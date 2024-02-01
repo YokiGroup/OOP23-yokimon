@@ -45,4 +45,11 @@ public class FightImpl implements Fight {
     public Yokimon getCurrentMyYokimon() {
         return curr_myYokimon;
     }
+
+
+    /**
+     * utilities to update Yokimons involved in fight
+     */
+    private void update_myCurr() {};
+    private void update_oppCurr() {};
 }
