@@ -1,6 +1,6 @@
 package io.github.yokigroup.battle;
 
-public class dummyOpponentAI extends OpponentAI {
+public class dummyImplOpponentAI extends OpponentAI {
 
     @Override
     Attack getMove(Yokimon curr_oppYokimon) {
