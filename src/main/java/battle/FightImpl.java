@@ -43,6 +43,6 @@ public class FightImpl implements Fight {
 
     @Override
     public Yokimon getCurrentMyYokimon() {
-        return null;
+        return curr_myYokimon;
     }
 }
