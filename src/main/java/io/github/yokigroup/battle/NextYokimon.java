@@ -1,4 +1,4 @@
-package battle;
+package io.github.yokigroup.battle;
 
 import java.util.List;
 import java.util.Optional;
