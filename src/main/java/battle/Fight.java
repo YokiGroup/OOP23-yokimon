@@ -35,6 +35,11 @@ public interface Fight {
      */
     boolean victory();
 
+    /**
+     *
+     * @param yokimon the Yokimon whose xp points must be updated
+     * @return xp pointa to be added
+     */
     int getXP(Yokimon yokimon);
 
 }
