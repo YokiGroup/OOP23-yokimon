@@ -46,10 +46,12 @@ public class FightImpl implements Fight {
         return curr_myYokimon;
     }
 
+    @Override
+    public Yokimon getCurrentOpponent() {
+        return curr_oppYokimon;
+    }
 
-    /**
-     * utilities to update Yokimons involved in fight
-     */
+    /* utilities to update Yokimons involved in fight */
     private void update_myCurr() {};
     private void update_oppCurr() {};
 }
