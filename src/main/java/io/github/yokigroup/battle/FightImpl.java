@@ -4,8 +4,8 @@ import java.util.List;
 public class FightImpl implements Fight {
 
     /* parties */
-    final List<Yokimon> myYokimons;
-    final List<Yokimon> oppYokimons;
+    private final List<Yokimon> myYokimons;
+    private final List<Yokimon> oppYokimons;
     private Yokimon currMyYokimon;
     private Yokimon currOppYokimon;
 
