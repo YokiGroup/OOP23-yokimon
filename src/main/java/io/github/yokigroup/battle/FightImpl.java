@@ -6,8 +6,8 @@ public class FightImpl implements Fight {
     /* parties */
     final List<Yokimon> myYokimons;
     final List<Yokimon> oppYokimons;
-    private Yokimon curr_myYokimon;
-    private Yokimon curr_oppYokimon;
+    private Yokimon currMyYokimon;
+    private Yokimon currOppYokimon;
 
     /* structures */
     private final OpponentAI oppAI = null;
@@ -49,12 +49,12 @@ public class FightImpl implements Fight {
 
     @Override
     public Yokimon getCurrentMyYokimon() {
-        return curr_myYokimon;
+        return currMyYokimon;
     }
 
     @Override
     public Yokimon getCurrentOpponent() {
-        return curr_oppYokimon;
+        return currOppYokimon;
     }
 
     /* utilities to update Yokimons involved in fight */
