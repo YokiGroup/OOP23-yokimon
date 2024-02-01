@@ -10,9 +10,9 @@ public class FightImpl implements Fight {
     private Yokimon currOppYokimon;
 
     /* structures */
-    private final OpponentAI oppAI = null;
-    private final XPCalculator XPCalc = null;
-    private final NextYokimon nextYok = null;
+    private final OpponentAI oppAI = new dummyImplOpponentAI();
+    private final XPCalculator XPCalc = new dummyImplXPCalculator();
+    private final NextYokimon nextYok = new dummyImplNextYokimon();
 
     /* boolean that triggers end of fight */
     private boolean isOver;
