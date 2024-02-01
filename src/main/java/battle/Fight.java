@@ -45,4 +45,10 @@ public interface Fight {
      */
     Yokimon getCurrentMyYokimon();
 
+    /**
+     * useful for the View
+     * @return my opponent's Yokimon currently involved in the fight
+     */
+    Yokimon getCurrentOpponent();
+
 }
