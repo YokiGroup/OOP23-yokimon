@@ -36,4 +36,5 @@ public interface Fight {
     boolean victory();
 
     int getXP(Yokimon yokimon);
+
 }
