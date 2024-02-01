@@ -40,4 +40,9 @@ public class FightImpl implements Fight {
     public int getXP(Yokimon yokimon) {
         return 0;
     }
+
+    @Override
+    public Yokimon getCurrentMyYokimon() {
+        return null;
+    }
 }

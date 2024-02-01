@@ -35,8 +35,14 @@ public interface Fight {
     /**
      *
      * @param yokimon the Yokimon whose xp points must be updated
-     * @return xp pointa to be added
+     * @return xp points to be added
      */
     int getXP(Yokimon yokimon);
+
+    /**
+     * useful for the View and for the level-up mechanism
+     * @return my party's Yokimon currently involved in the fight
+     */
+    Yokimon getCurrentMyYokimon();
 
 }
