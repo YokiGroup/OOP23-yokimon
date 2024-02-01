@@ -33,7 +33,7 @@ public class FightImpl implements Fight {
     }
 
     @Override
-    public success getAttacked(Yokimon opponent) {
+    public success getAttacked() {
         return null;
     }
 

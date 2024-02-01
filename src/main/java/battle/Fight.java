@@ -1,5 +1,4 @@
 package battle;
-import java.util.Optional;
 
 public interface Fight {
 
@@ -18,11 +17,9 @@ public interface Fight {
     success attack(Attack myAttack);
 
     /**
-     *
-     * @param opponent my Yokimon's opponent
      * @return success rate over opponent's attack
      */
-    success getAttacked(Yokimon opponent);
+    success getAttacked();
 
     /**
      * triggers end of the fight
