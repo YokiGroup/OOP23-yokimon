@@ -34,4 +34,6 @@ public interface Fight {
      * @return whether my Yokimon won
      */
     boolean victory();
+
+    int getXP(Yokimon yokimon);
 }
