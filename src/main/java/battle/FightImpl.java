@@ -1,12 +1,10 @@
 package battle;
 
-import java.util.Optional;
-
 public class FightImpl implements Fight {
 
     private final Yokimon myYokimon;
     private final Yokimon opponent;
-    //private final EnemyAI myEnemyAI;
+    //private final OpponentAI myOpponentAI;
     private boolean isOver;
 
 
@@ -24,7 +22,7 @@ public class FightImpl implements Fight {
      * FOR DEBUG USE ONLY to try out different AIs
      * @param e the AI that must be tested
      */
-    public void setEnemyAI(EnemyAI e) {
+    public void setEnemyAI(OpponentAI e) {
         this.myEnemyAIImpl = e;
     }
 

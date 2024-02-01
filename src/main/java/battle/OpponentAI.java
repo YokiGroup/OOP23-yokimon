@@ -1,7 +1,7 @@
 package battle;
 
 @FunctionalInterface
-public interface EnemyAI {
+public interface OpponentAI {
     /**
      *
      * @param opponent the Yokimon whose AI must be implemented
