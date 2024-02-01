@@ -1,10 +1,11 @@
 package battle;
+import java.util.List;
 
 public class FightImpl implements Fight {
 
     /* parties */
-    private final List<Yokimon> myYokimons;
-    private final List<Yokimon> oppYokimons;
+    final List<Yokimon> myYokimons;
+    final List<Yokimon> oppYokimons;
     private Yokimon curr_myYokimon;
     private Yokimon curr_oppYokimon;
 
@@ -15,6 +16,11 @@ public class FightImpl implements Fight {
 
     /* boolean that triggers end of fight */
     private boolean isOver;
+
+    public FightImpl(List<Yokimon> myYokimons, List<Yokimon> oppYokimons){
+        this.myYokimons = myYokimons;
+        this.oppYokimons = oppYokimons;
+    }
 
     @Override
     public success attack(Attack myAttack) {
