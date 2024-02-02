@@ -11,6 +11,11 @@ import java.util.Queue;
  */
 public class FightSubmodule implements Submodule{
     Optional<Fight> lastAnnouncedFight = Optional.empty();
+    PartySubmodule party; // keeping a reference to the party submodule to get a list of yokimons whenever necessary
+
+    public FightSubmodule(PartySubmodule party){
+        this.party = party;
+    }
 
     void addEncounter(Fight f){
         lastAnnouncedFight = Optional.ofNullable(f);
@@ -18,7 +23,8 @@ public class FightSubmodule implements Submodule{
 
     @Override
     public void process() {
-        // TODO start fight
-        return;
+        if(lastAnnouncedFight.isPresent()){
+            // TODO start fight
+        }
     }
 }
