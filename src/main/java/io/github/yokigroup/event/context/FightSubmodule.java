@@ -17,8 +17,12 @@ public class FightSubmodule implements Submodule{
         this.party = party;
     }
 
-    void addEncounter(Fight f){
+    public void addEncounter(Fight f){
         lastAnnouncedFight = Optional.ofNullable(f);
+    }
+
+    public Optional<Fight> getLastAnnouncedFight(){
+        return lastAnnouncedFight;
     }
 
     @Override
