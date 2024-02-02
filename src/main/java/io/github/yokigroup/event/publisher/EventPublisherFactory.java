@@ -1,8 +1,8 @@
 package io.github.yokigroup.event.publisher;
 
-import io.github.yokigroup.event.context.FightContext;
-import io.github.yokigroup.event.context.PartyContext;
-import io.github.yokigroup.event.context.PlayerPositionContext;
+import io.github.yokigroup.event.context.FightSubmodule;
+import io.github.yokigroup.event.context.PartySubmodule;
+import io.github.yokigroup.event.context.PlayerPositionSubmodule;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,15 +26,15 @@ public class EventPublisherFactory {
         }
     }
 
-    public static EventPublisher<FightContext> generateFightPublisher(){
-        return new EventPublisher<FightContext>();
+    public static EventPublisher<FightSubmodule> generateFightPublisher(){
+        return new EventPublisher<FightSubmodule>();
     }
 
-    public static EventPublisher<PartyContext> generatePartyPublisher(){
-        return new EventPublisher<PartyContext>();
+    public static EventPublisher<PartySubmodule> generatePartyPublisher(){
+        return new EventPublisher<PartySubmodule>();
     }
 
-    public static EventPublisher<PlayerPositionContext> generatePlayerPositionPublisher(){
-        return new EventPublisher<PlayerPositionContext>();
+    public static EventPublisher<PlayerPositionSubmodule> generatePlayerPositionPublisher(){
+        return new EventPublisher<PlayerPositionSubmodule>();
     }
 }
