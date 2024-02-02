@@ -8,15 +8,15 @@ import java.util.List;
 public class PartySubmodule implements Submodule{
     List<Yokimon> yokimonList = new ArrayList<>();
 
-    void addYokimon(Yokimon y) {
+    public void addYokimon(Yokimon y) {
         yokimonList.add(y);
     }
 
-    List<Yokimon> listYokimons() {
+    public List<Yokimon> listYokimons() {
         return yokimonList;
     }
 
-    boolean removeYokimon(Yokimon y) {
+    public boolean removeYokimon(Yokimon y) {
         return yokimonList.remove(y);
     }
 
