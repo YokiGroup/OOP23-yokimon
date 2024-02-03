@@ -1,5 +1,9 @@
 package io.github.yokigroup.util;
 
+/**
+ * A pool that given elements and their weight, it returns randomized items from it.
+ * @param <T> The type of objects contained in the pool.
+ */
 public interface WeightedPool<T> {
 
     /**
@@ -8,6 +12,12 @@ public interface WeightedPool<T> {
      * @param weight The chance of an element to be chosen.
      */
     void addRandomizedElement(final T element, final float weight);
+
+    /**
+     * Removes one of the elements from the pool.
+     * @param element The element to remove.
+     */
+    void removeRandomizedElement(final T element);
 
     /**
      *
