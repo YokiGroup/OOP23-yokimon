@@ -10,6 +10,9 @@ public class dummyImplOpponentAI extends OpponentAI {
      */
     @Override
     public Optional<Attack> getMove(Yokimon curr_oppYokimon) {
+        if (curr_oppYokimon.getAttacks() == null || curr_oppYokimon.getAttacks().isEmpty()) {
+            return Optional.empty();
+        }
         return Optional.of(curr_oppYokimon.getAttacks().get(0));
     }
 }
