@@ -8,7 +8,7 @@ public class YokimonImpl_dbg implements Yokimon {
     private static final int BASE_XP = 0;
     private static final int BASE_HP = 500;
 
-    private String name;
+    private final String name;
     private boolean active = true;
     private int level;
     private int XP = BASE_XP;
