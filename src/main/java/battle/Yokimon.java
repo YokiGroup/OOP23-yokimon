@@ -4,20 +4,38 @@ import battle.Attack;
 import java.util.Map;
 import java.util.List;
 public interface Yokimon {
-
+    /**
+    * Stats represent the stats that the yokimon has at this moment
+    * so just use this
+    * */
     public enum Stats{
         ATK,
         DEF,
         SPD,
-        HP
+        HP;
     }
+    /**
+     *Those are stat witch are common to every yokimon of the same type
+     *and are JUST used for leveling it up
+     **/
     public enum BaseStats {
         B_ATK,
         B_DEF,
-        B_HP,
-        B_SPD
+        B_SPD,
+        B_HP;
     }
-
+    public enum GrowRate {
+        SLOW(0.75),
+        MEDIUM(1.00),
+        FAST(1.25);
+        private final double rate;
+        GrowRate(double rate) {
+            this.rate = rate;
+        }
+        public double get(){
+            return rate;
+        }
+    }
     /**
      * Returns the name of the yokimon
      * @return String name
@@ -60,7 +78,19 @@ public interface Yokimon {
      * @return Int value
      */
     public int getLevel();
+    /**
+     *
+     * @param n value of the new level of the yokimon
+     */
+    public void setLevel(int n);
 
+    /**
+     * Does level up of the yokimon n-times
+     * return false if the level up is not possible
+     * @param n number of level
+     * @return exit status
+     */
+    public boolean levelUP(int n);
 
     /**
      *Return List of objects representing the current attacks of
@@ -81,13 +111,7 @@ public interface Yokimon {
      */
     public int getMAXHP();
 
-    /**
-     * Does level up of the yokimon n-times
-     * return false if the level up is not possible
-     * @param n number of level
-     * @return exit status
-     */
-    public boolean levelUP(int n);
+
 
     /**
      * Return true is the yokimon is Active, false
