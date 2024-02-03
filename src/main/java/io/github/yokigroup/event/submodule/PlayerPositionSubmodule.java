@@ -1,4 +1,4 @@
-package io.github.yokigroup.event.context;
+package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.world.entity.Entity;

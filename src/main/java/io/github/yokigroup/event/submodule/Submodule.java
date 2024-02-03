@@ -1,4 +1,4 @@
-package io.github.yokigroup.event.context;
+package io.github.yokigroup.event.submodule;
 
 /**
  * Submodule interface.

@@ -2,10 +2,9 @@ package io.github.yokigroup.event.publisher;
 
 import io.github.yokigroup.battle.Fight;
 import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.event.context.FightSubmodule;
-import io.github.yokigroup.event.context.PartySubmodule;
-import io.github.yokigroup.event.context.PlayerPositionSubmodule;
-import io.github.yokigroup.event.context.Submodule;
+import io.github.yokigroup.event.submodule.FightSubmodule;
+import io.github.yokigroup.event.submodule.PartySubmodule;
+import io.github.yokigroup.event.submodule.PlayerPositionSubmodule;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

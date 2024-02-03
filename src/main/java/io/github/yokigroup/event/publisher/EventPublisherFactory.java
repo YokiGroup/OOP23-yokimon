@@ -1,12 +1,8 @@
 package io.github.yokigroup.event.publisher;
 
-import io.github.yokigroup.event.context.FightSubmodule;
-import io.github.yokigroup.event.context.PartySubmodule;
-import io.github.yokigroup.event.context.PlayerPositionSubmodule;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Consumer;
+import io.github.yokigroup.event.submodule.FightSubmodule;
+import io.github.yokigroup.event.submodule.PartySubmodule;
+import io.github.yokigroup.event.submodule.PlayerPositionSubmodule;
 
 public class EventPublisherFactory {
 

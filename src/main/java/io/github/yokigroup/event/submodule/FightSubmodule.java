@@ -1,10 +1,8 @@
-package io.github.yokigroup.event.context;
+package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.battle.Fight;
 
-import java.util.ArrayDeque;
 import java.util.Optional;
-import java.util.Queue;
 
 /**
  * Handles queuing fights and starting them when the process
