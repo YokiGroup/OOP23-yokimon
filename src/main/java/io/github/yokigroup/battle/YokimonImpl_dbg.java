@@ -1,5 +1,6 @@
 package io.github.yokigroup.battle;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -14,7 +15,7 @@ public class YokimonImpl_dbg implements Yokimon {
     private int level;
     private int XP = BASE_XP;
     private int HP = BASE_HP;
-    private List<Attack> attacks;
+    private List<Attack> attacks = new LinkedList<>();
 
     /**
      *
@@ -22,11 +23,11 @@ public class YokimonImpl_dbg implements Yokimon {
      * @param level level of the Yokimon
      */
 
-    public YokimonImpl_dbg(String name, int level, List<Attack> attacks) {
+    public YokimonImpl_dbg(String name, int level, List<Attack> newAttacks) {
         this.name = name;
         this.level = level;
-        if (attacks != null && !attacks.isEmpty()) {
-            this.attacks.addAll(attacks);
+        if (newAttacks != null) {
+            this.attacks.addAll(newAttacks);
         }
     }
 
