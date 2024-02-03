@@ -25,8 +25,8 @@ public class YokimonImpl_dbg implements Yokimon {
     public YokimonImpl_dbg(String name, int level, List<Attack> attacks) {
         this.name = name;
         this.level = level;
-        if (!attacks.isEmpty()) {
-            this.attacks.addAll(Objects.requireNonNull(attacks));
+        if (attacks != null && !attacks.isEmpty()) {
+            this.attacks.addAll(attacks);
         }
     }
 
