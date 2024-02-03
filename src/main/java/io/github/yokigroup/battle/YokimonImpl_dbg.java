@@ -15,6 +15,10 @@ public class YokimonImpl_dbg implements Yokimon {
     private int HP = BASE_HP;
     private List<Attack> attacks;
 
+    public YokimonImpl_dbg(String name, int level){
+        this.name = name;
+        this.level = level;
+    }
 
     @Override
     public String getName() {
