@@ -23,7 +23,7 @@ public class YokimonImpl_dbg implements Yokimon {
      */
 
     public YokimonImpl_dbg(String name, int level, List<Attack> attacks) {
-        this.name = Objects.requireNonNull(name);
+        this.name = name;
         this.level = level;
         if (!attacks.isEmpty()) {
             this.attacks.addAll(Objects.requireNonNull(attacks));
@@ -31,7 +31,7 @@ public class YokimonImpl_dbg implements Yokimon {
     }
 
     public YokimonImpl_dbg(String name, int level){
-        new YokimonImpl_dbg(name, level, null);
+        this(name, level, null);
     }
 
     @Override
