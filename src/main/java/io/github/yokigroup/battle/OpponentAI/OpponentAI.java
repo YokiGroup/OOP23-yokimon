@@ -1,5 +1,8 @@
-package io.github.yokigroup.battle;
+package io.github.yokigroup.battle.OpponentAI;
 
+
+import io.github.yokigroup.battle.fight.Attack;
+import io.github.yokigroup.battle.fight.Yokimon;
 
 import java.util.Optional;
 

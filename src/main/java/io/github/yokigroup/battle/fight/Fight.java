@@ -1,4 +1,4 @@
-package io.github.yokigroup.battle;
+package io.github.yokigroup.battle.fight;
 
 public interface Fight {
 

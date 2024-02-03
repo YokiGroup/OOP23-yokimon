@@ -1,9 +1,8 @@
-package io.github.yokigroup.battle;
+package io.github.yokigroup.battle.fight;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class YokimonImpl_dbg implements Yokimon {
 

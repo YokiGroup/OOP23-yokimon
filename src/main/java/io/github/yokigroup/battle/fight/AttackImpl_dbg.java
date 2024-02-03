@@ -1,6 +1,4 @@
-package io.github.yokigroup.battle;
-
-import java.util.Objects;
+package io.github.yokigroup.battle.fight;
 
 public class AttackImpl_dbg implements Attack {
     private final String name;

@@ -1,4 +1,11 @@
-package io.github.yokigroup.battle;
+package io.github.yokigroup.battle.fight;
+import io.github.yokigroup.battle.NextYokimon.NextYokimon;
+import io.github.yokigroup.battle.NextYokimon.dummyImplNextYokimon;
+import io.github.yokigroup.battle.OpponentAI.OpponentAI;
+import io.github.yokigroup.battle.OpponentAI.dummyImplOpponentAI;
+import io.github.yokigroup.battle.XPCalculator.XPCalculator;
+import io.github.yokigroup.battle.XPCalculator.dummyImplXPCalculator;
+
 import java.util.List;
 
 public class FightImpl implements Fight {

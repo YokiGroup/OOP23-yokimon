@@ -4,7 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import io.github.yokigroup.battle.*;
+import io.github.yokigroup.battle.NextYokimon.NextYokimon;
+import io.github.yokigroup.battle.NextYokimon.dummyImplNextYokimon;
+import io.github.yokigroup.battle.fight.Yokimon;
+import io.github.yokigroup.battle.fight.YokimonImpl_dbg;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
