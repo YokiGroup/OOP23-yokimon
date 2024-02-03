@@ -2,6 +2,7 @@ package io.github.yokigroup.battle;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class YokimonImpl_dbg implements Yokimon {
 
@@ -15,9 +16,22 @@ public class YokimonImpl_dbg implements Yokimon {
     private int HP = BASE_HP;
     private List<Attack> attacks;
 
-    public YokimonImpl_dbg(String name, int level){
-        this.name = name;
+    /**
+     *
+     * @param name name of the Yokimon
+     * @param level level of the Yokimon
+     */
+
+    public YokimonImpl_dbg(String name, int level, List<Attack> attacks) {
+        this.name = Objects.requireNonNull(name);
         this.level = level;
+        if (!attacks.isEmpty()) {
+            this.attacks.addAll(Objects.requireNonNull(attacks));
+        }
+    }
+
+    public YokimonImpl_dbg(String name, int level){
+        new YokimonImpl_dbg(name, level, null);
     }
 
     @Override
