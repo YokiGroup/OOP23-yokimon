@@ -6,7 +6,7 @@ import java.util.Optional;
 public class dummyImplNextYokimon extends NextYokimon {
 
     @Override
-    public Optional<Yokimon> getNext(List<Yokimon> party) {
+     Optional<Yokimon> getNext(List<Yokimon> party) {
         if (!party.isEmpty()) {
             return Optional.of(party.get(0));
         }

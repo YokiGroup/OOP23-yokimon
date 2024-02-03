@@ -6,7 +6,7 @@ public class dummyImplXPCalculator extends XPCalculator {
 
     private static final int MULTIPLIER = 100;
     @Override
-    public int getXP(List<Yokimon> defeatedOpps) {
+    int getXP(List<Yokimon> defeatedOpps) {
         if (!defeatedOpps.isEmpty()) {
             return defeatedOpps.size() * MULTIPLIER;
         }
