@@ -5,7 +5,13 @@ import io.github.yokigroup.world.tile.Tile;
 
 import java.util.Set;
 
+/**
+ * A collection of tiles of a specific shape.
+ */
 public interface TileShape {
+    /**
+     * The possible directions a tile can connect to.
+     */
     enum Direction {
         UP,
         DOWN,
