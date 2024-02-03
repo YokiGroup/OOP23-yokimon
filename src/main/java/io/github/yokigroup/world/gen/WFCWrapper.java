@@ -4,6 +4,9 @@ import io.github.yokigroup.world.tile.Tile;
 
 import java.util.Set;
 
+/**
+ * A wrapper for a Wave Function Collapse library, can also be used for an implementation of it.
+ */
 public interface WFCWrapper {
     /**
      * Initializes the wave function collapse algorithm with the tile shape's rules.
