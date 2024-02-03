@@ -9,5 +9,5 @@ public abstract class NextYokimon {
      * @param party the party from which it must be chosen the next one to fight, once the current one is defeated
      * @return the party member chosen
      */
-    abstract Optional<Yokimon> getNext(List<Yokimon> party);
+    public abstract Optional<Yokimon> getNext(List<Yokimon> party);
 }
