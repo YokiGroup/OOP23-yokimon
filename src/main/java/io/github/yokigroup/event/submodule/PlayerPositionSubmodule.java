@@ -19,11 +19,12 @@ public class PlayerPositionSubmodule implements Submodule{
         this.map = map;
     }
 
-    void changeTile(Direction dir) {
+    // TODO Change Direction reference
+    public void changeTile(Direction dir) {
         //TODO change tile of player by going in dir
     }
 
-    void movePlayerBy(Vector2 delta) {
+    public void movePlayerBy(Vector2 delta) {
         // TODO move player by delta
     }
 
