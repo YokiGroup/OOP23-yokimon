@@ -1,4 +1,4 @@
-package io.github.yokigroup.world;
+package io.github.yokigroup.world.hitbox;
 
 import org.junit.jupiter.api.Test;
 
