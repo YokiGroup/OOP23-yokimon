@@ -1,7 +1,7 @@
 package io.github.yokigroup.entity;
 
+import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.hitbox.Hitbox;
-import javafx.util.Pair;
 
 /**
  * Dummy interface for the merge.

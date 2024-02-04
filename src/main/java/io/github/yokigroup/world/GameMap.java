@@ -1,6 +1,6 @@
 package io.github.yokigroup.world;
 
-import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.tile.Tile;
 
 /**
@@ -12,11 +12,11 @@ public interface GameMap {
      * @param position The world position to take the tile from.
      * @return The tile at that position.
      */
-    Tile getTileAt(final Vector2<Integer> position);
+    Tile getTileAt(final Pair<Integer, Integer> position);
 
     /**
      *
      * @return The player's world coordinates (the tile the player's on)
      */
-    Vector2<Integer> getPlayerWorldPosition();
+    Pair<Integer, Integer> getPlayerWorldPosition();
 }

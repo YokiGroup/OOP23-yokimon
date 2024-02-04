@@ -1,6 +1,6 @@
 package io.github.yokigroup.world.hitbox;
 
-import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Pair;
 
 /**
  * A collision box that allows for easier collision detection and manipulation
@@ -18,5 +18,5 @@ public interface Hitbox {
      * @param hitbox The hitbox to get offset from.
      * @return a vector2 containing the coordinate offset to push an entity back in bounds.
      */
-    Vector2<Float> fixBounds(final Hitbox hitbox);
+    Pair<Float, Float> fixBounds(final Hitbox hitbox);
 }
