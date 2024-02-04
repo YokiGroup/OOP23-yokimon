@@ -14,16 +14,7 @@ public interface Yokimon {
         SPD,
         HP;
     }
-    /**
-     *Those are stat witch are common to every yokimon of the same type
-     *and are JUST used for leveling it up
-     **/
-    public enum BaseStats {
-        B_ATK,
-        B_DEF,
-        B_SPD,
-        B_HP;
-    }
+
     public enum GrowRate {
         SLOW(0.75),
         MEDIUM(1.00),
@@ -70,7 +61,7 @@ public interface Yokimon {
      * @param baseStat is the value of the stat used for the level up
      * @return int value
      */
-    public int getBaseStat(BaseStats baseStat);
+    public int getBaseStat(Stats baseStat);
 
 
     /**
@@ -82,7 +73,7 @@ public interface Yokimon {
      *
      * @param n value of the new level of the yokimon
      */
-    public void setLevel(int n);
+    public exp_code setLevel(int n);
 
     /**
      * Does level up of the yokimon n-times
