@@ -8,9 +8,11 @@ class HitboxTest {
 
     @Test
     void collidesWith() {
+
     }
 
     @Test
     void fixBounds() {
+
     }
 }
