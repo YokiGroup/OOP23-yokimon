@@ -4,6 +4,7 @@ package io.github.yokigroup.entity;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.entity.people.People;
+import io.github.yokigroup.entity.people.Player;
 
 import java.util.Optional;
 
@@ -20,14 +21,25 @@ public class Altar extends Entity{
         this.state=altarState.NEW;
     }
 
-    @Override
-    message update() {
-        if(this.state==altarState.NEW){
+    /**
+     * Update the state of the Altar from new to used giving the player
+     * the yokimon inside
+     * @param you object of the player
+     * @return message: ok if the yokimon is taken correctly, used if it's been already taken
+     */
+    public message update(Player you) {
+        if(this.state==altarState.NEW && this.getNewYokimon().isPresent()){
             this.state=altarState.USED;
+            you.addYokimon(this.getNewYokimon().get());
             return message.OK;
         }
         else
             return message.USED;
+    }
+
+    @Override
+    public message update() {
+        return null;
     }
 
     public enum altarState{
