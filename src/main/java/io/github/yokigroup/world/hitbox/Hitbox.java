@@ -1,6 +1,5 @@
 package io.github.yokigroup.world.hitbox;
 
-import io.github.yokigroup.entity.Entity;
 import io.github.yokigroup.util.Vector2;
 
 /**
@@ -16,8 +15,8 @@ public interface Hitbox {
 
     /**
      *
-     * @param entity The entity to move back in bounds.
-     * @return a pair containing the coordinate offset to push an entity back in bounds.
+     * @param hitbox The hitbox to get offset from.
+     * @return a vector2 containing the coordinate offset to push an entity back in bounds.
      */
-    Vector2<Float> fixBounds(final Entity entity);
+    Vector2<Float> fixBounds(final Hitbox hitbox);
 }
