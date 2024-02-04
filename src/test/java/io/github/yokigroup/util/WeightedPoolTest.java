@@ -10,7 +10,7 @@ class WeightedPoolTest {
 
     @Test
     void addRandomizedElement() {
-        WeightedPool<String> pool = new WeightedPoolImpl<String>();
+        WeightedPool<String> pool = new WeightedPoolImpl<>();
         pool.addElement("elt1", 0.7f);
         pool.addElement("elt2", 0.1f);
         pool.addElement("elt3", 0.2f);
@@ -21,7 +21,7 @@ class WeightedPoolTest {
 
     @Test
     void removeElement() {
-        WeightedPool<String> pool = new WeightedPoolImpl<String>();
+        WeightedPool<String> pool = new WeightedPoolImpl<>();
         pool.addElement("elt1", 0.7f);
         pool.addElement("elt2", 0.1f);
         pool.addElement("elt3", 0.2f);
@@ -36,7 +36,7 @@ class WeightedPoolTest {
 
     @Test
     void getRandomizedElement() {
-        WeightedPool<String> pool = new WeightedPoolImpl<String>();
+        WeightedPool<String> pool = new WeightedPoolImpl<>();
         pool.addElement("elt1", 0.7f);
         pool.addElement("elt2", 0.1f);
         assertTrue(List.of("elt1", "elt2").contains(pool.getRandomizedElement()));
@@ -49,7 +49,7 @@ class WeightedPoolTest {
 
     @Test
     void removeRandomizedElement() {
-        WeightedPool<String> pool = new WeightedPoolImpl<String>();
+        WeightedPool<String> pool = new WeightedPoolImpl<>();
         pool.addElement("elt1", 0.7f);
         pool.addElement("elt2", 0.1f);
         assertEquals(2, pool.size());
@@ -59,8 +59,7 @@ class WeightedPoolTest {
         assertEquals(0, pool.size());
         pool.addElement("elt3", 0.2f);
         assertEquals(1, pool.size());
-        assertTrue(List.of("elt1", "elt2", "elt3").contains(pool.getRandomizedElement()));
+        assertTrue(List.of("elt1", "elt2", "elt3").contains(pool.removeRandomizedElement()));
         assertEquals(0, pool.size());
-
     }
 }
