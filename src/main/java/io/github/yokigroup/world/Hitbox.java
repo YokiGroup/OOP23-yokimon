@@ -2,6 +2,9 @@ package io.github.yokigroup.world;
 
 import javafx.util.Pair;
 
+/**
+ * A collision box that allows for easier collision detection and manipulation
+ */
 public interface Hitbox {
     /**
      *
