@@ -1,5 +1,7 @@
 package io.github.yokigroup.world;
 
+import javafx.util.Pair;
+
 public interface Hitbox {
     /**
      *
@@ -11,7 +13,7 @@ public interface Hitbox {
     /**
      *
      * @param entity The entity to move back in bounds.
-     * @return a vector containing the coordinate offset to push an entity in bounds.
+     * @return a pair containing the coordinate offset to push an entity in bounds.
      */
-    Vector2<float> fixBounds(final Entity entity);
+    Pair<Float, Float> fixBounds(final Entity entity);
 }
