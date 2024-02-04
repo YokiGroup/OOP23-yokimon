@@ -1,5 +1,6 @@
 package io.github.yokigroup.world.tile;
 
+import io.github.yokigroup.entity.Entity;
 import io.github.yokigroup.world.Hitbox;
 
 /**

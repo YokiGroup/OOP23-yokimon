@@ -1,5 +1,6 @@
 package io.github.yokigroup.world;
 
+import io.github.yokigroup.entity.Entity;
 import javafx.util.Pair;
 
 /**
