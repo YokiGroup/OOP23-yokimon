@@ -1,4 +1,4 @@
-package battle;
+package io.github.yokigroup.battle;
 //import java.util.HashMap;
 public interface Attack {
 

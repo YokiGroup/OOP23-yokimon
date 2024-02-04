@@ -1,5 +1,5 @@
-package battle;
-import battle.Attack;
+package io.github.yokigroup.battle;
+
 
 import java.util.Map;
 import java.util.List;
