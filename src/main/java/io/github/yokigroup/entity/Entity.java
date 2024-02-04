@@ -16,9 +16,10 @@ public abstract class Entity {
         OUT_OF_MAP,
         USED
     }
-    private final String name;
-    private Position Pos;
-    private Hitbox Hitbox_type;
+
+    protected final String name;
+    protected Position Pos;
+    protected Hitbox Hitbox_type;
 
     public Entity(String name, Position Pos, Hitbox Hitbox){
         this.Hitbox_type=Hitbox;
@@ -65,5 +66,5 @@ public abstract class Entity {
     /**
      * update the state of the entity
      */
-    abstract Entity.message update();
+    public abstract Entity.message update();
 }
