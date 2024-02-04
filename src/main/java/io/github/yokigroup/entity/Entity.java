@@ -1,6 +1,6 @@
 package io.github.yokigroup.entity;
 
-import io.github.yokigroup.world.Hitbox;
+import io.github.yokigroup.world.hitbox.Hitbox;
 import javafx.util.Pair;
 
 /**

@@ -1,7 +1,7 @@
 package io.github.yokigroup.world.tile;
 
 import io.github.yokigroup.entity.Entity;
-import io.github.yokigroup.world.Hitbox;
+import io.github.yokigroup.world.hitbox.Hitbox;
 
 /**
  * A single tile of the map, containing entities and hitboxes for the player to interact with.

@@ -1,7 +1,7 @@
-package io.github.yokigroup.world;
+package io.github.yokigroup.world.hitbox;
 
 import io.github.yokigroup.entity.Entity;
-import javafx.util.Pair;
+import io.github.yokigroup.util.Vector2;
 
 /**
  * A collision box that allows for easier collision detection and manipulation
@@ -17,7 +17,7 @@ public interface Hitbox {
     /**
      *
      * @param entity The entity to move back in bounds.
-     * @return a pair containing the coordinate offset to push an entity in bounds.
+     * @return a pair containing the coordinate offset to push an entity back in bounds.
      */
-    Pair<Float, Float> fixBounds(final Entity entity);
+    Vector2<Float> fixBounds(final Entity entity);
 }
