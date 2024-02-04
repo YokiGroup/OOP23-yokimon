@@ -1,6 +1,8 @@
-package entity;
+package io.github.yokigroup.entity;
 
-import battle.Yokimon;
+
+
+import io.github.yokigroup.battle.Yokimon;
 
 import java.util.Optional;
 

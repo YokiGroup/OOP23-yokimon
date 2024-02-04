@@ -1,4 +1,4 @@
-package entity;
+package io.github.yokigroup.entity;
 
 public interface Player extends People{
 
