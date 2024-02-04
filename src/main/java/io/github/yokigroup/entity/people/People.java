@@ -1,15 +1,17 @@
-package io.github.yokigroup.entity;
+package io.github.yokigroup.entity.people;
 
 
 
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.entity.Entity;
+import io.github.yokigroup.entity.Position;
 
 import java.util.List;
 
 /**
  *
  */
-public interface People extends Entity{
+public interface People extends Entity {
     /**
      * return the direction in which the player or a mpc is currently watching
      * @return the angle in radiant
