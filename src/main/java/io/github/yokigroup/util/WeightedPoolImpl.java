@@ -40,14 +40,14 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
                 .reduce(0.0f, Float::sum);
         // Get a randomized weight from the total
         final float randomWeight = new Random().nextFloat(sumWeight);
-        final Optional<T> element = this.itemPool.stream()
-                // Calculate the closest weight to the randomized one.
-                .reduce((a, b) -> Math.abs(a.Y() - randomWeight) < Math.abs(b.Y() - randomWeight) ? a : b)
-                .map(Pair::X);
-        if (element.isEmpty()) {
-            throw new IllegalStateException("No element could be retrieved from the pool.");
+        float cumulativeWeight = 0.0f;
+        for (final Pair<T, Float> pair : this.itemPool) {
+            cumulativeWeight += pair.Y();
+            if (randomWeight <= cumulativeWeight) {
+                return pair.X();
+            }
         }
-        return element.get();
+        throw new IllegalStateException("No element could be retrieved from the pool.");
     }
 
     @Override
