@@ -28,7 +28,7 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
 
     @Override
     public void removeElement(final T element) {
-        this.itemPool.removeIf(p -> p.X() == element);
+        this.itemPool.removeIf(p -> p.getKey() == element);
     }
 
     @Override
