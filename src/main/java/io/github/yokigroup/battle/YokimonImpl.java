@@ -6,6 +6,7 @@ import java.util.Map;
 public class YokimonImpl implements Yokimon{
 
     private final static int DEFAULT_LEVEL=1;
+    private final static GrowRate DEFAULT_GROWRATE = GrowRate.MEDIUM;
     private final String name;
 
     private final Map<Stats, Integer> BaseStats;
@@ -48,6 +49,11 @@ public class YokimonImpl implements Yokimon{
     {
         this(name, baseStats, growRate, DEFAULT_LEVEL, moves);
     }
+
+    public YokimonImpl(String name) {
+        this(name, Map.of(), DEFAULT_GROWRATE, DEFAULT_LEVEL, List.of());
+    }
+
     @Override
     public String getName() {
         return this.name;

@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import io.github.yokigroup.battle.NextYokimon.NextYokimon;
 import io.github.yokigroup.battle.NextYokimon.dummyImplNextYokimon;
+import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.battle.fight.Yokimon;
-import io.github.yokigroup.battle.fight.YokimonImpl_dbg;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,9 +15,9 @@ public class NextYokTest {
     @Test public void testDummyImpl() {
         NextYokimon toTest = new dummyImplNextYokimon();
 
-        Yokimon y1 = new YokimonImpl_dbg("Blue", 10);
-        Yokimon y2 = new YokimonImpl_dbg("Red", 2);
-        Yokimon y3 = new YokimonImpl_dbg("Yellow", 8);
+        Yokimon y1 = new YokimonImpl("Blue", 10);
+        Yokimon y2 = new YokimonImpl("Red", 2);
+        Yokimon y3 = new YokimonImpl("Yellow", 8);
         List<Yokimon> party1 = new LinkedList<>();
 
         party1.add(y1); party1.add(y2); party1.add(y3);
