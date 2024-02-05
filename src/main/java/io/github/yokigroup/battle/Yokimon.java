@@ -41,6 +41,10 @@ public interface Yokimon {
      */
     public String getName();
 
+    /**
+     * Returns the color of the Yokimon
+     * @return color
+     */
     public color getColor();
 
     /**
