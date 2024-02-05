@@ -1,6 +1,7 @@
 package io.github.yokigroup.battle.fight;
 
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.NextYokimon.NextYokimon;
 import io.github.yokigroup.battle.NextYokimon.dummyImplNextYokimon;
 import io.github.yokigroup.battle.OpponentAI.OpponentAI;
