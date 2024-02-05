@@ -1,6 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * a SubModuleMap is an object containing zero or more (different) submodules, queryable with the provided functions
@@ -19,4 +20,9 @@ public interface SubModuleMap {
      * @return Optional of submodule, empty if it is not contained in the map
      */
     <T extends Submodule> Optional<T> getSubmodule(Class<T> type);
+
+    /**
+     * @return Set of Submodules registered to this map
+     */
+    <T extends Submodule> Set<T> subModuleSet();
 }
