@@ -1,4 +1,4 @@
-package io.github.yokigroup.event;
+package io.github.yokigroup.core;
 
 import io.github.yokigroup.battle.Fight;
 import io.github.yokigroup.event.submodule.FightSubmodule;
