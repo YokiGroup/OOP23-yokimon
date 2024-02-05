@@ -15,7 +15,7 @@ public class SubModuleMapImpl implements SubModuleMap{
     }
 
     @Override
-    public <T extends Submodule> void addAll(Set<T> sSet) {
+    public <T extends Submodule> void registerAll(Set<T> sSet) {
         sSet.forEach(this::register);
     }
 

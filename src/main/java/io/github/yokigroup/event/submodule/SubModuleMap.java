@@ -17,7 +17,7 @@ public interface SubModuleMap {
     /**
      *
      */
-    <T extends Submodule> void addAll(Set<T> sSet);
+    <T extends Submodule> void registerAll(Set<T> sSet);
 
     /**
      * Get submodule of given class
