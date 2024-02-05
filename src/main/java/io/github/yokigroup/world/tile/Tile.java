@@ -11,7 +11,7 @@ import java.util.Set;
 public interface Tile {
     /**
      *
-     * @return All the hitboxes in a tile
+     * @return All the hitboxes in a tile.
      */
     Set<HitBox> getHitboxes();
 
@@ -20,4 +20,16 @@ public interface Tile {
      * @return All the entities in a tile.
      */
     Set<Entity> getEntities();
+
+    /**
+     *
+     * @param hitbox The hitbox to add to the tile.
+     */
+    void addHitbox(final HitBox hitbox);
+
+    /**
+     *
+     * @param entity The entity to add to the tile.
+     */
+    void addEntity(final Entity entity);
 }
