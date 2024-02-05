@@ -13,6 +13,6 @@ class TileShapeTest {
 
     @Test
     void getPossibleDirections() {
-        
+
     }
 }
