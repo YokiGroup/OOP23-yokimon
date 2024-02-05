@@ -1,7 +1,7 @@
 package io.github.yokigroup.world.tile;
 
-import com.almasb.fxgl.physics.HitBox;
 import io.github.yokigroup.entity.Entity;
+import io.github.yokigroup.entity.Hitbox;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +10,7 @@ import java.util.Set;
  * A tile contains the data of an entire part of the map: its entities and hitboxes manly.
  */
 public class TileImpl implements Tile {
-    private Set<HitBox> hitboxes;
+    private Set<Hitbox> hitboxes;
     private Set<Entity> entities;
 
     public TileImpl() {
@@ -19,7 +19,7 @@ public class TileImpl implements Tile {
     }
 
     @Override
-    public Set<HitBox> getHitboxes() {
+    public Set<Hitbox> getHitboxes() {
         return Set.copyOf(this.hitboxes);
     }
 
@@ -29,7 +29,7 @@ public class TileImpl implements Tile {
     }
 
     @Override
-    public void addHitbox(final HitBox hitbox) {
+    public void addHitbox(final Hitbox hitbox) {
         this.hitboxes.add(hitbox);
     }
 
