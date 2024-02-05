@@ -1,6 +1,7 @@
 package io.github.yokigroup.battleTest;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import io.github.yokigroup.battle.Attack;
@@ -20,9 +21,9 @@ public class OpponentAITest {
         Attack a2 = new AttackImpl("Leaf", Attack.color.GREEN);
 
 
-        Yokimon y1 = new YokimonImpl("Charizard");
-        Yokimon y2 = new YokimonImpl("Squirtle");
-        Yokimon y3 = new YokimonImpl("Bulbasaur");
+        Yokimon y1 = new YokimonImpl("Charizard", Map.of(), Yokimon.GrowRate.MEDIUM, List.of());
+        Yokimon y2 = new YokimonImpl("Squirtle",Map.of(), Yokimon.GrowRate.MEDIUM, List.of(a1));
+        Yokimon y3 = new YokimonImpl("Bulbasaur", Map.of(), Yokimon.GrowRate.MEDIUM, List.of(a1,a2));
 
         //empty
         assertEquals(Optional.empty(), toTest.getMove(y1));
