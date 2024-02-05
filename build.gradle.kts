@@ -45,10 +45,11 @@ dependencies {
     }
     // FXGL
     val fxglVersion = 17.3
-    compileOnly("com.github.almasb:fxgl:$fxglVersion");
+    implementation("com.github.almasb:fxgl:$fxglVersion")
 
     // JUnit API and testing engine
     val jUnitVersion = "5.10.1"
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
 }
