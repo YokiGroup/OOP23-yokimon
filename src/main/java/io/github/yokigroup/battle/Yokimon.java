@@ -1,6 +1,7 @@
 package io.github.yokigroup.battle;
 
 
+
 import java.util.Map;
 import java.util.List;
 public interface Yokimon {
@@ -132,4 +133,5 @@ public interface Yokimon {
      * ERROR if the method fails
      */
     public exp_code takeXP(int n);
+
 }
