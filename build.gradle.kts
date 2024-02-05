@@ -43,6 +43,7 @@ dependencies {
             implementation("org.openjfx:javafx-$module:$javaFxVersion:$platform")
         }
     }
+    implementation("org.dyn4j:dyn4j:5.0.1")
 
     val jUnitVersion = "5.10.1"
     // JUnit API and testing engine
