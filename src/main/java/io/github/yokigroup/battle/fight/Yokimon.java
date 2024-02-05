@@ -1,51 +1,41 @@
-package io.github.yokigroup.battle;
+package io.github.yokigroup.battle.fight;
 
 import java.util.Map;
 import java.util.List;
-
 public interface Yokimon {
-    /**
-    * Stats represent the stats that the yokimon has at this moment
-    * so just use this
-    * */
-    public enum Stats{
+
+    enum Stats{
         ATK,
         DEF,
         SPD,
-        HP;
+        HP
+    }
+     enum BaseStats {
+        B_ATK,
+        B_DEF,
+        B_HP,
+        B_SPD
     }
 
-    public enum GrowRate {
-        SLOW(0.75),
-        MEDIUM(1.00),
-        FAST(1.25);
-        private final double rate;
-        GrowRate(double rate) {
-            this.rate = rate;
-        }
-        public double get(){
-            return rate;
-        }
-    }
     /**
      * Returns the name of the yokimon
      * @return String name
      */
-    public String getName();
+     String getName();
 
     /**
      * Returns all the Stats as a map of Integer
      * with Stats as a key
      * @return Map<Stats, Integer>
      */
-    public Map<Stats, Integer> getALLStats();
+     Map<Stats, Integer> getALLStats();
 
     /**
      * Returns all the BASE Stats as a map of Integer
      * with Stats as a key
      * @return Map<Stats, Integer>
      */
-    public Map<Stats, Integer> getALLBaseStats();
+     Map<Stats, Integer> getALLBaseStats();
 
     /**
      * Returns the correspondent stat value
@@ -53,7 +43,7 @@ public interface Yokimon {
      * @param stat is the value of the Actual used stat
      * @return int value
      */
-    public int getStat(Stats stat);
+     int getStat(Stats stat);
 
     /**
      * Returns the correspondent basestast value
@@ -61,19 +51,33 @@ public interface Yokimon {
      * @param baseStat is the value of the stat used for the level up
      * @return int value
      */
-    public int getBaseStat(Stats baseStat);
-
+     int getBaseStat(BaseStats baseStat);
 
     /**
      *Return an int with the value of yokimon current level
      * @return Int value
      */
-    public int getLevel();
+     int getLevel();
+
+
     /**
-     *
-     * @param n value of the new level of the yokimon
+     *Return List of objects representing the current attacks of
+     * the yokimon
+     * @return List<Attacks> </Attacks>
      */
-    public exp_code setLevel(int n);
+     List<Attack> getAttacks();
+
+    /**
+     *Return actual HP of the yokimon
+     * @return actual HP
+     */
+     int getActualHP();
+
+    /**
+     *Return MAX HP of the yokimon
+     * @return MAX HP
+     */
+     int getMAXHP();
 
     /**
      * Does level up of the yokimon n-times
@@ -81,37 +85,16 @@ public interface Yokimon {
      * @param n number of level
      * @return exit status
      */
-    public boolean levelUP(int n);
-
-    /**
-     *Return List of objects representing the current attacks of
-     * the yokimon
-     * @return List<Attacks> </Attacks>
-     */
-    public List<Attack> getAttacks();
-
-    /**
-     *Return actual HP of the yokimon
-     * @return actual HP
-     */
-    public int getActualHP();
-
-    /**
-     *Return MAX HP of the yokimon
-     * @return MAX HP
-     */
-    public int getMAXHP();
-
-
+     boolean levelUP(int n);
 
     /**
      * Return true is the yokimon is Active, false
      * if is it not (0 HP)
      * @return boolean
      */
-    public boolean Active();
+     boolean Active();
 
-    public enum exp_code{
+     enum exp_code{
         OK,
         LEVEL_UP,
         NEW_MOVE,
@@ -131,6 +114,5 @@ public interface Yokimon {
      * MAX if the xp can't no longer raise
      * ERROR if the method fails
      */
-    public exp_code takeXP(int n);
-
+     exp_code takeXP(int n);
 }
