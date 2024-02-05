@@ -16,6 +16,13 @@ public interface Yokimon {
         HP;
     }
 
+    public enum color{
+        RED,
+        YELLOW,
+        GREEN,
+        BLUE
+    }
+
     public enum GrowRate {
         SLOW(0.75),
         MEDIUM(1.00),
@@ -33,6 +40,8 @@ public interface Yokimon {
      * @return String name
      */
     public String getName();
+
+    public color getColor();
 
     /**
      * Returns all the Stats as a map of Integer
