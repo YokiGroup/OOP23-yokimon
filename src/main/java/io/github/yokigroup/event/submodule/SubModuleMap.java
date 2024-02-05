@@ -29,5 +29,5 @@ public interface SubModuleMap {
     /**
      * @return Set of Submodules registered to this map
      */
-    <T extends Submodule> Set<T> subModuleSet();
+    Set<Submodule> subModuleSet();
 }

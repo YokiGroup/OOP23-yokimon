@@ -1,9 +1,6 @@
 package io.github.yokigroup.event.submodule;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SubModuleMapImpl implements SubModuleMap{
@@ -20,16 +17,17 @@ public class SubModuleMapImpl implements SubModuleMap{
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends Submodule> Optional<T> get(Class<T> type) {
-        //noinspection unchecked
-        T submodule = (T) submodules.get(type);
-        return submodule != null ? Optional.of(submodule) : Optional.empty();
+        Submodule tempSub = submodules.get(type);
+        T retSub = null;
+        if(type.isInstance(tempSub)){
+            retSub = (T)tempSub;
+        }
+        return Optional.ofNullable(retSub);
     }
 
-    public <T extends Submodule> Set<T> subModuleSet(){
-        //noinspection unchecked
-        return (Set<T>) submodules.entrySet().stream()
-                .map( en -> en.getKey().cast(en.getClass()) )
-                .collect(Collectors.toSet());
+    public Set<Submodule> subModuleSet(){
+        return new HashSet<>(submodules.values());
     }
 }
