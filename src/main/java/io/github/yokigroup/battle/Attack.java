@@ -6,7 +6,10 @@ public interface Attack {
         NONE
     }
     public enum color{
-        NONE
+        RED,
+        YELLOW,
+        GREEN,
+        BLUE
     }
     /**
      *Return the name of the Attack
