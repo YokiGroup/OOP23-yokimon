@@ -1,7 +1,7 @@
 package io.github.yokigroup.world.tile;
 
+import com.almasb.fxgl.physics.HitBox;
 import io.github.yokigroup.entity.Entity;
-import io.github.yokigroup.world.hitbox.Hitbox;
 
 import java.util.Set;
 
@@ -13,7 +13,7 @@ public interface Tile {
      *
      * @return All the hitboxes in a tile
      */
-    Set<Hitbox> getHitboxes();
+    Set<HitBox> getHitboxes();
 
     /**
      *

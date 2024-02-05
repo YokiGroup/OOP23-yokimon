@@ -1,7 +1,7 @@
 package io.github.yokigroup.world.gen;
 
-import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.tile.Tile;
+import javafx.util.Pair;
 
 import java.util.Set;
 

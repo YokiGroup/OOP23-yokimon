@@ -1,14 +1,14 @@
 package io.github.yokigroup.entity;
 
-import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.world.hitbox.Hitbox;
+import com.almasb.fxgl.core.math.Vec2;
+import com.almasb.fxgl.physics.HitBox;
 
 /**
  * Dummy interface for the merge.
  */
 public interface Entity {
-    public Pair<Float, Float> getPosition();
+    public Vec2 getPosition();
     public String getName();
-    public Hitbox getHitbox();
+    public HitBox getHitbox();
     public void update();
 }

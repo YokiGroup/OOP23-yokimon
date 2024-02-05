@@ -43,6 +43,8 @@ dependencies {
             implementation("org.openjfx:javafx-$module:$javaFxVersion:$platform")
         }
     }
+    // FXGL
+    compileOnly("com.github.almasb:fxgl:17.3");
 
     val jUnitVersion = "5.10.1"
     // JUnit API and testing engine
