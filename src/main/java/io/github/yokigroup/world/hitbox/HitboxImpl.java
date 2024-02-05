@@ -8,6 +8,10 @@ import io.github.yokigroup.util.Pair;
 public abstract class HitboxImpl implements Hitbox {
     protected Pair<Float, Float> centerPos;
 
+    public HitboxImpl(final Pair<Float, Float> centerPosition) {
+        this.centerPos = centerPosition;
+    }
+
     @Override
     public Pair<Float, Float> getPosition() {
         return this.centerPos;

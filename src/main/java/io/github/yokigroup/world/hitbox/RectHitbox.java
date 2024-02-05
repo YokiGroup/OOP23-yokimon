@@ -9,7 +9,7 @@ public class RectHitbox extends HitboxImpl {
     private final Pair<Float, Float> dimensions;
 
     public RectHitbox(final Pair<Float, Float> centerPosition, final Pair<Float, Float> dimensions) {
-        this.centerPos = centerPosition;
+        super(centerPosition);
         this.dimensions = dimensions;
     }
 

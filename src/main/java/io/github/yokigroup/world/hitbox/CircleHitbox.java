@@ -9,7 +9,7 @@ public class CircleHitbox extends HitboxImpl {
     private final float radius;
 
     public CircleHitbox(final Pair<Float, Float> centerPosition, final float radius) {
-        this.centerPos = centerPosition;
+        super(centerPosition);
         this.radius = radius;
     }
 
