@@ -1,5 +1,7 @@
 package io.github.yokigroup.battle.fight;
 
+import io.github.yokigroup.battle.DMGcalculator.DMGcalculator;
+import io.github.yokigroup.battle.DMGcalculator.basicImplDMGCalculator;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.NextYokimon.NextYokimon;
@@ -20,8 +22,9 @@ public class FightImpl implements Fight {
     private Yokimon currOppYokimon;
 
     /* structures */
-    private final OpponentAI oppAI = new dummyImplOpponentAI();
     private final XPCalculator XPCalc = new dummyImplXPCalculator();
+    private final DMGcalculator DMGCalc = new basicImplDMGCalculator();
+    private final OpponentAI oppAI = new dummyImplOpponentAI(DMGCalc);
 
     /* these two must be different: may use view selection for myNextYok*/
     private final NextYokimon myNextYok = new dummyImplNextYokimon();
