@@ -19,4 +19,16 @@ public interface Hitbox {
      * @return a vector2 containing the coordinate offset to push an entity back in bounds.
      */
     Pair<Float, Float> fixBounds(final Hitbox hitbox);
+
+    /**
+     *
+     * @return the center position of the hitbox.
+     */
+    Pair<Float, Float> getPosition();
+
+    /**
+     * Sets the center position of the hitbox.
+     * @param pos The position to set it to.
+     */
+    void setPosition(final Pair<Float, Float> pos);
 }
