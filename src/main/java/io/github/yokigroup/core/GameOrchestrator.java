@@ -7,6 +7,7 @@ import io.github.yokigroup.world.tile.TileMap;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -39,6 +40,10 @@ public class GameOrchestrator implements EventHandler {
 
     @Override
     public <T extends Submodule> void handle(Class<T> subModuleType, Consumer<T> handler) {
-
+        Optional<T> submodule = subModules.get(subModuleType);
+        if(submodule.isEmpty()){
+            throw new IllegalArgumentException(this.getClass()+" does not contain submodule "+subModuleType);
+        }
+        handler.accept(submodule.get());
     }
 }
