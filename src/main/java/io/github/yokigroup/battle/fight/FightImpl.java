@@ -22,7 +22,10 @@ public class FightImpl implements Fight {
     /* structures */
     private final OpponentAI oppAI = new dummyImplOpponentAI();
     private final XPCalculator XPCalc = new dummyImplXPCalculator();
-    private final NextYokimon nextYok = new dummyImplNextYokimon();
+
+    /* these two must be different: may use view selection for myNextYok*/
+    private final NextYokimon myNextYok = new dummyImplNextYokimon();
+    private final NextYokimon OppNextYok = new dummyImplNextYokimon();
 
     /* boolean that triggers end of fight */
     private boolean isOver;
