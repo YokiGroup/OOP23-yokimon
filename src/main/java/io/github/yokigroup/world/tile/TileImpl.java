@@ -13,7 +13,7 @@ public class TileImpl implements Tile {
     private Set<HitBox> hitboxes;
     private Set<Entity> entities;
 
-    public Tile() {
+    public TileImpl() {
         this.hitboxes = new HashSet<>();
         this.entities = new HashSet<>();
     }
