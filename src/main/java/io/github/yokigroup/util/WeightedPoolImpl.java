@@ -3,7 +3,6 @@ package io.github.yokigroup.util;
 import javafx.util.Pair;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 
@@ -12,10 +11,19 @@ import java.util.Set;
  * @param <T> The type of objects contained in the pool.
  */
 public class WeightedPoolImpl<T> implements WeightedPool<T> {
-    private final Set<Pair<T, Float>> itemPool;
+    private Set<Pair<T, Float>> itemPool;
 
     public WeightedPoolImpl() {
         this.itemPool = new HashSet<>();
+    }
+
+    @Override
+    public WeightedPoolImpl<T> clone() {
+        WeightedPoolImpl<T> clone = new WeightedPoolImpl<>();
+        for (Pair<T, Float> pair : this.itemPool) {
+            clone.addElement(pair.getKey(), pair.getValue());
+        }
+        return clone;
     }
 
     @Override
