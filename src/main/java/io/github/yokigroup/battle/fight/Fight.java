@@ -1,5 +1,7 @@
 package io.github.yokigroup.battle.fight;
 
+import io.github.yokigroup.battle.Yokimon;
+
 public interface Fight {
 
     /**
