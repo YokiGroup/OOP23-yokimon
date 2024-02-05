@@ -12,7 +12,7 @@ public interface TileShape {
     /**
      * The possible directions a tile can connect to.
      */
-    enum Direction {
+    enum TileDirections {
         UP,
         DOWN,
         LEFT,
@@ -28,5 +28,5 @@ public interface TileShape {
      *
      * @return All the directions of this shape.
      */
-    Set<Direction> getPossibleDirections();
+    Set<TileDirections> getPossibleDirections();
 }
