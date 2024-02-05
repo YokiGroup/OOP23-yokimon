@@ -16,13 +16,6 @@ public interface Yokimon {
         HP;
     }
 
-    public enum color{
-        RED,
-        YELLOW,
-        GREEN,
-        BLUE
-    }
-
     public enum GrowRate {
         SLOW(0.75),
         MEDIUM(1.00),
@@ -45,7 +38,7 @@ public interface Yokimon {
      * Returns the color of the Yokimon
      * @return color
      */
-    public color getColor();
+    public Attack.color getColor(); ///////////////////////////PROBABILMENTE UN DISASTRO
 
     /**
      * Returns all the Stats as a map of Integer
