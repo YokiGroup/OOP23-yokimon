@@ -1,7 +1,7 @@
 package io.github.yokigroup.world;
 
+import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.tile.Tile;
-import javafx.util.Pair;
 
 /**
  * A map containing tiles the player can traverse on.

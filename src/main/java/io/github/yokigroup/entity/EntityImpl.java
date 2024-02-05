@@ -1,7 +1,7 @@
 package io.github.yokigroup.entity;
 
-import com.almasb.fxgl.core.math.Vec2;
 import com.almasb.fxgl.physics.HitBox;
+import io.github.yokigroup.util.Pair;
 
 /**
  * A fake implementation of the entity interface
@@ -13,7 +13,7 @@ public class EntityImpl implements Entity {
     }
 
     @Override
-    public Vec2 getPosition() {
+    public Pair getPosition() {
         return null;
     }
 

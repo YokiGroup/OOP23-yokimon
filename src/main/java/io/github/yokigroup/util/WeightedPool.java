@@ -1,9 +1,5 @@
 package io.github.yokigroup.util;
 
-import javafx.util.Pair;
-
-import java.util.Set;
-
 /**
  * A pool that given elements and their weight, it returns randomized items from it.
  * @param <T> The type of objects contained in the pool.
