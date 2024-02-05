@@ -13,9 +13,13 @@ public class TileImpl implements Tile {
     private Set<Hitbox> hitboxes;
     private Set<Entity> entities;
 
+    public TileImpl(final Set<Hitbox> hitboxes, final Set<Entity> entities) {
+        this.hitboxes = hitboxes;
+        this.entities = entities;
+    }
+
     public TileImpl() {
-        this.hitboxes = new HashSet<>();
-        this.entities = new HashSet<>();
+        new TileImpl(Set.of(), Set.of());
     }
 
     @Override
