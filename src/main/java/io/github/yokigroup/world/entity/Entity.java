@@ -1,4 +1,4 @@
-package io.github.yokigroup.entity;
+package io.github.yokigroup.world.entity;
 
 
 /**
