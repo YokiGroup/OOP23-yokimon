@@ -8,7 +8,7 @@ class HitboxTest {
 
     @Test
     void collidesWith() {
-        
+
     }
 
     @Test

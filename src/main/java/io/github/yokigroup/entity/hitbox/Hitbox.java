@@ -1,10 +1,9 @@
 package io.github.yokigroup.entity.hitbox;
 
 import io.github.yokigroup.util.Pair;
-import org.dyn4j.geometry.Geometry;
+import org.dyn4j.geometry.Shape;
 
 public interface Hitbox {
-
     /**
      * Checks if this hitbox is colliding with another
      * @param other the other hitbox to check.
@@ -26,7 +25,7 @@ public interface Hitbox {
 
     /**
      *
-     * @return the geometry of the hitbox object
+     * @return the shape of the hitbox.
      */
-    Geometry getGeometry();
+    Shape getShape();
 }
