@@ -7,8 +7,8 @@ package io.github.yokigroup.util;
  */
 public class PairImpl<T, K> implements Pair<T, K> {
     private final javafx.util.Pair<T, K> pair;
-    public PairImpl(final T x, final K b) {
-        this.pair = new javafx.util.Pair<>(x, b);
+    public PairImpl(final T x, final K y) {
+        this.pair = new javafx.util.Pair<>(x, y);
     }
 
     @Override
