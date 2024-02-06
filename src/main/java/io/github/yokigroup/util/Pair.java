@@ -1,7 +1,7 @@
 package io.github.yokigroup.util;
 
 /**
- * A data structure containing two elements.
+ * A binding to a data structure containing two elements.
  * @param <T> The type of the first element.
  * @param <K> The type of the second element.
  */
