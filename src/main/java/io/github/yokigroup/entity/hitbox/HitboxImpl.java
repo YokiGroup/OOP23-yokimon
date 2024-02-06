@@ -8,21 +8,22 @@ import org.dyn4j.geometry.Shape;
  * An abstract binding to the Shape class
  */
 public abstract class HitboxImpl implements Hitbox {
-    private final Shape shape;
     private Pair<Float, Float> position;
+    protected Shape shape;
 
-    public HitboxImpl(final Shape shape, final Pair<Float, Float> position) {
+    public HitboxImpl(final Pair<Float, Float> position) {
         this.position = position;
-        this.shape = shape;
     }
 
-    public HitboxImpl(final Shape shape) {
-        this(shape, new PairImpl<>(0.0f, 0.0f));
+    public HitboxImpl() {
+        this(new PairImpl<>(0.0f, 0.0f));
     }
 
     @Override
     public void setPosition(final Pair<Float, Float> pos) {
         this.position = pos;
+        this.shape.translate(0, 0);
+        this.shape.translate(pos.getX(), pos.getY());
     }
 
     @Override
