@@ -51,7 +51,7 @@ public class HitboxImpl implements Hitbox {
 
     @Override
     public boolean collidesWith(final Hitbox other) {
-        return false;
+        return this.shape.createAABB().overlaps(other.getShape().createAABB());
     }
 
     @Override
