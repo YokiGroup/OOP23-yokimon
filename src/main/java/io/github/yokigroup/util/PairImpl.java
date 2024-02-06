@@ -1,6 +1,7 @@
 package io.github.yokigroup.util;
 
 /**
+ * Implementation of the Pair interface binding.
  * @param <T> the type of the first element
  * @param <K> the type of the second element
  */

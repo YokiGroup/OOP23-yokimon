@@ -6,6 +6,9 @@ import io.github.yokigroup.world.tile.Tile;
 
 import java.util.Set;
 
+/**
+ * A TileShape contains a set of all the tiles of a specific shape.
+ */
 public class TileShapeImpl implements TileShape {
     private final Set<TileDirections> shape;
     private final WeightedPool<Tile> tiles;
