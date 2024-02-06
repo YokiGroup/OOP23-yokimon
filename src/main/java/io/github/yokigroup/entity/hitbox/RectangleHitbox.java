@@ -12,9 +12,4 @@ public class RectangleHitbox extends HitboxImpl {
     public boolean collidesWith(Hitbox other) {
         return false;
     }
-
-    @Override
-    public Shape getShape() {
-        return null;
-    }
 }
