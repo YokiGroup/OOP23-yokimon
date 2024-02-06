@@ -44,7 +44,7 @@ public class GameOrchestrator implements EventHandler {
      * Initializes a GameOrchestrator with a new TileMap and PlayerCharacter, along with the required submodules.
      */
     public GameOrchestrator() {
-        playerCharacter = new Entity() { }; // TODO replace with Entity implementation
+        playerCharacter = null; // TODO replace with Entity implementation
         gameMap = new TileMap() { }; // TODO replace with TileMap implementation
         subModules = initSubmodules();
     }

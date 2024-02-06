@@ -84,7 +84,7 @@ class EventSystemTest {
     @Test
     void generatePlayerPositionPublisher() {
         EventPublisher<PlayerPositionSubmodule> playerPositionPub = EventPublisherFactory.generatePlayerPositionPublisher();
-        Entity playerChar = new Entity(){};
+        Entity playerChar = null;
         TileMap gameMap = new TileMap(){};
         // it makes no sense to have more than one PlayerPositionSubmodule
         PlayerPositionSubmodule playerPositionSub = new PlayerPositionSubmodule(playerChar, gameMap);
