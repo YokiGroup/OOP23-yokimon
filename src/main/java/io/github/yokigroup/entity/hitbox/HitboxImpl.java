@@ -4,6 +4,9 @@ import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.PairImpl;
 import org.dyn4j.geometry.Shape;
 
+/**
+ * An abstract binding to the Shape class
+ */
 public abstract class HitboxImpl implements Hitbox {
     private final Shape shape;
     private Pair<Float, Float> position;

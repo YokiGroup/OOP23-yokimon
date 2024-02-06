@@ -3,6 +3,9 @@ package io.github.yokigroup.entity.hitbox;
 import io.github.yokigroup.util.Pair;
 import org.dyn4j.geometry.Shape;
 
+/**
+ * A hitbox interface to manage collisions and resolve them between objects.
+ */
 public interface Hitbox {
     /**
      * Checks if this hitbox is colliding with another
