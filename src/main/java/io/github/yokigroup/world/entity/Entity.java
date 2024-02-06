@@ -15,7 +15,7 @@ public abstract class Entity {
         OUT_OF_MAP,
         USED
     }
-
+    //cambialo cretino
     protected final String name;
     protected Position Pos;
     protected Hitbox Hitbox_type;
