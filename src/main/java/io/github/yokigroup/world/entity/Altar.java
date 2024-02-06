@@ -1,10 +1,9 @@
-package io.github.yokigroup.entity;
+package io.github.yokigroup.world.entity;
 
 
 
 import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.entity.people.People;
-import io.github.yokigroup.entity.people.Player;
+import io.github.yokigroup.world.entity.people.Player;
 
 import java.util.Optional;
 
