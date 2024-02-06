@@ -1,8 +1,5 @@
 package io.github.yokigroup.world.tile;
 
-import com.almasb.fxgl.physics.BoundingShape;
-import com.almasb.fxgl.physics.HitBox;
-import javafx.geometry.Point2D;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
