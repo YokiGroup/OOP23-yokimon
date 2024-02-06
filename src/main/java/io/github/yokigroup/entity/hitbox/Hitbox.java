@@ -20,6 +20,12 @@ public interface Hitbox {
 
     /**
      *
+     * @return the position of the hitbox.
+     */
+    Pair<Float, Float> getPosition();
+
+    /**
+     *
      * @return the geometry of the hitbox object
      */
     Geometry getGeometry();
