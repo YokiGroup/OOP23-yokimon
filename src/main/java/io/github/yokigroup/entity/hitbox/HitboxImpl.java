@@ -2,51 +2,31 @@ package io.github.yokigroup.entity.hitbox;
 
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.PairImpl;
-import org.dyn4j.geometry.Circle;
-import org.dyn4j.geometry.Rectangle;
 import org.dyn4j.geometry.Shape;
 
 /**
  * An abstract binding to the Shape class
  */
-public class HitboxImpl implements Hitbox {
+public abstract class HitboxImpl implements Hitbox {
     private final Shape shape;
     private Pair<Float, Float> position;
 
     /**
-     * Creates a circular hitbox
-     * @param position the position of the circle
-     * @param radius the radius of the circle
+     * Creates a hitbox
+     * @param shape The shape of the hitbox
+     * @param position The position of the hitbox
      */
-    public HitboxImpl(final Pair<Float, Float> position, final float radius) {
-        this.shape = new Circle(radius);
+    protected HitboxImpl(final Shape shape, final Pair<Float, Float> position) {
+        this.shape = shape;
         this.setPosition(position);
     }
 
     /**
-     * Creates a rectangular hitbox
-     * @param position the position of the rectangle
-     * @param dimensions the width and height of the rectangle
+     * Creates hitbox at the origin
+     * @param shape The shape of the hitbox
      */
-    public HitboxImpl(final Pair<Float, Float> position, final Pair<Float, Float> dimensions) {
-        this.shape = new Rectangle(dimensions.getX(), dimensions.getY());
-        this.setPosition(position);
-    }
-
-    /**
-     * Creates a circular hitbox at the origin
-     * @param radius the radius of the circle
-     */
-    public HitboxImpl(final float radius) {
-        this(new PairImpl<>(0.0f, 0.0f), radius);
-    }
-
-    /**
-     * Creates a rectangular hitbox at the origin
-     * @param dimensions the width and height of the rectangle
-     */
-    public HitboxImpl(final Pair<Float, Float> dimensions) {
-        this(new PairImpl<>(0.0f, 0.0f), dimensions);
+    protected HitboxImpl(final Shape shape) {
+        this(shape, new PairImpl<>(0.0f, 0.0f));
     }
 
     @Override
