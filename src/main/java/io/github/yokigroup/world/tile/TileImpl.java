@@ -1,7 +1,7 @@
 package io.github.yokigroup.world.tile;
 
 import io.github.yokigroup.entity.Entity;
-import io.github.yokigroup.entity.Hitbox;
+import io.github.yokigroup.entity.hitbox.Hitbox;
 
 import java.util.Set;
 

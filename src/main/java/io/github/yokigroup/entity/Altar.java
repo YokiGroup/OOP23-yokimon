@@ -3,7 +3,7 @@ package io.github.yokigroup.entity;
 
 
 import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.entity.people.People;
+import io.github.yokigroup.entity.hitbox.Hitbox;
 import io.github.yokigroup.entity.people.Player;
 
 import java.util.Optional;

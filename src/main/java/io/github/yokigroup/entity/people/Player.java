@@ -1,7 +1,7 @@
 package io.github.yokigroup.entity.people;
 
 import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.entity.Hitbox;
+import io.github.yokigroup.entity.hitbox.Hitbox;
 import io.github.yokigroup.entity.Position;
 import io.github.yokigroup.entity.Vector;
 
