@@ -3,13 +3,14 @@ package io.github.yokigroup.event.submodule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-class SubModuleMapImplTest {
+class SubmoduleMapImplTest {
     private SubModuleMap map;
     private PartySubmodule pSub;
     private FightSubmodule fSub;
@@ -23,14 +24,14 @@ class SubModuleMapImplTest {
         subModuleTestSet = Set.of(pSub, fSub);
     }
 
-    private void retrievalAsserts(){
+    private void retrievalAsserts() {
         assertEquals(Optional.of(pSub), map.get(pSub.getClass()));
         assertEquals(Optional.of(fSub), map.get(fSub.getClass()));
         assertEquals(Optional.empty(), map.get(PlayerPositionSubmodule.class));
     }
 
     @Test
-    void register_and_get() {
+    void registerAndGet() {
         assertTrue(map.register(pSub));
         assertTrue(map.register(fSub));
         assertFalse(map.register(fSub));
