@@ -2,7 +2,6 @@ package io.github.yokigroup.entity.hitbox;
 
 import io.github.yokigroup.util.Pair;
 import org.dyn4j.geometry.Circle;
-import org.dyn4j.geometry.Rectangle;
 
 /**
  * A circular hitbox implementation.

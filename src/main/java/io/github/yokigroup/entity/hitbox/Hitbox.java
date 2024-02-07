@@ -8,8 +8,8 @@ import org.dyn4j.geometry.Shape;
  */
 public interface Hitbox {
     /**
-     * Checks if this hitbox is colliding with another
-     * @param other the other hitbox to check.
+     * Checks if this hitbox is colliding with another.
+     * @param other the other static hitbox to check.
      * @return true if the hitboxes are colliding.
      */
     boolean collidesWith(Hitbox other);
