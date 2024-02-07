@@ -28,7 +28,7 @@ public class PartySubmodule implements Submodule {
     /**
      * Lists all the yokimons in the party.
      * @return defensive copy (watch out!) of yokimons in the party
-     * @see {@code setParty}
+     * @see #setParty(List) setParty
      */
     public List<Yokimon> listYokimons() {
         return deepCopyOf(yokimonList);
