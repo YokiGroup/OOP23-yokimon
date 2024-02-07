@@ -11,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class SubmoduleMapImplTest {
-    private SubModuleMap map;
+    private SubmoduleMap map;
     private PartySubmodule pSub;
     private FightSubmodule fSub;
     private Set<Submodule> subModuleTestSet;
 
     @BeforeEach
     void setUp() {
-        map = new SubModuleMapImpl();
+        map = new SubmoduleMapImpl();
         pSub = new PartySubmodule();
         fSub = new FightSubmodule(pSub);
         subModuleTestSet = Set.of(pSub, fSub);

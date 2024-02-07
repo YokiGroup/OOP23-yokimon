@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * a SubModuleMap is an object containing zero or more (different) submodules, queryable with the provided functions
  */
-public interface SubModuleMap {
+public interface SubmoduleMap {
     /**
      * Put a submodule in the map
      * @param s submodule to add
