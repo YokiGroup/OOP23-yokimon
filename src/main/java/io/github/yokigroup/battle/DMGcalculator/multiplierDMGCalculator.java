@@ -3,7 +3,7 @@ package io.github.yokigroup.battle.DMGcalculator;
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Yokimon;
 
-public class multiplierDMGCalculator implements DMGcalculator{
+public class multiplierDMGCalculator implements DMGCalculator {
 
     private static final double MULTIPLIER = 1.2;
 

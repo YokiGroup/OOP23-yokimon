@@ -1,16 +1,16 @@
 package io.github.yokigroup.battle.OpponentAI;
 
 import io.github.yokigroup.battle.Attack;
-import io.github.yokigroup.battle.DMGcalculator.DMGcalculator;
+import io.github.yokigroup.battle.DMGcalculator.DMGCalculator;
 import io.github.yokigroup.battle.Yokimon;
 
 import java.util.Optional;
 
 public class dummyImplOpponentAI extends OpponentAI {
 
-    private final DMGcalculator DMGCalc;
+    private final DMGCalculator DMGCalc;
 
-    public dummyImplOpponentAI(DMGcalculator dmgCalc) {
+    public dummyImplOpponentAI(DMGCalculator dmgCalc) {
         DMGCalc = dmgCalc;
     }
 
