@@ -116,7 +116,7 @@ public class Vector2Impl implements Vector2 {
      */
     @Override
     public double dot(final Vector2 other) {
-        return this.vector.dot(((Vector2Impl)other).getVector());
+        return this.vector.dot(((Vector2Impl) other).getVector());
     }
 
     /**

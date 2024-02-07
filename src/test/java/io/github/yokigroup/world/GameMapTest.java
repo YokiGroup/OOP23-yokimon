@@ -2,8 +2,6 @@ package io.github.yokigroup.world;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class GameMapTest {
 
     @Test
