@@ -18,6 +18,18 @@ public interface Vector2 {
     double getY();
 
     /**
+     * Sets the first component of the vector.
+     * @param x The value to set it to.
+     */
+    void setX(double x);
+
+    /**
+     * Sets the second component of the vector.
+     * @param y The value to set it to.
+     */
+    void setY(double y);
+
+    /**
      *
      * @param other The other opertator.
      * @return a new vector containing the addition between this and another vector (component per component).

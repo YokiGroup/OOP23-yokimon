@@ -1,6 +1,7 @@
 package io.github.yokigroup.util;
 
 public class Vector2Impl implements Vector2 {
+    org.dyn4j.geometry.Vector2 vector2;
 
     @Override
     public double getX() {
@@ -10,6 +11,16 @@ public class Vector2Impl implements Vector2 {
     @Override
     public double getY() {
         return null;
+    }
+
+    @Override
+    public void setX(double x) {
+        
+    }
+
+    @Override
+    public void setY(double y) {
+
     }
 
     @Override
