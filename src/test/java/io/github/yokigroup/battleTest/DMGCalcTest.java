@@ -1,24 +1,26 @@
 package io.github.yokigroup.battleTest;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.AttackImpl;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.YokimonImpl;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class DMGCalcTest {
 
-    @Test public void testDummyImpl() {
+    /* public int getDMG(Yokimon attackingYokimon, Yokimon attackedYokimon, Attack attack) {
+        return (int)attackedYokimon.getStat(Yokimon.Stats.ATK)*attack.attackPower()
+                /attackedYokimon.getStat(Yokimon.Stats.DEF);
+    } */
+
+    @Test public void testBasicImpl() {
 
         Yokimon y1 = new YokimonImpl("Blue");
         Yokimon y2 = new YokimonImpl("Red");
         Attack a1 = new AttackImpl("Bubble", Attack.color.BLUE);
         Attack a2 = new AttackImpl("Leaf", Attack.color.GREEN);
+
+
 
 
     }
