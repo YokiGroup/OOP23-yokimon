@@ -9,6 +9,8 @@ public class YokimonImpl implements Yokimon{
     private final static GrowRate DEFAULT_GROWRATE = GrowRate.MEDIUM;
     private final String name;
 
+    private final Attack.color color;
+
     private final Map<Stats, Integer> BaseStats;
 
     private Map<Stats, Integer> Stats;
@@ -29,10 +31,11 @@ public class YokimonImpl implements Yokimon{
     private boolean active;
 
     private final LevelUP_Logic LevelUtility=new LevelUP_LogicImpl();
-    public YokimonImpl(String name, Map<Yokimon.Stats, Integer> baseStats, GrowRate growRate,
+    public YokimonImpl(String name, Attack.color color, Map<Yokimon.Stats, Integer> baseStats, GrowRate growRate,
                         int level, List<Attack> moves)
     {
         this.name = name;
+        this.color = color;
         this.BaseStats = Map.copyOf(baseStats);
         this.growRate = growRate;
         this.level=level;
@@ -47,16 +50,21 @@ public class YokimonImpl implements Yokimon{
     public YokimonImpl(String name, Map<Yokimon.Stats, Integer> baseStats, GrowRate growRate,
                         List<Attack> moves)
     {
-        this(name, baseStats, growRate, DEFAULT_LEVEL, moves);
+        this(name, null, baseStats, growRate, DEFAULT_LEVEL, moves);
     }
 
     public YokimonImpl(String name) {
-        this(name, Map.of(), DEFAULT_GROWRATE, DEFAULT_LEVEL, List.of());
+        this(name, null, Map.of(), DEFAULT_GROWRATE, DEFAULT_LEVEL, List.of());
     }
 
     @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public Attack.color getColor() {
+        return color;
     }
 
     @Override
