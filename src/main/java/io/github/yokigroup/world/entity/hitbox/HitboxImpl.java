@@ -1,4 +1,4 @@
-package io.github.yokigroup.entity.hitbox;
+package io.github.yokigroup.world.entity.hitbox;
 
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.PairImpl;

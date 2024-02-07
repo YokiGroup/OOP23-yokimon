@@ -1,6 +1,6 @@
-package io.github.yokigroup.entity;
+package io.github.yokigroup.world.entity;
 
-import io.github.yokigroup.entity.hitbox.Hitbox;
+import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 /**
  * This class represent the concept of entity

@@ -1,6 +1,9 @@
 package io.github.yokigroup.entity.hitbox;
 
 import io.github.yokigroup.util.PairImpl;
+import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
+import io.github.yokigroup.world.entity.hitbox.Hitbox;
+import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

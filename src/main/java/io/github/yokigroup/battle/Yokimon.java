@@ -1,9 +1,8 @@
 package io.github.yokigroup.battle;
 
-
-
 import java.util.Map;
 import java.util.List;
+
 public interface Yokimon {
     /**
     * Stats represent the stats that the yokimon has at this moment
