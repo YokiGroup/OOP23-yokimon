@@ -8,7 +8,7 @@ import java.util.function.Consumer;
  * Responsible for the communication between entities and the
  * submodules they interact with
  */
-public interface EventHandler {
+public interface MessageHandler {
     /**
      * handles an operation with a submodule, usually called by entities
      * @param subModuleType type of the submodule called in play

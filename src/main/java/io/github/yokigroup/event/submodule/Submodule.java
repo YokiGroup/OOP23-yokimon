@@ -1,9 +1,11 @@
 package io.github.yokigroup.event.submodule;
 
+import io.github.yokigroup.event.MessageHandler;
+
 /**
  * Submodule interface.
  * Every Submodule has the responsibility of handling and receiving events related to their function.
- * @see io.github.yokigroup.event.EventHandler EventHandler
+ * @see MessageHandler EventHandler
  */
 public interface Submodule {
     /**

@@ -1,6 +1,6 @@
 package io.github.yokigroup.core;
 
-import io.github.yokigroup.event.EventHandler;
+import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.FightSubmodule;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerPositionSubmodule;
@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 /**
  * Game loop. Responsible for receiving events and updating entities
  */
-public class GameOrchestrator implements EventHandler {
+public class GameOrchestrator implements MessageHandler {
     private final SubmoduleMap subModules;
     private final TileMap gameMap;
     private final Entity playerCharacter;
