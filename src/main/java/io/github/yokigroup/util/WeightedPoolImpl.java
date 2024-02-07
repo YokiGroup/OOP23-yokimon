@@ -9,12 +9,19 @@ import java.util.Set;
  * @param <T> The type of objects contained in the pool.
  */
 public class WeightedPoolImpl<T> implements WeightedPool<T> {
-    private Set<Pair<T, Float>> itemPool;
+    private final Set<Pair<T, Float>> itemPool;
 
+    /**
+     * Creates an empty weighted pool.
+     */
     public WeightedPoolImpl() {
         this.itemPool = new HashSet<>();
     }
 
+    /**
+     *
+     * @return creates a copy of the pool.
+     */
     @Override
     public WeightedPoolImpl<T> clone() {
         WeightedPoolImpl<T> clone = new WeightedPoolImpl<>();
@@ -24,6 +31,11 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
         return clone;
     }
 
+    /**
+     * Adds an element to the pool, the weights can be an arbitrary value.
+     * @param element The element to add to the pool.
+     * @param weight The chance of an element to be chosen.
+     */
     @Override
     public void addElement(final T element, final float weight) {
         if (weight <= 0.0f) {
@@ -32,11 +44,19 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
         this.itemPool.add(new PairImpl<>(element, weight));
     }
 
+    /**
+     * Removes one of the elements from the pool.
+     * @param element The element to remove.
+     */
     @Override
     public void removeElement(final T element) {
         this.itemPool.removeIf(p -> p.getX() == element);
     }
 
+    /**
+     * Gets one of the elements in the pool by their weight without removing it.
+     * @return One of the elements in the pool.
+     */
     @Override
     public T getRandomizedElement() {
         if (this.size() == 0) {
@@ -58,6 +78,10 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
         throw new IllegalStateException("No element could be retrieved from the pool.");
     }
 
+    /**
+     * Gets one of the elements in the pool by their weight and removes it.
+     * @return One of the elements in the pool.
+     */
     @Override
     public T removeRandomizedElement() {
         final T element = getRandomizedElement();
@@ -65,6 +89,10 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
         return element;
     }
 
+    /**
+     *
+     * @return the amount of items in the pool.
+     */
     @Override
     public int size() {
         return this.itemPool.size();
