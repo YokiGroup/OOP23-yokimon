@@ -40,6 +40,7 @@ public abstract class Entity {
      * @return message
      */
     public Entity.message setPosition(Position Pos){
+        // FIXME move hitbox position as well
         if(Pos.isValid()){
             this.Pos=Pos;
             return message.OK;
