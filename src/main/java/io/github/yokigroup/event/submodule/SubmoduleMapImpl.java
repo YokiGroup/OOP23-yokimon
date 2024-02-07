@@ -13,7 +13,7 @@ public final class SubmoduleMapImpl implements SubmoduleMap {
     private final Map<Class<? extends Submodule>, Submodule> submodules = new HashMap<>();
 
     @Override
-    public <T extends Submodule> boolean register(final T s) {
+    public boolean register(final Submodule s) {
         return submodules.put(s.getClass(), s) == null;
     }
 

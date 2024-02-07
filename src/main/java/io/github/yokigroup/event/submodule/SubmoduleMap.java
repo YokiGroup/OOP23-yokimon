@@ -10,10 +10,10 @@ public interface SubmoduleMap {
     /**
      * Put a submodule in the map.
      * @param s submodule to add
-     * @param <T> type of submodule to register
-     * @return true if the submodule has not been added previously, false if the added submodule overwrote another one
+     * @return true if a submodule of the same type has not been added previously,
+     * false if the added submodule overwrote another one
      */
-    <T extends Submodule> boolean register(T s);
+    boolean register(Submodule s);
 
     /**
      * Register all the submodules contained in the set.
