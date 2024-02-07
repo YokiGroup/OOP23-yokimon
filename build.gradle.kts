@@ -43,7 +43,12 @@ dependencies {
             implementation("org.openjfx:javafx-$module:$javaFxVersion:$platform")
         }
     }
+
+
     implementation("org.dyn4j:dyn4j:5.0.1")
+
+    // https://mvnrepository.com/artifact/com.github.java-json-tools/json-schema-validator
+    implementation("com.github.java-json-tools:json-schema-validator:2.2.14")
 
     // JUnit API and testing engine
     val jUnitVersion = "5.10.1"
