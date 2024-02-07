@@ -50,9 +50,11 @@ dependencies {
     // https://mvnrepository.com/artifact/com.github.java-json-tools/json-schema-validator
     implementation("com.github.java-json-tools:json-schema-validator:2.2.14")
 
+    // https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path
+    implementation("com.jayway.jsonpath:json-path:2.9.0")
+
     // JUnit API and testing engine
     val jUnitVersion = "5.10.1"
-
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
 }
