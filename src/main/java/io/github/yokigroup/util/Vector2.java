@@ -18,44 +18,32 @@ public interface Vector2 {
     double getY();
 
     /**
-     * Sets the first component of the vector.
-     * @param x The value to set it to.
-     */
-    void setX(double x);
-
-    /**
-     * Sets the second component of the vector.
-     * @param y The value to set it to.
-     */
-    void setY(double y);
-
-    /**
      *
      * @param other The other opertator.
      * @return a new vector containing the addition between this and another vector (component per component).
      */
-    Vector2 add(Vector2 other);
+    Vector2 plus(Vector2 other);
 
     /**
      *
      * @param other The other opertator.
      * @return a new vector containing the subtraction between this and another vector (component per component).
      */
-    Vector2 sub(Vector2 other);
+    Vector2 minus(Vector2 other);
 
     /**
      *
      * @param other The other opertator.
      * @return a new vector containing the multiplication between this and another vector (component per component).
      */
-    Vector2 mult(Vector2 other);
+    Vector2 times(Vector2 other);
 
     /**
      *
      * @param other The other opertator.
      * @return a new vector containing the division between this and another vector (component per component).
      */
-    Vector2 div(Vector2 other);
+    Vector2 divide(Vector2 other);
 
 
     /**
