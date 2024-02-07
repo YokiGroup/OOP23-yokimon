@@ -7,15 +7,29 @@ package io.github.yokigroup.util;
  */
 public class PairImpl<T, K> implements Pair<T, K> {
     private final javafx.util.Pair<T, K> pair;
+
+    /**
+     * Creates a pair with two elements.
+     * @param x The first element.
+     * @param y The second element.
+     */
     public PairImpl(final T x, final K y) {
         this.pair = new javafx.util.Pair<>(x, y);
     }
 
+    /**
+     *
+     * @return the first element in the pair.
+     */
     @Override
     public T getX() {
         return this.pair.getKey();
     }
 
+    /**
+     *
+     * @return the second element in the pair.
+     */
     @Override
     public K getY() {
         return this.pair.getValue();
