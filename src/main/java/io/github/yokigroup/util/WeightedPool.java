@@ -17,13 +17,13 @@ public interface WeightedPool<T> {
      * @param element The element to add to the pool.
      * @param weight The chance of an element to be chosen.
      */
-    void addElement(final T element, final float weight);
+    void addElement(T element, float weight);
 
     /**
      * Removes one of the elements from the pool.
      * @param element The element to remove.
      */
-    void removeElement(final T element);
+    void removeElement(T element);
 
     /**
      * Gets one of the elements in the pool by their weight without removing it.

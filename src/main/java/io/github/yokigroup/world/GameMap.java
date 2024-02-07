@@ -12,7 +12,7 @@ public interface GameMap {
      * @param position The world position to take the tile from.
      * @return The tile at that position.
      */
-    Tile getTileAt(final Pair<Integer, Integer> position);
+    Tile getTileAt(Pair<Integer, Integer> position);
 
     /**
      *

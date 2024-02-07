@@ -12,13 +12,13 @@ public interface Hitbox {
      * @param other the other hitbox to check.
      * @return true if the hitboxes are colliding.
      */
-    boolean collidesWith(final Hitbox other);
+    boolean collidesWith(Hitbox other);
 
     /**
      * Sets where the hitbox is located.
      * @param pos the positions of the hitbox.
      */
-    void setPosition(final Pair<Float, Float> pos);
+    void setPosition(Pair<Float, Float> pos);
 
     /**
      *

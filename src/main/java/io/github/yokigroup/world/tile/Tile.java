@@ -25,11 +25,11 @@ public interface Tile {
      *
      * @param hitbox The hitbox to add to the tile.
      */
-    void addHitbox(final Hitbox hitbox);
+    void addHitbox(Hitbox hitbox);
 
     /**
      *
      * @param entity The entity to add to the tile.
      */
-    void addEntity(final Entity entity);
+    void addEntity(Entity entity);
 }
