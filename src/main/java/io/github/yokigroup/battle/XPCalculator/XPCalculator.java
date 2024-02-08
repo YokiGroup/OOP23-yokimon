@@ -1,10 +1,13 @@
 package io.github.yokigroup.battle.XPCalculator;
 
-
 import io.github.yokigroup.battle.Yokimon;
 
 import java.util.List;
 
+/**
+ * It calculates the number of XP points that, in case of victory, my current Yokimon will earn.
+ * Different criteria for the choice are applied for different implementations of this interface.
+ */
 public abstract class XPCalculator {
 
     /**

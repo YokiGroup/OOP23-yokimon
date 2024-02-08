@@ -7,7 +7,7 @@ import java.util.Optional;
 
 /**
  * This is meant to select the best next Yokimon to use in the fight, once the current one is defeated.
- * The choice is based on different criteria, based on the different implementations.
+ * Different criteria for the choice are applied for different implementations of this interface.
  */
 public abstract class NextYokimon {
     /**
