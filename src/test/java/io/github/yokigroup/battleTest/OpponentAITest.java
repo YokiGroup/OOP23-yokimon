@@ -8,7 +8,7 @@ import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.AttackImpl;
 import io.github.yokigroup.battle.DmgCalculator.BasicImplDmgCalculator;
 import io.github.yokigroup.battle.OpponentAI.OpponentAI;
-import io.github.yokigroup.battle.OpponentAI.dummyImplOpponentAI;
+import io.github.yokigroup.battle.OpponentAI.DummyImplOpponentAI;
 import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.battle.Yokimon;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class OpponentAITest {
     @Test public void testDummyImpl() {
-        OpponentAI toTest = new dummyImplOpponentAI(new BasicImplDmgCalculator());
+        OpponentAI toTest = new DummyImplOpponentAI(new BasicImplDmgCalculator());
 
         Attack a1 = new AttackImpl("Bubble", Attack.color.BLUE);
         Attack a2 = new AttackImpl("Leaf", Attack.color.GREEN);
