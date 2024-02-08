@@ -16,14 +16,14 @@ public class multiplierDMGCalculator implements DMGCalculator {
      */
     @Override
     public int getDMG(Yokimon attackingYokimon, Yokimon attackedYokimon, Attack attack) {
-        double total = (double)attackedYokimon.getStat(Yokimon.Stats.ATK)*attack.attackPower()
-                        /attackedYokimon.getStat(Yokimon.Stats.DEF);
+        double total = (double)(attackingYokimon.getStat(Yokimon.Stats.ATK) * attack.attackPower()
+                / attackedYokimon.getStat(Yokimon.Stats.DEF));
 
-        if(attackingYokimon.getColor().equals(attack.color())) {
-            total = total*MULTIPLIER;
+        if (attackingYokimon.getColor().equals(attack.color())) {
+            total = total * MULTIPLIER;
         }
-        if(attackedYokimon.getColor().equals(attack.color())) {
-            total = total/MULTIPLIER;
+        if (attackedYokimon.getColor().equals(attack.color())) {
+            total = total / MULTIPLIER;
         }
 
         return (int)total;
