@@ -39,23 +39,15 @@ public abstract class HitboxImpl implements Hitbox {
         return this.shape.createAABB().overlaps(other.getShape().createAABB());
     }
 
-    /**
-     * Changes the position of the hitbox and the shape itself.
-     * @param pos the positions of the hitbox.
-     */
     @Override
-    public void setPosition(final Vector2 pos) {
+    public final void setPosition(final Vector2 pos) {
         this.position = pos;
         this.shape.translate(0.0d, 0.0d);
         this.shape.translate(pos.getX(), pos.getY());
     }
 
-    /**
-     *
-     * @return the position of the hitbox.
-     */
     @Override
-    public Vector2 getPosition() {
+    public final Vector2 getPosition() {
         return this.position;
     }
 }
