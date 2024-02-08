@@ -9,14 +9,14 @@ import org.dyn4j.geometry.Shape;
  * A circular hitbox implementation.
  */
 public class CircularHitbox extends HitboxImpl {
-    private final float radius;
+    private final double radius;
 
     /**
      * Creates a circular hitbox.
      * @param position The position of the circle.
      * @param radius The radius of the circle.
      */
-    public CircularHitbox(final Vector2 position, final float radius) {
+    public CircularHitbox(final Vector2 position, final double radius) {
         super(new Circle(radius), position);
         this.radius = radius;
     }
@@ -25,7 +25,7 @@ public class CircularHitbox extends HitboxImpl {
      * Creates a circular hitbox at the origin.
      * @param radius The radius of the circle.
      */
-    public CircularHitbox(final float radius) {
+    public CircularHitbox(final double radius) {
         this(new Vector2Impl(0.0d, 0.0d), radius);
     }
 
