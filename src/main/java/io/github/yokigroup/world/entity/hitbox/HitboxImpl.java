@@ -58,13 +58,4 @@ public abstract class HitboxImpl implements Hitbox {
     public Pair<Float, Float> getPosition() {
         return this.position;
     }
-
-    /**
-     *
-     * @return the shape of the hitbox.
-     */
-    @Override
-    public Shape getShape() {
-        return this.shape;
-    }
 }
