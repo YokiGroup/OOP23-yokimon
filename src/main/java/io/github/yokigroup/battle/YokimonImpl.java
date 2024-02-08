@@ -7,6 +7,7 @@ public class YokimonImpl implements Yokimon{
 
     private final static int DEFAULT_LEVEL=1;
     private final static GrowRate DEFAULT_GROWRATE = GrowRate.MEDIUM;
+
     private final String name;
 
     private final Attack.color color;
@@ -31,20 +32,26 @@ public class YokimonImpl implements Yokimon{
     private boolean active;
 
     private final LevelUP_Logic LevelUtility=new LevelUP_LogicImpl();
-    public YokimonImpl(String name, Attack.color color, Map<Yokimon.Stats, Integer> baseStats, GrowRate growRate,
-                        int level, List<Attack> moves)
-    {
+
+    public YokimonImpl(String name, Attack.color color, Map<Yokimon.Stats, Integer> baseStats,
+                       Map<Stats, Integer> Stats, int level, GrowRate growRate, List<Attack> moves, boolean active) {
         this.name = name;
         this.color = color;
         this.BaseStats = Map.copyOf(baseStats);
+        this.Stats = Map.copyOf(Stats);
+        this.level = level;
         this.growRate = growRate;
-        this.level=level;
         this.moves=List.copyOf(moves);
         this.active=true;
+
         this.XP=0;
         this.XP_NEXTLEV=LevelUtility.nextBoundXP(this.level);
         this.LevelUtility.set_Stats(this);
         this.ACTUAL_HP=this.MAX_HP;
+    }
+    public YokimonImpl(String name, Attack.color color, Map<Yokimon.Stats, Integer> baseStats, GrowRate growRate,
+                        int level, List<Attack> moves) {
+        this(name, color, baseStats, baseStats, DEFAULT_LEVEL, DEFAULT_GROWRATE, moves, true);
     }
 
     public YokimonImpl(String name, Map<Yokimon.Stats, Integer> baseStats, GrowRate growRate,
