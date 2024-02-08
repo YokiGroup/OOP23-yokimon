@@ -1,7 +1,7 @@
 package io.github.yokigroup.battle.fight;
 
 import io.github.yokigroup.battle.DMGcalculator.DMGCalculator;
-import io.github.yokigroup.battle.DMGcalculator.basicImplDMGCalculator;
+import io.github.yokigroup.battle.DMGcalculator.basicImplDmgCalculator;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.NextYokimon.NextYokimon;
@@ -28,7 +28,7 @@ public final class FightImpl implements Fight {
 
     /* structures */
     private final XPCalculator xpCalc = new dummyImplXPCalculator();
-    private final DMGCalculator dmgCalc = new basicImplDMGCalculator();
+    private final DMGCalculator dmgCalc = new basicImplDmgCalculator();
     private final OpponentAI oppAI = new dummyImplOpponentAI(dmgCalc);
     private final NextYokimon nextYok = new dummyImplNextYokimon();
 

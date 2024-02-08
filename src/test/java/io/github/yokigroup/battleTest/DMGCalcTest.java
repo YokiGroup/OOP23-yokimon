@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DMGCalcTest {
 
     @Test public void testBasicImpl() {
-        DMGCalculator toTest = new basicImplDMGCalculator();
+        DMGCalculator toTest = new basicImplDmgCalculator();
 
         Map<Yokimon.Stats, Integer> map1 = new HashMap<>();
         map1.put(Yokimon.Stats.ATK, 150);
