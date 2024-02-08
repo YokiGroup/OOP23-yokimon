@@ -3,7 +3,7 @@ package io.github.yokigroup.battle.DmgCalculator;
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Yokimon;
 
-public interface DMGCalculator {
+public interface DmgCalculator {
 
     /**
      * Calculates the actual damage provided by the attack
