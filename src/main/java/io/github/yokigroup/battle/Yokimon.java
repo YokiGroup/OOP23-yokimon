@@ -35,6 +35,11 @@ public interface Yokimon {
     public String getName();
 
     /**
+     * return the color of the yokimon
+     * @return Color
+     */
+    public Color getYokimonColor();
+    /**
      * Returns all the Stats as a map of Integer
      * with Stats as a key
      * @return Map<Stats, Integer>
@@ -64,6 +69,11 @@ public interface Yokimon {
      */
     public int getBaseStat(Stats baseStat);
 
+    /**
+     *
+     *
+     */
+    public void setStat(Stats change, int newValue);
 
     /**
      *Return an int with the value of yokimon current level
@@ -92,6 +102,18 @@ public interface Yokimon {
     public List<Attack> getAttacks();
 
     /**
+     *gives a new attack to the yokimon
+     */
+    public void addAttack(Attack newAttack);
+
+    /**
+     * Return a map with learnable attacks
+     * key: Integer which represent the level at which the yokimon learns the attack
+     * value: the actual attack
+     * @return Map of as key level and Attack as value
+     */
+    public Map<Integer, Attack> getLernableAttacks();
+    /**
      *Return actual HP of the yokimon
      * @return actual HP
      */
@@ -103,7 +125,26 @@ public interface Yokimon {
      */
     public int getMAXHP();
 
+    /**
+     * change the actual hp with a new value
+     * @param newValue the new value assigned to actualHP
+     */
+    public void setActualHP(int newValue);
 
+    /**
+     * change the max hp with a new value
+     * @param newValue the new value assigned to maxHP
+     */
+    public void setMaxHP(int newValue);
+
+    /**
+     * subtracts to the Actual HP of the yokimon the parameter damage
+     * if the hp of the yokimon reaches zero, it returns true
+     * otherwise it return true
+     * @param damage out put of the damage
+     * @return true if the yokimon is still active, false if is not
+     */
+    public boolean takeDamage(int damage);
 
     /**
      * Return true is the yokimon is Active, false
@@ -133,5 +174,26 @@ public interface Yokimon {
      * ERROR if the method fails
      */
     public exp_code takeXP(int n);
+
+    /**
+     * return the exp needed to reach the next
+     * level
+     * @return int ExpNext
+     */
+    public double getExpNext();
+    /**
+     * this method set a new bond to
+     * the amount of exp neaded for level-up
+     * to the next level
+     */
+    public void setExpNext(double newExp);
+
+    /**
+     * this method set a new value on the current exp
+     * of the yokimon
+     */
+    public void setExp(double exp);
+
+
 
 }
