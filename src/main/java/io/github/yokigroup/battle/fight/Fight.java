@@ -3,6 +3,9 @@ package io.github.yokigroup.battle.fight;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.Attack;
 
+/**
+ * Interface for Fight.
+ */
 public interface Fight {
 
     /**
