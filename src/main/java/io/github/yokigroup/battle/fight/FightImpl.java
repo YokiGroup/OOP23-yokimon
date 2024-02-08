@@ -45,7 +45,7 @@ public final class FightImpl implements Fight {
 
 
     /**
-     * Builder to instantiate the fight through the Logic
+     * Builder to instantiate the fight through the Logic.
      * @param myYokimons my party
      * @param oppYokimons the opponent party
      */
@@ -55,12 +55,12 @@ public final class FightImpl implements Fight {
     }
 
     @Override
-    public success attack(final Attack myAttack) {                                      ////missing
+    public Success attack(final Attack myAttack) {                                      ////missing
         return null;
     }
 
     @Override
-    public success getAttacked() {                                                      ////missing
+    public Success getAttacked() {                                                      ////missing
         return null;
     }
 
