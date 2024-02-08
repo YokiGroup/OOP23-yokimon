@@ -18,12 +18,8 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
         this.itemPool = new HashSet<>();
     }
 
-    /**
-     *
-     * @return creates a copy of the pool.
-     */
     @Override
-    public WeightedPoolImpl<T> copy() {
+    public final WeightedPoolImpl<T> copy() {
         final WeightedPoolImpl<T> clone = new WeightedPoolImpl<>();
         for (final Pair<T, Float> pair : this.itemPool) {
             clone.itemPool.add(new PairImpl<>(pair.getX(), pair.getY()));
@@ -31,34 +27,21 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
         return clone;
     }
 
-    /**
-     * Adds an element to the pool, the weights can be an arbitrary value.
-     * @param element The element to add to the pool.
-     * @param weight The chance of an element to be chosen.
-     */
     @Override
-    public void addElement(final T element, final float weight) {
+    public final void addElement(final T element, final float weight) {
         if (weight <= 0.0f) {
             throw new IllegalArgumentException("Weight must be positive.");
         }
         this.itemPool.add(new PairImpl<>(element, weight));
     }
 
-    /**
-     * Removes one of the elements from the pool.
-     * @param element The element to remove.
-     */
     @Override
-    public void removeElement(final T element) {
+    public final void removeElement(final T element) {
         this.itemPool.removeIf(p -> p.getX() == element);
     }
 
-    /**
-     * Gets one of the elements in the pool by their weight without removing it.
-     * @return One of the elements in the pool.
-     */
     @Override
-    public T getRandomizedElement() {
+    public final T getRandomizedElement() {
         if (this.size() == 0) {
             throw new IllegalStateException("The randomized pool is empty.");
         }
@@ -78,23 +61,15 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
         throw new IllegalStateException("No element could be retrieved from the pool.");
     }
 
-    /**
-     * Gets one of the elements in the pool by their weight and removes it.
-     * @return One of the elements in the pool.
-     */
     @Override
-    public T removeRandomizedElement() {
+    public final T removeRandomizedElement() {
         final T element = getRandomizedElement();
         removeElement(element);
         return element;
     }
 
-    /**
-     *
-     * @return the amount of items in the pool.
-     */
     @Override
-    public int size() {
+    public final int size() {
         return this.itemPool.size();
     }
 }
