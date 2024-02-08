@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Submodule containing a party's information (yokimon's group).
  */
-public class PartySubmodule implements Submodule {
+public class PartySubmodule extends Submodule {
     private List<Yokimon> yokimonList = new ArrayList<>();
 
     private List<Yokimon> deepCopyOf(final List<Yokimon> list) {

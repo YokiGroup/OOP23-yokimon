@@ -7,7 +7,7 @@ import io.github.yokigroup.world.tile.TileMap;
 /**
  * Handles player position updates.
  */
-public class PlayerPositionSubmodule implements Submodule {
+public class PlayerPositionSubmodule extends Submodule {
     private final Entity player;
     private final TileMap map;
 

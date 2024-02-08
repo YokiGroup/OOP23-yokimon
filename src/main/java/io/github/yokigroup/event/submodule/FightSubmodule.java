@@ -8,7 +8,7 @@ import java.util.Optional;
  * Handles queuing fights and starting them when the process.
  * @author Giovanni Paone
  */
-public class FightSubmodule implements Submodule {
+public class FightSubmodule extends Submodule {
     private Optional<Fight> lastAnnouncedFight = Optional.empty();
     private final PartySubmodule party; // keeping a reference to the party submodule to get a list of yokimons whenever necessary
 
