@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.AttackImpl;
-import io.github.yokigroup.battle.DMGcalculator.basicImplDmgCalculator;
+import io.github.yokigroup.battle.DmgCalculator.basicImplDmgCalculator;
 import io.github.yokigroup.battle.OpponentAI.OpponentAI;
 import io.github.yokigroup.battle.OpponentAI.dummyImplOpponentAI;
 import io.github.yokigroup.battle.YokimonImpl;
