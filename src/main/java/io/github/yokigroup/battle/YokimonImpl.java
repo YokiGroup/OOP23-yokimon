@@ -54,6 +54,7 @@ public class YokimonImpl implements Yokimon{
         this(name, color, baseStats, baseStats, DEFAULT_LEVEL, DEFAULT_GROWRATE, moves, true);
     }
 
+    /*MUST SUBSTITUTE WITH BUILDER USAGE*/
     public YokimonImpl(String name, Map<Yokimon.Stats, Integer> baseStats, GrowRate growRate,
                         List<Attack> moves)
     {
