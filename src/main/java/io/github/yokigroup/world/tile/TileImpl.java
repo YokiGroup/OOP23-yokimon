@@ -71,8 +71,8 @@ public class TileImpl implements Tile {
     }
 
     /**
-     * Adds an entity to the tile.
-     * @param entityPool The entity to add to the tile.
+     * Spawns all the entities in the tile.
+     * @param entityPool The pool of entities to randomly add to the tile.
      */
     @Override
     public void spawnEntities(final WeightedPool<Entity> entityPool) {
