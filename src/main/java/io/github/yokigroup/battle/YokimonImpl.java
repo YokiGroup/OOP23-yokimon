@@ -38,10 +38,10 @@ public class YokimonImpl implements Yokimon{
         this.name = name;
         this.color = color;
         this.BaseStats = Map.copyOf(baseStats);
-        this.Stats = Map.copyOf(Stats);
+        this.Stats = Map.copyOf(Stats); //
         this.level = level;
         this.growRate = growRate;
-        this.moves=List.copyOf(moves);
+        this.moves=List.copyOf(moves); //
         this.active=true;
 
         this.XP=0;
@@ -54,7 +54,6 @@ public class YokimonImpl implements Yokimon{
         this(name, color, baseStats, baseStats, DEFAULT_LEVEL, DEFAULT_GROWRATE, moves, true);
     }
 
-    /*MUST SUBSTITUTE WITH BUILDER USAGE*/
     public YokimonImpl(String name, Map<Yokimon.Stats, Integer> baseStats, GrowRate growRate,
                         List<Attack> moves)
     {
