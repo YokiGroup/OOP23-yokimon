@@ -34,48 +34,28 @@ public class TileImpl implements Tile {
         this(new HashSet<>(), new HashSet<>());
     }
 
-    /**
-     *
-     * @return All the hitboxes in a tile.
-     */
     @Override
-    public Set<Hitbox> getHitboxes() {
+    public final Set<Hitbox> getHitboxes() {
         return Set.copyOf(this.hitboxes);
     }
 
-    /**
-     *
-     * @return All the entity spawn locations on the tile.
-     */
     @Override
-    public Set<Vector2> getEntitySpawnLocations() {
+    public final Set<Vector2> getEntitySpawnLocations() {
         return Set.copyOf(spawnLocations);
     }
 
-    /**
-     * Adds a hitbox to the tile.
-     * @param hitbox The hitbox to add to the tile.
-     */
     @Override
-    public void addHitbox(final Hitbox hitbox) {
+    public final void addHitbox(final Hitbox hitbox) {
         this.hitboxes.add(hitbox);
     }
 
-    /**
-     *
-     * @param pos The spawn position to add to the tile.
-     */
     @Override
-    public void addSpawnLocation(final Vector2 pos) {
+    public final void addSpawnLocation(final Vector2 pos) {
         this.spawnLocations.add(pos);
     }
 
-    /**
-     * Spawns all the entities in the tile.
-     * @param entityPool The pool of entities to randomly add to the tile.
-     */
     @Override
-    public void spawnEntities(final WeightedPool<Entity> entityPool) {
+    public final void spawnEntities(final WeightedPool<Entity> entityPool) {
         this.spawnLocations
                 .forEach((pos) -> {
                     final Entity entity = entityPool.getRandomizedElement();
@@ -85,20 +65,13 @@ public class TileImpl implements Tile {
                 });
     }
 
-    /**
-     *
-     * @return All the entities in a tile.
-     */
     @Override
-    public Set<Entity> getEntities() {
+    public final Set<Entity> getEntities() {
         return Set.copyOf(this.entities);
     }
 
-    /**
-     * Runs the update method on all the entities on the tile.
-     */
     @Override
-    public void updateEntities() {
+    public final void updateEntities() {
         this.entities.forEach(Entity::update);
     }
 }
