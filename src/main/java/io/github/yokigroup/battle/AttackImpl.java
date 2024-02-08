@@ -2,11 +2,11 @@ package io.github.yokigroup.battle;
 
 public class AttackImpl implements Attack{
     private final String name;
-    private final color color;
+    private final Color color;
     private final int power;
     private final effect effect;
 
-    public AttackImpl(String name, Attack.color color, int power, Attack.effect effect) {
+    public AttackImpl(String name, Color color, int power, Attack.effect effect) {
         this.name = name;
         this.color = color;
         this.power = power;
@@ -19,7 +19,7 @@ public class AttackImpl implements Attack{
     }
 
     @Override
-    public color color() {
+    public Color getColor() {
         return this.color;
     }
 

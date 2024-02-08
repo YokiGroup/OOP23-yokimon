@@ -15,7 +15,7 @@ public interface Attack {
      *Return a reference of the color
      * @return return enum color
      */
-    public Color color();
+    public Color getColor();
     /**
      *Return power of the attack (0 if it doesn't deal damage)
      * @return integer atk pwr
