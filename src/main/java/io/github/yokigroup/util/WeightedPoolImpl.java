@@ -23,10 +23,10 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
      * @return creates a copy of the pool.
      */
     @Override
-    public WeightedPoolImpl<T> clone() {
-        WeightedPoolImpl<T> clone = new WeightedPoolImpl<>();
-        for (Pair<T, Float> pair : this.itemPool) {
-            clone.addElement(pair.getX(), pair.getY());
+    public WeightedPoolImpl<T> copy() {
+        final WeightedPoolImpl<T> clone = new WeightedPoolImpl<>();
+        for (final Pair<T, Float> pair : this.itemPool) {
+            clone.itemPool.add(new PairImpl<>(pair.getX(), pair.getY()));
         }
         return clone;
     }

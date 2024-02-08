@@ -32,7 +32,7 @@ public class TileShapeImpl implements TileShape {
      */
     @Override
     public WeightedPool<Tile> getTiles() {
-        return tiles.clone();
+        return tiles.copy();
     }
 
     /**

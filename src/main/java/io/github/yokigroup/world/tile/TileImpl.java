@@ -1,32 +1,37 @@
 package io.github.yokigroup.world.tile;
 
+import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
 
+import java.util.Collections;
 import java.util.Set;
 
 /**
  * A tile contains the data of an entire part of the map: its entities and hitboxes manly.
  */
 public class TileImpl implements Tile {
+    private final Set<Vector2> spawnLocations;
     private Set<Hitbox> hitboxes;
     private Set<Entity> entities;
 
     /**
      * Creates a tile with static and dynamic entities.
      * @param hitboxes The invisible walls in a tile.
-     * @param entities The entities in the tile.
+     * @param spawnLocations The entity spawn locations in the tile.
      */
-    public TileImpl(final Set<Hitbox> hitboxes, final Set<Entity> entities) {
+    public TileImpl(final Set<Hitbox> hitboxes, final Set<Vector2> spawnLocations) {
+        this.entities = Collections.emptySet();
         this.hitboxes = hitboxes;
-        this.entities = entities;
+        this.spawnLocations = spawnLocations;
     }
 
     /**
      * Creates a tile with no hitboxes and no entities.
      */
     public TileImpl() {
-        new TileImpl(Set.of(), Set.of());
+        this(Set.of(), Set.of());
     }
 
     /**
@@ -40,11 +45,11 @@ public class TileImpl implements Tile {
 
     /**
      *
-     * @return All the entities in a tile.
+     * @return All the entity spawn locations on the tile.
      */
     @Override
-    public Set<Entity> getEntities() {
-        return Set.copyOf(this.entities);
+    public Set<Vector2> getEntitySpawnLocations() {
+        return Set.copyOf(spawnLocations);
     }
 
     /**
@@ -57,11 +62,37 @@ public class TileImpl implements Tile {
     }
 
     /**
-     * Adds an entity to the tile.
-     * @param entity The entity to add to the tile.
+     *
+     * @param pos The spawn position to add to the tile.
      */
     @Override
-    public void addEntity(final Entity entity) {
-        this.entities.add(entity);
+    public void addSpawnLocation(final Vector2 pos) {
+        this.spawnLocations.add(pos);
+    }
+
+    /**
+     * Adds an entity to the tile.
+     * @param entityPool The entity to add to the tile.
+     */
+    @Override
+    public void spawnEntities(final WeightedPool<Entity> entityPool) {
+        //FIXME: to implement
+    }
+
+    /**
+     *
+     * @return All the entities in a tile.
+     */
+    @Override
+    public Set<Entity> getEntities() {
+        return Set.copyOf(this.entities);
+    }
+
+    /**
+     * Runs the update method on all the entities on the tile.
+     */
+    @Override
+    public void updateEntities() {
+        this.entities.forEach(Entity::update);
     }
 }

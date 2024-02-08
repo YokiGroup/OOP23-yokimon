@@ -1,6 +1,6 @@
 package io.github.yokigroup.world.entity.hitbox;
 
-import io.github.yokigroup.util.Pair;
+import io.github.yokigroup.util.Vector2;
 import org.dyn4j.geometry.Shape;
 
 /**
@@ -18,13 +18,13 @@ public interface Hitbox {
      * Sets where the hitbox is located.
      * @param pos the positions of the hitbox.
      */
-    void setPosition(Pair<Float, Float> pos);
+    void setPosition(Vector2 pos);
 
     /**
      *
      * @return the position of the hitbox.
      */
-    Pair<Float, Float> getPosition();
+    Vector2 getPosition();
 
     /**
      *
