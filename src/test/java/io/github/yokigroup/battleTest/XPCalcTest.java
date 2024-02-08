@@ -4,13 +4,13 @@ import java.util.List;
 import io.github.yokigroup.battle.XPCalculator.XPCalculator;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.YokimonImpl;
-import io.github.yokigroup.battle.XPCalculator.dummyImplXPCalculator;
+import io.github.yokigroup.battle.XPCalculator.DummyImplXPCalculator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class XPCalcTest {
     @Test public void testDummyImpl() {
-        XPCalculator toTest = new dummyImplXPCalculator();
+        XPCalculator toTest = new DummyImplXPCalculator();
 
         Yokimon y1 = new YokimonImpl("Blue");
         Yokimon y2 = new YokimonImpl("Red");

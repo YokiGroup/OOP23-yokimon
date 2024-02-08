@@ -9,7 +9,7 @@ import io.github.yokigroup.battle.NextYokimon.DummyImplNextYokimon;
 import io.github.yokigroup.battle.OpponentAI.OpponentAI;
 import io.github.yokigroup.battle.OpponentAI.DummyImplOpponentAI;
 import io.github.yokigroup.battle.XPCalculator.XPCalculator;
-import io.github.yokigroup.battle.XPCalculator.dummyImplXPCalculator;
+import io.github.yokigroup.battle.XPCalculator.DummyImplXPCalculator;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,7 +27,7 @@ public final class FightImpl implements Fight {
 
 
     /* structures */
-    private final XPCalculator xpCalc = new dummyImplXPCalculator();
+    private final XPCalculator xpCalc = new DummyImplXPCalculator();
     private final DmgCalculator dmgCalc = new BasicImplDmgCalculator();
     private final OpponentAI oppAI = new DummyImplOpponentAI(dmgCalc);
     private final NextYokimon nextYok = new DummyImplNextYokimon();
