@@ -11,6 +11,7 @@ import io.github.yokigroup.battle.OpponentAI.dummyImplOpponentAI;
 import io.github.yokigroup.battle.XPCalculator.XPCalculator;
 import io.github.yokigroup.battle.XPCalculator.dummyImplXPCalculator;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class FightImpl implements Fight {
@@ -21,17 +22,22 @@ public class FightImpl implements Fight {
     private Yokimon currMyYokimon;
     private Yokimon currOppYokimon;
 
+
     /* structures */
     private final XPCalculator XPCalc = new dummyImplXPCalculator();
     private final DMGCalculator DMGCalc = new basicImplDMGCalculator();
     private final OpponentAI oppAI = new dummyImplOpponentAI(DMGCalc);
+    private final NextYokimon nextYok = new dummyImplNextYokimon();
 
-    /* these two must be different: may use view selection for myNextYok*/
-    private final NextYokimon myNextYok = new dummyImplNextYokimon();
-    private final NextYokimon OppNextYok = new dummyImplNextYokimon();
+
 
     /* boolean that triggers end of fight */
     private boolean isOver;
+
+    /* to keep in store list of defeated Yokimons */
+    private final List<Yokimon> defeatedOpps = new LinkedList<>();
+
+
 
     public FightImpl(List<Yokimon> myYokimons, List<Yokimon> oppYokimons){
         this.myYokimons = myYokimons;
@@ -39,28 +45,28 @@ public class FightImpl implements Fight {
     }
 
     @Override
-    public success attack(Attack myAttack) {
+    public success attack(Attack myAttack) {                                            ////missing
         return null;
     }
 
     @Override
-    public success getAttacked() {
+    public success getAttacked() {                                                      ////missing
         return null;
     }
 
     @Override
     public boolean isOver() {
-        return false;
+        return myYokimons.isEmpty() || oppYokimons.isEmpty();
     }
 
     @Override
     public boolean victory() {
-        return false;
+        return oppYokimons.isEmpty();
     }
 
     @Override
     public int getXP(Yokimon yokimon) {
-        return 0;
+        return XPCalc.getXP(defeatedOpps);
     }
 
     @Override
@@ -74,6 +80,10 @@ public class FightImpl implements Fight {
     }
 
     /* utilities to update Yokimons involved in fight */
-    private void update_myCurr() {};
-    private void update_oppCurr() {};
+    private void update_myCurr() {
+        nextYok.getNext(myYokimons);
+    };
+    private void update_oppCurr() {
+        nextYok.getNext(oppYokimons);
+    };
 }
