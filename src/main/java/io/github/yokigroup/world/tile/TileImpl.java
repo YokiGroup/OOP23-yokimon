@@ -6,14 +6,15 @@ import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * A tile contains the data of an entire part of the map: its entities and hitboxes manly.
  */
 public class TileImpl implements Tile {
-    private final Set<Vector2> spawnLocations;
-    private final Set<Hitbox> hitboxes;
+    private Set<Vector2> spawnLocations;
+    private Set<Hitbox> hitboxes;
     private Set<Entity> entities;
 
     /**
@@ -22,7 +23,7 @@ public class TileImpl implements Tile {
      * @param spawnLocations The entity spawn locations in the tile.
      */
     public TileImpl(final Set<Hitbox> hitboxes, final Set<Vector2> spawnLocations) {
-        this.entities = Collections.emptySet();
+        this.entities = new HashSet<>();
         this.hitboxes = hitboxes;
         this.spawnLocations = spawnLocations;
     }
@@ -31,7 +32,7 @@ public class TileImpl implements Tile {
      * Creates a tile with no hitboxes and no entities.
      */
     public TileImpl() {
-        this(Set.of(), Set.of());
+        this(new HashSet<>(), new HashSet<>());
     }
 
     /**
