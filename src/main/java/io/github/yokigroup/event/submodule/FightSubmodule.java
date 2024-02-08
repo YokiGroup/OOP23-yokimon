@@ -1,6 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.battle.Fight;
+import io.github.yokigroup.event.MessageHandler;
 
 import java.util.Optional;
 
@@ -10,14 +11,9 @@ import java.util.Optional;
  */
 public class FightSubmodule extends Submodule {
     private Optional<Fight> lastAnnouncedFight = Optional.empty();
-    private final PartySubmodule party; // keeping a reference to the party submodule to get a list of yokimons whenever necessary
 
-    /**
-     * Instantiate a FightSubmodule.
-     * @param party party submodule reference to consult when fights start
-     */
-    public FightSubmodule(final PartySubmodule party) {
-        this.party = party;
+    public FightSubmodule(MessageHandler handler) {
+        super(handler);
     }
 
     /**

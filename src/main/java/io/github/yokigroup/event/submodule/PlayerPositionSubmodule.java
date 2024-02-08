@@ -1,5 +1,6 @@
 package io.github.yokigroup.event.submodule;
 
+import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.tile.TileMap;
@@ -8,8 +9,10 @@ import io.github.yokigroup.world.tile.TileMap;
  * Handles player position updates.
  */
 public class PlayerPositionSubmodule extends Submodule {
+/*
     private final Entity player;
-    private final TileMap map;
+    private final TileMap gameMap;
+*/
 
     // FIXME Replace with proper implementation
     /**
@@ -34,14 +37,8 @@ public class PlayerPositionSubmodule extends Submodule {
         RIGHT
     }
 
-    /**
-     * Instantiates a PlayerPositionSubmodule.
-     * @param player player to keep track of the position to
-     * @param map map containing player
-     */
-    public PlayerPositionSubmodule(final Entity player, final TileMap map) {
-        this.player = player;
-        this.map = map;
+    public PlayerPositionSubmodule(MessageHandler handler) {
+        super(handler);
     }
 
     // TODO Change Direction reference

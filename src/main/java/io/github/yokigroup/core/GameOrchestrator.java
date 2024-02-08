@@ -10,6 +10,9 @@ import io.github.yokigroup.event.submodule.Submodule;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.tile.TileMap;
 
+import javax.mail.Part;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -29,13 +32,20 @@ public class GameOrchestrator implements MessageHandler {
      */
     private SubmoduleMap initSubmodules() {
         SubmoduleMap retMap = new SubmoduleMapImpl();
+        List<Class<? extends Submodule>> submoduleTypes = List.of(
+                PartySubmodule.class,
+                PlayerPositionSubmodule.class,
+                FightSubmodule.class
+        );
 
-        // submodules this class uses
-        PartySubmodule partySub = new PartySubmodule();
-        PlayerPositionSubmodule playerPositionSub = new PlayerPositionSubmodule(playerCharacter, gameMap);
-        FightSubmodule fightSub = new FightSubmodule(partySub);
-
-        retMap.registerAll(Set.of(partySub, playerPositionSub, fightSub));
+        submoduleTypes.forEach(s -> {
+            try {
+                retMap.register(s.getConstructor(MessageHandler.class).newInstance(this));
+            } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
+                     IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         return retMap;
     }

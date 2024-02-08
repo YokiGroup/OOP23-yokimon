@@ -8,6 +8,12 @@ import io.github.yokigroup.event.MessageHandler;
  * @see MessageHandler EventHandler
  */
 public abstract class Submodule {
+    protected final MessageHandler handler;
+
+    public Submodule(MessageHandler handler) {
+        this.handler = handler;
+    }
+
     /**
      * to be called by the logic that integrates this submodule to let it process its inputs.
      */

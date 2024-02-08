@@ -1,6 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.event.MessageHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,10 @@ import java.util.List;
  */
 public class PartySubmodule extends Submodule {
     private List<Yokimon> yokimonList = new ArrayList<>();
+
+    public PartySubmodule(MessageHandler handler) {
+        super(handler);
+    }
 
     private List<Yokimon> deepCopyOf(final List<Yokimon> list) {
         // TODO wait for a copy constructor of yokimon to be pushed upstream
