@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import io.github.yokigroup.battle.NextYokimon.NextYokimon;
-import io.github.yokigroup.battle.NextYokimon.dummyImplNextYokimon;
+import io.github.yokigroup.battle.NextYokimon.DummyImplNextYokimon;
 import io.github.yokigroup.battle.Yokimon;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +13,7 @@ import io.github.yokigroup.battle.YokimonImpl;
 
 public class NextYokTest {
     @Test public void testDummyImpl() {
-        NextYokimon toTest = new dummyImplNextYokimon();
+        NextYokimon toTest = new DummyImplNextYokimon();
 
         Yokimon y1 = new YokimonImpl("Blue");
         Yokimon y2 = new YokimonImpl("Red");

@@ -5,7 +5,7 @@ import io.github.yokigroup.battle.DmgCalculator.BasicImplDmgCalculator;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.NextYokimon.NextYokimon;
-import io.github.yokigroup.battle.NextYokimon.dummyImplNextYokimon;
+import io.github.yokigroup.battle.NextYokimon.DummyImplNextYokimon;
 import io.github.yokigroup.battle.OpponentAI.OpponentAI;
 import io.github.yokigroup.battle.OpponentAI.dummyImplOpponentAI;
 import io.github.yokigroup.battle.XPCalculator.XPCalculator;
@@ -30,7 +30,7 @@ public final class FightImpl implements Fight {
     private final XPCalculator xpCalc = new dummyImplXPCalculator();
     private final DmgCalculator dmgCalc = new BasicImplDmgCalculator();
     private final OpponentAI oppAI = new dummyImplOpponentAI(dmgCalc);
-    private final NextYokimon nextYok = new dummyImplNextYokimon();
+    private final NextYokimon nextYok = new DummyImplNextYokimon();
 
 
     /**
