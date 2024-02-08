@@ -7,7 +7,7 @@ import io.github.yokigroup.battle.Yokimon;
  * Fuller version of Damage Calculator, that takes into consideration
  * the two Yokimons' color and the attack color.
  */
-public class multiplierDmgCalculator implements DmgCalculator {
+public class MultiplierDmgCalculator implements DmgCalculator {
 
     private static final double MULTIPLIER = 1.2;
 
