@@ -18,10 +18,6 @@ public class YokimonBuilder{
 
     /**
      * final fields of YokimonImpl. Their initialization is mandatory.
-     * @param name
-     * @param color
-     * @param BaseStats
-     * @param growRate
      */
     public YokimonBuilder(String name, Attack.color color,
                    Map<Yokimon.Stats, Integer> BaseStats, Yokimon.GrowRate growRate){
@@ -55,6 +51,7 @@ public class YokimonBuilder{
         if (this.name == null || this.color == null || this.BaseStats == null || this.growRate == null) {
             throw new IllegalStateException("");
         }
-        return new YokimonImpl(this.name, this.color, this.BaseStats, this.growRate, this.level, this.moves);
+        return new YokimonImpl(this.name, this.color, this.BaseStats, this.Stats,
+                this.level, this.growRate, this.moves, this.active);
     }
 }
