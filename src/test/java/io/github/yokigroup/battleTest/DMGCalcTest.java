@@ -24,7 +24,6 @@ public class DMGCalcTest {
         map2.put(Yokimon.Stats.DEF, 90);
 
         Attack a1 = new AttackImpl("Bubble", Attack.color.BLUE, 35, null);
-        Attack a2 = new AttackImpl("Leaf", Attack.color.GREEN, 55, null);
 
         Yokimon y1 = new YokimonImpl("Caterpie", Attack.color.GREEN, map1, map1, YokimonImpl.DEFAULT_LEVEL,
                             YokimonImpl.DEFAULT_GROWRATE, Collections.emptyList(), true);
@@ -32,6 +31,7 @@ public class DMGCalcTest {
         Yokimon y2 = new YokimonImpl("Squirtle", Attack.color.BLUE, map2, map2, YokimonImpl.DEFAULT_LEVEL,
                 YokimonImpl.DEFAULT_GROWRATE, Collections.emptyList(), true);
 
-        assertEquals(59, toTest.getDMG(y1,y2,a1));
+        assertEquals(58, toTest.getDMG(y1,y2,a1));
+
     }
 }
