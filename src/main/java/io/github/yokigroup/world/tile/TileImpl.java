@@ -5,7 +5,6 @@ import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
