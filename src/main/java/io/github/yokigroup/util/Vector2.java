@@ -18,28 +18,28 @@ public interface Vector2 {
     double getY();
 
     /**
-     *
+     * Sums two vectors together.
      * @param other The other opertator.
      * @return a new vector containing the addition between this and another vector (component per component).
      */
     Vector2 plus(Vector2 other);
 
     /**
-     *
+     * Subtracts two vectors together.
      * @param other The other opertator.
      * @return a new vector containing the subtraction between this and another vector (component per component).
      */
     Vector2 minus(Vector2 other);
 
     /**
-     *
+     * Multiplies two vectors together.
      * @param other The other opertator.
      * @return a new vector containing the multiplication between this and another vector (component per component).
      */
     Vector2 times(Vector2 other);
 
     /**
-     *
+     * Divides two vectors together.
      * @param other The other opertator.
      * @return a new vector containing the division between this and another vector (component per component).
      */
@@ -47,14 +47,14 @@ public interface Vector2 {
 
 
     /**
-     *
+     * Multiplies each component of the vector by value.
      * @param value The value to scale the vector by.
      * @return a new vector scaled by that value.
      */
     Vector2 scale(double value);
 
     /**
-     *
+     * Normalizes the vector.
      * @return a new normalized vector (with length 1).
      */
     Vector2 normalize();
@@ -66,7 +66,7 @@ public interface Vector2 {
     double length();
 
     /**
-     *
+     * Calculates the dot product between two vectors.
      * @param other The other operator.
      * @return the dot product between the two vectors.
      */
