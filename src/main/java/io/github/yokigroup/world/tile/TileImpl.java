@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public class TileImpl implements Tile {
     private final Set<Vector2> spawnLocations;
-    private Set<Hitbox> hitboxes;
+    private final Set<Hitbox> hitboxes;
     private Set<Entity> entities;
 
     /**
@@ -76,7 +76,13 @@ public class TileImpl implements Tile {
      */
     @Override
     public void spawnEntities(final WeightedPool<Entity> entityPool) {
-        //FIXME: to implement
+        this.spawnLocations
+                .forEach((pos) -> {
+                    final Entity entity = entityPool.getRandomizedElement();
+                    // FIXME: entity uses position instead of Vector2
+                    //entity.setPosition(pos);
+                    this.entities.add(entity);
+                });
     }
 
     /**
