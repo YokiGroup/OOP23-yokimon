@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class YokimonImpl implements Yokimon{
 
-    private final static int DEFAULT_LEVEL=1;
-    private final static GrowRate DEFAULT_GROWRATE = GrowRate.MEDIUM;
+    public final static int DEFAULT_LEVEL=1;
+    public final static GrowRate DEFAULT_GROWRATE = GrowRate.MEDIUM;
 
     private final String name;
 
