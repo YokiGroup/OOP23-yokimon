@@ -4,9 +4,9 @@ import io.github.yokigroup.battle.*;
 import io.github.yokigroup.battle.DMGcalculator.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import io.github.yokigroup.battle.YokimonImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,18 +26,12 @@ public class DMGCalcTest {
         Attack a1 = new AttackImpl("Bubble", Attack.color.BLUE, 35, null);
         Attack a2 = new AttackImpl("Leaf", Attack.color.GREEN, 55, null);
 
+        Yokimon y1 = new YokimonImpl("Caterpie", Attack.color.GREEN, map1, map1, YokimonImpl.DEFAULT_LEVEL,
+                            YokimonImpl.DEFAULT_GROWRATE, Collections.emptyList(), true);
 
-        Yokimon y1 = new YokimonBuilder("Caterpie", Attack.color.GREEN, map1, YokimonImpl.DEFAULT_GROWRATE)
-                .stats(map1)
-                .build();
+        Yokimon y2 = new YokimonImpl("Squirtle", Attack.color.BLUE, map2, map2, YokimonImpl.DEFAULT_LEVEL,
+                YokimonImpl.DEFAULT_GROWRATE, Collections.emptyList(), true);
 
-        Yokimon y2 = new YokimonBuilder("Charizard", Attack.color.RED, map2, YokimonImpl.DEFAULT_GROWRATE)
-                .stats(map2)
-                .build();
-
-        assert(!map1.isEmpty());
-        assert (!map2.isEmpty());
         assertEquals(59, toTest.getDMG(y1,y2,a1));
     }
 }
-
