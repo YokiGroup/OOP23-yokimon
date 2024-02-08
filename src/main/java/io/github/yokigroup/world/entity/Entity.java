@@ -1,5 +1,7 @@
 package io.github.yokigroup.world.entity;
 
+import io.github.yokigroup.world.entity.hitbox.Hitbox;
+
 /**
  * This class represent the concept of entity
  */
@@ -38,6 +40,7 @@ public abstract class Entity {
      * @return message
      */
     public Entity.message setPosition(Position Pos){
+        // FIXME move hitbox position as well
         if(Pos.isValid()){
             this.Pos=Pos;
             return message.OK;

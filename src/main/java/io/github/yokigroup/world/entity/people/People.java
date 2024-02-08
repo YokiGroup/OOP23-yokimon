@@ -3,8 +3,8 @@ package io.github.yokigroup.world.entity.people;
 
 
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
-import io.github.yokigroup.world.entity.Hitbox;
 import io.github.yokigroup.world.entity.Position;
 
 import java.util.List;

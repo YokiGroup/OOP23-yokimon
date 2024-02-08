@@ -43,10 +43,16 @@ dependencies {
             implementation("org.openjfx:javafx-$module:$javaFxVersion:$platform")
         }
     }
+
+    // https://mvnrepository.com/artifact/org.dyn4j/dyn4j
     implementation("org.dyn4j:dyn4j:5.0.1")
 
-    val jUnitVersion = "5.10.1"
+    // https://mvnrepository.com/artifact/com.github.java-json-tools/json-schema-validator
+    implementation("com.github.java-json-tools:json-schema-validator:2.2.14")
+
     // JUnit API and testing engine
+    val jUnitVersion = "5.10.1"
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
 }

@@ -1,10 +1,9 @@
 package io.github.yokigroup.world.entity.people;
 
 import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.world.entity.Hitbox;
+import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Position;
-import io.github.yokigroup.world.entity.Vector;
-
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class Player extends People {
      * @param v vector
      * @return message for collision
      */
-    public message move(Vector v) {
+    public message move(Vector2 v) {
         return null;
     }
 

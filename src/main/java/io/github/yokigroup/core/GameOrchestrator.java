@@ -1,14 +1,16 @@
 package io.github.yokigroup.core;
 
-import io.github.yokigroup.event.EventHandler;
+import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.FightSubmodule;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerPositionSubmodule;
-import io.github.yokigroup.event.submodule.SubModuleMap;
-import io.github.yokigroup.event.submodule.SubModuleMapImpl;
+import io.github.yokigroup.event.submodule.SubmoduleMap;
+import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 import io.github.yokigroup.event.submodule.Submodule;
+import io.github.yokigroup.util.Pair;
+import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.Entity;
-import io.github.yokigroup.world.tile.TileMap;
+import io.github.yokigroup.world.tile.Tile;
 
 import java.util.Optional;
 import java.util.Set;
@@ -17,18 +19,18 @@ import java.util.function.Consumer;
 /**
  * Game loop. Responsible for receiving events and updating entities
  */
-public class GameOrchestrator implements EventHandler {
-    private final SubModuleMap subModules;
-    private final TileMap gameMap;
+public class GameOrchestrator implements MessageHandler {
+    private final SubmoduleMap subModules;
+    private final GameMap gameMap;
     private final Entity playerCharacter;
 
     /**
      * Initializes game logic submodules.
      * @return Initialized SubModuleMap
-     * @see SubModuleMap
+     * @see SubmoduleMap
      */
-    private SubModuleMap initSubmodules() {
-        SubModuleMap retMap = new SubModuleMapImpl();
+    private SubmoduleMap initSubmodules() {
+        SubmoduleMap retMap = new SubmoduleMapImpl();
 
         // submodules this class uses
         PartySubmodule partySub = new PartySubmodule();
@@ -41,11 +43,21 @@ public class GameOrchestrator implements EventHandler {
     }
 
     /**
-     * Initializes a GameOrchestrator with a new TileMap and PlayerCharacter, along with the required submodules.
+     * Initializes a GameOrchestrator with a new GameMap and PlayerCharacter, along with the required submodules.
      */
     public GameOrchestrator() {
         playerCharacter = null; // TODO replace with Entity implementation
-        gameMap = new TileMap() { }; // TODO replace with TileMap implementation
+        gameMap = new GameMap() {
+            @Override
+            public Tile getTileAt(Pair<Integer, Integer> position) {
+                return null;
+            }
+
+            @Override
+            public Pair<Integer, Integer> getPlayerWorldPosition() {
+                return null;
+            }
+        }; // TODO replace with GameMap implementation
         subModules = initSubmodules();
     }
 
