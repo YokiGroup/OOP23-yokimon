@@ -13,6 +13,7 @@ import io.github.yokigroup.battle.xpcalculator.DummyImplXPCalculator;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The actual Fight implementation communicating with the Logic.
@@ -31,12 +32,6 @@ public final class FightImpl implements Fight {
     private final DmgCalculator dmgCalc = new BasicImplDmgCalculator();
     private final OpponentAI oppAI = new DummyImplOpponentAI(dmgCalc);
     private final NextYokimon nextYok = new DummyImplNextYokimon();
-
-
-    /**
-     * Boolean that triggers end of the fight.
-     */
-    private boolean isOver;
 
     /**
      * List to keep in store defeated Yokimons.
@@ -58,17 +53,17 @@ public final class FightImpl implements Fight {
     public Success attack(final Attack myAttack) {
 
         int damage = dmgCalc.getDMG(currMyYokimon,currOppYokimon,myAttack);
-        //currOppYokimon.removeHP(damage);
+        //currOppYokimon.removeHP(damage);          //TODO
 
-        if (!currOppYokimon.Active()) {         //active????????????
+        if (!currOppYokimon.Active()) {
             oppYokimons.remove(currOppYokimon);
             defeatedOpps.add(currMyYokimon);
 
-            if(!oppYokimons.isEmpty()) {
-                currOppYokimon = nextYok.getNext(oppYokimons).get();
+            final Optional<Yokimon> nextOppYok = nextYok.getNext(oppYokimons);
+            if (nextOppYok.isPresent()) {
+                currOppYokimon = nextOppYok.get();
             }
             else {
-                isOver = true;
                 int xpGain = xpCalc.getXP(defeatedOpps);
                 currMyYokimon.takeXP(xpGain);
             }
@@ -78,7 +73,24 @@ public final class FightImpl implements Fight {
     }
 
     @Override
-    public Success getAttacked() {                                                      ////missing
+    public Success getAttacked() {
+
+        final Optional<Attack> nextOppAttack = oppAI.getMove(currOppYokimon);
+
+        if(nextOppAttack.isEmpty()) {
+            throw new RuntimeException("Yokimon doesn't have any available attack.");
+        }
+        int damage = dmgCalc.getDMG(currOppYokimon,currMyYokimon,nextOppAttack.get());
+        //currMyYokimon.removeHP(damage);               //TODO
+
+        if (!currMyYokimon.Active()) {
+            myYokimons.remove(currMyYokimon);
+
+            final Optional<Yokimon> nextMyYok = nextYok.getNext(myYokimons);
+            nextMyYok.ifPresent(yokimon -> currOppYokimon = yokimon);
+        }
+
+
         return null;
     }
 
