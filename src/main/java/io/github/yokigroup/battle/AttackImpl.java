@@ -24,6 +24,10 @@ public class AttackImpl implements Attack{
         this.effect = effect;
     }
 
+    public AttackImpl(String name, Color color){
+        this(name,color,100,null);
+    }
+
     @Override
     public String getName() {
         return this.name;

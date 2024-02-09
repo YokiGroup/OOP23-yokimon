@@ -27,14 +27,14 @@ public class LevelUpLogicImpl implements  LevelUpLogic{
         //level
         Map<Yokimon.Stats, Integer> newStat = yokimon.getAllStats();
         newStat.entrySet().stream()
-               .filter(i -> i.getKey() != Yokimon.Stats.hp)
+               .filter(i -> i.getKey() != Yokimon.Stats.HP)
                .forEach(i -> i.setValue(upGrade(yokimon.getBaseStat(i.getKey()),
                         i.getValue(), yokimon.getLevel())));
-        newStat.replace(Yokimon.Stats.hp, upGradeHp(yokimon.getBaseStat(Yokimon.Stats.hp),
-                newStat.get(Yokimon.Stats.hp), yokimon.getLevel()));
+        newStat.replace(Yokimon.Stats.HP, upGradeHp(yokimon.getBaseStat(Yokimon.Stats.HP),
+                newStat.get(Yokimon.Stats.HP), yokimon.getLevel()));
         //reset hp
-        yokimon.setMaxHp(yokimon.getBaseStat(Yokimon.Stats.hp));
-        yokimon.setActualHp(yokimon.getBaseStat(Yokimon.Stats.hp));
+        yokimon.setMaxHp(yokimon.getBaseStat(Yokimon.Stats.HP));
+        yokimon.setActualHp(yokimon.getBaseStat(Yokimon.Stats.HP));
     }
 
     private int upGradeHp(int baseStat, int actualStat, int level){

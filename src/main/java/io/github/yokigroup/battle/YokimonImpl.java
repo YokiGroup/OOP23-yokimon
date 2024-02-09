@@ -8,28 +8,20 @@ import java.util.*;
  */
 public class YokimonImpl implements Yokimon{
 
-    private final static int defaultLevel=1;
+    public final static int DEFAULT_LEVEL=1;
+    public final static GrowthRate DEFAULT_GROWRATE = GrowthRate.MEDIUM;
     private final String name;
     private final Color color;
     private final Map<Stats, Integer> baseStats;
-
     private Map<Stats, Integer> stats;
     private int level;
-
     private int maxHp;
-
     private int actualHp;
-
     private final GrowthRate growthRate;
-
     private double xp;
-
     private double xpNext;
-
     private List<Attack> moves;
-
     private final Map<Integer, Attack> learnableMoves;
-
     private boolean active;
 
     private final LevelUpLogic levelUtility = new LevelUpLogicImpl();
@@ -69,7 +61,7 @@ public class YokimonImpl implements Yokimon{
      */
     public YokimonImpl(String name, Color color, Map<Yokimon.Stats, Integer> baseStats, GrowthRate growthRate,
                        Map<Integer, Attack> learnableMoves){
-        this(name, color, baseStats, growthRate, defaultLevel, learnableMoves);
+        this(name, color, baseStats, growthRate, DEFAULT_LEVEL, learnableMoves);
     }
 
     /**
@@ -91,7 +83,6 @@ public class YokimonImpl implements Yokimon{
         return this.name;
     }
 
-    @Override
     public Color getYokimonColor() {
         return this.color;
     }

@@ -13,10 +13,10 @@ public interface Yokimon {
      * hp -> health point.
     * */
     public enum Stats{
-        atk,
-        def,
-        spd,
-        hp;
+        ATK,
+        DEF,
+        SPD,
+        HP;
     }
 
     /**
@@ -24,9 +24,9 @@ public interface Yokimon {
      * the value assumed will be multiplied when the yokimon take xp.
      */
     public enum GrowthRate {
-        slow(0.75),
-        medium(1.00),
-        fast(1.25);
+        SLOW(0.75),
+        MEDIUM(1.00),
+        FAST(1.25);
         private final double rate;
         GrowthRate(double rate) {
             this.rate = rate;
@@ -155,7 +155,7 @@ public interface Yokimon {
     /**
      * subtracts to the Actual Hp of the yokimon the parameter damage
      * if the Hp of the yokimon reaches zero, it returns true
-     * otherwise it return true.
+     * otherwise it returns true.
      * @param damage out put of the damage
      * @return true if the yokimon is still active, false if is not
      */
