@@ -55,7 +55,25 @@ public final class FightImpl implements Fight {
     }
 
     @Override
-    public Success attack(final Attack myAttack) {                                      ////missing
+    public Success attack(final Attack myAttack) {
+
+        int damage = dmgCalc.getDMG(currMyYokimon,currOppYokimon,myAttack);
+        //currOppYokimon.removeHP(damage);
+
+        if (!currOppYokimon.Active()) {         //active????????????
+            oppYokimons.remove(currOppYokimon);
+            defeatedOpps.add(currMyYokimon);
+
+            if(!oppYokimons.isEmpty()) {
+                currOppYokimon = nextYok.getNext(oppYokimons).get();
+            }
+            else {
+                isOver = true;
+                int xpGain = xpCalc.getXP(defeatedOpps);
+                currMyYokimon.takeXP(xpGain);
+            }
+        }
+
         return null;
     }
 
