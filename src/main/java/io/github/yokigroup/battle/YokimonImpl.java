@@ -1,9 +1,6 @@
 package io.github.yokigroup.battle;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * YokimonImpl is an implementation of the Yokimon interface,
@@ -23,7 +20,7 @@ public class YokimonImpl implements Yokimon{
 
     private int actualHp;
 
-    private final GrowRate growRate;
+    private final GrowthRate growthRate;
 
     private double xp;
 
@@ -35,18 +32,18 @@ public class YokimonImpl implements Yokimon{
 
     private boolean active;
 
-    private final LevelUpLogic levelUtility=new LevelUpLogicImpl();
+    private final LevelUpLogic levelUtility = new LevelUpLogicImpl();
 
     /**
      * Constructor for YokimonImpl.
      * @param name Name of the Yokimon
      * @param color Color of the Yokimon
      * @param baseStats Base stats of the Yokimon
-     * @param growRate Growth rate of the Yokimon
+     * @param growthRate Growth rate of the Yokimon
      * @param level Initial level of the Yokimon
      * @param learnableMoves Learnable moves of the Yokimon
      */
-    public YokimonImpl(String name, Color color, Map<Yokimon.Stats, Integer> baseStats, GrowRate growRate,
+    public YokimonImpl(String name, Color color, Map<Yokimon.Stats, Integer> baseStats, GrowthRate growthRate,
                        int level, Map<Integer, Attack> learnableMoves)
     {
         this.stats = new HashMap<>();
@@ -54,8 +51,8 @@ public class YokimonImpl implements Yokimon{
         this.name = name;
         this.color = color;
         this.baseStats = Map.copyOf(baseStats);
-        this.growRate = growRate;
-        this.level=level;
+        this.growthRate = growthRate;
+        this.level = level;
         this.levelUtility.resetAttack(this);
         this.learnableMoves = Map.copyOf(learnableMoves);
         this.active=true;
@@ -67,12 +64,31 @@ public class YokimonImpl implements Yokimon{
      * @param name Name of the Yokimon
      * @param color Color of the Yokimon
      * @param baseStats Base stats of the Yokimon
-     * @param growRate Growth rate of the Yokimon
+     * @param growthRate Growth rate of the Yokimon
      * @param learnableMoves Learnable moves of the Yokimon
      */
-    public YokimonImpl(String name, Color color, Map<Yokimon.Stats, Integer> baseStats, GrowRate growRate,
+    public YokimonImpl(String name, Color color, Map<Yokimon.Stats, Integer> baseStats, GrowthRate growthRate,
                        Map<Integer, Attack> learnableMoves){
-        this(name, color, baseStats, growRate, defaultLevel, learnableMoves);
+        this(name, color, baseStats, growthRate, defaultLevel, learnableMoves);
+    }
+
+    /**
+     * Constructor for YokimonImpl for another yokimon.
+     * @param yokimon yokimon to copy
+     */
+    public YokimonImpl(YokimonImpl yokimon){
+        this(Objects.requireNonNull(yokimon, "YokimonImpl passed was null").name, yokimon.color,
+                Map.copyOf(yokimon.baseStats), yokimon.growthRate, yokimon.level, Map.copyOf(yokimon.learnableMoves));   ;
+    }
+
+    private void initialization(String name, Color color, Map<Yokimon.Stats, Integer> baseStats, GrowthRate growthRate,
+                                 int level, Map<Integer, Attack> learnableMoves){
+
+    }
+
+    @Override
+    public GrowthRate getGrowRate() {
+        return this.growthRate;
     }
 
     @Override
@@ -182,9 +198,19 @@ public class YokimonImpl implements Yokimon{
     }
 
     @Override
+    public double getXp() {
+        return this.xp;
+    }
+
+    @Override
+    public double getNextLevelXp() {
+        return this.maxHp;
+    }
+
+    @Override
     public exp_code takeXp(int n) {
         exp_code expCode=exp_code.ok;
-        double xpToTake = n*this.growRate.get();
+        double xpToTake = n*this.growthRate.get();
         while (xpToTake >= this.xpNext-this.xp){
             xpToTake -= this.xpNext-this.xp;
             expCode = this.levelUtility.levelUp(this, 1);

@@ -10,7 +10,7 @@ public interface Yokimon {
     /**
     * Stats represent the stats of the yokimon.
      * art -> attack def -> defence spd -> speed
-     * hp -> health point
+     * hp -> health point.
     * */
     public enum Stats{
         atk,
@@ -21,49 +21,56 @@ public interface Yokimon {
 
     /**
      * Represents the growth rate of the Yokimon.
-     * the value assumed will be multiplied when the yokimon take xp
+     * the value assumed will be multiplied when the yokimon take xp.
      */
-    public enum GrowRate {
+    public enum GrowthRate {
         slow(0.75),
         medium(1.00),
         fast(1.25);
         private final double rate;
-        GrowRate(double rate) {
+        GrowthRate(double rate) {
             this.rate = rate;
         }
         public double get(){
             return rate;
         }
     }
+
     /**
-     * Returns the name of the yokimon
+     * Returns the GrowRate of the yokimon.
+     * @return GrowRate of the yokimon
+     */
+    public GrowthRate getGrowRate();
+
+    /**
+     * Returns the name of the yokimon.
      * @return String name
      */
     public String getName();
 
     /**
-     * return the color of the yokimon
+     * return the color of the yokimon.
      * @return Color
      */
     public Color getYokimonColor();
 
     /**
      * Returns all the Stats as a map of Integer
-     * with Stats as a key
+     * with Stats as a key.
      * @return Map<Stats, Integer>
      */
     public Map<Stats, Integer> getAllStats();
 
     /**
      * Returns all the BASE Stats as a map of Integer
-     * with Stats as a key
+     * with Stats as a key.
      * @return Map<Stats, Integer>
      */
     public Map<Stats, Integer> getAllBaseStats();
 
     /**
      * Returns the correspondent stat value
-     * given in input
+     * given in input.
      * @param stat is the value of the Actual used stat
      * @return int value
      */
@@ -84,7 +91,7 @@ public interface Yokimon {
     public void setStat(Stats change, int newValue);
 
     /**
-     *Return an int with the value of yokimon current level
+     *Return an int with the value of yokimon current level.
      * @return Int value
      */
     public int getLevel();
@@ -96,7 +103,7 @@ public interface Yokimon {
 
     /**
      * Does level up of the yokimon n-times
-     * return false if the level up is not possible
+     * return false if the level up is not possible.
      * @param n number of level
      * @return exit status
      */
@@ -109,37 +116,38 @@ public interface Yokimon {
     public List<Attack> getAttacks();
 
     /**
-     *gives a new attack to the yokimon
+     * Gives a new attack to the yokimon.
+     * @param newAttack new Attack
      */
     public void addAttack(Attack newAttack);
 
     /**
-     * Return a map with learnable attacks
-     * key: Integer which represent the level at which the yokimon learns the attack
-     * value: the actual attack
+     * Return a map with learnable attacks.
+     * key: Integer which represent the level at which the yokimon learns the attack.
+     * value: the actual attack.
      * @return Map of as key level and Attack as value
      */
     public Map<Integer, Attack> getLearnableAttacks();
     /**
-     *Return actual hp of the yokimon
+     *Return actual hp of the yokimon.
      * @return actual hp
      */
     public int getActualHp();
 
     /**
-     *Return MAX hp of the yokimon
+     *Return MAX hp of the yokimon.
      * @return MAX hp
      */
     public int getMaxHp();
 
     /**
-     * change the actual hp with a new value
+     * change the actual hp with a new value.
      * @param newValue the new value assigned to actual hp
      */
     public void setActualHp(int newValue);
 
     /**
-     * change the max hp with a new value
+     * change the max hp with a new value.
      * @param newValue the new value assigned to max hp
      */
     public void setMaxHp(int newValue);
@@ -147,7 +155,7 @@ public interface Yokimon {
     /**
      * subtracts to the Actual Hp of the yokimon the parameter damage
      * if the Hp of the yokimon reaches zero, it returns true
-     * otherwise it return true
+     * otherwise it return true.
      * @param damage out put of the damage
      * @return true if the yokimon is still active, false if is not
      */
@@ -155,24 +163,37 @@ public interface Yokimon {
 
     /**
      * Return true is the yokimon is Active, false
-     * if is it not (0 hp)
+     * if is it not (0 hp).
      * @return boolean
      */
     public boolean active();
 
 
     /**
-     * enum used to specify return status of various methods
+     * enum used to specify return status of various methods.
      */
     public enum exp_code{
         ok,
         levelUp,
         newMove
     }
+
     /**
-     * Adds a certain amount of XP to the Yokimon, potentially triggering level-up and learning new moves.
+     * Return the current xp amount of the yokimon.
+     * @return double current xp
+     */
+    public double getXp();
+
+    /**
+     * Return the current xpNextLevel amount of the yokimon;
+     * @return double getNextLevelXp
+     */
+    public double getNextLevelXp();
+    /**
+     * Adds a certain amount of XP to the Yokimon, potentially triggering level-up and
+     * learning new moves.
      * @param n Amount of XP to add
-     * @return exp_code Status of the XP addition.
+     * @return exp_code Status of the XP addition
      * ok if the level of the yokimon doesn't change
      * level-up if the yokimon just level-up
      * newMove if the yokimon learn a new move
@@ -183,20 +204,20 @@ public interface Yokimon {
 
     /**
      * return the exp needed to reach the next
-     * level
+     * level.
      * @return int ExpNext
      */
     public double getExpNext();
     /**
      * this method set a new bond to
      * the amount of exp needed for level-up
-     * to the next level
+     * to the next level.
      */
     public void setExpNext(double newExp);
 
     /**
      * this method set a new value on the current exp
-     * of the yokimon
+     * of the yokimon.
      */
     public void setExp(double exp);
 
