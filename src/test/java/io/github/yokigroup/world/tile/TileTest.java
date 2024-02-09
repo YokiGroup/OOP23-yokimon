@@ -5,8 +5,6 @@ import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TileTest {
