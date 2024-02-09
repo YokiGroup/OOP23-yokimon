@@ -1,7 +1,7 @@
 package io.github.yokigroup.world.entity.hitbox;
 
-import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.util.PairImpl;
+import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
 import org.dyn4j.geometry.Shape;
 
 /**
@@ -9,14 +9,14 @@ import org.dyn4j.geometry.Shape;
  */
 public abstract class HitboxImpl implements Hitbox {
     private final Shape shape;
-    private Pair<Float, Float> position;
+    private Vector2 position;
 
     /**
      * Creates a hitbox.
      * @param shape The shape of the hitbox.
      * @param position The position of the hitbox.
      */
-    protected HitboxImpl(final Shape shape, final Pair<Float, Float> position) {
+    protected HitboxImpl(final Shape shape, final Vector2 position) {
         this.shape = shape;
         this.setPosition(position);
     }
@@ -26,7 +26,7 @@ public abstract class HitboxImpl implements Hitbox {
      * @param shape The shape of the hitbox.
      */
     protected HitboxImpl(final Shape shape) {
-        this(shape, new PairImpl<>(0.0f, 0.0f));
+        this(shape, new Vector2Impl(0.0d, 0.0d));
     }
 
     /**
@@ -44,9 +44,9 @@ public abstract class HitboxImpl implements Hitbox {
      * @param pos the positions of the hitbox.
      */
     @Override
-    public void setPosition(final Pair<Float, Float> pos) {
+    public void setPosition(final Vector2 pos) {
         this.position = pos;
-        this.shape.translate(0, 0);
+        this.shape.translate(0.0d, 0.0d);
         this.shape.translate(pos.getX(), pos.getY());
     }
 
@@ -55,16 +55,7 @@ public abstract class HitboxImpl implements Hitbox {
      * @return the position of the hitbox.
      */
     @Override
-    public Pair<Float, Float> getPosition() {
+    public Vector2 getPosition() {
         return this.position;
-    }
-
-    /**
-     *
-     * @return the shape of the hitbox.
-     */
-    @Override
-    public Shape getShape() {
-        return this.shape;
     }
 }

@@ -1,15 +1,19 @@
 package io.github.yokigroup.core;
 
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.*;
+import io.github.yokigroup.event.submodule.FightSubmodule;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
+import io.github.yokigroup.event.submodule.PartySubmodule;
+import io.github.yokigroup.event.submodule.PlayerPositionSubmodule;
+import io.github.yokigroup.event.submodule.Submodule;
+import io.github.yokigroup.event.submodule.SubmoduleMap;
+import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 import io.github.yokigroup.world.entity.Entity;
-import io.github.yokigroup.world.tile.TileMap;
 
-import javax.mail.Part;
 import java.lang.reflect.InvocationTargetException;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -46,7 +50,7 @@ public class GameOrchestrator implements MessageHandler {
     }
 
     /**
-     * Initializes a GameOrchestrator with a new TileMap and PlayerCharacter, along with the required submodules.
+     * Initializes a GameOrchestrator with a new GameMap and PlayerCharacter, along with the required submodules.
      */
     public GameOrchestrator() {
         playerCharacter = null; // TODO replace with Entity implementation

@@ -1,5 +1,7 @@
 package io.github.yokigroup.world.tile;
 
+import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
 
@@ -17,9 +19,9 @@ public interface Tile {
 
     /**
      *
-     * @return All the entities in a tile.
+     * @return All the spawn locations in a tile.
      */
-    Set<Entity> getEntities();
+    Set<Vector2> getEntitySpawnLocations();
 
     /**
      *
@@ -29,7 +31,24 @@ public interface Tile {
 
     /**
      *
-     * @param entity The entity to add to the tile.
+     * @param pos The spawn position to add to the tile.
      */
-    void addEntity(Entity entity);
+    void addSpawnLocation(Vector2 pos);
+
+    /**
+     * Spawns an entity on the tile at that position.
+     * @param entityPool The entity pool of the tile.
+     */
+    void spawnEntities(WeightedPool<Entity> entityPool);
+
+    /**
+     *
+     * @return The entities on the tile.
+     */
+    Set<Entity> getEntities();
+
+    /**
+     * Runs the update method on all the entities on the tile.
+     */
+    void updateEntities();
 }

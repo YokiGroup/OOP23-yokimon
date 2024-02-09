@@ -10,7 +10,7 @@ public interface WeightedPool<T> {
      *
      * @return creates a copy of the pool.
      */
-    WeightedPool<T> clone();
+    WeightedPool<T> copy();
 
     /**
      * Adds an element to the pool, the weights can be an arbitrary value.
