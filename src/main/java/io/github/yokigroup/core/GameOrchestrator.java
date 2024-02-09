@@ -19,7 +19,7 @@ import java.util.function.Consumer;
 /**
  * Game loop. Responsible for receiving events and updating entities
  */
-public class GameOrchestrator implements MessageHandler {
+public class GameOrchestrator implements MessageHandler, GameLogic {
     private final SubmoduleMap subModules;
     private final Entity playerCharacter;
 
@@ -40,8 +40,8 @@ public class GameOrchestrator implements MessageHandler {
         submoduleTypes.forEach(s -> {
             try {
                 retMap.register(s.getConstructor(MessageHandler.class).newInstance(this));
-            } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
-                     IllegalAccessException e) {
+            } catch (NoSuchMethodException | InvocationTargetException | InstantiationException
+                     | IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
         });
@@ -64,5 +64,10 @@ public class GameOrchestrator implements MessageHandler {
             throw new IllegalArgumentException(this.getClass() + " does not contain submodule " + subModuleType);
         }
         handler.accept(submodule.get());
+    }
+
+    @Override
+    public void start() {
+        // FIXME implement
     }
 }

@@ -8,12 +8,17 @@ import java.util.List;
 
 /**
  * Submodule containing a party's information (yokimon's group).
+ * @author Giovanni Paone
  */
 public class PartySubmodule extends Submodule {
-    private List<Yokimon> yokimonList = new ArrayList<>();
+    private List<Yokimon> yokimonList;
 
-    public PartySubmodule(MessageHandler handler) {
+    /**
+     * @param handler MessageHandler to call in order to query other submodules.
+     */
+    public PartySubmodule(final MessageHandler handler) {
         super(handler);
+        yokimonList = new ArrayList<>();
     }
 
     private List<Yokimon> deepCopyOf(final List<Yokimon> list) {

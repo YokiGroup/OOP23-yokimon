@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 
 /**
  * Responsible for the communication between entities and the submodules they interact with.
+ * @author Giovanni Paone
  */
 public interface MessageHandler {
     /**

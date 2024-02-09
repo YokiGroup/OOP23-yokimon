@@ -12,7 +12,10 @@ import java.util.Optional;
 public class FightSubmodule extends Submodule {
     private Optional<Fight> lastAnnouncedFight = Optional.empty();
 
-    public FightSubmodule(MessageHandler handler) {
+    /**
+     * @param handler MessageHandler to call in order to query other submodules.
+     */
+    public FightSubmodule(final MessageHandler handler) {
         super(handler);
     }
 
@@ -36,7 +39,7 @@ public class FightSubmodule extends Submodule {
     @Override
     public final void process() {
         if (lastAnnouncedFight.isPresent()) {
-            // TODO start fight
+            // TODO implement
         }
     }
 }

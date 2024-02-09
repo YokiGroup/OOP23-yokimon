@@ -2,11 +2,10 @@ package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Vector2;
-import io.github.yokigroup.world.GameMap;
-import io.github.yokigroup.world.entity.Entity;
 
 /**
  * Handles player position updates.
+ * @author Giovanni Paone
  */
 public class PlayerPositionSubmodule extends Submodule {
 /*
@@ -37,7 +36,10 @@ public class PlayerPositionSubmodule extends Submodule {
         RIGHT
     }
 
-    public PlayerPositionSubmodule(MessageHandler handler) {
+    /**
+     * @param handler MessageHandler to call in order to query other submodules.
+     */
+    public PlayerPositionSubmodule(final MessageHandler handler) {
         super(handler);
     }
 
