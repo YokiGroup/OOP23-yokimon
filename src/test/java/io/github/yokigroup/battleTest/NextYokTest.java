@@ -8,10 +8,17 @@ import io.github.yokigroup.battle.nextyokimon.NextYokimon;
 import io.github.yokigroup.battle.nextyokimon.DummyImplNextYokimon;
 import io.github.yokigroup.battle.Yokimon;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import io.github.yokigroup.battle.YokimonImpl;
 
+/**
+ * Test class for Next Yokimon.
+ */
 public class NextYokTest {
+
+    /**
+     * Testing dummy implementation.
+     */
     @Test public void testDummyImpl() {
         NextYokimon toTest = new DummyImplNextYokimon();
 
