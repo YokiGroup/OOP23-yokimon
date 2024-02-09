@@ -29,12 +29,8 @@ public class RectangularHitbox extends HitboxImpl {
         this(new Vector2Impl(0.0d, 0.0d), dimensions);
     }
 
-    /**
-     *
-     * @return a copy of the shape used for collision checking.
-     */
     @Override
-    public Shape getShape() {
+    public final Shape getShape() {
         final Shape shapeCopy = new Rectangle(dimensions.getX(), dimensions.getY());
         shapeCopy.translate(0.0d, 0.0d);
         shapeCopy.translate(this.getPosition().getX(), this.getPosition().getY());

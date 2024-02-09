@@ -29,12 +29,8 @@ public class CircularHitbox extends HitboxImpl {
         this(new Vector2Impl(0.0d, 0.0d), radius);
     }
 
-    /**
-     *
-     * @return a copy of the shape used for collision checking.
-     */
     @Override
-    public Shape getShape() {
+    public final Shape getShape() {
         final Shape shapeCopy = new Circle(radius);
         shapeCopy.translate(0.0d, 0.0d);
         shapeCopy.translate(this.getPosition().getX(), this.getPosition().getY());

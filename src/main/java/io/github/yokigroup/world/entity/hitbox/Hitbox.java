@@ -15,7 +15,7 @@ public interface Hitbox {
     boolean collidesWith(Hitbox other);
 
     /**
-     * Sets where the hitbox is located.
+     * Changes the position of the hitbox and the shape itself.
      * @param pos the positions of the hitbox.
      */
     void setPosition(Vector2 pos);
