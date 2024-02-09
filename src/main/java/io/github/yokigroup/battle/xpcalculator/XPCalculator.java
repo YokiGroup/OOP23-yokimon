@@ -1,4 +1,4 @@
-package io.github.yokigroup.battle.XPCalculator;
+package io.github.yokigroup.battle.xpcalculator;
 
 import io.github.yokigroup.battle.Yokimon;
 
