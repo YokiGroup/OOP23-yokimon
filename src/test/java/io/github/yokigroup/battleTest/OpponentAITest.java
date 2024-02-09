@@ -12,9 +12,16 @@ import io.github.yokigroup.battle.opponentai.DummyImplOpponentAI;
 import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.battle.Yokimon;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test class for Opponent AI.
+ */
 public class OpponentAITest {
+
+    /**
+     * Testing dummy implementation.
+     */
     @Test public void testDummyImpl() {
         OpponentAI toTest = new DummyImplOpponentAI(new BasicImplDmgCalculator());
 
@@ -23,8 +30,8 @@ public class OpponentAITest {
 
 
         Yokimon y1 = new YokimonImpl("Charizard", Map.of(), Yokimon.GrowRate.MEDIUM, List.of());
-        Yokimon y2 = new YokimonImpl("Squirtle",Map.of(), Yokimon.GrowRate.MEDIUM, List.of(a1));
-        Yokimon y3 = new YokimonImpl("Bulbasaur", Map.of(), Yokimon.GrowRate.MEDIUM, List.of(a1,a2));
+        Yokimon y2 = new YokimonImpl("Squirtle", Map.of(), Yokimon.GrowRate.MEDIUM, List.of(a1));
+        Yokimon y3 = new YokimonImpl("Bulbasaur", Map.of(), Yokimon.GrowRate.MEDIUM, List.of(a1, a2));
 
         //empty
         assertEquals(Optional.empty(), toTest.getMove(y1));
