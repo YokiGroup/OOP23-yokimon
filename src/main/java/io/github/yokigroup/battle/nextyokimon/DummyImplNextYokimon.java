@@ -1,4 +1,4 @@
-package io.github.yokigroup.battle.NextYokimon;
+package io.github.yokigroup.battle.nextyokimon;
 
 import io.github.yokigroup.battle.Yokimon;
 

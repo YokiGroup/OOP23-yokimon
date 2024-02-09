@@ -1,4 +1,4 @@
-package io.github.yokigroup.battle.OpponentAI;
+package io.github.yokigroup.battle.opponentai;
 
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Yokimon;

@@ -1,7 +1,7 @@
-package io.github.yokigroup.battle.OpponentAI;
+package io.github.yokigroup.battle.opponentai;
 
 import io.github.yokigroup.battle.Attack;
-import io.github.yokigroup.battle.DmgCalculator.DmgCalculator;
+import io.github.yokigroup.battle.dmgcalculator.DmgCalculator;
 import io.github.yokigroup.battle.Yokimon;
 
 import java.util.Optional;

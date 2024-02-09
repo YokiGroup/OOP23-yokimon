@@ -1,4 +1,4 @@
-package io.github.yokigroup.battle.DmgCalculator;
+package io.github.yokigroup.battle.dmgcalculator;
 
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Yokimon;

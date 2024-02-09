@@ -1,15 +1,15 @@
 package io.github.yokigroup.battle.fight;
 
-import io.github.yokigroup.battle.DmgCalculator.DmgCalculator;
-import io.github.yokigroup.battle.DmgCalculator.BasicImplDmgCalculator;
+import io.github.yokigroup.battle.dmgcalculator.DmgCalculator;
+import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.Attack;
-import io.github.yokigroup.battle.NextYokimon.NextYokimon;
-import io.github.yokigroup.battle.NextYokimon.DummyImplNextYokimon;
-import io.github.yokigroup.battle.OpponentAI.OpponentAI;
-import io.github.yokigroup.battle.OpponentAI.DummyImplOpponentAI;
-import io.github.yokigroup.battle.XPCalculator.XPCalculator;
-import io.github.yokigroup.battle.XPCalculator.DummyImplXPCalculator;
+import io.github.yokigroup.battle.nextyokimon.NextYokimon;
+import io.github.yokigroup.battle.nextyokimon.DummyImplNextYokimon;
+import io.github.yokigroup.battle.opponentai.OpponentAI;
+import io.github.yokigroup.battle.opponentai.DummyImplOpponentAI;
+import io.github.yokigroup.battle.xpcalculator.XPCalculator;
+import io.github.yokigroup.battle.xpcalculator.DummyImplXPCalculator;
 
 import java.util.LinkedList;
 import java.util.List;

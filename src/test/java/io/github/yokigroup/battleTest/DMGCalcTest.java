@@ -1,7 +1,7 @@
 package io.github.yokigroup.battleTest;
 
 import io.github.yokigroup.battle.*;
-import io.github.yokigroup.battle.DmgCalculator.*;
+import io.github.yokigroup.battle.dmgcalculator.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;

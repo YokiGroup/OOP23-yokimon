@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import io.github.yokigroup.battle.NextYokimon.NextYokimon;
-import io.github.yokigroup.battle.NextYokimon.DummyImplNextYokimon;
+import io.github.yokigroup.battle.nextyokimon.NextYokimon;
+import io.github.yokigroup.battle.nextyokimon.DummyImplNextYokimon;
 import io.github.yokigroup.battle.Yokimon;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,10 +1,10 @@
 package io.github.yokigroup.battleTest;
 
 import java.util.List;
-import io.github.yokigroup.battle.XPCalculator.XPCalculator;
+import io.github.yokigroup.battle.xpcalculator.XPCalculator;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.YokimonImpl;
-import io.github.yokigroup.battle.XPCalculator.DummyImplXPCalculator;
+import io.github.yokigroup.battle.xpcalculator.DummyImplXPCalculator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

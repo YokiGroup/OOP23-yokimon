@@ -6,9 +6,9 @@ import java.util.Optional;
 
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.AttackImpl;
-import io.github.yokigroup.battle.DmgCalculator.BasicImplDmgCalculator;
-import io.github.yokigroup.battle.OpponentAI.OpponentAI;
-import io.github.yokigroup.battle.OpponentAI.DummyImplOpponentAI;
+import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
+import io.github.yokigroup.battle.opponentai.OpponentAI;
+import io.github.yokigroup.battle.opponentai.DummyImplOpponentAI;
 import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.battle.Yokimon;
 import org.junit.jupiter.api.Test;
