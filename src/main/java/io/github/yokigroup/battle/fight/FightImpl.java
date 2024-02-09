@@ -89,7 +89,6 @@ public final class FightImpl implements Fight {
             nextMyYok.ifPresent(yokimon -> currOppYokimon = yokimon);
         }
 
-
         return null;
     }
 
