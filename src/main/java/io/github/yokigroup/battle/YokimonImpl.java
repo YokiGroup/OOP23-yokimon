@@ -81,11 +81,6 @@ public class YokimonImpl implements Yokimon{
                 Map.copyOf(yokimon.baseStats), yokimon.growthRate, yokimon.level, Map.copyOf(yokimon.learnableMoves));   ;
     }
 
-    private void initialization(String name, Color color, Map<Yokimon.Stats, Integer> baseStats, GrowthRate growthRate,
-                                 int level, Map<Integer, Attack> learnableMoves){
-
-    }
-
     @Override
     public GrowthRate getGrowRate() {
         return this.growthRate;
