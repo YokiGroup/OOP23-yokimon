@@ -1,12 +1,7 @@
 package io.github.yokigroup.core;
 
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.FightSubmodule;
-import io.github.yokigroup.event.submodule.PartySubmodule;
-import io.github.yokigroup.event.submodule.PlayerPositionSubmodule;
-import io.github.yokigroup.event.submodule.SubmoduleMap;
-import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
-import io.github.yokigroup.event.submodule.Submodule;
+import io.github.yokigroup.event.submodule.*;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.tile.TileMap;
 
@@ -22,7 +17,6 @@ import java.util.function.Consumer;
  */
 public class GameOrchestrator implements MessageHandler {
     private final SubmoduleMap subModules;
-    private final TileMap gameMap;
     private final Entity playerCharacter;
 
     /**
@@ -35,7 +29,8 @@ public class GameOrchestrator implements MessageHandler {
         List<Class<? extends Submodule>> submoduleTypes = List.of(
                 PartySubmodule.class,
                 PlayerPositionSubmodule.class,
-                FightSubmodule.class
+                FightSubmodule.class,
+                GameMapSubmodule.class
         );
 
         submoduleTypes.forEach(s -> {
@@ -55,7 +50,6 @@ public class GameOrchestrator implements MessageHandler {
      */
     public GameOrchestrator() {
         playerCharacter = null; // TODO replace with Entity implementation
-        gameMap = new TileMap() { }; // TODO replace with TileMap implementation
         subModules = initSubmodules();
     }
 
