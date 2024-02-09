@@ -1,4 +1,4 @@
-package io.github.yokigroup.entity.hitbox;
+package io.github.yokigroup.world.hitbox;
 
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
