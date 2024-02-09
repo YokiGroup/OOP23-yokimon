@@ -4,7 +4,7 @@ import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Yokimon;
 
 /**
- * Interface for Damage Calculator
+ * Interface for Damage Calculator.
  */
 public interface DmgCalculator {
 

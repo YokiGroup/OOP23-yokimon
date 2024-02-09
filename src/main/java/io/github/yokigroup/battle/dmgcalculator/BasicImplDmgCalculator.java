@@ -5,7 +5,7 @@ import io.github.yokigroup.battle.Yokimon;
 
 /**
  * Basic version for Damage Calculator, that only takes into consideration
- * the two Yokimons' stats and the attack power
+ * the two Yokimons' stats and the attack power.
  */
 public final class BasicImplDmgCalculator implements DmgCalculator {
     @Override
