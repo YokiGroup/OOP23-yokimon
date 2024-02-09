@@ -12,7 +12,22 @@ public interface Fight {
      * Different success rates trigger a different quote on the view.
      */
     enum Success {
-        GOOD, SUPER, WEAK, FAIL
+        /**
+         * The attack was successful.
+         */
+        GOOD,
+        /**
+         * The attack was very effective.
+         */
+        SUPER,
+        /**
+         * The attack was rather unsuccessful.
+         */
+        WEAK,
+        /**
+         * The attack was a failure.
+         */
+        FAIL
     }
 
     /**

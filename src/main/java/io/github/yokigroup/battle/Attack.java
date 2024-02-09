@@ -5,10 +5,26 @@ public interface Attack {
     public enum effect{
         NONE
     }
+
+    /**
+     * The color associated to a Yokimon. This affects each attack success rate.
+     */
     public enum color{
+        /**
+         * Color type red.
+         */
         RED,
+        /**
+         * Color type yellow.
+         */
         YELLOW,
+        /**
+         * Color type green.
+         */
         GREEN,
+        /**
+         * Color type blue.
+         */
         BLUE
     }
     /**
