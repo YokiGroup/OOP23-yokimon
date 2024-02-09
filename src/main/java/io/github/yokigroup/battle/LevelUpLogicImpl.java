@@ -2,16 +2,13 @@ package io.github.yokigroup.battle;
 
 import static java.lang.Math.pow;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.*;
-public class LevelUP_LogicImpl implements  LevelUP_Logic{
-    private final static int DEFAULT_VALUE=0;
+
+public class LevelUpLogicImpl implements  LevelUpLogic{
 
     private final static int CAP=80;
     /**
-     * value used for the exponent of the
+     * value used for the exponent for calculate nextBoundXP
      */
     private final static int exponent=3;
 
@@ -21,26 +18,26 @@ public class LevelUP_LogicImpl implements  LevelUP_Logic{
      * @param level level of the level upped yokimon
      * @return double with the new value
      */
-    private double nextBoundXP(int level) {
+    private double nextBoundXp(int level) {
         return pow(level, exponent);
     }
 
     @Override
-    public void set_Stats(Yokimon yokimon) {
+    public void setStats(Yokimon yokimon) {
         //level
         Map<Yokimon.Stats, Integer> newStat = yokimon.getALLStats();
         newStat.entrySet().stream()
-               .filter(i -> i.getKey() != Yokimon.Stats.HP)
+               .filter(i -> i.getKey() != Yokimon.Stats.hp)
                .forEach(i -> i.setValue(upGrade(yokimon.getBaseStat(i.getKey()),
                         i.getValue(), yokimon.getLevel())));
-        newStat.replace(Yokimon.Stats.HP, upGradeHP(yokimon.getBaseStat(Yokimon.Stats.HP),
-                newStat.get(Yokimon.Stats.HP), yokimon.getLevel()));
-        //reset HP
-        yokimon.setMaxHP(yokimon.getBaseStat(Yokimon.Stats.HP));
-        yokimon.setActualHP(yokimon.getBaseStat(Yokimon.Stats.HP));
+        newStat.replace(Yokimon.Stats.hp, upGradeHp(yokimon.getBaseStat(Yokimon.Stats.hp),
+                newStat.get(Yokimon.Stats.hp), yokimon.getLevel()));
+        //reset hp
+        yokimon.setMaxHp(yokimon.getBaseStat(Yokimon.Stats.hp));
+        yokimon.setActualHp(yokimon.getBaseStat(Yokimon.Stats.hp));
     }
 
-    private int upGradeHP(int baseStat, int actualStat, int level){
+    private int upGradeHp(int baseStat, int actualStat, int level){
         actualStat = (baseStat*2*level/CAP)+level+10;
         return actualStat;
     }
@@ -52,24 +49,24 @@ public class LevelUP_LogicImpl implements  LevelUP_Logic{
 
 
     @Override
-    public Yokimon.exp_code LevelUP(Yokimon yokimon, int plus) {
-        Yokimon.exp_code code = Yokimon.exp_code.LEVEL_UP;
+    public Yokimon.exp_code levelUp(Yokimon yokimon, int plus) {
+        Yokimon.exp_code code = Yokimon.exp_code.levelUp;
         //control if the yokimon learn a new move
         for(int i = yokimon.getLevel()+1; i <= yokimon.getLevel()+plus; i++){
-            if(yokimon.getLernableAttacks().containsKey(i)){
-                yokimon.addAttack(yokimon.getLernableAttacks().get(i));
-                code = Yokimon.exp_code.NEW_MOVE;
+            if(yokimon.getLearnableAttacks().containsKey(i)){
+                yokimon.addAttack(yokimon.getLearnableAttacks().get(i));
+                code = Yokimon.exp_code.newMove;
             }
         }
         //set new level
         yokimon.setLevel(yokimon.getLevel()+plus);
 
         //set the new exp calculator
-        yokimon.setExpNext(this.nextBoundXP(yokimon.getLevel()));
+        yokimon.setExpNext(this.nextBoundXp(yokimon.getLevel()));
         yokimon.setExp(yokimon.getExpNext());
 
         //set the new stats
-        this.set_Stats(yokimon);
+        this.setStats(yokimon);
         return code;
     }
 
@@ -77,16 +74,16 @@ public class LevelUP_LogicImpl implements  LevelUP_Logic{
     public void resetAttack(Yokimon yokimon) {
         yokimon.getAttacks().clear();
         for(int i = 0; i <= yokimon.getLevel(); i++){
-            if(yokimon.getLernableAttacks().containsKey(i)){
-                yokimon.addAttack(yokimon.getLernableAttacks().get(i));
+            if(yokimon.getLearnableAttacks().containsKey(i)){
+                yokimon.addAttack(yokimon.getLearnableAttacks().get(i));
             }
         }
     }
 
     @Override
     public void reset(Yokimon yokimon) {
-        yokimon.setExpNext(this.nextBoundXP(yokimon.getLevel()));
-        yokimon.setExp(this.nextBoundXP(yokimon.getLevel()-1));
-        this.set_Stats(yokimon);
+        yokimon.setExpNext(this.nextBoundXp(yokimon.getLevel()));
+        yokimon.setExp(this.nextBoundXp(yokimon.getLevel()-1));
+        this.setStats(yokimon);
     }
 }

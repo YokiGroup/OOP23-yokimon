@@ -3,22 +3,30 @@ package io.github.yokigroup.battle;
 import java.util.Map;
 import java.util.List;
 
+/**
+ * Yokimon interface represents a Yokimon, a creature with various stats and abilities.
+ */
 public interface Yokimon {
     /**
-    * Stats represent the stats that the yokimon has at this moment
-    * so just use this
+    * Stats represent the stats of the yokimon.
+     * art -> attack def -> defence spd -> speed
+     * hp -> health point
     * */
     public enum Stats{
-        ATK,
-        DEF,
-        SPD,
-        HP;
+        atk,
+        def,
+        spd,
+        hp;
     }
 
+    /**
+     * Represents the growth rate of the Yokimon.
+     * the value assumed will be multiplied when the yokimon take xp
+     */
     public enum GrowRate {
-        SLOW(0.75),
-        MEDIUM(1.00),
-        FAST(1.25);
+        slow(0.75),
+        medium(1.00),
+        fast(1.25);
         private final double rate;
         GrowRate(double rate) {
             this.rate = rate;
@@ -38,19 +46,20 @@ public interface Yokimon {
      * @return Color
      */
     public Color getYokimonColor();
+
     /**
      * Returns all the Stats as a map of Integer
      * with Stats as a key
      * @return Map<Stats, Integer>
      */
-    public Map<Stats, Integer> getALLStats();
+    public Map<Stats, Integer> getAllStats();
 
     /**
      * Returns all the BASE Stats as a map of Integer
      * with Stats as a key
      * @return Map<Stats, Integer>
      */
-    public Map<Stats, Integer> getALLBaseStats();
+    public Map<Stats, Integer> getAllBaseStats();
 
     /**
      * Returns the correspondent stat value
@@ -61,16 +70,16 @@ public interface Yokimon {
     public int getStat(Stats stat);
 
     /**
-     * Returns the correspondent basestast value
-     * given in input
-     * @param baseStat is the value of the stat used for the level up
-     * @return int value
+     * Returns the value of the specified base stat.
+     * @param baseStat The base stat to retrieve
+     * @return int Value of the specified base stat
      */
     public int getBaseStat(Stats baseStat);
 
     /**
-     *
-     *
+     * Sets the value of the specified stat.
+     * @param change The stat to change
+     * @param newValue The new value of the stat
      */
     public void setStat(Stats change, int newValue);
 
@@ -80,10 +89,10 @@ public interface Yokimon {
      */
     public int getLevel();
     /**
-     *
-     * @param n value of the new level of the yokimon
+     * Sets the level of the Yokimon.
+     * @param n The new level of the Yokimon
      */
-    public exp_code setLevel(int n);
+    public void setLevel(int n);
 
     /**
      * Does level up of the yokimon n-times
@@ -94,9 +103,8 @@ public interface Yokimon {
     public boolean levelUP(int n);
 
     /**
-     *Return List of objects representing the current attacks of
-     * the yokimon
-     * @return List<Attacks> </Attacks>
+     * Returns a list of attacks the Yokimon currently has.
+     * @return List<Attack> List of attacks
      */
     public List<Attack> getAttacks();
 
@@ -111,34 +119,34 @@ public interface Yokimon {
      * value: the actual attack
      * @return Map of as key level and Attack as value
      */
-    public Map<Integer, Attack> getLernableAttacks();
+    public Map<Integer, Attack> getLearnableAttacks();
     /**
-     *Return actual HP of the yokimon
-     * @return actual HP
+     *Return actual hp of the yokimon
+     * @return actual hp
      */
-    public int getActualHP();
+    public int getActualHp();
 
     /**
-     *Return MAX HP of the yokimon
-     * @return MAX HP
+     *Return MAX hp of the yokimon
+     * @return MAX hp
      */
-    public int getMAXHP();
+    public int getMaxHp();
 
     /**
      * change the actual hp with a new value
-     * @param newValue the new value assigned to actualHP
+     * @param newValue the new value assigned to actual hp
      */
-    public void setActualHP(int newValue);
+    public void setActualHp(int newValue);
 
     /**
      * change the max hp with a new value
-     * @param newValue the new value assigned to maxHP
+     * @param newValue the new value assigned to max hp
      */
-    public void setMaxHP(int newValue);
+    public void setMaxHp(int newValue);
 
     /**
-     * subtracts to the Actual HP of the yokimon the parameter damage
-     * if the hp of the yokimon reaches zero, it returns true
+     * subtracts to the Actual Hp of the yokimon the parameter damage
+     * if the Hp of the yokimon reaches zero, it returns true
      * otherwise it return true
      * @param damage out put of the damage
      * @return true if the yokimon is still active, false if is not
@@ -147,32 +155,31 @@ public interface Yokimon {
 
     /**
      * Return true is the yokimon is Active, false
-     * if is it not (0 HP)
+     * if is it not (0 hp)
      * @return boolean
      */
-    public boolean Active();
+    public boolean active();
 
+
+    /**
+     * enum used to specify return status of various methods
+     */
     public enum exp_code{
-        OK,
-        LEVEL_UP,
-        NEW_MOVE,
-        MAX,
-        ERROR
+        ok,
+        levelUp,
+        newMove
     }
     /**
-     *Using this method to add a certain amount of xp to
-     * a yokimon
-     *It will automatically level up and learn new moves if
-     *it needs to.
-     * @param n int value of the xp to add
-     * @return will return:
-     * OK if the level of the yokimon doesn't change
-     * LEVEL_UP if the yokimon just level-up
-     * NEW_MOVE if the yokimon learn a new move
-     * MAX if the xp can't no longer raise
-     * ERROR if the method fails
+     * Adds a certain amount of XP to the Yokimon, potentially triggering level-up and learning new moves.
+     * @param n Amount of XP to add
+     * @return exp_code Status of the XP addition.
+     * ok if the level of the yokimon doesn't change
+     * level-up if the yokimon just level-up
+     * newMove if the yokimon learn a new move
+     * max if the xp can't no longer raise
+     * error if the method fails
      */
-    public exp_code takeXP(int n);
+    public exp_code takeXp(int n);
 
     /**
      * return the exp needed to reach the next
@@ -182,7 +189,7 @@ public interface Yokimon {
     public double getExpNext();
     /**
      * this method set a new bond to
-     * the amount of exp neaded for level-up
+     * the amount of exp needed for level-up
      * to the next level
      */
     public void setExpNext(double newExp);

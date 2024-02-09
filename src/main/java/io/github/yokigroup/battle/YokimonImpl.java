@@ -1,27 +1,33 @@
 package io.github.yokigroup.battle;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * YokimonImpl is an implementation of the Yokimon interface,
+ * representing a creature with various stats and abilities.
+ */
 public class YokimonImpl implements Yokimon{
 
-    private final static int DEFAULT_LEVEL=1;
+    private final static int defaultLevel=1;
     private final String name;
     private final Color color;
-    private final Map<Stats, Integer> BaseStats;
+    private final Map<Stats, Integer> baseStats;
 
-    private Map<Stats, Integer> Stats;
+    private Map<Stats, Integer> stats;
     private int level;
 
-    private int MAX_HP;
+    private int maxHp;
 
-    private int ACTUAL_HP;
+    private int actualHp;
 
     private final GrowRate growRate;
 
-    private double XP;
+    private double xp;
 
-    private double XP_NEXTLEV;
+    private double xpNext;
 
     private List<Attack> moves;
 
@@ -29,21 +35,44 @@ public class YokimonImpl implements Yokimon{
 
     private boolean active;
 
+    private final LevelUpLogic levelUtility=new LevelUpLogicImpl();
 
-    private final LevelUP_Logic LevelUtility=new LevelUP_LogicImpl();
+    /**
+     * Constructor for YokimonImpl.
+     * @param name Name of the Yokimon
+     * @param color Color of the Yokimon
+     * @param baseStats Base stats of the Yokimon
+     * @param growRate Growth rate of the Yokimon
+     * @param level Initial level of the Yokimon
+     * @param learnableMoves Learnable moves of the Yokimon
+     */
     public YokimonImpl(String name, Color color, Map<Yokimon.Stats, Integer> baseStats, GrowRate growRate,
                        int level, Map<Integer, Attack> learnableMoves)
     {
+        this.stats = new HashMap<>();
+        this.moves = new ArrayList<>();
         this.name = name;
         this.color = color;
-        this.BaseStats = Map.copyOf(baseStats);
+        this.baseStats = Map.copyOf(baseStats);
         this.growRate = growRate;
         this.level=level;
-        this.LevelUtility.resetAttack(this);
+        this.levelUtility.resetAttack(this);
         this.learnableMoves = Map.copyOf(learnableMoves);
         this.active=true;
-        this.LevelUtility.set_Stats(this);
+        this.levelUtility.setStats(this);
 
+    }
+    /**
+     * Constructor for YokimonImpl with default level.
+     * @param name Name of the Yokimon
+     * @param color Color of the Yokimon
+     * @param baseStats Base stats of the Yokimon
+     * @param growRate Growth rate of the Yokimon
+     * @param learnableMoves Learnable moves of the Yokimon
+     */
+    public YokimonImpl(String name, Color color, Map<Yokimon.Stats, Integer> baseStats, GrowRate growRate,
+                       Map<Integer, Attack> learnableMoves){
+        this(name, color, baseStats, growRate, defaultLevel, learnableMoves);
     }
 
     @Override
@@ -57,28 +86,28 @@ public class YokimonImpl implements Yokimon{
     }
 
     @Override
-    public Map<Stats, Integer> getALLStats() {
-        return this.Stats;
+    public Map<Stats, Integer> getAllStats() {
+        return this.stats;
     }
 
     @Override
-    public Map<Stats, Integer> getALLBaseStats() {
-        return this.BaseStats;
+    public Map<Stats, Integer> getAllBaseStats() {
+        return this.baseStats;
     }
 
     @Override
     public int getStat(Stats stat) {
-        return this.Stats.get(stat);
+        return this.stats.get(stat);
     }
 
     @Override
     public int getBaseStat(Stats baseStat) {
-        return this.BaseStats.get(baseStat);
+        return this.baseStats.get(baseStat);
     }
 
     @Override
     public void setStat(Yokimon.Stats change, int newValue) {
-        this.Stats.replace(change, newValue);
+        this.stats.replace(change, newValue);
     }
 
     @Override
@@ -87,20 +116,17 @@ public class YokimonImpl implements Yokimon{
     }
 
     @Override
-    public exp_code setLevel(int n) {
+    public void setLevel(int n) {
         if(n>0){
             this.level=n;
-            this.LevelUtility.set_Stats(this);
-            return exp_code.OK;
+            this.levelUtility.setStats(this);
         }
-        else
-            return exp_code.ERROR;
 
     }
 
     @Override
     public boolean levelUP(int n) {
-        this.LevelUtility.LevelUP(this, n);
+        this.levelUtility.levelUp(this, n);
         return true;
     }
 
@@ -115,70 +141,70 @@ public class YokimonImpl implements Yokimon{
     }
 
     @Override
-    public Map<Integer, Attack> getLernableAttacks() {
+    public Map<Integer, Attack> getLearnableAttacks() {
         return this.learnableMoves;
     }
 
     @Override
-    public int getActualHP() {
-        return this.ACTUAL_HP;
+    public int getActualHp() {
+        return this.actualHp;
     }
 
     @Override
-    public int getMAXHP() {
-        return this.MAX_HP;
+    public int getMaxHp() {
+        return this.maxHp;
     }
 
     @Override
-    public void setActualHP(int newValue) {
+    public void setActualHp(int newValue) {
         if(newValue == 0) this.active = false ;
-        this.ACTUAL_HP=newValue;
+        this.actualHp=newValue;
     }
 
     @Override
-    public void setMaxHP(int newValue) {
-        this.MAX_HP=newValue;
+    public void setMaxHp(int newValue) {
+        this.maxHp=newValue;
     }
 
     @Override
     public boolean takeDamage(int damage) {
-        if(damage >= this.ACTUAL_HP){
-            this.ACTUAL_HP=0;
+        if(damage >= this.actualHp){
+            this.actualHp=0;
             this.active=false;
         }
-        this.ACTUAL_HP-=damage;
+        this.actualHp-=damage;
         return this.active;
     }
 
     @Override
-    public boolean Active() {
+    public boolean active() {
         return this.active;
     }
 
     @Override
-    public exp_code takeXP(int n) {
-        exp_code expCode=exp_code.OK;
+    public exp_code takeXp(int n) {
+        exp_code expCode=exp_code.ok;
         double xpToTake = n*this.growRate.get();
-        while (xpToTake >= this.XP_NEXTLEV-this.XP){
-            xpToTake -= this.XP_NEXTLEV-this.XP;
-            expCode = this.LevelUtility.LevelUP(this, 1);
+        while (xpToTake >= this.xpNext-this.xp){
+            xpToTake -= this.xpNext-this.xp;
+            expCode = this.levelUtility.levelUp(this, 1);
         }
-        this.XP += xpToTake;
+        this.xp += xpToTake;
         return expCode;
     }
 
     @Override
     public double getExpNext() {
-        return this.XP;
+        return this.xp;
     }
 
     @Override
     public void setExpNext(double newExp) {
-        this.XP_NEXTLEV=newExp;
+        this.xpNext=newExp;
     }
 
     @Override
     public void setExp(double exp) {
-        this.XP=exp;
+        this.xp=exp;
     }
 }
