@@ -25,7 +25,7 @@ public class LevelUpLogicImpl implements  LevelUpLogic{
     @Override
     public void setStats(Yokimon yokimon) {
         //level
-        Map<Yokimon.Stats, Integer> newStat = yokimon.getALLStats();
+        Map<Yokimon.Stats, Integer> newStat = yokimon.getAllStats();
         newStat.entrySet().stream()
                .filter(i -> i.getKey() != Yokimon.Stats.hp)
                .forEach(i -> i.setValue(upGrade(yokimon.getBaseStat(i.getKey()),
