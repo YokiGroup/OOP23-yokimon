@@ -47,6 +47,12 @@ public final class FightImpl implements Fight {
     public FightImpl(final List<Yokimon> myYokimons, final List<Yokimon> oppYokimons) {
         this.myYokimons = myYokimons;
         this.oppYokimons = oppYokimons;
+
+        if(nextYok.getNext(myYokimons).isEmpty() || nextYok.getNext(oppYokimons).isEmpty()) {
+            throw new RuntimeException("Must instantiate fight with at least one Yokimon on each party.");
+        }
+        this.currMyYokimon = nextYok.getNext(myYokimons).get();
+        this.currOppYokimon = nextYok.getNext(oppYokimons).get();
     }
 
     @Override
@@ -120,8 +126,9 @@ public final class FightImpl implements Fight {
     /* utilities to update Yokimons involved in fight */
     private void updateMyCurr() {
         nextYok.getNext(myYokimons);
-    };
+    }
+
     private void updateOppCurr() {
         nextYok.getNext(oppYokimons);
-    };
+    }
 }
