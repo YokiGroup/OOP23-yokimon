@@ -1,8 +1,6 @@
 package io.github.yokigroup.battleTest;
 
-import io.github.yokigroup.battle.Attack;
-import io.github.yokigroup.battle.AttackImpl;
-import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.*;
 import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
 import io.github.yokigroup.battle.dmgcalculator.DmgCalculator;
 import io.github.yokigroup.battle.dmgcalculator.MultiplierDmgCalculator;
@@ -10,10 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-import io.github.yokigroup.battle.YokimonImpl;
-
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,6 +37,8 @@ public class DMGCalcTest {
     /**
      * Instantiates variables for test.
      */
+
+    //TODO SPOSTA ISTSTSTSTSTANZIAZIONI DI Y1,Y2 QUI
     @BeforeEach
     public void init() {
 
@@ -58,14 +57,14 @@ public class DMGCalcTest {
     @Test public void testBasicImpl() {
         DmgCalculator toTest = new BasicImplDmgCalculator();
 
-        Attack a1 = new AttackImpl("Bubble", Attack.color.BLUE, PWR_VALUE1, null);
-        Attack a2 = new AttackImpl("Leaf", Attack.color.GREEN, PWR_VALUE2, null);
+        Attack a1 = new AttackImpl("Bubble", Color.BLACK, PWR_VALUE1, null);
+        Attack a2 = new AttackImpl("Leaf", Color.PURPLE, PWR_VALUE2, null);
 
-        Yokimon y1 = new YokimonImpl("Caterpie", Attack.color.GREEN, map1, map1, YokimonImpl.DEFAULT_LEVEL,
-                            YokimonImpl.DEFAULT_GROWRATE, Collections.emptyList(), true);
+        Yokimon y1 = new YokimonImpl("Caterpie", Color.PURPLE, map1, YokimonImpl.DEFAULT_GROWRATE,
+                    YokimonImpl.DEFAULT_LEVEL, Map.of());
 
-        Yokimon y2 = new YokimonImpl("Squirtle", Attack.color.BLUE, map2, map2, YokimonImpl.DEFAULT_LEVEL,
-                YokimonImpl.DEFAULT_GROWRATE, Collections.emptyList(), true);
+        Yokimon y2 = new YokimonImpl("Squirtle", Color.BLACK, map2, YokimonImpl.DEFAULT_GROWRATE,
+                YokimonImpl.DEFAULT_LEVEL, Map.of());
 
         assertEquals(EXP_VAL_BASIC1, toTest.getDMG(y1, y2, a1));
         assertEquals(EXP_VAL_BASIC2, toTest.getDMG(y1, y2, a2));
@@ -78,14 +77,14 @@ public class DMGCalcTest {
     @Test public void testMultiplierImpl() {
         DmgCalculator toTest = new MultiplierDmgCalculator();
 
-        Attack a1 = new AttackImpl("Bubble", Attack.color.BLUE, PWR_VALUE1, null);
-        Attack a2 = new AttackImpl("Leaf", Attack.color.GREEN, PWR_VALUE2, null);
+        Attack a1 = new AttackImpl("Bubble", Color.BLACK, PWR_VALUE1, null);
+        Attack a2 = new AttackImpl("Leaf", Color.PURPLE, PWR_VALUE2, null);
 
-        Yokimon y1 = new YokimonImpl("Caterpie", Attack.color.GREEN, map1, map1, YokimonImpl.DEFAULT_LEVEL,
-                YokimonImpl.DEFAULT_GROWRATE, Collections.emptyList(), true);
+        Yokimon y1 = new YokimonImpl("Caterpie", Color.PURPLE, map1, YokimonImpl.DEFAULT_GROWRATE,
+                YokimonImpl.DEFAULT_LEVEL, Map.of());
 
-        Yokimon y2 = new YokimonImpl("Squirtle", Attack.color.BLUE, map2, map2, YokimonImpl.DEFAULT_LEVEL,
-                YokimonImpl.DEFAULT_GROWRATE, Collections.emptyList(), true);
+        Yokimon y2 = new YokimonImpl("Squirtle", Color.BLACK, map2, YokimonImpl.DEFAULT_GROWRATE,
+                YokimonImpl.DEFAULT_LEVEL, Map.of());
 
         assertEquals(EXP_VAL_MULT1, toTest.getDMG(y1, y2, a1));
         assertEquals(EXP_VAL_MULT2, toTest.getDMG(y1, y2, a2));

@@ -24,9 +24,9 @@ public interface Yokimon {
      * the value assumed will be multiplied when the yokimon take xp.
      */
     public enum GrowthRate {
-        slow(0.75),
-        medium(1.00),
-        fast(1.25);
+        SLOW(0.75),
+        MEDIUM(1.00),
+        FAST(1.25);
         private final double rate;
         GrowthRate(double rate) {
             this.rate = rate;

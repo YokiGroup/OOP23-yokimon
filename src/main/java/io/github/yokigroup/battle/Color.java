@@ -11,8 +11,8 @@ package io.github.yokigroup.battle;
  * white -> has no damage modifier
  */
 public enum Color {
-    purple,
-    red,
-    black,
-    white
+    PURPLE,
+    RED,
+    BLACK,
+    WHITE
 }

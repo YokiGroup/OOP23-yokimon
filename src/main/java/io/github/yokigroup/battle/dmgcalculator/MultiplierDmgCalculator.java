@@ -23,10 +23,10 @@ public class MultiplierDmgCalculator implements DmgCalculator {
         double total = (double) (attackingYokimon.getStat(Yokimon.Stats.ATK) * attack.attackPower()
                 / attackedYokimon.getStat(Yokimon.Stats.DEF));
 
-        if (attackingYokimon.getColor().equals(attack.color())) {
+        if (attackingYokimon.getYokimonColor().equals(attack.getColor())) {
             total = total * MULTIPLIER;
         }
-        if (attackedYokimon.getColor().equals(attack.color())) {
+        if (attackedYokimon.getYokimonColor().equals(attack.getColor())) {
             total = total / MULTIPLIER;
         }
 

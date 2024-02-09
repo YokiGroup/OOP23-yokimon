@@ -59,9 +59,9 @@ public final class FightImpl implements Fight {
     public Success attack(final Attack myAttack) {
 
         int damage = dmgCalc.getDMG(currMyYokimon, currOppYokimon, myAttack);
-        //currOppYokimon.removeHP(damage);          //TODO
+        currOppYokimon.takeDamage(damage);
 
-        if (!currOppYokimon.Active()) {
+        if (!currOppYokimon.active()) {
             oppYokimons.remove(currOppYokimon);
             defeatedOpps.add(currMyYokimon);
 
@@ -70,7 +70,7 @@ public final class FightImpl implements Fight {
                 currOppYokimon = nextOppYok.get();
             } else {
                 int xpGain = xpCalc.getXP(defeatedOpps);
-                currMyYokimon.takeXP(xpGain);
+                currMyYokimon.takeXp(xpGain);
             }
         }
 
@@ -86,9 +86,9 @@ public final class FightImpl implements Fight {
             throw new RuntimeException("Yokimon doesn't have any available attack.");
         }
         int damage = dmgCalc.getDMG(currOppYokimon, currMyYokimon, nextOppAttack.get());
-        //currMyYokimon.removeHP(damage);               //TODO
+        currMyYokimon.takeDamage(damage);
 
-        if (!currMyYokimon.Active()) {
+        if (!currMyYokimon.active()) {
             myYokimons.remove(currMyYokimon);
 
             final Optional<Yokimon> nextMyYok = nextYok.getNext(myYokimons);

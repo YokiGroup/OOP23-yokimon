@@ -9,7 +9,7 @@ import java.util.*;
 public class YokimonImpl implements Yokimon{
 
     public final static int DEFAULT_LEVEL=1;
-    public final static GrowthRate DEFAULT_GROWRATE = GrowthRate.medium;
+    public final static GrowthRate DEFAULT_GROWRATE = GrowthRate.MEDIUM;
     private final String name;
     private final Color color;
     private final Map<Stats, Integer> baseStats;

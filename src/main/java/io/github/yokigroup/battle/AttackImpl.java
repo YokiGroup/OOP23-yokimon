@@ -24,7 +24,7 @@ public class AttackImpl implements Attack{
         this.effect = effect;
     }
 
-    public AttackImpl(String name, Attack.color color){
+    public AttackImpl(String name, Color color){
         this(name,color,100,null);
     }
 
