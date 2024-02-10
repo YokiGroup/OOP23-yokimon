@@ -2,14 +2,12 @@ package io.github.yokigroup.world.entity.hitbox;
 
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
-import org.dyn4j.collision.Filter;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.geometry.Transform;
 import org.dyn4j.world.DetectFilter;
 import org.dyn4j.world.World;
 import org.dyn4j.world.result.ConvexDetectResult;
-import org.dyn4j.world.result.DetectResult;
 
 import java.util.Iterator;
 
