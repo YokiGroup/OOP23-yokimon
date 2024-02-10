@@ -8,6 +8,7 @@ import io.github.yokigroup.world.tile.Tile;
 import java.util.Set;
 
 public class WFCWrapperImpl implements WFCWrapper {
+    private final WaveFunctionCollapse wfc;
 
     /**
      * Initializes the wave function collapse algorithm with the tile shape's rules.
@@ -15,21 +16,22 @@ public class WFCWrapperImpl implements WFCWrapper {
      * @param shapes All the shapes that will be generated.
      */
     public WFCWrapperImpl(final Pair<Integer, Integer> dimensions, final Set<TileShape> shapes) {
+        // TODO: fix initialization of the wfc object
+        wfc = new WaveFunctionCollapseImpl(dimensions, Set.of());
+    }
+
+    @Override
+    public final void setStaticTile(final Pair<Integer, Integer> position, final Tile tile) {
         // TODO: complete method
     }
 
     @Override
-    public void setStaticTile(final Pair<Integer, Integer> position, final Tile tile) {
-        // TODO: complete method
+    public final void runWFC() {
+        wfc.generateShapeMap();
     }
 
     @Override
-    public void runWFC() {
-        // TODO: complete method
-    }
-
-    @Override
-    public Tile getTileAt(final Pair<Integer, Integer> position) {
+    public final Tile getTileAt(final Pair<Integer, Integer> position) {
         // TODO: complete method
         return null;
     }
