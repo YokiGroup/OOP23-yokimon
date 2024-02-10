@@ -1,7 +1,6 @@
 package io.github.yokigroup.util;
 
 import java.util.AbstractMap.SimpleEntry;
-import java.util.Objects;
 
 /**
  * Implementation of the Pair interface binding.
@@ -44,6 +43,6 @@ public class PairImpl<T, K> implements Pair<T, K> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(pair.getValue(), pair.getKey());
+        return this.pair.hashCode();
     }
 }
