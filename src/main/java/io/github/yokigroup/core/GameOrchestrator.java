@@ -57,6 +57,11 @@ public class GameOrchestrator implements MessageHandler {
             public Pair<Integer, Integer> getPlayerWorldPosition() {
                 return null;
             }
+
+            @Override
+            public Tile getPlayerTile() {
+                return null;
+            }
         }; // TODO replace with GameMap implementation
         subModules = initSubmodules();
     }
