@@ -36,8 +36,8 @@ public interface Tile {
     void addSpawnLocation(Vector2 pos);
 
     /**
-     * Spawns an entity on the tile at that position.
-     * @param entityPool The entity pool of the tile.
+     * Spawns all the entities in the tile.
+     * @param entityPool The pool of entities to randomly add to the tile.
      */
     void spawnEntities(WeightedPool<Entity> entityPool);
 

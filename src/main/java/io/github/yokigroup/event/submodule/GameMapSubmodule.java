@@ -20,12 +20,17 @@ public class GameMapSubmodule extends Submodule {
         // FIXME replace with actual implementation
         this.gameMap = new GameMap() {
             @Override
-            public Tile getTileAt(final Pair<Integer, Integer> position) {
+            public Tile getTileAt(Pair<Integer, Integer> position) {
                 return null;
             }
 
             @Override
             public Pair<Integer, Integer> getPlayerWorldPosition() {
+                return null;
+            }
+
+            @Override
+            public Tile getPlayerTile() {
                 return null;
             }
         };

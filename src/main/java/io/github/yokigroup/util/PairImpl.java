@@ -19,21 +19,13 @@ public class PairImpl<T, K> implements Pair<T, K> {
         this.pair = new SimpleEntry<>(x, y);
     }
 
-    /**
-     *
-     * @return the first element in the pair.
-     */
     @Override
-    public T getX() {
+    public final T getX() {
         return this.pair.getKey();
     }
 
-    /**
-     *
-     * @return the second element in the pair.
-     */
     @Override
-    public K getY() {
+    public final K getY() {
         return this.pair.getValue();
     }
 }

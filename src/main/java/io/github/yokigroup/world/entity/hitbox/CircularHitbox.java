@@ -2,14 +2,14 @@ package io.github.yokigroup.world.entity.hitbox;
 
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import org.dyn4j.dynamics.Body;
 import org.dyn4j.geometry.Circle;
-import org.dyn4j.geometry.Shape;
+import org.dyn4j.geometry.Convex;
 
 /**
  * A circular hitbox implementation.
  */
 public class CircularHitbox extends HitboxImpl {
-    private final double radius;
 
     /**
      * Creates a circular hitbox.
@@ -17,8 +17,7 @@ public class CircularHitbox extends HitboxImpl {
      * @param radius The radius of the circle.
      */
     public CircularHitbox(final Vector2 position, final double radius) {
-        super(new Circle(radius), position);
-        this.radius = radius;
+        super(makeCircle(radius), position);
     }
 
     /**
@@ -31,13 +30,13 @@ public class CircularHitbox extends HitboxImpl {
 
     /**
      *
-     * @return a copy of the shape used for collision checking.
+     * @param radius The radius of the circle.
+     * @return A body with a circular fixture for collision calculation.
      */
-    @Override
-    public Shape getShape() {
-        final Shape shapeCopy = new Circle(radius);
-        shapeCopy.translate(0.0d, 0.0d);
-        shapeCopy.translate(this.getPosition().getX(), this.getPosition().getY());
-        return shapeCopy;
+    private static Body makeCircle(final double radius) {
+        final Body body = new Body();
+        final Convex shape = new Circle(radius);
+        body.addFixture(shape);
+        return body;
     }
 }
