@@ -84,17 +84,19 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
                     centerPosition.getX() + dir.getOffset().getX(),
                     centerPosition.getY() + dir.getOffset().getY()
             );
-            // And get the connection for that direction
-            final WfcShapeDirection dirConnection = dir.getConnection();
-            // Get the pool from the tile to update
-            final WeightedPool<Set<WfcShapeDirection>> pool = this.shapeMap.get(offsetPos);
-            // For all the shapes it has
-            pool.getEntries()
-                    .stream()
-                    .filter(s -> centerShape.contains(dir) != s.contains(dirConnection)) // Check if it cannot connect
-                    .forEach(pool::removeElement); // And remove it
-            // Set that new pool to the ShapeMap
-            this.shapeMap.put(offsetPos, pool);
+            if (offsetPos.getX() >= 0 && offsetPos.getY() >= 0 && offsetPos.getX() < dimensions.getX() && offsetPos.getY() < dimensions.getY()) {
+                // And get the connection for that direction
+                final WfcShapeDirection dirConnection = dir.getConnection();
+                // Get the pool from the tile to update
+                final WeightedPool<Set<WfcShapeDirection>> pool = this.shapeMap.get(offsetPos);
+                // For all the shapes it has
+                pool.getEntries()
+                        .stream()
+                        .filter(s -> centerShape.contains(dir) != s.contains(dirConnection)) // Check if it cannot connect
+                        .forEach(pool::removeElement); // And remove it
+                // Set that new pool to the ShapeMap
+                this.shapeMap.put(offsetPos, pool);
+            }
         }
     }
 
