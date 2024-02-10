@@ -8,7 +8,6 @@ import io.github.yokigroup.world.tile.Tile;
 import java.util.Set;
 
 public class WFCWrapperImpl implements WFCWrapper {
-    private final WaveFunctionCollapse wfc = new WaveFunctionCollapseImpl();
 
     /**
      * Initializes the wave function collapse algorithm with the tile shape's rules.
