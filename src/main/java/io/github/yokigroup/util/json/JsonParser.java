@@ -5,5 +5,6 @@ package io.github.yokigroup.util.json;
  * @see <a href="https://datatracker.ietf.org/wg/jsonpath/about/">jsonpath</a>
  */
 public interface JsonParser {
+    String ROOT = "io/github/yokigroup/utils/json";
     <T> T read(String jsonPath);
 }
