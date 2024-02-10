@@ -1,6 +1,8 @@
 package io.github.yokigroup.world.gen;
 
 import io.github.yokigroup.util.Pair;
+import io.github.yokigroup.world.gen.wfc.WaveFunctionCollapse;
+import io.github.yokigroup.world.gen.wfc.WaveFunctionCollapseImpl;
 import io.github.yokigroup.world.tile.Tile;
 
 import java.util.Set;
