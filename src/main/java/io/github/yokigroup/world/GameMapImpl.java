@@ -6,8 +6,10 @@ import io.github.yokigroup.world.gen.WFCWrapper;
 import io.github.yokigroup.world.gen.WFCWrapperImpl;
 import io.github.yokigroup.world.tile.Tile;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class GameMapImpl implements GameMap {
     private final WFCWrapper wfc;
@@ -15,8 +17,8 @@ public class GameMapImpl implements GameMap {
     private Pair<Integer, Integer> worldPlayerPosition;
 
     public GameMapImpl(final Pair<Integer, Integer> dimensions) {
-        // TODO: add this line
-        // this.wfc = new WFCWrapperImpl(dimensions);
+        // FIXME: add proper wfc initialization
+        this.wfc = new WFCWrapperImpl(dimensions, Collections.emptySet());
         this.tileMap = new HashMap<>();
         // TODO: initialize the map through the WFC algorithm
         this.worldPlayerPosition = new PairImpl<>(dimensions.getX() / 2, dimensions.getY() / 2);
