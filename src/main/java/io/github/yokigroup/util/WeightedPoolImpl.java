@@ -45,6 +45,8 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
     public final T getRandomizedElement() {
         if (this.size() == 0) {
             throw new IllegalStateException("The randomized pool is empty.");
+        } else if (this.size() == 1) {
+            return this.itemPool.iterator().next().getX();
         }
         // Sum all the weights together
         final float sumWeight = this.itemPool.stream()
