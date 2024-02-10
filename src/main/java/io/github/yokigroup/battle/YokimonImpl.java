@@ -45,8 +45,8 @@ public class YokimonImpl implements Yokimon{
         this.baseStats = Map.copyOf(baseStats);
         this.growthRate = growthRate;
         this.level = level;
-        this.levelUtility.resetAttack(this);
         this.learnableMoves = Map.copyOf(learnableMoves);
+        this.levelUtility.resetAttack(this);
         this.active=true;
         this.levelUtility.setStats(this);
 
@@ -64,6 +64,7 @@ public class YokimonImpl implements Yokimon{
         this(name, color, baseStats, growthRate, DEFAULT_LEVEL, learnableMoves);
     }
 
+    //FIXME
     /**
      * Constructor for YokimonImpl for another yokimon.
      * @param yokimon yokimon to copy

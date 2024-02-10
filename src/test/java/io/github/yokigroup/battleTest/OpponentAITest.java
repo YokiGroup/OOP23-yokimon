@@ -8,28 +8,40 @@ import io.github.yokigroup.battle.*;
 import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
 import io.github.yokigroup.battle.opponentai.OpponentAI;
 import io.github.yokigroup.battle.opponentai.DummyImplOpponentAI;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 /**
  * Test class for Opponent AI.
  */
 public class OpponentAITest {
 
+    //FIXME -> fix yokimon constructor or get actual complete yokimons as test variables
+    @BeforeEach
+    public void init() {
+        //TODO instantiate here your variables
+    }
+
     /**
      * Testing dummy implementation.
      */
     @Test public void testDummyImpl() {
+        /*
         OpponentAI toTest = new DummyImplOpponentAI(new BasicImplDmgCalculator());
 
-        Attack a1 = new AttackImpl("Bubble", Color.BLACK);
-        Attack a2 = new AttackImpl("Leaf", Color.PURPLE);
+
+        y1 = new YokimonImpl("Caterpie", Color.PURPLE, map1Stats, YokimonImpl.DEFAULT_GROWRATE,
+                YokimonImpl.DEFAULT_LEVEL, map1Learnables);
+
+        y2 = new YokimonImpl("Squirtle", Color.BLACK, map2Stats, YokimonImpl.DEFAULT_GROWRATE,
+                YokimonImpl.DEFAULT_LEVEL, map1Learnables);
+
+        y3 = new YokimonImpl("Meowtwo", Color.WHITE, map1Stats, YokimonImpl.DEFAULT_GROWRATE,
+                YokimonImpl.DEFAULT_LEVEL, map1Learnables);
 
 
-        /*      //TODO CORREGGI ISTANZIAZIONE YOKIMON
-        Yokimon y1 = new YokimonImpl("Charizard", Map.of(), Yokimon.GrowthRate.medium, List.of());
-        Yokimon y2 = new YokimonImpl("Squirtle", Map.of(), Yokimon.GrowRate.MEDIUM, List.of(a1));
-        Yokimon y3 = new YokimonImpl("Bulbasaur", Map.of(), Yokimon.GrowRate.MEDIUM, List.of(a1, a2));
 
         //empty
         assertEquals(Optional.empty(), toTest.getMove(y1));
@@ -37,6 +49,7 @@ public class OpponentAITest {
         assertEquals(Optional.of(a1), toTest.getMove(y2));
         //multiple attacks
         assertEquals(Optional.of(a1), toTest.getMove(y3));
+
          */
     }
 }
