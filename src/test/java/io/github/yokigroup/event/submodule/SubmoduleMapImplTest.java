@@ -1,10 +1,12 @@
 package io.github.yokigroup.event.submodule;
 
+import io.github.yokigroup.event.MessageHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,9 +20,17 @@ class SubmoduleMapImplTest {
 
     @BeforeEach
     void setUp() {
+        MessageHandler handler = new MessageHandler() {
+            @Override
+            public <T extends Submodule> void handle(final Class<T> subModuleType, final Consumer<T> handler) {
+                // Handle implementation does not matter for this test.
+                return;
+            }
+        };
+
         map = new SubmoduleMapImpl();
-        pSub = new PartySubmodule();
-        fSub = new FightSubmodule(pSub);
+        pSub = new PartySubmodule(handler);
+        fSub = new FightSubmodule(handler);
         subModuleTestSet = Set.of(pSub, fSub);
     }
 

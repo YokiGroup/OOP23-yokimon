@@ -1,5 +1,6 @@
 package io.github.yokigroup.event.submodule;
 
+import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.battle.fight.Fight;
 
 import java.util.Optional;
@@ -8,16 +9,14 @@ import java.util.Optional;
  * Handles queuing fights and starting them when the process.
  * @author Giovanni Paone
  */
-public class FightSubmodule implements Submodule {
+public class FightSubmodule extends Submodule {
     private Optional<Fight> lastAnnouncedFight = Optional.empty();
-    private final PartySubmodule party; // keeping a reference to the party submodule to get a list of yokimons whenever necessary
 
     /**
-     * Instantiate a FightSubmodule.
-     * @param party party submodule reference to consult when fights start
+     * @param handler MessageHandler to call in order to query other submodules.
      */
-    public FightSubmodule(final PartySubmodule party) {
-        this.party = party;
+    public FightSubmodule(final MessageHandler handler) {
+        super(handler);
     }
 
     /**
@@ -40,7 +39,7 @@ public class FightSubmodule implements Submodule {
     @Override
     public final void process() {
         if (lastAnnouncedFight.isPresent()) {
-            // TODO start fight
+            // TODO implement
         }
     }
 }

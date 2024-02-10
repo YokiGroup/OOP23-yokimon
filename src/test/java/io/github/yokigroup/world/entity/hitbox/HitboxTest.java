@@ -1,5 +1,6 @@
-package io.github.yokigroup.world.hitbox;
+package io.github.yokigroup.world.entity.hitbox;
 
+import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
@@ -94,5 +95,17 @@ class HitboxTest {
         assertFalse(rectangleHtibox2.collidesWith(circleHtibox3));
         assertFalse(circleHtibox3.collidesWith(rectangleHtibox3));
         assertFalse(rectangleHtibox3.collidesWith(circleHtibox3));
+    }
+
+    @Test
+    void changePosition() {
+        final Vector2 newPos = new Vector2Impl(circleHtibox2.getPosition().getX() + 3.0d, circleHtibox2.getPosition().getY());
+        circleHtibox2.setPosition(newPos);
+        assertTrue(circleHtibox1.collidesWith(circleHtibox2));
+        assertTrue(circleHtibox2.collidesWith(circleHtibox1));
+        final Vector2 newPos2 = new Vector2Impl(circleHtibox2.getPosition().getX() + 3.0d, circleHtibox2.getPosition().getY());
+        circleHtibox2.setPosition(newPos2);
+        assertFalse(circleHtibox1.collidesWith(circleHtibox2));
+        assertFalse(circleHtibox2.collidesWith(circleHtibox1));
     }
 }

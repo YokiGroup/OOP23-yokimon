@@ -1,15 +1,25 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.event.MessageHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Submodule containing a party's information (yokimon's group).
+ * @author Giovanni Paone
  */
-public class PartySubmodule implements Submodule {
-    private List<Yokimon> yokimonList = new ArrayList<>();
+public class PartySubmodule extends Submodule {
+    private List<Yokimon> yokimonList;
+
+    /**
+     * @param handler MessageHandler to call in order to query other submodules.
+     */
+    public PartySubmodule(final MessageHandler handler) {
+        super(handler);
+        yokimonList = new ArrayList<>();
+    }
 
     private List<Yokimon> deepCopyOf(final List<Yokimon> list) {
         // TODO wait for a copy constructor of yokimon to be pushed upstream
