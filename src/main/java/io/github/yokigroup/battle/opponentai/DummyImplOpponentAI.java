@@ -11,16 +11,6 @@ import java.util.Optional;
  */
 public class DummyImplOpponentAI extends OpponentAI {
 
-    private final DmgCalculator dmcCalc;
-
-    /**
-     * Instantiate the damage calculator from which to evaluate the best attack to use.
-     * @param dmgCalc
-     */
-    public DummyImplOpponentAI(final DmgCalculator dmgCalc) {
-        dmcCalc = dmgCalc;
-    }
-
     /**
      * @param currMyYokimon Yokimon from player's party currently involved in the fight
      * @param currOppYokimon the Yokimon whose AI must be implemented

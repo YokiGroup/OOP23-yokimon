@@ -30,7 +30,7 @@ public final class FightImpl implements Fight {
     /* structures */
     private final XPCalculator xpCalc = new DummyImplXPCalculator();
     private final DmgCalculator dmgCalc = new BasicImplDmgCalculator();
-    private final OpponentAI oppAI = new DummyImplOpponentAI(dmgCalc);
+    private final OpponentAI oppAI = new DummyImplOpponentAI();
     private final NextYokimon nextYok = new DummyImplNextYokimon();
 
     /**
