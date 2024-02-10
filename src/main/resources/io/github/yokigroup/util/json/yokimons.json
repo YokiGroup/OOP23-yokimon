@@ -1,0 +1,13 @@
+{
+  "1": {
+    "name": "Pippo",
+    "growthRate": 0.5,
+    "maxHP": 100,
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 2
+      }
+    ]
+  }
+}
