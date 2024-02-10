@@ -1,7 +1,7 @@
 package io.github.yokigroup.world.entity.hitbox;
 
-import io.github.yokigroup.util.Pair;
-import org.dyn4j.geometry.Shape;
+import io.github.yokigroup.util.Vector2;
+import org.dyn4j.dynamics.Body;
 
 /**
  * A hitbox interface to manage collisions and resolve them between objects.
@@ -15,20 +15,20 @@ public interface Hitbox {
     boolean collidesWith(Hitbox other);
 
     /**
-     * Sets where the hitbox is located.
+     * Changes the position of the hitbox and the shape itself.
      * @param pos the positions of the hitbox.
      */
-    void setPosition(Pair<Float, Float> pos);
+    void setPosition(Vector2 pos);
 
     /**
      *
      * @return the position of the hitbox.
      */
-    Pair<Float, Float> getPosition();
+    Vector2 getPosition();
 
     /**
      *
-     * @return the shape of the hitbox.
+     * @return the body of the hitbox.
      */
-    Shape getShape();
+    Body getBody();
 }

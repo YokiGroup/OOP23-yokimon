@@ -7,8 +7,10 @@ import io.github.yokigroup.event.submodule.PlayerPositionSubmodule;
 import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 import io.github.yokigroup.event.submodule.Submodule;
+import io.github.yokigroup.util.Pair;
+import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.Entity;
-import io.github.yokigroup.world.tile.TileMap;
+import io.github.yokigroup.world.tile.Tile;
 
 import java.util.Optional;
 import java.util.Set;
@@ -19,7 +21,7 @@ import java.util.function.Consumer;
  */
 public class GameOrchestrator implements MessageHandler {
     private final SubmoduleMap subModules;
-    private final TileMap gameMap;
+    private final GameMap gameMap;
     private final Entity playerCharacter;
 
     /**
@@ -41,11 +43,26 @@ public class GameOrchestrator implements MessageHandler {
     }
 
     /**
-     * Initializes a GameOrchestrator with a new TileMap and PlayerCharacter, along with the required submodules.
+     * Initializes a GameOrchestrator with a new GameMap and PlayerCharacter, along with the required submodules.
      */
     public GameOrchestrator() {
         playerCharacter = null; // TODO replace with Entity implementation
-        gameMap = new TileMap() { }; // TODO replace with TileMap implementation
+        gameMap = new GameMap() {
+            @Override
+            public Tile getTileAt(Pair<Integer, Integer> position) {
+                return null;
+            }
+
+            @Override
+            public Pair<Integer, Integer> getPlayerWorldPosition() {
+                return null;
+            }
+
+            @Override
+            public Tile getPlayerTile() {
+                return null;
+            }
+        }; // TODO replace with GameMap implementation
         subModules = initSubmodules();
     }
 

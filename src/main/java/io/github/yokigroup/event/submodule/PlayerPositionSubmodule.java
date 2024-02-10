@@ -1,19 +1,19 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.Entity;
-import io.github.yokigroup.world.tile.TileMap;
 
 /**
  * Handles player position updates.
  */
 public class PlayerPositionSubmodule implements Submodule {
     private final Entity player;
-    private final TileMap map;
+    private final GameMap map;
 
     // FIXME Replace with proper implementation
     /**
-     * THIS WILL BE REMOVED AS SOON AS TileMap IS FINISHED.
+     * THIS WILL BE REMOVED AS SOON AS GameMap IS FINISHED.
      */
     public enum Direction {
         /**
@@ -39,7 +39,7 @@ public class PlayerPositionSubmodule implements Submodule {
      * @param player player to keep track of the position to
      * @param map map containing player
      */
-    public PlayerPositionSubmodule(final Entity player, final TileMap map) {
+    public PlayerPositionSubmodule(final Entity player, final GameMap map) {
         this.player = player;
         this.map = map;
     }

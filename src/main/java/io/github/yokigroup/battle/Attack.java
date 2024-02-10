@@ -1,13 +1,14 @@
 package io.github.yokigroup.battle;
 //import java.util.HashMap;
+
+/**
+ * Attack interface represents an attack that a Yokimon can perform.
+ */
 public interface Attack {
 
     public enum effect{
-        NONE
     }
-    public enum color{
-        NONE
-    }
+
     /**
      *Return the name of the Attack
      * @return String name
@@ -18,7 +19,7 @@ public interface Attack {
      *Return a reference of the color
      * @return return enum color
      */
-    public Attack.color color();
+    public Color getColor();
     /**
      *Return power of the attack (0 if it doesn't deal damage)
      * @return integer atk pwr

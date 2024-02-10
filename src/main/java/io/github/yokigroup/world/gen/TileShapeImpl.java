@@ -26,21 +26,13 @@ public class TileShapeImpl implements TileShape {
         }
     }
 
-    /**
-     *
-     * @return A randomized pool containing all the tiles of this shape.
-     */
     @Override
-    public WeightedPool<Tile> getTiles() {
-        return tiles.clone();
+    public final WeightedPool<Tile> getTiles() {
+        return tiles.copy();
     }
 
-    /**
-     *
-     * @return All the possible directions of this shape.
-     */
     @Override
-    public Set<TileDirections> getPossibleDirections() {
+    public final Set<TileDirections> getPossibleDirections() {
         return Set.copyOf(this.shape);
     }
 }

@@ -1,6 +1,6 @@
 package io.github.yokigroup.event.submodule;
 
-import io.github.yokigroup.battle.Fight;
+import io.github.yokigroup.battle.fight.Fight;
 
 import java.util.Optional;
 
