@@ -8,6 +8,7 @@ import java.util.Set;
 
 /**
  * Map of submodules. Used to collect all submodules used by a game component into one place.
+ * @author Giovanni Paone
  */
 public final class SubmoduleMapImpl implements SubmoduleMap {
     private final Map<Class<? extends Submodule>, Submodule> submodules = new HashMap<>();
