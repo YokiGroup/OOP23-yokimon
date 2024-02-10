@@ -1,6 +1,7 @@
 package io.github.yokigroup.util;
 
 import java.util.AbstractMap.SimpleEntry;
+import java.util.Objects;
 
 /**
  * Implementation of the Pair interface binding.
@@ -27,5 +28,22 @@ public class PairImpl<T, K> implements Pair<T, K> {
     @Override
     public final K getY() {
         return this.pair.getValue();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+        final PairImpl<?, ?> oPair = (PairImpl<?, ?>) o;
+        return this.getX() == oPair.getX() && this.getY() == oPair.getY();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pair.getValue(), pair.getKey());
     }
 }
