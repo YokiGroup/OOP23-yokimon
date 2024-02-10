@@ -14,21 +14,22 @@ public class WFCWrapperImpl implements WFCWrapper {
      * @param shapes All the shapes that will be generated.
      */
     public WFCWrapperImpl(final Pair<Integer, Integer> dimensions, final Set<TileShape> shapes) {
-
+        // TODO: complete method
     }
 
     @Override
     public void setStaticTile(final Pair<Integer, Integer> position, final Tile tile) {
-
+        // TODO: complete method
     }
 
     @Override
     public void runWFC() {
-
+        // TODO: complete method
     }
 
     @Override
     public Tile getTileAt(final Pair<Integer, Integer> position) {
+        // TODO: complete method
         return null;
     }
 }
