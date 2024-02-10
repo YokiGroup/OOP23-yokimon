@@ -10,21 +10,20 @@ public enum WfcShapeDirection {
     /**
      * Can connect to tiles that have the shape "DOWN".
      */
-    UP(new PairImpl<>(0, 1), 1),
+    UP(new PairImpl<>(0, 1)),
     /**
      * Can connect to tiles that have the shape "UP".
      */
-    DOWN(new PairImpl<>(0, -1), 0),
+    DOWN(new PairImpl<>(0, -1)),
     /**
      * Can connect to tiles that have the shape "RIGHT".
      */
-    LEFT(new PairImpl<>(-1, 0), 3),
+    LEFT(new PairImpl<>(-1, 0)),
     /**
      * Can connect to tiles that have the shape "LEFT".
      */
-    RIGHT(new PairImpl<>(1, 0), 2);
+    RIGHT(new PairImpl<>(1, 0));
 
-    private final WfcShapeDirection connector;
     private final Pair<Integer, Integer> offset;
 
     /**
@@ -32,7 +31,18 @@ public enum WfcShapeDirection {
      * @return The opposite direction.
      */
     public WfcShapeDirection getConnection() {
-        return this.connector;
+        switch (this) {
+            case UP:
+                return DOWN;
+            case DOWN:
+                return UP;
+            case LEFT:
+                return RIGHT;
+            case RIGHT:
+                return LEFT;
+            default:
+                throw new IllegalStateException("Unexpected value: " + this);
+        }
     }
 
     /**
@@ -45,10 +55,9 @@ public enum WfcShapeDirection {
 
     /**
      *
-     * @param connector the index of the opposite direction of the shape.
+     * @param offset The coordinate offset of the direction.
      */
-    WfcShapeDirection(final Pair<Integer, Integer> offset, final int connector) {
+    WfcShapeDirection(final Pair<Integer, Integer> offset) {
         this.offset = offset;
-        this.connector = WfcShapeDirection.values()[connector];
     }
 }
