@@ -3,7 +3,7 @@ package io.github.yokigroup.world.gen.wfc;
 /**
  * The shapes allowed by the wave function collapse algorithm, and their opposites.
  */
-public enum WfcShape {
+public enum WfcShapeDirection {
     /**
      * Can connect to tiles that have the shape "DOWN".
      */
@@ -21,13 +21,13 @@ public enum WfcShape {
      */
     RIGHT(2);
 
-    private final WfcShape connector;
+    private final WfcShapeDirection connector;
 
     /**
      *
      * @return The opposite direction.
      */
-    public WfcShape getConnection() {
+    public WfcShapeDirection getConnection() {
         return this.connector;
     }
 
@@ -35,7 +35,7 @@ public enum WfcShape {
      *
      * @param connector the index of the opposite direction of the shape.
      */
-    WfcShape(final int connector) {
-        this.connector = WfcShape.values()[connector];
+    WfcShapeDirection(final int connector) {
+        this.connector = WfcShapeDirection.values()[connector];
     }
 }
