@@ -1,4 +1,6 @@
-package io.github.yokigroup.world.gen;
+package io.github.yokigroup.world.gen.wfc;
+
+import io.github.yokigroup.util.Pair;
 
 /**
  * The interface for the Wave Function Collapse algorithm.
@@ -7,32 +9,22 @@ package io.github.yokigroup.world.gen;
  */
 public interface WaveFunctionCollapse {
     /**
-     * The shapes allowed and their opposites.
+     *
+     * @param position The position of the shape to get.
+     * @return The shape of the section at that position.
      */
-    enum Shape {
-        UP(1),
-        DOWN(0),
-        LEFT(3),
-        RIGHT(2);
+    WfcShape getShapeAt(Pair<Integer, Integer> position);
 
-        private final Shape connector;
+    /**
+     * Sets one of the positions on the map to only accept a specific shape.
+     * @param position The position of the shape to set.
+     * @param shape The shape to set the map to.
+     */
+    void setStaticShape(Pair<Integer, Integer> position, WfcShape shape);
 
-        /**
-         *
-         * @return The opposite direction.
-         */
-        public Shape getConnection() {
-            return this.connector;
-        }
-
-        /**
-         *
-         * @param connector the index of the opposite direction of the shape.
-         */
-        Shape(final int connector) {
-            this.connector = Shape.values()[connector];
-        }
-    }
-
-
+    /**
+     * Runs the waveFunctionCollapse algorithm to generate a full shape map of the
+     * possible added shapes.
+     */
+    void generateShapeMap();
 }
