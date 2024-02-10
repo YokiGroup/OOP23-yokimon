@@ -75,6 +75,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @param centerPosition The central position of the update.
      */
     private void updateAdjacentShapes(final Pair<Integer, Integer> centerPosition) {
+        // TODO: add propagation to the WaveFunctionCollapse update (aka make it recursive)
         // Get the center shape of the update
         final Set<WfcShapeDirection> centerShape = this.shapeMap.get(centerPosition).getEntries().iterator().next();
         // Check all directions
