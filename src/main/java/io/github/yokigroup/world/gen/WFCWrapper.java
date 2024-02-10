@@ -3,8 +3,6 @@ package io.github.yokigroup.world.gen;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.tile.Tile;
 
-import java.util.Set;
-
 /**
  * A wrapper for a Wave Function Collapse library, can also be used for an implementation of it.
  */

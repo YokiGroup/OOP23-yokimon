@@ -7,6 +7,9 @@ import io.github.yokigroup.world.tile.Tile;
 
 import java.util.Set;
 
+/**
+ * Implementation of the wave function collapse algorithm wrapper.
+ */
 public class WFCWrapperImpl implements WFCWrapper {
     private final WaveFunctionCollapse wfc;
 
