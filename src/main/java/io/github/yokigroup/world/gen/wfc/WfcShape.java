@@ -5,19 +5,19 @@ package io.github.yokigroup.world.gen.wfc;
  */
 public enum WfcShape {
     /**
-     * Can connect to tiles that have the shape "DOWN"
+     * Can connect to tiles that have the shape "DOWN".
      */
     UP(1),
     /**
-     * Can connect to tiles that have the shape "UP"
+     * Can connect to tiles that have the shape "UP".
      */
     DOWN(0),
     /**
-     * Can connect to tiles that have the shape "RIGHT"
+     * Can connect to tiles that have the shape "RIGHT".
      */
     LEFT(3),
     /**
-     * Can connect to tiles that have the shape "LEFT"
+     * Can connect to tiles that have the shape "LEFT".
      */
     RIGHT(2);
 
