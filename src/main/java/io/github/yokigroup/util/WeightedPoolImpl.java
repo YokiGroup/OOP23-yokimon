@@ -3,6 +3,7 @@ package io.github.yokigroup.util;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of a pool that given elements and their weight, it returns randomized items from it.
@@ -66,6 +67,15 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
         final T element = getRandomizedElement();
         removeElement(element);
         return element;
+    }
+
+    @Override
+    public final Set<T> getEntries() {
+        return Set.copyOf(
+                this.itemPool.stream()
+                .map(Pair::getX)
+                .collect(Collectors.toSet())
+        );
     }
 
     @Override
