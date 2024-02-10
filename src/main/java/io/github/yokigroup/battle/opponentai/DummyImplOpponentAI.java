@@ -22,11 +22,12 @@ public class DummyImplOpponentAI extends OpponentAI {
     }
 
     /**
+     * @param currMyYokimon Yokimon from player's party currently involved in the fight
      * @param currOppYokimon the Yokimon whose AI must be implemented
      * @return the first attack on the attacks list
      */
     @Override
-    public Optional<Attack> getMove(final Yokimon currOppYokimon) {
+    public Optional<Attack> getMove(final Yokimon currMyYokimon, final Yokimon currOppYokimon) {
         if (currOppYokimon.getAttacks() == null || currOppYokimon.getAttacks().isEmpty()) {
             return Optional.empty();
         }

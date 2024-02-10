@@ -80,7 +80,7 @@ public final class FightImpl implements Fight {
     @Override
     public Success getAttacked() {
 
-        final Optional<Attack> nextOppAttack = oppAI.getMove(currOppYokimon);
+        final Optional<Attack> nextOppAttack = oppAI.getMove(currMyYokimon, currOppYokimon);
 
         if (nextOppAttack.isEmpty()) {
             throw new RuntimeException("Yokimon doesn't have any available attack.");
