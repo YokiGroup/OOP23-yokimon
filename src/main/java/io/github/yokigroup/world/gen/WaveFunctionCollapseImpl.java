@@ -1,4 +1,5 @@
 package io.github.yokigroup.world.gen;
 
-public class WaveFunctionCollapseImpl {
+public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
+
 }
