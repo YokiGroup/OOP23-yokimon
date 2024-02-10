@@ -9,6 +9,7 @@ import java.util.*;
 public class YokimonImpl implements Yokimon{
 
     public final static int DEFAULT_LEVEL=1;
+    public final static int DEFAULT_STAT=1;
     public final static GrowthRate DEFAULT_GROWRATE = GrowthRate.MEDIUM;
     private final String name;
     private final Color color;
@@ -39,15 +40,19 @@ public class YokimonImpl implements Yokimon{
                        int level, Map<Integer, Attack> learnableMoves)
     {
         this.stats = new HashMap<>();
+        for(Stats stat : Stats.values()){
+            stats.put(stat, DEFAULT_STAT);
+        }
+
         this.moves = new ArrayList<>();
+        this.active=true;
         this.name = name;
         this.color = color;
-        this.baseStats = Map.copyOf(baseStats);
-        this.growthRate = growthRate;
+        this.baseStats = Map.copyOf(Objects.requireNonNull(baseStats, "baseStats passed was null"));
+        this.growthRate = Objects.requireNonNull(growthRate, "growthRate passed was null");
         this.level = level;
+        this.learnableMoves = Map.copyOf(Objects.requireNonNull(learnableMoves, "learnableMoves passed was null"));
         this.levelUtility.resetAttack(this);
-        this.learnableMoves = Map.copyOf(learnableMoves);
-        this.active=true;
         this.levelUtility.setStats(this);
 
     }
@@ -103,8 +108,8 @@ public class YokimonImpl implements Yokimon{
     }
 
     @Override
-    public int getBaseStat(Stats baseStat) {
-        return this.baseStats.get(baseStat);
+    public int getBaseStat(Stats stat) {
+        return this.baseStats.get(stat);
     }
 
     @Override
@@ -195,7 +200,7 @@ public class YokimonImpl implements Yokimon{
 
     @Override
     public exp_code takeXp(int n) {
-        exp_code expCode=exp_code.ok;
+        exp_code expCode=exp_code.OK;
         double xpToTake = n*this.growthRate.get();
         while (xpToTake >= this.xpNext-this.xp){
             xpToTake -= this.xpNext-this.xp;
