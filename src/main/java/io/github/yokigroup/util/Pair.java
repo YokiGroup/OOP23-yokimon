@@ -1,20 +1,10 @@
 package io.github.yokigroup.util;
 
 /**
- * A binding to a data structure containing two elements.
- * @param <T> The type of the first element.
- * @param <K> The type of the second element.
+ * An immutable record containing two components.
+ * @param x The first component of the pair.
+ * @param y The second component of the pair.
+ * @param <T> The type of the first component.
+ * @param <K> The type of the second component.
  */
-public interface Pair<T, K> {
-    /**
-     *
-     * @return the first component of the pair
-     */
-    T getX();
-
-    /**
-     *
-     * @return the second component of the pair.
-     */
-    K getY();
-}
+public record Pair<T, K>(T x, K y){ }

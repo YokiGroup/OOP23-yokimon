@@ -1,7 +1,6 @@
 package io.github.yokigroup.world.gen.wfc;
 
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.util.PairImpl;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.util.WeightedPoolImpl;
 
@@ -25,11 +24,11 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         this.dimensions = dimensions;
         this.shapeMap = new HashMap<>();
         // Fill up the map with all shapes being any random shape
-        for (int i = 0; i < dimensions.getX(); i++) {
-            for (int j = 0; j < dimensions.getY(); j++) {
+        for (int i = 0; i < dimensions.x(); i++) {
+            for (int j = 0; j < dimensions.y(); j++) {
                 final WeightedPool<Set<WfcShapeDirection>> pool = new WeightedPoolImpl<>();
                 shapes.forEach(s -> pool.addElement(s, 1.0f));
-                this.shapeMap.put(new PairImpl<>(i, j), pool);
+                this.shapeMap.put(new Pair<>(i, j), pool);
             }
         }
     }
@@ -63,7 +62,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @return True if the position is a position inside the bounds of the map.
      */
     private boolean checkBounds(final Pair<Integer, Integer> pos) {
-        return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < this.dimensions.getX() && pos.getY() < this.dimensions.getY();
+        return pos.x() >= 0 && pos.y() >= 0 && pos.x() < this.dimensions.x() && pos.y() < this.dimensions.y();
     }
 
     /**
@@ -95,9 +94,9 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         // Check all directions
         for (final WfcShapeDirection dir : coherenceShape) {
             // Get the coordinate offset for that direction
-            final Pair<Integer, Integer> offsetPos = new PairImpl<>(
-                    centerPosition.getX() + dir.getOffset().getX(),
-                    centerPosition.getY() + dir.getOffset().getY()
+            final Pair<Integer, Integer> offsetPos = new Pair<>(
+                    centerPosition.x() + dir.getOffset().x(),
+                    centerPosition.y() + dir.getOffset().y()
             );
             // Check if the position is in bounds, and if the tile has not already been collapsed
             if (checkBounds(offsetPos) && !hasBeenCollapsed(offsetPos)) {

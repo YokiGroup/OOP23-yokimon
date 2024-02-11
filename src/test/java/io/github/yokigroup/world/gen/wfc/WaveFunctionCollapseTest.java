@@ -1,15 +1,16 @@
 package io.github.yokigroup.world.gen.wfc;
 
-import io.github.yokigroup.util.PairImpl;
+import io.github.yokigroup.util.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-// import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class WaveFunctionCollapseTest {
     private static final int WIDTH = 10;
@@ -31,13 +32,13 @@ class WaveFunctionCollapseTest {
         shapeDict.put("DR", Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.RIGHT));
         shapeDict.put("LR", Set.of(WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT));
         shapeDict.put("UD", Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN));
-        wfc = new WaveFunctionCollapseImpl(new PairImpl<>(WIDTH, HEIGHT), new HashSet<>(shapeDict.values()));
+        wfc = new WaveFunctionCollapseImpl(new Pair<>(WIDTH, HEIGHT), new HashSet<>(shapeDict.values()));
     }
 
     private void printWfc() {
         for (int j = WIDTH - 1; j >= 0; j--) {
             for (int i = 0; i < HEIGHT; i++) {
-                Set<WfcShapeDirection> shape = wfc.getShapeAt(new PairImpl<>(i, j));
+                Set<WfcShapeDirection> shape = wfc.getShapeAt(new Pair<>(i, j));
                 if (Objects.equals(shape, shapeDict.get("UDLR"))) {
                     System.out.print("━╋━");
                 } else if (Objects.equals(shape, shapeDict.get("DLR"))) {
@@ -68,6 +69,8 @@ class WaveFunctionCollapseTest {
 
     @Test
     void getShapeAt() {
+        Map<Pair<Integer, Integer>, Integer> test = new HashMap<>();
+        test.put(new Pair<>(2, 3), 2);
         wfc.generateShapeMap();
         printWfc();
         // TODO: complete the test
@@ -76,18 +79,18 @@ class WaveFunctionCollapseTest {
     @Test
     void setStaticShape() {
         for (int i = 1; i < WIDTH - 1; i++) {
-            wfc.setStaticShape(new PairImpl<>(i, 0), Set.of(shapeDict.get("ULR"), shapeDict.get("UL"), shapeDict.get("UR")));
-            wfc.setStaticShape(new PairImpl<>(i, HEIGHT - 1), Set.of(shapeDict.get("DLR"), shapeDict.get("DL"), shapeDict.get("DR")));
+            wfc.setStaticShape(new Pair<>(i, 0), Set.of(shapeDict.get("ULR"), shapeDict.get("UL"), shapeDict.get("UR")));
+            wfc.setStaticShape(new Pair<>(i, HEIGHT - 1), Set.of(shapeDict.get("DLR"), shapeDict.get("DL"), shapeDict.get("DR")));
         }
         for (int j = 1; j < HEIGHT - 1; j++) {
-            wfc.setStaticShape(new PairImpl<>(0, j), Set.of(shapeDict.get("UDR"), shapeDict.get("UR"), shapeDict.get("DR")));
-            wfc.setStaticShape(new PairImpl<>(WIDTH - 1, j), Set.of(shapeDict.get("UDL"), shapeDict.get("UL"), shapeDict.get("DL")));
+            wfc.setStaticShape(new Pair<>(0, j), Set.of(shapeDict.get("UDR"), shapeDict.get("UR"), shapeDict.get("DR")));
+            wfc.setStaticShape(new Pair<>(WIDTH - 1, j), Set.of(shapeDict.get("UDL"), shapeDict.get("UL"), shapeDict.get("DL")));
         }
-        wfc.setStaticShape(new PairImpl<>(0, 0), Set.of(shapeDict.get("UR")));
-        wfc.setStaticShape(new PairImpl<>(WIDTH - 1, 0), Set.of(shapeDict.get("UL")));
-        wfc.setStaticShape(new PairImpl<>(0, HEIGHT - 1), Set.of(shapeDict.get("DR")));
-        wfc.setStaticShape(new PairImpl<>(WIDTH - 1 , HEIGHT - 1), Set.of(shapeDict.get("DL")));
-        wfc.setStaticShape(new PairImpl<>(WIDTH / 2 - 1, HEIGHT / 2 - 1), Set.of(shapeDict.get("UDLR")));
+        wfc.setStaticShape(new Pair<>(0, 0), Set.of(shapeDict.get("UR")));
+        wfc.setStaticShape(new Pair<>(WIDTH - 1, 0), Set.of(shapeDict.get("UL")));
+        wfc.setStaticShape(new Pair<>(0, HEIGHT - 1), Set.of(shapeDict.get("DR")));
+        wfc.setStaticShape(new Pair<>(WIDTH - 1 , HEIGHT - 1), Set.of(shapeDict.get("DL")));
+        wfc.setStaticShape(new Pair<>(WIDTH / 2 - 1, HEIGHT / 2 - 1), Set.of(shapeDict.get("UDLR")));
         wfc.generateShapeMap();
         printWfc();
         // TODO: complete the test

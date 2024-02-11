@@ -1,7 +1,6 @@
 package io.github.yokigroup.world;
 
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.util.PairImpl;
 import io.github.yokigroup.world.gen.WFCWrapper;
 import io.github.yokigroup.world.gen.WFCWrapperImpl;
 import io.github.yokigroup.world.tile.Tile;
@@ -29,7 +28,7 @@ public class GameMapImpl implements GameMap {
         this.wfc = new WFCWrapperImpl(dimensions, Collections.emptySet());
         this.tileMap = new HashMap<>();
         // TODO: initialize the map through the WFC algorithm
-        this.worldPlayerPosition = new PairImpl<>(dimensions.getX() / 2, dimensions.getY() / 2);
+        this.worldPlayerPosition = new Pair<>(dimensions.x() / 2, dimensions.y() / 2);
     }
 
     @Override
