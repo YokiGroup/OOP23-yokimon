@@ -69,6 +69,7 @@ public class YokimonImpl implements Yokimon{
         this(name, color, baseStats, growthRate, DEFAULT_LEVEL, learnableMoves);
     }
 
+    //FIXME
     /**
      * Constructor for YokimonImpl for another yokimon.
      * @param yokimon yokimon to copy

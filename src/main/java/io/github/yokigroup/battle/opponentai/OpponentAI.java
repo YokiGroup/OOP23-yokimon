@@ -12,8 +12,9 @@ import java.util.Optional;
 public abstract class OpponentAI {
 
     /**
+     * @param currMyYokimon Yokimon from player's party currently involved in the fight
      * @param currOppYokimon the Yokimon whose AI must be implemented
      * @return the most suitable attack for the opponent to use
      */
-    public abstract Optional<Attack> getMove(Yokimon currOppYokimon);
+    public abstract Optional<Attack> getMove(Yokimon currMyYokimon, Yokimon currOppYokimon);
 }
