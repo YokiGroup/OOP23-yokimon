@@ -5,16 +5,14 @@ import io.github.yokigroup.util.PairImpl;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.util.WeightedPoolImpl;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * An implementation of the wave function collapse algorithm.
  * Used for a 2D map generation using a set of shapes.
  */
 public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
+    private static final int MAX_DEPTH = 5;
     private final Pair<Integer, Integer> dimensions;
     private final Map<Pair<Integer, Integer>, WeightedPool<Set<WfcShapeDirection>>> shapeMap;
 
@@ -56,7 +54,16 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         final WeightedPool<Set<WfcShapeDirection>> pool = new WeightedPoolImpl<>();
         pool.addElement(shape, 1.0f);
         this.shapeMap.put(position, pool);
-        updateAdjacentShapes(position);
+        updateAdjacentShapes(MAX_DEPTH, position);
+    }
+
+    /**
+     *
+     * @param pos The position to check.
+     * @return True if the position is a position inside the bounds of the map.
+     */
+    private boolean checkBounds(final Pair<Integer, Integer> pos) {
+        return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < this.dimensions.getX() && pos.getY() < this.dimensions.getY();
     }
 
     /**
@@ -77,32 +84,16 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
     }
 
     /**
-     *
-     * @param pos The position to check.
-     * @return True if the position is a position inside the bounds of the map.
-     */
-    private boolean checkBounds(final Pair<Integer, Integer> pos) {
-        return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < this.dimensions.getX() && pos.getY() < this.dimensions.getY();
-    }
-
-    /**
-     *
-     * @param pos The position to check.
-     * @return True if the shapeMap at that position has been collapsed.
-     */
-    private boolean hasBeenCollapsed(final Pair<Integer, Integer> pos) {
-        return this.shapeMap.get(pos).size() == 1;
-    }
-
-    /**
      * Updates all the adjacent WfcShapes to the central position.
      * @param centerPosition The central position of the update.
      */
-    private void updateAdjacentShapes(final Pair<Integer, Integer> centerPosition) {
-        // Get the center shape of the update
-        final Set<WfcShapeDirection> centerShape = this.shapeMap.get(centerPosition).getEntries().iterator().next();
+    private void updateAdjacentShapes(final int depth, final Pair<Integer, Integer> centerPosition) {
+        // Get any shape from the center
+        final Set<WfcShapeDirection> centerShape = this.shapeMap.get(centerPosition).getRandomizedElement();
+        // Get its coherence table
+        final Set<WfcShapeDirection> coherenceShape = getCoherentDirections(this.shapeMap.get(centerPosition).getEntries());
         // Check all directions
-        for (final WfcShapeDirection dir : WfcShapeDirection.values()) {
+        for (final WfcShapeDirection dir : coherenceShape) {
             // Get the coordinate offset for that direction
             final Pair<Integer, Integer> offsetPos = new PairImpl<>(
                     centerPosition.getX() + dir.getOffset().getX(),
@@ -121,8 +112,43 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
                         .forEach(pool::removeElement); // And remove it
                 // Set that new pool to the ShapeMap
                 this.shapeMap.put(offsetPos, pool);
+                if (depth > 1) {
+                    updateAdjacentShapes(depth - 1, offsetPos);
+                }
             }
         }
+    }
+
+    /**
+     * Checks if a direction has been set on a shape, for example if a shape has the options: (UP, LEFT) and (UP, RIGHT)
+     * it will return a new shape containing the values: (UP, DOWN)
+     * @param shapes The shapes to check
+     * @return A set of enums containing where the random shape has always the same direction
+     */
+    public Set<WfcShapeDirection> getCoherentDirections(final Set<Set<WfcShapeDirection>> shapes) {
+        // Get the common shapes through a stream
+        final Set<WfcShapeDirection> commonShapes = shapes.stream()
+                .reduce((a, b) -> {
+                    final Set<WfcShapeDirection> common = new HashSet<>(a);
+                    common.retainAll(b);
+                    return common;
+                }).orElse(EnumSet.noneOf(WfcShapeDirection.class));
+        // Get all the common non-present directions by removing them from the set containing all the direction
+        final Set<WfcShapeDirection> uncommonShapes = EnumSet.allOf(WfcShapeDirection.class);
+        shapes.forEach(uncommonShapes::removeAll);
+        // Merge the two sets together and return them
+        final Set<WfcShapeDirection> coherentShapes = new HashSet<>(commonShapes);
+        coherentShapes.addAll(uncommonShapes);
+        return coherentShapes;
+    }
+
+    /**
+     *
+     * @param pos The position to check.
+     * @return True if the shapeMap at that position has been collapsed.
+     */
+    private boolean hasBeenCollapsed(final Pair<Integer, Integer> pos) {
+        return this.shapeMap.get(pos).size() == 1;
     }
 
     /**
