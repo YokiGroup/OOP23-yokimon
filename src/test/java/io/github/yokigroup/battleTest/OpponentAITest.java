@@ -1,20 +1,8 @@
 package io.github.yokigroup.battleTest;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
 import io.github.yokigroup.battle.*;
-import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
-import io.github.yokigroup.battle.dmgcalculator.FullImplDmgCalculator;
-import io.github.yokigroup.battle.opponentai.FullImplOpponentAI;
-import io.github.yokigroup.battle.opponentai.OpponentAI;
-import io.github.yokigroup.battle.opponentai.DummyImplOpponentAI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 /**

@@ -3,11 +3,8 @@ package io.github.yokigroup.battleTest;
 import java.util.*;
 
 import io.github.yokigroup.battle.*;
-import io.github.yokigroup.battle.nextyokimon.NextYokimon;
-import io.github.yokigroup.battle.nextyokimon.DummyImplNextYokimon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test class for Next Yokimon.

@@ -8,14 +8,6 @@ import io.github.yokigroup.battle.dmgcalculator.MultiplierDmgCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 /**
  * Test class for Damage Calculator.
  */
