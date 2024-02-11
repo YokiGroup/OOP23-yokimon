@@ -8,7 +8,7 @@ public interface JsonParser {
     /**
      * Root dir of json files contained in the ClassPath.
      */
-    String ROOT = "io/github/yokigroup/utils/json";
+    String ROOT = "io/github/yokigroup/util/json";
 
     /**
      * @param jsonPath json path expression to evaluate
