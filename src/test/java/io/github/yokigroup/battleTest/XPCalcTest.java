@@ -23,8 +23,8 @@ public class XPCalcTest {
     private static final int EXP_VAL_DUMMY2 = 300;
     private static final int EXP_VAL_DUMMY3 = 200;
     private static final int EXP_VAL_FULL1 = 0;
-    private static final int EXP_VAL_FULL2 = 0;
-    private static final int EXP_VAL_FULL3 = 0;
+    private static final int EXP_VAL_FULL2 = 330;
+    private static final int EXP_VAL_FULL3 = 550;
 
     private static Yokimon y1, y2, y3;
 
