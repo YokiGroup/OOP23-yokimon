@@ -7,33 +7,33 @@ import java.util.Map;
  * Database used for test classes
  */
 public class YokimonDatabase {
-    private static final Attack shadowBall = new AttackImpl("Shadow ball", Color.BLACK, 90, Attack.effect.NONE);
-    private static final Attack strongPunch = new AttackImpl("strong punch", Color.RED, 80, Attack.effect.NONE);
-    private static final Attack curse = new AttackImpl("curse", Color.PURPLE, 70, Attack.effect.NONE);
-    private static final Attack slap = new AttackImpl("slap", Color.WHITE, 40, Attack.effect.NONE);
-    private static final Attack flameThrow = new AttackImpl("flame throw", Color.RED, 95, Attack.effect.NONE);
-    private static final Attack headBut = new AttackImpl("headBut", Color.WHITE, 50, Attack.effect.NONE);
-    private static final Attack tailSwipe = new AttackImpl("TailSwipe ", Color.WHITE, 60 , Attack.effect.NONE);
+    public static final Attack shadowBall = new AttackImpl("Shadow ball", Color.BLACK, 90, Attack.effect.NONE);
+    public static final Attack strongPunch = new AttackImpl("strong punch", Color.RED, 80, Attack.effect.NONE);
+    public static final Attack curse = new AttackImpl("curse", Color.PURPLE, 70, Attack.effect.NONE);
+    public static final Attack slap = new AttackImpl("slap", Color.WHITE, 40, Attack.effect.NONE);
+    public static final Attack flameThrow = new AttackImpl("flame throw", Color.RED, 95, Attack.effect.NONE);
+    public static final Attack headBut = new AttackImpl("headBut", Color.WHITE, 50, Attack.effect.NONE);
+    public static final Attack tailSwipe = new AttackImpl("TailSwipe ", Color.WHITE, 60 , Attack.effect.NONE);
     //future effect
-    private static final Attack whirlpool = new AttackImpl("whirlpool ", Color.BLACK, 20 , Attack.effect.NONE);
-    private static final Attack bite = new AttackImpl("bite ", Color.BLACK, 60, Attack.effect.NONE);
+    public static final Attack whirlpool = new AttackImpl("whirlpool ", Color.BLACK, 20 , Attack.effect.NONE);
+    public static final Attack bite = new AttackImpl("bite ", Color.BLACK, 60, Attack.effect.NONE);
     //effect
-    private static final Attack revenge = new AttackImpl("revenge ", Color.RED, 60 , Attack.effect.NONE);
-    private static final Attack confusion = new AttackImpl("confusion", Color.PURPLE, 50, Attack.effect.NONE);
+    public static final Attack revenge = new AttackImpl("revenge ", Color.RED, 60 , Attack.effect.NONE);
+    public static final Attack confusion = new AttackImpl("confusion", Color.PURPLE, 50, Attack.effect.NONE);
     //effect
-    private static final Attack illusion = new AttackImpl("Illusion", Color.PURPLE, 0, Attack.effect.NONE);
+    public static final Attack illusion = new AttackImpl("Illusion", Color.PURPLE, 0, Attack.effect.NONE);
     //works only if one or more of the yokimon other team is dead (for nekomata)
-    private static final Attack soulAttack = new AttackImpl("Soul Attack", Color.BLACK, 100, Attack.effect.NONE);
-    private static final Attack scratch = new AttackImpl("scratch", Color.WHITE, 40 , Attack.effect.NONE);
+    public static final Attack soulAttack = new AttackImpl("Soul Attack", Color.BLACK, 100, Attack.effect.NONE);
+    public static final Attack scratch = new AttackImpl("scratch", Color.WHITE, 40 , Attack.effect.NONE);
     //regenerate half of the damage (for baku)
-    private static final Attack dreamEater = new AttackImpl("dreamEater", Color.PURPLE, 60, Attack.effect.NONE);
+    public static final Attack dreamEater = new AttackImpl("dreamEater", Color.PURPLE, 60, Attack.effect.NONE);
     //only for kitsune
-    private static final Attack nineTailSmash = new AttackImpl("nineTailSmash", Color.WHITE, 140, Attack.effect.NONE);
+    public static final Attack nineTailSmash = new AttackImpl("nineTailSmash", Color.WHITE, 140, Attack.effect.NONE);
     //effect
-    private static final Attack transformation = new AttackImpl("transformation", Color.PURPLE, 0 , Attack.effect.NONE);
+    public static final Attack transformation = new AttackImpl("transformation", Color.PURPLE, 0 , Attack.effect.NONE);
 
-    private static final Map<Integer, Attack> stone= new HashMap<>();
-    private static final Map<Yokimon.Stats, Integer> baseStats= new HashMap<>();
+    public static final Map<Integer, Attack> stone= new HashMap<>();
+    public static final Map<Yokimon.Stats, Integer> baseStats= new HashMap<>();
 
     private static void init() {
 
