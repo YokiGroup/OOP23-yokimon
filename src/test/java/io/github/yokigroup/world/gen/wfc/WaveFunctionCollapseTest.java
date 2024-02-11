@@ -4,86 +4,89 @@ import io.github.yokigroup.util.PairImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class WaveFunctionCollapseTest {
-
-    private Set<Set<WfcShapeDirection>> allShapes;
+    private static final int WIDTH = 10;
+    private static final int HEIGHT = 10;
+    private WaveFunctionCollapse wfc;
+    private Map<String, Set<WfcShapeDirection>> shapeDict;
 
     @BeforeEach
     public void init() {
-        allShapes = new HashSet<>();
-        allShapes.add(Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN, WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT));
-        allShapes.add(Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT));
-        allShapes.add(Set.of(WfcShapeDirection.UP, WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT));
-        allShapes.add(Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN, WfcShapeDirection.LEFT));
-        allShapes.add(Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN, WfcShapeDirection.RIGHT));
-        allShapes.add(Set.of(WfcShapeDirection.UP, WfcShapeDirection.LEFT));
-        allShapes.add(Set.of(WfcShapeDirection.UP, WfcShapeDirection.RIGHT));
-        allShapes.add(Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.LEFT));
-        allShapes.add(Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.RIGHT));
-        allShapes.add(Set.of(WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT));
-        allShapes.add(Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN));
+        shapeDict = new HashMap<>();
+        shapeDict.put("UDLR", Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN, WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT));
+        shapeDict.put("DLR", Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT));
+        shapeDict.put("ULR", Set.of(WfcShapeDirection.UP, WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT));
+        shapeDict.put("UDL", Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN, WfcShapeDirection.LEFT));
+        shapeDict.put("UDR", Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN, WfcShapeDirection.RIGHT));
+        shapeDict.put("UL", Set.of(WfcShapeDirection.UP, WfcShapeDirection.LEFT));
+        shapeDict.put("UR", Set.of(WfcShapeDirection.UP, WfcShapeDirection.RIGHT));
+        shapeDict.put("DL", Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.LEFT));
+        shapeDict.put("DR", Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.RIGHT));
+        shapeDict.put("LR", Set.of(WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT));
+        shapeDict.put("UD", Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN));
+        wfc = new WaveFunctionCollapseImpl(new PairImpl<>(WIDTH, HEIGHT), new HashSet<>(shapeDict.values()));
     }
 
-    @Test
-    void getShapeAt() {
-        final WaveFunctionCollapse wfc = new WaveFunctionCollapseImpl(new PairImpl<>(10, 10), allShapes);
-        wfc.generateShapeMap();
-        for (int j = 9; j >= 0; j--) {
-            for (int i = 0; i < 10; i++) {
+    private void printWfc() {
+        for (int j = WIDTH - 1; j >= 0; j--) {
+            for (int i = 0; i < HEIGHT; i++) {
                 Set<WfcShapeDirection> shape = wfc.getShapeAt(new PairImpl<>(i, j));
-                assertTrue(allShapes.contains(shape));
-                if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN, WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT))) {
-                    System.out.print("╋");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT))) {
-                    System.out.print("┳");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT))) {
-                    System.out.print("┻");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN, WfcShapeDirection.LEFT))) {
-                    System.out.print("┫");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN, WfcShapeDirection.RIGHT))) {
-                    System.out.print("┣");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.LEFT))) {
-                    System.out.print("┛");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.RIGHT))) {
-                    System.out.print("┗");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.LEFT))) {
-                    System.out.print("┓");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.RIGHT))) {
-                    System.out.print("┏");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT))) {
-                    System.out.print("━");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN))) {
-                    System.out.print("┃");
+                assertTrue(new HashSet<>(shapeDict.values()).contains(shape));
+                if (Objects.equals(shape, shapeDict.get("UDLR"))) {
+                    System.out.print("━╋━");
+                } else if (Objects.equals(shape, shapeDict.get("DLR"))) {
+                    System.out.print("━┳━");
+                } else if (Objects.equals(shape, shapeDict.get("ULR"))) {
+                    System.out.print("━┻━");
+                } else if (Objects.equals(shape, shapeDict.get("UDL"))) {
+                    System.out.print("━┫ ");
+                } else if (Objects.equals(shape, shapeDict.get("UDR"))) {
+                    System.out.print(" ┣━");
+                } else if (Objects.equals(shape, shapeDict.get("UL"))) {
+                    System.out.print("━┛ ");
+                } else if (Objects.equals(shape, shapeDict.get("UR"))) {
+                    System.out.print(" ┗━");
+                } else if (Objects.equals(shape, shapeDict.get("DL"))) {
+                    System.out.print("━┓ ");
+                } else if (Objects.equals(shape, shapeDict.get("DR"))) {
+                    System.out.print(" ┏━");
+                } else if (Objects.equals(shape, shapeDict.get("LR"))) {
+                    System.out.print("━━━");
+                } else if (Objects.equals(shape, shapeDict.get("UD"))) {
+                    System.out.print(" ┃ ");
                 }
-                /*
-                else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP))) {
-                    System.out.print("╹");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.DOWN))) {
-                    System.out.print("╻");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.LEFT))) {
-                    System.out.print("╸");
-                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.RIGHT))) {
-                    System.out.print("╺");
-                }
-                */
             }
             System.out.println(" ");
         }
     }
 
     @Test
-    void setStaticShape() {
-
+    void getShapeAt() {
+        wfc.generateShapeMap();
+        // TODO: complete the test
     }
 
     @Test
-    void generateShapeMap() {
-
+    void setStaticShape() {
+        for (int i = 1; i < WIDTH - 1; i++) {
+            wfc.setStaticShape(new PairImpl<>(i, 0), Set.of(shapeDict.get("ULR")));
+            wfc.setStaticShape(new PairImpl<>(i, HEIGHT - 1), Set.of(shapeDict.get("DLR")));
+        }
+        for (int j = 1; j < HEIGHT - 1; j++) {
+            wfc.setStaticShape(new PairImpl<>(0, j), Set.of(shapeDict.get("UDR")));
+            wfc.setStaticShape(new PairImpl<>(WIDTH - 1, j), Set.of(shapeDict.get("UDL")));
+        }
+        wfc.setStaticShape(new PairImpl<>(0, 0), Set.of(shapeDict.get("UR")));
+        wfc.setStaticShape(new PairImpl<>(WIDTH - 1, 0), Set.of(shapeDict.get("UL")));
+        wfc.setStaticShape(new PairImpl<>(0, HEIGHT - 1), Set.of(shapeDict.get("DR")));
+        wfc.setStaticShape(new PairImpl<>(WIDTH - 1 , HEIGHT - 1), Set.of(shapeDict.get("DL")));
+        wfc.generateShapeMap();
+        printWfc();
+        // TODO: complete the test
     }
 }
