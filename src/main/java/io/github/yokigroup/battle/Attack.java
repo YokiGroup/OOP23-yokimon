@@ -7,6 +7,7 @@ package io.github.yokigroup.battle;
 public interface Attack {
 
     public enum effect{
+        NONE
     }
 
     /**

@@ -10,7 +10,7 @@ public class LevelUpLogicImpl implements  LevelUpLogic{
     /**
      * value used for the exponent for calculate nextBoundXP
      */
-    private final static int exponent=3;
+    private final static int EXPONENT=3;
 
     /**
      *This method calculates the next XP bound to
@@ -19,7 +19,7 @@ public class LevelUpLogicImpl implements  LevelUpLogic{
      * @return double with the new value
      */
     private double nextBoundXp(int level) {
-        return pow(level, exponent);
+        return pow(level, EXPONENT);
     }
 
     @Override
@@ -50,14 +50,15 @@ public class LevelUpLogicImpl implements  LevelUpLogic{
 
     @Override
     public Yokimon.exp_code levelUp(Yokimon yokimon, int plus) {
-        Yokimon.exp_code code = Yokimon.exp_code.levelUp;
+
+        Yokimon.exp_code code = Yokimon.exp_code.LEVEL_UP;
         //control if the yokimon learn a new move
-        for(int i = yokimon.getLevel()+1; i <= yokimon.getLevel()+plus; i++){
-            if(yokimon.getLearnableAttacks().containsKey(i)){
-                yokimon.addAttack(yokimon.getLearnableAttacks().get(i));
-                code = Yokimon.exp_code.newMove;
+            for(int i = yokimon.getLevel()+1; i <= yokimon.getLevel()+plus; i++){
+                if(yokimon.getLearnableAttacks().containsKey(i)){
+                    yokimon.addAttack(yokimon.getLearnableAttacks().get(i));
+                    code = Yokimon.exp_code.NEW_MOVE;
+                }
             }
-        }
         //set new level
         yokimon.setLevel(yokimon.getLevel()+plus);
 

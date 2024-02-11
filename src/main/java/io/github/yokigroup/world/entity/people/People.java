@@ -1,7 +1,5 @@
 package io.github.yokigroup.world.entity.people;
 
-
-
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
@@ -10,107 +8,108 @@ import io.github.yokigroup.world.entity.Position;
 import java.util.List;
 
 /**
- *
+ * People class represents a generic person entity in the game world.
+ * It provides methods to manage and manipulate people entities.
  */
 public abstract class People extends Entity {
 
-    private final static float DEFAULT_DIRECTION=0;
+    private final static float DEFAULT_DIRECTION = 0;
+
     /**
-     * position the entity is first spawned
+     * The position the entity is first spawned.
      */
     protected final Position initialPos;
+
     /**
-     * direction where the entity is looking
+     * The direction where the entity is looking.
      */
     protected float direction;
 
-    protected boolean Active;
+    protected boolean active;
 
     protected List<Yokimon> Party;
 
-    public People(String name, Position Pos, Hitbox Hitbox, List<Yokimon> Party) {
-        super(name, Pos, Hitbox);
-        this.Party=List.copyOf(Party);
-        this.direction=DEFAULT_DIRECTION;
-        this.Active=true;
-        this.initialPos=Pos;
-
+    /**
+     * Constructs a People object with the specified attributes.
+     * @param name The name of the People
+     * @param pos The position of the People
+     * @param hitbox The hitbox of the People
+     * @param party The party of Yokimon belonging to the People
+     */
+    public People(String name, Position pos, Hitbox hitbox, List<Yokimon> party) {
+        super(name, pos, hitbox);
+        this.Party = List.copyOf(party);
+        this.direction = DEFAULT_DIRECTION;
+        this.active = true;
+        this.initialPos = pos;
     }
 
     /**
-     * return the direction in which the player or a mpc is currently watching
-     *
-     * @return the angle in radiant
+     * Returns the direction in which the people entity is currently looking.
+     * @return float The angle in radiant
      */
     public float getDirection() {
         return this.direction;
     }
 
     /**
-     * return is the person isActive or not (if is not
-     * it will not perform any action)
-     *
-     * @return true if is active, false if is not
+     * Returns whether the people entity is active or not.
+     * @return boolean True if the people entity is active, false otherwise
      */
     public boolean getIsActive() {
-        return this.Active;
+        return this.active;
     }
 
     /**
-     * set is the person Active (if is not
-     * it will not perform any action
+     * Sets the people entity as active.
      */
     public void setActive() {
-        this.Active=true;
+        this.active = true;
     }
 
     /**
-     * set is the person not Active (if is not
-     * it will not perform any action
+     * Sets the people entity as inactive.
      */
     public void shut() {
-        this.Active=false;
+        this.active = false;
     }
 
     /**
-     * return the party of the people as list of yokimon
-     *
-     * @return List<Yokimon> </Yokimon>
+     * Returns the party of Yokimon belonging to the people entity.
+     * @return List<Yokimon> The party of Yokimon
      */
     public List<Yokimon> getListOfYokimon() {
         return this.Party;
     }
 
     /**
-     * @param newYokimon add a new yokimon to the party
-     * @return message
+     * Adds a new Yokimon to the party of the people entity.
+     * @param newYokimon The new Yokimon to add
+     * @return message Status message
      */
     public Entity.message addYokimon(Yokimon newYokimon) {
         this.Party.add(newYokimon);
-        return message.OK;
+        return message.ok;
     }
 
     /**
-     * @param newYokimons add a new list of yokimon to the party
-     * @return message
+     * Adds a list of new Yokimon to the party of the people entity.
+     * @param newYokimons The list of new Yokimon to add
+     * @return message Status message
      */
     public Entity.message addListOfYokimon(List<Yokimon> newYokimons) {
-        if(this.Party.addAll(newYokimons)){
-            return message.OK;
-        }
-        else
-            return message.ERROR;
-
+        if (this.Party.addAll(newYokimons)) {
+            return message.ok;
+        } else
+            return message.error;
     }
 
     /**
-     * return the current position of the entity
-     *
-     * @return Position, X e Y
+     * Returns the initial position of the entity.
+     * @return Position Initial position of the entity
      */
     public Position getInitialPos() {
         return this.initialPos;
     }
 
 }
-
