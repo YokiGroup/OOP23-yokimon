@@ -1,5 +1,7 @@
 package io.github.yokigroup.battle;
 
+import java.util.Objects;
+
 /**
  * AttackImpl class represents an implementation of the Attack interface.
  * It provides methods to manipulate and manage Attack objects.
@@ -17,11 +19,12 @@ public class AttackImpl implements Attack{
      * @param power The power of the Attack
      * @param effect The secondary effect of the Attack
      */
+    //Objects.requireNonNull(, " passed was null")
     public AttackImpl(String name, Color color, int power, Attack.effect effect) {
         this.name = name;
-        this.color = color;
+        this.color = Objects.requireNonNull(color, "color passed was null");
         this.power = power;
-        this.effect = effect;
+        this.effect = Objects.requireNonNull(effect, "effect passed was null");
     }
 
     public AttackImpl(String name, Color color){

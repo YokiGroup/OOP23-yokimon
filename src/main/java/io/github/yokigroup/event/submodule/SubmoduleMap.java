@@ -5,6 +5,7 @@ import java.util.Set;
 
 /**
  * a SubModuleMap is an object containing zero or more (different) submodules, queryable with the provided functions.
+ * @author Giovanni Paone
  */
 public interface SubmoduleMap {
     /**
