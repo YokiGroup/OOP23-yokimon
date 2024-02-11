@@ -74,17 +74,17 @@ class WaveFunctionCollapseTest {
     @Test
     void setStaticShape() {
         for (int i = 1; i < WIDTH - 1; i++) {
-            wfc.setStaticShape(new PairImpl<>(i, 0), Set.of(shapeDict.get("ULR")));
-            wfc.setStaticShape(new PairImpl<>(i, HEIGHT - 1), Set.of(shapeDict.get("DLR")));
+            wfc.setStaticShape(new PairImpl<>(i, 0), shapeDict.get("ULR"));
+            wfc.setStaticShape(new PairImpl<>(i, HEIGHT - 1), shapeDict.get("DLR"));
         }
         for (int j = 1; j < HEIGHT - 1; j++) {
-            wfc.setStaticShape(new PairImpl<>(0, j), Set.of(shapeDict.get("UDR")));
-            wfc.setStaticShape(new PairImpl<>(WIDTH - 1, j), Set.of(shapeDict.get("UDL")));
+            wfc.setStaticShape(new PairImpl<>(0, j), shapeDict.get("UDR"));
+            wfc.setStaticShape(new PairImpl<>(WIDTH - 1, j), shapeDict.get("UDL"));
         }
-        wfc.setStaticShape(new PairImpl<>(0, 0), Set.of(shapeDict.get("UR")));
-        wfc.setStaticShape(new PairImpl<>(WIDTH - 1, 0), Set.of(shapeDict.get("UL")));
-        wfc.setStaticShape(new PairImpl<>(0, HEIGHT - 1), Set.of(shapeDict.get("DR")));
-        wfc.setStaticShape(new PairImpl<>(WIDTH - 1 , HEIGHT - 1), Set.of(shapeDict.get("DL")));
+        wfc.setStaticShape(new PairImpl<>(0, 0), shapeDict.get("UR"));
+        wfc.setStaticShape(new PairImpl<>(WIDTH - 1, 0), shapeDict.get("UL"));
+        wfc.setStaticShape(new PairImpl<>(0, HEIGHT - 1), shapeDict.get("DR"));
+        wfc.setStaticShape(new PairImpl<>(WIDTH - 1 , HEIGHT - 1), shapeDict.get("DL"));
         wfc.generateShapeMap();
         printWfc();
         // TODO: complete the test
