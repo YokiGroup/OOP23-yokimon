@@ -18,8 +18,11 @@ public abstract class AbstractJsonLoader<T> {
         return parser;
     }
 
-    public AbstractJsonLoader(final String resourcePath){
-        this.parser = new JsonParserImpl(resourcePath);
+    /**
+     * @param relativePath path of json file relative to {@code JsonParser.ROOT}
+     */
+    public AbstractJsonLoader(final String relativePath){
+        this.parser = new JsonParserImpl(JsonParser.ROOT+"/"+relativePath);
     }
 
     public abstract T load(int id);
