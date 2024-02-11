@@ -20,5 +20,6 @@ class YokimonLoaderTest {
 
         assertEquals("Pippo", y.getName());
         assertEquals(Yokimon.GrowthRate.SLOW, y.getGrowRate());
+        // FIXME check the validity of all yokimon fields (with reflection if need be)
     }
 }
