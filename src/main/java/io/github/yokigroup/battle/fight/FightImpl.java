@@ -20,6 +20,10 @@ import java.util.Optional;
  */
 public final class FightImpl implements Fight {
 
+    private static final int TOPLIMIT_FAIL = 30;
+    private static final int TOPLIMIT_WEAK = 70;
+    private static final int TOPLIMIT_GOOD = 120;
+
     /* parties */
     private final List<Yokimon> myYokimons;
     private final List<Yokimon> oppYokimons;
@@ -74,7 +78,7 @@ public final class FightImpl implements Fight {
             }
         }
 
-        return null;
+        return successRate(damage);
     }
 
     @Override
@@ -95,7 +99,20 @@ public final class FightImpl implements Fight {
             nextMyYok.ifPresent(yokimon -> currOppYokimon = yokimon);
         }
 
-        return null;
+        return successRate(damage);
+    }
+
+    private Success successRate(int damage) {
+       if (damage < TOPLIMIT_FAIL) {
+           return Success.FAIL;
+       }
+       if (damage < TOPLIMIT_WEAK) {
+           return Success.WEAK;
+       }
+       if (damage < TOPLIMIT_GOOD) {
+           return Success.GOOD;
+       }
+       return Success.SUPER;
     }
 
     @Override
@@ -121,14 +138,5 @@ public final class FightImpl implements Fight {
     @Override
     public Yokimon getCurrentOpponent() {
         return currOppYokimon;
-    }
-
-    /* utilities to update Yokimons involved in fight */
-    private void updateMyCurr() {
-        nextYok.getNext(myYokimons);
-    }
-
-    private void updateOppCurr() {
-        nextYok.getNext(oppYokimons);
     }
 }
