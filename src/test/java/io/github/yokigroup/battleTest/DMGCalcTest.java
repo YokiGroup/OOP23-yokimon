@@ -3,6 +3,7 @@ package io.github.yokigroup.battleTest;
 import io.github.yokigroup.battle.*;
 import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
 import io.github.yokigroup.battle.dmgcalculator.DmgCalculator;
+import io.github.yokigroup.battle.dmgcalculator.FullImplDmgCalculator;
 import io.github.yokigroup.battle.dmgcalculator.MultiplierDmgCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,20 +21,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class DMGCalcTest {
 
-    private static final int EXP_VAL_BASIC1 = 58;
-    private static final int EXP_VAL_BASIC2 = 91;
-    private static final int EXP_VAL_MULT1 = 48;
-    private static final int EXP_VAL_MULT2 = 109;
-    private static final int ATK_VALUE1 = 150;
-    private static final int DEF_VALUE1 = 80;
-    private static final int ATK_VALUE2 = 120;
-    private static final int DEF_VALUE2 = 90;
-    private static final int PWR_VALUE1 = 35;
-    private static final int PWR_VALUE2 = 55;
-    private static final int HP_VALUE1 = 200;
-    private static final int HP_VALUE2 = 300;
-    private static final int SPD_VALUE1 = 30;
-    private static final int SPD_VALUE2 = 20;
+    private static final int EXP_VAL_BASIC1 = 64;
+    private static final int EXP_VAL_BASIC2 = 56;
+    private static final int EXP_VAL_MULT1 = 77;
+    private static final int EXP_VAL_MULT2 = 47;
+    private static final short EXP_VAL_FULL1 = 38;
+    private static final short EXP_VAL_FULL2 = 23;
+    private static final short EXP_VAL_FULL3 = 107;
+    private static final short EXP_VAL_FULL4 = 134;
     private static Yokimon y1, y2;
     private static Attack a1, a2;
 
@@ -41,64 +36,42 @@ public class DMGCalcTest {
     /**
      * Instantiates variables for test.
      */
-
-    //FIXME -> fix yokimon constructor or get actual complete yokimons as test variables
+    //FIXME -> still giving NullPointerException
     @BeforeEach
     public void init() {
-
-        /*
-        Map<Yokimon.Stats, Integer> map1Stats = new HashMap<>();
-        map1Stats.put(Yokimon.Stats.ATK, ATK_VALUE1);
-        map1Stats.put(Yokimon.Stats.DEF, DEF_VALUE1);
-        map1Stats.put(Yokimon.Stats.HP, HP_VALUE1);
-        map1Stats.put(Yokimon.Stats.SPD, SPD_VALUE1);
-
-        Map<Yokimon.Stats, Integer> map2Stats = new HashMap<>();
-        map2Stats.put(Yokimon.Stats.ATK, ATK_VALUE2);
-        map2Stats.put(Yokimon.Stats.DEF, DEF_VALUE2);
-        map2Stats.put(Yokimon.Stats.HP, HP_VALUE2);
-        map1Stats.put(Yokimon.Stats.SPD, SPD_VALUE2);
-
-        a1 = new AttackImpl("Bubble", Color.BLACK, PWR_VALUE1, null);
-        a2 = new AttackImpl("Leaf", Color.PURPLE, PWR_VALUE2, null);
-
-        Map<Integer, Attack> map1Learnables = new HashMap<>();
-        map1Learnables.put(YokimonImpl.DEFAULT_LEVEL, a1);
-
-        y1 = new YokimonImpl("Caterpie", Color.PURPLE, map1Stats, YokimonImpl.DEFAULT_GROWRATE,
-                YokimonImpl.DEFAULT_LEVEL, map1Learnables);
-
-        y2 = new YokimonImpl("Squirtle", Color.BLACK, map2Stats, YokimonImpl.DEFAULT_GROWRATE,
-                YokimonImpl.DEFAULT_LEVEL, map1Learnables);
-
-         */
+        y1 = YokimonDatabase.getOni();
+        y2 = YokimonDatabase.getBaku();
+        a1 = YokimonDatabase.strongPunch;
+        a2 = YokimonDatabase.curse;
     }
 
     /**
      * Testing basic implementation.
      */
     @Test public void testBasicImpl() {
-        /*
         DmgCalculator toTest = new BasicImplDmgCalculator();
 
-        assertEquals(EXP_VAL_BASIC1, toTest.getDMG(y1, y2, a1));
-        assertEquals(EXP_VAL_BASIC2, toTest.getDMG(y1, y2, a2));
-
-         */
-
+        assertEquals(EXP_VAL_BASIC1, toTest.getDMG(y1, y2, a1)); //80*80/100 = 64
+        assertEquals(EXP_VAL_BASIC2, toTest.getDMG(y1, y2, a2)); //80*70/100 = 56
     }
 
     /**
      * Testing multiplier implementation.
      */
     @Test public void testMultiplierImpl() {
-        /*
         DmgCalculator toTest = new MultiplierDmgCalculator();
 
-        assertEquals(EXP_VAL_MULT1, toTest.getDMG(y1, y2, a1));
-        assertEquals(EXP_VAL_MULT2, toTest.getDMG(y1, y2, a2));
+        assertEquals(EXP_VAL_MULT1, toTest.getDMG(y1, y2, a1));//80*80/100*1.2 = 77
+        assertEquals(EXP_VAL_MULT2, toTest.getDMG(y1, y2, a2));//80*70/100/1.2 = 47
+    }
 
-         */
+    //TODO MUST TEST THIS CLASS!!!!!!!!!!!
+    @Test public void testFullImpl() {
+        DmgCalculator toTest = new FullImplDmgCalculator();
 
+        assertEquals(EXP_VAL_FULL1, toTest.getDMG(y1, y2, a1));//80*80/100*1.2*0.5 = 38
+        assertEquals(EXP_VAL_FULL2, toTest.getDMG(y1, y2, a2));//80*70/100/1.2*0.5 = 23
+        assertEquals(EXP_VAL_FULL3, toTest.getDMG(y2, y1, a1));//80*80/100/1.2*2 = 107
+        assertEquals(EXP_VAL_FULL4, toTest.getDMG(y2, y1, a2));//80*70/100*1.2*2 = 134
     }
 }
