@@ -3,7 +3,8 @@ package io.github.yokigroup.world.entity;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 /**
- * This class represent the concept of entity
+ * Entity class represents a generic entity in the game world.
+ * It provides methods to manage and manipulate entities.
  */
 public abstract class Entity {
     /**
@@ -11,42 +12,47 @@ public abstract class Entity {
      * ereditance
      */
     public enum message{
-        OK,
-        OVER_FLOW,
-        ERROR,
-        OUT_OF_MAP,
-        USED
+        ok,
+        error,
+        outOfMap,
+        used
     }
-
+    //cambialo cretino
     protected final String name;
-    protected Position Pos;
-    protected Hitbox Hitbox_type;
+    protected Position pos;
+    protected Hitbox hitbox;
 
-    public Entity(String name, Position Pos, Hitbox Hitbox){
-        this.Hitbox_type=Hitbox;
+    /**
+     * Constructs an Entity object with the specified attributes.
+     * @param name The name of the Entity
+     * @param pos The position of the Entity
+     * @param Hitbox The hitbox of the Entity
+     */
+    public Entity(String name, Position pos, Hitbox Hitbox){
+        this.hitbox=Hitbox;
         this.name=name;
-        this.Pos=Pos;
+        this.pos=pos;
     }
     /**
      * return the current position of the entity
      * @return Position, X e Y
      */
     public Position getPosition(){
-        return this.Pos;
+        return this.pos;
     }
     /**
      * Set a new position for the entity, if it's valid it changes it
      * otherwise it return an error message
      * @return message
      */
-    public Entity.message setPosition(Position Pos){
+    public Entity.message setPosition(Position pos){
         // FIXME move hitbox position as well
-        if(Pos.isValid()){
-            this.Pos=Pos;
-            return message.OK;
+        if(pos.isValid()){
+            this.pos=pos;
+            return message.ok;
         }
         else
-            return message.OUT_OF_MAP;
+            return message.outOfMap;
     }
     /**
      * return the name of the entity, it's univocal,
@@ -62,11 +68,12 @@ public abstract class Entity {
      * @return Hitbox
      */
     public Hitbox getHitbox(){
-        return this.Hitbox_type;
+        return this.hitbox;
     }
 
     /**
-     * update the state of the entity
+     * Updates the state of the entity.
+     * @return message Status message
      */
     public abstract Entity.message update();
 }
