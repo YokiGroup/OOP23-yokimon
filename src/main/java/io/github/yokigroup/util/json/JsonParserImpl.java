@@ -9,12 +9,16 @@ import java.util.Objects;
 /**
  * Implements JsonParser by wrapping the jsonPath library.
  */
-public class JsonParserImpl implements JsonParser{
+public final class JsonParserImpl implements JsonParser {
     private final DocumentContext doc;
 
-    public JsonParserImpl(String resourcePath){
+    /**
+     * Constructs a JsonParseImpl.
+     * @param resourcePath file to open and parse, located on the classpath by the SystemClassLoader
+     */
+    public JsonParserImpl(final String resourcePath) {
         Objects.requireNonNull(resourcePath);
-        try(var is = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath)){
+        try (var is = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath)) {
             doc = JsonPath.parse(is);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -22,7 +26,7 @@ public class JsonParserImpl implements JsonParser{
     }
 
     @Override
-    public <T> T read(String jsonPath) {
+    public <T> T read(final String jsonPath) {
         Objects.requireNonNull(jsonPath);
         JsonPath path = JsonPath.compile(jsonPath);
         return doc.read(path);
