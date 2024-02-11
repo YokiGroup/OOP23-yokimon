@@ -66,6 +66,9 @@ public class DMGCalcTest {
     }
 
     //TODO MUST TEST THIS CLASS!!!!!!!!!!!
+    /**
+     * Testing full implementation with color hierarchy.
+     */
     @Test public void testFullImpl() {
         DmgCalculator toTest = new FullImplDmgCalculator();
 
