@@ -10,7 +10,7 @@ import java.util.Objects;
  * Implements JsonParser by wrapping the jsonPath library.
  */
 public class JsonParserImpl implements JsonParser{
-    private DocumentContext doc;
+    private final DocumentContext doc;
 
     public JsonParserImpl(String resourcePath){
         Objects.requireNonNull(resourcePath);
