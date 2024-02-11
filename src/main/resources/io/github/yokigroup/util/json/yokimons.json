@@ -2,7 +2,6 @@
   "1": {
     "name": "Pippo",
     "growthRate": "SLOW",
-    "maxHP": 100,
     "color": "RED",
     "stats": {
       "ATK": 1,
