@@ -20,9 +20,9 @@ public interface WaveFunctionCollapse {
     /**
      * Sets one of the positions on the map to only accept a specific shape.
      * @param position The position of the shape to set.
-     * @param shape The shape to set the map to.
+     * @param shapes The shapes to set the shape to.
      */
-    void setStaticShape(Pair<Integer, Integer> position, Set<WfcShapeDirection> shape);
+    void setStaticShape(Pair<Integer, Integer> position, Set<Set<WfcShapeDirection>> shapes);
 
     /**
      * Runs the waveFunctionCollapse algorithm to generate a full shape map of the
