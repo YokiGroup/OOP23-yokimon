@@ -1,12 +1,23 @@
 {
   "1": {
     "name": "Pippo",
-    "growthRate": 0.5,
+    "growthRate": "SLOW",
     "maxHP": 100,
+    "color": "RED",
+    "stats": {
+      "ATK": 1,
+      "DEF": 1,
+      "SPD": 1,
+      "HP": 10
+    },
     "moves": [
       {
         "level": 1,
         "skillId": 2
+      },
+      {
+        "level": 2,
+        "skillId": 1
       }
     ]
   }
