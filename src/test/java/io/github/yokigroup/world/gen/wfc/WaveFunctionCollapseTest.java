@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,28 +38,40 @@ class WaveFunctionCollapseTest {
             for (int i = 0; i < 10; i++) {
                 Set<WfcShapeDirection> shape = wfc.getShapeAt(new PairImpl<>(i, j));
                 assertTrue(allShapes.contains(shape));
-                System.out.print("[");
-                if (shape.contains(WfcShapeDirection.UP)) {
-                    System.out.print("↑");
-                } else {
-                    System.out.print(" ");
+                if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN, WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT))) {
+                    System.out.print("╋");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT))) {
+                    System.out.print("┳");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT))) {
+                    System.out.print("┻");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN, WfcShapeDirection.LEFT))) {
+                    System.out.print("┫");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN, WfcShapeDirection.RIGHT))) {
+                    System.out.print("┣");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.LEFT))) {
+                    System.out.print("┛");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.RIGHT))) {
+                    System.out.print("┗");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.LEFT))) {
+                    System.out.print("┓");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.DOWN, WfcShapeDirection.RIGHT))) {
+                    System.out.print("┏");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.LEFT, WfcShapeDirection.RIGHT))) {
+                    System.out.print("━");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP, WfcShapeDirection.DOWN))) {
+                    System.out.print("┃");
                 }
-                if (shape.contains(WfcShapeDirection.DOWN)) {
-                    System.out.print("↓");
-                } else {
-                    System.out.print(" ");
+                /*
+                else if (Objects.equals(shape, Set.of(WfcShapeDirection.UP))) {
+                    System.out.print("╹");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.DOWN))) {
+                    System.out.print("╻");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.LEFT))) {
+                    System.out.print("╸");
+                } else if (Objects.equals(shape, Set.of(WfcShapeDirection.RIGHT))) {
+                    System.out.print("╺");
                 }
-                if (shape.contains(WfcShapeDirection.LEFT)) {
-                    System.out.print("←");
-                } else {
-                    System.out.print(" ");
-                }
-                if (shape.contains(WfcShapeDirection.RIGHT)) {
-                    System.out.print("→");
-                } else {
-                    System.out.print(" ");
-                }
-                System.out.print("]");
+                */
             }
             System.out.println(" ");
         }

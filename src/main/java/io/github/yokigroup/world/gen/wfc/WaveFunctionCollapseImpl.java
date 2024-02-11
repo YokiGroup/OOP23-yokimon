@@ -71,11 +71,28 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
     }
 
     /**
+     *
+     * @param pos The position to check.
+     * @return True if the position is a position inside the bounds of the map.
+     */
+    private boolean checkBounds(final Pair<Integer, Integer> pos) {
+        return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < this.dimensions.getX() && pos.getY() < this.dimensions.getY();
+    }
+
+    /**
+     *
+     * @param pos The position to check.
+     * @return True if the shapeMap at that position has been collapsed.
+     */
+    private boolean hasBeenCollapsed(final Pair<Integer, Integer> pos) {
+        return this.shapeMap.get(pos).size() == 1;
+    }
+
+    /**
      * Updates all the adjacent WfcShapes to the central position.
      * @param centerPosition The central position of the update.
      */
     private void updateAdjacentShapes(final Pair<Integer, Integer> centerPosition) {
-        // TODO: add propagation to the WaveFunctionCollapse update (aka make it recursive)
         // Get the center shape of the update
         final Set<WfcShapeDirection> centerShape = this.shapeMap.get(centerPosition).getEntries().iterator().next();
         // Check all directions
@@ -85,7 +102,8 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
                     centerPosition.getX() + dir.getOffset().getX(),
                     centerPosition.getY() + dir.getOffset().getY()
             );
-            if (offsetPos.getX() >= 0 && offsetPos.getY() >= 0 && offsetPos.getX() < dimensions.getX() && offsetPos.getY() < dimensions.getY()) {
+            // Check if the position is in bounds, and if the tile has not already been collapsed
+            if (checkBounds(offsetPos) && !hasBeenCollapsed(offsetPos)) {
                 // And get the connection for that direction
                 final WfcShapeDirection dirConnection = dir.getConnection();
                 // Get the pool from the tile to update
