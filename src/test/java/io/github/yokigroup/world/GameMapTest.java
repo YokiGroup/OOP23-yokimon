@@ -6,11 +6,11 @@ class GameMapTest {
 
     @Test
     void getTileAt() {
-
+        // TODO: complete the test
     }
 
     @Test
     void getPlayerWorldPosition() {
-
+        // TODO: complete the test
     }
 }
