@@ -44,7 +44,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
     }
 
     @Override
-    public final void setStaticShape(final Pair<Integer, Integer> position, final Set<WfcShapeDirection> shape) {
+    public final void setStaticShape(final Pair<Integer, Integer> position, final Set<Set<WfcShapeDirection>> shape) {
         if (shape == null || shape.isEmpty()) {
             throw new IllegalArgumentException("The shape of the static tile must not be empty.");
         }
@@ -52,7 +52,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
             throw new IllegalArgumentException("The position must be inside the bounds of the map.");
         }
         final WeightedPool<Set<WfcShapeDirection>> pool = new WeightedPoolImpl<>();
-        pool.addElement(shape, 1.0f);
+        shape.forEach(s -> pool.addElement(s, 1.0f));
         this.shapeMap.put(position, pool);
         updateAdjacentShapes(MAX_DEPTH, position);
     }
@@ -156,7 +156,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @param position The position of the shapeMap to collapse.
      */
     private void collapseShape(final Pair<Integer, Integer> position) {
-        setStaticShape(position, this.shapeMap.get(position).getRandomizedElement());
+        setStaticShape(position, Set.of(this.shapeMap.get(position).getRandomizedElement()));
     }
 
     /**

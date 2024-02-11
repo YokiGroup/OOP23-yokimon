@@ -22,7 +22,7 @@ public interface WaveFunctionCollapse {
      * @param position The position of the shape to set.
      * @param shapes The shapes to set the shape to.
      */
-    void setStaticShape(Pair<Integer, Integer> position, Set<WfcShapeDirection> shapes);
+    void setStaticShape(Pair<Integer, Integer> position, Set<Set<WfcShapeDirection>> shapes);
 
     /**
      * Runs the waveFunctionCollapse algorithm to generate a full shape map of the
