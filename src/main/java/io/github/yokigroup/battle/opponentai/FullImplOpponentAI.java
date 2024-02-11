@@ -56,7 +56,7 @@ public class FullImplOpponentAI extends OpponentAI {            //TODO MUST TEST
         }
         //In case the opponent Yokimon has recently used the most suitable attack,
         //a random one from the list is used instead.
-        if (best.isPresent() && lastUsed.equals(best.get())) {
+        while (best.isPresent() && lastUsed.equals(best.get())) {
             best = Optional.of(Attacks.get(rand.nextInt(Attacks.size())));
         }
         best.ifPresent(attack -> lastUsed = attack);
