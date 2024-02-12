@@ -15,7 +15,7 @@ public final class FullImplXPCalculator extends XPCalculator {      //TODO MUST 
     private static final int SINGLE = 1;
 
     @Override
-    public int getXP(List<Yokimon> defeatedOpps) {
+    public int getXP(final List<Yokimon> defeatedOpps) {
         int total = DEFAULT_TOTAL;
         for (var el: defeatedOpps) {
             total += MULTIPLIER * (SINGLE + el.getLevel() / DIVISOR);
