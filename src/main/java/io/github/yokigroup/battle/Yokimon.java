@@ -188,7 +188,7 @@ public interface Yokimon {
      * Return the current xpNextLevel amount of the yokimon;
      * @return double getNextLevelXp
      */
-    public double getNextLevelXp();
+    public double getNextXp();
     /**
      * Adds a certain amount of XP to the Yokimon, potentially triggering level-up and
      * learning new moves.
@@ -202,12 +202,7 @@ public interface Yokimon {
      */
     public exp_code takeXp(int n);
 
-    /**
-     * return the exp needed to reach the next
-     * level.
-     * @return int ExpNext
-     */
-    public double getExpNext();
+
     /**
      * this method set a new bond to
      * the amount of exp needed for level-up

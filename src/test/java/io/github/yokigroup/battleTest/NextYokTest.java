@@ -3,9 +3,8 @@ package io.github.yokigroup.battleTest;
 import java.util.*;
 
 import io.github.yokigroup.battle.*;
-import io.github.yokigroup.battle.nextyokimon.NextYokimon;
-import io.github.yokigroup.battle.nextyokimon.DummyImplNextYokimon;
 import org.junit.jupiter.api.BeforeEach;
+import io.github.yokigroup.battle.Yokimon;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,6 +26,10 @@ public class NextYokTest {
      * Testing dummy implementation.
      */
     @Test public void testDummyImpl() {
+
+       // NextYokimon toTest = new DummyImplNextYokimon();
+
+
         /*
         NextYokimon toTest = new DummyImplNextYokimon();
 
