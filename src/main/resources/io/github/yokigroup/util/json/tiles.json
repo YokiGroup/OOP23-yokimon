@@ -3,12 +3,29 @@
     "texture": "immagine.jpg",
     "hitboxes": [
       {
+        "type": "rect",
         "position": {
           "x": 10,
           "y": 5
         },
-        // FIXME
-        "skillId": 2
+        "dimensions": {
+          "x": 5.0,
+          "y": 5.0
+        }
+      },
+      {
+        "type": "circle",
+        "position": {
+          "x": 30.0,
+          "y": 5.0
+        },
+        "radius": 5.0
+      }
+    ],
+    "spawns": [
+      {
+        "x": 10.0,
+        "y": 30.0
       }
     ]
   }
