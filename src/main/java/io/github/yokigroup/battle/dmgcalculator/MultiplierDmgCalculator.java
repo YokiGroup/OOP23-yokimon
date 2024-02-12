@@ -20,7 +20,7 @@ public class MultiplierDmgCalculator implements DmgCalculator {
      */
     @Override
     public int getDMG(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
-        double total = (double) (attackingYokimon.getStat(Yokimon.Stats.ATK) * attack.attackPower()
+        double total = (double) ((double)(attackingYokimon.getStat(Yokimon.Stats.ATK) * attack.attackPower())
                 / attackedYokimon.getStat(Yokimon.Stats.DEF));
 
         if (attackingYokimon.getYokimonColor().equals(attack.getColor())) {
