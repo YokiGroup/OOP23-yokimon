@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import io.github.yokigroup.battle.nextyokimon.NextYokimon;
-import io.github.yokigroup.battle.nextyokimon.DummyImplNextYokimon;
+//import io.github.yokigroup.battle.nextyokimon.NextYokimon;
+//import io.github.yokigroup.battle.nextyokimon.DummyImplNextYokimon;
 import io.github.yokigroup.battle.Yokimon;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +20,7 @@ public class NextYokTest {
      * Testing dummy implementation.
      */
     @Test public void testDummyImpl() {
-        NextYokimon toTest = new DummyImplNextYokimon();
+       // NextYokimon toTest = new DummyImplNextYokimon();
 
         /*
         Yokimon y1 = new YokimonImpl("Blue");       //TODO ISTANZIA MEGLIO YOKIMON

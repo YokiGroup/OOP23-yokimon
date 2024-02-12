@@ -1,10 +1,10 @@
 package io.github.yokigroup.battleTest;
 
 import java.util.List;
-import io.github.yokigroup.battle.xpcalculator.XPCalculator;
+//import io.github.yokigroup.battle.xpcalculator.XPCalculator;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.YokimonImpl;
-import io.github.yokigroup.battle.xpcalculator.DummyImplXPCalculator;
+//import io.github.yokigroup.battle.xpcalculator.DummyImplXPCalculator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -22,7 +22,7 @@ public class XPCalcTest {
      * Testing dummy implementation.
      */
     @Test public void testDummyImpl() {
-        XPCalculator toTest = new DummyImplXPCalculator();
+//        XPCalculator toTest = new DummyImplXPCalculator();
 
         /*      //TODO INST. YOKIMON
         Yokimon y1 = new YokimonImpl("Blue");
