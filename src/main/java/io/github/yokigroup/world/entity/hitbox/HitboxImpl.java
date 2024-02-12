@@ -8,7 +8,6 @@ import org.dyn4j.geometry.Transform;
 import org.dyn4j.world.DetectFilter;
 import org.dyn4j.world.World;
 import org.dyn4j.world.result.ConvexDetectResult;
-import org.dyn4j.world.result.DetectResult;
 
 import java.util.Iterator;
 import java.util.Optional;
