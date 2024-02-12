@@ -4,14 +4,20 @@ import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.util.WeightedPoolImpl;
 
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.EnumSet;
+import java.util.Optional;
+
 
 /**
  * An implementation of the wave function collapse algorithm.
  * Used for a 2D map generation using a set of shapes.
  */
 public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
-    private static final int MAX_DEPTH = 5;
+    private final int maxDepth;
     private final Pair<Integer, Integer> dimensions;
     private final Map<Pair<Integer, Integer>, WeightedPool<Set<WfcShapeDirection>>> shapeMap;
 
@@ -21,6 +27,8 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @param shapes The shapes the map can have.
      */
     public WaveFunctionCollapseImpl(final Pair<Integer, Integer> dimensions, final Set<Set<WfcShapeDirection>> shapes) {
+        // Arbitrary max depth
+        this.maxDepth = shapes.size();
         this.dimensions = dimensions;
         this.shapeMap = new HashMap<>();
         // Fill up the map with all shapes being any random shape
@@ -53,7 +61,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         final WeightedPool<Set<WfcShapeDirection>> pool = new WeightedPoolImpl<>();
         shape.forEach(s -> pool.addElement(s, 1.0f));
         this.shapeMap.put(position, pool);
-        updateAdjacentShapes(MAX_DEPTH, position);
+        updateAdjacentShapes(maxDepth, position);
     }
 
     /**
@@ -84,6 +92,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
 
     /**
      * Updates all the adjacent WfcShapes to the central position.
+     * @param depth The depth of the update search.
      * @param centerPosition The central position of the update.
      */
     private void updateAdjacentShapes(final int depth, final Pair<Integer, Integer> centerPosition) {
@@ -120,9 +129,9 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
 
     /**
      * Checks if a direction has been set on a shape, for example if a shape has the options: (UP, LEFT) and (UP, RIGHT)
-     * it will return a new shape containing the values: (UP, DOWN)
-     * @param shapes The shapes to check
-     * @return A set of enums containing where the random shape has always the same direction
+     * it will return a new shape containing the values: (UP, DOWN).
+     * @param shapes The shapes to check.
+     * @return A set of enums containing where the random shape has always the same direction.
      */
     public Set<WfcShapeDirection> getCoherentDirections(final Set<Set<WfcShapeDirection>> shapes) {
         // Get the common shapes through a stream
