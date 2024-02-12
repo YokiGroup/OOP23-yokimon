@@ -12,10 +12,6 @@
     "moves": [
       {
         "level": 1,
-        "skillId": 2
-      },
-      {
-        "level": 2,
         "skillId": 1
       }
     ]
