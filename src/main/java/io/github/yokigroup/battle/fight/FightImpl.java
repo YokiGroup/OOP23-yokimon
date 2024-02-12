@@ -52,7 +52,7 @@ public final class FightImpl implements Fight {
         this.myYokimons = myYokimons;
         this.oppYokimons = oppYokimons;
 
-        if(nextYok.getNext(myYokimons).isEmpty() || nextYok.getNext(oppYokimons).isEmpty()) {
+        if (nextYok.getNext(myYokimons).isEmpty() || nextYok.getNext(oppYokimons).isEmpty()) {
             throw new RuntimeException("Must instantiate fight with at least one Yokimon on each party.");
         }
         this.currMyYokimon = nextYok.getNext(myYokimons).get();
@@ -102,7 +102,7 @@ public final class FightImpl implements Fight {
         return successRate(damage);
     }
 
-    private Success successRate(int damage) {
+    private Success successRate(final int damage) {
        if (damage < TOPLIMIT_FAIL) {
            return Success.FAIL;
        }
