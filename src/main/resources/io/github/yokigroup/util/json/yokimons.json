@@ -1,17 +1,116 @@
 {
   "1": {
-    "name": "Pippo",
-    "growthRate": "SLOW",
+    "name": "Oni",
+    "growthRate": "MEDIUM",
     "color": "RED",
     "stats": {
-      "ATK": 1,
-      "DEF": 1,
-      "SPD": 1,
-      "HP": 10
+      "ATK": 80,
+      "DEF": 100,
+      "SPD": 40,
+      "HP": 90
     },
     "moves": [
       {
         "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+  "2": {
+    "name": "Nekomata",
+    "growthRate": "MEDIUM",
+    "color": "PURPLE",
+    "stats": {
+      "ATK": 80,
+      "DEF": 100,
+      "SPD": 40,
+      "HP": 90
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+  "3": {
+    "name": "Baku",
+    "growthRate": "MEDIUM",
+    "color": "PURPLE",
+    "stats": {
+      "ATK": 80,
+      "DEF": 100,
+      "SPD": 40,
+      "HP": 90
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+  "4": {
+    "name": "Kitsune",
+    "growthRate": "MEDIUM",
+    "color": "WHITE",
+    "stats": {
+      "ATK": 80,
+      "DEF": 100,
+      "SPD": 40,
+      "HP": 90
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
         "skillId": 1
       }
     ]
