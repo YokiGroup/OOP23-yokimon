@@ -8,6 +8,8 @@ import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -53,59 +55,81 @@ class HitboxTest {
     @Test
     void collidesWithCircles() {
         // Collisions between circles only
-        assertTrue(circleHitbox1.collidesWith(circleHitbox2));
-        assertTrue(circleHitbox2.collidesWith(circleHitbox1));
-        assertFalse(circleHitbox1.collidesWith(circleHitbox3));
-        assertFalse(circleHitbox3.collidesWith(circleHitbox1));
-        assertTrue(circleHitbox2.collidesWith(circleHitbox3));
-        assertTrue(circleHitbox3.collidesWith(circleHitbox2));
+        assertTrue(circleHitbox1.collidesWith(circleHitbox2).isPresent());
+        assertTrue(circleHitbox2.collidesWith(circleHitbox1).isPresent());
+        assertFalse(circleHitbox1.collidesWith(circleHitbox3).isPresent());
+        assertFalse(circleHitbox3.collidesWith(circleHitbox1).isPresent());
+        assertTrue(circleHitbox2.collidesWith(circleHitbox3).isPresent());
+        assertTrue(circleHitbox3.collidesWith(circleHitbox2).isPresent());
     }
 
     @Test
     void collidesWithRectangles() {
         // Collisions between rectangles only
-        assertFalse(rectangleHitbox1.collidesWith(rectangleHitbox2));
-        assertFalse(rectangleHitbox2.collidesWith(rectangleHitbox1));
-        assertTrue(rectangleHitbox1.collidesWith(rectangleHitbox3));
-        assertTrue(rectangleHitbox3.collidesWith(rectangleHitbox1));
-        assertTrue(rectangleHitbox2.collidesWith(rectangleHitbox3));
-        assertTrue(rectangleHitbox3.collidesWith(rectangleHitbox2));
+        assertFalse(rectangleHitbox1.collidesWith(rectangleHitbox2).isPresent());
+        assertFalse(rectangleHitbox2.collidesWith(rectangleHitbox1).isPresent());
+        assertTrue(rectangleHitbox1.collidesWith(rectangleHitbox3).isPresent());
+        assertTrue(rectangleHitbox3.collidesWith(rectangleHitbox1).isPresent());
+        assertTrue(rectangleHitbox2.collidesWith(rectangleHitbox3).isPresent());
+        assertTrue(rectangleHitbox3.collidesWith(rectangleHitbox2).isPresent());
     }
 
     @Test
     void collidesWithBoth() {
         // Collisions of boxes with circle1
-        assertTrue(circleHitbox1.collidesWith(rectangleHitbox1));
-        assertTrue(rectangleHitbox1.collidesWith(circleHitbox1));
-        assertFalse(circleHitbox1.collidesWith(rectangleHitbox2));
-        assertFalse(rectangleHitbox2.collidesWith(circleHitbox1));
-        assertTrue(circleHitbox1.collidesWith(rectangleHitbox3));
-        assertTrue(rectangleHitbox3.collidesWith(circleHitbox1));
+        assertTrue(circleHitbox1.collidesWith(rectangleHitbox1).isPresent());
+        assertTrue(rectangleHitbox1.collidesWith(circleHitbox1).isPresent());
+        assertFalse(circleHitbox1.collidesWith(rectangleHitbox2).isPresent());
+        assertFalse(rectangleHitbox2.collidesWith(circleHitbox1).isPresent());
+        assertTrue(circleHitbox1.collidesWith(rectangleHitbox3).isPresent());
+        assertTrue(rectangleHitbox3.collidesWith(circleHitbox1).isPresent());
         // Collisions of boxes with circle2
-        assertTrue(circleHitbox2.collidesWith(rectangleHitbox1));
-        assertTrue(rectangleHitbox1.collidesWith(circleHitbox2));
-        assertTrue(circleHitbox2.collidesWith(rectangleHitbox2));
-        assertTrue(rectangleHitbox2.collidesWith(circleHitbox2));
-        assertTrue(circleHitbox2.collidesWith(rectangleHitbox3));
-        assertTrue(rectangleHitbox3.collidesWith(circleHitbox2));
+        assertTrue(circleHitbox2.collidesWith(rectangleHitbox1).isPresent());
+        assertTrue(rectangleHitbox1.collidesWith(circleHitbox2).isPresent());
+        assertTrue(circleHitbox2.collidesWith(rectangleHitbox2).isPresent());
+        assertTrue(rectangleHitbox2.collidesWith(circleHitbox2).isPresent());
+        assertTrue(circleHitbox2.collidesWith(rectangleHitbox3).isPresent());
+        assertTrue(rectangleHitbox3.collidesWith(circleHitbox2).isPresent());
         // Collisions of boxes with circle3
-        assertFalse(circleHitbox3.collidesWith(rectangleHitbox1));
-        assertFalse(rectangleHitbox1.collidesWith(circleHitbox3));
-        assertFalse(circleHitbox3.collidesWith(rectangleHitbox2));
-        assertFalse(rectangleHitbox2.collidesWith(circleHitbox3));
-        assertFalse(circleHitbox3.collidesWith(rectangleHitbox3));
-        assertFalse(rectangleHitbox3.collidesWith(circleHitbox3));
+        assertFalse(circleHitbox3.collidesWith(rectangleHitbox1).isPresent());
+        assertFalse(rectangleHitbox1.collidesWith(circleHitbox3).isPresent());
+        assertFalse(circleHitbox3.collidesWith(rectangleHitbox2).isPresent());
+        assertFalse(rectangleHitbox2.collidesWith(circleHitbox3).isPresent());
+        assertFalse(circleHitbox3.collidesWith(rectangleHitbox3).isPresent());
+        assertFalse(rectangleHitbox3.collidesWith(circleHitbox3).isPresent());
+    }
+
+    @Test
+    void resolveCollisions() {
+        assertTrue(circleHitbox1.collidesWith(circleHitbox2).isPresent());
+        assertTrue(circleHitbox2.collidesWith(circleHitbox1).isPresent());
+        final Vector2 resolvedPos = circleHitbox1.collidesWith(circleHitbox2).get();
+        circleHitbox1.setPosition(circleHitbox1.getPosition().plus(resolvedPos));
+        assertFalse(circleHitbox1.collidesWith(circleHitbox2).isPresent());
+        assertFalse(circleHitbox2.collidesWith(circleHitbox1).isPresent());
+        assertTrue(rectangleHitbox1.collidesWith(rectangleHitbox3).isPresent());
+        assertTrue(rectangleHitbox3.collidesWith(rectangleHitbox1).isPresent());
+        final Vector2 resolvedPos2 = rectangleHitbox1.collidesWith(rectangleHitbox3).get();
+        rectangleHitbox1.setPosition(rectangleHitbox1.getPosition().plus(resolvedPos2));
+        assertFalse(rectangleHitbox1.collidesWith(rectangleHitbox3).isPresent());
+        assertFalse(rectangleHitbox3.collidesWith(rectangleHitbox1).isPresent());
+        assertTrue(circleHitbox2.collidesWith(rectangleHitbox3).isPresent());
+        assertTrue(rectangleHitbox3.collidesWith(circleHitbox2).isPresent());
+        final Vector2 resolvedPos3 = circleHitbox2.collidesWith(rectangleHitbox3).get();
+        circleHitbox2.setPosition(circleHitbox2.getPosition().plus(resolvedPos3));
+        assertFalse(circleHitbox2.collidesWith(rectangleHitbox3).isPresent());
+        assertFalse(rectangleHitbox3.collidesWith(circleHitbox2).isPresent());
     }
 
     @Test
     void changePosition() {
         final Vector2 newPos = new Vector2Impl(circleHitbox2.getPosition().getX() + 3.0d, circleHitbox2.getPosition().getY());
         circleHitbox2.setPosition(newPos);
-        assertTrue(circleHitbox1.collidesWith(circleHitbox2));
-        assertTrue(circleHitbox2.collidesWith(circleHitbox1));
+        assertTrue(circleHitbox1.collidesWith(circleHitbox2).isPresent());
+        assertTrue(circleHitbox2.collidesWith(circleHitbox1).isPresent());
         final Vector2 newPos2 = new Vector2Impl(circleHitbox2.getPosition().getX() + 3.0d, circleHitbox2.getPosition().getY());
         circleHitbox2.setPosition(newPos2);
-        assertFalse(circleHitbox1.collidesWith(circleHitbox2));
-        assertFalse(circleHitbox2.collidesWith(circleHitbox1));
+        assertFalse(circleHitbox1.collidesWith(circleHitbox2).isPresent());
+        assertFalse(circleHitbox2.collidesWith(circleHitbox1).isPresent());
     }
 }
