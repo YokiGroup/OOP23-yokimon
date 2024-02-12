@@ -85,5 +85,34 @@
         "skillId": 1
       }
     ]
+  },
+  "4": {
+    "name": "Kitsune",
+    "growthRate": "MEDIUM",
+    "color": "WHITE",
+    "stats": {
+      "ATK": 80,
+      "DEF": 100,
+      "SPD": 40,
+      "HP": 90
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
   }
 }
