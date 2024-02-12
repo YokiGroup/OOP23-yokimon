@@ -28,7 +28,7 @@ class YokimonImplTest {
         /*
         Attack  = new AttackImpl("", Color.WHITE, , Attack.effect.NONE);
         */
-        Map<Integer, Attack> stone= new HashMap<>();
+        Map<Integer, Attack> stone = new HashMap<>();
         stone.put(1, slap);
         stone.put(3, strongPunch);
         stone.put(7, curse);
