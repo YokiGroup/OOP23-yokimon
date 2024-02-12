@@ -45,7 +45,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
     public final Set<WfcShapeDirection> getShapeAt(final Pair<Integer, Integer> position) {
         // If there's more than one possibility per position, the algorithm has not finished generating the map.
         if (shapeMap.get(position).size() > 1) {
-            throw new IllegalStateException("The WaveFunctionCollapse algorithm has not yet finished generating the map.");
+            throw new IllegalStateException("The WaveFunctionCollapse algorithm has not yet generated the map correctly.");
         }
         return shapeMap.get(position).getRandomizedElement();
     }
