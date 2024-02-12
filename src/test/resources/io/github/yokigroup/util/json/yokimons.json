@@ -15,5 +15,18 @@
         "skillId": 1
       }
     ]
+  },
+  "2": {
+    "name": "Pluto Pugile",
+    "growthRate": "FAST",
+    "color": "BLACK",
+    "stats": {
+      "ATK": 1,
+      "DEF": 1,
+      "SPD": 1,
+      "HP": 10
+    },
+    "moves": [
+    ]
   }
 }
