@@ -10,9 +10,9 @@ import java.util.Optional;
 /**
  * Fuller version of OpponentAI, responsible for choosing the next best move for the opponent to use.
  */
-public class FullImplOpponentAI extends OpponentAI {            //TODO MUST TEST THIS CLASS
+public class FullImplOpponentAI extends OpponentAI {
 
-    private Attack lastUsed;
+    private Optional<Attack> lastUsed = Optional.empty();
     private final DmgCalculator dmgCalc;
     private final Random rand = new Random();
 
@@ -54,12 +54,13 @@ public class FullImplOpponentAI extends OpponentAI {            //TODO MUST TEST
                 best = Optional.of(atk);
             }
         }
+        //FIXME
         //In case the opponent Yokimon has recently used the most suitable attack,
         //a random one from the list is used instead.
-        while (best.isPresent() && lastUsed.equals(best.get())) {
+        if (best.isPresent() && (lastUsed.isPresent() && lastUsed.get().equals(best.get()))) {
             best = Optional.of(Attacks.get(rand.nextInt(Attacks.size())));
         }
-        best.ifPresent(attack -> lastUsed = attack);
+        best.ifPresent(attack -> lastUsed = Optional.of(attack));
         return best;
     }
 }
