@@ -2,26 +2,25 @@ package io.github.yokigroup.core;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.FightSubmodule;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerPositionSubmodule;
+import io.github.yokigroup.event.submodule.Submodule;
 import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
-import io.github.yokigroup.event.submodule.Submodule;
-import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.Entity;
-import io.github.yokigroup.world.tile.Tile;
 
+import java.lang.reflect.InvocationTargetException;
+
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Consumer;
 
 /**
  * Game loop. Responsible for receiving events and updating entities
  */
-public class GameOrchestrator implements MessageHandler {
+public class GameOrchestrator implements MessageHandler, GameLogic {
     private final SubmoduleMap subModules;
-    private final GameMap gameMap;
     private final Entity playerCharacter;
 
     /**
@@ -31,13 +30,21 @@ public class GameOrchestrator implements MessageHandler {
      */
     private SubmoduleMap initSubmodules() {
         SubmoduleMap retMap = new SubmoduleMapImpl();
+        List<Class<? extends Submodule>> submoduleTypes = List.of(
+                PartySubmodule.class,
+                PlayerPositionSubmodule.class,
+                FightSubmodule.class,
+                GameMapSubmodule.class
+        );
 
-        // submodules this class uses
-        PartySubmodule partySub = new PartySubmodule();
-        PlayerPositionSubmodule playerPositionSub = new PlayerPositionSubmodule(playerCharacter, gameMap);
-        FightSubmodule fightSub = new FightSubmodule(partySub);
-
-        retMap.registerAll(Set.of(partySub, playerPositionSub, fightSub));
+        submoduleTypes.forEach(s -> {
+            try {
+                retMap.register(s.getConstructor(MessageHandler.class).newInstance(this));
+            } catch (NoSuchMethodException | InvocationTargetException | InstantiationException
+                     | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         return retMap;
     }
@@ -47,17 +54,6 @@ public class GameOrchestrator implements MessageHandler {
      */
     public GameOrchestrator() {
         playerCharacter = null; // TODO replace with Entity implementation
-        gameMap = new GameMap() {
-            @Override
-            public Tile getTileAt(Pair<Integer, Integer> position) {
-                return null;
-            }
-
-            @Override
-            public Pair<Integer, Integer> getPlayerWorldPosition() {
-                return null;
-            }
-        }; // TODO replace with GameMap implementation
         subModules = initSubmodules();
     }
 
@@ -68,5 +64,10 @@ public class GameOrchestrator implements MessageHandler {
             throw new IllegalArgumentException(this.getClass() + " does not contain submodule " + subModuleType);
         }
         handler.accept(submodule.get());
+    }
+
+    @Override
+    public void start() {
+        // FIXME implement
     }
 }

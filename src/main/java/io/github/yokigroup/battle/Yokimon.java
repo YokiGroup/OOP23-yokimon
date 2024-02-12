@@ -16,7 +16,7 @@ public interface Yokimon {
         ATK,
         DEF,
         SPD,
-        HP;
+        HP
     }
 
     /**
@@ -173,9 +173,9 @@ public interface Yokimon {
      * enum used to specify return status of various methods.
      */
     public enum exp_code{
-        ok,
-        levelUp,
-        newMove
+        OK,
+        LEVEL_UP,
+        NEW_MOVE
     }
 
     /**

@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Player extends People {
 
-    public Player(String name, Position Pos, Hitbox Hitbox, List<Yokimon> Party) {
-        super(name, Pos, Hitbox, Party);
+    public Player(String name, Position pos, Hitbox hitbox, List<Yokimon> party) {
+        super(name, pos, hitbox, party);
     }
 
     /**

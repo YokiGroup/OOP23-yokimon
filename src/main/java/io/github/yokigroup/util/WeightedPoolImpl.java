@@ -3,6 +3,7 @@ package io.github.yokigroup.util;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of a pool that given elements and their weight, it returns randomized items from it.
@@ -22,7 +23,7 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
     public final WeightedPoolImpl<T> copy() {
         final WeightedPoolImpl<T> clone = new WeightedPoolImpl<>();
         for (final Pair<T, Float> pair : this.itemPool) {
-            clone.itemPool.add(new PairImpl<>(pair.getX(), pair.getY()));
+            clone.itemPool.add(new Pair<>(pair.x(), pair.y()));
         }
         return clone;
     }
@@ -32,30 +33,32 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
         if (weight <= 0.0f) {
             throw new IllegalArgumentException("Weight must be positive.");
         }
-        this.itemPool.add(new PairImpl<>(element, weight));
+        this.itemPool.add(new Pair<>(element, weight));
     }
 
     @Override
     public final void removeElement(final T element) {
-        this.itemPool.removeIf(p -> p.getX() == element);
+        this.itemPool.removeIf(p -> p.x() == element);
     }
 
     @Override
     public final T getRandomizedElement() {
-        if (this.size() == 0) {
+        if (this.itemPool.isEmpty()) {
             throw new IllegalStateException("The randomized pool is empty.");
+        } else if (this.itemPool.size() == 1) {
+            return this.itemPool.iterator().next().x();
         }
         // Sum all the weights together
         final float sumWeight = this.itemPool.stream()
-                .map(Pair::getY)
+                .map(Pair::y)
                 .reduce(0.0f, Float::sum);
         // Get a randomized weight from the total
         final float randomWeight = new Random().nextFloat(sumWeight);
         float cumulativeWeight = 0.0f;
         for (final Pair<T, Float> pair : this.itemPool) {
-            cumulativeWeight += pair.getY();
+            cumulativeWeight += pair.y();
             if (randomWeight <= cumulativeWeight) {
-                return pair.getX();
+                return pair.x();
             }
         }
         throw new IllegalStateException("No element could be retrieved from the pool.");
@@ -66,6 +69,15 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
         final T element = getRandomizedElement();
         removeElement(element);
         return element;
+    }
+
+    @Override
+    public final Set<T> getEntries() {
+        return Set.copyOf(
+                this.itemPool.stream()
+                .map(Pair::x)
+                .collect(Collectors.toSet())
+        );
     }
 
     @Override
