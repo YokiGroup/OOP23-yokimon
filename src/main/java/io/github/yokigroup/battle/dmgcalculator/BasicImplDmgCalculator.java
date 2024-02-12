@@ -10,7 +10,7 @@ import io.github.yokigroup.battle.Yokimon;
 public final class BasicImplDmgCalculator implements DmgCalculator {
     @Override
     public int getDMG(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
-        return (int) (attackingYokimon.getStat(Yokimon.Stats.ATK) * attack.attackPower()
+        return (int) ((double)(attackingYokimon.getStat(Yokimon.Stats.ATK) * attack.attackPower())
                 / attackedYokimon.getStat(Yokimon.Stats.DEF));
     }
 }
