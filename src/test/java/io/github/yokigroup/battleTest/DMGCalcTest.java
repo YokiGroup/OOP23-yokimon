@@ -1,6 +1,7 @@
 package io.github.yokigroup.battleTest;
 
-import io.github.yokigroup.battle.*;
+import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
 import io.github.yokigroup.battle.dmgcalculator.DmgCalculator;
 import io.github.yokigroup.battle.dmgcalculator.FullImplDmgCalculator;
@@ -59,8 +60,8 @@ public class DMGCalcTest {
     @Test public void testMultiplierImpl() {
         DmgCalculator toTest = new MultiplierDmgCalculator();
 
-        assertEquals(EXP_VAL_MULT1, toTest.getDMG(y1, y2, a1));//80*1.2 = 96
-        assertEquals(EXP_VAL_MULT2, toTest.getDMG(y1, y2, a2));//70/1.2 = 58
+        assertEquals(EXP_VAL_MULT1, toTest.getDMG(y1, y2, a1)); //80*1.2 = 96
+        assertEquals(EXP_VAL_MULT2, toTest.getDMG(y1, y2, a2)); //70/1.2 = 58
     }
 
     /**
@@ -69,9 +70,9 @@ public class DMGCalcTest {
     @Test public void testFullImpl() {
         DmgCalculator toTest = new FullImplDmgCalculator();
 
-        assertEquals(EXP_VAL_FULL1, toTest.getDMG(y1, y2, a1));//80*1.2*0.5 = 48
-        assertEquals(EXP_VAL_FULL2, toTest.getDMG(y1, y2, a2));//70/1.2*0.5 = 29
-        assertEquals(EXP_VAL_FULL3, toTest.getDMG(y2, y1, a1));//80/1.2*2 = 133
-        assertEquals(EXP_VAL_FULL4, toTest.getDMG(y2, y1, a2));//70*1.2*2 = 168
+        assertEquals(EXP_VAL_FULL1, toTest.getDMG(y1, y2, a1)); //80*1.2*0.5 = 48
+        assertEquals(EXP_VAL_FULL2, toTest.getDMG(y1, y2, a2)); //70/1.2*0.5 = 29
+        assertEquals(EXP_VAL_FULL3, toTest.getDMG(y2, y1, a1)); //80/1.2*2 = 133
+        assertEquals(EXP_VAL_FULL4, toTest.getDMG(y2, y1, a2)); //70*1.2*2 = 168
     }
 }

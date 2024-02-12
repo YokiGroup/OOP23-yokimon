@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 /**
  * Test class for XP Calculator.
  */
-public class XPCalcTest {
+public final class XPCalcTest {
 
     private static final int EXP_VAL_DUMMY1 = 0;
     private static final int EXP_VAL_DUMMY2 = 300;
@@ -25,8 +25,11 @@ public class XPCalcTest {
     private static final int RAND_LEVEL = 12;
 
     private static Yokimon y1, y2, y3;
-    private static final YokimonLoader yokimonLoader = new YokimonLoader();
+    private final YokimonLoader yokimonLoader = new YokimonLoader();
 
+    /**
+     * Initialises some Yokimons meant for testing.
+     */
     @BeforeEach
     public void init() {
         y1 = yokimonLoader.load(1);

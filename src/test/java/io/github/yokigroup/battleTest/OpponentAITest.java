@@ -2,14 +2,14 @@ package io.github.yokigroup.battleTest;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
-import io.github.yokigroup.battle.opponentai.*;
+import io.github.yokigroup.battle.opponentai.OpponentAI;
+import io.github.yokigroup.battle.opponentai.DummyImplOpponentAI;
+import io.github.yokigroup.battle.opponentai.FullImplOpponentAI;
 import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -17,11 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 /**
  * Test class for Opponent AI.
  */
-public class OpponentAITest {
+public final class OpponentAITest {
     private static Yokimon y1, y2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
 
+    /**
+     * Initialises some Yokimons meant for testing.
+     */
     @BeforeEach
     public void init() {
         y1 = yokimonLoader.load(1);
@@ -41,6 +44,9 @@ public class OpponentAITest {
 
     }
 
+    /**
+     * Testing the full implementation (FullImplOpponentAI) with a BasicImplDmgCalculator.
+     */
     //FIXME --> ON THE SECOND RUN IT DOESN'T CHANGE THE ATTACK, IT ALWAYS CHOOSES THE BEST ONE
     //NOTE: IN ORDER TO TEST YOU NEED TO MODIFY THE JSON FILE SO THEY HAVE MORE ATTACKS AVAILABLE
     @Test public void testFullImplBasicDMGCalc() {
