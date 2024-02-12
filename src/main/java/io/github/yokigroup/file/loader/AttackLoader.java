@@ -1,9 +1,16 @@
 package io.github.yokigroup.file.loader;
 
 import io.github.yokigroup.battle.Attack;
+import io.github.yokigroup.battle.AttackImpl;
+import io.github.yokigroup.battle.Color;
+import io.github.yokigroup.util.json.JsonParser;
 
 public class AttackLoader extends AbstractJsonLoader<Attack> {
     private static final String ATTACKJSONRPATH = "yokimons.json";
+    private static final String ATTACK_NAME_JPATHF = "$.%d.name";
+    private static final String ATTACK_COLOR_JPATHF = "$.%d.color";
+    private static final String ATTACK_POWER_JPATHF = "$.%d.power";
+    private static final String ATTACK_EFFECT_JPATHF = "$.%d.effect";
 
     public AttackLoader() {
         super(ATTACKJSONRPATH);
@@ -11,6 +18,13 @@ public class AttackLoader extends AbstractJsonLoader<Attack> {
 
     @Override
     public Attack load(int id) {
-        return null;
+        JsonParser parser = getParser();
+
+        String name = parser.read(String.format(ATTACK_NAME_JPATHF, id));
+        Color color = Color.valueOf(parser.read(String.format(ATTACK_COLOR_JPATHF, id)));
+        int power = parser.read(String.format(ATTACK_POWER_JPATHF, id));
+        Attack.effect effect = Attack.effect.valueOf(parser.read(String.format(ATTACK_EFFECT_JPATHF, id)));
+
+        return new AttackImpl(name, color, power, effect);
     }
 }
