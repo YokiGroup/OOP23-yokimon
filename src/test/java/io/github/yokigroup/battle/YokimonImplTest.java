@@ -24,6 +24,43 @@ class YokimonImplTest {
         Attack strongPunch = new AttackImpl("strong punch", Color.RED, 80, Attack.effect.NONE);
         Attack curse = new AttackImpl("curse", Color.PURPLE, 70, Attack.effect.NONE);
         Attack slap = new AttackImpl("slap", Color.WHITE, 40, Attack.effect.NONE);
+        Attack mock = new AttackImpl("mock", Color.WHITE, 0, Attack.effect.NONE);
+        /*
+        Attack  = new AttackImpl("", Color.WHITE, , Attack.effect.NONE);
+        */
+        Map<Integer, Attack> stone= new HashMap<>();
+        stone.put(1, slap);
+        stone.put(3, strongPunch);
+        stone.put(7, curse);
+        stone.put(15, shadowBall);
+        stone.put(50, mock);
+        Map<Yokimon.Stats, Integer> baseStats= new HashMap<>();
+        baseStats.put(Yokimon.Stats.HP, 90);
+        baseStats.put(Yokimon.Stats.ATK, 80);
+        baseStats.put(Yokimon.Stats.DEF, 100);
+        baseStats.put(Yokimon.Stats.SPD, 40);
+
+        Yokimon oni = new YokimonImpl("oni", Color.RED, baseStats, Yokimon.GrowthRate.MEDIUM, 1, stone );
+
+
+        oni.takeXp(1000);
+        oni.setLevel(10);
+       // assertEquals(oni.getActualHp(), oni.getStat(Yokimon.Stats.HP));
+        assertEquals(1000, oni.getXp());
+        assertEquals(1331, oni.getNextXp());
+        assertEquals(true, oni.getAttacks().contains(curse));
+    }
+
+    @Test
+    void getAttacks() {
+    }
+
+    @Test
+    void setExpNext() {
+        Attack shadowBall = new AttackImpl("Shadow ball", Color.BLACK, 90, Attack.effect.NONE);
+        Attack strongPunch = new AttackImpl("strong punch", Color.RED, 80, Attack.effect.NONE);
+        Attack curse = new AttackImpl("curse", Color.PURPLE, 70, Attack.effect.NONE);
+        Attack slap = new AttackImpl("slap", Color.WHITE, 40, Attack.effect.NONE);
         Attack flameThrow = new AttackImpl("flame throw", Color.RED, 95, Attack.effect.NONE);
         Attack headBut = new AttackImpl("headBut", Color.WHITE, 50, Attack.effect.NONE);
         Attack tailSwipe = new AttackImpl("TailSwipe ", Color.WHITE, 60 , Attack.effect.NONE);
@@ -87,32 +124,9 @@ class YokimonImplTest {
         baseStats.put(Yokimon.Stats.SPD, 40);
 
         Yokimon oni = new YokimonImpl("oni", Color.RED, baseStats, Yokimon.GrowthRate.MEDIUM, 1, stone );
-        Yokimon akugyo = new YokimonImpl("akugyo", Color.BLACK, baseStats, Yokimon.GrowthRate.FAST, 1, stone );
-        Yokimon nekomata = new YokimonImpl("nekomata", Color.PURPLE, baseStats, Yokimon.GrowthRate.MEDIUM, 1, stone );
-        Yokimon baku = new YokimonImpl("baku", Color.PURPLE, baseStats, Yokimon.GrowthRate.MEDIUM, 1, stone );
-        Yokimon kitsune = new YokimonImpl("kitsune", Color.WHITE, baseStats, Yokimon.GrowthRate.FAST, 1, stone );
-        Yokimon tanuki = new YokimonImpl("tanuki", Color.WHITE, baseStats, Yokimon.GrowthRate.FAST, 1, stone );
-        Yokimon sazaeOni = new YokimonImpl("sazae-oni", Color.WHITE, baseStats, Yokimon.GrowthRate.MEDIUM, 1, stone );
-        Yokimon tengu = new YokimonImpl("tengu", Color.RED, baseStats, Yokimon.GrowthRate.MEDIUM, 1, stone );
-        Yokimon tsuchigumo = new YokimonImpl("tsuchigumo", Color.BLACK, baseStats, Yokimon.GrowthRate.MEDIUM, 1, stone );
-        Yokimon wani = new YokimonImpl("wani", Color.RED, baseStats, Yokimon.GrowthRate.SLOW, 1, stone );
-        Yokimon Yatagarasu = new YokimonImpl("Yatagarasu", Color.BLACK, baseStats, Yokimon.GrowthRate.FAST, 1, stone );
-        Yokimon Yosuzume  = new YokimonImpl("Yosuzume ", Color.BLACK, baseStats, Yokimon.GrowthRate.FAST, 1, stone );
-        Yokimon inugami = new YokimonImpl("inugami", Color.WHITE, baseStats, Yokimon.GrowthRate.SLOW, 1, stone );
-        Yokimon kappa = new YokimonImpl("kappa", Color.WHITE, baseStats, Yokimon.GrowthRate.MEDIUM, 1, stone );
-        Yokimon sonWukong = new YokimonImpl("sonWukong", Color.WHITE, baseStats, Yokimon.GrowthRate.SLOW, 1, stone );
-        //this yokimon can't be hit 75% of the times
-        Yokimon woman = new YokimonImpl("woman", Color.WHITE, baseStats, Yokimon.GrowthRate.SLOW, 1, stone );
 
-        oni.takeXp(125);
-        assertEquals(5, oni.getLevel());
-    }
 
-    @Test
-    void getAttacks() {
-    }
-
-    @Test
-    void setExpNext() {
+        oni.takeXp(216);
+        assertEquals(6, oni.getLevel());
     }
 }

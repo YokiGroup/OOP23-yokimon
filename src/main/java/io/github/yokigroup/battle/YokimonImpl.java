@@ -43,7 +43,6 @@ public class YokimonImpl implements Yokimon{
         for(Stats stat : Stats.values()){
             stats.put(stat, DEFAULT_STAT);
         }
-
         this.moves = new ArrayList<>();
         this.active=true;
         this.name = name;
@@ -53,7 +52,7 @@ public class YokimonImpl implements Yokimon{
         this.level = level;
         this.learnableMoves = Map.copyOf(Objects.requireNonNull(learnableMoves, "learnableMoves passed was null"));
         this.levelUtility.resetAttack(this);
-        this.levelUtility.setStats(this);
+        this.levelUtility.reset(this);
 
     }
     /**
@@ -126,7 +125,8 @@ public class YokimonImpl implements Yokimon{
     public void setLevel(int n) {
         if(n>0){
             this.level=n;
-            this.levelUtility.setStats(this);
+            this.levelUtility.reset(this);
+            this.levelUtility.resetAttack(this);
         }
 
     }
@@ -192,10 +192,9 @@ public class YokimonImpl implements Yokimon{
     public double getXp() {
         return this.xp;
     }
-
     @Override
-    public double getNextLevelXp() {
-        return this.maxHp;
+    public double getNextXp() {
+        return this.xpNext;
     }
 
     @Override
@@ -208,11 +207,6 @@ public class YokimonImpl implements Yokimon{
         }
         this.xp += xpToTake;
         return expCode;
-    }
-
-    @Override
-    public double getExpNext() {
-        return this.xp;
     }
 
     @Override

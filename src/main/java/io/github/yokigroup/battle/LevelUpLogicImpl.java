@@ -19,22 +19,27 @@ public class LevelUpLogicImpl implements  LevelUpLogic{
      * @return double with the new value
      */
     private double nextBoundXp(int level) {
+            return pow(level+1, EXPONENT);
+    }
+    private double espectedXp(int level) {
+        if (level == 1)
+            return 0;
         return pow(level, EXPONENT);
     }
 
     @Override
     public void setStats(Yokimon yokimon) {
         //level
-        Map<Yokimon.Stats, Integer> newStat = yokimon.getAllStats();
-        newStat.entrySet().stream()
+        //Map<Yokimon.Stats, Integer> newStat = yokimon.getAllStats();
+        yokimon.getAllStats().entrySet().stream()
                .filter(i -> i.getKey() != Yokimon.Stats.HP)
                .forEach(i -> i.setValue(upGrade(yokimon.getBaseStat(i.getKey()),
                         i.getValue(), yokimon.getLevel())));
-        newStat.replace(Yokimon.Stats.HP, upGradeHp(yokimon.getBaseStat(Yokimon.Stats.HP),
-                newStat.get(Yokimon.Stats.HP), yokimon.getLevel()));
+        yokimon.getAllStats().replace(Yokimon.Stats.HP, upGradeHp(yokimon.getBaseStat(Yokimon.Stats.HP),
+                yokimon.getStat(Yokimon.Stats.HP), yokimon.getLevel()));
         //reset hp
-        yokimon.setMaxHp(yokimon.getBaseStat(Yokimon.Stats.HP));
-        yokimon.setActualHp(yokimon.getBaseStat(Yokimon.Stats.HP));
+        yokimon.setMaxHp(yokimon.getStat(Yokimon.Stats.HP));
+        yokimon.setActualHp(yokimon.getStat(Yokimon.Stats.HP));
     }
 
     private int upGradeHp(int baseStat, int actualStat, int level){
@@ -64,7 +69,7 @@ public class LevelUpLogicImpl implements  LevelUpLogic{
 
         //set the new exp calculator
         yokimon.setExpNext(this.nextBoundXp(yokimon.getLevel()));
-        yokimon.setExp(yokimon.getExpNext());
+        yokimon.setExp(this.espectedXp(yokimon.getLevel()));
 
         //set the new stats
         this.setStats(yokimon);
@@ -84,7 +89,7 @@ public class LevelUpLogicImpl implements  LevelUpLogic{
     @Override
     public void reset(Yokimon yokimon) {
         yokimon.setExpNext(this.nextBoundXp(yokimon.getLevel()));
-        yokimon.setExp(this.nextBoundXp(yokimon.getLevel()-1));
+        yokimon.setExp(this.espectedXp(yokimon.getLevel()));
         this.setStats(yokimon);
     }
 }
