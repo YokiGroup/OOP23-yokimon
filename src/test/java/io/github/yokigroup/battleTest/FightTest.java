@@ -2,7 +2,6 @@ package io.github.yokigroup.battleTest;
 
 import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.battle.fight.FightImpl;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import io.github.yokigroup.battle.*;

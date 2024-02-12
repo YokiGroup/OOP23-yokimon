@@ -46,7 +46,7 @@ public class FullImplDmgCalculator implements DmgCalculator {
                     case BLACK -> {
                         total = total * WEAK;
                     }
-                    case PURPLE, WHITE, default -> {
+                    case PURPLE, WHITE -> {
                         total = total * NORMAL;
                     }
                     case RED -> {
@@ -59,7 +59,7 @@ public class FullImplDmgCalculator implements DmgCalculator {
                     case PURPLE -> {
                         total = total * WEAK;
                     }
-                    case RED, WHITE, default -> {
+                    case RED, WHITE -> {
                         total = total * NORMAL;
                     }
                     case BLACK -> {
@@ -72,7 +72,7 @@ public class FullImplDmgCalculator implements DmgCalculator {
                     case RED -> {
                         total = total * WEAK;
                     }
-                    case BLACK, WHITE, default -> {
+                    case BLACK, WHITE -> {
                         total = total * NORMAL;
                     }
                     case PURPLE -> {
