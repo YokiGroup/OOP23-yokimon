@@ -21,7 +21,7 @@ public class XPCalcTest {
     private static final int EXP_VAL_DUMMY3 = 200;
     private static final int EXP_VAL_FULL1 = 0;
     private static final int EXP_VAL_FULL2 = 330;
-    private static final int EXP_VAL_FULL3 = 550;
+    private static final int EXP_VAL_FULL3 = 220;
 
     private static Yokimon y1, y2, y3;
 
@@ -41,20 +41,19 @@ public class XPCalcTest {
 
         assertEquals(EXP_VAL_DUMMY1, toTest.getXP(List.of()));
         assertEquals(EXP_VAL_DUMMY2, toTest.getXP(List.of(y1, y2, y3)));
-        assertNotEquals(EXP_VAL_DUMMY3, toTest.getXP(List.of(y1, y2)));
+        assertEquals(EXP_VAL_DUMMY3, toTest.getXP(List.of(y1, y2)));
 
     }
 
     /**
      * Testing full implementation.
      */
-    //TODO MUST TEST THIS CLASS
     @Test public void testFullImpl() {
         XPCalculator toTest = new FullImplXPCalculator();
 
         assertEquals(EXP_VAL_FULL1, toTest.getXP(List.of()));
+        assertEquals(EXP_VAL_FULL3, toTest.getXP(List.of(y1, y2)));
         assertEquals(EXP_VAL_FULL2, toTest.getXP(List.of(y1, y2, y3)));
-        assertNotEquals(EXP_VAL_FULL3, toTest.getXP(List.of(y1, y2)));
 
     }
 }
