@@ -79,8 +79,8 @@ class Vector2Test {
         final double normCoord1Y = 1.0d;
         final double normCoord2X = 1.0d;
         final double normCoord2Y = 0.0d;
-        final double normCoord3X = 0.8661855860486004d;
-        final double normCoord3Y = 0.4997224534895771d;
+        final double normCoord3X = 0.866_185_586_048_600_400d;
+        final double normCoord3Y = 0.499_722_453_489_577_100d;
         final Vector2 vec1 = new Vector2Impl(coord1X, coord1Y);
         final Vector2 vec2 = new Vector2Impl(coord2X, coord2Y);
         final Vector2 vec3 = new Vector2Impl(coord3X, coord3Y);
@@ -112,7 +112,7 @@ class Vector2Test {
         final double coord3Y = 6.0d;
         final double length1 = 3.0d;
         final double length2 = 3.0d;
-        final double length3 = 12.006664815842909d;
+        final double length3 = 12.006_664_815_842_909d;
         final Vector2 vec1 = new Vector2Impl(coord1X, coord1Y);
         final Vector2 vec2 = new Vector2Impl(coord2X, coord2Y);
         final Vector2 vec3 = new Vector2Impl(coord3X, coord3Y);
