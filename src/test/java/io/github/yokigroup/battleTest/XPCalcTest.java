@@ -1,11 +1,11 @@
 package io.github.yokigroup.battleTest;
 
 import java.util.List;
-import io.github.yokigroup.battle.YokimonDatabase;
 import io.github.yokigroup.battle.xpcalculator.FullImplXPCalculator;
 import io.github.yokigroup.battle.xpcalculator.XPCalculator;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.xpcalculator.DummyImplXPCalculator;
+import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,15 +22,16 @@ public class XPCalcTest {
     private static final int EXP_VAL_FULL1 = 0;
     private static final int EXP_VAL_FULL2 = 330;
     private static final int EXP_VAL_FULL3 = 220;
+    private static final int RAND_LEVEL = 12;
 
     private static Yokimon y1, y2, y3;
+    private static final YokimonLoader yokimonLoader = new YokimonLoader();
 
-    //FIXME -> still giving NullPointerException
     @BeforeEach
     public void init() {
-        y1 = YokimonDatabase.getOni();
-        y2 = YokimonDatabase.getBaku();
-        y3 = YokimonDatabase.getNekomata();
+        y1 = yokimonLoader.load(1);
+        y2 = yokimonLoader.load(2);
+        y3 = yokimonLoader.load(3);
     }
 
     /**
@@ -52,8 +53,11 @@ public class XPCalcTest {
         XPCalculator toTest = new FullImplXPCalculator();
 
         assertEquals(EXP_VAL_FULL1, toTest.getXP(List.of()));
-        assertEquals(EXP_VAL_FULL3, toTest.getXP(List.of(y1, y2)));
         assertEquals(EXP_VAL_FULL2, toTest.getXP(List.of(y1, y2, y3)));
+        assertEquals(EXP_VAL_FULL3, toTest.getXP(List.of(y1, y2)));
+
+        y2.setLevel(RAND_LEVEL);
+        assertNotEquals(EXP_VAL_FULL3, toTest.getXP(List.of(y1, y2)));
 
     }
 }
