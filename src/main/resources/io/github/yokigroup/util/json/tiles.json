@@ -1,0 +1,15 @@
+{
+  "1": {
+    "texture": "immagine.jpg",
+    "hitboxes": [
+      {
+        "position": {
+          "x": 10,
+          "y": 5
+        },
+        // FIXME
+        "skillId": 2
+      }
+    ]
+  }
+}
