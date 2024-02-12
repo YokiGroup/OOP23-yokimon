@@ -28,7 +28,7 @@ public class FullImplDmgCalculator implements DmgCalculator {
     @Override
     public int getDMG(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
 
-        double total = (double) (attackingYokimon.getStat(Yokimon.Stats.ATK) * attack.attackPower()
+        double total = (double) ((double)(attackingYokimon.getStat(Yokimon.Stats.ATK) * attack.attackPower())
                 / attackedYokimon.getStat(Yokimon.Stats.DEF));
 
         //same-color multiplier
