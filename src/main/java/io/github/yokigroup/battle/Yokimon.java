@@ -216,6 +216,4 @@ public interface Yokimon {
      */
     public void setExp(double exp);
 
-
-
 }

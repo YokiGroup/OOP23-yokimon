@@ -1,5 +1,7 @@
 package io.github.yokigroup.util;
 
+import java.util.Set;
+
 /**
  * A pool that given elements and their weight, it returns randomized items from it.
  * @param <T> The type of objects contained in the pool.
@@ -36,6 +38,12 @@ public interface WeightedPool<T> {
      * @return One of the elements in the pool.
      */
     T removeRandomizedElement();
+
+    /**
+     *
+     * @return A set containing all the entries in the pool.
+     */
+    Set<T> getEntries();
 
     /**
      *
