@@ -2,13 +2,8 @@ package io.github.yokigroup.world.entity.hitbox;
 
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
-import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
-import io.github.yokigroup.world.entity.hitbox.Hitbox;
-import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
