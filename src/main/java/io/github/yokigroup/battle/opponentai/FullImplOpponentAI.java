@@ -20,7 +20,7 @@ public class FullImplOpponentAI extends OpponentAI {
      * The DmgCalculator is essential to assert which move is the best one.
      * @param newDamageCalculator the required damage calculator.
      */
-    public FullImplOpponentAI (DmgCalculator newDamageCalculator) {
+    public FullImplOpponentAI(final DmgCalculator newDamageCalculator) {
         dmgCalc = newDamageCalculator;
     }
 
@@ -35,18 +35,18 @@ public class FullImplOpponentAI extends OpponentAI {
     @Override
     public Optional<Attack> getMove(final Yokimon currMyYokimon, final Yokimon currOppYokimon) {
 
-        var Attacks = currOppYokimon.getAttacks();
+        var attacks = currOppYokimon.getAttacks();
         Optional<Attack> best = Optional.empty();
 
         int maxValue = 0;
 
         //there are no available attacks
-        if (Attacks.isEmpty()) {
+        if (attacks.isEmpty()) {
             return Optional.empty();
         }
 
         //there are available attacks
-        for (Attack atk : Attacks) {
+        for (Attack atk : attacks) {
 
             int atkValue = dmgCalc.getDMG(currMyYokimon, currOppYokimon, atk);
             if (atkValue >= maxValue) {
@@ -58,7 +58,7 @@ public class FullImplOpponentAI extends OpponentAI {
         //In case the opponent Yokimon has recently used the most suitable attack,
         //a random one from the list is used instead.
         if (best.isPresent() && (lastUsed.isPresent() && lastUsed.get().equals(best.get()))) {
-            best = Optional.of(Attacks.get(rand.nextInt(Attacks.size())));
+            best = Optional.of(attacks.get(rand.nextInt(attacks.size())));
         }
         best.ifPresent(attack -> lastUsed = Optional.of(attack));
         return best;

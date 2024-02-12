@@ -18,7 +18,7 @@ public final class FullImplXPCalculator extends XPCalculator {
     public int getXP(final List<Yokimon> defeatedOpps) {
         int total = DEFAULT_TOTAL;
         for (var el: defeatedOpps) {
-            double delta = (double)el.getLevel() / DIVISOR;
+            double delta = (double) el.getLevel() / DIVISOR;
             total += (int) (MULTIPLIER * (BASE + delta));
         }
         return total;
