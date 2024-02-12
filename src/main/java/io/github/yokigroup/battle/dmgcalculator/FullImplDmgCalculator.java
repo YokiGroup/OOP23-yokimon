@@ -26,7 +26,7 @@ public class FullImplDmgCalculator implements DmgCalculator {
      * @return the actual damage (to subtract from the HP of the attacked Yokimon)
      */
     @Override
-    public int getDMG(Yokimon attackingYokimon, Yokimon attackedYokimon, Attack attack) {
+    public int getDMG(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
 
         double total = (double) (attackingYokimon.getStat(Yokimon.Stats.ATK) * attack.attackPower()
                 / attackedYokimon.getStat(Yokimon.Stats.DEF));
@@ -46,7 +46,7 @@ public class FullImplDmgCalculator implements DmgCalculator {
                     case BLACK -> {
                         total = total * WEAK;
                     }
-                    case PURPLE, WHITE -> {
+                    case PURPLE, WHITE, default -> {
                         total = total * NORMAL;
                     }
                     case RED -> {
@@ -59,7 +59,7 @@ public class FullImplDmgCalculator implements DmgCalculator {
                     case PURPLE -> {
                         total = total * WEAK;
                     }
-                    case RED, WHITE -> {
+                    case RED, WHITE, default -> {
                         total = total * NORMAL;
                     }
                     case BLACK -> {
@@ -72,11 +72,11 @@ public class FullImplDmgCalculator implements DmgCalculator {
                     case RED -> {
                         total = total * WEAK;
                     }
+                    case BLACK, WHITE, default -> {
+                        total = total * NORMAL;
+                    }
                     case PURPLE -> {
                         total = total * STRONG;
-                    }
-                    case BLACK, WHITE -> {
-                        total = total * NORMAL;
                     }
                 }
             }
