@@ -6,6 +6,8 @@ import java.util.Map;
 /**
  * Database used for test classes
  */
+
+//TODO DELETE ME
 public class YokimonDatabase {
     public static final Attack shadowBall = new AttackImpl("Shadow ball", Color.BLACK, 90, Attack.effect.NONE);
     public static final Attack strongPunch = new AttackImpl("strong punch", Color.RED, 80, Attack.effect.NONE);
