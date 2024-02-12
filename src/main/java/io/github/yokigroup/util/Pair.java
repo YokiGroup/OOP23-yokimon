@@ -7,4 +7,4 @@ package io.github.yokigroup.util;
  * @param <T> The type of the first component.
  * @param <K> The type of the second component.
  */
-public record Pair<T, K>(T x, K y){ }
+public record Pair<T, K>(T x, K y) { }
