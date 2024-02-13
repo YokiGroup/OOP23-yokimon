@@ -4,7 +4,7 @@ import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.FightSubmodule;
 import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.event.submodule.PartySubmodule;
-import io.github.yokigroup.event.submodule.PlayerPositionSubmodule;
+import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.event.submodule.Submodule;
 import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
@@ -32,7 +32,7 @@ public class GameOrchestrator implements MessageHandler, GameLogic {
         SubmoduleMap retMap = new SubmoduleMapImpl();
         List<Class<? extends Submodule>> submoduleTypes = List.of(
                 PartySubmodule.class,
-                PlayerPositionSubmodule.class,
+                PlayerCharacterSubmodule.class,
                 FightSubmodule.class,
                 GameMapSubmodule.class
         );
