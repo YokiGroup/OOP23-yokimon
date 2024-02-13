@@ -32,17 +32,6 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
         }
     }
 
-    /**
-     * Deep copy constructor for the WeightedPoolImpl.
-     * @param pool The pool to copy from.
-     */
-    public WeightedPoolImpl(final WeightedPool<T> pool, final Function<T, T> copyFunction) {
-        this();
-        for (final Pair<T, Float> pair : pool.getItemPool()) {
-            this.itemPool.add(new Pair<>(copyFunction.apply(pair.x()), pair.y()));
-        }
-    }
-
     @Override
     public final WeightedPool<T> deepCopy(final WeightedPool<T> pool, final UnaryOperator<T> copyFunction) {
         final WeightedPool<T> copyPool = new WeightedPoolImpl<>();
