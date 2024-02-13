@@ -104,4 +104,14 @@ public interface Fight {
      * @return the state.
      */
     State getState();
+
+    /**
+     * Subscribe an observer to this fight (Observer pattern).
+     */
+    void addObserver(FightObserver obs);
+
+    /**
+     * Update all the observers about changes in the fight.
+     */
+    void notifyObservers(State state);
 }
