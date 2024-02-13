@@ -54,7 +54,7 @@ public interface Fight {
      * Progress the fight one turn.
      * @param myAttack the player's attack.
      */
-    void progress(Attack myAttack);
+    //void progress(Attack myAttack);
 
     /**
      * Method through which the Logic can communicate which attack the player wants to use and do so.
@@ -107,11 +107,12 @@ public interface Fight {
 
     /**
      * Subscribe an observer to this fight (Observer pattern).
+     * @param obs the observer that wants to subscribe to the fight.
      */
     void addObserver(FightObserver obs);
 
     /**
      * Update all the observers about changes in the fight.
      */
-    void notifyObservers(State state);
+    void notifyObservers();
 }
