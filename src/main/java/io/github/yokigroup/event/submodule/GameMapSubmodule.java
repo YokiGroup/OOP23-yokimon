@@ -10,7 +10,7 @@ import io.github.yokigroup.world.tile.Tile;
  * @author Giovanni Paone
  */
 public class GameMapSubmodule extends Submodule {
-    private GameMap gameMap;
+    private final GameMap gameMap;
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
@@ -20,7 +20,7 @@ public class GameMapSubmodule extends Submodule {
         // FIXME replace with actual implementation
         this.gameMap = new GameMap() {
             @Override
-            public Tile getTileAt(Pair<Integer, Integer> position) {
+            public Tile getTileAt(final Pair<Integer, Integer> position) {
                 return null;
             }
 
