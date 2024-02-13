@@ -1,6 +1,7 @@
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerPositionSubmodule;
@@ -15,7 +16,7 @@ import java.util.Optional;
  */
 public class Altar extends Entity {
 
-    private Yokimon gift;
+    private final Yokimon gift;
     private altarState state;
     /**
      * Constructs an Altar object with the specified attributes.
@@ -25,7 +26,7 @@ public class Altar extends Entity {
      */
     public Altar(Position Pos, Hitbox Hitbox, Yokimon yokimon, MessageHandler messageHandler) {
         super(Pos, Hitbox, messageHandler);
-        this.gift = yokimon;
+        this.gift = new YokimonImpl(yokimon);
         this.state = altarState.powered;
     }
 
@@ -41,7 +42,7 @@ public class Altar extends Entity {
      * @return Optional<Yokimon> The Yokimon from the Altar
      */
     public Yokimon getNewYokimon() {
-            return this.gift;
+            return new YokimonImpl(this.gift);
     }
 
     /**
@@ -50,8 +51,7 @@ public class Altar extends Entity {
     @Override
     public void update() {
         this.getMessageHandler().handle(PlayerPositionSubmodule.class, pos -> {
-            //TODO pavo deve implementare la posizione del player
-            if(pos.equals(null) && this.state == altarState.powered){
+            if( this.state == altarState.powered){
                 this.getMessageHandler().handle(PartySubmodule.class, party ->{
                     party.addYokimon(this.getNewYokimon());
                     this.state = altarState.used;

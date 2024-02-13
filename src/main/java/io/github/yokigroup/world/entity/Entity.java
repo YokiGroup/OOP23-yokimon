@@ -1,7 +1,11 @@
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
+
+import java.util.Objects;
 
 /**
  * Entity class represents a generic entity in the game world.
@@ -43,11 +47,15 @@ public abstract class Entity {
 
     /**
      * Set a new position for the entity, if it's valid it changes it
-     * otherwise it return an error message
-     * @return message
+     *
      */
     protected void setPos(Position pos) {
-        this.pos = pos;
+        Objects.requireNonNull(pos, "Pos passed to the entity was null");
+        if(pos.isValid()){
+            this.pos = pos;
+            this.hitbox.setPosition(pos.turnIntoVector());
+        }
+
     }
 
     protected Hitbox getHitbox(){
