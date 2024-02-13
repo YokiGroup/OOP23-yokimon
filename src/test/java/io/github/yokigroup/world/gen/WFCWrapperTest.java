@@ -20,7 +20,7 @@ class WFCWrapperTest {
     }
 
     @Test
-    void getTileAt() {
+    void testGetTileAt() {
         // TODO: complete the test
     }
 }

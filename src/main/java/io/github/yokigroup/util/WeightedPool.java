@@ -1,6 +1,7 @@
 package io.github.yokigroup.util;
 
 import java.util.Set;
+import java.util.function.UnaryOperator;
 
 /**
  * A pool that given elements and their weight, it returns randomized items from it.
@@ -9,10 +10,12 @@ import java.util.Set;
 public interface WeightedPool<T> {
 
     /**
-     *
-     * @return creates a copy of the pool.
+     * Creates a copy of the WeightedPool object.
+     * @param pool The pool to copy.
+     * @param copyFunction The function to make sure to deep copy the generic element.
+     * @return A copied WeightedPool.
      */
-    WeightedPool<T> copy();
+    WeightedPool<T> deepCopy(WeightedPool<T> pool, UnaryOperator<T> copyFunction);
 
     /**
      * Adds an element to the pool, the weights can be an arbitrary value.
@@ -44,6 +47,12 @@ public interface WeightedPool<T> {
      * @return A set containing all the entries in the pool.
      */
     Set<T> getEntries();
+
+    /**
+     *
+     * @return A copy of the entire itemPool.
+     */
+    Set<Pair<T, Float>> getItemPool();
 
     /**
      *
