@@ -4,12 +4,15 @@ import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.MutablePair;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
+
+import java.util.Objects;
 
 import static java.lang.Math.sqrt;
 import static java.lang.Math.pow;
 public class PositionImpl implements Position{
 
-    private static double EXPONENT = 2.00;
+    private final static double EXPONENT = 2.00;
     private MutablePair pos;
 
     //private final MessageHandler messageHandler;
@@ -20,13 +23,14 @@ public class PositionImpl implements Position{
      * //@param message messageHandler
      */
     public PositionImpl(MutablePair pos) {
-        this.pos = pos;
+        Objects.requireNonNull(pos, "Pos passed in PositionImpl was null");
+        this.pos = pos.copyOf();
         //this.messageHandler = message;
     }
 
     @Override
     public MutablePair getPosition() {
-        return this.pos;
+        return this.pos.copyOf();
     }
 
     @Override
@@ -46,9 +50,15 @@ public class PositionImpl implements Position{
     }
 
     @Override
+    public Vector2 turnIntoVector() {
+        return new Vector2Impl(this.getPosition().getX(), this.getPosition().getY());
+    }
+
+    @Override
     public boolean inRadius(Position otherPos, double radius) {
-        double dist = getDistance((double)this.pos.getX(), (double)otherPos.getPosition().getX(),
-                (double)this.pos.getY(), (double)otherPos.getPosition().getY());
+        Objects.requireNonNull(otherPos, "Pos passed in inRadius method was null");
+        double dist = getDistance(this.pos.getX(), otherPos.getPosition().getX(),
+                this.pos.getY(), otherPos.getPosition().getY());
         return dist <= radius;
 
     }

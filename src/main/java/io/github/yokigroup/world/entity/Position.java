@@ -1,7 +1,6 @@
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.util.MutablePair;
-import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 
 /**
@@ -34,9 +33,14 @@ public interface Position {
     public boolean isValid();
 
     /**
+     * Gives a vector with coordinates correspondent to this position;
+     * @return Vector2 type
+     */
+    public Vector2 turnIntoVector();
+    /**
      * Return true if the distance from the pair passed is less then Radius
      * Return false if radius is greater;
-     * @param otherPair the other pair to check
+     * @param otherPos the other pair to check
      * @param radius min distance
      * @return boolean
      */

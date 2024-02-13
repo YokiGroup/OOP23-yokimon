@@ -73,9 +73,9 @@ public class YokimonImpl implements Yokimon{
      * Constructor for YokimonImpl for another yokimon.
      * @param yokimon yokimon to copy
      */
-    public YokimonImpl(YokimonImpl yokimon){
-        this(Objects.requireNonNull(yokimon, "YokimonImpl passed was null").name, yokimon.color,
-                Map.copyOf(yokimon.baseStats), yokimon.growthRate, yokimon.level, Map.copyOf(yokimon.learnableMoves));   ;
+    public YokimonImpl(Yokimon yokimon){
+        this(Objects.requireNonNull(yokimon, "YokimonImpl passed was null").getName(), yokimon.getYokimonColor(),
+                Map.copyOf(yokimon.getAllBaseStats()), yokimon.getGrowRate(), yokimon.getLevel(), Map.copyOf(yokimon.getLearnableAttacks()));
     }
 
     @Override

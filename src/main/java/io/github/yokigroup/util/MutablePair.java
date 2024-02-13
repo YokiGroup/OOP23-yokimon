@@ -2,8 +2,6 @@ package io.github.yokigroup.util;
 
 /**
  * A binding to a data structure containing two elements, which can eventually change.
- * @param <T> The type of the first element.
- * @param <K> The type of the second element.
  */
 public interface MutablePair{
     /**
@@ -47,4 +45,10 @@ public interface MutablePair{
      */
     void addVector(Vector2 vector);
 
+
+    /**
+     *
+     * @return return a copy of this pair
+     */
+    public MutablePair copyOf();
 }

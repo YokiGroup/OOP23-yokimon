@@ -1,5 +1,7 @@
 package io.github.yokigroup.util;
 
+import java.util.Objects;
+
 /**
  * Implementation of the MutablePair interface binding.
  */
@@ -40,13 +42,19 @@ public class MutablePairImpl implements MutablePair{
 
     @Override
     public void setPair(MutablePair newPair) {
+        Objects.requireNonNull(newPair, "Pair passed was null");
         this.x = newPair.getX();
         this.y = newPair.getY();
     }
 
     @Override
     public void addVector(Vector2 vector) {
+        Objects.requireNonNull(vector, "Vector passed was null");
         this.x+=(float)vector.getX();
         this.y+=(float)vector.getY();
+    }
+
+    public MutablePair copyOf(){
+        return new MutablePairImpl(this.x, this.y);
     }
 }
