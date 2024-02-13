@@ -35,40 +35,6 @@ class WaveFunctionCollapseTest {
         wfc = new WaveFunctionCollapseImpl(new Pair<>(WIDTH, HEIGHT), new HashSet<>(shpDic.values()));
     }
 
-    /*
-    private void printWfc() {
-        for (int j = WIDTH - 1; j >= 0; j--) {
-            for (int i = 0; i < HEIGHT; i++) {
-                final Set<WfcShapeDirection> shape = wfc.getShapeAt(new Pair<>(i, j));
-                if (Objects.equals(shape, shpDic.get("UDLR"))) {
-                    System.out.print("━╋━");
-                } else if (Objects.equals(shape, shpDic.get("DLR"))) {
-                    System.out.print("━┳━");
-                } else if (Objects.equals(shape, shpDic.get("ULR"))) {
-                    System.out.print("━┻━");
-                } else if (Objects.equals(shape, shpDic.get("UDL"))) {
-                    System.out.print("━┫ ");
-                } else if (Objects.equals(shape, shpDic.get("UDR"))) {
-                    System.out.print(" ┣━");
-                } else if (Objects.equals(shape, shpDic.get("UL"))) {
-                    System.out.print("━┛ ");
-                } else if (Objects.equals(shape, shpDic.get("UR"))) {
-                    System.out.print(" ┗━");
-                } else if (Objects.equals(shape, shpDic.get("DL"))) {
-                    System.out.print("━┓ ");
-                } else if (Objects.equals(shape, shpDic.get("DR"))) {
-                    System.out.print(" ┏━");
-                } else if (Objects.equals(shape, shpDic.get("LR"))) {
-                    System.out.print("━━━");
-                } else if (Objects.equals(shape, shpDic.get("UD"))) {
-                    System.out.print(" ┃ ");
-                }
-            }
-            System.out.println(" ");
-        }
-    }
-    */
-
     @Test
     void testGetShapeAt() {
         wfc.generateShapeMap();
