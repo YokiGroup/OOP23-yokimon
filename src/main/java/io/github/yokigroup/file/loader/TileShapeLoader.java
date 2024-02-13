@@ -61,8 +61,13 @@ public class TileShapeLoader extends JsonLoader<TileShape>{
     }
 
     private Set<Hitbox> getHitboxes(final int id) {
+        return doUntilPathException((c, i) -> {
+            Set<Hitbox> coll = c;
+            if(coll == null) coll = new HashSet<>();
 
-
+            coll.add(getHitbox(id, i));
+            return coll;
+        });
     }
 
     private Pair<Set<TileShape.TileDirections>, Tile> load(final int id){
