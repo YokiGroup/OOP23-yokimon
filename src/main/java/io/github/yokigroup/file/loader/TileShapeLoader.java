@@ -12,12 +12,13 @@ import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
 import io.github.yokigroup.world.gen.TileShape;
 import io.github.yokigroup.world.gen.TileShapeImpl;
 import io.github.yokigroup.world.tile.Tile;
+import io.github.yokigroup.world.tile.TileImpl;
 
 import java.util.*;
 
 public class TileShapeLoader extends JsonLoader<TileShape>{
     private static final String TILE_JSON_RPATH = "tiles.json";
-    private static final String TILE_NAME_JPATHF = "$.%d.shape[*]";
+    private static final String TILE_SHAPE_JPATHF = "$.%d.shape[*]";
     private static final String TILE_HITBOX_TYPE_JPATHF = "$.%d.hitboxes[%d]";
     private Map<Set<TileShape.TileDirections>, Set<Tile>> tiles = new HashMap<>();
     private final JsonParser parser = getParser();
@@ -70,11 +71,29 @@ public class TileShapeLoader extends JsonLoader<TileShape>{
         });
     }
 
-    private Pair<Set<TileShape.TileDirections>, Tile> load(final int id){
-        Set<TileShape.TileDirections> tileDirs;
-        Tile tile;
+    private Set<TileShape.TileDirections> getTileDirs(final int id) {
+        Set<String> rawTileDirs = parser.read(String.format(TILE_SHAPE_JPATHF, id));
+        Set<TileShape.TileDirections> tileDirs = new HashSet<>();
 
-        return null;
+        rawTileDirs.forEach(d -> tileDirs.add(TileShape.TileDirections.valueOf(d)));
+        return tileDirs;
+    }
+
+    private Set<Vector2>  getSpawnPositions(final int id) {
+        final String spawnPositionJPath = "$."+id+".spawns[%d]";
+        return  doUntilPathException((c, i) -> {
+            Set<Vector2> aggr = c;
+            if(aggr == null) aggr = new HashSet<>();
+
+            aggr.add(getVector2(String.format(spawnPositionJPath, i)));
+            return aggr;
+        });
+    }
+
+    private Pair<Set<TileShape.TileDirections>, Tile> load(final int id) {
+        Set<TileShape.TileDirections> tileDirs = getTileDirs(id);
+        Tile tile = new TileImpl(getHitboxes(id), getSpawnPositions(id));
+        return new Pair<>(tileDirs, tile);
     }
 
     private void insertTile(final Set<TileShape.TileDirections> dirs, final Tile tile) {
