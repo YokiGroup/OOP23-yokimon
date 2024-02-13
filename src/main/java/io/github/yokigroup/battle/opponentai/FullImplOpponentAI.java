@@ -12,6 +12,7 @@ import java.util.Optional;
  */
 public class FullImplOpponentAI extends OpponentAI {
 
+    private static final int SINGLE = 1;
     private Optional<Attack> lastUsed = Optional.empty();
     private final DmgCalculator dmgCalc;
     private final Random rand = new Random();
@@ -54,13 +55,17 @@ public class FullImplOpponentAI extends OpponentAI {
                 best = Optional.of(atk);
             }
         }
-        //FIXME
+        //TODO TEST THIS CLASS
         //In case the opponent Yokimon has recently used the most suitable attack,
         //a random one from the list is used instead.
-        if (best.isPresent() && (lastUsed.isPresent() && lastUsed.get().equals(best.get()))) {
-            best = Optional.of(attacks.get(rand.nextInt(attacks.size())));
+        if (best.isPresent()) {
+            if (attacks.size() > SINGLE && lastUsed.isPresent()) {
+                while(best.get().equals(lastUsed.get())) {
+                    best = Optional.of(attacks.get(rand.nextInt(attacks.size())));
+                }
+            }
+            lastUsed = best;
         }
-        best.ifPresent(attack -> lastUsed = Optional.of(attack));
         return best;
     }
 }
