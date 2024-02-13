@@ -10,6 +10,8 @@ import io.github.yokigroup.battle.opponentai.OpponentAI;
 import io.github.yokigroup.battle.opponentai.DummyImplOpponentAI;
 import io.github.yokigroup.battle.xpcalculator.FullImplXPCalculator;
 import io.github.yokigroup.battle.xpcalculator.XPCalculator;
+import io.github.yokigroup.core.Publisher;
+import io.github.yokigroup.core.PublisherImpl;
 
 import java.util.*;
 
@@ -37,10 +39,10 @@ public final class FightImpl implements Fight {
 
     /* List to keep in store defeated Yokimons. */
     private final List<Yokimon> defeatedOpps = new LinkedList<>();
-    /* Current state of the fight. */
+
+    /* Current state of the fight and event publisher */
     private State state;
-    /* The Observers subscribed to this fight. */
-    Set<FightObserver> observerSet = new HashSet<>();
+    private final Publisher<Fight> publisher = new PublisherImpl<Fight>();
 
     /**
      * Builder to instantiate the fight through the Logic.
@@ -59,6 +61,7 @@ public final class FightImpl implements Fight {
         this.state = State.READY_TO_PROGRESS;
     }
 
+
     /*
     @Override
     public void progress(Attack myAttack) {
@@ -70,6 +73,7 @@ public final class FightImpl implements Fight {
         }
     }
      */
+
 
     @Override
     public Success attack(final Attack myAttack) {
@@ -89,7 +93,7 @@ public final class FightImpl implements Fight {
                 int xpGain = xpCalc.getXP(defeatedOpps);
                 currMyYokimon.takeXp(xpGain);
                 state = State.WIN;
-                notifyObservers();
+                publisher.notifyObservers(this);
                 return Success.VICTORY;
             }
         }
@@ -117,7 +121,7 @@ public final class FightImpl implements Fight {
                 return successRate(damage);
             } else {
                 state = State.LOSE;
-                notifyObservers();
+                publisher.notifyObservers(this);
                 return Success.LOSS;
             }
         }
@@ -165,18 +169,6 @@ public final class FightImpl implements Fight {
     @Override
     public State getState() {
         return this.state;
-    }
-
-    @Override
-    public void addObserver(FightObserver obs) {
-        observerSet.add(obs);
-    }
-
-    @Override
-    public void notifyObservers () {
-        for (var obs : observerSet) {
-            obs.update(this, state);
-        }
     }
 
 }
