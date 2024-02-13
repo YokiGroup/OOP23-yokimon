@@ -4,10 +4,12 @@ import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PartySubmodule;
+import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.event.submodule.PlayerPositionSubmodule;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.people.Player;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -18,6 +20,7 @@ public class Altar extends Entity {
 
     private final Yokimon gift;
     private altarState state;
+    private final static double RADIUS = 4;
     /**
      * Constructs an Altar object with the specified attributes.
      * @param Pos The position of the Altar
@@ -50,8 +53,10 @@ public class Altar extends Entity {
      */
     @Override
     public void update() {
-        this.getMessageHandler().handle(PlayerPositionSubmodule.class, pos -> {
-            if( this.state == altarState.powered){
+        this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {
+            Objects.requireNonNull(pos.getPosition().getPosition(), "Position of the player invalid");
+            if(pos.getPosition().isValid() && pos.getPosition().inRadius(this.getPos(), RADIUS)
+                    && this.state == altarState.powered){
                 this.getMessageHandler().handle(PartySubmodule.class, party ->{
                     party.addYokimon(this.getNewYokimon());
                     this.state = altarState.used;

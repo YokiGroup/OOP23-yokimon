@@ -40,8 +40,12 @@ public class Enemy extends People {
      *
      */
     public void follow() {
+
     }
 
+    public void wander(){
+
+    }
     /**
      * Updates the state of the Enemy (switches between wander and follow).
      *

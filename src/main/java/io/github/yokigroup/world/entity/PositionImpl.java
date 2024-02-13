@@ -1,6 +1,7 @@
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.util.MutablePair;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
@@ -14,6 +15,8 @@ public class PositionImpl implements Position{
 
     private final static double EXPONENT = 2.00;
     private MutablePair pos;
+
+    private MessageHandler messageHandler;
 
     //private final MessageHandler messageHandler;
 
@@ -46,6 +49,9 @@ public class PositionImpl implements Position{
 
     @Override
     public boolean isValid() {
+        messageHandler.handle(GameMapSubmodule.class, map -> {
+            map.getEntitiesOnCurrentTile();
+        });
         return true;
     }
 
