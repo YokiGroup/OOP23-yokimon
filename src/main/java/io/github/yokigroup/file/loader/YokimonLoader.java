@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class YokimonLoader extends AbstractJsonLoader<Yokimon>{
+public class YokimonLoader extends IdJsonLoader<Yokimon> {
     // path of yokimon json file relative to JsonParser.ROOT
     private static final String YOKIMON_JSON_PATH = "yokimons.json";
     private static final String YOKI_NAME_JPATHF = "$.%d.name";
