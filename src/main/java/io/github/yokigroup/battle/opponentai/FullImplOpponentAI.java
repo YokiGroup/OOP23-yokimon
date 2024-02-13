@@ -3,6 +3,8 @@ package io.github.yokigroup.battle.opponentai;
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.dmgcalculator.DmgCalculator;
+
+import java.util.List;
 import java.util.Random;
 
 import java.util.Optional;
@@ -36,7 +38,8 @@ public class FullImplOpponentAI extends OpponentAI {
     @Override
     public Optional<Attack> getMove(final Yokimon currMyYokimon, final Yokimon currOppYokimon) {
 
-        var attacks = currOppYokimon.getAttacks();
+        //FIXME: GetAttacks() --> it returns a list of only the most powerful attack
+        List<Attack> attacks = currOppYokimon.getAttacks();
         Optional<Attack> best = Optional.empty();
 
         int maxValue = 0;
@@ -55,7 +58,7 @@ public class FullImplOpponentAI extends OpponentAI {
                 best = Optional.of(atk);
             }
         }
-        //TODO TEST THIS CLASS
+
         //In case the opponent Yokimon has recently used the most suitable attack,
         //a random one from the list is used instead.
         if (best.isPresent()) {

@@ -47,7 +47,7 @@ public final class OpponentAITest {
     /**
      * Testing the full implementation (FullImplOpponentAI) with a BasicImplDmgCalculator.
      */
-    //FIXME --> ON THE SECOND RUN IT DOESN'T CHANGE THE ATTACK, IT ALWAYS CHOOSES THE BEST ONE
+
     //NOTE: IN ORDER TO TEST YOU NEED TO MODIFY THE JSON FILE SO THEY HAVE MORE ATTACKS AVAILABLE
     @Test public void testFullImplBasicDMGCalc() {
         OpponentAI toTest = new FullImplOpponentAI(new BasicImplDmgCalculator());
