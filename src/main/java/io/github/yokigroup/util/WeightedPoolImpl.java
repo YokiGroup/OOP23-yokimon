@@ -3,6 +3,8 @@ package io.github.yokigroup.util;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 /**
@@ -24,15 +26,30 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
      * @param pool The pool to copy from.
      */
     public WeightedPoolImpl(final WeightedPool<T> pool) {
-        this.itemPool = new HashSet<>();
+        this();
         for (final Pair<T, Float> pair : pool.getItemPool()) {
             this.itemPool.add(new Pair<>(pair.x(), pair.y()));
         }
     }
 
+    /**
+     * Deep copy constructor for the WeightedPoolImpl.
+     * @param pool The pool to copy from.
+     */
+    public WeightedPoolImpl(final WeightedPool<T> pool, final Function<T, T> copyFunction) {
+        this();
+        for (final Pair<T, Float> pair : pool.getItemPool()) {
+            this.itemPool.add(new Pair<>(copyFunction.apply(pair.x()), pair.y()));
+        }
+    }
+
     @Override
-    public final Set<Pair<T, Float>> getItemPool() {
-        return Set.copyOf(itemPool);
+    public final WeightedPool<T> deepCopy(final WeightedPool<T> pool, final UnaryOperator<T> copyFunction) {
+        final WeightedPool<T> copyPool = new WeightedPoolImpl<>();
+        for (final Pair<T, Float> pair : pool.getItemPool()) {
+            copyPool.addElement(copyFunction.apply(pair.x()), pair.y());
+        }
+        return copyPool;
     }
 
     @Override
@@ -85,6 +102,11 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
                 .map(Pair::x)
                 .collect(Collectors.toSet())
         );
+    }
+
+    @Override
+    public final Set<Pair<T, Float>> getItemPool() {
+        return Set.copyOf(itemPool);
     }
 
     @Override

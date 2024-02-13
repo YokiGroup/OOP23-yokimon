@@ -1,12 +1,21 @@
 package io.github.yokigroup.util;
 
 import java.util.Set;
+import java.util.function.UnaryOperator;
 
 /**
  * A pool that given elements and their weight, it returns randomized items from it.
  * @param <T> The type of objects contained in the pool.
  */
 public interface WeightedPool<T> {
+
+    /**
+     * Creates a copy of the WeightedPool object.
+     * @param pool The pool to copy.
+     * @param copyFunction The function to make sure to deep copy the generic element.
+     * @return A copied WeightedPool.
+     */
+    WeightedPool<T> deepCopy(WeightedPool<T> pool, UnaryOperator<T> copyFunction);
 
     /**
      * Adds an element to the pool, the weights can be an arbitrary value.
