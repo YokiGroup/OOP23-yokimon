@@ -27,6 +27,9 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @param shapes The shapes the map can have.
      */
     public WaveFunctionCollapseImpl(final Pair<Integer, Integer> dimensions, final Set<Set<WfcShapeDirection>> shapes) {
+        if (shapes == null) {
+            throw new IllegalArgumentException("The WaveFunctionCollapse's shape set must not be null.");
+        }
         // Arbitrary max depth
         this.maxDepth = shapes.size();
         this.dimensions = dimensions;
@@ -35,7 +38,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         for (int i = 0; i < dimensions.x(); i++) {
             for (int j = 0; j < dimensions.y(); j++) {
                 final WeightedPool<Set<WfcShapeDirection>> pool = new WeightedPoolImpl<>();
-                shapes.forEach(s -> pool.addElement(s, 1.0f));
+                Set.copyOf(shapes).forEach(s -> pool.addElement(Set.copyOf(s), 1.0f));
                 this.shapeMap.put(new Pair<>(i, j), pool);
             }
         }
@@ -45,9 +48,9 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
     public final Set<WfcShapeDirection> getShapeAt(final Pair<Integer, Integer> position) {
         // If there's more than one possibility per position, the algorithm has not finished generating the map.
         if (shapeMap.get(position).size() > 1) {
-            throw new RuntimeException("The WaveFunctionCollapse algorithm has not yet finished generating the map.");
+            throw new IllegalStateException("The WaveFunctionCollapse algorithm has not yet generated the map correctly.");
         }
-        return shapeMap.get(position).getRandomizedElement();
+        return Map.copyOf(shapeMap).get(position).getRandomizedElement();
     }
 
     @Override
@@ -59,7 +62,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
             throw new IllegalArgumentException("The position must be inside the bounds of the map.");
         }
         final WeightedPool<Set<WfcShapeDirection>> pool = new WeightedPoolImpl<>();
-        shape.forEach(s -> pool.addElement(s, 1.0f));
+        Set.copyOf(shape).forEach(s -> pool.addElement(Set.copyOf(s), 1.0f));
         this.shapeMap.put(position, pool);
         updateAdjacentShapes(maxDepth, position);
     }
@@ -133,7 +136,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @param shapes The shapes to check.
      * @return A set of enums containing where the random shape has always the same direction.
      */
-    public Set<WfcShapeDirection> getCoherentDirections(final Set<Set<WfcShapeDirection>> shapes) {
+    private Set<WfcShapeDirection> getCoherentDirections(final Set<Set<WfcShapeDirection>> shapes) {
         // Get the common shapes through a stream
         final Set<WfcShapeDirection> commonShapes = shapes.stream()
                 .reduce((a, b) -> {

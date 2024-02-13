@@ -44,7 +44,7 @@ public enum WfcShapeDirection {
      * @return The coordinate offset.
      */
     public Pair<Integer, Integer> getOffset() {
-        return this.offset;
+        return new Pair<>(this.offset.x(), this.offset.y());
     }
 
     /**

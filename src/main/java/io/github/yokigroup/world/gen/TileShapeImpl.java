@@ -19,16 +19,21 @@ public class TileShapeImpl implements TileShape {
      * @param shape The shape of the tile.
      */
     public TileShapeImpl(final Set<Tile> tiles, final Set<TileDirections> shape) {
-        this.shape = shape;
+        if (shape == null) {
+            throw new IllegalArgumentException("The 'shape' argument is null.");
+        } else if (tiles == null) {
+            throw new IllegalArgumentException("The 'tiles' argument is null");
+        }
+        this.shape = Set.copyOf(shape);
         this.tiles = new WeightedPoolImpl<>();
-        for (final Tile t : tiles) {
+        for (final Tile t : Set.copyOf(tiles)) {
             this.tiles.addElement(t, 1.0f);
         }
     }
 
     @Override
     public final WeightedPool<Tile> getTiles() {
-        return tiles.copy();
+        return new WeightedPoolImpl<>(this.tiles);
     }
 
     @Override

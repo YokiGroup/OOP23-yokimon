@@ -30,7 +30,7 @@ class TileShapeTest {
     }
 
     @Test
-    void getTiles() {
+    void testGetTiles() {
         tileShape1 = new TileShapeImpl(Set.of(new TileImpl(), new TileImpl()), tileShapeSet1);
         final WeightedPool<Tile> tileSet = tileShape1.getTiles();
         assertEquals(2, tileSet.size());
@@ -40,7 +40,7 @@ class TileShapeTest {
     }
 
     @Test
-    void getPossibleDirections() {
+    void testGetPossibleDirections() {
         assertEquals(tileShapeSet1, tileShape1.getPossibleDirections());
         assertEquals(tileShapeSet2, tileShape2.getPossibleDirections());
         assertEquals(tileShapeSet3, tileShape3.getPossibleDirections());
