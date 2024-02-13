@@ -3,7 +3,10 @@ package io.github.yokigroup.event.submodule;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.GameMap;
+import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.tile.Tile;
+
+import java.util.Set;
 
 /**
  * Submodule containing a GameMap and relevant methods to query the map's state.
@@ -46,9 +49,10 @@ public class GameMapSubmodule extends Submodule {
     /**
      * Gets the entities contained in the Tile the player's currently on.
      */
-    public void getEntitiesOnCurrentTile() {
+    public Set<Entity> getEntitiesOnCurrentTile() {
         // FIXME consider whether this should be here
         // TODO implement
+        return Set.of();
     }
 
     @Override
