@@ -72,7 +72,7 @@ public class TileShapeLoader extends JsonLoader<TileShape>{
     }
 
     private Set<TileShape.TileDirections> getTileDirs(final int id) {
-        Set<String> rawTileDirs = parser.read(String.format(TILE_SHAPE_JPATHF, id));
+        List<String> rawTileDirs = parser.read(String.format(TILE_SHAPE_JPATHF, id));
         Set<TileShape.TileDirections> tileDirs = new HashSet<>();
 
         rawTileDirs.forEach(d -> tileDirs.add(TileShape.TileDirections.valueOf(d)));
