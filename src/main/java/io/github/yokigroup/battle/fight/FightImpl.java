@@ -43,6 +43,8 @@ public final class FightImpl implements Fight {
     private final List<Yokimon> defeatedOpps = new LinkedList<>();
     /* Current state of the fight. */
     private State state;
+    /* The Observers subscribed to this fight. */
+    Set<FightObserver> observerSet = new HashSet<>();
 
     /**
      * Builder to instantiate the fight through the Logic.
@@ -61,6 +63,7 @@ public final class FightImpl implements Fight {
         this.state = State.READY_TO_PROGRESS;
     }
 
+    /*
     @Override
     public void progress(Attack myAttack) {
         if (state.equals(State.READY_TO_PROGRESS)) {
@@ -70,6 +73,7 @@ public final class FightImpl implements Fight {
             }
         }
     }
+     */
 
     @Override
     public Success attack(final Attack myAttack) {
@@ -84,10 +88,12 @@ public final class FightImpl implements Fight {
             final Optional<Yokimon> nextOppYok = nextYok.getNext(oppYokimons);
             if (nextOppYok.isPresent()) {
                 currOppYokimon = nextOppYok.get();
+
             } else {
                 int xpGain = xpCalc.getXP(defeatedOpps);
                 currMyYokimon.takeXp(xpGain);
                 state = State.WIN;
+                notifyObservers();
                 return Success.VICTORY;
             }
         }
@@ -115,6 +121,7 @@ public final class FightImpl implements Fight {
                 return successRate(damage);
             } else {
                 state = State.LOSE;
+                notifyObservers();
                 return Success.LOSS;
             }
         }
@@ -163,4 +170,17 @@ public final class FightImpl implements Fight {
     public State getState() {
         return this.state;
     }
+
+    @Override
+    public void addObserver(FightObserver obs) {
+        observerSet.add(obs);
+    }
+
+    @Override
+    public void notifyObservers () {
+        for (var obs : observerSet) {
+            obs.update(this, state);
+        }
+    }
+
 }
