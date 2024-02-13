@@ -5,7 +5,6 @@ import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
-import io.github.yokigroup.event.submodule.PlayerPositionSubmodule;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.people.Player;
 
