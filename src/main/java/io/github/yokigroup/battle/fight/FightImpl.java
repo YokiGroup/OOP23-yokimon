@@ -1,7 +1,6 @@
 package io.github.yokigroup.battle.fight;
 
 import io.github.yokigroup.battle.dmgcalculator.DmgCalculator;
-import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.dmgcalculator.FullImplDmgCalculator;
@@ -11,11 +10,8 @@ import io.github.yokigroup.battle.opponentai.OpponentAI;
 import io.github.yokigroup.battle.opponentai.DummyImplOpponentAI;
 import io.github.yokigroup.battle.xpcalculator.FullImplXPCalculator;
 import io.github.yokigroup.battle.xpcalculator.XPCalculator;
-import io.github.yokigroup.battle.xpcalculator.DummyImplXPCalculator;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * The actual Fight implementation communicating with the Logic.
