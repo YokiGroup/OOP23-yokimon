@@ -58,6 +58,17 @@ public final class FightImpl implements Fight {
         }
         this.currMyYokimon = nextYok.getNext(myYokimons).get();
         this.currOppYokimon = nextYok.getNext(oppYokimons).get();
+        this.state = State.READY_TO_PROGRESS;
+    }
+
+    @Override
+    public void progress(Attack myAttack) {
+        if (state.equals(State.READY_TO_PROGRESS)) {
+            attack(myAttack);
+            if (state.equals(State.READY_TO_PROGRESS)) {
+                getAttacked();
+            }
+        }
     }
 
     @Override
@@ -76,9 +87,10 @@ public final class FightImpl implements Fight {
             } else {
                 int xpGain = xpCalc.getXP(defeatedOpps);
                 currMyYokimon.takeXp(xpGain);
+                state = State.WIN;
+                return Success.VICTORY;
             }
         }
-
         return successRate(damage);
     }
 
@@ -97,9 +109,15 @@ public final class FightImpl implements Fight {
             myYokimons.remove(currMyYokimon);
 
             final Optional<Yokimon> nextMyYok = nextYok.getNext(myYokimons);
-            nextMyYok.ifPresent(yokimon -> currOppYokimon = yokimon);
-        }
 
+            if (nextMyYok.isPresent()) {
+                currMyYokimon = nextMyYok.get();
+                return successRate(damage);
+            } else {
+                state = State.LOSE;
+                return Success.LOSS;
+            }
+        }
         return successRate(damage);
     }
 
@@ -139,5 +157,10 @@ public final class FightImpl implements Fight {
     @Override
     public Yokimon getCurrentOpponent() {
         return currOppYokimon;
+    }
+
+    @Override
+    public State getState() {
+        return this.state;
     }
 }
