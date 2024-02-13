@@ -39,11 +39,10 @@ public final class FightImpl implements Fight {
     private final OpponentAI oppAI = new DummyImplOpponentAI();         //TODO: SUBSTITUTE NEW AND FULLER VERSIONS
     private final NextYokimon nextYok = new DummyImplNextYokimon();
 
-    /**
-     * List to keep in store defeated Yokimons.
-     */
+    /* List to keep in store defeated Yokimons. */
     private final List<Yokimon> defeatedOpps = new LinkedList<>();
-
+    /* Current state of the fight. */
+    private State state;
 
     /**
      * Builder to instantiate the fight through the Logic.
