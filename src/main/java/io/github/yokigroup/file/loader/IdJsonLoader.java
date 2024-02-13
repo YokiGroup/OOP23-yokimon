@@ -17,15 +17,11 @@ public abstract class IdJsonLoader<T> extends JsonLoader<T> {
 
     public Map<Integer, T> getAll(){
         Map<Integer, T> retMap = new HashMap<>();
-        int i = 1;
-        try {
-            // Will stop once it finds no more items to load without breaking id continuity.
-            while (true) {
-                retMap.put(i, load(i));
-                i++;
-            }
-        }catch(PathNotFoundException e) {
-            return retMap;
-        }
+        return doUntilPathException((c, i) -> {
+            var coll = c;
+            if(coll == null) coll = new HashMap<>();
+            coll.put(i, load(i));
+            return coll;
+        });
     }
 }
