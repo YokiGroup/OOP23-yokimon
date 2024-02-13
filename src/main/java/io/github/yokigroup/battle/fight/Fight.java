@@ -11,7 +11,7 @@ public interface Fight {
     /**
      * Different success rates trigger a different quote on the view.
      */
-    enum Success {
+     enum Success {
         /**
          * The attack was successful.
          */
@@ -27,8 +27,34 @@ public interface Fight {
         /**
          * The attack was a failure.
          */
-        FAIL
+        FAIL,
+        VICTORY,
+        LOSS
     }
+
+    /**
+     * Meant for signaling the state of the fight (Observer pattern).
+     */
+    enum State {
+        /**
+         * The fight has been instantiated. We can proceed.
+         */
+         READY_TO_PROGRESS,
+        /**
+         * The fight ended with the player's victory.
+         */
+        WIN,
+        /**
+         * The fight ended with the player's loss.
+         */
+        LOSE
+    }
+
+    /**
+     * Progress the fight one turn.
+     * @param myAttack the player's attack.
+     */
+    void progress(Attack myAttack);
 
     /**
      * Method through which the Logic can communicate which attack the player wants to use and do so.
@@ -73,4 +99,9 @@ public interface Fight {
      */
     Yokimon getCurrentOpponent();
 
+    /**
+     * The current state of the fight.
+     * @return the state.
+     */
+    State getState();
 }
