@@ -9,12 +9,6 @@ import java.util.Set;
 public interface WeightedPool<T> {
 
     /**
-     *
-     * @return creates a copy of the pool.
-     */
-    WeightedPool<T> copy();
-
-    /**
      * Adds an element to the pool, the weights can be an arbitrary value.
      * @param element The element to add to the pool.
      * @param weight The chance of an element to be chosen.
@@ -44,6 +38,12 @@ public interface WeightedPool<T> {
      * @return A set containing all the entries in the pool.
      */
     Set<T> getEntries();
+
+    /**
+     *
+     * @return A copy of the entire itemPool.
+     */
+    Set<Pair<T, Float>> getItemPool();
 
     /**
      *

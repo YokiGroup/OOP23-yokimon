@@ -19,13 +19,20 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
         this.itemPool = new HashSet<>();
     }
 
-    @Override
-    public final WeightedPoolImpl<T> copy() {
-        final WeightedPoolImpl<T> clone = new WeightedPoolImpl<>();
-        for (final Pair<T, Float> pair : this.itemPool) {
-            clone.itemPool.add(new Pair<>(pair.x(), pair.y()));
+    /**
+     * Copy constructor for the WeightedPoolImpl.
+     * @param pool The pool to copy from.
+     */
+    public WeightedPoolImpl(final WeightedPool<T> pool) {
+        this.itemPool = new HashSet<>();
+        for (final Pair<T, Float> pair : pool.getItemPool()) {
+            this.itemPool.add(new Pair<>(pair.x(), pair.y()));
         }
-        return clone;
+    }
+
+    @Override
+    public final Set<Pair<T, Float>> getItemPool() {
+        return Set.copyOf(itemPool);
     }
 
     @Override
