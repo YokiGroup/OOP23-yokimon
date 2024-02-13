@@ -1,17 +1,58 @@
 package io.github.yokigroup.file.loader;
 
+import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
+import io.github.yokigroup.world.entity.hitbox.Hitbox;
+import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
+import io.github.yokigroup.world.gen.TileShape;
+import io.github.yokigroup.world.tile.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TileShapeLoaderTest {
+    private TileShape loadedTileShape;
+    private Tile loadedTile;
 
     @BeforeEach
     void setUp() {
+        TileShapeLoader tileShapeLoader = new TileShapeLoader();
+        var tileShapeSet = tileShapeLoader.getAll();
+
+        assertEquals(1, tileShapeSet.size());
+        for(var t: tileShapeSet) loadedTileShape = t; // will return only element in Set
+        assertNotNull(loadedTileShape);
+
+        assertEquals(1, loadedTileShape.getTiles().size());
+        for(var t: loadedTileShape.getTiles().getEntries()) loadedTile = t;
+        assertNotNull(loadedTile);
     }
 
     @Test
-    void getAll() {
+    void hitboxesTest() {
+        Hitbox rectHitbox = new RectangularHitbox(
+                new Vector2Impl(10.0, 5.0),
+                new Vector2Impl(5.0, 5.0)
+        );
+        Hitbox circleHitbox = new CircularHitbox(
+                new Vector2Impl(30.0, 5.0),
+                5.0
+        );
+        assertEquals(
+                Set.of(rectHitbox, circleHitbox),
+                loadedTile.getHitboxes()
+        );
+    }
+
+    @Test
+    void possibleDirectionsTest() {
+        assertEquals(
+                Set.of(TileShape.TileDirections.DOWN, TileShape.TileDirections.LEFT),
+                loadedTileShape.getPossibleDirections()
+        );
     }
 }
