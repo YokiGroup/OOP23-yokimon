@@ -34,7 +34,6 @@ public class Enemy extends People {
      */
     private static final double VELOCITY = 1.50;
     private State state;
-    private WeightedPoolImpl<Direction> directionWeightedPool;
     /**
      * Constructs an Enemy object with the specified attributes.
      * @param pos The position of the Enemy

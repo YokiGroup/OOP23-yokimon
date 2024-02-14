@@ -1,8 +1,6 @@
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.util.Vector2;
-import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 import java.util.Objects;
@@ -21,11 +19,11 @@ public abstract class Entity {
     /**
      * Constructs an Entity object with the specified attributes.
      * @param pos The position of the Entity
-     * @param hitbox The hitbox of the Entity
+     * @param hitBox The hitBox of the Entity
      */
-    public Entity(Position pos, Hitbox hitbox, MessageHandler messageHandler){
+    public Entity(Position pos, Hitbox hitBox, MessageHandler messageHandler){
         this.messageHandler = messageHandler;
-        this.setHitbox(hitbox);
+        this.setHitBox(hitBox);
         this.setPos(pos);
     }
 
@@ -65,7 +63,7 @@ public abstract class Entity {
     /**
      * Updates the state of the entity.
      */
-    protected void setHitbox(Hitbox hitbox) {
+    protected void setHitBox(Hitbox hitbox) {
         this.hitbox = hitbox;
     }
 

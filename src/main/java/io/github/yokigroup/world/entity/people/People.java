@@ -33,11 +33,11 @@ public abstract class People extends Entity {
     /**
      * Constructs a People object with the specified attributes.
      * @param pos The position of the People
-     * @param hitbox The hitbox of the People
+     * @param hitBox The hitBox of the People
      * @param party The party of Yokimon belonging to the People
      */
-    public People(Position pos, Hitbox hitbox, List<Yokimon> party, MessageHandler messageHandler) {
-        super(pos, hitbox, messageHandler);
+    public People(Position pos, Hitbox hitBox, List<Yokimon> party, MessageHandler messageHandler) {
+        super(pos, hitBox, messageHandler);
         this.Party = List.copyOf(party);
         this.direction = DEFAULT_DIRECTION;
         this.active = true;
