@@ -38,7 +38,6 @@ public class FullImplOpponentAI extends OpponentAI {
     @Override
     public Optional<Attack> getMove(final Yokimon currMyYokimon, final Yokimon currOppYokimon) {
 
-        //FIXME: GetAttacks() --> it returns a list of only the most powerful attack
         List<Attack> attacks = currOppYokimon.getAttacks();
         Optional<Attack> best = Optional.empty();
 
