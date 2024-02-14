@@ -20,12 +20,12 @@ public class FightSubmodule extends Submodule {
     }
 
     /**
-     * Adds Fight {@param f} to be processed as next encounter.
-     * @param f
+     * Generates fight to be processed as next encounter.
+     * @param fightDifficulty difficulty of the fight to generate
      */
-    public void addEncounter(final Fight f) {
-        // FIXME perhaps Fight could adopt the Builder design pattern?
-        lastAnnouncedFight = Optional.ofNullable(f);
+    public void addEncounter(final int fightDifficulty) {
+        // FIXME implement
+        //lastAnnouncedFight = Optional.ofNullable(f);
     }
 
     /**
