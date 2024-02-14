@@ -28,7 +28,13 @@ public interface Fight {
          * The attack was a failure.
          */
         FAIL,
+        /**
+         * The attack resulted in the player's victory.
+         */
         VICTORY,
+        /**
+         * The attack resulted in the player's loss.
+         */
         LOSS
     }
 
