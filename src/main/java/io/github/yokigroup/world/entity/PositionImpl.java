@@ -13,8 +13,6 @@ public class PositionImpl implements Position{
     private final static double EXPONENT = 2.00;
     private Vector2 pos;
 
-    private MessageHandler messageHandler;
-
     //private final MessageHandler messageHandler;
 
     /**
@@ -47,11 +45,10 @@ public class PositionImpl implements Position{
         return new PositionImpl(this.pos.plus(vector));
     }
 
-
     @Override
-    public boolean isValid() {
+    public boolean isValid(MessageHandler messageHandler) {
+        Objects.requireNonNull(messageHandler, "Message was null");
         messageHandler.handle(GameMapSubmodule.class, map -> {
-        //    map.getEntitiesOnCurrentTile().
         });
         return true;
     }

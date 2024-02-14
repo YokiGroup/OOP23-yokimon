@@ -54,7 +54,7 @@ public class Altar extends Entity {
     public void update() {
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {
             Objects.requireNonNull(pos.getPosition().getPosition(), "Position of the player invalid");
-            if(pos.getPosition().isValid() && pos.getPosition().inRadius(this.getPos(), RADIUS)
+            if(pos.getPosition().isValid(this.getMessageHandler()) && pos.getPosition().inRadius(this.getPos(), RADIUS)
                     && this.state == altarState.powered){
                 this.getMessageHandler().handle(PartySubmodule.class, party ->{
                     party.addYokimon(this.getNewYokimon());

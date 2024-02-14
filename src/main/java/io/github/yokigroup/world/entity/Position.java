@@ -1,5 +1,6 @@
 package io.github.yokigroup.world.entity;
 
+import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Vector2;
 
 /**
@@ -36,7 +37,7 @@ public interface Position {
      * False if is not.
      * @return boolean
      */
-    public boolean isValid();
+    public boolean isValid(MessageHandler messageHandler);
 
     /**
      * Return true if the distance from the pair passed is less then Radius

@@ -51,7 +51,7 @@ public abstract class Entity {
      */
     public void setPos(Position pos) {
         Objects.requireNonNull(pos, "Pos passed to the entity was null");
-        if(pos.isValid()){
+        if(pos.isValid(this.messageHandler)){
             this.pos = pos;
             this.hitbox.setPosition(pos.getPosition());
         }
