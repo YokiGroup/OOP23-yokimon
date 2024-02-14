@@ -6,10 +6,10 @@ import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.PositionImpl;
 
 /**
- * Handles player position updates.
+ * Handles player updates.
  * @author Giovanni Paone
  */
-public class PlayerCharacterSubmodule extends Submodule {
+public final class PlayerCharacterSubmodule extends Submodule {
 /*
     private final Entity player;
 */
@@ -53,7 +53,10 @@ public class PlayerCharacterSubmodule extends Submodule {
         //TODO change tile of player by going in dir
     }
 
-    public Position getPosition(){
+    /**
+     * @return position of player character.
+     */
+    public Position getPosition() {
         // FIXME implement
         return new PositionImpl(null);
     }
