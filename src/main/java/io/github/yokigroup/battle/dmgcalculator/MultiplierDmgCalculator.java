@@ -10,6 +10,7 @@ import io.github.yokigroup.battle.Yokimon;
 public class MultiplierDmgCalculator implements DmgCalculator {
 
     private static final double MULTIPLIER = 1.2;
+    private static final int DIVISOR = 4;
 
     /**
      * This version uses a multiplier in case a Yokimon and the attack are of the same color.
@@ -21,7 +22,7 @@ public class MultiplierDmgCalculator implements DmgCalculator {
     @Override
     public int getDMG(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
         double total = (double) ((double) (attackingYokimon.getStat(Yokimon.Stats.ATK) * attack.attackPower())
-                / attackedYokimon.getStat(Yokimon.Stats.DEF));
+                / (attackedYokimon.getStat(Yokimon.Stats.DEF) * DIVISOR));
 
         if (attackingYokimon.getYokimonColor().equals(attack.getColor())) {
             total = total * MULTIPLIER;

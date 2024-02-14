@@ -10,6 +10,7 @@ import io.github.yokigroup.battle.Yokimon;
 public class FullImplDmgCalculator implements DmgCalculator {
 
     private static final double MULTIPLIER = 1.2;
+    private static final int DIVISOR = 4;
     private static final double STRONG = 2.0;           //TODO MUST TEST THIS CLASS!!!!!!!!!!!
     private static final double NORMAL = 1.0;
     private static final double WEAK = 0.5;
@@ -29,7 +30,7 @@ public class FullImplDmgCalculator implements DmgCalculator {
     public int getDMG(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
 
         double total = (double) ((double) (attackingYokimon.getStat(Yokimon.Stats.ATK) * attack.attackPower())
-                / attackedYokimon.getStat(Yokimon.Stats.DEF));
+                / (attackedYokimon.getStat(Yokimon.Stats.DEF) * DIVISOR));
 
         //same-color multiplier
         if (attackingYokimon.getYokimonColor().equals(attack.getColor())) {
