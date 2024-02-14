@@ -73,7 +73,6 @@ class TileTest {
     @Test
     void spawnEntities() {
         final WeightedPool<Entity> entityPool = new WeightedPoolImpl<>();
-        // FIXME: instantiation of entities
         final MessageHandler mh = new MessageHandler() {
             @Override
             public <T extends Submodule> void handle(final Class<T> subModuleType, final Consumer<T> handler) {
