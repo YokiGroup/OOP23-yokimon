@@ -13,7 +13,7 @@ import java.util.Set;
  * Submodule containing a GameMap and relevant methods to query the map's state.
  * @author Giovanni Paone
  */
-public class GameMapSubmodule extends Submodule {
+public final class GameMapSubmodule extends Submodule {
     private final GameMap gameMap;
 
     /**
@@ -52,6 +52,9 @@ public class GameMapSubmodule extends Submodule {
         return this.gameMap;
     }
 
+    /**
+     * @return hitboxes contained in the tile the player's currently on.
+     */
     public Set<Hitbox> getHitboxesOnCurrentTile() {
         return gameMap.getPlayerTile().getHitboxes();
     }
