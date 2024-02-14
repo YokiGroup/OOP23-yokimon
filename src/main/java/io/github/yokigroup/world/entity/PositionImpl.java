@@ -2,10 +2,7 @@ package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.util.MutablePair;
-import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.util.Vector2;
-import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.util.*;
 
 import java.util.Objects;
 
@@ -14,7 +11,7 @@ import static java.lang.Math.pow;
 public class PositionImpl implements Position{
 
     private final static double EXPONENT = 2.00;
-    private MutablePair pos;
+    private Vector2 pos;
 
     private MessageHandler messageHandler;
 
@@ -25,39 +22,38 @@ public class PositionImpl implements Position{
      * @param pos pos = Pair<>
      * //@param message messageHandler
      */
-    public PositionImpl(MutablePair pos) {
+    public PositionImpl(Vector2 pos) {
         Objects.requireNonNull(pos, "Pos passed in PositionImpl was null");
-        this.pos = pos.copyOf();
-        //this.messageHandler = message;
+        this.pos = new Vector2Impl(pos);
     }
 
     @Override
-    public MutablePair getPosition() {
-        return this.pos.copyOf();
+    public Vector2 getPosition() {
+        return new Vector2Impl(this.pos);
     }
 
     @Override
-    public void setPosition(MutablePair newPos) {
-        //TODO control if the position is valid
-        this.pos.setPair(newPos);
+    public void setPosition(Vector2 pos) {
+        this.pos = new Vector2Impl(pos);
     }
 
     @Override
     public void movePosition(Vector2 vector) {
-        this.pos.addVector(vector);
+        this.pos = this.pos.plus(vector);
     }
+
+    @Override
+    public Position testTovePosition(Vector2 vector) {
+        return new PositionImpl(this.pos.plus(vector));
+    }
+
 
     @Override
     public boolean isValid() {
         messageHandler.handle(GameMapSubmodule.class, map -> {
-            map.getEntitiesOnCurrentTile();
+        //    map.getEntitiesOnCurrentTile().
         });
         return true;
-    }
-
-    @Override
-    public Vector2 turnIntoVector() {
-        return new Vector2Impl(this.getPosition().getX(), this.getPosition().getY());
     }
 
     @Override

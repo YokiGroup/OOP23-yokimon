@@ -53,12 +53,12 @@ public abstract class Entity {
         Objects.requireNonNull(pos, "Pos passed to the entity was null");
         if(pos.isValid()){
             this.pos = pos;
-            this.hitbox.setPosition(pos.turnIntoVector());
+            this.hitbox.setPosition(pos.getPosition());
         }
 
     }
 
-    protected Hitbox getHitbox(){
+    public Hitbox getHitbox(){
         return this.hitbox;
     }
 
