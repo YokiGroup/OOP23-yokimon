@@ -33,6 +33,12 @@ class TileShapeLoaderTest {
     }
 
     @Test
+    void spawnsTest() {
+        Set<Vector2> spawns = Set.of(new Vector2Impl(10.0, 30.0));
+        assertEquals(spawns, loadedTile.getEntitySpawnLocations());
+    }
+
+    @Test
     void hitboxesTest() {
         Hitbox rectHitbox = new RectangularHitbox(
                 new Vector2Impl(10.0, 5.0),
