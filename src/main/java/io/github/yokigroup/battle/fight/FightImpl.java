@@ -6,14 +6,16 @@ import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.dmgcalculator.FullImplDmgCalculator;
 import io.github.yokigroup.battle.nextyokimon.NextYokimon;
 import io.github.yokigroup.battle.nextyokimon.DummyImplNextYokimon;
+import io.github.yokigroup.battle.opponentai.FullImplOpponentAI;
 import io.github.yokigroup.battle.opponentai.OpponentAI;
-import io.github.yokigroup.battle.opponentai.DummyImplOpponentAI;
 import io.github.yokigroup.battle.xpcalculator.FullImplXPCalculator;
 import io.github.yokigroup.battle.xpcalculator.XPCalculator;
 import io.github.yokigroup.core.Publisher;
 import io.github.yokigroup.core.PublisherImpl;
 
-import java.util.*;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Optional;
 
 /**
  * The actual Fight implementation communicating with the Logic.
@@ -34,7 +36,7 @@ public final class FightImpl implements Fight {
     /* structures */
     private final XPCalculator xpCalc = new FullImplXPCalculator();
     private final DmgCalculator dmgCalc = new FullImplDmgCalculator();
-    private final OpponentAI oppAI = new DummyImplOpponentAI();         //TODO: SUBSTITUTE NEW AND FULLER VERSIONS
+    private final OpponentAI oppAI = new FullImplOpponentAI(dmgCalc);
     private final NextYokimon nextYok = new DummyImplNextYokimon();
 
     /* List to keep in store defeated Yokimons. */
@@ -73,7 +75,6 @@ public final class FightImpl implements Fight {
         }
     }
      */
-
 
     @Override
     public Success attack(final Attack myAttack) {
