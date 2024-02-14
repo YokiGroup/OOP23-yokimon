@@ -11,7 +11,6 @@ import org.dyn4j.world.World;
 import org.dyn4j.world.result.ConvexDetectResult;
 
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -76,7 +75,10 @@ public abstract class HitboxImpl implements Hitbox {
     private static Vector2 getIntersectionVector(final ConvexDetectResult<Body, BodyFixture> detectResult) {
         final double penetration = detectResult.getPenetration().getDepth();
         // Get the normal vector of the collision (the direction we should move the body by to fix the collision
-        final Vector2 normal = new Vector2Impl(detectResult.getPenetration().getNormal().x, detectResult.getPenetration().getNormal().y);
+        final Vector2 normal = new Vector2Impl(
+                detectResult.getPenetration().getNormal().x,
+                detectResult.getPenetration().getNormal().y
+        );
         // Scale the normal by the penetration amount to resolve the collision
         return normal.scale(penetration);
     }
@@ -100,7 +102,10 @@ public abstract class HitboxImpl implements Hitbox {
     public final boolean equals(final Object other) {
         if (!(other instanceof HitboxImpl)) {
             return false;
-        } else if (this.body.getFixture(0).getShape().getClass() != ((HitboxImpl) other).getBody().getFixture(0).getShape().getClass()) {
+        } else if (
+                this.body.getFixture(0).getShape().getClass()
+                != ((HitboxImpl) other).getBody().getFixture(0).getShape().getClass()
+        ) {
             return false;
         }
         final AABB aabb1 = this.body.createAABB();
@@ -108,6 +113,13 @@ public abstract class HitboxImpl implements Hitbox {
         return this.body.getTransform().getTranslationX() == ((HitboxImpl) other).getBody().getTransform().getTranslationX()
                 && aabb1.getHeight() == aabb2.getHeight()
                 && aabb1.getWidth() == aabb2.getWidth();
+    }
+
+    @Override
+    public final int hashCode() {
+        final int prime1 = 79;
+        final int prime2 = 39;
+        return prime1 * this.getPosition().hashCode() + prime2 * (int) this.body.getFixture(0).getShape().getRadius();
     }
 
     /**

@@ -1,7 +1,6 @@
 package io.github.yokigroup.world.entity.hitbox;
 
 import io.github.yokigroup.util.Vector2;
-import org.dyn4j.dynamics.Body;
 
 import java.util.Optional;
 
@@ -30,10 +29,9 @@ public interface Hitbox {
     Vector2 getPosition();
 
 
-    /**
-     *
-     * @param other The other object to check.
-     * @return True if the two hitboxes are the same, false otherwise.
-     */
+    @Override
     boolean equals(Object other);
+
+    @Override
+    int hashCode();
 }
