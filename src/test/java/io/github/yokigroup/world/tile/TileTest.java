@@ -70,7 +70,8 @@ class TileTest {
     @Test
     void spawnEntities() {
         final WeightedPool<Entity> entityPool = new WeightedPoolImpl<>();
-        // FIXME: possibly fix the entity initialization
+        // FIXME: instantiation of entities
+        entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, null), 1.0f);
         entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, null), 1.0f);
         entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, null), 1.0f);
         entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, null), 1.0f);
@@ -81,14 +82,10 @@ class TileTest {
         tile.addSpawnLocation(vector2);
         tile.addSpawnLocation(vector3);
         tile.spawnEntities(entityPool);
-        /*
-        for (final Vector2 pos : tile.getEntitySpawnLocations()) {
-            // FIXME: the getPosition returns a "Position" object, not a Vector2
-            assertTrue(tile.getEntities()
-                    .stream()
-                    .map(e -> e.getPosition());
-            );
-        }
-        */
+        assertEquals(3, tile.getEntities().size());
+        tile.getEntities()
+                .stream()
+                .map(e -> e.getPos().turnIntoVector())
+                .forEach(v -> assertTrue(tile.getEntitySpawnLocations().contains(v)));
     }
 }
