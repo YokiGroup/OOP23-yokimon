@@ -14,7 +14,14 @@ import java.util.List;
  * It provides methods to manage and manipulate enemy entities.
  */
 public class Enemy extends People {
-
+    /**
+     * This value represent the maximum distance at which the player will be in sight
+     */
+    private static final double RADIUS_PLAYER = 6.00;
+    /**
+     * This value represent the maximum distance at which the enemy will
+     */
+    private static final double RADIUS_INITIAL_POS = 5.00;
     private Enemy.state state;
 
     /**
