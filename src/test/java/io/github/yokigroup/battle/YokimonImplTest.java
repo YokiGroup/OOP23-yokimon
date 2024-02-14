@@ -21,11 +21,11 @@ class YokimonImplTest {
     }
     @Test
     void getAllStats() {
-        Attack shadowBall = new AttackImpl("Shadow ball", Color.BLACK, 90, Attack.effect.NONE);
-        Attack strongPunch = new AttackImpl("strong punch", Color.RED, 80, Attack.effect.NONE);
-        Attack curse = new AttackImpl("curse", Color.PURPLE, 70, Attack.effect.NONE);
-        Attack slap = new AttackImpl("slap", Color.WHITE, 40, Attack.effect.NONE);
-        Attack mock = new AttackImpl("mock", Color.WHITE, 0, Attack.effect.NONE);
+        Attack shadowBall = new AttackImpl("Shadow ball", Color.BLACK, 90, Attack.Effect.NONE);
+        Attack strongPunch = new AttackImpl("strong punch", Color.RED, 80, Attack.Effect.NONE);
+        Attack curse = new AttackImpl("curse", Color.PURPLE, 70, Attack.Effect.NONE);
+        Attack slap = new AttackImpl("slap", Color.WHITE, 40, Attack.Effect.NONE);
+        Attack mock = new AttackImpl("mock", Color.WHITE, 0, Attack.Effect.NONE);
         /*
         Attack  = new AttackImpl("", Color.WHITE, , Attack.effect.NONE);
         */
@@ -58,57 +58,57 @@ class YokimonImplTest {
 
     @Test
     void setExpNext() {
-        Attack shadowBall = new AttackImpl("Shadow ball", Color.BLACK, 90, Attack.effect.NONE);
-        Attack strongPunch = new AttackImpl("strong punch", Color.RED, 80, Attack.effect.NONE);
-        Attack curse = new AttackImpl("curse", Color.PURPLE, 70, Attack.effect.NONE);
-        Attack slap = new AttackImpl("slap", Color.WHITE, 40, Attack.effect.NONE);
-        Attack flameThrow = new AttackImpl("flame throw", Color.RED, 95, Attack.effect.NONE);
-        Attack headBut = new AttackImpl("headBut", Color.WHITE, 50, Attack.effect.NONE);
-        Attack tailSwipe = new AttackImpl("TailSwipe ", Color.WHITE, 60 , Attack.effect.NONE);
-        Attack whirlpool = new AttackImpl("whirlpool ", Color.PURPLE, 60 , Attack.effect.NONE);
-        Attack bite = new AttackImpl("bite ", Color.BLACK, 60, Attack.effect.NONE);
+        Attack shadowBall = new AttackImpl("Shadow ball", Color.BLACK, 90, Attack.Effect.NONE);
+        Attack strongPunch = new AttackImpl("strong punch", Color.RED, 80, Attack.Effect.NONE);
+        Attack curse = new AttackImpl("curse", Color.PURPLE, 70, Attack.Effect.NONE);
+        Attack slap = new AttackImpl("slap", Color.WHITE, 40, Attack.Effect.NONE);
+        Attack flameThrow = new AttackImpl("flame throw", Color.RED, 95, Attack.Effect.NONE);
+        Attack headBut = new AttackImpl("headBut", Color.WHITE, 50, Attack.Effect.NONE);
+        Attack tailSwipe = new AttackImpl("TailSwipe ", Color.WHITE, 60 , Attack.Effect.NONE);
+        Attack whirlpool = new AttackImpl("whirlpool ", Color.PURPLE, 60 , Attack.Effect.NONE);
+        Attack bite = new AttackImpl("bite ", Color.BLACK, 60, Attack.Effect.NONE);
         //effect is stronger if the yokimon is already been hit in this turn
-        Attack revenge = new AttackImpl("revenge ", Color.RED, 60 , Attack.effect.NONE);
-        Attack confusion = new AttackImpl("confusion", Color.PURPLE, 50, Attack.effect.NONE);
+        Attack revenge = new AttackImpl("revenge ", Color.RED, 60 , Attack.Effect.NONE);
+        Attack confusion = new AttackImpl("confusion", Color.PURPLE, 50, Attack.Effect.NONE);
         //effect lower defence of the opponent
-        Attack illusion = new AttackImpl("Illusion", Color.PURPLE, 0, Attack.effect.NONE);
-        Attack scratch = new AttackImpl("scratch", Color.WHITE, 40 , Attack.effect.NONE);
+        Attack illusion = new AttackImpl("Illusion", Color.PURPLE, 0, Attack.Effect.NONE);
+        Attack scratch = new AttackImpl("scratch", Color.WHITE, 40 , Attack.Effect.NONE);
         //temporary transform in woman for 3 turns
-        Attack transformation = new AttackImpl("transformation", Color.PURPLE, 0 , Attack.effect.NONE);
+        Attack transformation = new AttackImpl("transformation", Color.PURPLE, 0 , Attack.Effect.NONE);
         //regenerate 75% of the max HP, but lower the speed
-        Attack grannyStew = new AttackImpl("grannyStew", Color.WHITE, 0, Attack.effect.NONE);
-        Attack tsunami = new AttackImpl("tsunami", Color.RED, 100 , Attack.effect.NONE);
-        Attack psychic = new AttackImpl("psychic", Color.PURPLE, 90, Attack.effect.NONE);
+        Attack grannyStew = new AttackImpl("grannyStew", Color.WHITE, 0, Attack.Effect.NONE);
+        Attack tsunami = new AttackImpl("tsunami", Color.RED, 100 , Attack.Effect.NONE);
+        Attack psychic = new AttackImpl("psychic", Color.PURPLE, 90, Attack.Effect.NONE);
         //lower the attack
-        Attack sub = new AttackImpl("sub", Color.WHITE, 70, Attack.effect.NONE);
+        Attack sub = new AttackImpl("sub", Color.WHITE, 70, Attack.Effect.NONE);
         //decrease all the other yokimon's stats
-        Attack mock = new AttackImpl("mock", Color.WHITE, 0, Attack.effect.NONE);
+        Attack mock = new AttackImpl("mock", Color.WHITE, 0, Attack.Effect.NONE);
 
 
         //works only if one or more of the yokimon other team is dead (for nekomata)
-        Attack soulAttack = new AttackImpl("Soul Attack", Color.BLACK, 100, Attack.effect.NONE);
+        Attack soulAttack = new AttackImpl("Soul Attack", Color.BLACK, 100, Attack.Effect.NONE);
         //regenerate half of the damage (for baku)
-        Attack dreamEater = new AttackImpl("dreamEater", Color.PURPLE, 60, Attack.effect.NONE);
+        Attack dreamEater = new AttackImpl("dreamEater", Color.PURPLE, 60, Attack.Effect.NONE);
         //only for kitsune
-        Attack nineTailSmash = new AttackImpl("nineTailSmash", Color.WHITE, 140, Attack.effect.NONE);
+        Attack nineTailSmash = new AttackImpl("nineTailSmash", Color.WHITE, 140, Attack.Effect.NONE);
         //raise a lot the attack (only for tanuki)
-        Attack drumAttributes = new AttackImpl("drumAttributes", Color.WHITE, 0, Attack.effect.NONE);
+        Attack drumAttributes = new AttackImpl("drumAttributes", Color.WHITE, 0, Attack.Effect.NONE);
         //effect has only %20 to work (for sazae Oni)
-        Attack cutAttributes = new AttackImpl("cut attributes", Color.WHITE, 1000 , Attack.effect.NONE);
+        Attack cutAttributes = new AttackImpl("cut attributes", Color.WHITE, 1000 , Attack.Effect.NONE);
         //only for tengu
-        Attack katanaSlash = new AttackImpl("katanaSlash", Color.RED, 90, Attack.effect.NONE);
+        Attack katanaSlash = new AttackImpl("katanaSlash", Color.RED, 90, Attack.Effect.NONE);
         //lower the speed, only tsuchigumo
-        Attack web = new AttackImpl("web", Color.BLACK, 20, Attack.effect.NONE);
+        Attack web = new AttackImpl("web", Color.BLACK, 20, Attack.Effect.NONE);
         //only for wani
-        Attack dragonRage = new AttackImpl("dragonRage", Color.RED, 120, Attack.effect.NONE);
+        Attack dragonRage = new AttackImpl("dragonRage", Color.RED, 120, Attack.Effect.NONE);
         //hit always fist
-        Attack shadowSneak = new AttackImpl("shadowSneak", Color.BLACK, 40, Attack.effect.NONE);
+        Attack shadowSneak = new AttackImpl("shadowSneak", Color.BLACK, 40, Attack.Effect.NONE);
         //hit always fist only Yatagarasu
-        Attack extremeSpeed = new AttackImpl("extremeSpeed", Color.WHITE, 80, Attack.effect.NONE);
+        Attack extremeSpeed = new AttackImpl("extremeSpeed", Color.WHITE, 80, Attack.Effect.NONE);
         //raise attack, defense and speed only for inugami
-        Attack possession = new AttackImpl("possession", Color.BLACK, 0, Attack.effect.NONE);
+        Attack possession = new AttackImpl("possession", Color.BLACK, 0, Attack.Effect.NONE);
         //the yokimon rest the next turn only sonWukong
-        Attack celestialGun = new AttackImpl("celestialGun", Color.WHITE, 175, Attack.effect.NONE);
+        Attack celestialGun = new AttackImpl("celestialGun", Color.WHITE, 175, Attack.Effect.NONE);
 
         /*
         Attack  = new AttackImpl("", Color.WHITE, , Attack.effect.NONE);
