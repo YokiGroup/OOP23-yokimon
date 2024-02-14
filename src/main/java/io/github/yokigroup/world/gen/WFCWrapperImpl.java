@@ -28,18 +28,14 @@ public class WFCWrapperImpl implements WFCWrapper {
         this.tileShapes = Set.copyOf(shapes);
         final Set<Set<WfcShapeDirection>> convertedShapes = this.tileShapes.stream()
                 .map(TileShape::getPossibleDirections)
-                .map(this::wfcToTileShape)
+                .map(this::tileShapeToWfc)
                 .collect(Collectors.toSet());
         this.wfc = new WaveFunctionCollapseImpl(dimensions, convertedShapes);
     }
 
     @Override
-    public final void setStaticTile(final Pair<Integer, Integer> position, final Tile tile) {
-        final Set<Set<WfcShapeDirection>> shapes = this.tileShapes.stream()
-            .filter(s -> s.getTiles().getEntries().contains(tile))
-            .map(s -> wfcToTileShape(s.getPossibleDirections()))
-                .collect(Collectors.toSet());
-        this.wfc.setStaticShape(position, shapes);
+    public final void setStaticTile(final Pair<Integer, Integer> position, final Set<TileShape.TileDirections> tile) {
+        this.wfc.setStaticShape(position, Set.of(tileShapeToWfc(tile)));
     }
 
     @Override
@@ -50,7 +46,7 @@ public class WFCWrapperImpl implements WFCWrapper {
     @Override
     public final Tile getTileAt(final Pair<Integer, Integer> position) {
         final Optional<WeightedPool<Tile>> tilePool =  this.tileShapes.stream()
-                .filter(s -> s.getPossibleDirections() == tileShapeToWfc(wfc.getShapeAt(position)))
+                .filter(s -> compareShapes(s.getPossibleDirections(), wfcToTileShape(wfc.getShapeAt(position))))
                 .map(TileShape::getTiles)
                 .findFirst();
         if (tilePool.isEmpty()) {
@@ -60,11 +56,29 @@ public class WFCWrapperImpl implements WFCWrapper {
     }
 
     /**
+     *
+     * @param shape1 The first shape to check.
+     * @param shape2 The second shape to check.
+     * @return True if the two shapes are the same.
+     */
+    private boolean compareShapes(final Set<TileShape.TileDirections> shape1, final Set<TileShape.TileDirections> shape2) {
+        Set<TileShape.TileDirections> fullSet = new HashSet<>();
+        fullSet.addAll(shape1);
+        fullSet.addAll(shape2);
+        for (TileShape.TileDirections dir : fullSet) {
+            if (!shape2.contains(dir) || !shape1.contains(dir)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Converts a tile shape from TileDirections to WfcShapeDirection.
      * @param shape The shape of the tile.
      * @return The set in WfcShapeDirection format.
      */
-    private Set<WfcShapeDirection> wfcToTileShape(final Set<TileShape.TileDirections> shape) {
+    private Set<WfcShapeDirection> tileShapeToWfc(final Set<TileShape.TileDirections> shape) {
         final Set<WfcShapeDirection> convertedShapes = new HashSet<>();
         if (shape.contains(TileShape.TileDirections.UP)) {
             convertedShapes.add(WfcShapeDirection.UP);
@@ -86,7 +100,7 @@ public class WFCWrapperImpl implements WFCWrapper {
      * @param shape The shape of the tile.
      * @return The set in TileDirections format.
      */
-    private Set<TileShape.TileDirections> tileShapeToWfc(final Set<WfcShapeDirection> shape) {
+    private Set<TileShape.TileDirections> wfcToTileShape(final Set<WfcShapeDirection> shape) {
         final Set<TileShape.TileDirections> convertedShapes = new HashSet<>();
         if (shape.contains(WfcShapeDirection.UP)) {
             convertedShapes.add(TileShape.TileDirections.UP);
