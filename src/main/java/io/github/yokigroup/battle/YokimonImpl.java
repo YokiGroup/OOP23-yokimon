@@ -1,30 +1,43 @@
 package io.github.yokigroup.battle;
 
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * YokimonImpl is an implementation of the Yokimon interface,
  * representing a creature with various stats and abilities.
  */
-public class YokimonImpl implements Yokimon{
+public class YokimonImpl implements Yokimon {
+    /**
+     * The starting level of the yokimon.
+     */
+    public static final int DEFAULT_LEVEL = 1;
 
-    public final static int DEFAULT_LEVEL=1;
-    public final static int DEFAULT_STAT=1;
-    public final static GrowthRate DEFAULT_GROWRATE = GrowthRate.MEDIUM;
+    /**
+     * The base stat level of the yokimon.
+     */
+    public static final int DEFAULT_STAT = 1;
+
+    /**
+     * The default GrowthRate of the yokimon.
+     */
+    public static final GrowthRate DEFAULT_GROWRATE = GrowthRate.MEDIUM;
     private final String name;
     private final Color color;
     private final Map<Stats, Integer> baseStats;
-    private Map<Stats, Integer> stats;
+    private final Map<Stats, Integer> stats;
     private int level;
     private int maxHp;
     private int actualHp;
     private final GrowthRate growthRate;
     private double xp;
     private double xpNext;
-    private List<Attack> moves;
+    private final List<Attack> moves;
     private final Map<Integer, Attack> learnableMoves;
     private boolean active;
-
     private final LevelUpLogic levelUtility = new LevelUpLogicImpl();
 
     /**
@@ -36,16 +49,14 @@ public class YokimonImpl implements Yokimon{
      * @param level Initial level of the Yokimon
      * @param learnableMoves Learnable moves of the Yokimon
      */
-    public YokimonImpl(String name, Color color, Map<Yokimon.Stats, Integer> baseStats, GrowthRate growthRate,
-                       int level, Map<Integer, Attack> learnableMoves)
-    {
+    public YokimonImpl(final String name, final Color color, final Map<Yokimon.Stats, Integer> baseStats,
+                       final GrowthRate growthRate, final int level, final Map<Integer, Attack> learnableMoves) {
         this.stats = new HashMap<>();
-        for(Stats stat : Stats.values()){
+        for (Stats stat : Stats.values()) {
             stats.put(stat, DEFAULT_STAT);
         }
-
         this.moves = new ArrayList<>();
-        this.active=true;
+        this.active = true;
         this.name = name;
         this.color = color;
         this.baseStats = Map.copyOf(Objects.requireNonNull(baseStats, "baseStats passed was null"));
@@ -53,7 +64,7 @@ public class YokimonImpl implements Yokimon{
         this.level = level;
         this.learnableMoves = Map.copyOf(Objects.requireNonNull(learnableMoves, "learnableMoves passed was null"));
         this.levelUtility.resetAttack(this);
-        this.levelUtility.setStats(this);
+        this.levelUtility.reset(this);
 
     }
     /**
@@ -64,8 +75,8 @@ public class YokimonImpl implements Yokimon{
      * @param growthRate Growth rate of the Yokimon
      * @param learnableMoves Learnable moves of the Yokimon
      */
-    public YokimonImpl(String name, Color color, Map<Yokimon.Stats, Integer> baseStats, GrowthRate growthRate,
-                       Map<Integer, Attack> learnableMoves){
+    public YokimonImpl(final String name, final Color color, final Map<Yokimon.Stats, Integer> baseStats,
+                       final GrowthRate growthRate, final Map<Integer, Attack> learnableMoves) {
         this(name, color, baseStats, growthRate, DEFAULT_LEVEL, learnableMoves);
     }
 
@@ -74,137 +85,144 @@ public class YokimonImpl implements Yokimon{
      * Constructor for YokimonImpl for another yokimon.
      * @param yokimon yokimon to copy
      */
-    public YokimonImpl(YokimonImpl yokimon){
-        this(Objects.requireNonNull(yokimon, "YokimonImpl passed was null").name, yokimon.color,
-                Map.copyOf(yokimon.baseStats), yokimon.growthRate, yokimon.level, Map.copyOf(yokimon.learnableMoves));   ;
+    public YokimonImpl(final Yokimon yokimon) {
+        this(Objects.requireNonNull(yokimon, "YokimonImpl passed was null").getName(), yokimon.getYokimonColor(),
+                Map.copyOf(yokimon.getAllBaseStats()), yokimon.getGrowRate(), yokimon.getLevel(),
+                Map.copyOf(yokimon.getLearnableAttacks()));
     }
 
     @Override
-    public GrowthRate getGrowRate() {
+    public final GrowthRate getGrowRate() {
         return this.growthRate;
     }
 
     @Override
-    public String getName() {
+    public final String getName() {
         return this.name;
     }
 
-    public Color getYokimonColor() {
+    /**
+     *
+     * @return The color of the yokimon.
+     */
+    public final Color getYokimonColor() {
         return this.color;
     }
 
     @Override
-    public Map<Stats, Integer> getAllStats() {
+    public final Map<Stats, Integer> getAllStats() {
         return this.stats;
     }
 
     @Override
-    public Map<Stats, Integer> getAllBaseStats() {
+    public final Map<Stats, Integer> getAllBaseStats() {
         return this.baseStats;
     }
 
     @Override
-    public int getStat(Stats stat) {
+    public final int getStat(final Stats stat) {
         return this.stats.get(stat);
     }
 
     @Override
-    public int getBaseStat(Stats stat) {
+    public final int getBaseStat(final Stats stat) {
         return this.baseStats.get(stat);
     }
 
     @Override
-    public void setStat(Yokimon.Stats change, int newValue) {
+    public final void setStat(final Yokimon.Stats change, final int newValue) {
         this.stats.replace(change, newValue);
     }
 
     @Override
-    public int getLevel() {
+    public final int getLevel() {
         return this.level;
     }
 
     @Override
-    public void setLevel(int n) {
-        if(n>0){
-            this.level=n;
-            this.levelUtility.setStats(this);
+    public final void setLevel(final int n) {
+        if (n > 0) {
+            this.level = n;
+            this.levelUtility.reset(this);
+            this.levelUtility.resetAttack(this);
         }
 
     }
 
     @Override
-    public boolean levelUP(int n) {
+    public final boolean levelUP(final int n) {
         this.levelUtility.levelUp(this, n);
         return true;
     }
 
     @Override
-    public List<Attack> getAttacks() {
+    public final List<Attack> getAttacks() {
         return this.moves;
     }
 
     @Override
-    public void addAttack(Attack newAttack) {
+    public final void addAttack(final Attack newAttack) {
         this.moves.add(newAttack);
     }
 
     @Override
-    public Map<Integer, Attack> getLearnableAttacks() {
+    public final Map<Integer, Attack> getLearnableAttacks() {
         return this.learnableMoves;
     }
 
     @Override
-    public int getActualHp() {
+    public final int getActualHp() {
         return this.actualHp;
     }
 
     @Override
-    public int getMaxHp() {
+    public final int getMaxHp() {
         return this.maxHp;
     }
 
     @Override
-    public void setActualHp(int newValue) {
-        if(newValue == 0) this.active = false ;
-        this.actualHp=newValue;
-    }
-
-    @Override
-    public void setMaxHp(int newValue) {
-        this.maxHp=newValue;
-    }
-
-    @Override
-    public boolean takeDamage(int damage) {
-        if(damage >= this.actualHp){
-            this.actualHp=0;
-            this.active=false;
+    public final void setActualHp(final int newValue) {
+        if (newValue == 0) {
+            this.active = false;
         }
-        this.actualHp-=damage;
+        this.actualHp = newValue;
+    }
+
+    @Override
+    public final void setMaxHp(final int newValue) {
+        this.maxHp = newValue;
+    }
+
+    @Override
+    public final boolean takeDamage(final int damage) {
+        if (damage >= this.actualHp) {
+            this.actualHp = 0;
+            this.active = false;
+        }
+        this.actualHp -= damage;
         return this.active;
     }
 
     @Override
-    public boolean active() {
+    public final boolean active() {
         return this.active;
     }
 
     @Override
-    public double getXp() {
+    public final double getXp() {
         return this.xp;
     }
-
     @Override
-    public double getNextLevelXp() {
-        return this.maxHp;
+    public final double getNextXp() {
+        return this.xpNext;
     }
 
     @Override
-    public exp_code takeXp(int n) {
-        exp_code expCode=exp_code.OK;
-        double xpToTake = n*this.growthRate.get();
-        while (xpToTake >= this.xpNext-this.xp){
-            xpToTake -= this.xpNext-this.xp;
+    public final ExpCode takeXp(final int n) {
+        ExpCode expCode = ExpCode.OK;
+        double xpToTake = n * this.growthRate.get();
+        while (xpToTake >= this.xpNext - this.xp) {
+            xpToTake -= this.xpNext - this.xp;
             expCode = this.levelUtility.levelUp(this, 1);
         }
         this.xp += xpToTake;
@@ -212,17 +230,12 @@ public class YokimonImpl implements Yokimon{
     }
 
     @Override
-    public double getExpNext() {
-        return this.xp;
+    public final void setExpNext(final double newExp) {
+        this.xpNext = newExp;
     }
 
     @Override
-    public void setExpNext(double newExp) {
-        this.xpNext=newExp;
-    }
-
-    @Override
-    public void setExp(double exp) {
-        this.xp=exp;
+    public final void setExp(final double exp) {
+        this.xp = exp;
     }
 }

@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 class GameMapTest {
 
     @Test
-    void getTileAt() {
+    void testGetTileAt() {
         // TODO: complete the test
     }
 
     @Test
-    void getPlayerWorldPosition() {
+    void testGetPlayerWorldPosition() {
         // TODO: complete the test
     }
 }

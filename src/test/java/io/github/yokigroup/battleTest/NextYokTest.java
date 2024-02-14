@@ -1,33 +1,41 @@
 package io.github.yokigroup.battleTest;
 
-import java.util.*;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Optional;
 
-import io.github.yokigroup.battle.*;
-import io.github.yokigroup.battle.nextyokimon.NextYokimon;
+import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.nextyokimon.DummyImplNextYokimon;
+import io.github.yokigroup.battle.nextyokimon.NextYokimon;
+import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test class for Next Yokimon.
  */
-public class NextYokTest {
+public final class NextYokTest {
     private static Yokimon y1, y2, y3;
+    private final YokimonLoader yokimonLoader = new YokimonLoader();
 
-    //FIXME -> still giving NullPointerException
+    /**
+     * Initialises some Yokimons meant for testing.
+     */
     @BeforeEach
     public void init() {
-        y1 = YokimonDatabase.getOni();
-        y2 = YokimonDatabase.getBaku();
-        y3 = YokimonDatabase.getKitsune();
+        y1 = yokimonLoader.load(1);
+        y2 = yokimonLoader.load(2);
+        y3 = yokimonLoader.load(3);
     }
 
     /**
      * Testing dummy implementation.
      */
     @Test public void testDummyImpl() {
-        /*
+       // NextYokimon toTest = new DummyImplNextYokimon();
+
         NextYokimon toTest = new DummyImplNextYokimon();
 
         List<Yokimon> party1 = new LinkedList<>();
@@ -44,6 +52,5 @@ public class NextYokTest {
         party1.remove(y3);
         assertEquals(Optional.empty(), toTest.getNext(party1));
 
-         */
     }
 }

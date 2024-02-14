@@ -1,7 +1,6 @@
 package io.github.yokigroup.world.entity.hitbox;
 
 import io.github.yokigroup.util.Vector2;
-import io.github.yokigroup.util.Vector2Impl;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.geometry.Circle;
 import org.dyn4j.geometry.Convex;
@@ -25,7 +24,7 @@ public class CircularHitbox extends HitboxImpl {
      * @param radius The radius of the circle.
      */
     public CircularHitbox(final double radius) {
-        this(new Vector2Impl(0.0d, 0.0d), radius);
+        super(makeCircle(radius));
     }
 
     /**

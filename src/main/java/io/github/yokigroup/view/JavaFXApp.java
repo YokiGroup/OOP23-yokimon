@@ -54,7 +54,7 @@ public final class JavaFXApp extends Application {
             */
             // JavaFXApp.launch(args);
             // Whereas the following would do just fine:
-            // JavaFXApp.run(args)
+            JavaFXApp.run(args);
         }
     }
 }

@@ -71,4 +71,10 @@ public interface Vector2 {
      * @return the dot product between the two vectors.
      */
     double dot(Vector2 other);
+
+    @Override
+    boolean equals(Object other);
+
+    @Override
+    int hashCode();
 }

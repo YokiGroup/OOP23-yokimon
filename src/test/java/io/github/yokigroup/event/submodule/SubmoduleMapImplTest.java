@@ -37,7 +37,7 @@ class SubmoduleMapImplTest {
     private void retrievalAsserts() {
         assertEquals(Optional.of(pSub), map.get(pSub.getClass()));
         assertEquals(Optional.of(fSub), map.get(fSub.getClass()));
-        assertEquals(Optional.empty(), map.get(PlayerPositionSubmodule.class));
+        assertEquals(Optional.empty(), map.get(PlayerCharacterSubmodule.class));
     }
 
     @Test

@@ -1,6 +1,9 @@
 package io.github.yokigroup.world.entity.people;
 
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
@@ -14,12 +17,10 @@ import java.util.List;
 public abstract class People extends Entity {
 
     private final static float DEFAULT_DIRECTION = 0;
-
     /**
      * The position the entity is first spawned.
      */
     protected final Position initialPos;
-
     /**
      * The direction where the entity is looking.
      */
@@ -31,19 +32,39 @@ public abstract class People extends Entity {
 
     /**
      * Constructs a People object with the specified attributes.
-     * @param name The name of the People
      * @param pos The position of the People
      * @param hitbox The hitbox of the People
      * @param party The party of Yokimon belonging to the People
      */
-    public People(String name, Position pos, Hitbox hitbox, List<Yokimon> party) {
-        super(name, pos, hitbox);
+    public People(Position pos, Hitbox hitbox, List<Yokimon> party, MessageHandler messageHandler) {
+        super(pos, hitbox, messageHandler);
         this.Party = List.copyOf(party);
         this.direction = DEFAULT_DIRECTION;
         this.active = true;
         this.initialPos = pos;
     }
 
+    /**
+     * Direction enum represents the possible default directions in the game world.
+     */
+    public enum Direction {
+        UP(new Vector2Impl(0, -1)),
+        UP_RIGHT(new Vector2Impl(1, -1)),
+        RIGHT(new Vector2Impl(1, 0)),
+        DOWN_RIGHT(new Vector2Impl(1, 1)),
+        DOWN(new Vector2Impl(0,1)),
+        LEFT_DOWN(new Vector2Impl(-1, 1)),
+        LEFT(new Vector2Impl(-1,0)),
+        UP_LEFT(new Vector2Impl(-1, -1));
+
+        private final Vector2 vector;
+        Direction(Vector2 vector) {
+            this.vector = vector;
+        }
+        public Vector2 get(){
+            return vector;
+        }
+    }
     /**
      * Returns the direction in which the people entity is currently looking.
      * @return float The angle in radiant
@@ -85,11 +106,14 @@ public abstract class People extends Entity {
     /**
      * Adds a new Yokimon to the party of the people entity.
      * @param newYokimon The new Yokimon to add
-     * @return message Status message
+     * @return true if the operation worked
      */
-    public Entity.message addYokimon(Yokimon newYokimon) {
+    public boolean addYokimon(Yokimon newYokimon) {
+        if(this.Party == null){
+            return false;
+        }
         this.Party.add(newYokimon);
-        return message.ok;
+        return true;
     }
 
     /**
@@ -97,13 +121,9 @@ public abstract class People extends Entity {
      * @param newYokimons The list of new Yokimon to add
      * @return message Status message
      */
-    public Entity.message addListOfYokimon(List<Yokimon> newYokimons) {
-        if (this.Party.addAll(newYokimons)) {
-            return message.ok;
-        } else
-            return message.error;
+    public boolean addListOfYokimon(List<Yokimon> newYokimons) {
+       return this.Party.addAll(newYokimons);
     }
-
     /**
      * Returns the initial position of the entity.
      * @return Position Initial position of the entity

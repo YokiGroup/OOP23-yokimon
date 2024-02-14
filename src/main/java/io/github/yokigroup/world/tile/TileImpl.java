@@ -2,6 +2,7 @@ package io.github.yokigroup.world.tile;
 
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.WeightedPool;
+import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
 
@@ -59,8 +60,7 @@ public class TileImpl implements Tile {
         this.spawnLocations
                 .forEach((pos) -> {
                     final Entity entity = entityPool.getRandomizedElement();
-                    // FIXME: entity uses position instead of Vector2
-                    //entity.setPosition(pos);
+                    entity.setPos(new PositionImpl(pos));
                     this.entities.add(entity);
                 });
     }

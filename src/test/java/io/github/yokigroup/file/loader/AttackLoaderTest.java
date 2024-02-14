@@ -20,7 +20,7 @@ class AttackLoaderTest {
         final int attack_id = 1;
         final String expectedName = "ULTRA COLPO FOLGORANTE DISTRUTTIVO";
         final Color expectedColor = Color.PURPLE;
-        final Attack.effect expectedEffect = Attack.effect.NONE;
+        final Attack.Effect expectedEffect = Attack.Effect.NONE;
         final int expectedPower = 9001;
 
         Attack toTest = loader.load(attack_id);
