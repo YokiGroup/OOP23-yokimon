@@ -61,14 +61,18 @@ public class TileShapeLoader extends JsonLoader<TileShape>{
         return retHBox;
     }
 
+    private <T> Set<T> ifNullReturnEmpty(Set<T> set){
+        return set != null ? set : Set.of();
+    }
+
     private Set<Hitbox> getHitboxes(final int id) {
-        return doUntilPathException((c, i) -> {
+        return ifNullReturnEmpty(doUntilPathException((c, i) -> {
             Set<Hitbox> coll = c;
             if(coll == null) coll = new HashSet<>();
 
             coll.add(getHitbox(id, i));
             return coll;
-        });
+        }));
     }
 
     private Set<TileShape.TileDirections> getTileDirs(final int id) {
@@ -81,13 +85,13 @@ public class TileShapeLoader extends JsonLoader<TileShape>{
 
     private Set<Vector2>  getSpawnPositions(final int id) {
         final String spawnPositionJPath = "$."+id+".spawns[%d]";
-        return  doUntilPathException((c, i) -> {
+        return ifNullReturnEmpty(doUntilPathException((c, i) -> {
             Set<Vector2> aggr = c;
             if(aggr == null) aggr = new HashSet<>();
 
             aggr.add(getVector2(String.format(spawnPositionJPath, i)));
             return aggr;
-        });
+        }));
     }
 
     private Pair<Set<TileShape.TileDirections>, Tile> load(final int id) {
