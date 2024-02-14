@@ -6,7 +6,6 @@ import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.util.WeightedPoolImpl;
-import io.github.yokigroup.util.MutablePairImpl;
 import io.github.yokigroup.world.entity.Altar;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.PositionImpl;
@@ -79,11 +78,12 @@ class TileTest {
                 return;
             }
         };
-        entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, mh), 1.0f);
-        entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, mh), 1.0f);
-        entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, mh), 1.0f);
-        entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, mh), 1.0f);
-        entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, mh), 1.0f);
+
+        entityPool.addElement(new Altar(new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
+        entityPool.addElement(new Altar(new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
+        entityPool.addElement(new Altar(new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
+        entityPool.addElement(new Altar(new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
+        entityPool.addElement(new Altar(new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
         tile.addSpawnLocation(vector1);
         tile.addSpawnLocation(vector2);
         tile.addSpawnLocation(vector3);
@@ -91,7 +91,7 @@ class TileTest {
         assertEquals(3, tile.getEntities().size());
         tile.getEntities()
                 .stream()
-                .map(e -> e.getPos().turnIntoVector())
+                .map(e -> e.getPos())
                 .forEach(v -> assertTrue(tile.getEntitySpawnLocations().contains(v)));
     }
 }

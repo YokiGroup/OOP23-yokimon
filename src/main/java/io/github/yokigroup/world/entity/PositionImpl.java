@@ -11,7 +11,7 @@ import static java.lang.Math.pow;
 public class PositionImpl implements Position{
 
     private final static double EXPONENT = 2.00;
-    private MutablePair pos;
+    private Vector2 pos;
 
     private MessageHandler messageHandler;
 
@@ -22,31 +22,29 @@ public class PositionImpl implements Position{
      * @param pos pos = Pair<>
      * //@param message messageHandler
      */
-    public PositionImpl(MutablePair pos) {
+    public PositionImpl(Vector2 pos) {
         Objects.requireNonNull(pos, "Pos passed in PositionImpl was null");
-        this.pos = pos.copyOf();
-        //this.messageHandler = message;
+        this.pos = new Vector2Impl(pos);
     }
 
     @Override
-    public MutablePair getPosition() {
-        return this.pos.copyOf();
+    public Vector2 getPosition() {
+        return new Vector2Impl(this.pos);
     }
 
     @Override
-    public void setPosition(MutablePair newPos) {
-        //TODO control if the position is valid
-        this.pos.setPair(newPos);
+    public void setPosition(Vector2 pos) {
+        this.pos = new Vector2Impl(pos);
     }
 
     @Override
     public void movePosition(Vector2 vector) {
-        this.pos.addVector(vector);
+        this.pos = this.pos.plus(vector);
     }
 
     @Override
     public Position testTovePosition(Vector2 vector) {
-        return new PositionImpl(new MutablePairImpl(this.pos.getX()+vector.getX(), this.pos.getY()+vector.getY()));
+        return new PositionImpl(this.pos.plus(vector));
     }
 
 
@@ -56,11 +54,6 @@ public class PositionImpl implements Position{
         //    map.getEntitiesOnCurrentTile().
         });
         return true;
-    }
-
-    @Override
-    public Vector2 turnIntoVector() {
-        return new Vector2Impl(this.getPosition().getX(), this.getPosition().getY());
     }
 
     @Override

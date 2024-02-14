@@ -2,22 +2,16 @@ package io.github.yokigroup.world.entity.people;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.PartySubmodule;
-import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
-import io.github.yokigroup.event.submodule.Submodule;
-import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
-import io.github.yokigroup.util.MutablePairImpl;
+import io.github.yokigroup.event.submodule.*;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.util.WeightedPoolImpl;
-import io.github.yokigroup.world.entity.Altar;
 import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Stream;
 
 /**
@@ -87,8 +81,16 @@ public class Enemy extends People {
      * @return A new position
      */
     private Position move(Vector2 vector){
-        //TODO
-        return new PositionImpl(new MutablePairImpl(vector.getX(), vector.getY()));
+        this.setPos(new PositionImpl(new Vector2Impl(vector.getX(), vector.getY())));
+        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
+            /*
+            map.getEntitiesOnCurrentTile().stream()
+                    .forEach(entity -> );
+
+             */
+        });
+
+        return new PositionImpl(new Vector2Impl(vector.getX(), vector.getY()));
     }
     /**
      * Updates the state of the Enemy (switches between wander and follow).
