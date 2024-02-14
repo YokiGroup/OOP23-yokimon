@@ -32,5 +32,32 @@
         "y": 30.0
       }
     ]
+  },
+  "2": {
+    "texture": "immagine2.jpg",
+    "shape": [
+      "RIGHT",
+      "LEFT"
+    ],
+    "hitboxes": [
+      {
+        "type": "circle",
+        "position": {
+          "x": 30.0,
+          "y": 5.0
+        },
+        "radius": 10.0
+      }
+    ],
+    "spawns": []
+  },
+  "3": {
+    "texture": "immagine3.jpg",
+    "shape": [
+      "DOWN",
+      "LEFT"
+    ],
+    "hitboxes": [],
+    "spawns": []
   }
 }

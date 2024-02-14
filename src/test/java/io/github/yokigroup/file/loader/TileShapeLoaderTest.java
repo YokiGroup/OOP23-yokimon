@@ -23,12 +23,16 @@ class TileShapeLoaderTest {
         TileShapeLoader tileShapeLoader = new TileShapeLoader();
         var tileShapeSet = tileShapeLoader.getAll();
 
-        assertEquals(1, tileShapeSet.size());
-        for(var t: tileShapeSet) loadedTileShape = t; // will return only element in Set
+        assertEquals(2, tileShapeSet.size());
+        for(var t: tileShapeSet) {
+            if(t.getTiles().size() == 2) loadedTileShape = t;
+        }
         assertNotNull(loadedTileShape);
 
-        assertEquals(1, loadedTileShape.getTiles().size());
-        for(var t: loadedTileShape.getTiles().getEntries()) loadedTile = t;
+        assertEquals(2, loadedTileShape.getTiles().size());
+        for(var t: loadedTileShape.getTiles().getEntries()){
+            if(t.getHitboxes().size() == 2) loadedTile = t;
+        }
         assertNotNull(loadedTile);
     }
 
