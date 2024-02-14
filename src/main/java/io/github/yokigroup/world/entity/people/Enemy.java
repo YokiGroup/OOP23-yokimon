@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Enemy extends People {
 
-    private Enemy.state Action;
+    private Enemy.state state;
 
     /**
      * Constructs an Enemy object with the specified attributes.
@@ -25,7 +25,7 @@ public class Enemy extends People {
      */
     public Enemy(Position Pos, Hitbox Hitbox, List<Yokimon> Party, MessageHandler messageHandler) {
         super(Pos, Hitbox, Party, messageHandler);
-        this.Action = state.wander;
+        this.state = state.wander;
     }
 
     /**
@@ -52,12 +52,7 @@ public class Enemy extends People {
      */
     @Override
     public void update() {
-        /*
-        this.getMessageHandler().handle(SubmoduleMapImpl.class, map -> {
-            map.process();
-
-        });
-        */
+        
 
     }
 }
