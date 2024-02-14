@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * Test class for Opponent AI.
  */
 public final class OpponentAITest {
+    private static final int RAND_LEVEL = 15;
     private static Yokimon y1, y2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
@@ -48,7 +49,7 @@ public final class OpponentAITest {
      */
     @Test public void testFullImplBasicDMGCalc() {
         OpponentAI toTest = new FullImplOpponentAI(new BasicImplDmgCalculator());
-        y1.levelUP(15);
+        y1.levelUP(RAND_LEVEL);
 
         //multiple attacks. BASIC --> the Attack with the biggest POWER value
 
