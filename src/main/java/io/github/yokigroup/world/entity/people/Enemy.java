@@ -81,13 +81,12 @@ public class Enemy extends People {
      * @return A new position
      */
     private Position move(Vector2 vector){
-        this.setPos(new PositionImpl(new Vector2Impl(vector.getX(), vector.getY())));
-        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
-            /*
-            map.getEntitiesOnCurrentTile().stream()
-                    .forEach(entity -> );
 
-             */
+        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
+            map.getEntitiesOnCurrentTile().stream()
+                    .forEach(entity -> {
+                      //  this.setPos(Vector2Impl   this.getHitbox().collidesWith(entity.getHitbox()));
+                    });
         });
 
         return new PositionImpl(new Vector2Impl(vector.getX(), vector.getY()));
