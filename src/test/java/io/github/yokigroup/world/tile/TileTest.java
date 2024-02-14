@@ -1,6 +1,10 @@
 package io.github.yokigroup.world.tile;
 
-import io.github.yokigroup.util.*;
+import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.util.WeightedPool;
+import io.github.yokigroup.util.WeightedPoolImpl;
+import io.github.yokigroup.util.MutablePairImpl;
 import io.github.yokigroup.world.entity.Altar;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.PositionImpl;
@@ -10,7 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
