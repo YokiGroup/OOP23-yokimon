@@ -1,11 +1,9 @@
 package io.github.yokigroup.file.loader;
 
-import com.google.common.collect.ImmutableList;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.util.json.JsonParser;
-import io.github.yokigroup.util.json.PathNotFoundException;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
@@ -14,15 +12,26 @@ import io.github.yokigroup.world.gen.TileShapeImpl;
 import io.github.yokigroup.world.tile.Tile;
 import io.github.yokigroup.world.tile.TileImpl;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
-public class TileShapeLoader extends JsonLoader<TileShape>{
+/**
+ * Loads all the tiles contained in the json file describing them and puts them in a Set of {@link TileShape}s.
+ */
+public class TileShapeLoader extends JsonLoader<TileShape> {
     private static final String TILE_JSON_RPATH = "tiles.json";
     private static final String TILE_SHAPE_JPATHF = "$.%d.shape[*]";
     private static final String TILE_HITBOX_TYPE_JPATHF = "$.%d.hitboxes[%d]";
     private Map<Set<TileShape.TileDirections>, Set<Tile>> tiles = new HashMap<>();
     private final JsonParser parser = getParser();
 
+    /**
+     * Constructor.
+     */
     public TileShapeLoader() {
         super(TILE_JSON_RPATH);
     }
@@ -40,35 +49,39 @@ public class TileShapeLoader extends JsonLoader<TileShape>{
 
     private Hitbox getHitbox(final int id, final int index) {
         final String formattedHitboxJPath = String.format(TILE_HITBOX_TYPE_JPATHF, id, index);
-        final String type = parser.read(formattedHitboxJPath+".type");
-        final Vector2 pos = getVector2(formattedHitboxJPath+".position");
+        final String type = parser.read(formattedHitboxJPath  +  ".type");
+        final Vector2 pos = getVector2(formattedHitboxJPath  +  ".position");
 
         Hitbox retHBox;
-        switch(type) {
+        switch (type) {
             case "rect":
-                final Vector2 dim = getVector2(formattedHitboxJPath+".dimensions");
+                final Vector2 dim = getVector2(formattedHitboxJPath  +  ".dimensions");
                 retHBox = new RectangularHitbox(pos, dim);
                 break;
 
             case "circle":
-                final double radius = parser.read(formattedHitboxJPath+".radius");
+                final double radius = parser.read(formattedHitboxJPath  +  ".radius");
                 retHBox = new CircularHitbox(pos, radius);
                 break;
 
             default:
-                throw new RuntimeException(String.format("invalid type of hitbox index %d of id %d: received %s", index, id, type));
+                throw new RuntimeException(
+                        String.format("invalid type of hitbox index %d of id %d: received %s", index, id, type)
+                );
         }
         return retHBox;
     }
 
-    private <T> Set<T> ifNullReturnEmpty(Set<T> set){
+    private <T> Set<T> ifNullReturnEmpty(final Set<T> set) {
         return set != null ? set : Set.of();
     }
 
     private Set<Hitbox> getHitboxes(final int id) {
         return ifNullReturnEmpty(doUntilPathException((c, i) -> {
             Set<Hitbox> coll = c;
-            if(coll == null) coll = new HashSet<>();
+            if (coll == null) {
+                coll = new HashSet<>();
+            }
 
             coll.add(getHitbox(id, i));
             return coll;
@@ -84,10 +97,12 @@ public class TileShapeLoader extends JsonLoader<TileShape>{
     }
 
     private Set<Vector2>  getSpawnPositions(final int id) {
-        final String spawnPositionJPath = "$."+id+".spawns[%d]";
+        final String spawnPositionJPath = "$." + id + ".spawns[%d]";
         return ifNullReturnEmpty(doUntilPathException((c, i) -> {
             Set<Vector2> aggr = c;
-            if(aggr == null) aggr = new HashSet<>();
+            if (aggr == null) {
+                aggr = new HashSet<>();
+            }
 
             aggr.add(getVector2(String.format(spawnPositionJPath, i)));
             return aggr;
@@ -104,24 +119,27 @@ public class TileShapeLoader extends JsonLoader<TileShape>{
         Objects.requireNonNull(dirs);
         Objects.requireNonNull(tile);
 
-        if(!tiles.containsKey(dirs)) {
+        if (!tiles.containsKey(dirs)) {
             tiles.put(dirs, new HashSet<>());
         }
         tiles.get(dirs).add(tile);
     }
 
+    /**
+     * @return Set of all the possible {@link TileShape}s, each {@link TileShape} containing all tiles of that shape.
+     */
     public Set<TileShape> getAll() {
         Set<TileShape> shapes = new HashSet<>();
 
-        if(tiles.isEmpty()){
+        if (tiles.isEmpty()) {
             doUntilPathException((c, i) -> {
-                var nextTile = load(i+1);
+                var nextTile = load(i + 1);
                 insertTile(nextTile.x(), nextTile.y());
                 return null;
             });
         }
 
-        for(var tileEntry: tiles.entrySet()) {
+        for (var tileEntry: tiles.entrySet()) {
             shapes.add(new TileShapeImpl(tileEntry.getValue(), tileEntry.getKey()));
         }
 
