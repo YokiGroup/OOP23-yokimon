@@ -62,7 +62,7 @@ public class FullImplOpponentAI extends OpponentAI {
         //a random one from the list is used instead.
         if (best.isPresent()) {
             if (attacks.size() > SINGLE && lastUsed.isPresent()) {
-                while(best.get().equals(lastUsed.get())) {
+                while (best.get().equals(lastUsed.get())) {
                     best = Optional.of(attacks.get(rand.nextInt(attacks.size())));
                 }
             }
