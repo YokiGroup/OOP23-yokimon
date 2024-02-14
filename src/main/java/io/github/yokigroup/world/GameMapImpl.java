@@ -2,12 +2,10 @@ package io.github.yokigroup.world;
 
 import io.github.yokigroup.file.loader.TileShapeLoader;
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.world.gen.TileShape;
 import io.github.yokigroup.world.gen.WFCWrapper;
 import io.github.yokigroup.world.gen.WFCWrapperImpl;
 import io.github.yokigroup.world.tile.Tile;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +22,7 @@ public class GameMapImpl implements GameMap {
 
     /**
      * Initializes the game map through the usage of the wave function collapse algorithm.
+     * @param tileDimensions The dimensions in unit of the Tile on the map.
      * @param mapDimensions The mapDimensions of the map in tiles.
      */
     public GameMapImpl(final Pair<Integer, Integer> tileDimensions, final Pair<Integer, Integer> mapDimensions) {
@@ -48,7 +47,7 @@ public class GameMapImpl implements GameMap {
     }
 
     @Override
-    public Pair<Integer, Integer> getTileDimensions() {
+    public final Pair<Integer, Integer> getTileDimensions() {
         return this.tileDimensions;
     }
 
