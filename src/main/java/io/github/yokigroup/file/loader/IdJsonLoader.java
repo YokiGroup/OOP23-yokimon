@@ -13,7 +13,7 @@ public abstract class IdJsonLoader<T> extends JsonLoader<T> {
         super(relativePath);
     }
 
-    public abstract T load(int id);
+    public abstract T load(final int id);
 
     public Map<Integer, T> getAll(){
         Map<Integer, T> retMap = new HashMap<>();

@@ -17,7 +17,7 @@ public class AttackLoader extends IdJsonLoader<Attack> {
     }
 
     @Override
-    public Attack load(int id) {
+    public Attack load(final int id) {
         JsonParser parser = getParser();
 
         int power = parser.read(String.format(ATTACK_POWER_JPATHF, id));
