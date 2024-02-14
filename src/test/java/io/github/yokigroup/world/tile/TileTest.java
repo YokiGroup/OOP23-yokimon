@@ -1,18 +1,22 @@
 package io.github.yokigroup.world.tile;
 
+import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.Submodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.util.WeightedPoolImpl;
+import io.github.yokigroup.util.MutablePairImpl;
 import io.github.yokigroup.world.entity.Altar;
 import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
-import java.util.Optional;
+import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -69,25 +73,25 @@ class TileTest {
     @Test
     void spawnEntities() {
         final WeightedPool<Entity> entityPool = new WeightedPoolImpl<>();
-        // FIXME: possibly fix the entity initialization too
-        entityPool.addElement(new Altar("a1", null, null, Optional.empty()), 1.0f);
-        entityPool.addElement(new Altar("a2", null, null, Optional.empty()), 1.0f);
-        entityPool.addElement(new Altar("a3", null, null, Optional.empty()), 1.0f);
-        entityPool.addElement(new Altar("a4", null, null, Optional.empty()), 1.0f);
-        entityPool.addElement(new Altar("a5", null, null, Optional.empty()), 1.0f);
-        entityPool.addElement(new Altar("a6", null, null, Optional.empty()), 1.0f);
+        final MessageHandler mh = new MessageHandler() {
+            @Override
+            public <T extends Submodule> void handle(final Class<T> subModuleType, final Consumer<T> handler) {
+                return;
+            }
+        };
+        entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, mh), 1.0f);
+        entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, mh), 1.0f);
+        entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, mh), 1.0f);
+        entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, mh), 1.0f);
+        entityPool.addElement(new Altar(new PositionImpl(new MutablePairImpl(0, 0)), null, null, mh), 1.0f);
         tile.addSpawnLocation(vector1);
         tile.addSpawnLocation(vector2);
         tile.addSpawnLocation(vector3);
         tile.spawnEntities(entityPool);
-        /*
-        for (final Vector2 pos : tile.getEntitySpawnLocations()) {
-            // FIXME: the getPosition returns a "Position" object, not a Vector2
-            assertTrue(tile.getEntities()
-                    .stream()
-                    .map(e -> e.getPosition());
-            );
-        }
-        */
+        assertEquals(3, tile.getEntities().size());
+        tile.getEntities()
+                .stream()
+                .map(e -> e.getPos().turnIntoVector())
+                .forEach(v -> assertTrue(tile.getEntitySpawnLocations().contains(v)));
     }
 }

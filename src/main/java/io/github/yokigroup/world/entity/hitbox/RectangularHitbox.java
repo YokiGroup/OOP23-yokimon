@@ -1,7 +1,6 @@
 package io.github.yokigroup.world.entity.hitbox;
 
 import io.github.yokigroup.util.Vector2;
-import io.github.yokigroup.util.Vector2Impl;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.geometry.Convex;
 import org.dyn4j.geometry.Rectangle;
@@ -25,7 +24,7 @@ public class RectangularHitbox extends HitboxImpl {
      * @param dimensions The dimensions of the rectangle.
      */
     public RectangularHitbox(final Vector2 dimensions) {
-        this(new Vector2Impl(0.0d, 0.0d), dimensions);
+        super(makeRectangle(dimensions));
     }
 
     /**
