@@ -4,7 +4,7 @@ import io.github.yokigroup.util.json.JsonParser;
 import io.github.yokigroup.util.json.JsonParserImpl;
 import io.github.yokigroup.util.json.PathNotFoundException;
 
-import java.util.function.BiFunction;
+import java.util.function.BiConsumer;
 
 /**
  * @param <T>
@@ -12,13 +12,12 @@ import java.util.function.BiFunction;
 public abstract class JsonLoader<T> {
     private final JsonParser parser;
 
-    protected <T> T doUntilPathException(BiFunction<T, Integer, T> fun) {
-        T aggregator = null;
+    protected final <T> T doUntilPathException(T aggregator, BiConsumer<T, Integer> fun) {
         int i = 0;
 
         try {
             while(true) {
-                aggregator = fun.apply(aggregator, i);
+                fun.accept(aggregator, i);
                 i++;
             }
         }catch(PathNotFoundException ignored) { }
