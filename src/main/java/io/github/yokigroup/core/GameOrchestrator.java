@@ -67,7 +67,7 @@ public class GameOrchestrator implements MessageHandler, GameLogic {
     }
 
     @Override
-    public <T extends Submodule, E> E handle(Class<T> subModuleType, Function<T, E> handler) {
+    public final <T extends Submodule, E> E handle(final Class<T> subModuleType, final Function<T, E> handler) {
         Optional<T> submodule = subModules.get(subModuleType);
         if (submodule.isEmpty()) {
             throw new IllegalArgumentException(this.getClass() + " does not contain submodule " + subModuleType);
