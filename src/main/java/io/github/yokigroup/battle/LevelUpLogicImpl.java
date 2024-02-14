@@ -66,13 +66,13 @@ public class LevelUpLogicImpl implements LevelUpLogic {
     }
 
     @Override
-    public final Yokimon.exp_code levelUp(final Yokimon yokimon, final int plus) {
-        Yokimon.exp_code code = Yokimon.exp_code.LEVEL_UP;
+    public final Yokimon.ExpCode levelUp(final Yokimon yokimon, final int plus) {
+        Yokimon.ExpCode code = Yokimon.ExpCode.LEVEL_UP;
         // Control if the yokimon learn a new move
             for (int i = yokimon.getLevel() + 1; i <= yokimon.getLevel() + plus; i++) {
                 if (yokimon.getLearnableAttacks().containsKey(i)) {
                     yokimon.addAttack(yokimon.getLearnableAttacks().get(i));
-                    code = Yokimon.exp_code.NEW_MOVE;
+                    code = Yokimon.ExpCode.NEW_MOVE;
                 }
             }
         // Set new level

@@ -132,9 +132,6 @@ class YokimonImplTest {
         Yokimon oni = new YokimonImpl("oni", Color.RED, baseStats1, Yokimon.GrowthRate.MEDIUM, 10, stone );
         Yokimon wani = new YokimonImpl("wani", Color.RED, baseStats2, Yokimon.GrowthRate.SLOW, 10, stone );
         assertEquals(42, oni.getStat(Yokimon.Stats.HP));
-
         assertEquals(40, calc.getDMG(oni, wani, slap));
-
-
     }
 }

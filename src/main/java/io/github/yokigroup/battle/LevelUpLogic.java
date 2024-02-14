@@ -20,7 +20,7 @@ public interface LevelUpLogic {
      * @param plus number to add to level.
      * @return returns levelUP if the yokimon just level up, newMove if it learns one or mode moves.
      */
-    Yokimon.exp_code levelUp(Yokimon yokimon, int plus);
+    Yokimon.ExpCode levelUp(Yokimon yokimon, int plus);
 
     /**
      * Set the moves of the yokimon given as parameter to what.

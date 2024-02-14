@@ -218,8 +218,8 @@ public class YokimonImpl implements Yokimon {
     }
 
     @Override
-    public final exp_code takeXp(final int n) {
-        exp_code expCode = exp_code.OK;
+    public final ExpCode takeXp(final int n) {
+        ExpCode expCode = ExpCode.OK;
         double xpToTake = n * this.growthRate.get();
         while (xpToTake >= this.xpNext - this.xp) {
             xpToTake -= this.xpNext - this.xp;
