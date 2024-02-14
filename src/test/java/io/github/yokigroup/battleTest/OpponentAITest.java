@@ -47,12 +47,12 @@ public final class OpponentAITest {
     /**
      * Testing the full implementation (FullImplOpponentAI) with a BasicImplDmgCalculator.
      */
-
-    //NOTE: IN ORDER TO TEST YOU NEED TO MODIFY THE JSON FILE SO THEY HAVE MORE ATTACKS AVAILABLE
     @Test public void testFullImplBasicDMGCalc() {
         OpponentAI toTest = new FullImplOpponentAI(new BasicImplDmgCalculator());
+        y1.levelUP(15);
 
         //multiple attacks. BASIC --> the Attack with the biggest POWER value
+
         //                            first, the Attack with the biggest POWER value
         assertEquals(Optional.of(attackLoader.load(1)).get().getName().toLowerCase(),
                 toTest.getMove(y2, y1).get().getName().toLowerCase());
