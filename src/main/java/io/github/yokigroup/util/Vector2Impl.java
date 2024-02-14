@@ -81,6 +81,13 @@ public class Vector2Impl implements Vector2 {
         return this.getX() == ((Vector2Impl) other).getX() && this.getY() == ((Vector2Impl) other).getY();
     }
 
+    @Override
+    public final int hashCode() {
+        final int prime1 = 43;
+        final int prime2 = 61;
+        return Double.hashCode(prime1 * this.getX()) * Double.hashCode(prime2 * this.getY());
+    }
+
     private org.dyn4j.geometry.Vector2 getVector() {
         return this.vector;
     }

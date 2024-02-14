@@ -72,10 +72,9 @@ public interface Vector2 {
      */
     double dot(Vector2 other);
 
-    /**
-     *
-     * @param other The other object to check.
-     * @return True if the two vectors are the same, false otherwise.
-     */
+    @Override
     boolean equals(Object other);
+
+    @Override
+    int hashCode();
 }
