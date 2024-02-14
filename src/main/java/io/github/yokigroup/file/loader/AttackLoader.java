@@ -23,7 +23,7 @@ public class AttackLoader extends AbstractJsonLoader<Attack> {
         int power = parser.read(String.format(ATTACK_POWER_JPATHF, id));
         String name = parser.read(String.format(ATTACK_NAME_JPATHF, id));
         Color color = Color.valueOf(parser.read(String.format(ATTACK_COLOR_JPATHF, id)));
-        Attack.effect effect = Attack.effect.valueOf(parser.read(String.format(ATTACK_EFFECT_JPATHF, id)));
+        Attack.Effect effect = Attack.Effect.valueOf(parser.read(String.format(ATTACK_EFFECT_JPATHF, id)));
 
         return new AttackImpl(name, color, power, effect);
     }

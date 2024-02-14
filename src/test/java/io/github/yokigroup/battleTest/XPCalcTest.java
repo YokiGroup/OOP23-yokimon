@@ -45,7 +45,6 @@ public class XPCalcTest {
         assertEquals(EXP_VAL_DUMMY1, toTest.getXP(List.of()));
         assertEquals(EXP_VAL_DUMMY2, toTest.getXP(List.of(y1, y2, y3)));
         assertNotEquals(EXP_VAL_DUMMY3, toTest.getXP(List.of(y1, y2)));
-
     }
 
     /**
@@ -58,6 +57,5 @@ public class XPCalcTest {
         assertEquals(EXP_VAL_FULL1, toTest.getXP(List.of()));
         assertEquals(EXP_VAL_FULL2, toTest.getXP(List.of(y1, y2, y3)));
         assertNotEquals(EXP_VAL_FULL3, toTest.getXP(List.of(y1, y2)));
-
     }
 }
