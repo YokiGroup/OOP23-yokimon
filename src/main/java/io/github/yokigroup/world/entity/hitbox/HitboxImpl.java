@@ -4,12 +4,14 @@ import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
+import org.dyn4j.geometry.AABB;
 import org.dyn4j.geometry.Transform;
 import org.dyn4j.world.DetectFilter;
 import org.dyn4j.world.World;
 import org.dyn4j.world.result.ConvexDetectResult;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -92,6 +94,20 @@ public abstract class HitboxImpl implements Hitbox {
                 this.body.getTransform().getTranslationX(),
                 this.body.getTransform().getTranslationY()
         );
+    }
+
+    @Override
+    public final boolean equals(final Object other) {
+        if (!(other instanceof HitboxImpl)) {
+            return false;
+        } else if (this.body.getFixture(0).getShape().getClass() != ((HitboxImpl) other).getBody().getFixture(0).getShape().getClass()) {
+            return false;
+        }
+        final AABB aabb1 = this.body.createAABB();
+        final AABB aabb2 = ((HitboxImpl) other).getBody().createAABB();
+        return this.body.getTransform().getTranslationX() == ((HitboxImpl) other).getBody().getTransform().getTranslationX()
+                && aabb1.getHeight() == aabb2.getHeight()
+                && aabb1.getWidth() == aabb2.getWidth();
     }
 
     /**

@@ -28,4 +28,12 @@ public interface Hitbox {
      * @return the position of the hitbox.
      */
     Vector2 getPosition();
+
+
+    /**
+     *
+     * @param other The other object to check.
+     * @return True if the two hitboxes are the same, false otherwise.
+     */
+    boolean equals(Object other);
 }
