@@ -74,8 +74,8 @@ public interface Vector2 {
 
     /**
      *
-     * @param other The other vector to check.
+     * @param other The other object to check.
      * @return True if the two vectors are the same, false otherwise.
      */
-    boolean equals(Vector2 other);
+    boolean equals(Object other);
 }
