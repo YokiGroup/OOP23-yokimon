@@ -35,7 +35,7 @@ public class WFCWrapperImpl implements WFCWrapper {
 
     @Override
     public final void setStaticTile(final Pair<Integer, Integer> position, final Tile tile) {
-        Set<Set<WfcShapeDirection>> shapes = this.tileShapes.stream()
+        final Set<Set<WfcShapeDirection>> shapes = this.tileShapes.stream()
             .filter(s -> s.getTiles().getEntries().contains(tile))
             .map(s -> wfcToTileShape(s.getPossibleDirections()))
                 .collect(Collectors.toSet());
@@ -54,7 +54,7 @@ public class WFCWrapperImpl implements WFCWrapper {
                 .map(TileShape::getTiles)
                 .findFirst();
         if (tilePool.isEmpty()) {
-            throw new NullPointerException("Couldn't locate file at that location.");
+            throw new IllegalStateException("Couldn't get the tile at that location.");
         }
         return tilePool.get().getRandomizedElement();
     }
@@ -65,7 +65,7 @@ public class WFCWrapperImpl implements WFCWrapper {
      * @return The set in WfcShapeDirection format.
      */
     private Set<WfcShapeDirection> wfcToTileShape(final Set<TileShape.TileDirections> shape) {
-        Set<WfcShapeDirection> convertedShapes = new HashSet<>();
+        final Set<WfcShapeDirection> convertedShapes = new HashSet<>();
         if (shape.contains(TileShape.TileDirections.UP)) {
             convertedShapes.add(WfcShapeDirection.UP);
         }
@@ -87,7 +87,7 @@ public class WFCWrapperImpl implements WFCWrapper {
      * @return The set in TileDirections format.
      */
     private Set<TileShape.TileDirections> tileShapeToWfc(final Set<WfcShapeDirection> shape) {
-        Set<TileShape.TileDirections> convertedShapes = new HashSet<>();
+        final Set<TileShape.TileDirections> convertedShapes = new HashSet<>();
         if (shape.contains(WfcShapeDirection.UP)) {
             convertedShapes.add(TileShape.TileDirections.UP);
         }
