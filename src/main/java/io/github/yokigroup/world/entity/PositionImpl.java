@@ -2,10 +2,7 @@ package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.util.MutablePair;
-import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.util.Vector2;
-import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.util.*;
 
 import java.util.Objects;
 
@@ -48,9 +45,15 @@ public class PositionImpl implements Position{
     }
 
     @Override
+    public Position testTovePosition(Vector2 vector) {
+        return new PositionImpl(new MutablePairImpl(this.pos.getX()+vector.getX(), this.pos.getY()+vector.getY()));
+    }
+
+
+    @Override
     public boolean isValid() {
         messageHandler.handle(GameMapSubmodule.class, map -> {
-            map.getEntitiesOnCurrentTile();
+        //    map.getEntitiesOnCurrentTile().
         });
         return true;
     }

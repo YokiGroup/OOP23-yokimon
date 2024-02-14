@@ -25,6 +25,13 @@ public interface Position {
      * @param vector vector to add
      */
     public void movePosition(Vector2 vector);
+
+    /**
+     * add a vector to the position and return the new value of pos without changing it.
+     * @param vector vector to add
+     * @return Position new
+     */
+    public Position testTovePosition(Vector2 vector);
     /**
      * Return true if the position is valid in the map.
      * False if is not.
@@ -45,4 +52,6 @@ public interface Position {
      * @return boolean
      */
     public boolean inRadius(Position otherPos, double radius);
+
+
 }
