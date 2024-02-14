@@ -14,7 +14,7 @@ public abstract class JsonLoader<T> {
 
     protected <T> T doUntilPathException(BiFunction<T, Integer, T> fun) {
         T aggregator = null;
-        int i = 1;
+        int i = 0;
 
         try {
             while(true) {

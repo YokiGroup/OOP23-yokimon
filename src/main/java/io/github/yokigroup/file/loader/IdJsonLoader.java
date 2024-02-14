@@ -20,7 +20,7 @@ public abstract class IdJsonLoader<T> extends JsonLoader<T> {
         return doUntilPathException((c, i) -> {
             var coll = c;
             if(coll == null) coll = new HashMap<>();
-            coll.put(i, load(i));
+            coll.put(i+1, load(i+1));
             return coll;
         });
     }

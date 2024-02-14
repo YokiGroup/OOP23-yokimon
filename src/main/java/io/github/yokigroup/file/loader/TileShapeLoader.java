@@ -111,7 +111,7 @@ public class TileShapeLoader extends JsonLoader<TileShape>{
 
         if(tiles.isEmpty()){
             doUntilPathException((c, i) -> {
-                var nextTile = load(i);
+                var nextTile = load(i+1);
                 insertTile(nextTile.x(), nextTile.y());
                 return null;
             });
