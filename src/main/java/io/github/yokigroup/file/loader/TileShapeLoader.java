@@ -44,7 +44,7 @@ public class TileShapeLoader extends JsonLoader<TileShape>{
         final Vector2 pos = getVector2(formattedHitboxJPath+".position");
 
         Hitbox retHBox;
-        switch(type){
+        switch(type) {
             case "rect":
                 final Vector2 dim = getVector2(formattedHitboxJPath+".dimensions");
                 retHBox = new RectangularHitbox(pos, dim);
