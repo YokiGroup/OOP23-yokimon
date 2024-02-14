@@ -4,16 +4,11 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Optional;
 
-<<<<<<< HEAD
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.nextyokimon.DummyImplNextYokimon;
 import io.github.yokigroup.battle.nextyokimon.NextYokimon;
 import io.github.yokigroup.file.loader.YokimonLoader;
-=======
-import io.github.yokigroup.battle.*;
->>>>>>> master
 import org.junit.jupiter.api.BeforeEach;
-import io.github.yokigroup.battle.Yokimon;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,14 +34,8 @@ public final class NextYokTest {
      * Testing dummy implementation.
      */
     @Test public void testDummyImpl() {
-<<<<<<< HEAD
-=======
-
        // NextYokimon toTest = new DummyImplNextYokimon();
 
-
-        /*
->>>>>>> master
         NextYokimon toTest = new DummyImplNextYokimon();
 
         List<Yokimon> party1 = new LinkedList<>();

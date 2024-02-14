@@ -35,19 +35,6 @@ class WaveFunctionCollapseTest {
         wfc = new WaveFunctionCollapseImpl(new Pair<>(WIDTH, HEIGHT), new HashSet<>(shpDic.values()));
     }
 
-<<<<<<< HEAD
-    private void printWfc() {
-        for (int j = WIDTH - 1; j >= 0; j--) {
-            for (int i = 0; i < HEIGHT; i++) {
-                Set<WfcShapeDirection> shape = wfc.getShapeAt(new Pair<>(i, j));
-
-            }
-            System.out.println(" ");
-        }
-    }
-
-=======
->>>>>>> master
     @Test
     void testGetShapeAt() {
         wfc.generateShapeMap();

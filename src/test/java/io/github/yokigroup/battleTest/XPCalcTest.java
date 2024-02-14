@@ -45,12 +45,7 @@ public final class XPCalcTest {
 
         assertEquals(EXP_VAL_DUMMY1, toTest.getXP(List.of()));
         assertEquals(EXP_VAL_DUMMY2, toTest.getXP(List.of(y1, y2, y3)));
-<<<<<<< HEAD
         assertEquals(EXP_VAL_DUMMY3, toTest.getXP(List.of(y1, y2)));
-
-=======
-        assertNotEquals(EXP_VAL_DUMMY3, toTest.getXP(List.of(y1, y2)));
->>>>>>> master
     }
 
     /**
