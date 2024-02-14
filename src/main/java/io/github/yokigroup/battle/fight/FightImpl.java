@@ -20,9 +20,9 @@ import java.util.*;
  */
 public final class FightImpl implements Fight {
 
-    private static final int TOPLIMIT_FAIL = 30;
-    private static final int TOPLIMIT_WEAK = 70;
-    private static final int TOPLIMIT_GOOD = 120;
+    private static final int TOPLIMIT_FAIL = 8;
+    private static final int TOPLIMIT_WEAK = 18;
+    private static final int TOPLIMIT_GOOD = 30;
 
     /* parties */
     private final List<Yokimon> myYokimons;

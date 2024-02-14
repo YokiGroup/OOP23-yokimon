@@ -17,9 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
  * Test class for FightImpl.
  */
-//NOTE: THIS FIGHT WAS TESTED WITH DUMMY IMPLEMENTATIONS
 public final class FightTest {
-    private static final int EXP_XPVALUE = 200;
+    private static final int EXP_XPVALUE = 320;
 
     private static Fight toTest;
     private static Yokimon y1, y2, y3, y4, y5;
@@ -88,7 +87,7 @@ public final class FightTest {
      */
     @Test public void testGetAttacked() {
         Fight.Success atk1 = toTest.getAttacked();
-        assertNotEquals(toTest.getCurrentMyYokimon().getActualHp(),
+        assertEquals(toTest.getCurrentMyYokimon().getActualHp(),
                         toTest.getCurrentMyYokimon().getMaxHp());
         assertNotEquals(Fight.Success.FAIL, atk1);  //the best attack available shouldn't be that bad
         assertNotEquals(Fight.Success.WEAK, atk1);  //WITH DUMMY DAMAGE CALCULATOR!!
