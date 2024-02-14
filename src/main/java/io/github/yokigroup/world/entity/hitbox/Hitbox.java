@@ -28,10 +28,4 @@ public interface Hitbox {
      * @return the position of the hitbox.
      */
     Vector2 getPosition();
-
-    /**
-     *
-     * @return the body of the hitbox.
-     */
-    Body getBody();
 }
