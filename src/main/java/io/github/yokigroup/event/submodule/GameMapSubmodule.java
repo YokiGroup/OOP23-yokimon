@@ -4,6 +4,7 @@ import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.tile.Tile;
 
 import java.util.Set;
@@ -44,6 +45,10 @@ public class GameMapSubmodule extends Submodule {
      */
     public GameMap getGameMap() {
         return this.gameMap;
+    }
+
+    public Set<Hitbox> getHitboxesOnCurrentTile() {
+        return gameMap.getPlayerTile().getHitboxes();
     }
 
     /**
