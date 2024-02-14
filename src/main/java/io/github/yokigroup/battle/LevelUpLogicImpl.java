@@ -14,7 +14,7 @@ public class LevelUpLogicImpl implements LevelUpLogic {
     /**
      * Value used for the exponent for calculate nextBoundXP.
      */
-    private static final double EXPONENT = 2.7d;
+    private static final int EXPONENT = 3;
 
     /**
      * This method calculates the next XP bound to
