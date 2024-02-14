@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,10 +22,15 @@ class SubmoduleMapImplTest {
     @BeforeEach
     void setUp() {
         MessageHandler handler = new MessageHandler() {
+            // handle implementation do not matter for this test.
             @Override
             public <T extends Submodule> void handle(final Class<T> subModuleType, final Consumer<T> handler) {
-                // Handle implementation does not matter for this test.
                 return;
+            }
+
+            @Override
+            public <T extends Submodule, E> E handle(Class<T> subModuleType, Function<T, E> handler) {
+                return null;
             }
         };
 
