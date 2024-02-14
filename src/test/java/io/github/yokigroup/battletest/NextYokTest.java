@@ -1,4 +1,4 @@
-package io.github.yokigroup.battleTest;
+package io.github.yokigroup.battletest;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Test class for Next Yokimon.
  */
-public final class NextYokTest {
+final class NextYokTest {
     private static Yokimon y1, y2, y3;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
 
@@ -24,7 +24,7 @@ public final class NextYokTest {
      * Initialises some Yokimons meant for testing.
      */
     @BeforeEach
-    public void init() {
+    void init() {
         y1 = yokimonLoader.load(1);
         y2 = yokimonLoader.load(2);
         y3 = yokimonLoader.load(3);
@@ -33,12 +33,11 @@ public final class NextYokTest {
     /**
      * Testing dummy implementation.
      */
-    @Test public void testDummyImpl() {
-       // NextYokimon toTest = new DummyImplNextYokimon();
+    @Test
+    void testDummyImpl() {
+        final NextYokimon toTest = new DummyImplNextYokimon();
 
-        NextYokimon toTest = new DummyImplNextYokimon();
-
-        List<Yokimon> party1 = new LinkedList<>();
+        final List<Yokimon> party1 = new LinkedList<>();
 
         party1.add(y1); party1.add(y2); party1.add(y3);
         assertEquals(Optional.of(y1), toTest.getNext(party1));

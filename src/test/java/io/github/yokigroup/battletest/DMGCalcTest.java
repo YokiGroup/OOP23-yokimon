@@ -1,4 +1,4 @@
-package io.github.yokigroup.battleTest;
+package io.github.yokigroup.battletest;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.Attack;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Test class for Damage Calculator.
  */
-public class DMGCalcTest {
+class DMGCalcTest {
 
     private static final int EXP_VAL_BASIC1 = 20;
     private static final int EXP_VAL_BASIC2 = 17;
@@ -36,7 +36,7 @@ public class DMGCalcTest {
      * Instantiates variables for test.
      */
     @BeforeEach
-    public void init() {
+    void init() {
         y1 = yokimonLoader.load(1);
         y2 = yokimonLoader.load(3);
         a1 = attackLoader.load(2);
@@ -46,8 +46,9 @@ public class DMGCalcTest {
     /**
      * Testing basic implementation.
      */
-    @Test public void testBasicImpl() {
-        DmgCalculator toTest = new BasicImplDmgCalculator();
+    @Test
+    void testBasicImpl() {
+        final DmgCalculator toTest = new BasicImplDmgCalculator();
 
         assertEquals(EXP_VAL_BASIC1, toTest.getDMG(y1, y2, a1)); //7*80/7*4 = 20
         assertEquals(EXP_VAL_BASIC2, toTest.getDMG(y1, y2, a2)); //7*70/7*4 = 17
@@ -57,8 +58,9 @@ public class DMGCalcTest {
     /**
      * Testing multiplier implementation.
      */
-    @Test public void testMultiplierImpl() {
-        DmgCalculator toTest = new MultiplierDmgCalculator();
+    @Test
+    void testMultiplierImpl() {
+        final DmgCalculator toTest = new MultiplierDmgCalculator();
 
         assertEquals(EXP_VAL_MULT1, toTest.getDMG(y1, y2, a1)); //80*1.2/4 = 24
         assertEquals(EXP_VAL_MULT2, toTest.getDMG(y1, y2, a2)); //70/1.2/4 = 14
@@ -67,8 +69,9 @@ public class DMGCalcTest {
     /**
      * Testing full implementation with color hierarchy.
      */
-    @Test public void testFullImpl() {
-        DmgCalculator toTest = new FullImplDmgCalculator();
+    @Test
+    void testFullImpl() {
+        final DmgCalculator toTest = new FullImplDmgCalculator();
 
         assertEquals(EXP_VAL_FULL1, toTest.getDMG(y1, y2, a1)); //80*1.2*0.5 = 48/4 = 12
         assertEquals(EXP_VAL_FULL2, toTest.getDMG(y1, y2, a2)); //70/1.2*0.5 = 29/4 = 7

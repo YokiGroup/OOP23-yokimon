@@ -1,4 +1,4 @@
-package io.github.yokigroup.battleTest;
+package io.github.yokigroup.battletest;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
@@ -9,6 +9,8 @@ import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Locale;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -17,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 /**
  * Test class for Opponent AI.
  */
-public final class OpponentAITest {
+final class OpponentAITest {
     private static final int RAND_LEVEL = 15;
     private static Yokimon y1, y2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
@@ -35,8 +37,9 @@ public final class OpponentAITest {
     /**
      * Testing dummy implementation.
      */
-    @Test public void testDummyImpl() {
-        OpponentAI toTest = new DummyImplOpponentAI();
+    @Test
+    void testDummyImpl() {
+        final OpponentAI toTest = new DummyImplOpponentAI();
 
         assertEquals(Optional.of(attackLoader.load(4)).get().getName().toLowerCase(),
                         toTest.getMove(y2, y1).get().getName().toLowerCase());
@@ -47,13 +50,15 @@ public final class OpponentAITest {
     /**
      * Testing the full implementation (FullImplOpponentAI) with a BasicImplDmgCalculator.
      */
-    @Test public void testFullImplBasicDMGCalc() {
-        OpponentAI toTest = new FullImplOpponentAI(new BasicImplDmgCalculator());
+    @Test
+    void testFullImplBasicDMGCalc() {
+        final OpponentAI toTest = new FullImplOpponentAI(new BasicImplDmgCalculator());
         y1.levelUP(RAND_LEVEL);
 
         //multiple attacks. BASIC --> the Attack with the biggest POWER value
 
         //                            first, the Attack with the biggest POWER value
+        //FIXME -> PMD STYLE CHECKS: LOCALE???
         assertEquals(Optional.of(attackLoader.load(1)).get().getName().toLowerCase(),
                 toTest.getMove(y2, y1).get().getName().toLowerCase());
         //                              then, another -random- one

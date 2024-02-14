@@ -1,4 +1,4 @@
-package io.github.yokigroup.battleTest;
+package io.github.yokigroup.battletest;
 
 import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.battle.fight.FightImpl;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
  * Test class for FightImpl.
  */
-public final class FightTest {
+final class FightTest {
     private static final int EXP_XPVALUE = 320;
 
     private static Fight toTest;
@@ -29,7 +29,7 @@ public final class FightTest {
      * Initialises the fight with some Yokimons meant for testing.
      */
     @BeforeEach
-    public void init() {
+    void init() {
 
         y1 =  yokimonLoader.load(1);
         y2 =  yokimonLoader.load(3);
@@ -38,12 +38,12 @@ public final class FightTest {
         y4 = yokimonLoader.load(2);
         y5 = yokimonLoader.load(2);
 
-        List<Yokimon> myParty = new LinkedList<>();
+        final List<Yokimon> myParty = new LinkedList<>();
         myParty.add(y1);
         myParty.add(y2);
         myParty.add(y3);
 
-        List<Yokimon> oppParty = new LinkedList<>();
+        final List<Yokimon> oppParty = new LinkedList<>();
         oppParty.add(y4);
         oppParty.add(y5);
 
@@ -53,7 +53,8 @@ public final class FightTest {
     /**
      * Testing instantiation of the fight.
      */
-    @Test public void testInstantiation() {
+    @Test
+    void testInstantiation() {
         assertEquals(y1, toTest.getCurrentMyYokimon());
         assertEquals(y4, toTest.getCurrentOpponent());
     }
@@ -61,21 +62,16 @@ public final class FightTest {
     /**
      * Testing attack() method.
      */
-    @Test public void testAttack() {
-        Fight.Success atk1 = toTest.attack(attackLoader.load(2));
+    @Test
+    void testAttack() {
+        toTest.attack(attackLoader.load(2));
         assertNotEquals(toTest.getCurrentOpponent().getActualHp(),
                         toTest.getCurrentOpponent().getMaxHp());
-        //assertEquals(26, toTest.getCurrentOpponent().getActualHp());   // (90 - 80*80/100)
-        assertEquals(y4, toTest.getCurrentOpponent());                   // should still be alive
-        //assertEquals(Fight.Success.WEAK, atk1);
-
+        assertEquals(y4, toTest.getCurrentOpponent());             // should still be alive
         assertFalse(toTest.isOver());
         assertFalse(toTest.victory());
-
-        Fight.Success atk2 = toTest.attack(attackLoader.load(4));     // (26 - 80*40/100 = -6 --> dead)
-        assertEquals(y5, toTest.getCurrentOpponent());                   // should have changed
-        //assertEquals(Fight.Success.WEAK, atk2);
-
+        toTest.attack(attackLoader.load(4));
+        assertEquals(y5, toTest.getCurrentOpponent());            // should have changed
         toTest.attack(attackLoader.load(1));
         toTest.attack(attackLoader.load(1));
         assertTrue(toTest.isOver());
@@ -85,12 +81,13 @@ public final class FightTest {
     /**
      * Testing getAttacked() method.
      */
-    @Test public void testGetAttacked() {
-        Fight.Success atk1 = toTest.getAttacked();
+    @Test
+    void testGetAttacked() {
+        final Fight.Success atk1 = toTest.getAttacked();
         assertEquals(toTest.getCurrentMyYokimon().getActualHp(),
                         toTest.getCurrentMyYokimon().getMaxHp());
         assertNotEquals(Fight.Success.FAIL, atk1);  //the best attack available shouldn't be that bad
-        assertNotEquals(Fight.Success.WEAK, atk1);  //WITH DUMMY DAMAGE CALCULATOR!!
+        assertNotEquals(Fight.Success.WEAK, atk1);
 
         assertFalse(toTest.isOver());
         assertFalse(toTest.victory());
@@ -99,7 +96,8 @@ public final class FightTest {
     /**
      * Test to ensure the XP points are calculated correctly.
      */
-    @Test public void testGetXP() {
+    @Test
+    void testGetXP() {
         assertEquals(0, toTest.getXP(toTest.getCurrentMyYokimon()));
 
         while (!toTest.isOver()) {

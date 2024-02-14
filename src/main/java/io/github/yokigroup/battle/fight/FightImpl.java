@@ -44,7 +44,7 @@ public final class FightImpl implements Fight {
 
     /* Current state of the fight and event publisher */
     private State state;
-    private final Publisher<Fight> publisher = new PublisherImpl<Fight>();
+    private final Publisher<Fight> publisher = new PublisherImpl<>();
 
     /**
      * Builder to instantiate the fight through the Logic.
@@ -56,7 +56,7 @@ public final class FightImpl implements Fight {
         this.oppYokimons = oppYokimons;
 
         if (nextYok.getNext(myYokimons).isEmpty() || nextYok.getNext(oppYokimons).isEmpty()) {
-            throw new RuntimeException("Must instantiate fight with at least one Yokimon on each party.");
+            throw new RuntimeException ("Must instantiate fight with at least one Yokimon on each party.");
         }
         this.currMyYokimon = nextYok.getNext(myYokimons).get();
         this.currOppYokimon = nextYok.getNext(oppYokimons).get();
@@ -79,7 +79,7 @@ public final class FightImpl implements Fight {
     @Override
     public Success attack(final Attack myAttack) {
 
-        int damage = dmgCalc.getDMG(currMyYokimon, currOppYokimon, myAttack);
+        final int damage = dmgCalc.getDMG(currMyYokimon, currOppYokimon, myAttack);
         currOppYokimon.takeDamage(damage);
 
         if (!currOppYokimon.active()) {
@@ -91,7 +91,7 @@ public final class FightImpl implements Fight {
                 currOppYokimon = nextOppYok.get();
 
             } else {
-                int xpGain = xpCalc.getXP(defeatedOpps);
+                final int xpGain = xpCalc.getXP(defeatedOpps);
                 currMyYokimon.takeXp(xpGain);
                 state = State.WIN;
                 publisher.notifyObservers(this);
@@ -109,7 +109,7 @@ public final class FightImpl implements Fight {
         if (nextOppAttack.isEmpty()) {
             throw new RuntimeException("Yokimon doesn't have any available attack.");
         }
-        int damage = dmgCalc.getDMG(currOppYokimon, currMyYokimon, nextOppAttack.get());
+        final int damage = dmgCalc.getDMG(currOppYokimon, currMyYokimon, nextOppAttack.get());
         currMyYokimon.takeDamage(damage);
 
         if (!currMyYokimon.active()) {

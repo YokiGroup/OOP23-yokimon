@@ -20,7 +20,7 @@ public class MultiplierDmgCalculator implements DmgCalculator {
      */
     protected double getDMGdouble(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
 
-        BasicImplDmgCalculator basic = new BasicImplDmgCalculator();
+        final BasicImplDmgCalculator basic = new BasicImplDmgCalculator();
         double total = basic.getDMGdouble(attackingYokimon, attackedYokimon, attack);
 
         if (attackingYokimon.getYokimonColor().equals(attack.getColor())) {
