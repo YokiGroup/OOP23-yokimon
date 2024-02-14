@@ -91,7 +91,7 @@ class TileTest {
         assertEquals(3, tile.getEntities().size());
         tile.getEntities()
                 .stream()
-                .map(e -> e.getPos())
+                .map(e -> e.getPos().getPosition())
                 .forEach(v -> assertTrue(tile.getEntitySpawnLocations().contains(v)));
     }
 }
