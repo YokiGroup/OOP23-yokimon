@@ -14,8 +14,15 @@ import java.util.List;
  * It provides methods to manage and manipulate enemy entities.
  */
 public class Enemy extends People {
-
-    private Enemy.state Action;
+    /**
+     * This value represent the maximum distance at which the player will be in sight
+     */
+    private static final double RADIUS_PLAYER = 6.00;
+    /**
+     * This value represent the maximum distance at which the enemy will
+     */
+    private static final double RADIUS_INITIAL_POS = 5.00;
+    private Enemy.state state;
 
     /**
      * Constructs an Enemy object with the specified attributes.
@@ -25,7 +32,7 @@ public class Enemy extends People {
      */
     public Enemy(Position Pos, Hitbox Hitbox, List<Yokimon> Party, MessageHandler messageHandler) {
         super(Pos, Hitbox, Party, messageHandler);
-        this.Action = state.wander;
+        this.state = state.wander;
     }
 
     /**
@@ -52,12 +59,7 @@ public class Enemy extends People {
      */
     @Override
     public void update() {
-        /*
-        this.getMessageHandler().handle(SubmoduleMapImpl.class, map -> {
-            map.process();
-
-        });
-        */
+        
 
     }
 }

@@ -33,7 +33,7 @@ public abstract class Entity {
      * return the current position of the entity
      * @return Position, X e Y
      */
-    protected Position getPos() {
+    public Position getPos() {
         return pos;
     }
 
@@ -49,7 +49,7 @@ public abstract class Entity {
      * Set a new position for the entity, if it's valid it changes it
      *
      */
-    protected void setPos(Position pos) {
+    public void setPos(Position pos) {
         Objects.requireNonNull(pos, "Pos passed to the entity was null");
         if(pos.isValid()){
             this.pos = pos;

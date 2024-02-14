@@ -2,6 +2,8 @@ package io.github.yokigroup.world.entity.people;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
@@ -42,6 +44,27 @@ public abstract class People extends Entity {
         this.initialPos = pos;
     }
 
+    /**
+     * Direction enum represents the possible default directions in the game world.
+     */
+    public enum Direction {
+        UP(new Vector2Impl(0, -1)),
+        UP_RIGHT(new Vector2Impl(1, -1)),
+        RIGHT(new Vector2Impl(1, 0)),
+        DOWN_RIGHT(new Vector2Impl(1, 1)),
+        DOWN(new Vector2Impl(0,1)),
+        LEFT_DOWN(new Vector2Impl(-1, 1)),
+        LEFT(new Vector2Impl(-1,0)),
+        UP_LEFT(new Vector2Impl(-1, -1));
+
+        private final Vector2 vector;
+        Direction(Vector2 vector) {
+            this.vector = vector;
+        }
+        public Vector2 get(){
+            return vector;
+        }
+    }
     /**
      * Returns the direction in which the people entity is currently looking.
      * @return float The angle in radiant
