@@ -1,16 +1,19 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.util.MutablePair;
 import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.world.entity.Position;
+import io.github.yokigroup.world.entity.PositionImpl;
 
 /**
  * Handles player position updates.
  * @author Giovanni Paone
  */
-public class PlayerPositionSubmodule extends Submodule {
+public class PlayerCharacterSubmodule extends Submodule {
 /*
     private final Entity player;
-    private final TileMap gameMap;
 */
 
     // FIXME Replace with proper implementation
@@ -39,7 +42,7 @@ public class PlayerPositionSubmodule extends Submodule {
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
-    public PlayerPositionSubmodule(final MessageHandler handler) {
+    public PlayerCharacterSubmodule(final MessageHandler handler) {
         super(handler);
     }
 
@@ -50,6 +53,11 @@ public class PlayerPositionSubmodule extends Submodule {
      */
     public void changeTile(final Direction dir) {
         //TODO change tile of player by going in dir
+    }
+
+    public Position getPosition(){
+        // FIXME implement
+        return new PositionImpl(null);
     }
 
     /**

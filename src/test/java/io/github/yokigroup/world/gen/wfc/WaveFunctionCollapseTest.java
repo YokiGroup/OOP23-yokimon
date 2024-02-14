@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -36,6 +35,7 @@ class WaveFunctionCollapseTest {
         wfc = new WaveFunctionCollapseImpl(new Pair<>(WIDTH, HEIGHT), new HashSet<>(shpDic.values()));
     }
 
+<<<<<<< HEAD
     private void printWfc() {
         for (int j = WIDTH - 1; j >= 0; j--) {
             for (int i = 0; i < HEIGHT; i++) {
@@ -46,12 +46,11 @@ class WaveFunctionCollapseTest {
         }
     }
 
+=======
+>>>>>>> master
     @Test
-    void getShapeAt() {
-        Map<Pair<Integer, Integer>, Integer> test = new HashMap<>();
-        test.put(new Pair<>(2, 3), 2);
+    void testGetShapeAt() {
         wfc.generateShapeMap();
-        printWfc();
         // TODO: complete the test
     }
 
@@ -71,7 +70,6 @@ class WaveFunctionCollapseTest {
         wfc.setStaticShape(new Pair<>(WIDTH - 1, HEIGHT - 1), Set.of(shpDic.get("DL")));
         wfc.setStaticShape(new Pair<>(WIDTH / 2 - 1, HEIGHT / 2 - 1), Set.of(shpDic.get("UDLR")));
         wfc.generateShapeMap();
-        printWfc();
         // TODO: complete the test
     }
 }

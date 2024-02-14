@@ -4,6 +4,7 @@ import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
+import org.dyn4j.geometry.AABB;
 import org.dyn4j.geometry.Transform;
 import org.dyn4j.world.DetectFilter;
 import org.dyn4j.world.World;
@@ -41,7 +42,7 @@ public abstract class HitboxImpl implements Hitbox {
     public final Optional<Vector2> collidesWith(final Hitbox other) {
         // Add the body to the world to check for collisions
         final World<Body> world = new World<>();
-        world.addBody(other.getBody());
+        world.addBody(((HitboxImpl) other).getBody());
         // Check for bounding box collisions
         final DetectFilter<Body, BodyFixture> filter = new DetectFilter<>(true, true, null);
         final Iterator<ConvexDetectResult<Body, BodyFixture>> results = world.detectIterator(
@@ -54,11 +55,7 @@ public abstract class HitboxImpl implements Hitbox {
         if (results.hasNext()) {
             final ConvexDetectResult<Body, BodyFixture> result = results.next();
             // Get the penetration amount of the collision
-            final double penetration = result.getPenetration().getDepth();
-            // Get the normal vector of the collision (the direction we should move the body by to fix the collision
-            final Vector2 normal = new Vector2Impl(result.getPenetration().getNormal().x, result.getPenetration().getNormal().y);
-            // Scale the normal by the penetration amount to resolve the collision
-            final Vector2 offset = normal.scale(penetration);
+            final Vector2 offset = getIntersectionVector(result);
             // Shapes still have the bounding boxes colliding, so we check if the offset
             // is long enough to be considered a collision (sometimes it can return 0.0d, 0.0d as values, or
             // some very small offset values like 1E-20)
@@ -68,6 +65,22 @@ public abstract class HitboxImpl implements Hitbox {
         }
         world.removeAllBodies();
         return mtv;
+    }
+
+    /**
+     *
+     * @param detectResult The convexDetection result to get the vector of.
+     * @return The offset to resolve the Hitbox collision from the detection.
+     */
+    private static Vector2 getIntersectionVector(final ConvexDetectResult<Body, BodyFixture> detectResult) {
+        final double penetration = detectResult.getPenetration().getDepth();
+        // Get the normal vector of the collision (the direction we should move the body by to fix the collision
+        final Vector2 normal = new Vector2Impl(
+                detectResult.getPenetration().getNormal().x,
+                detectResult.getPenetration().getNormal().y
+        );
+        // Scale the normal by the penetration amount to resolve the collision
+        return normal.scale(penetration);
     }
 
     @Override
@@ -86,7 +99,34 @@ public abstract class HitboxImpl implements Hitbox {
     }
 
     @Override
-    public final Body getBody() {
+    public final boolean equals(final Object other) {
+        if (!(other instanceof HitboxImpl)) {
+            return false;
+        } else if (
+                this.body.getFixture(0).getShape().getClass()
+                != ((HitboxImpl) other).getBody().getFixture(0).getShape().getClass()
+        ) {
+            return false;
+        }
+        final AABB aabb1 = this.body.createAABB();
+        final AABB aabb2 = ((HitboxImpl) other).getBody().createAABB();
+        return this.body.getTransform().getTranslationX() == ((HitboxImpl) other).getBody().getTransform().getTranslationX()
+                && aabb1.getHeight() == aabb2.getHeight()
+                && aabb1.getWidth() == aabb2.getWidth();
+    }
+
+    @Override
+    public final int hashCode() {
+        final int prime1 = 79;
+        final int prime2 = 39;
+        return prime1 * this.getPosition().hashCode() + prime2 * (int) this.body.getFixture(0).getShape().getRadius();
+    }
+
+    /**
+     *
+     * @return The underlying body of the Hitbox.
+     */
+    protected final Body getBody() {
         final Body bodyCopy = new Body();
         this.body.getFixtures()
                 .forEach(f -> bodyCopy.addFixture(new BodyFixture(f.getShape())));

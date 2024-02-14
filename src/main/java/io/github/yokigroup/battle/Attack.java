@@ -6,31 +6,37 @@ package io.github.yokigroup.battle;
  */
 public interface Attack {
 
-    public enum effect{
+    /**
+     * The status effect of the Attack.
+     */
+    enum Effect {
+        /**
+         * No attack status effect.
+         */
         NONE
     }
 
     /**
-     *Return the name of the Attack
-     * @return String name
+     * Return the name of the Attack.
+     * @return String name.
      */
-    public String getName();
+    String getName();
 
     /**
-     *Return a reference of the color
-     * @return return enum color
+     * Return a reference of the color.
+     * @return return enum color.
      */
-    public Color getColor();
+    Color getColor();
     /**
-     *Return power of the attack (0 if it doesn't deal damage)
-     * @return integer atk pwr
+     *Return power of the attack (0 if it doesn't deal damage).
+     * @return integer atk pwr.
      */
-    public int attackPower();
+    int attackPower();
 
     /**
-     * Return the secondary effect of the attack
-     * @return enum effect
+     * Return the secondary effect of the attack.
+     * @return enum effect.
      */
-    public Attack.effect getEffectID();
+    Effect getEffectID();
 
 }

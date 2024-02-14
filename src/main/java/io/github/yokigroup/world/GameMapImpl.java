@@ -38,7 +38,7 @@ public class GameMapImpl implements GameMap {
 
     @Override
     public final Pair<Integer, Integer> getPlayerWorldPosition() {
-        return this.worldPlayerPosition;
+        return new Pair<>(this.worldPlayerPosition.x(), this.worldPlayerPosition.y());
     }
 
     @Override

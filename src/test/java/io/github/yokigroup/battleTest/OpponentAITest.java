@@ -36,6 +36,18 @@ public final class OpponentAITest {
      */
     @Test public void testDummyImpl() {
         OpponentAI toTest = new DummyImplOpponentAI();
+=======
+//        OpponentAI toTest = new DummyImplOpponentAI(new BasicImplDmgCalculator());
+
+        Attack a1 = new AttackImpl("Bubble", Color.BLACK);
+        Attack a2 = new AttackImpl("Leaf", Color.PURPLE);
+
+
+        /*      //TODO CORREGGI ISTANZIAZIONE YOKIMON
+        Yokimon y1 = new YokimonImpl("Charizard", Map.of(), Yokimon.GrowthRate.medium, List.of());
+        Yokimon y2 = new YokimonImpl("Squirtle", Map.of(), Yokimon.GrowRate.MEDIUM, List.of(a1));
+        Yokimon y3 = new YokimonImpl("Bulbasaur", Map.of(), Yokimon.GrowRate.MEDIUM, List.of(a1, a2));
+>>>>>>> feature/yokimon-system
 
         assertEquals(Optional.of(attackLoader.load(4)).get().getName().toLowerCase(),
                         toTest.getMove(y2, y1).get().getName().toLowerCase());
