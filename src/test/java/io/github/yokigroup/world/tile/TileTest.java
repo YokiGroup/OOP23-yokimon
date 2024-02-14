@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -76,6 +77,11 @@ class TileTest {
             @Override
             public <T extends Submodule> void handle(final Class<T> subModuleType, final Consumer<T> handler) {
                 return;
+            }
+
+            @Override
+            public <T extends Submodule, E> E handle(Class<T> subModuleType, Function<T, E> handler) {
+                return null;
             }
         };
 
