@@ -71,4 +71,11 @@ public interface Vector2 {
      * @return the dot product between the two vectors.
      */
     double dot(Vector2 other);
+
+    /**
+     *
+     * @param other The other vector to check.
+     * @return True if the two vectors are the same, false otherwise.
+     */
+    boolean equals(Vector2 other);
 }

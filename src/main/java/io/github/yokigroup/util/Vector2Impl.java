@@ -73,6 +73,11 @@ public class Vector2Impl implements Vector2 {
         return this.vector.dot(((Vector2Impl) other).getVector());
     }
 
+    @Override
+    public final boolean equals(final Vector2 other) {
+        return this.getX() == other.getX() && this.getY() == other.getY();
+    }
+
     private org.dyn4j.geometry.Vector2 getVector() {
         return this.vector;
     }
