@@ -16,6 +16,12 @@ public interface GameMap {
 
     /**
      *
+     * @return The dimensions of the tile.
+     */
+    Pair<Integer, Integer> getTileDimensions();
+
+    /**
+     *
      * @return The player's world coordinates.
      */
     Pair<Integer, Integer> getPlayerWorldPosition();
