@@ -15,6 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * Game loop. Responsible for receiving events and updating entities
@@ -59,11 +60,19 @@ public class GameOrchestrator implements MessageHandler, GameLogic {
 
     @Override
     public final <T extends Submodule> void handle(final Class<T> subModuleType, final Consumer<T> handler) {
+        this.<T, Void>handle(subModuleType, a -> {
+            handler.accept(a);
+            return null;
+        });
+    }
+
+    @Override
+    public <T extends Submodule, E> E handle(Class<T> subModuleType, Function<T, E> handler) {
         Optional<T> submodule = subModules.get(subModuleType);
         if (submodule.isEmpty()) {
             throw new IllegalArgumentException(this.getClass() + " does not contain submodule " + subModuleType);
         }
-        handler.accept(submodule.get());
+        return handler.apply(submodule.get());
     }
 
     @Override
