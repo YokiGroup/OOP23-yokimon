@@ -12,6 +12,7 @@ import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -28,6 +29,10 @@ public class Enemy extends People {
      * go from his initial pos
      */
     private static final double RADIUS_INITIAL_POS = 5.00;
+    /**
+     * Velocity Offset of the enemy when following the player
+     */
+    private static final double VELOCITY = 1.50;
     private State state;
     private WeightedPoolImpl<Direction> directionWeightedPool;
     /**
@@ -50,11 +55,13 @@ public class Enemy extends People {
         FOLLOW
     }
     /**
-     * Logic calls this method when the player is too close to the enemy.
+     * Update calls this method when the player is too close to the enemy.
      *
      */
-    public void follow() {
-
+    private Vector2 follow(Vector2 playerPos) {
+        Objects.requireNonNull(playerPos, "Player position NULL in follow");
+        return new Vector2Impl(this.getPos().getPosition().minus(playerPos)
+                .normalize().scale(VELOCITY).plus(this.getPos().getPosition()));
     }
 
     /**
@@ -67,7 +74,7 @@ public class Enemy extends People {
 
         Stream.of(Direction.values())
                 .filter(dir -> this.initialPos.inRadius(this.getPos().testTovePosition(dir.get()), RADIUS_INITIAL_POS))
-                .filter(dir -> this.getPos().testTovePosition(dir.get()).isValid())
+                .filter(dir -> this.getPos().testTovePosition(dir.get()).isValid(this.getMessageHandler()))
                 .forEach(dir -> directionWeightedPool.addElement(dir, 0.1f));
 
            return directionWeightedPool.getRandomizedElement().get();
@@ -78,18 +85,24 @@ public class Enemy extends People {
      * return a new position given a vector, checking the hitBox of all the
      * entity in the tile
      * @param vector vector given
-     * @return A new position
+     *
      */
-    private Position move(Vector2 vector){
+    private void move(Vector2 vector){
+
+        this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
 
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
-            map.getEntitiesOnCurrentTile().stream()
-                    .forEach(entity -> {
-                      //  this.setPos(Vector2Impl   this.getHitbox().collidesWith(entity.getHitbox()));
-                    });
-        });
+            map.getGameMap().getPlayerTile().getHitboxes().stream()
+                    .map(block -> this.getHitbox().collidesWith(block))
+                    .filter(Optional::isPresent)
+                    .forEach(block -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(block.get()))));
 
-        return new PositionImpl(new Vector2Impl(vector.getX(), vector.getY()));
+            map.getEntitiesOnCurrentTile().stream()
+                    .map(entity -> this.getHitbox().collidesWith(entity.getHitbox()))
+                    .filter(Optional::isPresent)
+                    .forEach(block -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(block.get()))));
+
+        });
     }
     /**
      * Updates the state of the Enemy (switches between wander and follow).
@@ -101,15 +114,19 @@ public class Enemy extends People {
             return;
         }
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {
-            Objects.requireNonNull(pos.getPosition().getPosition(), "Position of the player invalid");
-            if(pos.getPosition().isValid() && this.getPos().inRadius(pos.getPosition(), RADIUS_PLAYER)) {
+            Objects.requireNonNull(pos.getPosition().getPosition(), "Position of the player isNull");
+            if(pos.getPosition().isValid(this.getMessageHandler())
+                    && this.getPos().inRadius(pos.getPosition(), RADIUS_PLAYER)) {
                 this.state = State.FOLLOW;
             }
             else {
                 this.state = State.WANDER;
             }
             if(this.state == State.WANDER) {
-
+                this.move(wander());
+            }
+            else{
+                this.move(follow(pos.getPosition().getPosition()));
             }
 
         });
