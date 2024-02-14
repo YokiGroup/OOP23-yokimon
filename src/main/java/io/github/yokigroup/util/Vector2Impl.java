@@ -16,6 +16,14 @@ public class Vector2Impl implements Vector2 {
     }
 
     /**
+     * Copy constructor for Vector2Impl.
+     * @param vector The vector to copy.
+     */
+    public Vector2Impl(final Vector2 vector) {
+        this(vector.getX(), vector.getY());
+    }
+
+    /**
      * Creates a Vector2 with coordinates at 0.0.
      */
     public Vector2Impl() {
