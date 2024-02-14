@@ -10,7 +10,28 @@ import io.github.yokigroup.battle.Yokimon;
 public class MultiplierDmgCalculator implements DmgCalculator {
 
     private static final double MULTIPLIER = 1.2;
-    private static final int DIVISOR = 4;
+
+    /**
+     * This version uses a multiplier in case a Yokimon and the attack are of the same color.
+     * @param attackingYokimon the offending Yokimon
+     * @param attackedYokimon the offended Yokimon
+     * @param attack the attack used by the first one
+     * @return the actual damage (to subtract from the HP of the attacked Yokimon)
+     */
+    protected double getDMGdouble(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
+
+        BasicImplDmgCalculator basic = new BasicImplDmgCalculator();
+        double total = basic.getDMGdouble(attackingYokimon, attackedYokimon, attack);
+
+        if (attackingYokimon.getYokimonColor().equals(attack.getColor())) {
+            total = total * MULTIPLIER;
+        }
+        if (attackedYokimon.getYokimonColor().equals(attack.getColor())) {
+            total = total / MULTIPLIER;
+        }
+
+        return total;
+    }
 
     /**
      * This version uses a multiplier in case a Yokimon and the attack are of the same color.
@@ -21,16 +42,6 @@ public class MultiplierDmgCalculator implements DmgCalculator {
      */
     @Override
     public int getDMG(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
-        double total = (double) ((double) (attackingYokimon.getStat(Yokimon.Stats.ATK) * attack.attackPower())
-                / (attackedYokimon.getStat(Yokimon.Stats.DEF) * DIVISOR));
-
-        if (attackingYokimon.getYokimonColor().equals(attack.getColor())) {
-            total = total * MULTIPLIER;
-        }
-        if (attackedYokimon.getYokimonColor().equals(attack.getColor())) {
-            total = total / MULTIPLIER;
-        }
-
-        return (int) total;
+        return (int) getDMGdouble(attackingYokimon, attackedYokimon, attack);
     }
 }
