@@ -25,28 +25,33 @@ public class TileBuilderImpl implements TileBuilder {
     }
 
     @Override
-    public final void addHitbox(final Hitbox hitbox) {
+    public final TileBuilder addHitbox(final Hitbox hitbox) {
         this.hitboxes.add(hitbox);
+        return this;
     }
 
     @Override
-    public final void addAllHitboxes(final Set<Hitbox> hitboxes) {
+    public final TileBuilder addAllHitboxes(final Set<Hitbox> hitboxes) {
         this.hitboxes.addAll(hitboxes);
+        return this;
     }
 
     @Override
-    public final void addEntity(final Entity entity) {
+    public final TileBuilder addEntity(final Entity entity) {
         this.entities.add(entity);
+        return this;
     }
 
     @Override
-    public final void addAllEntities(final Set<Entity> entities) {
+    public final TileBuilder addAllEntities(final Set<Entity> entities) {
         this.entities.addAll(entities);
+        return this;
     }
 
     @Override
-    public final void addAdjacency(final Direction direction) {
+    public final TileBuilder addAdjacency(final Direction direction) {
         this.adjacencies.add(direction);
+        return this;
     }
 
     @Override

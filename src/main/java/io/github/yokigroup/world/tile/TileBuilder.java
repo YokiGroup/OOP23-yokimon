@@ -14,31 +14,31 @@ public interface TileBuilder {
      * Adds a hitbox to the tile.
      * @param hitbox The hitbox to add.
      */
-    void addHitbox(Hitbox hitbox);
+    TileBuilder addHitbox(Hitbox hitbox);
 
     /**
      * Adds multiple hitboxes to the tile.
      * @param hitboxes The hitboxes to add.
      */
-    void addAllHitboxes(Set<Hitbox> hitboxes);
+    TileBuilder addAllHitboxes(Set<Hitbox> hitboxes);
 
     /**
      * Adds an entity to the tile.
      * @param entity The entity to add.
      */
-    void addEntity(Entity entity);
+    TileBuilder addEntity(Entity entity);
 
     /**
      * Adds multiple entities to the tile.
      * @param entities The entities to add.
      */
-    void addAllEntities(Set<Entity> entities);
+    TileBuilder addAllEntities(Set<Entity> entities);
 
     /**
      * Adds an adjacency rule to the tile.
      * @param direction The adjacency to add to the tile.
      */
-    void addAdjacency(Direction direction);
+    TileBuilder addAdjacency(Direction direction);
 
     /**
      * Finalizes the tile object.
