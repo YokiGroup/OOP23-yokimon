@@ -5,7 +5,7 @@ import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
-import io.github.yokigroup.world.gen.TileDirections;
+import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.gen.TileShape;
 import io.github.yokigroup.world.tile.Tile;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,7 +62,7 @@ class TileShapeLoaderTest {
     @Test
     void possibleDirectionsTest() {
         assertEquals(
-                Set.of(TileDirections.DOWN, TileDirections.LEFT),
+                Set.of(Direction.DOWN, Direction.LEFT),
                 loadedTileShape.getPossibleDirections()
         );
     }

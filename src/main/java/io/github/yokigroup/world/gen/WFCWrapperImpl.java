@@ -2,6 +2,7 @@ package io.github.yokigroup.world.gen;
 
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.WeightedPool;
+import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.gen.wfc.WaveFunctionCollapse;
 import io.github.yokigroup.world.gen.wfc.WaveFunctionCollapseImpl;
 import io.github.yokigroup.world.tile.Tile;
@@ -26,14 +27,14 @@ public class WFCWrapperImpl implements WFCWrapper {
     public WFCWrapperImpl(final Pair<Integer, Integer> dimensions, final Set<TileShape> shapes) {
         this.tileShapes = Set.copyOf(shapes);
         // TODO: filter duplicate shapes.
-        final Set<Set<TileDirections>> convertedShapes = this.tileShapes.stream()
+        final Set<Set<Direction>> convertedShapes = this.tileShapes.stream()
                 .map(TileShape::getPossibleDirections)
                 .collect(Collectors.toSet());
         this.wfc = new WaveFunctionCollapseImpl(dimensions, convertedShapes);
     }
 
     @Override
-    public final void setStaticTile(final Pair<Integer, Integer> position, final Set<TileDirections> tile) {
+    public final void setStaticTile(final Pair<Integer, Integer> position, final Set<Direction> tile) {
         this.wfc.setStaticShape(position, Set.of(tile));
     }
 
@@ -60,11 +61,11 @@ public class WFCWrapperImpl implements WFCWrapper {
      * @param shape2 The second shape to check.
      * @return True if the two shapes are the same.
      */
-    private boolean compareShapes(final Set<TileDirections> shape1, final Set<TileDirections> shape2) {
-        final Set<TileDirections> fullSet = new HashSet<>();
+    private boolean compareShapes(final Set<Direction> shape1, final Set<Direction> shape2) {
+        final Set<Direction> fullSet = new HashSet<>();
         fullSet.addAll(shape1);
         fullSet.addAll(shape2);
-        for (final TileDirections dir : fullSet) {
+        for (final Direction dir : fullSet) {
             if (!shape2.contains(dir) || !shape1.contains(dir)) {
                 return false;
             }

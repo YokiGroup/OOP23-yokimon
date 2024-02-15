@@ -1,10 +1,8 @@
 package io.github.yokigroup.world.tile;
 
-import io.github.yokigroup.util.Vector2;
-import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
-import io.github.yokigroup.world.gen.TileDirections;
+import io.github.yokigroup.world.Direction;
 
 import java.util.Set;
 
@@ -39,7 +37,7 @@ public interface Tile {
      *
      * @return The connected directions of the tile.
      */
-    Set<TileDirections> getAdjacencies();
+    Set<Direction> getAdjacencies();
 
     @Override
     boolean equals(Object other);

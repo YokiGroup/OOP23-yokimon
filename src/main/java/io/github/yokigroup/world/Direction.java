@@ -1,11 +1,11 @@
-package io.github.yokigroup.world.gen;
+package io.github.yokigroup.world;
 
 import io.github.yokigroup.util.Pair;
 
 /**
  * Enum that stores the directions of a tile.
  */
-public enum TileDirections {
+public enum Direction {
     /**
      * Can connect to tiles that have the shape "DOWN".
      */
@@ -29,7 +29,7 @@ public enum TileDirections {
      *
      * @return The opposite direction.
      */
-    public TileDirections getComplementary() {
+    public Direction getComplementary() {
         return switch (this) {
             case UP -> DOWN;
             case DOWN -> UP;
@@ -51,7 +51,7 @@ public enum TileDirections {
      *
      * @param offset The coordinate offset of the direction.
      */
-    TileDirections(final Pair<Integer, Integer> offset) {
+    Direction(final Pair<Integer, Integer> offset) {
         this.offset = offset;
     }
 }

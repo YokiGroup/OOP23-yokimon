@@ -2,7 +2,7 @@ package io.github.yokigroup.world.tile;
 
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
-import io.github.yokigroup.world.gen.TileDirections;
+import io.github.yokigroup.world.Direction;
 
 import java.util.Objects;
 import java.util.Set;
@@ -12,7 +12,7 @@ import java.util.Set;
  */
 class TileImpl implements Tile {
     private final int id;
-    private final Set<TileDirections> adjacencies;
+    private final Set<Direction> adjacencies;
     private final Set<Hitbox> hitboxes;
     private final Set<Entity> entities;
 
@@ -21,7 +21,7 @@ class TileImpl implements Tile {
      * @param id The id of the tile.
      * @param hitboxes The invisible walls in a tile.
      */
-    public TileImpl(final int id, final Set<TileDirections> adjacencies, final Set<Hitbox> hitboxes, final Set<Entity> entities) {
+    public TileImpl(final int id, final Set<Direction> adjacencies, final Set<Hitbox> hitboxes, final Set<Entity> entities) {
         if (hitboxes == null) {
             throw new IllegalArgumentException("The hitboxes set is null.");
         } else if (entities == null) {
@@ -56,7 +56,7 @@ class TileImpl implements Tile {
     }
 
     @Override
-    public Set<TileDirections> getAdjacencies() {
+    public Set<Direction> getAdjacencies() {
         return Set.copyOf(this.adjacencies);
     }
 

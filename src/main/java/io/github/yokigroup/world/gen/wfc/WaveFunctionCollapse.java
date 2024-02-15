@@ -1,7 +1,7 @@
 package io.github.yokigroup.world.gen.wfc;
 
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.world.gen.TileDirections;
+import io.github.yokigroup.world.Direction;
 
 import java.util.Set;
 
@@ -16,14 +16,14 @@ public interface WaveFunctionCollapse {
      * @param position The position of the shape to get.
      * @return The shape of the section at that position.
      */
-    Set<TileDirections> getShapeAt(Pair<Integer, Integer> position);
+    Set<Direction> getShapeAt(Pair<Integer, Integer> position);
 
     /**
      * Sets one of the positions on the map to only accept a specific shape.
      * @param position The position of the shape to set.
      * @param shapes The shapes to set the shape to.
      */
-    void setStaticShape(Pair<Integer, Integer> position, Set<Set<TileDirections>> shapes);
+    void setStaticShape(Pair<Integer, Integer> position, Set<Set<Direction>> shapes);
 
     /**
      * Runs the waveFunctionCollapse algorithm to generate a full shape map of the

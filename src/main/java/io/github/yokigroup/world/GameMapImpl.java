@@ -1,12 +1,8 @@
 package io.github.yokigroup.world;
 
-import io.github.yokigroup.file.loader.TileShapeLoader;
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.world.gen.WFCWrapper;
-import io.github.yokigroup.world.gen.WFCWrapperImpl;
 import io.github.yokigroup.world.tile.Tile;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -15,27 +11,18 @@ import java.util.Map;
  * Allows the player to switch screens (tiles) by walking around.
  */
 public class GameMapImpl implements GameMap {
-    private final TileShapeLoader tileShapeLoader;
     private final Map<Pair<Integer, Integer>, Tile> tileMap;
+    private final Pair<Integer, Integer> mapDimensions;
     private Pair<Integer, Integer> worldPlayerPosition;
 
     /**
      * Initializes the game map through the usage of the wave function collapse algorithm.
      * @param mapDimensions The mapDimensions of the map in tiles.
      */
-    public GameMapImpl(final Pair<Integer, Integer> mapDimensions) {
-        this.tileShapeLoader = new TileShapeLoader();
-        final WFCWrapper wfc = new WFCWrapperImpl(mapDimensions, tileShapeLoader.getAll());
-        this.tileMap = new HashMap<>();
-        for (int i = 0; i < mapDimensions.x(); i++) {
-            for (int j = 0; j < mapDimensions.y(); j++) {
-                final Pair<Integer, Integer> pos = new Pair<>(i, j);
-                final Tile mapTile = wfc.getTileAt(pos);
-                // TODO: maybe spawn entities here.
-                this.tileMap.put(pos, mapTile);
-            }
-        }
-        this.worldPlayerPosition = new Pair<>(mapDimensions.x() / 2, mapDimensions.y() / 2);
+    public GameMapImpl(final Pair<Integer, Integer> mapDimensions, final Map<Pair<Integer, Integer>, Tile> tileMap, final Pair<Integer, Integer> worldPlayerPosition) {
+        this.tileMap = tileMap;
+        this.worldPlayerPosition = worldPlayerPosition;
+        this.mapDimensions = mapDimensions;
     }
 
     @Override
@@ -51,5 +38,11 @@ public class GameMapImpl implements GameMap {
     @Override
     public final Tile getPlayerTile() {
         return getTileAt(this.worldPlayerPosition);
+    }
+
+    @Override
+    public final boolean movePlayerWorldPosition(final Direction direction) {
+        // TODO: to implement
+        return true;
     }
 }
