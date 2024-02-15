@@ -9,11 +9,11 @@ public enum TileDirections {
     /**
      * Can connect to tiles that have the shape "DOWN".
      */
-    UP(new Pair<>(0, 1)),
+    UP(new Pair<>(0, -1)),
     /**
      * Can connect to tiles that have the shape "UP".
      */
-    DOWN(new Pair<>(0, -1)),
+    DOWN(new Pair<>(0, 1)),
     /**
      * Can connect to tiles that have the shape "RIGHT".
      */
