@@ -60,7 +60,7 @@ public class GameOrchestrator implements MessageHandler, GameLogic {
 
     @Override
     public final <T extends Submodule> void handle(final Class<T> subModuleType, final Consumer<T> handler) {
-        this.<T, Void>handle(subModuleType, a -> {
+        this.handle(subModuleType, a -> {
             handler.accept(a);
             return null;
         });
