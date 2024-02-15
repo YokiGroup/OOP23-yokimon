@@ -53,7 +53,9 @@ public class GameMapBuilderImpl implements GameMapBuilder {
         for (int i = 0; i < mapDimensions.x(); i++) {
             for (int j = 0; j < mapDimensions.y(); j++) {
                 final Pair<Integer, Integer> pos = new Pair<>(i, j);
-                tileMap.put(pos, wfc.getTileAt(pos));
+                if (!tileMap.contains(pos)) {
+                    tileMap.put(pos, wfc.getTileAt(pos));
+                }
             }
         }
         return new GameMapImpl(mapDimensions, tileMap, playerTileMapPosition);
