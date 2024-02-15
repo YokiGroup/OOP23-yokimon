@@ -42,7 +42,20 @@ public class GameMapImpl implements GameMap {
 
     @Override
     public final boolean movePlayerWorldPosition(final Direction direction) {
-        // TODO: to implement
-        return true;
+        for (final Direction dir : Direction.values()) {
+            if (getPlayerTile().getAdjacencies().contains(dir)) {
+                this.worldPlayerPosition = new Pair<>(
+                        this.worldPlayerPosition.x() + dir.getOffset().x(),
+                        this.worldPlayerPosition.y() + dir.getOffset().y()
+                );
+                if (worldPlayerPosition.x() < 0 || worldPlayerPosition.y() < 0
+                        || worldPlayerPosition.x() >= mapDimensions.x() || worldPlayerPosition.y() >= mapDimensions.y()) {
+                    throw new IllegalStateException("The player went out of bounds ("
+                            + worldPlayerPosition.y() + " " + worldPlayerPosition.y() + ").");
+                }
+                return true;
+            }
+        }
+        return false;
     }
 }
