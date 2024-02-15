@@ -20,7 +20,7 @@ import java.util.function.Function;
 /**
  * Game loop. Responsible for receiving events and updating entities
  */
-public class GameOrchestrator implements MessageHandler, GameLogic {
+public class GameOrchestrator implements MessageHandler {
     private final SubmoduleMap subModules;
     private final Entity playerCharacter;
 
@@ -73,10 +73,5 @@ public class GameOrchestrator implements MessageHandler, GameLogic {
             throw new IllegalArgumentException(this.getClass() + " does not contain submodule " + subModuleType);
         }
         return handler.apply(submodule.get());
-    }
-
-    @Override
-    public void start() {
-        // FIXME implement
     }
 }
