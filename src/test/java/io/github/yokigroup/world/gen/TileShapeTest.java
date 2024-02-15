@@ -30,7 +30,7 @@ class TileShapeTest {
 
     @Test
     void testGetTiles() {
-        tileShape1 = new TileShapeImpl(Set.of(new TileImpl(), new TileImpl()), tileShapeSet1);
+        tileShape1 = new TileShapeImpl(Set.of(new TileImpl(0), new TileImpl(1)), tileShapeSet1);
         final WeightedPool<Tile> tileSet = tileShape1.getTiles();
         assertEquals(2, tileSet.size());
         tileSet.removeRandomizedElement();
