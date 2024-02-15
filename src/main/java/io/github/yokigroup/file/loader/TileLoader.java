@@ -13,7 +13,6 @@ import java.util.Set;
 
 public class TileLoader extends IdJsonLoader<Tile>{
     private static final String TILE_JSON_RPATH = "tiles.json";
-    private static final String TILE_HITBOX_TYPE_JPATHF = "$.%s.hitboxes[%d]";
 
     public TileLoader() {
         super(TILE_JSON_RPATH);
@@ -25,19 +24,24 @@ public class TileLoader extends IdJsonLoader<Tile>{
 
     private Hitbox getHitbox(final String name, final int index) {
         JsonParser parser = getParser();
+        final String TILE_HITBOX_TYPE_JPATHF = "$.%s.hitboxes[%d]";
+        final String TILE_HITBOX_TYPE_RPATH = ".type";
+        final String TILE_HITBOX_POSITION_RPATH = ".position";
+        final String TILE_HITBOX_DIMENSIONS_RPATH = ".dimensions";
+        final String TILE_HITBOX_RADIUS_RPATH = ".radius";
         final String formattedHitboxJPath = String.format(TILE_HITBOX_TYPE_JPATHF, name, index);
-        final String type = parser.read(formattedHitboxJPath  +  ".type");
-        final Vector2 pos = getVector2(formattedHitboxJPath  +  ".position");
+        final String type = parser.read(formattedHitboxJPath  +  TILE_HITBOX_TYPE_RPATH);
+        final Vector2 pos = getVector2(formattedHitboxJPath  +  TILE_HITBOX_POSITION_RPATH);
 
         Hitbox retHBox;
         switch (type) {
             case "rect":
-                final Vector2 dim = getVector2(formattedHitboxJPath  +  ".dimensions");
+                final Vector2 dim = getVector2(formattedHitboxJPath  + TILE_HITBOX_DIMENSIONS_RPATH);
                 retHBox = new RectangularHitbox(pos, dim);
                 break;
 
             case "circle":
-                final double radius = parser.read(formattedHitboxJPath  +  ".radius");
+                final double radius = parser.read(formattedHitboxJPath  + TILE_HITBOX_RADIUS_RPATH);
                 retHBox = new CircularHitbox(pos, radius);
                 break;
 
@@ -56,9 +60,9 @@ public class TileLoader extends IdJsonLoader<Tile>{
     }
 
     private Set<Vector2>  getSpawnPositions(final String name) {
-        final String spawnPositionJPath = "$." + name + ".spawns[%d]";
+        final String SPAWN_POSITION_JPATH = "$." + name + ".spawns[%d]";
         return ifNullReturnEmpty(doUntilPathException(new HashSet<>(), (c, i) -> {
-            c.add(getVector2(String.format(spawnPositionJPath, i)));
+            c.add(getVector2(String.format(SPAWN_POSITION_JPATH, i)));
         }));
     }
 
