@@ -15,7 +15,11 @@ public interface Attack {
          */
         NONE
     }
-
+    /**
+     *
+     * @return return the attack id
+     */
+    int getId();
     /**
      * Return the name of the Attack.
      * @return String name.
