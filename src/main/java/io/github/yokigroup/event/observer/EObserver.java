@@ -1,4 +1,4 @@
-package io.github.yokigroup.core;
+package io.github.yokigroup.event.observer;
 
 /**
  * A class must implement this interface in order to subscribe to an observable.
