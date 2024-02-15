@@ -1,12 +1,14 @@
 package io.github.yokigroup.world.tile;
 
 import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -82,5 +84,22 @@ public class TileImpl implements Tile {
     @Override
     public final void updateEntities() {
         this.entities.forEach(Entity::update);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final TileImpl tile = (TileImpl) o;
+        return this.id == tile.id && Objects.equals(spawnLocations, tile.spawnLocations) && Objects.equals(hitboxes, tile.hitboxes) && Objects.equals(entities, tile.entities);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, spawnLocations, hitboxes, entities);
     }
 }

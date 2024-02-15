@@ -57,4 +57,10 @@ public interface Tile {
      * Runs the update method on all the entities on the tile.
      */
     void updateEntities();
+
+    @Override
+    boolean equals(Object other);
+
+    @Override
+    int hashCode();
 }
