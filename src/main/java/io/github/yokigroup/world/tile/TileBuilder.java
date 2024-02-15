@@ -2,6 +2,7 @@ package io.github.yokigroup.world.tile;
 
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
+import io.github.yokigroup.world.gen.TileDirections;
 
 import java.util.Set;
 
@@ -32,6 +33,12 @@ public interface TileBuilder {
      * @param entities The entities to add.
      */
     void addAllEntities(Set<Entity> entities);
+
+    /**
+     * Adds an adjacency rule to the tile.
+     * @param direction The adjacency to add to the tile.
+     */
+    void addAdjacency(TileDirections direction);
 
     /**
      * Finalizes the tile object.

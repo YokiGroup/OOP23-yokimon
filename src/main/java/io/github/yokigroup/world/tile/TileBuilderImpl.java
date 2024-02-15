@@ -2,6 +2,7 @@ package io.github.yokigroup.world.tile;
 
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
+import io.github.yokigroup.world.gen.TileDirections;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,10 +13,12 @@ import java.util.Set;
 public class TileBuilderImpl implements TileBuilder {
     private final Set<Entity> entities;
     private final Set<Hitbox> hitboxes;
+    private final Set<TileDirections> adjacencies;
 
     public TileBuilderImpl() {
         this.entities = new HashSet<>();
         this.hitboxes = new HashSet<>();
+        this.adjacencies = new HashSet<>();
     }
 
     @Override
@@ -39,7 +42,12 @@ public class TileBuilderImpl implements TileBuilder {
     }
 
     @Override
+    public final void addAdjacency(final TileDirections direction) {
+        this.adjacencies.add(direction);
+    }
+
+    @Override
     public Tile build(final int id) {
-        return new TileImpl(id, this.hitboxes, this.entities);
+        return new TileImpl(id, this.adjacencies, this.hitboxes, this.entities);
     }
 }
