@@ -20,9 +20,8 @@ import java.util.function.Function;
 /**
  * Game loop. Responsible for receiving events and updating entities
  */
-public class GameOrchestrator implements MessageHandler, GameLogic {
+public class GameMessageHandler implements MessageHandler {
     private final SubmoduleMap subModules;
-    private final Entity playerCharacter;
 
     /**
      * Initializes game logic submodules.
@@ -53,14 +52,14 @@ public class GameOrchestrator implements MessageHandler, GameLogic {
     /**
      * Initializes a GameOrchestrator with a new GameMap and PlayerCharacter, along with the required submodules.
      */
-    public GameOrchestrator() {
+    public GameMessageHandler() {
         playerCharacter = null; // TODO replace with Entity implementation
         subModules = initSubmodules();
     }
 
     @Override
     public final <T extends Submodule> void handle(final Class<T> subModuleType, final Consumer<T> handler) {
-        this.<T, Void>handle(subModuleType, a -> {
+        this.handle(subModuleType, a -> {
             handler.accept(a);
             return null;
         });
@@ -73,10 +72,5 @@ public class GameOrchestrator implements MessageHandler, GameLogic {
             throw new IllegalArgumentException(this.getClass() + " does not contain submodule " + subModuleType);
         }
         return handler.apply(submodule.get());
-    }
-
-    @Override
-    public void start() {
-        // FIXME implement
     }
 }
