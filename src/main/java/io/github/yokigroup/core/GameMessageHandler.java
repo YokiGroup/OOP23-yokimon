@@ -72,4 +72,9 @@ public class GameMessageHandler implements MessageHandler {
         }
         return handler.apply(submodule.get());
     }
+
+    @Override
+    public void updateSubmodules() {
+        subModules.subModuleSet().forEach(Submodule::process);
+    }
 }
