@@ -1,8 +1,10 @@
 package io.github.yokigroup.event.submodule;
 
+import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.battle.fight.Fight;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -21,9 +23,9 @@ public class FightSubmodule extends Submodule {
 
     /**
      * Generates fight to be processed as next encounter.
-     * @param fightDifficulty difficulty of the fight to generate
+     * @param enemyParty party of the enemy to instantiate in a fight
      */
-    public void addEncounter(final int fightDifficulty) {
+    public void addEncounter(List<Yokimon> enemyParty) {
         // FIXME implement
         //lastAnnouncedFight = Optional.ofNullable(f);
     }
