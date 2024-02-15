@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * A tile contains the data of an entire part of the map: its entities and hitboxes manly.
  */
-public class TileImpl implements Tile {
+class TileImpl implements Tile {
     private final int id;
     private final Set<Hitbox> hitboxes;
     private final Set<Entity> entities;
