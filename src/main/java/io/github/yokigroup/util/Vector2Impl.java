@@ -1,5 +1,7 @@
 package io.github.yokigroup.util;
 
+import java.util.Objects;
+
 /**
  * An implementation of the binding to a vector2 class.
  */
@@ -82,18 +84,20 @@ public class Vector2Impl implements Vector2 {
     }
 
     @Override
-    public final boolean equals(final Object other) {
-        if (!(other instanceof Vector2Impl)) {
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        return this.getX() == ((Vector2Impl) other).getX() && this.getY() == ((Vector2Impl) other).getY();
+        final Vector2Impl vector2 = (Vector2Impl) o;
+        return Objects.equals(vector, vector2.vector);
     }
 
     @Override
-    public final int hashCode() {
-        final int prime1 = 43;
-        final int prime2 = 61;
-        return Double.hashCode(prime1 * this.getX()) * Double.hashCode(prime2 * this.getY());
+    public int hashCode() {
+        return Objects.hash(vector);
     }
 
     private org.dyn4j.geometry.Vector2 getVector() {

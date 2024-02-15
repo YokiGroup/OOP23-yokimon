@@ -1,26 +1,8 @@
 {
   "1": {
-    "name": "Shadow Ball",
-    "color": "BLACK",
-    "effect": "NONE",
-    "power": 90
-  },
-  "2": {
-    "name": "Strong Punch",
-    "color": "RED",
-    "effect": "NONE",
-    "power": 80
-  },
-  "3": {
-    "name": "Curse",
+    "name": "ULTRA COLPO FOLGORANTE DISTRUTTIVO DI MASSA",
     "color": "PURPLE",
     "effect": "NONE",
-    "power": 70
-  },
-  "4": {
-    "name": "Slap",
-    "color": "WHITE",
-    "effect": "NONE",
-    "power": 70
+    "power": 9001
   }
 }

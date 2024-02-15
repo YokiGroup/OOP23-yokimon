@@ -63,6 +63,11 @@ public interface Yokimon {
 
     /**
      *
+     * @return return the id of the yokimon
+     */
+    int getId();
+    /**
+     *
      * @return The GrowthRate of the yokimon.
      */
     GrowthRate getGrowRate();

@@ -43,7 +43,7 @@ class TileTest {
         hitbox1 = new CircularHitbox(r1);
         hitbox2 = new CircularHitbox(r2);
         hitbox3 = new CircularHitbox(r3);
-        tile = new TileImpl(new HashSet<>(), new HashSet<>());
+        tile = new TileImpl(0, new HashSet<>(), new HashSet<>());
         vector1 = new Vector2Impl(x1, y1);
         vector2 = new Vector2Impl(x2, y2);
         vector3 = new Vector2Impl(x3, y3);
