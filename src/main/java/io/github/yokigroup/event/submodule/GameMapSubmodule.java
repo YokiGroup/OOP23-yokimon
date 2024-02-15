@@ -69,7 +69,7 @@ public final class GameMapSubmodule extends Submodule {
     }
 
     @Override
-    public void process() {
+    public void update() {
         /*
         this function should query the player's position and consider whether to change Tile if the player is crossing
         the tile border.

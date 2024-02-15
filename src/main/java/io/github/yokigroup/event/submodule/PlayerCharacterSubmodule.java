@@ -70,7 +70,7 @@ public final class PlayerCharacterSubmodule extends Submodule {
     }
 
     @Override
-    public void process() {
+    public void update() {
         // TODO collision check
     }
 }

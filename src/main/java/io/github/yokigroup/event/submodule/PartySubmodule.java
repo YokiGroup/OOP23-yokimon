@@ -63,7 +63,7 @@ public class PartySubmodule extends Submodule {
     }
 
     @Override
-    public void process() {
+    public void update() {
 
     }
 }

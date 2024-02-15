@@ -39,7 +39,7 @@ public class FightSubmodule extends Submodule {
     }
 
     @Override
-    public final void process() {
+    public final void update() {
         if (lastAnnouncedFight.isPresent()) {
             // TODO implement
         }

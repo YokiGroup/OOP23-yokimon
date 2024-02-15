@@ -8,7 +8,6 @@ import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.event.submodule.Submodule;
 import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
-import io.github.yokigroup.world.entity.Entity;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -75,6 +74,6 @@ public class GameMessageHandler implements MessageHandler {
 
     @Override
     public void updateSubmodules() {
-        subModules.subModuleSet().forEach(Submodule::process);
+        subModules.subModuleSet().forEach(Submodule::update);
     }
 }
