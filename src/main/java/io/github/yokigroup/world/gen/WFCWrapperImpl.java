@@ -25,6 +25,7 @@ public class WFCWrapperImpl implements WFCWrapper {
      */
     public WFCWrapperImpl(final Pair<Integer, Integer> dimensions, final Set<TileShape> shapes) {
         this.tileShapes = Set.copyOf(shapes);
+        // TODO: filter duplicate shapes.
         final Set<Set<TileDirections>> convertedShapes = this.tileShapes.stream()
                 .map(TileShape::getPossibleDirections)
                 .collect(Collectors.toSet());
