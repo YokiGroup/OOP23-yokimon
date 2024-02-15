@@ -10,8 +10,8 @@ public interface GameMap {
     /**
      * The dimensions of the tile using the 16:9 aspect ratio.
      */
-    public static final Pair<Integer, Integer> TILE_DIMENSIONS = new Pair<>(1280, 720);
-    
+    Pair<Integer, Integer> TILE_DIMENSIONS = new Pair<>(1280, 720);
+
     /**
      *
      * @param position The world position to take the tile from.
