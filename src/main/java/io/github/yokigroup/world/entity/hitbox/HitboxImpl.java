@@ -11,7 +11,6 @@ import org.dyn4j.world.World;
 import org.dyn4j.world.result.ConvexDetectResult;
 
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -100,20 +99,27 @@ public abstract class HitboxImpl implements Hitbox {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
+    public final boolean equals(final Object other) {
+        if (!(other instanceof HitboxImpl)) {
+            return false;
+        } else if (
+                this.body.getFixture(0).getShape().getClass()
+                != ((HitboxImpl) other).getBody().getFixture(0).getShape().getClass()
+        ) {
             return false;
         }
-        final HitboxImpl hitbox = (HitboxImpl) o;
-        return Objects.equals(body, hitbox.body);
+        final AABB aabb1 = this.body.createAABB();
+        final AABB aabb2 = ((HitboxImpl) other).getBody().createAABB();
+        return this.body.getTransform().getTranslationX() == ((HitboxImpl) other).getBody().getTransform().getTranslationX()
+                && aabb1.getHeight() == aabb2.getHeight()
+                && aabb1.getWidth() == aabb2.getWidth();
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(body);
+    public final int hashCode() {
+        final int prime1 = 79;
+        final int prime2 = 39;
+        return prime1 * this.getPosition().hashCode() + prime2 * (int) this.body.getFixture(0).getShape().getRadius();
     }
 
     /**
