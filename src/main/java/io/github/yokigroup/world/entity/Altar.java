@@ -5,7 +5,8 @@ import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
-import io.github.yokigroup.world.entity.hitbox.Hitbox;
+import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
 
 import java.util.Objects;
 
@@ -16,19 +17,19 @@ import java.util.Objects;
 public class Altar extends Entity {
     private final Yokimon gift;
     private AltarState state;
-    private static final double RADIUS = 4;
-
+    private static final double RADIUS = 40;
+    private static final double HITBOX_SIDE = 20;
     /**
      * Constructs an Altar object with the specified attributes.
      * @param id id of the altar
      * @param pos The position of the Altar
-     * @param hitBox The hitBox of the Altar
      * @param yokimon The Yokimon to give at the first interaction
      * @param messageHandler Message handler used to handle events
      */
-    public Altar(final int id, final Position pos, final Hitbox hitBox,
+    public Altar(final int id, final Position pos,
                  final Yokimon yokimon, final MessageHandler messageHandler) {
-        super(id, pos, hitBox, messageHandler);
+        super(id, pos, new RectangularHitbox(pos.getPosition(),
+                new Vector2Impl(HITBOX_SIDE, HITBOX_SIDE)), messageHandler);
         this.gift = new YokimonImpl(yokimon);
         this.state = AltarState.POWERED;
     }
@@ -37,7 +38,7 @@ public class Altar extends Entity {
      * Returns the current state of the Altar (if it's used or not).
      * @return altarState Current state of the Altar
      */
-    public final Altar.AltarState getState() {
+    public final AltarState getState() {
         return this.state;
     }
     /**
@@ -56,9 +57,8 @@ public class Altar extends Entity {
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {
             Objects.requireNonNull(pos.getPosition().getPosition(), "Position of the player invalid");
 
-            if (pos.getPosition().isValid()
-                    && pos.getPosition().inRadius(this.getPos(), RADIUS)
-                    && this.state == AltarState.POWERED) {
+            if (this.state == AltarState.POWERED && pos.getPosition().isValid()
+                    && pos.getPosition().inRadius(this.getPos(), RADIUS)) {
 
                     this.getMessageHandler().handle(PartySubmodule.class, party -> {
                     party.addYokimon(this.getNewYokimon());
@@ -75,11 +75,11 @@ public class Altar extends Entity {
      */
     public enum AltarState {
         /**
-         * If the altar is in this state will no longer give a yokimon
+         * If the altar is in this state will no longer give a yokimon.
          */
         USED,
         /**
-         * If the altar is in this state is active and will give a yokimon
+         * If the altar is in this state is active and will give a yokimon.
          */
         POWERED
     }
