@@ -29,11 +29,6 @@ public final class GameMapSubmodule extends Submodule {
             }
 
             @Override
-            public Pair<Integer, Integer> getTileDimensions() {
-                return null;
-            }
-
-            @Override
             public Pair<Integer, Integer> getPlayerWorldPosition() {
                 return null;
             }
