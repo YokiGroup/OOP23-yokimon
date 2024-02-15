@@ -23,9 +23,8 @@ public class FightSubmodule extends Submodule {
 
     /**
      * Generates fight to be processed as next encounter.
-     * @param enemyParty party of the enemy to instantiate in a fight
      */
-    public void addEncounter(List<Yokimon> enemyParty) {
+    public void addEncounter() {
         // FIXME implement
         //lastAnnouncedFight = Optional.ofNullable(f);
     }

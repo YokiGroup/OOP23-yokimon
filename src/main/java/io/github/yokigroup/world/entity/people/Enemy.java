@@ -130,7 +130,7 @@ public class Enemy extends People {
              if (entity instanceof Player && this.getHitBox().collidesWith(entity.getHitBox()).isPresent()) {
                  this.getMessageHandler().handle(FightSubmodule.class, fight -> {
                      this.getMessageHandler().handle(PartySubmodule.class, playerParty -> {
-                         fight.addEncounter(this.getListOfYokimon());
+                         fight.addEncounter();
                      });
                  });
              }
