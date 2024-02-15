@@ -35,10 +35,9 @@ public interface Position {
     /**
      * Return true if the position is valid in the map.
      * False if is not.
-     * @param messageHandler handler for messages
      * @return boolean
      */
-    boolean isValid(MessageHandler messageHandler);
+    boolean isValid();
 
     /**
      * Return true if the distance from the pair passed is less then Radius

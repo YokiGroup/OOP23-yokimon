@@ -1,6 +1,5 @@
 package io.github.yokigroup.world.gen;
 
-import io.github.yokigroup.file.loader.TileLoader;
 import io.github.yokigroup.file.loader.TileShapeLoader;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.tile.Tile;

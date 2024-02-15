@@ -5,6 +5,8 @@ import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.world.GameMap;
+import io.github.yokigroup.world.GameMapImpl;
 import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Position;
@@ -54,10 +56,10 @@ public class Player extends People {
      */
     @Override
     public void resetPosition() {
-        if (!this.getPos().isValid(this.getMessageHandler())) {
+        if (!this.getPos().isValid()) {
             this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
-                this.setPos(new PositionImpl(new Vector2Impl( (double) map.getGameMap().getTileDimensions().x()/2,
-                        (double) map.getGameMap().getTileDimensions().y() / 2 )));
+                this.setPos(new PositionImpl(new Vector2Impl( (double) GameMap.TILE_DIMENSIONS.x()/2,
+                        (double) GameMap.TILE_DIMENSIONS.y() / 2 )));
             });
         }
     }

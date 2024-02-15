@@ -84,7 +84,7 @@ public class Vector2Impl implements Vector2 {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -96,7 +96,7 @@ public class Vector2Impl implements Vector2 {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hash(vector);
     }
 
