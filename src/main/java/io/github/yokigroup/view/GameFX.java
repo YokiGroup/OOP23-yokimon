@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class GameFX extends Application {
     public final static Rectangle2D screenSize = Screen.getPrimary().getBounds();
 
-    private class GameWindowResizeListener implements ChangeListener<Number> {
+    private static class GameWindowResizeListener<T> implements ChangeListener<T> {
         private final double ratio;
         private final Pane gamePane;
         private final Scene gameScene;
@@ -28,21 +28,19 @@ public class GameFX extends Application {
         }
 
         @Override
-        public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+        public void changed(ObservableValue<? extends T> observableValue, T t, T t1) {
             double paneWidth = gamePane.getWidth();
             double paneHeight = gamePane.getHeight();
             final double currentRatio = paneWidth / paneHeight;
 
             if (currentRatio > ratio) { // width has to be truncated
                 paneHeight = gameScene.getHeight();
-                gamePane.setStyle("-fx-background-color: blue");
                 gamePane.setPrefHeight(paneHeight);
                 gamePane.setMaxHeight(paneHeight);
                 gamePane.setPrefWidth(paneHeight * ratio);
                 gamePane.setMaxWidth(paneHeight * ratio);
             } else { // height has to be truncated
                 paneWidth = gameScene.getWidth();
-                gamePane.setStyle("-fx-background-color: red");
                 gamePane.setPrefWidth(paneWidth);
                 gamePane.setMaxWidth(paneWidth);
                 gamePane.setPrefHeight(paneWidth / ratio);
@@ -61,9 +59,11 @@ public class GameFX extends Application {
         final Pane gamePane = (Pane) rootElem.getCenter(); // FIXME maybe casting like this isn't the smartest choice
         final Scene scene = new Scene(rootElem, windowDim.getWidth(), windowDim.getHeight());
 
-        final GameWindowResizeListener resizeListener = new GameWindowResizeListener(scene, gamePane, ratio);
+        final GameWindowResizeListener<Object> resizeListener = new GameWindowResizeListener<>(scene, gamePane, ratio);
         stage.widthProperty().addListener(resizeListener);
         stage.heightProperty().addListener(resizeListener);
+        stage.fullScreenProperty().addListener(resizeListener);
+        stage.maximizedProperty().addListener(resizeListener);
 
         stage.setTitle("Yokimon");
         stage.setScene(scene);
