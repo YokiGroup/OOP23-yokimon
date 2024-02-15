@@ -27,13 +27,23 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
     private static final String TILE_SHAPE_JPATHF = "$.%d.shape[*]";
     private Map<Set<TileShape.TileDirections>, Set<Tile>> tiles = new HashMap<>();
     private final JsonParser parser = getParser();
-    private final TileLoader tileLoader = new TileLoader();
+    private final TileLoader tileLoader;
 
     /**
      * Constructor.
      */
     public TileShapeLoader() {
+        this(new TileLoader());
+    }
+
+    /**
+     * Instance TileShapeLoader with an existing TileLoader.
+     * @param loader loader to use
+     */
+    public TileShapeLoader(TileLoader loader) {
         super(TILE_JSON_RPATH);
+        Objects.requireNonNull(loader);
+        this.tileLoader = loader;
     }
 
     private Set<TileShape.TileDirections> convertToTileShapeSet(final Set<String> rawInput) {
