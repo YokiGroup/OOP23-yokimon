@@ -33,24 +33,19 @@ public class TileLoader extends IdJsonLoader<Tile>{
         final String type = parser.read(formattedHitboxJPath  +  TILE_HITBOX_TYPE_RPATH);
         final Vector2 pos = getVector2(formattedHitboxJPath  +  TILE_HITBOX_POSITION_RPATH);
 
-        Hitbox retHBox;
-        switch (type) {
-            case "rect":
-                final Vector2 dim = getVector2(formattedHitboxJPath  + TILE_HITBOX_DIMENSIONS_RPATH);
-                retHBox = new RectangularHitbox(pos, dim);
-                break;
-
-            case "circle":
-                final double radius = parser.read(formattedHitboxJPath  + TILE_HITBOX_RADIUS_RPATH);
-                retHBox = new CircularHitbox(pos, radius);
-                break;
-
-            default:
-                throw new RuntimeException(
-                        String.format("invalid type of hitbox index %d of name %s: received %s", index, name, type)
-                );
-        }
-        return retHBox;
+        return switch (type) {
+            case "rect" -> {
+                final Vector2 dim = getVector2(formattedHitboxJPath + TILE_HITBOX_DIMENSIONS_RPATH);
+                yield new RectangularHitbox(pos, dim);
+            }
+            case "circle" -> {
+                final double radius = parser.read(formattedHitboxJPath + TILE_HITBOX_RADIUS_RPATH);
+                yield new CircularHitbox(pos, radius);
+            }
+            default -> throw new RuntimeException(
+                    String.format("invalid type of hitbox index %d of name %s: received %s", index, name, type)
+            );
+        };
     }
 
     private Set<Hitbox> getHitboxes(final String name) {
