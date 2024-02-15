@@ -1,4 +1,15 @@
 {
+  "home": {
+    "texture": "immagine.jpg",
+    "shape": [
+      "DOWN",
+      "LEFT",
+      "RIGHT",
+      "UP"
+    ],
+    "hitboxes": [],
+    "spawns": []
+  },
   "1": {
     "texture": "immagine.jpg",
     "shape": [

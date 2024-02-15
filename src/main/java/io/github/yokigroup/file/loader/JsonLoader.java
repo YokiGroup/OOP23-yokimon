@@ -1,9 +1,12 @@
 package io.github.yokigroup.file.loader;
 
+import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.util.json.JsonParser;
 import io.github.yokigroup.util.json.JsonParserImpl;
 import io.github.yokigroup.util.json.PathNotFoundException;
 
+import java.util.Map;
 import java.util.function.BiConsumer;
 
 /**
@@ -38,6 +41,11 @@ public abstract class JsonLoader<T> {
      */
     protected final JsonParser getParser() {
         return parser;
+    }
+
+    protected Vector2 getVector2(final String path) {
+        final Map<String, Double> rawVec = parser.read(path);
+        return new Vector2Impl(rawVec.get("x"), rawVec.get("y"));
     }
 
     /**

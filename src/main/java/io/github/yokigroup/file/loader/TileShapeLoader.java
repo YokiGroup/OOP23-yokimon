@@ -25,61 +25,31 @@ import java.util.Set;
 public class TileShapeLoader extends JsonLoader<TileShape> {
     private static final String TILE_JSON_RPATH = "tiles.json";
     private static final String TILE_SHAPE_JPATHF = "$.%d.shape[*]";
-    private static final String TILE_HITBOX_TYPE_JPATHF = "$.%d.hitboxes[%d]";
     private Map<Set<TileShape.TileDirections>, Set<Tile>> tiles = new HashMap<>();
     private final JsonParser parser = getParser();
+    private final TileLoader tileLoader;
 
     /**
      * Constructor.
      */
     public TileShapeLoader() {
+        this(new TileLoader());
+    }
+
+    /**
+     * Instance TileShapeLoader with an existing TileLoader.
+     * @param loader loader to use
+     */
+    public TileShapeLoader(TileLoader loader) {
         super(TILE_JSON_RPATH);
+        Objects.requireNonNull(loader);
+        this.tileLoader = loader;
     }
 
     private Set<TileShape.TileDirections> convertToTileShapeSet(final Set<String> rawInput) {
         Set<TileShape.TileDirections> retSet = new HashSet<>();
         rawInput.forEach(s -> retSet.add(TileShape.TileDirections.valueOf(s)));
         return retSet;
-    }
-
-    private Vector2 getVector2(final String path) {
-        final Map<String, Double> rawVec = parser.read(path);
-        return new Vector2Impl(rawVec.get("x"), rawVec.get("y"));
-    }
-
-    private Hitbox getHitbox(final int id, final int index) {
-        final String formattedHitboxJPath = String.format(TILE_HITBOX_TYPE_JPATHF, id, index);
-        final String type = parser.read(formattedHitboxJPath  +  ".type");
-        final Vector2 pos = getVector2(formattedHitboxJPath  +  ".position");
-
-        Hitbox retHBox;
-        switch (type) {
-            case "rect":
-                final Vector2 dim = getVector2(formattedHitboxJPath  +  ".dimensions");
-                retHBox = new RectangularHitbox(pos, dim);
-                break;
-
-            case "circle":
-                final double radius = parser.read(formattedHitboxJPath  +  ".radius");
-                retHBox = new CircularHitbox(pos, radius);
-                break;
-
-            default:
-                throw new RuntimeException(
-                        String.format("invalid type of hitbox index %d of id %d: received %s", index, id, type)
-                );
-        }
-        return retHBox;
-    }
-
-    private <T> Set<T> ifNullReturnEmpty(final Set<T> set) {
-        return set != null ? set : Set.of();
-    }
-
-    private Set<Hitbox> getHitboxes(final int id) {
-        return ifNullReturnEmpty(doUntilPathException(new HashSet<>(), (c, i) -> {
-            c.add(getHitbox(id, i));
-        }));
     }
 
     private Set<TileShape.TileDirections> getTileDirs(final int id) {
@@ -90,16 +60,9 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
         return tileDirs;
     }
 
-    private Set<Vector2>  getSpawnPositions(final int id) {
-        final String spawnPositionJPath = "$." + id + ".spawns[%d]";
-        return ifNullReturnEmpty(doUntilPathException(new HashSet<>(), (c, i) -> {
-            c.add(getVector2(String.format(spawnPositionJPath, i)));
-        }));
-    }
-
     private Pair<Set<TileShape.TileDirections>, Tile> load(final int id) {
         Set<TileShape.TileDirections> tileDirs = getTileDirs(id);
-        Tile tile = new TileImpl(getHitboxes(id), getSpawnPositions(id));
+        Tile tile = tileLoader.load(id);
         return new Pair<>(tileDirs, tile);
     }
 
