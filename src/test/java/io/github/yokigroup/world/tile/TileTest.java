@@ -72,11 +72,12 @@ class TileTest {
     void spawnEntities() {
         final WeightedPool<Entity> entityPool = new WeightedPoolImpl<>();
         final MessageHandler mh = new GameMessageHandler();
-        entityPool.addElement(new Altar(new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
-        entityPool.addElement(new Altar(new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
-        entityPool.addElement(new Altar(new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
-        entityPool.addElement(new Altar(new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
-        entityPool.addElement(new Altar(new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
+
+        entityPool.addElement(new Altar(0, new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
+        entityPool.addElement(new Altar(1, new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
+        entityPool.addElement(new Altar(2, new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
+        entityPool.addElement(new Altar(3, new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
+        entityPool.addElement(new Altar(4, new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
         tile.addSpawnLocation(vector1);
         tile.addSpawnLocation(vector2);
         tile.addSpawnLocation(vector3);

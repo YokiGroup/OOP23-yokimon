@@ -14,8 +14,8 @@ class PositionImplTest {
 
     @Test
     void inRadius() {
-        Vector2 p1 = new Vector2Impl(0 , 1);
-        Vector2 p2 = new Vector2Impl(2 , -1);
+        Vector2 p1 = new Vector2Impl(0 , 0);
+        Vector2 p2 = new Vector2Impl(4 , 0);
 
         Position pos1 = new PositionImpl(p1);
         Position pos2 = new PositionImpl(p2);

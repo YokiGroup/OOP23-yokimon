@@ -6,69 +6,67 @@ import io.github.yokigroup.util.*;
 
 import java.util.Objects;
 
-import static java.lang.Math.sqrt;
-import static java.lang.Math.pow;
+/**
+ * Implementation of Position, provides many useful methods
+ * for managing positions.
+ */
 public class PositionImpl implements Position{
 
-    private final static double EXPONENT = 2.00;
     private Vector2 pos;
 
-    private MessageHandler messageHandler;
-
-    //private final MessageHandler messageHandler;
-
     /**
-     * Constructor of the PositionImpl class, with the specified values
+     * Constructor of the PositionImpl class, with the specified values.
      * @param pos pos = Pair<>
-     * //@param message messageHandler
      */
-    public PositionImpl(Vector2 pos) {
+    public PositionImpl(final Vector2 pos) {
         Objects.requireNonNull(pos, "Pos passed in PositionImpl was null");
         this.pos = new Vector2Impl(pos);
     }
 
     @Override
-    public Vector2 getPosition() {
+    public final Vector2 getPosition() {
         return new Vector2Impl(this.pos);
     }
 
     @Override
-    public void setPosition(Vector2 pos) {
+    public final void setPosition(final Vector2 pos) {
         this.pos = new Vector2Impl(pos);
     }
 
     @Override
-    public void movePosition(Vector2 vector) {
+    public final void movePosition(final Vector2 vector) {
         this.pos = this.pos.plus(vector);
     }
 
     @Override
-    public Position testTovePosition(Vector2 vector) {
+    public final Position testMovePosition(final Vector2 vector) {
+        Objects.requireNonNull(vector, "Vector in testMovePosition was null");
         return new PositionImpl(this.pos.plus(vector));
     }
 
-
     @Override
-    public boolean isValid() {
+    public final boolean isValid(final MessageHandler messageHandler) {
+        Objects.requireNonNull(messageHandler, "MessageHandler was null");
         messageHandler.handle(GameMapSubmodule.class, map -> {
-        //    map.getEntitiesOnCurrentTile().
+            if (map.getGameMap().getTileDimensions().x() < this.pos.getY() || this.pos.getX() < 0
+                || map.getGameMap().getTileDimensions().y() < this.pos.getY() || this.pos.getY() < 0) {
+                //TODO
+            }
+
         });
         return true;
     }
 
+    /**
+     * Return true if the distance between two vectors is less than radius,
+     * false if it's more.
+     * @param otherPos the other pair to check
+     * @param radius min distance
+     * @return boolean
+     */
     @Override
-    public boolean inRadius(Position otherPos, double radius) {
+    public final boolean inRadius(final Position otherPos, final double radius) {
         Objects.requireNonNull(otherPos, "Pos passed in inRadius method was null");
-        double dist = getDistance(this.pos.getX(), otherPos.getPosition().getX(),
-                this.pos.getY(), otherPos.getPosition().getY());
-        return dist <= radius;
-
-    }
-
-
-    private Float getDistance(double x1, double x2, double y1, double y2){
-        double pow1 = pow(x2 - x1, EXPONENT);
-        double pow2 = pow(y2 - y1, EXPONENT);
-        return (float)sqrt(pow1+pow2);
+        return this.pos.minus(otherPos.getPosition()).length() <= radius;
     }
 }
