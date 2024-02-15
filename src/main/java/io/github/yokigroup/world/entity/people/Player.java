@@ -1,16 +1,13 @@
 package io.github.yokigroup.world.entity.people;
 
-import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.PositionImpl;
-import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Position;
 
-import java.util.List;
 import java.util.Optional;
 
 /**

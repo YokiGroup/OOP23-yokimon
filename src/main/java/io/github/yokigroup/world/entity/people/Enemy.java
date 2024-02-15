@@ -1,6 +1,5 @@
 package io.github.yokigroup.world.entity.people;
 
-import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
 
 import io.github.yokigroup.event.submodule.FightSubmodule;
@@ -13,9 +12,7 @@ import io.github.yokigroup.util.WeightedPoolImpl;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.PositionImpl;
-import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -132,6 +129,7 @@ public class Enemy extends People {
                  this.getMessageHandler().handle(FightSubmodule.class, fight -> {
                      this.getMessageHandler().handle(PartySubmodule.class, playerParty -> {
                          fight.addEncounter();
+                         this.shut();
                      });
                  });
              }

@@ -34,11 +34,6 @@ public class PositionImpl implements Position {
     }
 
     @Override
-    public final void movePosition(final Vector2 vector) {
-        this.pos = this.pos.plus(vector);
-    }
-
-    @Override
     public final Position testMovePosition(final Vector2 vector) {
         Objects.requireNonNull(vector, "Vector in testMovePosition was null");
         return new PositionImpl(this.pos.plus(vector));

@@ -21,12 +21,6 @@ public interface Position {
     void setPosition(Vector2 pos);
 
     /**
-     * add a vector to the position.
-     * @param vector vector to add
-     */
-    void movePosition(Vector2 vector);
-
-    /**
      * add a vector to the position and return the new value of pos without changing it.
      * @param vector vector to add
      * @return Position new
