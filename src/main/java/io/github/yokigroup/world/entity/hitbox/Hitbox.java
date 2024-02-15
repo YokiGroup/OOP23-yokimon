@@ -30,7 +30,7 @@ public interface Hitbox {
 
 
     @Override
-    boolean equals(Object other);
+    boolean equals(Object o);
 
     @Override
     int hashCode();
