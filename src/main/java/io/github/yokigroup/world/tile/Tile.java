@@ -48,6 +48,12 @@ public interface Tile {
     Set<Entity> getEntities();
 
     /**
+     *
+     * @return The id of the tile.
+     */
+    int getId();
+
+    /**
      * Runs the update method on all the entities on the tile.
      */
     void updateEntities();

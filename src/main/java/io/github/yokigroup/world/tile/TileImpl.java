@@ -13,16 +13,19 @@ import java.util.Set;
  * A tile contains the data of an entire part of the map: its entities and hitboxes manly.
  */
 public class TileImpl implements Tile {
+    private final int id;
     private Set<Vector2> spawnLocations;
     private Set<Hitbox> hitboxes;
     private Set<Entity> entities;
 
     /**
      * Creates a tile with static and dynamic entities.
+     * @param id The id of the tile.
      * @param hitboxes The invisible walls in a tile.
      * @param spawnLocations The entity spawn locations in the tile.
      */
-    public TileImpl(final Set<Hitbox> hitboxes, final Set<Vector2> spawnLocations) {
+    public TileImpl(final int id, final Set<Hitbox> hitboxes, final Set<Vector2> spawnLocations) {
+        this.id = id;
         this.entities = new HashSet<>();
         this.hitboxes = hitboxes;
         this.spawnLocations = spawnLocations;
@@ -30,9 +33,10 @@ public class TileImpl implements Tile {
 
     /**
      * Creates a tile with no hitboxes and no entities.
+     * @param id The id of the tile.
      */
-    public TileImpl() {
-        this(new HashSet<>(), new HashSet<>());
+    public TileImpl(final int id) {
+        this(id, new HashSet<>(), new HashSet<>());
     }
 
     @Override
@@ -68,6 +72,11 @@ public class TileImpl implements Tile {
     @Override
     public final Set<Entity> getEntities() {
         return Set.copyOf(this.entities);
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
     }
 
     @Override
