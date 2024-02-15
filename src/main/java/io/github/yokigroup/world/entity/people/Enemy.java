@@ -65,7 +65,7 @@ public class Enemy extends People {
      */
     @Override
     public void resetPosition() {
-        if (!this.getPos().isValid(this.getMessageHandler())) {
+        if (!this.getPos().isValid()) {
             this.setPos(this.getInitialPos());
         }
     }
@@ -105,7 +105,7 @@ public class Enemy extends People {
 
         Stream.of(Direction.values())
                 .filter(dir -> this.getInitialPos().inRadius(this.getPos().testMovePosition(dir.get()), RADIUS_INITIAL_POS))
-                .filter(dir -> this.getPos().testMovePosition(dir.get()).isValid(this.getMessageHandler()))
+                .filter(dir -> this.getPos().testMovePosition(dir.get()).isValid())
                 .forEach(dir -> directionWeightedPool.addElement(dir, DEFAULT_POOL_VALUE));
         if(directionWeightedPool.size() < 1){
             directionWeightedPool.addElement(Direction.DEFAULT_STAND, DEFAULT_POOL_VALUE);

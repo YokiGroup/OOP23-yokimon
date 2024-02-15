@@ -8,17 +8,16 @@ import io.github.yokigroup.world.tile.Tile;
  */
 public interface GameMap {
     /**
+     * The dimensions of the tile using the 16:9 aspect ratio.
+     */
+    Pair<Integer, Integer> TILE_DIMENSIONS = new Pair<>(1280, 720);
+
+    /**
      *
      * @param position The world position to take the tile from.
      * @return The tile at that position.
      */
     Tile getTileAt(Pair<Integer, Integer> position);
-
-    /**
-     *
-     * @return The dimensions of the tile.
-     */
-    Pair<Integer, Integer> getTileDimensions();
 
     /**
      *

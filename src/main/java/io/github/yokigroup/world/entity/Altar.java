@@ -56,7 +56,7 @@ public class Altar extends Entity {
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {
             Objects.requireNonNull(pos.getPosition().getPosition(), "Position of the player invalid");
 
-            if (pos.getPosition().isValid(this.getMessageHandler())
+            if (pos.getPosition().isValid()
                     && pos.getPosition().inRadius(this.getPos(), RADIUS)
                     && this.state == AltarState.POWERED) {
 

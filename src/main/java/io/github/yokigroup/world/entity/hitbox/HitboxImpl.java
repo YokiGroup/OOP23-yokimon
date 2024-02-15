@@ -99,18 +99,18 @@ public abstract class HitboxImpl implements Hitbox {
     }
 
     @Override
-    public final boolean equals(final Object other) {
-        if (!(other instanceof HitboxImpl)) {
+    public final boolean equals(final Object o) {
+        if (!(o instanceof HitboxImpl)) {
             return false;
         } else if (
                 this.body.getFixture(0).getShape().getClass()
-                != ((HitboxImpl) other).getBody().getFixture(0).getShape().getClass()
+                != ((HitboxImpl) o).getBody().getFixture(0).getShape().getClass()
         ) {
             return false;
         }
         final AABB aabb1 = this.body.createAABB();
-        final AABB aabb2 = ((HitboxImpl) other).getBody().createAABB();
-        return this.body.getTransform().getTranslationX() == ((HitboxImpl) other).getBody().getTransform().getTranslationX()
+        final AABB aabb2 = ((HitboxImpl) o).getBody().createAABB();
+        return this.body.getTransform().getTranslationX() == ((HitboxImpl) o).getBody().getTransform().getTranslationX()
                 && aabb1.getHeight() == aabb2.getHeight()
                 && aabb1.getWidth() == aabb2.getWidth();
     }

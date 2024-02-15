@@ -15,10 +15,6 @@ import java.util.Map;
  * Allows the player to switch screens (tiles) by walking around.
  */
 public class GameMapImpl implements GameMap {
-    /**
-     * The dimensions of the tile using the 16:9 aspect ratio.
-     */
-    private static final Pair<Integer, Integer> TILE_DIMENSIONS = new Pair<>(1280, 720);
     private final TileShapeLoader tileShapeLoader;
     private final Map<Pair<Integer, Integer>, Tile> tileMap;
     private Pair<Integer, Integer> worldPlayerPosition;
@@ -45,11 +41,6 @@ public class GameMapImpl implements GameMap {
     @Override
     public final Tile getTileAt(final Pair<Integer, Integer> position) {
         return this.tileMap.get(position);
-    }
-
-    @Override
-    public final Pair<Integer, Integer> getTileDimensions() {
-        return TILE_DIMENSIONS;
     }
 
     @Override

@@ -3,6 +3,7 @@ package io.github.yokigroup.world.entity;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.util.*;
+import io.github.yokigroup.world.GameMap;
 
 import java.util.Objects;
 
@@ -47,20 +48,13 @@ public class PositionImpl implements Position{
     /**
      * Return true if the position passed is correct in the current tile
      * false if it's out of range of the map.
-     * @param messageHandler handler for messages
      * @return boolean
      */
     @Override
-    public final boolean isValid(final MessageHandler messageHandler) {
-        Objects.requireNonNull(messageHandler, "MessageHandler was null");
-        return messageHandler.handle(GameMapSubmodule.class, map -> {
-            if (map.getGameMap().getTileDimensions().x() < this.pos.getY() || this.pos.getX() < 0
-                || map.getGameMap().getTileDimensions().y() < this.pos.getY() || this.pos.getY() < 0) {
-                return false;
-            }
-            return true;
-        });
-
+    public final boolean isValid() {
+        return this.pos.getX() >= 0 && this.pos.getY() >= 0
+                && this.pos.getX() < GameMap.TILE_DIMENSIONS.x()
+                && this.pos.getY() < GameMap.TILE_DIMENSIONS.y();
     }
 
     /**
