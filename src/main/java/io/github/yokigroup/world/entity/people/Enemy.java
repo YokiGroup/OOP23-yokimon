@@ -128,15 +128,9 @@ public class Enemy extends People {
 
         for (Entity entity : map.getEntitiesOnCurrentTile()) {
              if (entity instanceof Player && this.getHitBox().collidesWith(entity.getHitBox()).isPresent()) {
-                 /* pavo ma perché mi fai questo
-                 this.getMessageHandler().handle(PartySubmodule.class, player ->
-                         this.getMessageHandler().handle(FightSubmodule.class, fight -> {
-                     fight.addEncounter(new FightImpl(player.listYokimons(), this.getListOfYokimon()));
-                     this.shut();
-                 }));*/
                  this.getMessageHandler().handle(FightSubmodule.class, fight -> {
                      this.getMessageHandler().handle(PartySubmodule.class, playerParty -> {
-                         fight.addEncounter(1);
+                         fight.addEncounter(this.getListOfYokimon());
                      });
                  });
              }
