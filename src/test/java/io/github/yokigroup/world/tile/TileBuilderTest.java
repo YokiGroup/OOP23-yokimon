@@ -8,21 +8,26 @@ class TileBuilderTest {
 
     @Test
     void addHitbox() {
+        // TODO: implement test
     }
 
     @Test
     void addAllHitboxes() {
+        // TODO: implement test
     }
 
     @Test
     void addEntity() {
+        // TODO: implement test
     }
 
     @Test
     void addAllEntities() {
+        // TODO: implement test
     }
 
     @Test
     void build() {
+        // TODO: implement test
     }
 }
