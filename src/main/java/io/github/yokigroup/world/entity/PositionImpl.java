@@ -48,7 +48,6 @@ public class PositionImpl implements Position{
     /**
      * Return true if the position passed is correct in the current tile
      * false if it's out of range of the map.
-     * @param messageHandler handler for messages
      * @return boolean
      */
     @Override
