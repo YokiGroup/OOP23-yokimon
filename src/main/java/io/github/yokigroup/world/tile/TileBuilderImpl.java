@@ -15,6 +15,9 @@ public class TileBuilderImpl implements TileBuilder {
     private final Set<Hitbox> hitboxes;
     private final Set<Direction> adjacencies;
 
+    /**
+     * Creates an empty tile with no entities, hitboxes nor adjacencies.
+     */
     public TileBuilderImpl() {
         this.entities = new HashSet<>();
         this.hitboxes = new HashSet<>();
