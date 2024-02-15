@@ -13,15 +13,15 @@ import java.util.Map;
 public class GameMapImpl implements GameMap {
     private final Map<Pair<Integer, Integer>, Tile> tileMap;
     private final Pair<Integer, Integer> mapDimensions;
-    private Pair<Integer, Integer> worldPlayerPosition;
+    private Pair<Integer, Integer> playerTileMapPosition;
 
     /**
      * Initializes the game map through the usage of the wave function collapse algorithm.
      * @param mapDimensions The mapDimensions of the map in tiles.
      */
-    public GameMapImpl(final Pair<Integer, Integer> mapDimensions, final Map<Pair<Integer, Integer>, Tile> tileMap, final Pair<Integer, Integer> worldPlayerPosition) {
+    public GameMapImpl(final Pair<Integer, Integer> mapDimensions, final Map<Pair<Integer, Integer>, Tile> tileMap, final Pair<Integer, Integer> playerTileMapPosition) {
         this.tileMap = tileMap;
-        this.worldPlayerPosition = worldPlayerPosition;
+        this.playerTileMapPosition = playerTileMapPosition;
         this.mapDimensions = mapDimensions;
     }
 
@@ -31,27 +31,27 @@ public class GameMapImpl implements GameMap {
     }
 
     @Override
-    public final Pair<Integer, Integer> getPlayerWorldPosition() {
-        return new Pair<>(this.worldPlayerPosition.x(), this.worldPlayerPosition.y());
+    public final Pair<Integer, Integer> getPlayerTileMapPosition() {
+        return new Pair<>(this.playerTileMapPosition.x(), this.playerTileMapPosition.y());
     }
 
     @Override
     public final Tile getPlayerTile() {
-        return getTileAt(this.worldPlayerPosition);
+        return getTileAt(this.playerTileMapPosition);
     }
 
     @Override
-    public final boolean movePlayerWorldPosition(final Direction direction) {
+    public final boolean movePlayerTileMapPosition(final Direction direction) {
         for (final Direction dir : Direction.values()) {
             if (getPlayerTile().getAdjacencies().contains(dir)) {
-                this.worldPlayerPosition = new Pair<>(
-                        this.worldPlayerPosition.x() + dir.getOffset().x(),
-                        this.worldPlayerPosition.y() + dir.getOffset().y()
+                this.playerTileMapPosition = new Pair<>(
+                        this.playerTileMapPosition.x() + dir.getOffset().x(),
+                        this.playerTileMapPosition.y() + dir.getOffset().y()
                 );
-                if (worldPlayerPosition.x() < 0 || worldPlayerPosition.y() < 0
-                        || worldPlayerPosition.x() >= mapDimensions.x() || worldPlayerPosition.y() >= mapDimensions.y()) {
+                if (playerTileMapPosition.x() < 0 || playerTileMapPosition.y() < 0
+                        || playerTileMapPosition.x() >= mapDimensions.x() || playerTileMapPosition.y() >= mapDimensions.y()) {
                     throw new IllegalStateException("The player went out of bounds ("
-                            + worldPlayerPosition.y() + " " + worldPlayerPosition.y() + ").");
+                            + playerTileMapPosition.y() + " " + playerTileMapPosition.y() + ").");
                 }
                 return true;
             }

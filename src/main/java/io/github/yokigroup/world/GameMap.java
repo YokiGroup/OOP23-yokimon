@@ -23,7 +23,7 @@ public interface GameMap {
      *
      * @return The player's world coordinates.
      */
-    Pair<Integer, Integer> getPlayerWorldPosition();
+    Pair<Integer, Integer> getPlayerTileMapPosition();
 
     /**
      *
@@ -36,5 +36,5 @@ public interface GameMap {
      * @param direction The direction to move the player position.
      * @return True if the player can move in that direction, false otherwise.
      */
-    boolean movePlayerWorldPosition(Direction direction);
+    boolean movePlayerTileMapPosition(Direction direction);
 }
