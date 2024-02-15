@@ -43,6 +43,7 @@ public class YokimonImpl implements Yokimon {
 
     /**
      * Constructor for YokimonImpl.
+     * @param id id of the yokimon
      * @param name Name of the Yokimon
      * @param color Color of the Yokimon
      * @param baseStats Base stats of the Yokimon
@@ -71,6 +72,7 @@ public class YokimonImpl implements Yokimon {
     }
     /**
      * Constructor for YokimonImpl with default level.
+     * @param id id of the Yokiomon
      * @param name Name of the Yokimon
      * @param color Color of the Yokimon
      * @param baseStats Base stats of the Yokimon
@@ -81,8 +83,6 @@ public class YokimonImpl implements Yokimon {
                        final GrowthRate growthRate, final Map<Integer, Attack> learnableMoves) {
         this(id, name, color, baseStats, growthRate, DEFAULT_LEVEL, learnableMoves);
     }
-
-    //FIXME
     /**
      * Constructor for YokimonImpl for another yokimon.
      * @param yokimon yokimon to copy
@@ -93,6 +93,10 @@ public class YokimonImpl implements Yokimon {
                 yokimon.getLevel(), Map.copyOf(yokimon.getLearnableAttacks()));
     }
 
+    /**
+     * return the id of the yokimon.
+     * @return int
+     */
     @Override
     public int getId() {
         return this.id;
@@ -109,7 +113,6 @@ public class YokimonImpl implements Yokimon {
     }
 
     /**
-     *
      * @return The color of the yokimon.
      */
     public final Color getYokimonColor() {
@@ -246,10 +249,19 @@ public class YokimonImpl implements Yokimon {
         this.xp = exp;
     }
 
+    /**
+     * Control if a yokimon is equal to another.
+     * @param o object
+     * @return boolean
+     */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         YokimonImpl yokimon = (YokimonImpl) o;
         return id == yokimon.id && level == yokimon.level && maxHp == yokimon.maxHp && actualHp == yokimon.actualHp
                 && Double.compare(xp, yokimon.xp) == 0 && Double.compare(xpNext, yokimon.xpNext) == 0
@@ -259,6 +271,10 @@ public class YokimonImpl implements Yokimon {
                 && Objects.equals(learnableMoves, yokimon.learnableMoves);
     }
 
+    /**
+     * Generate hashCode for this class.
+     * @return int
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, name, color, baseStats, stats, level, maxHp,
