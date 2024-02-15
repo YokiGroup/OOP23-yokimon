@@ -3,6 +3,7 @@ package io.github.yokigroup.event.submodule;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.GameMap;
+import io.github.yokigroup.world.GameMapImpl;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.tile.Tile;
@@ -15,29 +16,14 @@ import java.util.Set;
  */
 public final class GameMapSubmodule extends Submodule {
     private final GameMap gameMap;
+    private final Pair<Integer, Integer> MAP_DIM = new Pair<>(5, 5);
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
     public GameMapSubmodule(final MessageHandler handler) {
         super(handler);
-        // FIXME replace with actual implementation
-        this.gameMap = new GameMap() {
-            @Override
-            public Tile getTileAt(final Pair<Integer, Integer> position) {
-                return null;
-            }
-
-            @Override
-            public Pair<Integer, Integer> getPlayerWorldPosition() {
-                return null;
-            }
-
-            @Override
-            public Tile getPlayerTile() {
-                return null;
-            }
-        };
+        this.gameMap = new GameMapImpl(MAP_DIM);
     }
 
     /**
@@ -69,6 +55,9 @@ public final class GameMapSubmodule extends Submodule {
         this function should query the player's position and consider whether to change Tile if the player is crossing
         the tile border.
          */
-        // TODO implement
+        handler().handle(PlayerCharacterSubmodule.class, s -> {
+
+            //s.getPosition().isValid();
+        });
     }
 }
