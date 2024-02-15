@@ -1,8 +1,5 @@
 package io.github.yokigroup.world.tile;
 
-import io.github.yokigroup.util.Vector2;
-import io.github.yokigroup.util.WeightedPool;
-import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
 
@@ -15,7 +12,6 @@ import java.util.Set;
  */
 public class TileImpl implements Tile {
     private final int id;
-    private Set<Vector2> spawnLocations;
     private Set<Hitbox> hitboxes;
     private Set<Entity> entities;
 
@@ -23,13 +19,11 @@ public class TileImpl implements Tile {
      * Creates a tile with static and dynamic entities.
      * @param id The id of the tile.
      * @param hitboxes The invisible walls in a tile.
-     * @param spawnLocations The entity spawn locations in the tile.
      */
-    public TileImpl(final int id, final Set<Hitbox> hitboxes, final Set<Vector2> spawnLocations) {
+    public TileImpl(final int id, final Set<Hitbox> hitboxes) {
         this.id = id;
         this.entities = new HashSet<>();
         this.hitboxes = hitboxes;
-        this.spawnLocations = spawnLocations;
     }
 
     /**
@@ -37,7 +31,7 @@ public class TileImpl implements Tile {
      * @param id The id of the tile.
      */
     public TileImpl(final int id) {
-        this(id, new HashSet<>(), new HashSet<>());
+        this(id, new HashSet<>());
     }
 
     @Override
@@ -46,28 +40,8 @@ public class TileImpl implements Tile {
     }
 
     @Override
-    public final Set<Vector2> getEntitySpawnLocations() {
-        return Set.copyOf(spawnLocations);
-    }
-
-    @Override
     public final void addHitbox(final Hitbox hitbox) {
         this.hitboxes.add(hitbox);
-    }
-
-    @Override
-    public final void addSpawnLocation(final Vector2 pos) {
-        this.spawnLocations.add(pos);
-    }
-
-    @Override
-    public final void spawnEntities(final WeightedPool<Entity> entityPool) {
-        this.spawnLocations
-                .forEach((pos) -> {
-                    final Entity entity = entityPool.getRandomizedElement();
-                    entity.setPos(new PositionImpl(pos));
-                    this.entities.add(entity);
-                });
     }
 
     @Override
@@ -94,12 +68,11 @@ public class TileImpl implements Tile {
             return false;
         }
         final TileImpl tile = (TileImpl) o;
-        return this.id == tile.id && Objects.equals(spawnLocations, tile.spawnLocations)
-                && Objects.equals(hitboxes, tile.hitboxes) && Objects.equals(entities, tile.entities);
+        return this.id == tile.id && Objects.equals(hitboxes, tile.hitboxes) && Objects.equals(entities, tile.entities);
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(id, spawnLocations, hitboxes, entities);
+        return Objects.hash(id, hitboxes, entities);
     }
 }

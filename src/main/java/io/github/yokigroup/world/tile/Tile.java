@@ -19,27 +19,9 @@ public interface Tile {
 
     /**
      *
-     * @return All the spawn locations in a tile.
-     */
-    Set<Vector2> getEntitySpawnLocations();
-
-    /**
-     *
      * @param hitbox The hitbox to add to the tile.
      */
     void addHitbox(Hitbox hitbox);
-
-    /**
-     *
-     * @param pos The spawn position to add to the tile.
-     */
-    void addSpawnLocation(Vector2 pos);
-
-    /**
-     * Spawns all the entities in the tile.
-     * @param entityPool The pool of entities to randomly add to the tile.
-     */
-    void spawnEntities(WeightedPool<Entity> entityPool);
 
     /**
      *
