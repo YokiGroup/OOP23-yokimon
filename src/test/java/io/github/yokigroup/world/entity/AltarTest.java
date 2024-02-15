@@ -1,12 +1,16 @@
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.battle.YokimonImpl;
+import io.github.yokigroup.core.GameMessageHandler;
+import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.print.attribute.standard.MediaSize;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,9 +20,11 @@ class AltarTest {
     @BeforeEach
     void setUp() {
         loader = new YokimonLoader();
+        MessageHandler messageHandler = new GameMessageHandler();
     }
     @Test
     void getState() {
+
         Position playerPos = new PositionImpl(new Vector2Impl(0, 0));
         Position altarPos = new PositionImpl(new Vector2Impl(2, 0));
         Hitbox altarHitBox = new RectangularHitbox(altarPos.getPosition(), altarPos.getPosition());
