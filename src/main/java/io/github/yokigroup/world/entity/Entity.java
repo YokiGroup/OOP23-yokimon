@@ -88,4 +88,16 @@ public abstract class Entity {
      */
     public abstract void update();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Entity entity = (Entity) o;
+        return id == entity.id && Objects.equals(pos, entity.pos) && Objects.equals(hitBox, entity.hitBox);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pos, hitBox, id);
+    }
 }
