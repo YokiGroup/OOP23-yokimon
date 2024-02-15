@@ -38,7 +38,7 @@ public abstract class People extends Entity {
      * This list contains the lists of the yokimons that player and
      * entity will use in the fight system.
      */
-    private final List<Yokimon> party;
+    private List<Yokimon> party;
 
     /**
      * Used to calculate where this People is looking.
@@ -65,7 +65,7 @@ public abstract class People extends Entity {
      * @param party The party of Yokimon belonging to the People
      * @param messageHandler handler of events
      */
-    public People(final int id, final Position pos, final Hitbox hitBox, final List<Yokimon> party,
+    public People(final int id, final Position pos, final Hitbox hitBox, List<Yokimon> party,
                   final MessageHandler messageHandler) {
         super(id, pos, hitBox, messageHandler);
         this.party = List.copyOf(party);
