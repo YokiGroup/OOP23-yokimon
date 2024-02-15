@@ -10,8 +10,8 @@ import java.util.Set;
  * Implementation of a builder class to create a tile object.
  */
 public class TileBuilderImpl implements TileBuilder {
-    final Set<Entity> entities;
-    final Set<Hitbox> hitboxes;
+    private final Set<Entity> entities;
+    private final Set<Hitbox> hitboxes;
 
     public TileBuilderImpl() {
         this.entities = new HashSet<>();
