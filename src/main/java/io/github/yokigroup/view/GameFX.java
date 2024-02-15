@@ -51,7 +51,7 @@ public class GameFX extends Application {
 
     @Override
     public void start(final Stage stage) throws Exception {
-        final double scaledY = screenSize.getWidth() * 2.0 / 3.0;
+        final double scaledY = screenSize.getHeight() * 2.0 / 3.0;
         final double ratio = 16.0/9.0; // 16:9 ratio
         final Dimension2D windowDim = new Dimension2D(scaledY*ratio, scaledY);
 

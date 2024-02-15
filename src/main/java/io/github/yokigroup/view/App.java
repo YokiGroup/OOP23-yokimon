@@ -21,6 +21,6 @@ public final class App {
         // is not a subclass of javafx.application.Application
         // JavaFXApp.launch(args);
         // While the following would do just fine:
-        JavaFXApp.run(args);
+        GameFX.run(args);
     }
 }
