@@ -5,6 +5,7 @@ import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.tile.Tile;
+import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,10 +35,10 @@ class TileShapeTest {
     @Test
     void testGetTiles() {
         MessageHandler messageHandler = new GameMessageHandler();
-        final Tile tile1 = new TileBuilderImpl(0).build(messageHandler);
-        final Tile tile2 = new TileBuilderImpl(1).build(messageHandler);
+        final var tile1 = new TileBuilderImpl(0);
+        final var tile2 = new TileBuilderImpl(1);
         tileShape1 = new TileShapeImpl(Set.of(tile1, tile2), tileShapeSet1);
-        final WeightedPool<Tile> tileSet = tileShape1.getTiles();
+        final WeightedPool<TileBuilder> tileSet = tileShape1.getTiles();
         assertEquals(2, tileSet.size());
         tileSet.removeRandomizedElement();
         tileSet.removeRandomizedElement();

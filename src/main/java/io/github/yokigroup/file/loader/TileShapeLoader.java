@@ -6,6 +6,7 @@ import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.gen.TileShape;
 import io.github.yokigroup.world.gen.TileShapeImpl;
 import io.github.yokigroup.world.tile.Tile;
+import io.github.yokigroup.world.tile.TileBuilder;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,7 +21,7 @@ import java.util.Set;
 public class TileShapeLoader extends JsonLoader<TileShape> {
     private static final String TILE_JSON_RPATH = "tiles.json";
     private static final String TILE_SHAPE_JPATHF = "$.%d.shape[*]";
-    private Map<Set<Direction>, Set<Tile>> tiles = new HashMap<>();
+    private Map<Set<Direction>, Set<TileBuilder>> tiles = new HashMap<>();
     private final JsonParser parser = getParser();
     private final TileLoader tileLoader;
 
@@ -55,13 +56,13 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
         return tileDirs;
     }
 
-    private Pair<Set<Direction>, Tile> load(final int id) {
+    private Pair<Set<Direction>, TileBuilder> load(final int id) {
         Set<Direction> tileDirs = getTileDirs(id);
-        Tile tile = tileLoader.load(id);
+        TileBuilder tile = tileLoader.load(id);
         return new Pair<>(tileDirs, tile);
     }
 
-    private void insertTile(final Set<Direction> dirs, final Tile tile) {
+    private void insertTile(final Set<Direction> dirs, final TileBuilder tile) {
         Objects.requireNonNull(dirs);
         Objects.requireNonNull(tile);
 

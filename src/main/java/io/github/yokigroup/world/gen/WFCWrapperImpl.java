@@ -6,6 +6,7 @@ import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.gen.wfc.WaveFunctionCollapse;
 import io.github.yokigroup.world.gen.wfc.WaveFunctionCollapseImpl;
 import io.github.yokigroup.world.tile.Tile;
+import io.github.yokigroup.world.tile.TileBuilder;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -44,8 +45,8 @@ public class WFCWrapperImpl implements WFCWrapper {
     }
 
     @Override
-    public final Tile getTileAt(final Pair<Integer, Integer> position) {
-        final Optional<WeightedPool<Tile>> tilePool =  this.tileShapes.stream()
+    public final TileBuilder getTileAt(final Pair<Integer, Integer> position) {
+        final Optional<WeightedPool<TileBuilder>> tilePool =  this.tileShapes.stream()
                 .filter(s -> compareShapes(s.getPossibleDirections(), wfc.getShapeAt(position)))
                 .map(TileShape::getTiles)
                 .findFirst();

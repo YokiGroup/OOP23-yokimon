@@ -1,5 +1,6 @@
 package io.github.yokigroup.world;
 
+import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.file.loader.TileShapeLoader;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.gen.WFCWrapper;
@@ -45,7 +46,7 @@ public class GameMapBuilderImpl implements GameMapBuilder {
     }
 
     @Override
-    public GameMap build() {
+    public GameMap build(MessageHandler handler) {
         final TileShapeLoader loader = new TileShapeLoader();
         final WFCWrapper wfc = new WFCWrapperImpl(this.mapDimensions, loader.getAll());
         this.tileMap.forEach((k, v) -> wfc.setStaticTile(k, v.getAdjacencies()));
@@ -53,8 +54,8 @@ public class GameMapBuilderImpl implements GameMapBuilder {
         for (int i = 0; i < mapDimensions.x(); i++) {
             for (int j = 0; j < mapDimensions.y(); j++) {
                 final Pair<Integer, Integer> pos = new Pair<>(i, j);
-                if (!tileMap.contains(pos)) {
-                    tileMap.put(pos, wfc.getTileAt(pos));
+                if (!tileMap.containsKey(pos)) {
+                    tileMap.put(pos, wfc.getTileAt(pos).build(handler));
                 }
             }
         }

@@ -1,7 +1,10 @@
 package io.github.yokigroup.file.loader;
 
+import io.github.yokigroup.core.GameMessageHandler;
+import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
@@ -12,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +25,7 @@ class TileShapeLoaderTest {
 
     @BeforeEach
     void setUp() {
+        MessageHandler handler = new GameMessageHandler();
         TileShapeLoader tileShapeLoader = new TileShapeLoader();
         var tileShapeSet = tileShapeLoader.getAll();
 
@@ -32,7 +37,8 @@ class TileShapeLoaderTest {
 
         assertEquals(2, loadedTileShape.getTiles().size());
         for(var t: loadedTileShape.getTiles().getEntries()){
-            if(t.getHitboxes().size() == 2) loadedTile = t;
+            Tile builtTile = t.build(handler);
+            if(builtTile.getHitboxes().size() == 2) loadedTile = builtTile;
         }
         assertNotNull(loadedTile);
     }
@@ -40,7 +46,7 @@ class TileShapeLoaderTest {
     @Test
     void spawnsTest() {
         Set<Vector2> spawns = Set.of(new Vector2Impl(10.0, 30.0));
-        assertEquals(spawns, loadedTile.getEntitySpawnLocations());
+        assertEquals(spawns, loadedTile.getEntities().stream().map(Entity::getPos).collect(Collectors.toSet()));
     }
 
     @Test

@@ -1,5 +1,7 @@
 package io.github.yokigroup.world.gen;
 
+import io.github.yokigroup.core.GameMessageHandler;
+import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.file.loader.TileShapeLoader;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.tile.Tile;
@@ -21,9 +23,11 @@ class WFCWrapperTest {
     @BeforeEach
     public void init() {
         final Set<TileShape> allShapes = TILE_SHAPE_LOADER.getAll();
+        final MessageHandler handler = new GameMessageHandler();
         allTiles = allShapes.stream()
                 .map(s -> s.getTiles().getEntries())
                 .flatMap(Set::stream)
+                .map(s -> s.build(handler))
                 .collect(Collectors.toSet());
         this.wfcWrapper = new WFCWrapperImpl(new Pair<>(WIDTH, HEIGHT), allShapes);
     }

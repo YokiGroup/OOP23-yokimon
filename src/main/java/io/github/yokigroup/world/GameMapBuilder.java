@@ -1,7 +1,10 @@
 package io.github.yokigroup.world;
 
+import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.tile.Tile;
+
+import javax.mail.Message;
 
 public interface GameMapBuilder {
 
@@ -28,5 +31,5 @@ public interface GameMapBuilder {
      * Finalizes the GameMap object.
      * @return The built GameMap.
      */
-    GameMap build();
+    GameMap build(MessageHandler handler);
 }
