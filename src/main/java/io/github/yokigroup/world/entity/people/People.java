@@ -2,14 +2,17 @@ package io.github.yokigroup.world.entity.people;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * People class represents a generic person entity in the game world.
@@ -230,5 +233,18 @@ public abstract class People extends Entity {
      * the initial one, or to the centre of the tile if the entity is the player.
      */
     public abstract void resetPosition();
+
+    /**
+     * Checks if an entity is colliding in
+     */
+    protected final void nonEntityCollisionCheck(){
+        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
+            map.getGameMap().getPlayerTile().getHitboxes().stream()
+                    .map(block -> this.getHitBox().collidesWith(block))
+                    .filter(Optional::isPresent)
+                    .forEach(block -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(block.get()))));
+        });
+
+    }
 
 }

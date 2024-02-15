@@ -123,12 +123,8 @@ public class Enemy extends People {
     private void move(final Vector2 vector) {
 
         this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
-
+        this.nonEntityCollisionCheck();
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
-            map.getGameMap().getPlayerTile().getHitboxes().stream()
-                    .map(block -> this.getHitBox().collidesWith(block))
-                    .filter(Optional::isPresent)
-                    .forEach(block -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(block.get()))));
 
         for (Entity entity : map.getEntitiesOnCurrentTile()) {
              if (entity instanceof Player && this.getHitBox().collidesWith(entity.getHitBox()).isPresent()) {
