@@ -15,18 +15,19 @@ import java.util.Map;
  * Allows the player to switch screens (tiles) by walking around.
  */
 public class GameMapImpl implements GameMap {
+    /**
+     * The dimensions of the tile using the 16:9 aspect ratio.
+     */
+    private static final Pair<Integer, Integer> TILE_DIMENSIONS = new Pair<>(1280, 720);
     private final TileShapeLoader tileShapeLoader;
-    private final Pair<Integer, Integer> tileDimensions;
     private final Map<Pair<Integer, Integer>, Tile> tileMap;
     private Pair<Integer, Integer> worldPlayerPosition;
 
     /**
      * Initializes the game map through the usage of the wave function collapse algorithm.
-     * @param tileDimensions The dimensions in unit of the Tile on the map.
      * @param mapDimensions The mapDimensions of the map in tiles.
      */
-    public GameMapImpl(final Pair<Integer, Integer> tileDimensions, final Pair<Integer, Integer> mapDimensions) {
-        this.tileDimensions = tileDimensions;
+    public GameMapImpl(final Pair<Integer, Integer> mapDimensions) {
         this.tileShapeLoader = new TileShapeLoader();
         final WFCWrapper wfc = new WFCWrapperImpl(mapDimensions, tileShapeLoader.getAll());
         this.tileMap = new HashMap<>();
@@ -48,7 +49,7 @@ public class GameMapImpl implements GameMap {
 
     @Override
     public final Pair<Integer, Integer> getTileDimensions() {
-        return this.tileDimensions;
+        return TILE_DIMENSIONS;
     }
 
     @Override
