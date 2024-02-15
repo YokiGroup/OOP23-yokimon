@@ -2,6 +2,9 @@ package io.github.yokigroup.world.gen;
 
 import io.github.yokigroup.util.Pair;
 
+/**
+ * Enum that stores the directions of a tile.
+ */
 public enum TileDirections {
     /**
      * Can connect to tiles that have the shape "DOWN".
