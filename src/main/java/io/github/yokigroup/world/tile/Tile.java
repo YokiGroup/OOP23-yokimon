@@ -19,12 +19,6 @@ public interface Tile {
 
     /**
      *
-     * @param hitbox The hitbox to add to the tile.
-     */
-    void addHitbox(Hitbox hitbox);
-
-    /**
-     *
      * @return The entities on the tile.
      */
     Set<Entity> getEntities();

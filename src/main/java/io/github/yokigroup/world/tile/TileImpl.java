@@ -12,36 +12,29 @@ import java.util.Set;
  */
 public class TileImpl implements Tile {
     private final int id;
-    private Set<Hitbox> hitboxes;
-    private Set<Entity> entities;
+    private final Set<Hitbox> hitboxes;
+    private final Set<Entity> entities;
 
     /**
      * Creates a tile with static and dynamic entities.
      * @param id The id of the tile.
      * @param hitboxes The invisible walls in a tile.
      */
-    public TileImpl(final int id, final Set<Hitbox> hitboxes) {
+    public TileImpl(final int id, final Set<Hitbox> hitboxes, final Set<Entity> entities) {
+        if (hitboxes == null) {
+            throw new IllegalArgumentException("The hitboxes set is null.");
+        }
+        if (entities == null) {
+            throw new IllegalArgumentException("The entities set is null.");
+        }
         this.id = id;
-        this.entities = new HashSet<>();
-        this.hitboxes = hitboxes;
-    }
-
-    /**
-     * Creates a tile with no hitboxes and no entities.
-     * @param id The id of the tile.
-     */
-    public TileImpl(final int id) {
-        this(id, new HashSet<>());
+        this.hitboxes = Set.copyOf(hitboxes);
+        this.entities = Set.copyOf(entities);
     }
 
     @Override
     public final Set<Hitbox> getHitboxes() {
         return Set.copyOf(this.hitboxes);
-    }
-
-    @Override
-    public final void addHitbox(final Hitbox hitbox) {
-        this.hitboxes.add(hitbox);
     }
 
     @Override
