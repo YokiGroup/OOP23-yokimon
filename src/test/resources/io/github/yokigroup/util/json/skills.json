@@ -4,5 +4,23 @@
     "color": "PURPLE",
     "effect": "NONE",
     "power": 9001
+  },
+  "2": {
+    "name": "Strong Punch",
+    "color": "RED",
+    "effect": "NONE",
+    "power": 80
+  },
+  "3": {
+    "name": "Curse",
+    "color": "PURPLE",
+    "effect": "NONE",
+    "power": 70
+  },
+  "4": {
+    "name": "Slap",
+    "color": "WHITE",
+    "effect": "NONE",
+    "power": 70
   }
 }
