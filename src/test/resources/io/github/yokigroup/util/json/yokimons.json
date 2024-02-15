@@ -1,29 +1,17 @@
 {
   "1": {
-    "name": "Oni",
-    "growthRate": "MEDIUM",
-    "color": "RED",
+    "name": "Pippo Pugile",
+    "growthRate": "FAST",
+    "color": "BLACK",
     "stats": {
-      "ATK": 80,
-      "DEF": 100,
-      "SPD": 40,
-      "HP": 90
+      "ATK": 1,
+      "DEF": 1,
+      "SPD": 1,
+      "HP": 10
     },
     "moves": [
       {
         "level": 1,
-        "skillId": 4
-      },
-      {
-        "level": 3,
-        "skillId": 2
-      },
-      {
-        "level": 7,
-        "skillId": 3
-      },
-      {
-        "level": 15,
         "skillId": 1
       }
     ]
@@ -435,19 +423,5 @@
         "skillId": 1
       }
     ]
-  },
-  "2": {
-    "name": "Pluto Pugile",
-    "growthRate": "FAST",
-    "color": "BLACK",
-    "stats": {
-      "ATK": 1,
-      "DEF": 1,
-      "SPD": 1,
-      "HP": 10
-    },
-    "moves": [
-    ]
   }
-
 }
