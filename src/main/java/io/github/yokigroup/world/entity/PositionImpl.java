@@ -10,7 +10,7 @@ import java.util.Objects;
  * Implementation of Position, provides many useful methods
  * for managing positions.
  */
-public class PositionImpl implements Position{
+public class PositionImpl implements Position {
 
     private Vector2 pos;
 

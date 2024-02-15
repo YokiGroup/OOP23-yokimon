@@ -32,10 +32,9 @@ class AltarTest {
 
         Position playerPos = new PositionImpl(new Vector2Impl(0, 0));
         Position altarPos = new PositionImpl(new Vector2Impl(2, 0));
-        Hitbox altarHitBox = new RectangularHitbox(altarPos.getPosition(), new Vector2Impl(1, 1));
-        Hitbox playerHitBox = new RectangularHitbox(playerPos.getPosition(), new Vector2Impl(1, 1));
-        Altar altar = new Altar(0, altarPos, altarHitBox, loader.load(1), messageHandler);
-        Entity player = new Player(1, playerPos, playerHitBox, Collections.emptyList(), messageHandler);
+
+        Altar altar = new Altar(0, altarPos, loader.load(1), messageHandler);
+        Entity player = new Player(1, playerPos, messageHandler);
         GameMap map = messageHandler.handle(GameMapSubmodule.class, GameMapSubmodule::getGameMap);
         map.getPlayerTile().getEntities().add(player);
         map.getPlayerTile().getEntities().add(altar);

@@ -22,13 +22,11 @@ public class Player extends People {
      * Constructor of the player.
      * @param id identification id
      * @param pos initial Pos
-     * @param hitBox hitBox of the player
-     * @param party expandable party of the player
      * @param messageHandler handler of Events
      */
-    public Player(final int id, final Position pos, final Hitbox hitBox, final List<Yokimon> party,
+    public Player(final int id, final Position pos,
                   final MessageHandler messageHandler) {
-        super(id, pos, hitBox, party, messageHandler);
+        super(id, pos, messageHandler);
     }
 
     /**
@@ -58,7 +56,7 @@ public class Player extends People {
         if (!this.getPos().isValid()) {
             this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
                 this.setPos(new PositionImpl(new Vector2Impl( (double) GameMap.TILE_DIMENSIONS.x() / 2,
-                        (double) GameMap.TILE_DIMENSIONS.y() / 2 ) ));
+                        (double) GameMap.TILE_DIMENSIONS.y() / 2 )));
             });
         }
     }
@@ -68,8 +66,8 @@ public class Player extends People {
      */
     @Override
     public void update() {
-        Vector2 dir = new Vector2Impl(0 , 0);
-        if ( !this.getIsActive() ) {
+        Vector2 dir = new Vector2Impl(0, 0);
+        if (!this.getIsActive()) {
             return;
         }
         resetPosition();

@@ -35,9 +35,13 @@ public class Enemy extends People {
      */
     private static final double RADIUS_INITIAL_POS = 5.00;
     /**
+     * SCALE Offset of for general movement.
+     */
+    private static final double SCALE = 10;
+    /**
      * Velocity Offset of the enemy when following the player.
      */
-    private static final double VELOCITY = 1.50;
+    private static final double VELOCITY = 1.5;
 
     /**
      * Default value for random directions.
@@ -48,13 +52,10 @@ public class Enemy extends People {
      * Constructs an Enemy object with the specified attributes.
      * @param id id of the enemy
      * @param pos The position of the Enemy
-     * @param hitBox The hitBox of the Enemy
-     * @param party The party of Yokimon belonging to the Enemy
      * @param messageHandler handle for events
      */
-    public Enemy(final int id, final Position pos, final Hitbox hitBox,
-                 final List<Yokimon> party, final MessageHandler messageHandler) {
-        super(id, pos, hitBox, party, messageHandler);
+    public Enemy(final int id, final Position pos, final MessageHandler messageHandler) {
+        super(id, pos, messageHandler);
         this.state = State.WANDER;
 
     }
@@ -130,7 +131,7 @@ public class Enemy extends People {
              if (entity instanceof Player && this.getHitBox().collidesWith(entity.getHitBox()).isPresent()) {
                  this.getMessageHandler().handle(FightSubmodule.class, fight -> {
                      this.getMessageHandler().handle(PartySubmodule.class, playerParty -> {
-                         fight.addEncounter(this.getListOfYokimon());
+                         fight.addEncounter();
                      });
                  });
              }
@@ -167,7 +168,7 @@ public class Enemy extends People {
                 v = new Vector2Impl(follow(pos.getPosition().getPosition()));
             }
             this.toDirection(v);
-            this.move(v);
+            this.move(v.scale(SCALE));
 
         });
 
