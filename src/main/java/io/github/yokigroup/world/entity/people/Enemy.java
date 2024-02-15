@@ -28,12 +28,12 @@ public class Enemy extends People {
     /**
      * This value represent the maximum distance at which the player will be in sight.
      */
-    private static final double RADIUS_PLAYER = 6.00;
+    private static final double RADIUS_PLAYER = 60.00;
     /**
      * This value represent the maximum distance at which the enemy will.
      * go from his initial pos.
      */
-    private static final double RADIUS_INITIAL_POS = 5.00;
+    private static final double RADIUS_INITIAL_POS = 50.00;
     /**
      * SCALE Offset of for general movement.
      */
