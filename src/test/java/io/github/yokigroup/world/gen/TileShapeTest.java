@@ -3,7 +3,7 @@ package io.github.yokigroup.world.gen;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.tile.Tile;
-import io.github.yokigroup.world.tile.TileImpl;
+import io.github.yokigroup.world.tile.TileBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,9 @@ class TileShapeTest {
 
     @Test
     void testGetTiles() {
-        tileShape1 = new TileShapeImpl(Set.of(new TileImpl(0), new TileImpl(1)), tileShapeSet1);
+        final Tile tile1 = new TileBuilderImpl().build(0);
+        final Tile tile2 = new TileBuilderImpl().build(1);
+        tileShape1 = new TileShapeImpl(Set.of(tile1, tile2), tileShapeSet1);
         final WeightedPool<Tile> tileSet = tileShape1.getTiles();
         assertEquals(2, tileSet.size());
         tileSet.removeRandomizedElement();
