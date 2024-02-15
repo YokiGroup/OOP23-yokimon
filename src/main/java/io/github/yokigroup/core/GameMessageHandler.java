@@ -20,7 +20,7 @@ import java.util.function.Function;
 /**
  * Game loop. Responsible for receiving events and updating entities
  */
-public class GameOrchestrator implements MessageHandler {
+public class GameMessageHandler implements MessageHandler {
     private final SubmoduleMap subModules;
     private final Entity playerCharacter;
 
@@ -53,7 +53,7 @@ public class GameOrchestrator implements MessageHandler {
     /**
      * Initializes a GameOrchestrator with a new GameMap and PlayerCharacter, along with the required submodules.
      */
-    public GameOrchestrator() {
+    public GameMessageHandler() {
         playerCharacter = null; // TODO replace with Entity implementation
         subModules = initSubmodules();
     }
