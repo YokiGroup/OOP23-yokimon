@@ -1,4 +1,4 @@
-package io.github.yokigroup.core;
+package io.github.yokigroup.event.observer;
 
 /**
  * Publisher interface, responsible for adding and updating subscribers to a certain argument.

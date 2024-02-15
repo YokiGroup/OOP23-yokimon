@@ -1,4 +1,4 @@
-package io.github.yokigroup.core;
+package io.github.yokigroup.event.observer;
 
 import java.util.Set;
 import java.util.HashSet;
