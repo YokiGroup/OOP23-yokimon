@@ -17,7 +17,7 @@ import java.util.Map;
 class YokimonImplTest {
 
     private static YokimonLoader loader;
-    private  static AttackLoader loaderAttack;
+    private static AttackLoader loaderAttack;
     private static MessageHandler messageHandler;
     @BeforeEach
     void setUp() {
@@ -34,12 +34,12 @@ class YokimonImplTest {
     }
     @Test
     void getAllStats() {
-        // FIXME we use loaders now
     Yokimon oni = loader.load(1);
 
     oni.setLevel(5);
 
     assertEquals(5, oni.getLevel());
+
     }
 
     @Test
