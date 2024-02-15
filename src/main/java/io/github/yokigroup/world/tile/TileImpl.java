@@ -3,7 +3,6 @@ package io.github.yokigroup.world.tile;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
