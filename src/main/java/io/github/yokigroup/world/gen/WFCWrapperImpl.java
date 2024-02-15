@@ -61,10 +61,10 @@ public class WFCWrapperImpl implements WFCWrapper {
      * @return True if the two shapes are the same.
      */
     private boolean compareShapes(final Set<TileDirections> shape1, final Set<TileDirections> shape2) {
-        Set<TileDirections> fullSet = new HashSet<>();
+        final Set<TileDirections> fullSet = new HashSet<>();
         fullSet.addAll(shape1);
         fullSet.addAll(shape2);
-        for (TileDirections dir : fullSet) {
+        for (final TileDirections dir : fullSet) {
             if (!shape2.contains(dir) || !shape1.contains(dir)) {
                 return false;
             }
