@@ -20,9 +20,12 @@ public class GameMapImpl implements GameMap {
      * @param mapDimensions The mapDimensions of the map in tiles.
      */
     public GameMapImpl(final Pair<Integer, Integer> mapDimensions, final Map<Pair<Integer, Integer>, Tile> tileMap, final Pair<Integer, Integer> playerTileMapPosition) {
-        this.tileMap = tileMap;
+        if (tileMap == null) {
+            throw new IllegalArgumentException("The passed TileMap was null");
+        }
         this.playerTileMapPosition = playerTileMapPosition;
         this.mapDimensions = mapDimensions;
+        this.tileMap = Map.copyOf(tileMap);
     }
 
     @Override
