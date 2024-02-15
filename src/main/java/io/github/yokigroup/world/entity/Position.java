@@ -1,6 +1,6 @@
 package io.github.yokigroup.world.entity;
 
-import io.github.yokigroup.event.MessageHandler;
+
 import io.github.yokigroup.util.Vector2;
 
 /**

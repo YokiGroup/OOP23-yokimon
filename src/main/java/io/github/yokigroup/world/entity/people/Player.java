@@ -6,7 +6,6 @@ import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.GameMap;
-import io.github.yokigroup.world.GameMapImpl;
 import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Position;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * This class describe the behaviour of the player entity in game map
+ * This class describe the behaviour of the player entity in game map.
  */
 public class Player extends People {
 
@@ -58,8 +57,8 @@ public class Player extends People {
     public void resetPosition() {
         if (!this.getPos().isValid()) {
             this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
-                this.setPos(new PositionImpl(new Vector2Impl( (double) GameMap.TILE_DIMENSIONS.x()/2,
-                        (double) GameMap.TILE_DIMENSIONS.y() / 2 )));
+                this.setPos(new PositionImpl(new Vector2Impl( (double) GameMap.TILE_DIMENSIONS.x() / 2,
+                        (double) GameMap.TILE_DIMENSIONS.y() / 2 ) ));
             });
         }
     }
@@ -70,7 +69,7 @@ public class Player extends People {
     @Override
     public void update() {
         Vector2 dir = new Vector2Impl(0 , 0);
-        if (!this.getIsActive()) {
+        if ( !this.getIsActive() ) {
             return;
         }
         resetPosition();

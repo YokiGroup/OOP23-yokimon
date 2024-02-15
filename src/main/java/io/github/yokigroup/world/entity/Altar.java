@@ -75,11 +75,11 @@ public class Altar extends Entity {
      */
     public enum AltarState {
         /**
-         * If the altar is in this state will no longer give a yokimon
+         * If the altar is in this state will no longer give a yokimon.
          */
         USED,
         /**
-         * If the altar is in this state is active and will give a yokimon
+         * If the altar is in this state is active and will give a yokimon.
          */
         POWERED
     }

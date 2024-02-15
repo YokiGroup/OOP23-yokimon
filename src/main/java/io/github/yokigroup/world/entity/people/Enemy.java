@@ -1,7 +1,6 @@
 package io.github.yokigroup.world.entity.people;
 
 import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.battle.fight.FightImpl;
 import io.github.yokigroup.event.MessageHandler;
 
 import io.github.yokigroup.event.submodule.FightSubmodule;
@@ -108,7 +107,7 @@ public class Enemy extends People {
                 .filter(dir -> this.getInitialPos().inRadius(this.getPos().testMovePosition(dir.get()), RADIUS_INITIAL_POS))
                 .filter(dir -> this.getPos().testMovePosition(dir.get()).isValid())
                 .forEach(dir -> directionWeightedPool.addElement(dir, DEFAULT_POOL_VALUE));
-        if(directionWeightedPool.size() < 1){
+        if (directionWeightedPool.size() < 1) {
             directionWeightedPool.addElement(Direction.DEFAULT_STAND, DEFAULT_POOL_VALUE);
         }
            return directionWeightedPool.getRandomizedElement().get();

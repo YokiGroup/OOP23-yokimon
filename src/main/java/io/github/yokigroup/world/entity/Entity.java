@@ -32,10 +32,10 @@ public abstract class Entity {
     }
 
     /**
-     * Returns the entity id
+     * Returns the entity id.
      * @return int
      */
-    public final int getId(){
+    public final int getId() {
         return this.id;
     }
 
@@ -80,7 +80,7 @@ public abstract class Entity {
      * Set a new hitBox.
      * @param hitBox new hitBox
      */
-    protected final void setHitBox(Hitbox hitBox) {
+    protected final void setHitBox(final Hitbox hitBox) {
         this.hitBox = hitBox;
     }
     /**
@@ -88,14 +88,27 @@ public abstract class Entity {
      */
     public abstract void update();
 
+    /**
+     * Control if the entity is equal to another.
+     * @param o Entity
+     * @return boolean
+     */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Entity entity = (Entity) o;
         return id == entity.id && Objects.equals(pos, entity.pos) && Objects.equals(hitBox, entity.hitBox);
     }
 
+    /**
+     * Return and hash code of the entity.
+     * @return int
+     */
     @Override
     public int hashCode() {
         return Objects.hash(pos, hitBox, id);

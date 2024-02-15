@@ -68,7 +68,7 @@ public abstract class People extends Entity {
      * @param party The party of Yokimon belonging to the People
      * @param messageHandler handler of events
      */
-    public People(final int id, final Position pos, final Hitbox hitBox, List<Yokimon> party,
+    public People(final int id, final Position pos, final Hitbox hitBox, final List<Yokimon> party,
                   final MessageHandler messageHandler) {
         super(id, pos, hitBox, messageHandler);
         this.party = List.copyOf(party);
@@ -82,7 +82,7 @@ public abstract class People extends Entity {
      */
     public enum Direction {
         /**
-         * The entity doesn't move
+         * The entity doesn't move.
          */
         DEFAULT_STAND(new Vector2Impl(0, 0)),
         /**
@@ -229,9 +229,9 @@ public abstract class People extends Entity {
     public abstract void resetPosition();
 
     /**
-     * Checks if an entity is colliding in
+     * Checks if an entity is colliding in.
      */
-    protected final void nonEntityCollisionCheck(){
+    protected final void nonEntityCollisionCheck() {
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
             map.getGameMap().getPlayerTile().getHitboxes().stream()
                     .map(block -> this.getHitBox().collidesWith(block))

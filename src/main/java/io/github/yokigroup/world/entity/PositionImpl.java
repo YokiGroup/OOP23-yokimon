@@ -1,8 +1,7 @@
 package io.github.yokigroup.world.entity;
 
-import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.util.*;
+import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.GameMap;
 
 import java.util.Objects;
