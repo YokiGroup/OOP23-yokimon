@@ -3,6 +3,7 @@ package io.github.yokigroup.world.gen.wfc;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.util.WeightedPoolImpl;
+import io.github.yokigroup.world.gen.TileDirections;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -19,14 +20,14 @@ import java.util.Optional;
 public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
     private final int maxDepth;
     private final Pair<Integer, Integer> dimensions;
-    private final Map<Pair<Integer, Integer>, WeightedPool<Set<WfcShapeDirection>>> shapeMap;
+    private final Map<Pair<Integer, Integer>, WeightedPool<Set<TileDirections>>> shapeMap;
 
     /**
      * Instantiates the wave function collapse algorithm for the shape map generation.
      * @param dimensions The dimensions of the ShapeMap to generate
      * @param shapes The shapes the map can have.
      */
-    public WaveFunctionCollapseImpl(final Pair<Integer, Integer> dimensions, final Set<Set<WfcShapeDirection>> shapes) {
+    public WaveFunctionCollapseImpl(final Pair<Integer, Integer> dimensions, final Set<Set<TileDirections>> shapes) {
         if (shapes == null) {
             throw new IllegalArgumentException("The WaveFunctionCollapse's shape set must not be null.");
         }
@@ -37,7 +38,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         // Fill up the map with all shapes being any random shape
         for (int i = 0; i < dimensions.x(); i++) {
             for (int j = 0; j < dimensions.y(); j++) {
-                final WeightedPool<Set<WfcShapeDirection>> pool = new WeightedPoolImpl<>();
+                final WeightedPool<Set<TileDirections>> pool = new WeightedPoolImpl<>();
                 Set.copyOf(shapes).forEach(s -> pool.addElement(Set.copyOf(s), 1.0f));
                 this.shapeMap.put(new Pair<>(i, j), pool);
             }
@@ -45,7 +46,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
     }
 
     @Override
-    public final Set<WfcShapeDirection> getShapeAt(final Pair<Integer, Integer> position) {
+    public final Set<TileDirections> getShapeAt(final Pair<Integer, Integer> position) {
         // If there's more than one possibility per position, the algorithm has not finished generating the map.
         if (shapeMap.get(position).size() > 1) {
             throw new IllegalStateException("The WaveFunctionCollapse algorithm has not yet generated the map correctly.");
@@ -54,14 +55,14 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
     }
 
     @Override
-    public final void setStaticShape(final Pair<Integer, Integer> position, final Set<Set<WfcShapeDirection>> shape) {
+    public final void setStaticShape(final Pair<Integer, Integer> position, final Set<Set<TileDirections>> shape) {
         if (shape == null || shape.isEmpty()) {
             throw new IllegalArgumentException("The shape of the static tile must not be empty.");
         }
         if (!checkBounds(position)) {
             throw new IllegalArgumentException("The position must be inside the bounds of the map.");
         }
-        final WeightedPool<Set<WfcShapeDirection>> pool = new WeightedPoolImpl<>();
+        final WeightedPool<Set<TileDirections>> pool = new WeightedPoolImpl<>();
         Set.copyOf(shape).forEach(s -> pool.addElement(Set.copyOf(s), 1.0f));
         this.shapeMap.put(position, pool);
         updateAdjacentShapes(maxDepth, position);
@@ -100,11 +101,11 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      */
     private void updateAdjacentShapes(final int depth, final Pair<Integer, Integer> centerPosition) {
         // Get any shape from the center
-        final Set<WfcShapeDirection> centerShape = this.shapeMap.get(centerPosition).getRandomizedElement();
+        final Set<TileDirections> centerShape = this.shapeMap.get(centerPosition).getRandomizedElement();
         // Get its coherence table
-        final Set<WfcShapeDirection> coherenceShape = getCoherentDirections(this.shapeMap.get(centerPosition).getEntries());
+        final Set<TileDirections> coherenceShape = getCoherentDirections(this.shapeMap.get(centerPosition).getEntries());
         // Check all directions
-        for (final WfcShapeDirection dir : coherenceShape) {
+        for (final TileDirections dir : coherenceShape) {
             // Get the coordinate offset for that direction
             final Pair<Integer, Integer> offsetPos = new Pair<>(
                     centerPosition.x() + dir.getOffset().x(),
@@ -113,9 +114,9 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
             // Check if the position is in bounds, and if the tile has not already been collapsed
             if (checkBounds(offsetPos) && !hasBeenCollapsed(offsetPos)) {
                 // And get the connection for that direction
-                final WfcShapeDirection dirConnection = dir.getConnection();
+                final TileDirections dirConnection = dir.getComplementary();
                 // Get the pool from the tile to update
-                final WeightedPool<Set<WfcShapeDirection>> pool = this.shapeMap.get(offsetPos);
+                final WeightedPool<Set<TileDirections>> pool = this.shapeMap.get(offsetPos);
                 // For all the shapes it has
                 pool.getEntries()
                         .stream()
@@ -136,19 +137,19 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @param shapes The shapes to check.
      * @return A set of enums containing where the random shape has always the same direction.
      */
-    private Set<WfcShapeDirection> getCoherentDirections(final Set<Set<WfcShapeDirection>> shapes) {
+    private Set<TileDirections> getCoherentDirections(final Set<Set<TileDirections>> shapes) {
         // Get the common shapes through a stream
-        final Set<WfcShapeDirection> commonShapes = shapes.stream()
+        final Set<TileDirections> commonShapes = shapes.stream()
                 .reduce((a, b) -> {
-                    final Set<WfcShapeDirection> common = new HashSet<>(a);
+                    final Set<TileDirections> common = new HashSet<>(a);
                     common.retainAll(b);
                     return common;
-                }).orElse(EnumSet.noneOf(WfcShapeDirection.class));
+                }).orElse(EnumSet.noneOf(TileDirections.class));
         // Get all the common non-present directions by removing them from the set containing all the direction
-        final Set<WfcShapeDirection> uncommonShapes = EnumSet.allOf(WfcShapeDirection.class);
+        final Set<TileDirections> uncommonShapes = EnumSet.allOf(TileDirections.class);
         shapes.forEach(uncommonShapes::removeAll);
         // Merge the two sets together and return them
-        final Set<WfcShapeDirection> coherentShapes = new HashSet<>(commonShapes);
+        final Set<TileDirections> coherentShapes = new HashSet<>(commonShapes);
         coherentShapes.addAll(uncommonShapes);
         return coherentShapes;
     }

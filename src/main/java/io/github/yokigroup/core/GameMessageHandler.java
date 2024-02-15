@@ -53,7 +53,7 @@ public class GameMessageHandler implements MessageHandler {
      * Initializes a GameOrchestrator with a new GameMap and PlayerCharacter, along with the required submodules.
      */
     public GameMessageHandler() {
-        playerCharacter = null; // TODO replace with Entity implementation
+        // playerCharacter = null; // TODO replace with Entity implementation
         subModules = initSubmodules();
     }
 

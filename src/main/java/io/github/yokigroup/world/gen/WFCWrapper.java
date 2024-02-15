@@ -15,7 +15,7 @@ public interface WFCWrapper {
      * @param position The position to set static.
      * @param tile The tile that will be placed there.
      */
-    void setStaticTile(Pair<Integer, Integer> position, Set<TileShape.TileDirections> tile);
+    void setStaticTile(Pair<Integer, Integer> position, Set<TileDirections> tile);
 
     /**
      * Runs the wave function collapse algorithm, generating a full tile map.

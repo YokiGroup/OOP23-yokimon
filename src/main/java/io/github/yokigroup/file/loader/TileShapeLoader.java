@@ -7,6 +7,7 @@ import io.github.yokigroup.util.json.JsonParser;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
+import io.github.yokigroup.world.gen.TileDirections;
 import io.github.yokigroup.world.gen.TileShape;
 import io.github.yokigroup.world.gen.TileShapeImpl;
 import io.github.yokigroup.world.tile.Tile;
@@ -25,7 +26,7 @@ import java.util.Set;
 public class TileShapeLoader extends JsonLoader<TileShape> {
     private static final String TILE_JSON_RPATH = "tiles.json";
     private static final String TILE_SHAPE_JPATHF = "$.%d.shape[*]";
-    private Map<Set<TileShape.TileDirections>, Set<Tile>> tiles = new HashMap<>();
+    private Map<Set<TileDirections>, Set<Tile>> tiles = new HashMap<>();
     private final JsonParser parser = getParser();
     private final TileLoader tileLoader;
 
@@ -46,27 +47,27 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
         this.tileLoader = loader;
     }
 
-    private Set<TileShape.TileDirections> convertToTileShapeSet(final Set<String> rawInput) {
-        Set<TileShape.TileDirections> retSet = new HashSet<>();
-        rawInput.forEach(s -> retSet.add(TileShape.TileDirections.valueOf(s)));
+    private Set<TileDirections> convertToTileShapeSet(final Set<String> rawInput) {
+        Set<TileDirections> retSet = new HashSet<>();
+        rawInput.forEach(s -> retSet.add(TileDirections.valueOf(s)));
         return retSet;
     }
 
-    private Set<TileShape.TileDirections> getTileDirs(final int id) {
+    private Set<TileDirections> getTileDirs(final int id) {
         List<String> rawTileDirs = parser.read(String.format(TILE_SHAPE_JPATHF, id));
-        Set<TileShape.TileDirections> tileDirs = new HashSet<>();
+        Set<TileDirections> tileDirs = new HashSet<>();
 
-        rawTileDirs.forEach(d -> tileDirs.add(TileShape.TileDirections.valueOf(d)));
+        rawTileDirs.forEach(d -> tileDirs.add(TileDirections.valueOf(d)));
         return tileDirs;
     }
 
-    private Pair<Set<TileShape.TileDirections>, Tile> load(final int id) {
-        Set<TileShape.TileDirections> tileDirs = getTileDirs(id);
+    private Pair<Set<TileDirections>, Tile> load(final int id) {
+        Set<TileDirections> tileDirs = getTileDirs(id);
         Tile tile = tileLoader.load(id);
         return new Pair<>(tileDirs, tile);
     }
 
-    private void insertTile(final Set<TileShape.TileDirections> dirs, final Tile tile) {
+    private void insertTile(final Set<TileDirections> dirs, final Tile tile) {
         Objects.requireNonNull(dirs);
         Objects.requireNonNull(tile);
 
