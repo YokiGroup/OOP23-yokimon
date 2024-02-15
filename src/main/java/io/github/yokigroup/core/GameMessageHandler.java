@@ -22,7 +22,6 @@ import java.util.function.Function;
  */
 public class GameMessageHandler implements MessageHandler {
     private final SubmoduleMap subModules;
-    private final Entity playerCharacter;
 
     /**
      * Initializes game logic submodules.
