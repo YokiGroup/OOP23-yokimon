@@ -65,9 +65,10 @@ public class Enemy extends People {
      */
     @Override
     public void resetPosition() {
-        if (!this.getPos().isValid()) {
+
+            this.state = State.WANDER;
             this.setPos(this.getInitialPos());
-        }
+
     }
 
     /**
@@ -154,15 +155,16 @@ public class Enemy extends People {
         }
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {
             Objects.requireNonNull(pos.getPosition().getPosition(), "Position of the player isNull");
-            resetPosition();
+            if (!this.getPos().isValid()) {
+                resetPosition();
+            }
             if (this.getPos().inRadius(pos.getPosition(), RADIUS_PLAYER)) {
                 this.state = State.FOLLOW;
             }
             Vector2 v;
             if (this.state == State.WANDER) {
                 v = new Vector2Impl(wander());
-            }
-            else {
+            } else {
                 v = new Vector2Impl(follow(pos.getPosition().getPosition()));
             }
             this.toDirection(v);

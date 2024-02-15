@@ -37,7 +37,7 @@ public class Altar extends Entity {
      * Returns the current state of the Altar (if it's used or not).
      * @return altarState Current state of the Altar
      */
-    public final Altar.AltarState getState() {
+    public final AltarState getState() {
         return this.state;
     }
     /**

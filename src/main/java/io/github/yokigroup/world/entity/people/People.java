@@ -153,20 +153,14 @@ public abstract class People extends Entity {
      */
     public final void toDirection(final Vector2 v) {
         Objects.requireNonNull(v, "Vector passed to toDirection was null");
-        if (v.getX() == 0 && v.getY() > 0) {
+        if (v.getX() > 0 && v.getY() == 0) {
             this.direction = Direction.RIGHT;
-        } else if (v.getX() == 0 && v.getY() < 0) {
+        } else if (v.getX() <= 0 && v.getY() == 0) {
             this.direction = Direction.LEFT;
-        }
-        double degree = Math.toDegrees(Math.atan(v.getY() / v.getX()));
-        if (degree > CRITICAL_UP_RIGHT && degree < CRITICAL_DOWN_RIGHT) {
-            this.direction = Direction.RIGHT;
-        } else if (degree > CRITICAL_DOWN_LEFT && degree < CRITICAL_UP_LEFT) {
-            this.direction = Direction.LEFT;
-        } else if (degree >= CRITICAL_DOWN_RIGHT && degree <= CRITICAL_DOWN_LEFT) {
-            this.direction = Direction.UP;
-        } else {
+        } else if (v.getY() > 0) {
             this.direction = Direction.DOWN;
+        } else {
+            this.direction = Direction.UP;
         }
     }
     /**
