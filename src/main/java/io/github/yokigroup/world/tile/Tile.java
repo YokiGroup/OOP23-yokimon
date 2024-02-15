@@ -4,6 +4,7 @@ import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.world.gen.TileDirections;
 
 import java.util.Set;
 
@@ -33,6 +34,12 @@ public interface Tile {
      * Runs the update method on all the entities on the tile.
      */
     void updateEntities();
+
+    /**
+     *
+     * @return The connected directions of the tile.
+     */
+    Set<TileDirections> getAdjacencies();
 
     @Override
     boolean equals(Object other);

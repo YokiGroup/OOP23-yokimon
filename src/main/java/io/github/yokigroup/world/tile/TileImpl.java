@@ -2,6 +2,7 @@ package io.github.yokigroup.world.tile;
 
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.world.gen.TileDirections;
 
 import java.util.Objects;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
  */
 class TileImpl implements Tile {
     private final int id;
+    private final Set<TileDirections> adjacencies;
     private final Set<Hitbox> hitboxes;
     private final Set<Entity> entities;
 
@@ -19,14 +21,16 @@ class TileImpl implements Tile {
      * @param id The id of the tile.
      * @param hitboxes The invisible walls in a tile.
      */
-    public TileImpl(final int id, final Set<Hitbox> hitboxes, final Set<Entity> entities) {
+    public TileImpl(final int id, final Set<TileDirections> adjacencies, final Set<Hitbox> hitboxes, final Set<Entity> entities) {
         if (hitboxes == null) {
             throw new IllegalArgumentException("The hitboxes set is null.");
-        }
-        if (entities == null) {
+        } else if (entities == null) {
+            throw new IllegalArgumentException("The entities set is null.");
+        } else if (adjacencies == null) {
             throw new IllegalArgumentException("The entities set is null.");
         }
         this.id = id;
+        this.adjacencies = Set.copyOf(adjacencies);
         this.hitboxes = Set.copyOf(hitboxes);
         this.entities = Set.copyOf(entities);
     }
@@ -52,6 +56,11 @@ class TileImpl implements Tile {
     }
 
     @Override
+    public Set<TileDirections> getAdjacencies() {
+        return Set.copyOf(this.adjacencies);
+    }
+
+    @Override
     public final boolean equals(final Object o) {
         if (this == o) {
             return true;
@@ -60,11 +69,12 @@ class TileImpl implements Tile {
             return false;
         }
         final TileImpl tile = (TileImpl) o;
-        return this.id == tile.id && Objects.equals(hitboxes, tile.hitboxes) && Objects.equals(entities, tile.entities);
+        return this.id == tile.id && Objects.equals(hitboxes, tile.hitboxes)
+                && Objects.equals(entities, tile.entities) && Objects.equals(adjacencies, tile.adjacencies);
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(id, hitboxes, entities);
+        return Objects.hash(id, hitboxes, adjacencies, entities);
     }
 }
