@@ -44,17 +44,23 @@ public class PositionImpl implements Position{
         return new PositionImpl(this.pos.plus(vector));
     }
 
+    /**
+     * Return true if the position passed is correct in the current tile
+     * false if it's out of range of the map.
+     * @param messageHandler handler for messages
+     * @return boolean
+     */
     @Override
     public final boolean isValid(final MessageHandler messageHandler) {
         Objects.requireNonNull(messageHandler, "MessageHandler was null");
-        messageHandler.handle(GameMapSubmodule.class, map -> {
+        return messageHandler.handle(GameMapSubmodule.class, map -> {
             if (map.getGameMap().getTileDimensions().x() < this.pos.getY() || this.pos.getX() < 0
                 || map.getGameMap().getTileDimensions().y() < this.pos.getY() || this.pos.getY() < 0) {
-                //TODO
+                return false;
             }
-
+            return true;
         });
-        return true;
+
     }
 
     /**
