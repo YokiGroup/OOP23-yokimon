@@ -10,7 +10,7 @@ import java.util.Map;
  * Contains tiles, their entities and the player world position.
  * Allows the player to switch screens (tiles) by walking around.
  */
-public class GameMapImpl implements GameMap {
+class GameMapImpl implements GameMap {
     private final Map<Pair<Integer, Integer>, Tile> tileMap;
     private final Pair<Integer, Integer> mapDimensions;
     private Pair<Integer, Integer> playerTileMapPosition;
