@@ -62,7 +62,7 @@ public class TileLoader extends IdJsonLoader<Tile>{
     }
 
     private Tile getTileAt(String name) {
-        return new TileImpl(getHitboxes(name), getSpawnPositions(name));
+        return new TileImpl(name.equals("home") ? -1 : Integer.parseInt(name), getHitboxes(name), getSpawnPositions(name));
     }
 
     public Tile getHomeTime() {

@@ -18,7 +18,7 @@ class AttackLoaderTest {
     @Test
     void load() {
         final int attack_id = 1;
-        final String expectedName = "ULTRA COLPO FOLGORANTE DISTRUTTIVO";
+        final String expectedName = "ULTRA COLPO FOLGORANTE DISTRUTTIVO DI MASSA";
         final Color expectedColor = Color.PURPLE;
         final Attack.Effect expectedEffect = Attack.Effect.NONE;
         final int expectedPower = 9001;

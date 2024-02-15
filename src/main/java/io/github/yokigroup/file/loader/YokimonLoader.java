@@ -56,6 +56,6 @@ public final class YokimonLoader extends IdJsonLoader<Yokimon> {
             );
         });
 
-        return new YokimonImpl(name, color, baseStats, growthRate, learnableMoves);
+        return new YokimonImpl(id, name, color, baseStats, growthRate, learnableMoves);
     }
 }

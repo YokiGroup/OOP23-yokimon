@@ -7,6 +7,7 @@ import java.util.Objects;
  * It provides methods to manipulate and manage Attack objects.
  */
 public class AttackImpl implements Attack {
+    private final int id;
     private final String name;
     private final Color color;
     private final int power;
@@ -14,13 +15,16 @@ public class AttackImpl implements Attack {
 
     /**
      * Constructs an AttackImpl object with the specified attributes.
+     * @param id id of the attack
      * @param name The name of the Attack.
      * @param color The color of the Attack.
      * @param power The power of the Attack.
      * @param effect The secondary effect of the Attack.
+     *
      */
     //Objects.requireNonNull(, " passed was null")
-    public AttackImpl(final String name, final Color color, final int power, final Effect effect) {
+    public AttackImpl(final int id, final String name, final Color color, final int power, final Effect effect) {
+        this.id = id;
         this.name = name;
         this.color = Objects.requireNonNull(color, "color passed was null");
         this.power = power;
@@ -32,8 +36,13 @@ public class AttackImpl implements Attack {
      * @param name The name of the Attack.
      * @param color The color of the Attack.
      */
-    public AttackImpl(final String name, final Color color) {
-        this(name, color, 100, null);
+    public AttackImpl(final int id, final String name, final Color color) {
+        this(id, name, color, 100, Effect.NONE);
+    }
+
+    @Override
+    public int getId() {
+        return 0;
     }
 
     @Override
@@ -54,5 +63,18 @@ public class AttackImpl implements Attack {
     @Override
     public final Effect getEffectID() {
         return this.effect;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AttackImpl attack = (AttackImpl) o;
+        return id == attack.id && power == attack.power && Objects.equals(name, attack.name) && color == attack.color && effect == attack.effect;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, color, power, effect);
     }
 }

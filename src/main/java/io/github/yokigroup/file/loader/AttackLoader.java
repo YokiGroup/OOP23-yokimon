@@ -25,6 +25,6 @@ public class AttackLoader extends IdJsonLoader<Attack> {
         Color color = Color.valueOf(parser.read(String.format(ATTACK_COLOR_JPATHF, id)));
         Attack.Effect effect = Attack.Effect.valueOf(parser.read(String.format(ATTACK_EFFECT_JPATHF, id)));
 
-        return new AttackImpl(name, color, power, effect);
+        return new AttackImpl(id, name, color, power, effect);
     }
 }
