@@ -35,15 +35,15 @@ class SubmoduleMapImplTest {
         };
 
         map = new SubmoduleMapImpl();
-        pSub = new PartySubmodule(handler);
-        fSub = new FightSubmodule(handler);
+        pSub = new PartySubmoduleImpl(handler);
+        fSub = new FightSubmoduleImpl(handler);
         subModuleTestSet = Set.of(pSub, fSub);
     }
 
     private void retrievalAsserts() {
         assertEquals(Optional.of(pSub), map.get(pSub.getClass()));
         assertEquals(Optional.of(fSub), map.get(fSub.getClass()));
-        assertEquals(Optional.empty(), map.get(PlayerCharacterSubmodule.class));
+        assertEquals(Optional.empty(), map.get(PlayerCharacterSubmoduleImpl.class));
     }
 
     @Test

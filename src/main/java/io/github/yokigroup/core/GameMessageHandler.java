@@ -1,14 +1,7 @@
 package io.github.yokigroup.core;
 
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.FightSubmodule;
-import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.event.submodule.PartySubmodule;
-import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
-import io.github.yokigroup.event.submodule.Submodule;
-import io.github.yokigroup.event.submodule.SubmoduleMap;
-import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
-import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.event.submodule.*;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -31,10 +24,10 @@ public class GameMessageHandler implements MessageHandler {
     private SubmoduleMap initSubmodules() {
         SubmoduleMap retMap = new SubmoduleMapImpl();
         List<Class<? extends Submodule>> submoduleTypes = List.of(
-                PartySubmodule.class,
-                PlayerCharacterSubmodule.class,
-                FightSubmodule.class,
-                GameMapSubmodule.class
+                PartySubmoduleImpl.class,
+                PlayerCharacterSubmoduleImpl.class,
+                FightSubmoduleImpl.class,
+                GameMapSubmoduleImpl.class
         );
 
         submoduleTypes.forEach(s -> {
