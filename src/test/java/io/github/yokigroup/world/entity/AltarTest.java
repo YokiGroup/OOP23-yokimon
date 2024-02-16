@@ -22,22 +22,24 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AltarTest {
-    private static YokimonLoader loader;
-    private static MessageHandler messageHandler;
-    private static GameMessageHandler gameMessageHandler;
+    private static MessageHandler messageHandler = new GameMessageHandler();
+    private TestMessageHandler testMeg;
+//    private static GameMessageHandler gameMessageHandler;
 
     private static class TestMessageHandler extends GameMessageHandler {
         private static class TestSubmodule extends GameMapSubmodule {
-            Vector2 v = new Vector2Impl(50, 50);
+            Vector2 v = new Vector2Impl(30, 0);
             Position altarPos = new PositionImpl(v);
             Tile tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, altarPos)
                     .build(messageHandler);
-            GameMap map = new GameMapBuilderImpl().build(messageHandler);
+
+
 
             public TestSubmodule(MessageHandler handler) {
                 super(handler);
@@ -45,40 +47,52 @@ class AltarTest {
 
             @Override
             public GameMap getGameMap() {
-                return map;
+                return null;
             }
 
             @Override
             public Set<Hitbox> getHitboxesOnCurrentTile() {
-                return map.getPlayerTile().getHitboxes();
+                return tile.getHitboxes();
             }
 
             @Override
             public Set<Entity> getEntitiesOnCurrentTile() {
-                return map.getPlayerTile().getEntities();
+                return tile.getEntities();
             }
         }
 
         @Override
         protected Set<Class<? extends Submodule>> getSubmoduleTypes() {
             return Set.of(
-
+                    PlayerCharacterSubmoduleImpl.class,
+                    GameMapSubmoduleImpl.class
             );
         }
     }
 
     @BeforeEach
     void setUp() {
-        loader = new YokimonLoader();
-        MessageHandler messageHandler = new GameMessageHandler();
-        GameMessageHandler gameMessageHandler = new GameMessageHandler();
+        testMeg = new TestMessageHandler();
     }
     @Test
     void getState() {
 
+        System.out.println("sasso");
+        testMeg.handle(GameMapSubmoduleImpl.class, map -> {
+           for(Entity entity : map.getEntitiesOnCurrentTile()) {
+               if ( entity instanceof Altar ) {
+                   Altar altar = (Altar) entity;
+                    testMeg.handle(PlayerCharacterSubmoduleImpl.class, player -> {
+                        assertEquals(Altar.AltarState.POWERED,  altar.getState());
+                        altar.update();
+                        assertEquals(Altar.AltarState.POWERED,  altar.getState());
+                        assertEquals(Altar.AltarState.POWERED,  altar.getState());
 
-        //altar.update();
-        //assertEquals(Altar.AltarState.USED, altar.getState());
+
+                   });
+               }
+           }
+        });
 
     }
 
