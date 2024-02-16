@@ -20,7 +20,7 @@ import java.util.Set;
 
 public class TileLoader extends IdJsonLoader<TileBuilder> {
     private static final String TILE_JSON_RPATH = "tiles.json";
-    private static final String TILE_SHAPE_JPATHF = "$.%d.shape[*]";
+    private static final String TILE_SHAPE_JPATHF = "$.%s.shape[*]";
 
     public TileLoader() {
         super(TILE_JSON_RPATH);
@@ -77,7 +77,7 @@ public class TileLoader extends IdJsonLoader<TileBuilder> {
     }
 
     private Set<Direction> getTileDirs(final int id) {
-        List<String> rawTileDirs = getParser().read(String.format(TILE_SHAPE_JPATHF, id));
+        List<String> rawTileDirs = getParser().read(String.format(TILE_SHAPE_JPATHF, id == -1 ? "home" : "" + id));
         Set<Direction> tileDirs = new HashSet<>();
 
         rawTileDirs.forEach(d -> tileDirs.add(Direction.valueOf(d)));
