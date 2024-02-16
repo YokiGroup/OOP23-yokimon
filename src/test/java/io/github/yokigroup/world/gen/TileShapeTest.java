@@ -1,8 +1,12 @@
 package io.github.yokigroup.world.gen;
 
+import io.github.yokigroup.core.GameMessageHandler;
+import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.WeightedPool;
+import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.tile.Tile;
-import io.github.yokigroup.world.tile.TileImpl;
+import io.github.yokigroup.world.tile.TileBuilder;
+import io.github.yokigroup.world.tile.TileBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,18 +15,18 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TileShapeTest {
-    private Set<TileDirections> tileShapeSet1;
-    private Set<TileDirections> tileShapeSet2;
-    private Set<TileDirections> tileShapeSet3;
+    private Set<Direction> tileShapeSet1;
+    private Set<Direction> tileShapeSet2;
+    private Set<Direction> tileShapeSet3;
     private TileShape tileShape1;
     private TileShape tileShape2;
     private TileShape tileShape3;
 
     @BeforeEach
     public void init() {
-        tileShapeSet1 = Set.of(TileDirections.UP, TileDirections.DOWN);
-        tileShapeSet2 = Set.of(TileDirections.UP, TileDirections.RIGHT);
-        tileShapeSet3 = Set.of(TileDirections.UP, TileDirections.RIGHT, TileDirections.DOWN);
+        tileShapeSet1 = Set.of(Direction.UP, Direction.DOWN);
+        tileShapeSet2 = Set.of(Direction.UP, Direction.RIGHT);
+        tileShapeSet3 = Set.of(Direction.UP, Direction.RIGHT, Direction.DOWN);
         tileShape1 = new TileShapeImpl(Set.of(), tileShapeSet1);
         tileShape2 = new TileShapeImpl(Set.of(), tileShapeSet2);
         tileShape3 = new TileShapeImpl(Set.of(), tileShapeSet3);
@@ -30,8 +34,11 @@ class TileShapeTest {
 
     @Test
     void testGetTiles() {
-        tileShape1 = new TileShapeImpl(Set.of(new TileImpl(0), new TileImpl(1)), tileShapeSet1);
-        final WeightedPool<Tile> tileSet = tileShape1.getTiles();
+        MessageHandler messageHandler = new GameMessageHandler();
+        final var tile1 = new TileBuilderImpl(0);
+        final var tile2 = new TileBuilderImpl(1);
+        tileShape1 = new TileShapeImpl(Set.of(tile1, tile2), tileShapeSet1);
+        final WeightedPool<TileBuilder> tileSet = tileShape1.getTiles();
         assertEquals(2, tileSet.size());
         tileSet.removeRandomizedElement();
         tileSet.removeRandomizedElement();

@@ -3,10 +3,10 @@ package io.github.yokigroup.event.submodule;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.GameMap;
-import io.github.yokigroup.world.GameMapImpl;
+import io.github.yokigroup.world.GameMapBuilder;
+import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
-import io.github.yokigroup.world.tile.Tile;
 
 import java.util.Set;
 
@@ -23,7 +23,13 @@ public final class GameMapSubmodule extends Submodule {
      */
     public GameMapSubmodule(final MessageHandler handler) {
         super(handler);
-        this.gameMap = new GameMapImpl(MAP_DIM);
+        final Pair<Integer, Integer> playerTilePos = new Pair<>(MAP_DIM.x()/2+1, MAP_DIM.y()/2+1);
+        final GameMapBuilder builder = new GameMapBuilderImpl();
+
+        builder.setMapDimensions(MAP_DIM);
+        builder.setPlayerTileMapPosition(playerTilePos);
+        builder.setHomeTileAt(playerTilePos);
+        this.gameMap = builder.build(handler);
     }
 
     /**
@@ -44,9 +50,7 @@ public final class GameMapSubmodule extends Submodule {
      * Gets the entities contained in the Tile the player's currently on.
      */
     public Set<Entity> getEntitiesOnCurrentTile() {
-        // FIXME consider whether this should be here
-        // TODO implement
-        return Set.of();
+        return gameMap.getPlayerTile().getEntities();
     }
 
     @Override

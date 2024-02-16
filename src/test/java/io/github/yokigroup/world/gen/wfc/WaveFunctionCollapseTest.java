@@ -1,7 +1,7 @@
 package io.github.yokigroup.world.gen.wfc;
 
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.world.gen.TileDirections;
+import io.github.yokigroup.world.Direction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,20 +17,20 @@ class WaveFunctionCollapseTest {
     private static final int WIDTH = 10;
     private static final int HEIGHT = 10;
     private WaveFunctionCollapse wfc;
-    private Map<String, Set<TileDirections>> shpDic;
+    private Map<String, Set<Direction>> shpDic;
 
     @BeforeEach
     public void init() {
         shpDic = new HashMap<>();
-        shpDic.put("UDLR", Set.of(TileDirections.UP, TileDirections.DOWN, TileDirections.LEFT, TileDirections.RIGHT));
-        shpDic.put("DLR", Set.of(TileDirections.DOWN, TileDirections.LEFT, TileDirections.RIGHT));
-        shpDic.put("ULR", Set.of(TileDirections.UP, TileDirections.LEFT, TileDirections.RIGHT));
-        shpDic.put("UDL", Set.of(TileDirections.UP, TileDirections.DOWN, TileDirections.LEFT));
-        shpDic.put("UDR", Set.of(TileDirections.UP, TileDirections.DOWN, TileDirections.RIGHT));
-        shpDic.put("UL", Set.of(TileDirections.UP, TileDirections.LEFT));
-        shpDic.put("UR", Set.of(TileDirections.UP, TileDirections.RIGHT));
-        shpDic.put("DL", Set.of(TileDirections.DOWN, TileDirections.LEFT));
-        shpDic.put("DR", Set.of(TileDirections.DOWN, TileDirections.RIGHT));
+        shpDic.put("UDLR", Set.of(Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT));
+        shpDic.put("DLR", Set.of(Direction.DOWN, Direction.LEFT, Direction.RIGHT));
+        shpDic.put("ULR", Set.of(Direction.UP, Direction.LEFT, Direction.RIGHT));
+        shpDic.put("UDL", Set.of(Direction.UP, Direction.DOWN, Direction.LEFT));
+        shpDic.put("UDR", Set.of(Direction.UP, Direction.DOWN, Direction.RIGHT));
+        shpDic.put("UL", Set.of(Direction.UP, Direction.LEFT));
+        shpDic.put("UR", Set.of(Direction.UP, Direction.RIGHT));
+        shpDic.put("DL", Set.of(Direction.DOWN, Direction.LEFT));
+        shpDic.put("DR", Set.of(Direction.DOWN, Direction.RIGHT));
         wfc = new WaveFunctionCollapseImpl(new Pair<>(WIDTH, HEIGHT), new HashSet<>(shpDic.values()));
     }
 

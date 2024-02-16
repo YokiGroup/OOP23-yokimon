@@ -1,12 +1,8 @@
 package io.github.yokigroup.world;
 
-import io.github.yokigroup.file.loader.TileShapeLoader;
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.world.gen.WFCWrapper;
-import io.github.yokigroup.world.gen.WFCWrapperImpl;
 import io.github.yokigroup.world.tile.Tile;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,28 +10,22 @@ import java.util.Map;
  * Contains tiles, their entities and the player world position.
  * Allows the player to switch screens (tiles) by walking around.
  */
-public class GameMapImpl implements GameMap {
-    private final TileShapeLoader tileShapeLoader;
+class GameMapImpl implements GameMap {
     private final Map<Pair<Integer, Integer>, Tile> tileMap;
-    private Pair<Integer, Integer> worldPlayerPosition;
+    private final Pair<Integer, Integer> mapDimensions;
+    private Pair<Integer, Integer> playerTileMapPosition;
 
     /**
      * Initializes the game map through the usage of the wave function collapse algorithm.
      * @param mapDimensions The mapDimensions of the map in tiles.
      */
-    public GameMapImpl(final Pair<Integer, Integer> mapDimensions) {
-        this.tileShapeLoader = new TileShapeLoader();
-        final WFCWrapper wfc = new WFCWrapperImpl(mapDimensions, tileShapeLoader.getAll());
-        this.tileMap = new HashMap<>();
-        for (int i = 0; i < mapDimensions.x(); i++) {
-            for (int j = 0; j < mapDimensions.y(); j++) {
-                final Pair<Integer, Integer> pos = new Pair<>(i, j);
-                final Tile mapTile = wfc.getTileAt(pos);
-                // TODO: maybe spawn entities here.
-                this.tileMap.put(pos, mapTile);
-            }
+    public GameMapImpl(final Pair<Integer, Integer> mapDimensions, final Map<Pair<Integer, Integer>, Tile> tileMap, final Pair<Integer, Integer> playerTileMapPosition) {
+        if (tileMap == null) {
+            throw new IllegalArgumentException("The passed TileMap was null");
         }
-        this.worldPlayerPosition = new Pair<>(mapDimensions.x() / 2, mapDimensions.y() / 2);
+        this.playerTileMapPosition = playerTileMapPosition;
+        this.mapDimensions = mapDimensions;
+        this.tileMap = Map.copyOf(tileMap);
     }
 
     @Override
@@ -44,12 +34,31 @@ public class GameMapImpl implements GameMap {
     }
 
     @Override
-    public final Pair<Integer, Integer> getPlayerWorldPosition() {
-        return new Pair<>(this.worldPlayerPosition.x(), this.worldPlayerPosition.y());
+    public final Pair<Integer, Integer> getPlayerTileMapPosition() {
+        return new Pair<>(this.playerTileMapPosition.x(), this.playerTileMapPosition.y());
     }
 
     @Override
     public final Tile getPlayerTile() {
-        return getTileAt(this.worldPlayerPosition);
+        return getTileAt(this.playerTileMapPosition);
+    }
+
+    @Override
+    public final boolean movePlayerTileMapPosition(final Direction direction) {
+        for (final Direction dir : Direction.values()) {
+            if (getPlayerTile().getAdjacencies().contains(dir)) {
+                this.playerTileMapPosition = new Pair<>(
+                        this.playerTileMapPosition.x() + dir.getOffset().x(),
+                        this.playerTileMapPosition.y() + dir.getOffset().y()
+                );
+                if (playerTileMapPosition.x() < 0 || playerTileMapPosition.y() < 0
+                        || playerTileMapPosition.x() >= mapDimensions.x() || playerTileMapPosition.y() >= mapDimensions.y()) {
+                    throw new IllegalStateException("The player went out of bounds ("
+                            + playerTileMapPosition.y() + " " + playerTileMapPosition.y() + ").");
+                }
+                return true;
+            }
+        }
+        return false;
     }
 }
