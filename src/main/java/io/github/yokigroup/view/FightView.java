@@ -28,18 +28,21 @@ public final class FightView extends Application {
 
         Scene scene = new Scene(root_draft, SCREEN_WIDTH, SCREEN_HEIGTH);
 
-        //BACKGROUND        TODO MUST REPLACE URL WITH PNG
-        BackgroundImage backgroundImage= new BackgroundImage(new Image(BACKGROUND_URL,SCREEN_WIDTH,SCREEN_HEIGTH,false,true),
-                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
-        root_draft.setBackground(new Background(backgroundImage));
-
+        setBackground();
         setHealthBars();
 
         //FINAL SETUPS
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fight");
         primaryStage.show();
+    }
+
+    // TODO MUST REPLACE URL WITH PNG
+    private void setBackground() {
+        BackgroundImage backgroundImage= new BackgroundImage(new Image(BACKGROUND_URL,SCREEN_WIDTH,SCREEN_HEIGTH,false,true),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        root_draft.setBackground(new Background(backgroundImage));
     }
 
     private void setHealthBars() {
