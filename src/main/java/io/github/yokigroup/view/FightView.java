@@ -22,20 +22,22 @@ public final class FightView extends Application {
     private static final int HPBAR_LENGTH = 200;
     private static final int HPBAR_HEIGTH = 40;
     private static final int DELTA = 20;
+    private static Pane root_draft = new Pane();
     private static final String BACKGROUND_URL = "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/204364595/original/86db6005cd51b4f60e71cca277f603a82cf5646a/draw-a-pixel-pokemon-battle-background.png";
+    private static final String BACKGROUND_PNG = "C:/Users/Marilia/Downloads/forest-background-5th-style-pass-portfolio-edit.png";
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
 
-        //THE BACKGROUND IS VISIBLE
-        var root_draft = new Pane();
         Scene scene = new Scene(root_draft, SCREEN_WIDTH, SCREEN_HEIGTH);
 
+        //BACKGROUND        TODO MUST REPLACE URL WITH PNG
         BackgroundImage backgroundImage= new BackgroundImage(new Image(BACKGROUND_URL,SCREEN_WIDTH,SCREEN_HEIGTH,false,true),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         root_draft.setBackground(new Background(backgroundImage));
 
+        //HEALTHBARS
         final Rectangle healthbar1 = new Rectangle(HPBAR_LENGTH, HPBAR_HEIGTH, Color.DARKGREY);
         healthbar1.setX(DELTA);
         healthbar1.setY(DELTA);
@@ -51,43 +53,21 @@ public final class FightView extends Application {
         primaryStage.show();
     }
 
-    /**
-     * Program's entry point.
-     * @param args
-     */
     public static void run(final String... args) {
         launch(args);
     }
 
-    // Defining the main methods directly within JavaFXApp may be problematic:
-    // public static void main(final String[] args) {
-    //        run();
-    // }
-
-    /**
-     * Entry point's class.
-     */
     public static final class Main {
         private Main() {
             // the constructor will never be called directly.
         }
 
-        /**
-         * Program's entry point.
-         * @param args
-         */
         public static void main(final String... args) {
             Application.launch(JavaFXApp.class, args);
-            /*
-            The following line raises: Error: class io.github.yokigroup.view.JavaFXApp$Main
-            is not a subclass of javafx.application.Application
-            Because if you do not provide the Application subclass to launch() it will consider the enclosing class)
-            */
-            // JavaFXApp.launch(args);
-            // Whereas the following would do just fine:
             JavaFXApp.run(args);
         }
 
+        //TODO COMPLETE THIS AND DEBUG
         public void drawHPbars(final Fight fight) {
 
             Rectangle healthbarMyYokimon = new Rectangle(200.0, 50.0, Color.GREY);
@@ -101,8 +81,8 @@ public final class FightView extends Application {
             healthbarMyYokimon.widthProperty().bind(b1);
             healthbarOppYokimon.widthProperty().bind(b2);
 
-            //mainPane.getChildren().add(healthbarMyYokimon);
-            //mainPane.getChildren().add(healthbarOppYokimon);
+            root_draft.getChildren().add(healthbarMyYokimon);
+            root_draft.getChildren().add(healthbarOppYokimon);
         }
     }
 }
