@@ -36,7 +36,7 @@ public class GameMessageHandler implements MessageHandler {
      * @return Initialized SubModuleMap
      * @see SubmoduleMap
      */
-    private final SubmoduleMap initSubmodules() {
+    private SubmoduleMap initSubmodules() {
         SubmoduleMap retMap = new SubmoduleMapImpl();
         final var submoduleTypes = getSubmoduleTypes();
 
