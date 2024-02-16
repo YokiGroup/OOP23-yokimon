@@ -36,9 +36,8 @@ class AltarTest {
         private static class TestSubmodule extends GameMapSubmodule {
             Vector2 v = new Vector2Impl(30, 0);
             Position altarPos = new PositionImpl(v);
-            Tile tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, altarPos)
-                    .build(messageHandler);
-
+            TileBuilder tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, altarPos);
+            GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0,0)).build(messageHandler);
 
 
             public TestSubmodule(MessageHandler handler) {
@@ -47,17 +46,17 @@ class AltarTest {
 
             @Override
             public GameMap getGameMap() {
-                return null;
+                return map;
             }
 
             @Override
             public Set<Hitbox> getHitboxesOnCurrentTile() {
-                return tile.getHitboxes();
+                return map.getPlayerTile().getHitboxes();
             }
 
             @Override
             public Set<Entity> getEntitiesOnCurrentTile() {
-                return tile.getEntities();
+                return map.getPlayerTile().getEntities();
             }
         }
 
