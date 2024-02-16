@@ -25,6 +25,7 @@ public final class FightImpl implements Fight {
     private static final int TOPLIMIT_FAIL = 8;
     private static final int TOPLIMIT_WEAK = 18;
     private static final int TOPLIMIT_GOOD = 30;
+    private static final int TOTAL = 100;
 
     /* parties */
     private final List<Yokimon> myYokimons;
@@ -170,6 +171,11 @@ public final class FightImpl implements Fight {
     @Override
     public State getState() {
         return this.state;
+    }
+
+    @Override
+    public double getHPPercentage(final Yokimon yokimon){
+        return (double) yokimon.getActualHp() * TOTAL / yokimon.getMaxHp();
     }
 
 }
