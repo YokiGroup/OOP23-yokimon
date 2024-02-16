@@ -15,6 +15,7 @@ import java.util.Optional;
  */
 public class Player extends People {
 
+    private static final double SCALE = 10;
     /**
      * Constructor of the player.
      * @param pos initial Pos
@@ -67,6 +68,6 @@ public class Player extends People {
             return;
         }
         resetPosition();
-        move(dir);
+        move(dir.scale(SCALE));
     }
 }

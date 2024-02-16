@@ -138,7 +138,7 @@
   "4": {
     "name": "Kitsune",
     "growthRate": "MEDIUM",
-    "color": "WHITE",
+    "color": "PURPLE",
     "stats": {
       "ATK": 90,
       "DEF": 90,

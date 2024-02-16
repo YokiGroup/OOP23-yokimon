@@ -26,7 +26,7 @@ class PeopleTest {
     @Test
     void toDirection() {
         Position playerPos = new PositionImpl(new Vector2Impl(0, 0));
-        Enemy en = new Enemy(0, playerPos, messageHandler);
+        Enemy en = new Enemy(playerPos, messageHandler);
         Vector2 vector = new Vector2Impl(1, 0);
         en.toDirection(vector);
         assertEquals(People.Direction.RIGHT, en.getDirection());

@@ -5,7 +5,8 @@ import java.util.Objects;
 /**
  * An implementation of the binding to a vector2 class.
  */
-public class Vector2Impl implements Vector2 {
+public final class Vector2Impl implements Vector2 {
+    private static final String ERROR_STRING = "The other vector was null.";
     private final org.dyn4j.geometry.Vector2 vector;
 
     /**
@@ -33,58 +34,73 @@ public class Vector2Impl implements Vector2 {
     }
 
     @Override
-    public final double getX() {
+    public double getX() {
         return vector.x;
     }
 
     @Override
-    public final double getY() {
+    public double getY() {
         return vector.y;
     }
 
     @Override
-    public final Vector2 plus(final Vector2 other) {
+    public Vector2 plus(final Vector2 other) {
+        if (other == null) {
+            throw new IllegalArgumentException(ERROR_STRING);
+        }
         return new Vector2Impl(this.getX() + other.getX(), this.getY() + other.getY());
     }
 
     @Override
-    public final Vector2 minus(final Vector2 other) {
+    public Vector2 minus(final Vector2 other) {
+        if (other == null) {
+            throw new IllegalArgumentException(ERROR_STRING);
+        }
         return new Vector2Impl(this.getX() - other.getX(), this.getY() - other.getY());
     }
 
     @Override
-    public final Vector2 times(final Vector2 other) {
+    public Vector2 times(final Vector2 other) {
+        if (other == null) {
+            throw new IllegalArgumentException(ERROR_STRING);
+        }
         return new Vector2Impl(this.getX() * other.getX(), this.getY() * other.getY());
     }
 
     @Override
-    public final Vector2 divide(final Vector2 other) {
+    public Vector2 divide(final Vector2 other) {
+        if (other == null) {
+            throw new IllegalArgumentException(ERROR_STRING);
+        }
         return new Vector2Impl(this.getX() / other.getX(), this.getY() / other.getY());
     }
 
     @Override
-    public final Vector2 scale(final double value) {
+    public Vector2 scale(final double value) {
         return new Vector2Impl(this.getX() * value, this.getY() * value);
     }
 
     @Override
-    public final Vector2 normalize() {
+    public Vector2 normalize() {
         final org.dyn4j.geometry.Vector2 normalized = this.vector.getNormalized();
         return new Vector2Impl(normalized.x, normalized.y);
     }
 
     @Override
-    public final double length() {
+    public double length() {
         return this.vector.getMagnitude();
     }
 
     @Override
-    public final double dot(final Vector2 other) {
+    public double dot(final Vector2 other) {
+        if (other == null) {
+            throw new IllegalArgumentException(ERROR_STRING);
+        }
         return this.vector.dot(((Vector2Impl) other).getVector());
     }
 
     @Override
-    public final boolean equals(final Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -96,7 +112,7 @@ public class Vector2Impl implements Vector2 {
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         return Objects.hash(vector);
     }
 
