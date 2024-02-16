@@ -21,14 +21,13 @@ public class Altar extends Entity {
     private static final double HITBOX_SIDE = 20;
     /**
      * Constructs an Altar object with the specified attributes.
-     * @param id id of the altar
      * @param pos The position of the Altar
      * @param yokimon The Yokimon to give at the first interaction
      * @param messageHandler Message handler used to handle events
      */
-    public Altar(final int id, final Position pos,
+    public Altar(final Position pos,
                  final Yokimon yokimon, final MessageHandler messageHandler) {
-        super(id, pos, new RectangularHitbox(pos.getPosition(),
+        super(pos, new RectangularHitbox(pos.getPosition(),
                 new Vector2Impl(HITBOX_SIDE, HITBOX_SIDE)), messageHandler);
         this.gift = new YokimonImpl(yokimon);
         this.state = AltarState.POWERED;

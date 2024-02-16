@@ -47,12 +47,11 @@ public class Enemy extends People {
     private State state;
     /**
      * Constructs an Enemy object with the specified attributes.
-     * @param id id of the enemy
      * @param pos The position of the Enemy
      * @param messageHandler handle for events
      */
-    public Enemy(final int id, final Position pos, final MessageHandler messageHandler) {
-        super(id, pos, messageHandler);
+    public Enemy(final Position pos, final MessageHandler messageHandler) {
+        super(pos, messageHandler);
         this.state = State.WANDER;
 
     }

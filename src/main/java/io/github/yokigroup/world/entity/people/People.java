@@ -42,13 +42,12 @@ public abstract class People extends Entity {
 
     /**
      * Constructs a People object with the specified attributes.
-     * @param id of the people
      * @param pos The position of the People
      * @param messageHandler handler of events
      */
-    public People(final int id, final Position pos,
+    public People(final Position pos,
                   final MessageHandler messageHandler) {
-        super(id, pos, new CircularHitbox(pos.getPosition(), HITBOX_RADIUS), messageHandler);
+        super(pos, new CircularHitbox(pos.getPosition(), HITBOX_RADIUS), messageHandler);
         this.direction = DEFAULT_DIRECTION;
         this.active = true;
         this.initialPos = pos;

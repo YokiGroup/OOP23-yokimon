@@ -11,32 +11,20 @@ import java.util.Objects;
  */
 public abstract class Entity {
 
-
     private Position pos;
     private Hitbox hitBox;
     private final MessageHandler messageHandler;
-    private final int id;
 
     /**
      * Constructs an Entity object with the specified attributes.
-     * @param id id of the entity
      * @param pos The position of the Entity
      * @param hitBox The hitBox of the Entity
      * @param messageHandler handler for the events
      */
-    public Entity(final int id, final Position pos, final Hitbox hitBox, final MessageHandler messageHandler) {
+    public Entity(final Position pos, final Hitbox hitBox, final MessageHandler messageHandler) {
         this.messageHandler = messageHandler;
-        this.id = id;
         this.setHitBox(hitBox);
         this.setPos(pos);
-    }
-
-    /**
-     * Returns the entity id.
-     * @return int
-     */
-    public final int getId() {
-        return this.id;
     }
 
     /**
@@ -102,7 +90,7 @@ public abstract class Entity {
             return false;
         }
         Entity entity = (Entity) o;
-        return id == entity.id && Objects.equals(pos, entity.pos) && Objects.equals(hitBox, entity.hitBox);
+        return Objects.equals(pos, entity.pos) && Objects.equals(hitBox, entity.hitBox);
     }
 
     /**
@@ -111,6 +99,6 @@ public abstract class Entity {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(pos, hitBox, id);
+        return Objects.hash(pos, hitBox);
     }
 }
