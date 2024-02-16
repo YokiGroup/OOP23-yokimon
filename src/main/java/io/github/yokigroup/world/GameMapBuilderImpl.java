@@ -44,9 +44,14 @@ public class GameMapBuilderImpl implements GameMapBuilder {
     }
 
     @Override
-    public final GameMapBuilder putHomeTileAt(final Pair<Integer, Integer> position) {
-        this.tileMap.put(position, tileLoader.getHomeTile());
+    public GameMapBuilder putTileAt(TileBuilder tile, Pair<Integer, Integer> position) {
+        this.tileMap.put(position, tile);
         return this;
+    }
+
+    @Override
+    public final GameMapBuilder putHomeTileAt(final Pair<Integer, Integer> position) {
+        return this.putTileAt(tileLoader.getHomeTile(), position);
     }
 
     @Override

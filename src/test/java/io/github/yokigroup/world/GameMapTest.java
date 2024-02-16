@@ -31,15 +31,12 @@ class GameMapTest {
 
     @Test
     void testGetTileAt() {
-        // TODO: borks up and loads indefinitely???
-        /*
-        final Set<Tile> builtTiles = loader.getAll().values().stream()
-                .map(a -> a.build(messageHandler))
+        final Set<Integer> tileIds = loader.getAll().values().stream()
+                .map(a -> a.build(messageHandler).getId())
                 .collect(Collectors.toSet());
         assertEquals(loader.getHomeTile().build(messageHandler), map.getTileAt(new Pair<>(1, 1)));
-        assertTrue(builtTiles.contains(map.getTileAt(new Pair<>(1, 2))));
-        */
-        assertTrue(false);
+        assertTrue(tileIds.contains(map.getTileAt(new Pair<>(1, 2)).getId()));
+        assertTrue(tileIds.contains(map.getTileAt(new Pair<>(0, 3)).getId()));
     }
 
     @Test
