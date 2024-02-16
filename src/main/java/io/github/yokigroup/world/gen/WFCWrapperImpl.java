@@ -26,11 +26,10 @@ public class WFCWrapperImpl implements WFCWrapper {
      */
     public WFCWrapperImpl(final Pair<Integer, Integer> dimensions, final Set<TileShape> shapes) {
         this.tileShapes = Set.copyOf(shapes);
-        // TODO: filter duplicate shapes.
-        final Set<Set<Direction>> convertedShapes = this.tileShapes.stream()
+        final Set<Set<Direction>> wfcShapes = this.tileShapes.stream()
                 .map(TileShape::getPossibleDirections)
                 .collect(Collectors.toSet());
-        this.wfc = new WaveFunctionCollapseImpl(dimensions, convertedShapes);
+        this.wfc = new WaveFunctionCollapseImpl(dimensions, wfcShapes);
     }
 
     @Override
