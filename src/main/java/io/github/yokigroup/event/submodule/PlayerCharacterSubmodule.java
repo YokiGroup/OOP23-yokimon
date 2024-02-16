@@ -3,6 +3,7 @@ package io.github.yokigroup.event.submodule;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.world.entity.Position;
+import io.github.yokigroup.world.entity.PositionImpl;
 
 public abstract class PlayerCharacterSubmodule extends Submodule {
     public PlayerCharacterSubmodule(MessageHandler handler) {
@@ -28,11 +29,6 @@ public abstract class PlayerCharacterSubmodule extends Submodule {
      */
     public abstract void movePlayerBy(Vector2 delta);
 
-    @Override
-    public void process() {
-        // TODO collision check
-    }
-
     /**
      * THIS WILL BE REMOVED AS SOON AS GameMap IS FINISHED.
      */
@@ -53,5 +49,10 @@ public abstract class PlayerCharacterSubmodule extends Submodule {
          * Right direction.
          */
         RIGHT
+    }
+
+    @Override
+    public void update() {
+        // TODO collision check
     }
 }

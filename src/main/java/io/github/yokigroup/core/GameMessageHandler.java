@@ -1,12 +1,18 @@
 package io.github.yokigroup.core;
 
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.*;
+import io.github.yokigroup.event.submodule.FightSubmodule;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
+import io.github.yokigroup.event.submodule.PartySubmodule;
+import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
+import io.github.yokigroup.event.submodule.Submodule;
+import io.github.yokigroup.event.submodule.SubmoduleMap;
+import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 
 import java.lang.reflect.InvocationTargetException;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -16,19 +22,23 @@ import java.util.function.Function;
 public class GameMessageHandler implements MessageHandler {
     private final SubmoduleMap subModules;
 
+    protected Set<Class<? extends Submodule>> getSubmoduleTypes() {
+        return Set.of(
+                PartySubmodule.class,
+                PlayerCharacterSubmodule.class,
+                FightSubmodule.class,
+                GameMapSubmodule.class
+        );
+    }
+
     /**
      * Initializes game logic submodules.
      * @return Initialized SubModuleMap
      * @see SubmoduleMap
      */
-    private SubmoduleMap initSubmodules() {
+    private final SubmoduleMap initSubmodules() {
         SubmoduleMap retMap = new SubmoduleMapImpl();
-        List<Class<? extends Submodule>> submoduleTypes = List.of(
-                PartySubmoduleImpl.class,
-                PlayerCharacterSubmoduleImpl.class,
-                FightSubmoduleImpl.class,
-                GameMapSubmoduleImpl.class
-        );
+        final var submoduleTypes = getSubmoduleTypes();
 
         submoduleTypes.forEach(s -> {
             try {
@@ -64,5 +74,10 @@ public class GameMessageHandler implements MessageHandler {
             throw new IllegalArgumentException(this.getClass() + " does not contain submodule " + subModuleType);
         }
         return handler.apply(submodule.get());
+    }
+
+    @Override
+    public final void updateSubmodules() {
+        subModules.subModuleSet().forEach(Submodule::update);
     }
 }

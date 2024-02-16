@@ -19,10 +19,10 @@ class TileBuilderTest {
 
     @Test
     void tileBuilderTest() {
+        final MessageHandler messageHandler = new GameMessageHandler();
         final Hitbox circleA = new CircularHitbox(1.0d);
         final Hitbox circleB = new CircularHitbox(3.0d);
         final Hitbox rectA = new RectangularHitbox(new Vector2Impl(1.0d, 3.2d));
-        final MessageHandler messageHandler = new GameMessageHandler();
         final TileBuilder builderA = new TileBuilderImpl(0);
         final Tile tileA = builderA.build(messageHandler);
         assertEquals(0, tileA.getId());

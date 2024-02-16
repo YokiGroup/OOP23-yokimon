@@ -29,5 +29,5 @@ public abstract class Submodule {
     /**
      * to be called by the logic that integrates this submodule to let it process its state.
      */
-    public abstract void process();
+    public abstract void update();
 }
