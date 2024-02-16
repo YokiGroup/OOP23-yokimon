@@ -1,5 +1,6 @@
 package io.github.yokigroup.world.tile;
 
+import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.Submodule;
 import io.github.yokigroup.util.Vector2;
@@ -73,17 +74,7 @@ class TileTest {
     @Test
     void spawnEntities() {
         final WeightedPool<Entity> entityPool = new WeightedPoolImpl<>();
-        final MessageHandler mh = new MessageHandler() {
-            @Override
-            public <T extends Submodule> void handle(final Class<T> subModuleType, final Consumer<T> handler) {
-                return;
-            }
-
-            @Override
-            public <T extends Submodule, E> E handle(Class<T> subModuleType, Function<T, E> handler) {
-                return null;
-            }
-        };
+        final MessageHandler mh = new GameMessageHandler();
 
         entityPool.addElement(new Altar(new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
         entityPool.addElement(new Altar(new PositionImpl(new Vector2Impl(0, 0)), null, null, mh), 1.0f);
