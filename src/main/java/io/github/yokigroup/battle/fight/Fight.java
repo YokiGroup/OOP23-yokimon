@@ -114,8 +114,8 @@ public interface Fight {
     /**
      * This is meant for displaying the life bar in the view.
      * @param yokimon the yokimon whose HP percentage must be shown
-     * @return the percentage of HP points left.
+     * @return the percentage of HP points left (expressed from 0 to 100)
      */
-    public double getHPPercentage(Yokimon yokimon);
+    public int getHPPercentage(Yokimon yokimon);
 
 }

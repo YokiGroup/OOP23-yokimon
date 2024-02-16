@@ -173,8 +173,8 @@ public final class FightImpl implements Fight {
     }
 
     @Override
-    public double getHPPercentage(final Yokimon yokimon){
-        return (double) yokimon.getActualHp() / yokimon.getMaxHp();
+    public int getHPPercentage(final Yokimon yokimon){
+        return (int) ((double) yokimon.getActualHp()  * 100 / yokimon.getMaxHp());
     }
 
 }
