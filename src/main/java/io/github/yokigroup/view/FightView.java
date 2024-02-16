@@ -19,9 +19,17 @@ public final class FightView extends Application {
     private static final int HPBAR_LENGTH = 250;
     private static final int HPBAR_HEIGTH = 35;
     private static final int DELTA = 20;
+    private static final int ARC_DIMENSION = 15;
     private static Pane root_draft = new Pane();
+    private Fight fight;
     private static final String BACKGROUND_URL = "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/204364595/original/86db6005cd51b4f60e71cca277f603a82cf5646a/draw-a-pixel-pokemon-battle-background.png";
     private static final String BACKGROUND_PNG = "C:/Users/Marilia/Downloads/forest-background-5th-style-pass-portfolio-edit.png";
+
+    /*
+    public FightView(Fight fight) {
+        this.fight = fight;
+    }
+     */
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
@@ -46,22 +54,43 @@ public final class FightView extends Application {
     }
 
     private void setHealthBars() {
-        final Rectangle healthbar1 = new Rectangle(getLengthHPBar(20), HPBAR_HEIGTH, getColorHPBar(20));
+        /*
+        final Rectangle healthbar1 = new Rectangle(getLengthHPBar(fight.getHPPercentage(fight.getCurrentMyYokimon())),
+                HPBAR_HEIGTH,
+                getColorHPBar(fight.getHPPercentage(fight.getCurrentOpponent())));
         healthbar1.setX(DELTA);
         healthbar1.setY(DELTA);
-        healthbar1.setArcHeight(15);
-        healthbar1.setArcWidth(15);
-        healthbar1.setStyle("-fx-stroke: darkgrey; -fx-stroke-width: 4;");
+        healthbar1.setArcHeight(ARC_DIMENSION);
+        healthbar1.setArcWidth(ARC_DIMENSION);
+        healthbar1.setStyle("-fx-stroke: grey; -fx-stroke-width: 4;");
 
-        final Rectangle healthbar2 = new Rectangle(getLengthHPBar(80), HPBAR_HEIGTH, getColorHPBar(80));
-        healthbar2.setX(SCREEN_WIDTH - getLengthHPBar(80) - DELTA);
+        final Rectangle healthbar2 = new Rectangle(getLengthHPBar(fight.getHPPercentage(fight.getCurrentOpponent())),
+                HPBAR_HEIGTH,
+                getColorHPBar(fight.getHPPercentage(fight.getCurrentOpponent())));
+        healthbar2.setX(SCREEN_WIDTH - getLengthHPBar(fight.getHPPercentage(fight.getCurrentOpponent())) - DELTA);
         healthbar2.setY(DELTA);
-        healthbar2.setArcHeight(15);
-        healthbar2.setArcWidth(15);
-        healthbar2.setStyle("-fx-stroke: darkgrey; -fx-stroke-width: 4;");
+        healthbar2.setArcHeight(ARC_DIMENSION);
+        healthbar2.setArcWidth(ARC_DIMENSION);
+        healthbar2.setStyle("-fx-stroke: grey; -fx-stroke-width: 4;");
+         */
 
-        root_draft.getChildren().add(healthbar1);
-        root_draft.getChildren().add(healthbar2);
+        final Rectangle healthbar1_dbg = new Rectangle(HPBAR_LENGTH, HPBAR_HEIGTH, Color.GREEN);
+        healthbar1_dbg.setX(DELTA);
+        healthbar1_dbg.setY(DELTA);
+        healthbar1_dbg.setArcHeight(ARC_DIMENSION);
+        healthbar1_dbg.setArcWidth(ARC_DIMENSION);
+        healthbar1_dbg.setStyle("-fx-stroke: grey; -fx-stroke-width: 4;");
+
+        final Rectangle healthbar2_dbg = new Rectangle(HPBAR_LENGTH, HPBAR_HEIGTH, Color.GREEN);
+        healthbar2_dbg.setX(SCREEN_WIDTH - HPBAR_LENGTH - DELTA);
+        healthbar2_dbg.setY(DELTA);
+        healthbar2_dbg.setArcHeight(ARC_DIMENSION);
+        healthbar2_dbg.setArcWidth(ARC_DIMENSION);
+        healthbar2_dbg.setStyle("-fx-stroke: grey; -fx-stroke-width: 4;");
+
+        //TODO SUBSTITUTE ACTUAL HEALTH BARS
+        root_draft.getChildren().add(healthbar1_dbg);
+        root_draft.getChildren().add(healthbar2_dbg);
     }
 
     public void drawHPbars(final Fight fight) {
@@ -96,8 +125,6 @@ public final class FightView extends Application {
     private int getLengthHPBar(int percentage) {
         return (int)((double)percentage * HPBAR_LENGTH / 100) ;
     }
-
-
 
 
     public static void run(final String... args) {
