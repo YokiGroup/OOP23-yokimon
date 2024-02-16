@@ -8,9 +8,11 @@ import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.Direction;
+import io.github.yokigroup.world.entity.people.Enemy;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of a builder class to create a tile object.
@@ -61,9 +63,17 @@ public class TileBuilderImpl implements TileBuilder {
         return this;
     }
 
+    private Set<Entity> generateEntities(MessageHandler handler) {
+        return this.entities.stream()
+                .map(e -> switch(e.x()) {
+                    case ENEMY -> new Enemy(e.y(), handler);
+                    case ALTAR -> new Altar(e.y(), handler);
+                }).collect(Collectors.toSet());
+    }
+
     @Override
     public Tile build(MessageHandler handler) {
-        Set<Entity> createdEntities = null; // FIXME implement as soon as entity constructors are fixed
+        Set<Entity> createdEntities = generateEntities(handler);
         return new TileImpl(id, this.adjacencies, this.hitboxes, createdEntities);
     }
 }
