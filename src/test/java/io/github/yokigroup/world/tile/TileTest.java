@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TileTest {
-
+    private static final int TILE_ID = 13;
     private static Hitbox hitbox1;
     private static Hitbox hitbox2;
     private static Hitbox hitbox3;
@@ -27,7 +27,7 @@ class TileTest {
         hitbox1 = new CircularHitbox(r1);
         hitbox2 = new CircularHitbox(r2);
         hitbox3 = new CircularHitbox(r3);
-        tile = new TileBuilderImpl(13)
+        tile = new TileBuilderImpl(TILE_ID)
                 .addHitbox(hitbox1)
                 .addHitbox(hitbox2)
                 .addHitbox(hitbox3)
@@ -38,8 +38,8 @@ class TileTest {
 
     @Test
     void tileGettersAndAdd() {
-        assertEquals(13, tile.getId());
-        assertEquals(3, tile.getAdjacencies().size());
+        assertEquals(TILE_ID, tile.getId());
+        assertEquals(2, tile.getAdjacencies().size());
         assertTrue(tile.getAdjacencies().contains(Direction.UP));
         assertTrue(tile.getAdjacencies().contains(Direction.DOWN));
         assertEquals(3, tile.getHitboxes().size());

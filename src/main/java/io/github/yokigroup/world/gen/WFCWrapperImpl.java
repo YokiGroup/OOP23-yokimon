@@ -5,7 +5,6 @@ import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.gen.wfc.WaveFunctionCollapse;
 import io.github.yokigroup.world.gen.wfc.WaveFunctionCollapseImpl;
-import io.github.yokigroup.world.tile.Tile;
 import io.github.yokigroup.world.tile.TileBuilder;
 
 import java.util.HashSet;
@@ -27,11 +26,10 @@ public class WFCWrapperImpl implements WFCWrapper {
      */
     public WFCWrapperImpl(final Pair<Integer, Integer> dimensions, final Set<TileShape> shapes) {
         this.tileShapes = Set.copyOf(shapes);
-        // TODO: filter duplicate shapes.
-        final Set<Set<Direction>> convertedShapes = this.tileShapes.stream()
+        final Set<Set<Direction>> wfcShapes = this.tileShapes.stream()
                 .map(TileShape::getPossibleDirections)
                 .collect(Collectors.toSet());
-        this.wfc = new WaveFunctionCollapseImpl(dimensions, convertedShapes);
+        this.wfc = new WaveFunctionCollapseImpl(dimensions, wfcShapes);
     }
 
     @Override

@@ -19,9 +19,12 @@ class TileImpl implements Tile {
     /**
      * Creates a tile with static and dynamic entities.
      * @param id The id of the tile.
+     * @param adjacencies The connections this tile has.
      * @param hitboxes The invisible walls in a tile.
+     * @param entities The entities on the tile.
+     * @throws IllegalArgumentException If any of the arguments are null.
      */
-    public TileImpl(final int id, final Set<Direction> adjacencies, final Set<Hitbox> hitboxes, final Set<Entity> entities) {
+    TileImpl(final int id, final Set<Direction> adjacencies, final Set<Hitbox> hitboxes, final Set<Entity> entities) {
         if (hitboxes == null) {
             throw new IllegalArgumentException("The hitboxes set is null.");
         } else if (entities == null) {

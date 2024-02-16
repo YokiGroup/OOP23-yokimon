@@ -1,10 +1,7 @@
 package io.github.yokigroup.world.gen;
 
-import io.github.yokigroup.core.GameMessageHandler;
-import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.world.Direction;
-import io.github.yokigroup.world.tile.Tile;
 import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +31,6 @@ class TileShapeTest {
 
     @Test
     void testGetTiles() {
-        MessageHandler messageHandler = new GameMessageHandler();
         final var tile1 = new TileBuilderImpl(0);
         final var tile2 = new TileBuilderImpl(1);
         tileShape1 = new TileShapeImpl(Set.of(tile1, tile2), tileShapeSet1);

@@ -26,6 +26,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * Instantiates the wave function collapse algorithm for the shape map generation.
      * @param dimensions The dimensions of the ShapeMap to generate
      * @param shapes The shapes the map can have.
+     * @throws IllegalArgumentException If the shape is null.
      */
     public WaveFunctionCollapseImpl(final Pair<Integer, Integer> dimensions, final Set<Set<Direction>> shapes) {
         if (shapes == null) {

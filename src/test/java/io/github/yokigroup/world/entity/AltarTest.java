@@ -3,7 +3,8 @@ package io.github.yokigroup.world.entity;
 import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
+
+import io.github.yokigroup.event.submodule.GameMapSubmoduleImpl;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.GameMap;

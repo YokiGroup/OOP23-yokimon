@@ -1,7 +1,7 @@
 package io.github.yokigroup.world.entity.people;
 
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.GameMapSubmodule;
+import io.github.yokigroup.event.submodule.GameMapSubmoduleImpl;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.GameMap;
@@ -35,7 +35,7 @@ public class Player extends People {
 
         this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
         this.nonEntityCollisionCheck();
-        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
+        this.getMessageHandler().handle(GameMapSubmoduleImpl.class, map -> {
 
             map.getEntitiesOnCurrentTile().stream()
                     .map(entity -> this.getHitBox().collidesWith(entity.getHitBox()))
@@ -51,7 +51,7 @@ public class Player extends People {
     @Override
     public void resetPosition() {
         if (!this.getPos().isValid()) {
-            this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
+            this.getMessageHandler().handle(GameMapSubmoduleImpl.class, map -> {
                 this.setPos(new PositionImpl(new Vector2Impl( (double) GameMap.TILE_DIMENSIONS.x() / 2,
                         (double) GameMap.TILE_DIMENSIONS.y() / 2 )));
             });

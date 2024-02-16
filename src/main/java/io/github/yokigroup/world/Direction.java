@@ -28,6 +28,7 @@ public enum Direction {
     /**
      *
      * @return The opposite direction.
+     * @throws IllegalStateException If it goes into an unknown value (impossible).
      */
     public Direction getComplementary() {
         return switch (this) {
