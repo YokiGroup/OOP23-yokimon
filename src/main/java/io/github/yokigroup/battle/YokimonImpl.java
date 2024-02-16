@@ -233,7 +233,11 @@ public class YokimonImpl implements Yokimon {
         double xpToTake = n * this.growthRate.get();
         while (xpToTake >= this.xpNext - this.xp) {
             xpToTake -= this.xpNext - this.xp;
-            expCode = this.levelUtility.levelUp(this, 1);
+            if (expCode == ExpCode.NEW_MOVE) {
+                this.levelUtility.levelUp(this, 1);
+            } else {
+                expCode = this.levelUtility.levelUp(this, 1);
+            }
         }
         this.xp += xpToTake;
         return expCode;

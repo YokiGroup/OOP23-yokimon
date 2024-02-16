@@ -15,7 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 class YokimonImplTest {
-
+    private static final int DEFAULT_LEVEL = 10;
+    private static final int NUM_MOVES = 3;
     private static YokimonLoader loader;
     private static AttackLoader loaderAttack;
     private static MessageHandler messageHandler;
@@ -34,51 +35,38 @@ class YokimonImplTest {
     }
     @Test
     void getAllStats() {
-    Yokimon oni = loader.load(1);
+    Yokimon tengu = loader.load(7);
 
-    oni.setLevel(5);
+    tengu.setLevel(DEFAULT_LEVEL);
 
-    assertEquals(5, oni.getLevel());
+    assertEquals(DEFAULT_LEVEL, tengu.getLevel());
 
+    assertEquals(NUM_MOVES, tengu.getAttacks().size());
     }
 
     @Test
     void getAttacks() {
+            Yokimon tengu = loader.load(7);
+
+            tengu.setLevel(DEFAULT_LEVEL);
+
+            assertEquals(NUM_MOVES, tengu.getAttacks().size());
+            final int atk4 = 4;
+            final int atk1 = 1;
+            for(int i = atk4; i > atk1; i--){
+                assertTrue(tengu.getAttacks().contains(loaderAttack.load(i)));
+            }
+
+            assertFalse(tengu.getAttacks().contains(loaderAttack.load(atk1)));
     }
 
     @Test
-    void setExpNext() {
-/*
-        Attack shadowBall = new AttackImpl("Shadow ball", Color.BLACK, 90, Attack.Effect.NONE);
-        Attack strongPunch = new AttackImpl("strong punch", Color.RED, 80, Attack.Effect.NONE);
-        Attack curse = new AttackImpl("curse", Color.PURPLE, 70, Attack.Effect.NONE);
-        Attack slap = new AttackImpl("slap", Color.WHITE, 40, Attack.Effect.NONE);
-*/
-
-        /*
-        Attack  = new AttackImpl("", Color.WHITE, , Attack.effect.NONE);
-        */
-        Map<Integer, Attack> stone= new HashMap<>();
-/*
-        stone.put(1, slap);
-        stone.put(3, strongPunch);
-        stone.put(7, curse);
-        stone.put(15, shadowBall);
-        Map<Yokimon.Stats, Integer> baseStats1= new HashMap<>();
-        baseStats1.put(Yokimon.Stats.HP, 90);
-        baseStats1.put(Yokimon.Stats.ATK, 80);
-        baseStats1.put(Yokimon.Stats.DEF, 100);
-        baseStats1.put(Yokimon.Stats.SPD, 40);
-        Map<Yokimon.Stats, Integer> baseStats2= new HashMap<>();
-        baseStats2.put(Yokimon.Stats.HP, 120);
-        baseStats2.put(Yokimon.Stats.ATK, 100);
-        baseStats2.put(Yokimon.Stats.DEF, 60);
-        baseStats2.put(Yokimon.Stats.SPD, 70);
-        BasicImplDmgCalculator calc = new BasicImplDmgCalculator();
-        Yokimon oni = new YokimonImpl("oni", Color.RED, baseStats1, Yokimon.GrowthRate.MEDIUM, 10, stone );
-        Yokimon wani = new YokimonImpl("wani", Color.RED, baseStats2, Yokimon.GrowthRate.SLOW, 10, stone );
-        assertEquals(42, oni.getStat(Yokimon.Stats.HP));
-        assertEquals(12, calc.getDMG(oni, wani, slap));
-*/
+    void takeXP() {
+        Yokimon tengu = loader.load(7);
+        final int def_XP = 1000;
+        assertEquals(Yokimon.ExpCode.NEW_MOVE, tengu.takeXp(def_XP));
+        assertEquals(DEFAULT_LEVEL, tengu.getLevel());
+        assertEquals(Yokimon.ExpCode.LEVEL_UP, tengu.takeXp(400));
+        assertEquals(Yokimon.ExpCode.OK, tengu.takeXp(1));
     }
 }

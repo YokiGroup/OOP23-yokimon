@@ -82,7 +82,7 @@ public class LevelUpLogicImpl implements LevelUpLogic {
             }
         // Set new level
         yokimon.setLevel(yokimon.getLevel() + plus);
-        // Set the new exp calculator
+        // Set the new exp bound
         yokimon.setExpNext(this.nextBoundXp(yokimon.getLevel()));
         yokimon.setExp(this.expectedXp(yokimon.getLevel()));
         // Set the new stats
