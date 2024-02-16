@@ -1,10 +1,10 @@
 package io.github.yokigroup.core;
 
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.FightSubmodule;
-import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.event.submodule.PartySubmodule;
-import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
+import io.github.yokigroup.event.submodule.FightSubmoduleImpl;
+import io.github.yokigroup.event.submodule.GameMapSubmoduleImpl;
+import io.github.yokigroup.event.submodule.PartySubmoduleImpl;
+import io.github.yokigroup.event.submodule.PlayerCharacterSubmoduleImpl;
 import io.github.yokigroup.event.submodule.Submodule;
 import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
@@ -24,10 +24,10 @@ public class GameMessageHandler implements MessageHandler {
 
     protected Set<Class<? extends Submodule>> getSubmoduleTypes() {
         return Set.of(
-                PartySubmodule.class,
-                PlayerCharacterSubmodule.class,
-                FightSubmodule.class,
-                GameMapSubmodule.class
+                PartySubmoduleImpl.class,
+                PlayerCharacterSubmoduleImpl.class,
+                FightSubmoduleImpl.class,
+                GameMapSubmoduleImpl.class
         );
     }
 
