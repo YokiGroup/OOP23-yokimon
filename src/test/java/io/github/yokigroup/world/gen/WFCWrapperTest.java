@@ -5,6 +5,7 @@ import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.file.loader.TileShapeLoader;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.tile.Tile;
+import io.github.yokigroup.world.tile.TileBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ class WFCWrapperTest {
     private static final int WIDTH = 5;
     private static final int HEIGHT = 5;
     private static final TileShapeLoader TILE_SHAPE_LOADER = new TileShapeLoader();
-    private Set<Tile> allTiles;
+    private Set<TileBuilder> allTiles;
     private WFCWrapper wfcWrapper;
 
     @BeforeEach
@@ -27,7 +28,6 @@ class WFCWrapperTest {
         allTiles = allShapes.stream()
                 .map(s -> s.getTiles().getEntries())
                 .flatMap(Set::stream)
-                .map(s -> s.build(handler))
                 .collect(Collectors.toSet());
         this.wfcWrapper = new WFCWrapperImpl(new Pair<>(WIDTH, HEIGHT), allShapes);
     }
