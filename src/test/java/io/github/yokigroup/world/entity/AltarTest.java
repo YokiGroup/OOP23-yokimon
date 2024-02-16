@@ -6,9 +6,12 @@ import io.github.yokigroup.event.submodule.*;
 
 import io.github.yokigroup.file.loader.YokimonLoader;
 import io.github.yokigroup.util.Pair;
+import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
+import io.github.yokigroup.world.GameMapBuilder;
+import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.people.Player;
 import io.github.yokigroup.world.tile.Tile;
@@ -27,61 +30,42 @@ class AltarTest {
     private static YokimonLoader loader;
     private static MessageHandler messageHandler;
     private static GameMessageHandler gameMessageHandler;
-/*
+
     private static class TestMessageHandler extends GameMessageHandler {
-        private static class TestFightSubmodule extends GameMapSubmodule {
-            Position playerPos = new PositionImpl(new Vector2Impl(0, 0));
-            Position altarPos = new PositionImpl(new Vector2Impl(30, 0));
+        private static class TestSubmodule extends GameMapSubmodule {
+            Vector2 v = new Vector2Impl(50, 50);
+            Position altarPos = new PositionImpl(v);
             Tile tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, altarPos)
                     .build(messageHandler);
-            GameMap mappa = new GameMap() {
-                @Override
-                public Tile getTileAt(Pair<Integer, Integer> position) {
-                    return tile;
-                }
+            GameMap map = new GameMapBuilderImpl().build(messageHandler);
 
-                @Override
-                public Pair<Integer, Integer> getPlayerTileMapPosition() {
-                    return new Pair<>(0,0);
-                }
-
-                @Override
-                public Tile getPlayerTile() {
-                    return tile;
-                }
-
-                @Override
-                public boolean movePlayerTileMapPosition(Direction direction) {
-                    return false;
-                }
-            } ;
-
-            public TestFightSubmodule(MessageHandler handler) {
+            public TestSubmodule(MessageHandler handler) {
                 super(handler);
             }
 
             @Override
             public GameMap getGameMap() {
-                return mappa;
+                return map;
             }
 
             @Override
             public Set<Hitbox> getHitboxesOnCurrentTile() {
-                return new HashSet<>();
+                return map.getPlayerTile().getHitboxes();
             }
 
             @Override
             public Set<Entity> getEntitiesOnCurrentTile() {
-                return new HashSet<>();
+                return map.getPlayerTile().getEntities();
             }
         }
 
         @Override
-        protected List<Class<? extends Submodule>> getSubmoduleTypes() {
-            return (List<Class<? extends Submodule>>) Set.of( GameMapSubmoduleImpl.class , PartySubmodule.class);
+        protected Set<Class<? extends Submodule>> getSubmoduleTypes() {
+            return Set.of(
+
+            );
         }
     }
-    */
 
     @BeforeEach
     void setUp() {
