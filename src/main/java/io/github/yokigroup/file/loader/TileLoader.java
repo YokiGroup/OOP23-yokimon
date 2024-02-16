@@ -60,11 +60,13 @@ public class TileLoader extends IdJsonLoader<TileBuilder> {
     private Set<Pair<TileBuilder.EntityType, Vector2>> getEntities(final int id) {
         final String SPAWN_POSITION_JPATH = "$." + (id == -1 ? "home" : id) + ".spawns[%d]";
         return ifNullReturnEmpty(doUntilPathException(new HashSet<>(), (c, i) -> {
-            Vector2 position = getVector2(String.format(SPAWN_POSITION_JPATH, i));
-            c.add(switch (getParser().<String>read(SPAWN_POSITION_JPATH + ".type")) {
+            final String formattedJPath = String.format(SPAWN_POSITION_JPATH, i);
+            Vector2 position = getVector2(formattedJPath);
+            String type = getParser().read(formattedJPath + ".type");
+            c.add(switch (type) {
                 case "enemy" -> new Pair<>(TileBuilder.EntityType.ENEMY, position);
                 case "altar" -> new Pair<>(TileBuilder.EntityType.ALTAR, position);
-                default -> throw new InvalidJsonException("");
+                default -> throw new InvalidJsonException(String.format("invalid type %s", type));
             });
         }));
     }
