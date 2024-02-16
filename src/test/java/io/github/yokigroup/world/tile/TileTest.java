@@ -37,7 +37,7 @@ class TileTest {
     }
 
     @Test
-    void tileGettersAndAdd() {
+    void tileGetters() {
         assertEquals(TILE_ID, tile.getId());
         assertEquals(2, tile.getAdjacencies().size());
         assertTrue(tile.getAdjacencies().contains(Direction.UP));
