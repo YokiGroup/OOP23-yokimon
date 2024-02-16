@@ -2,6 +2,7 @@ package io.github.yokigroup.world;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Pair;
+import io.github.yokigroup.world.tile.TileBuilder;
 
 /**
  * Interface for a builder to create a GameMap object.
@@ -21,6 +22,14 @@ public interface GameMapBuilder {
      * @return The current GameMapBuilder.
      */
     GameMapBuilder changePlayerTileMapPosition(Pair<Integer, Integer> position);
+
+    /**
+     * Sets the home tile as a static tile in the map at position {@param position}.
+     * @param tile The tile to set.
+     * @param position The position to set the tile at.
+     * @return The current GameMapBuilder.
+     */
+    GameMapBuilder putTileAt(TileBuilder tile, Pair<Integer, Integer> position);
 
     /**
      * Sets the home tile as a static tile in the map at position {@param position}.
