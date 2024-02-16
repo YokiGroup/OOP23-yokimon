@@ -50,9 +50,7 @@ public final class GameMapSubmodule extends Submodule {
      * Gets the entities contained in the Tile the player's currently on.
      */
     public Set<Entity> getEntitiesOnCurrentTile() {
-        // FIXME consider whether this should be here
-        // TODO implement
-        return Set.of();
+        return gameMap.getPlayerTile().getEntities();
     }
 
     @Override
