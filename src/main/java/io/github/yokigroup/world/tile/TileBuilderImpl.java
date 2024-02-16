@@ -69,7 +69,7 @@ public class TileBuilderImpl implements TileBuilder {
         return new TileImpl(id, this.adjacencies, this.hitboxes, createdEntities);
     }
 
-    private Set<Entity> generateEntities(MessageHandler handler) {
+    private Set<Entity> generateEntities(final MessageHandler handler) {
         return this.entities.stream()
                 .map(e -> switch (e.x()) {
                     case ENEMY -> new Enemy(e.y(), handler);
