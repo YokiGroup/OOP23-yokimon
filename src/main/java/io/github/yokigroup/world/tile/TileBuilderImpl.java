@@ -64,6 +64,12 @@ public class TileBuilderImpl implements TileBuilder {
     }
 
     @Override
+    public final TileBuilder addAllAdjacencies(Set<Direction> directions) {
+        this.adjacencies.addAll(directions);
+        return this;
+    }
+
+    @Override
     public final Tile build(final MessageHandler handler) {
         final Set<Entity> createdEntities = generateEntities(handler);
         return new TileImpl(id, this.adjacencies, this.hitboxes, createdEntities);
