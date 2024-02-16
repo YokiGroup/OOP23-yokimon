@@ -20,10 +20,9 @@ import java.util.Set;
  */
 public class TileShapeLoader extends JsonLoader<TileShape> {
     private static final String TILE_JSON_RPATH = "tiles.json";
-    private static final String TILE_SHAPE_JPATHF = "$.%d.shape[*]";
     private Map<Set<Direction>, Set<TileBuilder>> tiles = new HashMap<>();
     private final JsonParser parser = getParser();
-    private final TileLoader tileLoader;
+    private final IdJsonLoader<TileBuilder> tileLoader;
 
     /**
      * Constructor.
@@ -48,18 +47,9 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
         return retSet;
     }
 
-    private Set<Direction> getTileDirs(final int id) {
-        List<String> rawTileDirs = parser.read(String.format(TILE_SHAPE_JPATHF, id));
-        Set<Direction> tileDirs = new HashSet<>();
-
-        rawTileDirs.forEach(d -> tileDirs.add(Direction.valueOf(d)));
-        return tileDirs;
-    }
-
     private Pair<Set<Direction>, TileBuilder> load(final int id) {
-        Set<Direction> tileDirs = getTileDirs(id);
-        TileBuilder tile = tileLoader.load(id);
-        return new Pair<>(tileDirs, tile);
+        TileBuilder tileBuilder = tileLoader.load(id);
+        return new Pair<>(tileBuilder.getAdjacencies(), tileBuilder);
     }
 
     private void insertTile(final Set<Direction> dirs, final TileBuilder tile) {

@@ -4,6 +4,7 @@ import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.json.InvalidJsonException;
 import io.github.yokigroup.util.json.JsonParser;
+import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.PositionImpl;
@@ -14,10 +15,12 @@ import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class TileLoader extends IdJsonLoader<TileBuilder> {
     private static final String TILE_JSON_RPATH = "tiles.json";
+    private static final String TILE_SHAPE_JPATHF = "$.%d.shape[*]";
 
     public TileLoader() {
         super(TILE_JSON_RPATH);
@@ -73,10 +76,19 @@ public class TileLoader extends IdJsonLoader<TileBuilder> {
         }));
     }
 
+    private Set<Direction> getTileDirs(final int id) {
+        List<String> rawTileDirs = getParser().read(String.format(TILE_SHAPE_JPATHF, id));
+        Set<Direction> tileDirs = new HashSet<>();
+
+        rawTileDirs.forEach(d -> tileDirs.add(Direction.valueOf(d)));
+        return tileDirs;
+    }
+
     private TileBuilder getTileAt(final int id) {
         TileBuilder tileBuilder = new TileBuilderImpl(id);
         tileBuilder.addAllHitboxes(getHitboxes(id));
         tileBuilder.addAllEntities(getEntities(id));
+        tileBuilder.addAllAdjacencies(getTileDirs(id));
         return tileBuilder;
     }
 
