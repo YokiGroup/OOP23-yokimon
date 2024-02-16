@@ -22,6 +22,7 @@ class TileImpl implements Tile {
      * @param adjacencies The connections this tile has.
      * @param hitboxes The invisible walls in a tile.
      * @param entities The entities on the tile.
+     * @throws IllegalArgumentException If any of the arguments are null.
      */
     TileImpl(final int id, final Set<Direction> adjacencies, final Set<Hitbox> hitboxes, final Set<Entity> entities) {
         if (hitboxes == null) {
