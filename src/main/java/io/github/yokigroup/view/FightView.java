@@ -14,7 +14,9 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public final class FightView extends Application {
 
@@ -30,10 +32,10 @@ public final class FightView extends Application {
     private static final double YOKIMON_DIM = 200;
     private static Pane root_draft = new Pane();
     private Fight fight;
-    private static final String POKEMON1_URL = "https://i.pinimg.com/originals/ef/33/2f/ef332f79619b7503ff40c766eb370219.png";
-    private static final String POKEMON2_URL = "https://purepng.com/public/uploads/large/purepng.com-pokemonpokemonpocket-monsterspokemon-franchisefictional-speciesone-pokemonmany-pokemonone-pikachu-1701527784884jkxg4.png";
+    private static final String YOKIMON1_PATH = "C:\\Users\\Marilia\\Downloads\\YOKIMON\\NEKOMATA.png";
+    private static final String YOKIMON2_PATH = "C:\\Users\\Marilia\\Downloads\\YOKIMON\\KITSUNE.png";
     private static final String BACKGROUND_URL = "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/204364595/original/86db6005cd51b4f60e71cca277f603a82cf5646a/draw-a-pixel-pokemon-battle-background.png";
-    private static final String BACKGROUND_PNG = "C:/Users/Marilia/Downloads/forest-background-5th-style-pass-portfolio-edit.png";
+    private static final String BACKGROUND_PNG = "C:\\Users\\Marilia\\Downloads\\forest-background-5th-style-pass-portfolio-edit.png";
 
     /*
     public FightView(Fight fight) {
@@ -58,13 +60,10 @@ public final class FightView extends Application {
     }
 
     //TODO SUBSTITUTE WITH ACTUAL YOKIMONS
-    private void setYokimons() {
+    private void setYokimons() throws FileNotFoundException {
 
-        Image image1 = new Image("C:\\Users\\Marilia\\Downloads\\YOKIMON\\TANUKI.png");
-        Image image2 = new Image("C:\\Users\\Marilia\\Downloads\\YOKIMON\\NEKOMATA.png");;
-
-        //final Image image1 = new Image(POKEMON1_URL, YOKIMON_DIM, YOKIMON_DIM, false, true);
-        //final Image image2 = new Image(POKEMON2_URL, YOKIMON_DIM, YOKIMON_DIM, false, true);
+        final Image image1 = new Image(new FileInputStream(new File(YOKIMON1_PATH)));
+        final Image image2 = new Image(new FileInputStream(new File(YOKIMON2_PATH)));
         ImagePattern pattern1 = new ImagePattern(image1);
         ImagePattern pattern2 = new ImagePattern(image2);
 
@@ -84,8 +83,8 @@ public final class FightView extends Application {
 
 
     // TODO MUST REPLACE URL WITH PNG
-    private void setBackground() {
-        BackgroundImage backgroundImage= new BackgroundImage(new Image(BACKGROUND_URL,SCREEN_WIDTH,SCREEN_HEIGTH,false,true),
+    private void setBackground() throws FileNotFoundException {
+        BackgroundImage backgroundImage= new BackgroundImage(new Image(new FileInputStream(new File(BACKGROUND_PNG)),SCREEN_WIDTH,SCREEN_HEIGTH,false,true),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         root_draft.setBackground(new Background(backgroundImage));
