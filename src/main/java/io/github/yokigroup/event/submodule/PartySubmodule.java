@@ -42,7 +42,7 @@ public abstract class PartySubmodule extends Submodule {
     public abstract boolean removeYokimon(Yokimon y);
 
     @Override
-    public void process() {
+    public void update() {
 
     }
 }
