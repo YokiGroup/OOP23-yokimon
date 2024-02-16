@@ -34,7 +34,7 @@ public final class FightView extends Application {
     private Fight fight;
     private static final String YOKIMON1_PATH = "C:\\Users\\Marilia\\Downloads\\YOKIMON\\NEKOMATA.png";
     private static final String YOKIMON2_PATH = "C:\\Users\\Marilia\\Downloads\\YOKIMON\\KITSUNE.png";
-    private static final String BACKGROUND_URL = "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/204364595/original/86db6005cd51b4f60e71cca277f603a82cf5646a/draw-a-pixel-pokemon-battle-background.png";
+    private static final String TEXTBOX_BG_PNG = "C:\\Users\\Marilia\\Downloads\\pngtree-simple-blue-vintage-japanese-pattern-picture-image_1283990.jpg";
     private static final String BACKGROUND_PNG = "C:\\Users\\Marilia\\Downloads\\forest-background-5th-style-pass-portfolio-edit.png";
 
     /*
@@ -52,6 +52,8 @@ public final class FightView extends Application {
         setHealthBars();
         setInfo();
         setYokimons();
+        setTextBox();
+        setAttackMenu();
 
         //FINAL SETUPS
         primaryStage.setScene(scene);
@@ -59,7 +61,25 @@ public final class FightView extends Application {
         primaryStage.show();
     }
 
-    //TODO SUBSTITUTE WITH ACTUAL YOKIMONS
+    //TODO
+    private void setAttackMenu() {
+    }
+
+    //TODO
+    private void setTextBox() throws FileNotFoundException {
+
+        double textBoxHeigth = (double)SCREEN_WIDTH/8;
+        double textBoxWidth = (double)SCREEN_WIDTH/3;
+        final Rectangle textBox = new Rectangle(textBoxWidth, textBoxHeigth, Color.ANTIQUEWHITE);
+        textBox.setX((double)SCREEN_WIDTH / 2 - textBoxWidth / 2 );
+        textBox.setY(SCREEN_HEIGTH - textBoxHeigth - DELTA );
+        textBox.setArcHeight(ARC_DIMENSION);
+        textBox.setArcWidth(ARC_DIMENSION);
+        root_draft.getChildren().add(textBox);
+
+    }
+
+    //FIXME SUBSTITUTE WITH ACTUAL YOKIMONS
     private void setYokimons() throws FileNotFoundException {
 
         final Image image1 = new Image(new FileInputStream(new File(YOKIMON1_PATH)));
@@ -81,8 +101,6 @@ public final class FightView extends Application {
         root_draft.getChildren().add(rect2);
     }
 
-
-    // TODO MUST REPLACE URL WITH PNG
     private void setBackground() throws FileNotFoundException {
         BackgroundImage backgroundImage= new BackgroundImage(new Image(new FileInputStream(new File(BACKGROUND_PNG)),SCREEN_WIDTH,SCREEN_HEIGTH,false,true),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -125,7 +143,7 @@ public final class FightView extends Application {
         healthbar2_dbg.setArcWidth(ARC_DIMENSION);
         healthbar2_dbg.setStyle("-fx-stroke: white; -fx-stroke-width: 4;");
 
-        //TODO SUBSTITUTE ACTUAL HEALTH BARS
+        //FIXME SUBSTITUTE ACTUAL HEALTH BARS
         root_draft.getChildren().add(healthbar1_dbg);
         root_draft.getChildren().add(healthbar2_dbg);
     }
