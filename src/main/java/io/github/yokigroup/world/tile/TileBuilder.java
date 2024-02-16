@@ -4,6 +4,7 @@ import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.Direction;
 
@@ -35,13 +36,13 @@ public interface TileBuilder {
      *                   (initialized when {@link TileBuilder#build(MessageHandler)} is called)
      * @param position position of the entity to be added
      */
-    TileBuilder addEntity(final EntityType entityType, final Vector2 position);
+    TileBuilder addEntity(final EntityType entityType, final Position position);
 
     /**
      * Adds multiple entities to the tile.
      * @param entities The entities to add.
      */
-    TileBuilder addAllEntities(final Set<Pair<EntityType, Vector2>> entities);
+    TileBuilder addAllEntities(final Set<Pair<EntityType, Position>> entities);
 
     /**
      * Adds an adjacency rule to the tile.
