@@ -26,10 +26,10 @@ public final class FightView extends Application {
     private static final int HPBAR_HEIGTH = 35;
     private static final double DELTA = 20;
     private static final int ARC_DIMENSION = 15;
-    private static final String DEFAULT_NAME1 = "YOKIMON 1";
-    private static final String DEFAULT_NAME2 = "YOKIMON 2";
-    private static final String DEFAULT_LEVEL = "LEVEL";
-    private static final double YOKIMON_DIM = 200;
+    private static final String DEFAULT_NAME1 = "NEKOMATA";
+    private static final String DEFAULT_NAME2 = "KITSUNE";
+    private static final double YOKIMON_DIM = 220;
+    private static final int TOTAL_PERCENTAGE = 100;
     private static Pane root_draft = new Pane();
     private Fight fight;
     private static final String YOKIMON1_PATH = "C:\\Users\\Marilia\\Downloads\\YOKIMON\\NEKOMATA.png";
@@ -116,14 +116,14 @@ public final class FightView extends Application {
         healthbar1_dbg.setY(DELTA);
         healthbar1_dbg.setArcHeight(ARC_DIMENSION);
         healthbar1_dbg.setArcWidth(ARC_DIMENSION);
-        healthbar1_dbg.setStyle("-fx-stroke: grey; -fx-stroke-width: 4;");
+        healthbar1_dbg.setStyle("-fx-stroke: white; -fx-stroke-width: 4;");
 
         final Rectangle healthbar2_dbg = new Rectangle(HPBAR_LENGTH, HPBAR_HEIGTH, Color.GREEN);
         healthbar2_dbg.setX(SCREEN_WIDTH - HPBAR_LENGTH - DELTA);
         healthbar2_dbg.setY(DELTA);
         healthbar2_dbg.setArcHeight(ARC_DIMENSION);
         healthbar2_dbg.setArcWidth(ARC_DIMENSION);
-        healthbar2_dbg.setStyle("-fx-stroke: grey; -fx-stroke-width: 4;");
+        healthbar2_dbg.setStyle("-fx-stroke: white; -fx-stroke-width: 4;");
 
         //TODO SUBSTITUTE ACTUAL HEALTH BARS
         root_draft.getChildren().add(healthbar1_dbg);
@@ -154,31 +154,29 @@ public final class FightView extends Application {
     //classpath- > input stream dal font della classpath
     private void setInfo() {
 
-        javafx.scene.text.Font.getFamilies();
-
         //final Label Name1 = new Label(fight.getCurrentMyYokimon().getName().toUpperCase());
         final Label Name1 = new Label(DEFAULT_NAME1);
         Name1.setLayoutX(DELTA);
         Name1.setLayoutY(DELTA + HPBAR_HEIGTH + (double)DELTA/3);
-        Name1.setStyle("-fx-text-fill: black ; -fx-font-size: 24;");
+        Name1.setStyle("-fx-text-fill: white ; -fx-font-size: 24;");
 
         //final Label Name2 = new Label(fight.getCurrentOpponent().getName().toUpperCase());
         final Label Name2 = new Label(DEFAULT_NAME2);
         Name2.setLayoutX(SCREEN_WIDTH - (17)*DEFAULT_NAME2.length());
         Name2.setLayoutY(DELTA + HPBAR_HEIGTH + DELTA/3);
-        Name2.setStyle("-fx-text-fill: black ; -fx-font-size: 24;");
+        Name2.setStyle("-fx-text-fill: white ; -fx-font-size: 24;");
 
         //final Label Level1 = new Label(DEFAULT_LEVEL + fight.getCurrentMyYokimon().getLevel());
-        final Label Level1 = new Label(DEFAULT_LEVEL + "14");
+        final Label Level1 = new Label("LEVEL" + "14");
         Level1.setLayoutX(DELTA);
         Level1.setLayoutY(DELTA + HPBAR_HEIGTH + DELTA*1.5);
-        Level1.setStyle("-fx-text-fill: black ; -fx-font-size: 24;");
+        Level1.setStyle("-fx-text-fill: white ; -fx-font-size: 24;");
 
         //final Label Level2 = new Label(DEFAULT_LEVEL + fight.getCurrentOpponent().getLevel());
-        final Label Level2 = new Label(DEFAULT_LEVEL + "15");
-        Level2.setLayoutX(SCREEN_WIDTH - (12)*DEFAULT_NAME2.length());
+        final Label Level2 = new Label("LEVEL" + "15");
+        Level2.setLayoutX(SCREEN_WIDTH - (16)*DEFAULT_NAME2.length());
         Level2.setLayoutY(DELTA + HPBAR_HEIGTH + (double)DELTA*1.5);
-        Level2.setStyle("-fx-text-fill: black ; -fx-font-size: 24;");
+        Level2.setStyle("-fx-text-fill: white ; -fx-font-size: 24;");
 
         root_draft.getChildren().add(Name1);
         root_draft.getChildren().add(Name2);
@@ -197,7 +195,7 @@ public final class FightView extends Application {
     }
 
     private int getLengthHPBar(int percentage) {
-        return (int)((double)percentage * HPBAR_LENGTH / 100) ;
+        return (int)((double)percentage * HPBAR_LENGTH / TOTAL_PERCENTAGE) ;
     }
 
 
