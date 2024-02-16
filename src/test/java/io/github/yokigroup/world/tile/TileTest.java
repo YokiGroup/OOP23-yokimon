@@ -2,13 +2,7 @@ package io.github.yokigroup.world.tile;
 
 import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.util.Vector2Impl;
-import io.github.yokigroup.util.WeightedPool;
-import io.github.yokigroup.util.WeightedPoolImpl;
 import io.github.yokigroup.world.Direction;
-import io.github.yokigroup.world.entity.Altar;
-import io.github.yokigroup.world.entity.Entity;
-import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,28 +43,9 @@ class TileTest {
         assertTrue(tile.getAdjacencies().contains(Direction.UP));
         assertTrue(tile.getAdjacencies().contains(Direction.DOWN));
         assertEquals(3, tile.getHitboxes().size());
-    }
-
-    @Test
-    void spawnEntities() {
-        final WeightedPool<Entity> entityPool = new WeightedPoolImpl<>();
-        final MessageHandler mh = new GameMessageHandler();
-
-        entityPool.addElement(new Altar(0, new PositionImpl(new Vector2Impl(0, 0)), null,  mh), 1.0f);
-        entityPool.addElement(new Altar(1, new PositionImpl(new Vector2Impl(0, 0)), null,  mh), 1.0f);
-        entityPool.addElement(new Altar(2, new PositionImpl(new Vector2Impl(0, 0)), null,  mh), 1.0f);
-        entityPool.addElement(new Altar(3, new PositionImpl(new Vector2Impl(0, 0)), null,  mh), 1.0f);
-        entityPool.addElement(new Altar(4, new PositionImpl(new Vector2Impl(0, 0)), null,  mh), 1.0f);
-        /*
-        tile.addSpawnLocation(vector1);
-        tile.addSpawnLocation(vector2);
-        tile.addSpawnLocation(vector3);
-        tile.spawnEntities(entityPool);
-        assertEquals(3, tile.getEntities().size());
-        tile.getEntities()
-                .stream()
-                .map(e -> e.getPos().getPosition())
-                .forEach(v -> assertTrue(tile.getEntitySpawnLocations().contains(v)));
-        */
+        assertTrue(tile.getHitboxes().contains(hitbox1));
+        assertTrue(tile.getHitboxes().contains(hitbox2));
+        assertTrue(tile.getHitboxes().contains(hitbox3));
+        assertEquals(0, tile.getEntities().size());
     }
 }
