@@ -19,7 +19,9 @@ class TileImpl implements Tile {
     /**
      * Creates a tile with static and dynamic entities.
      * @param id The id of the tile.
+     * @param adjacencies The connections this tile has.
      * @param hitboxes The invisible walls in a tile.
+     * @param entities The entities on the tile.
      */
     public TileImpl(final int id, final Set<Direction> adjacencies, final Set<Hitbox> hitboxes, final Set<Entity> entities) {
         if (hitboxes == null) {
