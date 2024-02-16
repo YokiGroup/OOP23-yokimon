@@ -62,7 +62,7 @@ public interface Yokimon {
     }
 
     /**
-     *
+     * Return the id of the yokimon.
      * @return return the id of the yokimon
      */
     int getId();

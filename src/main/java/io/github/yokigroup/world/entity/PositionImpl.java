@@ -1,8 +1,7 @@
 package io.github.yokigroup.world.entity;
 
-import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.util.*;
+import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.GameMap;
 
 import java.util.Objects;
@@ -11,7 +10,7 @@ import java.util.Objects;
  * Implementation of Position, provides many useful methods
  * for managing positions.
  */
-public class PositionImpl implements Position{
+public class PositionImpl implements Position {
 
     private Vector2 pos;
 
@@ -32,11 +31,6 @@ public class PositionImpl implements Position{
     @Override
     public final void setPosition(final Vector2 pos) {
         this.pos = new Vector2Impl(pos);
-    }
-
-    @Override
-    public final void movePosition(final Vector2 vector) {
-        this.pos = this.pos.plus(vector);
     }
 
     @Override

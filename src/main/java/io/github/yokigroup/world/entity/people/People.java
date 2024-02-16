@@ -1,16 +1,14 @@
 package io.github.yokigroup.world.entity.people;
 
-import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.PositionImpl;
-import io.github.yokigroup.world.entity.hitbox.Hitbox;
+import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -38,40 +36,19 @@ public abstract class People extends Entity {
      */
     private boolean active;
     /**
-     * This list contains the lists of the yokimons that player and
-     * entity will use in the fight system.
+     * Default hitBot of the people.
      */
-    private List<Yokimon> party;
-
-    /**
-     * Used to calculate where this People is looking.
-     */
-    private static final double CRITICAL_UP_RIGHT = 45;
-    /**
-     * Used to calculate where this People is looking.
-     */
-    private static final double CRITICAL_DOWN_RIGHT = 135;
-    /**
-     * Used to calculate where this People is looking.
-     */
-    private static final double CRITICAL_DOWN_LEFT = 225;
-    /**
-     * Used to calculate where this People is looking.
-     */
-    private static final double CRITICAL_UP_LEFT = 315;
+    private static final double HITBOX_RADIUS = 15;
 
     /**
      * Constructs a People object with the specified attributes.
      * @param id of the people
      * @param pos The position of the People
-     * @param hitBox The hitBox of the People
-     * @param party The party of Yokimon belonging to the People
      * @param messageHandler handler of events
      */
-    public People(final int id, final Position pos, final Hitbox hitBox, List<Yokimon> party,
+    public People(final int id, final Position pos,
                   final MessageHandler messageHandler) {
-        super(id, pos, hitBox, messageHandler);
-        this.party = List.copyOf(party);
+        super(id, pos, new CircularHitbox(pos.getPosition(), HITBOX_RADIUS), messageHandler);
         this.direction = DEFAULT_DIRECTION;
         this.active = true;
         this.initialPos = pos;
@@ -82,7 +59,7 @@ public abstract class People extends Entity {
      */
     public enum Direction {
         /**
-         * The entity doesn't move
+         * The entity doesn't move.
          */
         DEFAULT_STAND(new Vector2Impl(0, 0)),
         /**
@@ -153,20 +130,14 @@ public abstract class People extends Entity {
      */
     public final void toDirection(final Vector2 v) {
         Objects.requireNonNull(v, "Vector passed to toDirection was null");
-        if (v.getX() == 0 && v.getY() > 0) {
+        if (v.getX() > 0 && v.getY() == 0) {
             this.direction = Direction.RIGHT;
-        } else if (v.getX() == 0 && v.getY() < 0) {
+        } else if (v.getX() <= 0 && v.getY() == 0) {
             this.direction = Direction.LEFT;
-        }
-        double degree = Math.toDegrees(Math.atan(v.getY() / v.getX()));
-        if (degree > CRITICAL_UP_RIGHT && degree < CRITICAL_DOWN_RIGHT) {
-            this.direction = Direction.RIGHT;
-        } else if (degree > CRITICAL_DOWN_LEFT && degree < CRITICAL_UP_LEFT) {
-            this.direction = Direction.LEFT;
-        } else if (degree >= CRITICAL_DOWN_RIGHT && degree <= CRITICAL_DOWN_LEFT) {
-            this.direction = Direction.UP;
-        } else {
+        } else if (v.getY() > 0) {
             this.direction = Direction.DOWN;
+        } else {
+            this.direction = Direction.UP;
         }
     }
     /**
@@ -192,35 +163,6 @@ public abstract class People extends Entity {
     }
 
     /**
-     * Returns the party of Yokimon belonging to the people entity.
-     * @return List<Yokimon> The party of Yokimon
-     */
-    public List<Yokimon> getListOfYokimon() {
-        return List.copyOf(this.party);
-    }
-
-    /**
-     * Adds a new Yokimon to the party of the people entity.
-     * @param newYokimon The new Yokimon to add
-     * @return true if the operation worked
-     */
-    public final boolean addYokimon(final Yokimon newYokimon) {
-        if (this.party == null) {
-            return false;
-        }
-        this.party.add(newYokimon);
-        return true;
-    }
-
-    /**
-     * Adds a list of new Yokimon to the party of the people entity.
-     * @param newYokimons The list of new Yokimon to add
-     * @return message Status message
-     */
-    public final boolean addListOfYokimon(final List<Yokimon> newYokimons) {
-       return this.party.addAll(newYokimons);
-    }
-    /**
      * Returns the initial position of the entity.
      * @return Position Initial position of the entity
      */
@@ -235,9 +177,9 @@ public abstract class People extends Entity {
     public abstract void resetPosition();
 
     /**
-     * Checks if an entity is colliding in
+     * Checks if an entity is colliding in.
      */
-    protected final void nonEntityCollisionCheck(){
+    protected final void nonEntityCollisionCheck() {
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
             map.getGameMap().getPlayerTile().getHitboxes().stream()
                     .map(block -> this.getHitBox().collidesWith(block))

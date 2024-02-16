@@ -42,6 +42,7 @@ public class LevelUpLogicImpl implements LevelUpLogic {
 
     @Override
     public final void setStats(final Yokimon yokimon) {
+        Objects.requireNonNull(yokimon, "Yokimon null at level-up logic");
         // Level
         // Map<Yokimon.Stats, Integer> newStat = yokimon.getAllStats();
         yokimon.getAllStats().entrySet()
@@ -58,6 +59,7 @@ public class LevelUpLogicImpl implements LevelUpLogic {
      * @return The upgraded stat.
      */
     private int upGradeStat(final Yokimon yokimon, final Yokimon.Stats stat) {
+        Objects.requireNonNull(yokimon, "Yokimon null at level-up logic");
         final int level = yokimon.getLevel();
         if (stat == Yokimon.Stats.HP) {
             final int hpExtra = 10;
@@ -69,6 +71,7 @@ public class LevelUpLogicImpl implements LevelUpLogic {
 
     @Override
     public final Yokimon.ExpCode levelUp(final Yokimon yokimon, final int plus) {
+        Objects.requireNonNull(yokimon, "Yokimon null at level-up logic");
         Yokimon.ExpCode code = Yokimon.ExpCode.LEVEL_UP;
         // Control if the yokimon learn a new move
             for (int i = yokimon.getLevel() + 1; i <= yokimon.getLevel() + plus; i++) {
@@ -89,6 +92,7 @@ public class LevelUpLogicImpl implements LevelUpLogic {
 
     @Override
     public final void resetAttack(final Yokimon yokimon) {
+        Objects.requireNonNull(yokimon, "Yokimon null at level-up logic");
         yokimon.getAttacks().clear();
         for (int i = 0; i <= yokimon.getLevel(); i++) {
             if (yokimon.getLearnableAttacks().containsKey(i)) {
@@ -99,6 +103,7 @@ public class LevelUpLogicImpl implements LevelUpLogic {
 
     @Override
     public final void reset(final Yokimon yokimon) {
+        Objects.requireNonNull(yokimon, "Yokimon null at level-up logic");
         yokimon.setExpNext(this.nextBoundXp(yokimon.getLevel()));
         yokimon.setExp(this.expectedXp(yokimon.getLevel()));
         this.setStats(yokimon);

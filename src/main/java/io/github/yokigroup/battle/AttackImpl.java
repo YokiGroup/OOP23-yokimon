@@ -33,6 +33,7 @@ public class AttackImpl implements Attack {
 
     /**
      * Constructs an AttackImpl object with generic attributes.
+     * @param id id of the attack
      * @param name The name of the Attack.
      * @param color The color of the Attack.
      */
@@ -41,7 +42,7 @@ public class AttackImpl implements Attack {
     }
 
     @Override
-    public int getId() {
+    public final int getId() {
         return 0;
     }
 
@@ -65,14 +66,28 @@ public class AttackImpl implements Attack {
         return this.effect;
     }
 
+    /**
+     * Control if this attack is equal to another.
+     * @param o Objects
+     * @return boolean
+     */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         AttackImpl attack = (AttackImpl) o;
-        return id == attack.id && power == attack.power && Objects.equals(name, attack.name) && color == attack.color && effect == attack.effect;
+        return id == attack.id && power == attack.power && Objects.equals(name, attack.name)
+                && color == attack.color && effect == attack.effect;
     }
 
+    /**
+     * Return a int for the hash code.
+     * @return integer
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, name, color, power, effect);

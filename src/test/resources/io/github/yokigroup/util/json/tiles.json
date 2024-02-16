@@ -1,4 +1,15 @@
 {
+  "home": {
+    "texture": "immagine.jpg",
+    "shape": [
+      "DOWN",
+      "LEFT",
+      "RIGHT",
+      "UP"
+    ],
+    "hitboxes": [],
+    "spawns": []
+  },
   "1": {
     "texture": "immagine.jpg",
     "shape": [
@@ -28,36 +39,15 @@
     ],
     "spawns": [
       {
+        "type": "enemy",
         "x": 10.0,
+        "y": 30.0
+      },
+      {
+        "type": "altar",
+        "x": 50.0,
         "y": 30.0
       }
     ]
-  },
-  "2": {
-    "texture": "immagine2.jpg",
-    "shape": [
-      "RIGHT",
-      "LEFT"
-    ],
-    "hitboxes": [
-      {
-        "type": "circle",
-        "position": {
-          "x": 30.0,
-          "y": 5.0
-        },
-        "radius": 10.0
-      }
-    ],
-    "spawns": []
-  },
-  "3": {
-    "texture": "immagine3.jpg",
-    "shape": [
-      "DOWN",
-      "LEFT"
-    ],
-    "hitboxes": [],
-    "spawns": []
   }
 }

@@ -1,17 +1,20 @@
 package io.github.yokigroup.file.loader;
 
+import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.json.InvalidJsonException;
 import io.github.yokigroup.util.json.JsonParser;
+import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
-import io.github.yokigroup.world.tile.Tile;
-import io.github.yokigroup.world.tile.TileImpl;
+import io.github.yokigroup.world.tile.TileBuilder;
+import io.github.yokigroup.world.tile.TileBuilderImpl;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class TileLoader extends IdJsonLoader<Tile>{
+public class TileLoader extends IdJsonLoader<TileBuilder> {
     private static final String TILE_JSON_RPATH = "tiles.json";
 
     public TileLoader() {
@@ -22,14 +25,14 @@ public class TileLoader extends IdJsonLoader<Tile>{
         return set != null ? set : Set.of();
     }
 
-    private Hitbox getHitbox(final String name, final int index) {
+    private Hitbox getHitbox(final int id, final int index) {
         JsonParser parser = getParser();
         final String TILE_HITBOX_TYPE_JPATHF = "$.%s.hitboxes[%d]";
         final String TILE_HITBOX_TYPE_RPATH = ".type";
         final String TILE_HITBOX_POSITION_RPATH = ".position";
         final String TILE_HITBOX_DIMENSIONS_RPATH = ".dimensions";
         final String TILE_HITBOX_RADIUS_RPATH = ".radius";
-        final String formattedHitboxJPath = String.format(TILE_HITBOX_TYPE_JPATHF, name, index);
+        final String formattedHitboxJPath = String.format(TILE_HITBOX_TYPE_JPATHF, id == -1 ? "home" : ""+id, index);
         final String type = parser.read(formattedHitboxJPath  +  TILE_HITBOX_TYPE_RPATH);
         final Vector2 pos = getVector2(formattedHitboxJPath  +  TILE_HITBOX_POSITION_RPATH);
 
@@ -43,34 +46,44 @@ public class TileLoader extends IdJsonLoader<Tile>{
                 yield new CircularHitbox(pos, radius);
             }
             default -> throw new RuntimeException(
-                    String.format("invalid type of hitbox index %d of name %s: received %s", index, name, type)
+                    String.format("invalid type of hitbox index %d of name %s: received %s", index, id, type)
             );
         };
     }
 
-    private Set<Hitbox> getHitboxes(final String name) {
+    private Set<Hitbox> getHitboxes(final int id) {
         return ifNullReturnEmpty(doUntilPathException(new HashSet<>(), (c, i) -> {
-            c.add(getHitbox(name, i));
+            c.add(getHitbox(id, i));
         }));
     }
 
-    private Set<Vector2>  getSpawnPositions(final String name) {
-        final String SPAWN_POSITION_JPATH = "$." + name + ".spawns[%d]";
+    private Set<Pair<TileBuilder.EntityType, Vector2>> getEntities(final int id) {
+        final String SPAWN_POSITION_JPATH = "$." + (id == -1 ? "home" : id) + ".spawns[%d]";
         return ifNullReturnEmpty(doUntilPathException(new HashSet<>(), (c, i) -> {
-            c.add(getVector2(String.format(SPAWN_POSITION_JPATH, i)));
+            final String formattedJPath = String.format(SPAWN_POSITION_JPATH, i);
+            Vector2 position = getVector2(formattedJPath);
+            String type = getParser().read(formattedJPath + ".type");
+            c.add(switch (type) {
+                case "enemy" -> new Pair<>(TileBuilder.EntityType.ENEMY, position);
+                case "altar" -> new Pair<>(TileBuilder.EntityType.ALTAR, position);
+                default -> throw new InvalidJsonException(String.format("invalid type %s", type));
+            });
         }));
     }
 
-    private Tile getTileAt(String name) {
-        return new TileImpl(name.equals("home") ? -1 : Integer.parseInt(name), getHitboxes(name), getSpawnPositions(name));
+    private TileBuilder getTileAt(final int id) {
+        TileBuilder tileBuilder = new TileBuilderImpl(id);
+        tileBuilder.addAllHitboxes(getHitboxes(id));
+        tileBuilder.addAllEntities(getEntities(id));
+        return tileBuilder;
     }
 
-    public Tile getHomeTime() {
-        return getTileAt("home");
+    public TileBuilder getHomeTile() {
+        return getTileAt(-1);
     }
 
     @Override
-    public Tile load(final int id) {
-        return getTileAt(""+id);
+    public TileBuilder load(final int id) {
+        return getTileAt(id);
     }
 }

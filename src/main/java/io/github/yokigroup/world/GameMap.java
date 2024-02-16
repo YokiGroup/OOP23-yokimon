@@ -23,11 +23,18 @@ public interface GameMap {
      *
      * @return The player's world coordinates.
      */
-    Pair<Integer, Integer> getPlayerWorldPosition();
+    Pair<Integer, Integer> getPlayerTileMapPosition();
 
     /**
      *
      * @return The tile the player is on.
      */
     Tile getPlayerTile();
+
+    /**
+     * Moves the player position in that direction.
+     * @param direction The direction to move the player position.
+     * @return True if the player can move in that direction, false otherwise.
+     */
+    boolean movePlayerTileMapPosition(Direction direction);
 }
