@@ -1,0 +1,144 @@
+{
+  "home": {
+    "texture": "immagine.jpg",
+    "shape": [
+      "DOWN",
+      "LEFT",
+      "RIGHT",
+      "UP"
+    ],
+    "hitboxes": [],
+    "spawns": []
+  },
+  "1": {
+    "texture": "immagine.jpg",
+    "shape": [
+      "DOWN",
+      "LEFT"
+    ],
+    "hitboxes": [
+      {
+        "type": "rect",
+        "position": {
+          "x": 10.0,
+          "y": 5.0
+        },
+        "dimensions": {
+          "x": 5.0,
+          "y": 5.0
+        }
+      },
+      {
+        "type": "circle",
+        "position": {
+          "x": 30.0,
+          "y": 5.0
+        },
+        "radius": 5.0
+      }
+    ],
+    "spawns": [
+      {
+        "type": "enemy",
+        "x": 10.0,
+        "y": 30.0
+      },
+      {
+        "type": "altar",
+        "x": 50.0,
+        "y": 30.0
+      }
+    ]
+  },
+  "2": {
+    "texture": "immagine.jpg",
+    "shape": [
+      "UP",
+      "LEFT"
+    ],
+    "hitboxes": [
+      {
+        "type": "rect",
+        "position": {
+          "x": 10.0,
+          "y": 5.0
+        },
+        "dimensions": {
+          "x": 5.0,
+          "y": 5.0
+        }
+      }
+    ],
+    "spawns": [
+      {
+        "type": "enemy",
+        "x": 10.0,
+        "y": 30.0
+      }
+    ]
+  },
+  "3": {
+    "texture": "immagine.jpg",
+    "shape": [
+      "DOWN",
+      "RIGHT"
+    ],
+    "hitboxes": [
+      {
+        "type": "circle",
+        "position": {
+          "x": 30.0,
+          "y": 5.0
+        },
+        "radius": 5.0
+      }
+    ],
+    "spawns": [
+      {
+        "type": "altar",
+        "x": 50.0,
+        "y": 30.0
+      }
+    ]
+  },
+  "4": {
+    "texture": "immagine.jpg",
+    "shape": [
+      "UP",
+      "RIGHT"
+    ],
+    "hitboxes": [
+      {
+        "type": "rect",
+        "position": {
+          "x": 10.0,
+          "y": 5.0
+        },
+        "dimensions": {
+          "x": 5.0,
+          "y": 5.0
+        }
+      },
+      {
+        "type": "circle",
+        "position": {
+          "x": 30.0,
+          "y": 5.0
+        },
+        "radius": 9.0
+      }
+    ],
+    "spawns": [
+      {
+        "type": "enemy",
+        "x": 40.0,
+        "y": 50.0
+      },
+      {
+        "type": "altar",
+        "x": 20.0,
+        "y": 10.0
+      }
+    ]
+  }
+}
