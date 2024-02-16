@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
  */
 public class GameMapBuilderImpl implements GameMapBuilder {
     private final Map<Pair<Integer, Integer>, TileBuilder> tileMap;
+    private final TileLoader tileLoader = new TileLoader();
     private Pair<Integer, Integer> playerTileMapPosition;
     private Pair<Integer, Integer> mapDimensions;
-    private TileLoader tileLoader = new TileLoader();
 
     /**
      * Creates a 1x1 map with the player starting at 0, 0.
@@ -52,13 +52,13 @@ public class GameMapBuilderImpl implements GameMapBuilder {
     */
 
     @Override
-    public GameMapBuilder setHomeTileAt(Pair<Integer, Integer> position) {
+    public final GameMapBuilder setHomeTileAt(final Pair<Integer, Integer> position) {
         this.tileMap.put(position, tileLoader.getHomeTile());
         return this;
     }
 
     @Override
-    public GameMap build(MessageHandler handler) {
+    public final GameMap build(final MessageHandler handler) {
         final TileShapeLoader loader = new TileShapeLoader(tileLoader);
         final WFCWrapper wfc = new WFCWrapperImpl(this.mapDimensions, loader.getAll());
         final Map<Pair<Integer, Integer>, Tile> builtTiles = tileMap.entrySet().stream()
