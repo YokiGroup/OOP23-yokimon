@@ -2,7 +2,9 @@ package io.github.yokigroup.world.entity.people;
 
 import io.github.yokigroup.event.MessageHandler;
 
-import io.github.yokigroup.event.submodule.*;
+import io.github.yokigroup.event.submodule.FightSubmoduleImpl;
+import io.github.yokigroup.event.submodule.GameMapSubmoduleImpl;
+import io.github.yokigroup.event.submodule.PlayerCharacterSubmoduleImpl;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.util.WeightedPoolImpl;
@@ -123,10 +125,8 @@ public class Enemy extends People {
         for (Entity entity : map.getEntitiesOnCurrentTile()) {
              if (entity instanceof Player && this.getHitBox().collidesWith(entity.getHitBox()).isPresent()) {
                  this.getMessageHandler().handle(FightSubmoduleImpl.class, fight -> {
-                     this.getMessageHandler().handle(PartySubmoduleImpl.class, playerParty -> {
                          fight.addEncounter();
                          this.shut();
-                     });
                  });
              }
         }
