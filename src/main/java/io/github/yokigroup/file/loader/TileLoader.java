@@ -37,7 +37,7 @@ public class TileLoader extends IdJsonLoader<TileBuilder> {
         final String TILE_HITBOX_POSITION_RPATH = ".position";
         final String TILE_HITBOX_DIMENSIONS_RPATH = ".dimensions";
         final String TILE_HITBOX_RADIUS_RPATH = ".radius";
-        final String formattedHitboxJPath = String.format(TILE_HITBOX_TYPE_JPATHF, id == -1 ? "home" : ""+id, index);
+        final String formattedHitboxJPath = String.format(TILE_HITBOX_TYPE_JPATHF, id == -1 ? "home" : "" + id, index);
         final String type = parser.read(formattedHitboxJPath  +  TILE_HITBOX_TYPE_RPATH);
         final Vector2 pos = getVector2(formattedHitboxJPath  +  TILE_HITBOX_POSITION_RPATH);
 
