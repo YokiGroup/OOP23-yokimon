@@ -58,7 +58,7 @@ final class OpponentAITest {
         //multiple attacks. BASIC --> the Attack with the biggest POWER value
 
         //                            first, the Attack with the biggest POWER value
-        //FIXME -> PMD STYLE CHECKS: LOCALE???
+        //FIXME -> PMD STYLE CHECKS: USA EQUALS ANZICHE' GETNAME()
         assertEquals(Optional.of(attackLoader.load(1)).get().getName().toLowerCase(),
                 toTest.getMove(y2, y1).get().getName().toLowerCase());
         //                              then, another -random- one
