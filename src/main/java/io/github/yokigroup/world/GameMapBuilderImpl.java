@@ -17,6 +17,7 @@ public class GameMapBuilderImpl implements GameMapBuilder {
     private final Map<Pair<Integer, Integer>, Tile> tileMap;
     private Pair<Integer, Integer> playerTileMapPosition;
     private Pair<Integer, Integer> mapDimensions;
+    private final TileShapeLoader loader = new TileShapeLoader();
 
     /**
      * Creates a 1x1 map with the player starting at 0, 0.
@@ -39,15 +40,16 @@ public class GameMapBuilderImpl implements GameMapBuilder {
         return this;
     }
 
+    /*
     @Override
     public final GameMapBuilder setStaticTileAt(final Pair<Integer, Integer> position, final Tile tile) {
         this.tileMap.put(position, tile);
         return this;
     }
+    */
 
     @Override
     public GameMap build(MessageHandler handler) {
-        final TileShapeLoader loader = new TileShapeLoader();
         final WFCWrapper wfc = new WFCWrapperImpl(this.mapDimensions, loader.getAll());
         this.tileMap.forEach((k, v) -> wfc.setStaticTile(k, v.getAdjacencies()));
         wfc.runWFC();

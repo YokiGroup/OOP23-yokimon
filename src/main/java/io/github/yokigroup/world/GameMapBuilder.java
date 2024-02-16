@@ -20,12 +20,20 @@ public interface GameMapBuilder {
      */
     GameMapBuilder setPlayerTileMapPosition(Pair<Integer, Integer> position);
 
+    /*
     /**
      * Sets a static tile in the map (won't be overridden by the generation).
      * @param position The position to set the tile at.
      * @param tile The tile to set it to.
-     */
+     * /
     GameMapBuilder setStaticTileAt(Pair<Integer, Integer> position, Tile tile);
+    */
+
+    /**
+     * Sets the home tile as a static tile in the map at position {@param position}.
+     * @param position The position to set the tile at.
+     */
+    GameMapBuilder setHomeTileAt(Pair<Integer, Integer> position);
 
     /**
      * Finalizes the GameMap object.
