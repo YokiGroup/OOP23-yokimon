@@ -6,11 +6,16 @@ import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import javax.naming.Name;
 
 public final class FightView extends Application {
 
@@ -18,8 +23,11 @@ public final class FightView extends Application {
     private static final int SCREEN_HEIGTH = 500;
     private static final int HPBAR_LENGTH = 250;
     private static final int HPBAR_HEIGTH = 35;
-    private static final int DELTA = 20;
+    private static final double DELTA = 20;
     private static final int ARC_DIMENSION = 15;
+    private static final String DEFAULT_NAME1 = "YOKIMON 1";
+    private static final String DEFAULT_NAME2 = "YOKIMON 2";
+    private static final String DEFAULT_LEVEL = "LEVEL";
     private static Pane root_draft = new Pane();
     private Fight fight;
     private static final String BACKGROUND_URL = "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/204364595/original/86db6005cd51b4f60e71cca277f603a82cf5646a/draw-a-pixel-pokemon-battle-background.png";
@@ -38,12 +46,14 @@ public final class FightView extends Application {
 
         setBackground();
         setHealthBars();
+        setInfo();
 
         //FINAL SETUPS
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fight");
         primaryStage.show();
     }
+
 
     // TODO MUST REPLACE URL WITH PNG
     private void setBackground() {
@@ -110,6 +120,43 @@ public final class FightView extends Application {
 
         root_draft.getChildren().add(healthbarMyYokimon);
         root_draft.getChildren().add(healthbarOppYokimon);
+    }
+
+    //FIXME
+    //loadfont
+    //classpath- > input stream dal font della classpath
+    private void setInfo() {
+
+        javafx.scene.text.Font.getFamilies();
+
+        //final Label Name1 = new Label(fight.getCurrentMyYokimon().getName().toUpperCase());
+        final Label Name1 = new Label(DEFAULT_NAME1);
+        Name1.setLayoutX(DELTA);
+        Name1.setLayoutY(DELTA + HPBAR_HEIGTH + (double)DELTA/3);
+        Name1.setStyle("-fx-text-fill: black ; -fx-font-size: 24;");
+
+        //final Label Name2 = new Label(fight.getCurrentOpponent().getName().toUpperCase());
+        final Label Name2 = new Label(DEFAULT_NAME2);
+        Name2.setLayoutX(SCREEN_WIDTH - (17)*DEFAULT_NAME2.length());
+        Name2.setLayoutY(DELTA + HPBAR_HEIGTH + DELTA/3);
+        Name2.setStyle("-fx-text-fill: black ; -fx-font-size: 24;");
+
+        //final Label Level1 = new Label(DEFAULT_LEVEL + fight.getCurrentMyYokimon().getLevel());
+        final Label Level1 = new Label(DEFAULT_LEVEL + "14");
+        Level1.setLayoutX(DELTA);
+        Level1.setLayoutY(DELTA + HPBAR_HEIGTH + DELTA*1.5);
+        Level1.setStyle("-fx-text-fill: black ; -fx-font-size: 24;");
+
+        //final Label Level2 = new Label(DEFAULT_LEVEL + fight.getCurrentOpponent().getLevel());
+        final Label Level2 = new Label(DEFAULT_LEVEL + "15");
+        Level2.setLayoutX(SCREEN_WIDTH - (12)*DEFAULT_NAME2.length());
+        Level2.setLayoutY(DELTA + HPBAR_HEIGTH + (double)DELTA*1.5);
+        Level2.setStyle("-fx-text-fill: black ; -fx-font-size: 24;");
+
+        root_draft.getChildren().add(Name1);
+        root_draft.getChildren().add(Name2);
+        root_draft.getChildren().add(Level1);
+        root_draft.getChildren().add(Level2);
     }
 
     private Color getColorHPBar(int percentage) {
