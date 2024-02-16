@@ -2,10 +2,7 @@ package io.github.yokigroup.world.entity.people;
 
 import io.github.yokigroup.event.MessageHandler;
 
-import io.github.yokigroup.event.submodule.FightSubmodule;
-import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.event.submodule.PartySubmodule;
-import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
+import io.github.yokigroup.event.submodule.*;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.util.WeightedPoolImpl;
@@ -121,12 +118,12 @@ public class Enemy extends People {
 
         this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
         this.nonEntityCollisionCheck();
-        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
+        this.getMessageHandler().handle(GameMapSubmoduleImpl.class, map -> {
 
         for (Entity entity : map.getEntitiesOnCurrentTile()) {
              if (entity instanceof Player && this.getHitBox().collidesWith(entity.getHitBox()).isPresent()) {
-                 this.getMessageHandler().handle(FightSubmodule.class, fight -> {
-                     this.getMessageHandler().handle(PartySubmodule.class, playerParty -> {
+                 this.getMessageHandler().handle(FightSubmoduleImpl.class, fight -> {
+                     this.getMessageHandler().handle(PartySubmoduleImpl.class, playerParty -> {
                          fight.addEncounter();
                          this.shut();
                      });
@@ -150,7 +147,7 @@ public class Enemy extends People {
         if (!this.getIsActive()) {
             return;
         }
-        this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {
+        this.getMessageHandler().handle(PlayerCharacterSubmoduleImpl.class, pos -> {
             Objects.requireNonNull(pos.getPosition().getPosition(), "Position of the player isNull");
             if (!this.getPos().isValid()) {
                 resetPosition();

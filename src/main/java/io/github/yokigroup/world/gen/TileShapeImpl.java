@@ -3,7 +3,6 @@ package io.github.yokigroup.world.gen;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.util.WeightedPoolImpl;
 import io.github.yokigroup.world.Direction;
-import io.github.yokigroup.world.tile.Tile;
 import io.github.yokigroup.world.tile.TileBuilder;
 
 import java.util.Set;
