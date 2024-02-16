@@ -20,6 +20,7 @@ class GameMapImpl implements GameMap {
      * @param mapDimensions The mapDimensions of the map in tiles.
      * @param tileMap The map of the tiles.
      * @param playerTileMapPosition The player position on the tileMap.
+     * @throws IllegalArgumentException if the TileMap is null.
      */
     GameMapImpl(final Pair<Integer, Integer> mapDimensions, final Map<Pair<Integer, Integer>, Tile> tileMap,
                 final Pair<Integer, Integer> playerTileMapPosition) {
