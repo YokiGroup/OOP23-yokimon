@@ -27,6 +27,7 @@ public interface WFCWrapper {
      *
      * @param position The position to get the tile from.
      * @return The tile at that position.
+     * @throws IllegalStateException If there is no tile at that position.
      */
     TileBuilder getTileAt(Pair<Integer, Integer> position);
 }
