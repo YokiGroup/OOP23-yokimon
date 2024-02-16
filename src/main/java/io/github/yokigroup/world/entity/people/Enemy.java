@@ -102,8 +102,8 @@ public class Enemy extends People {
         WeightedPoolImpl<Direction> directionWeightedPool = new WeightedPoolImpl<>();
 
         Stream.of(Direction.values())
-                .filter(dir -> this.getInitialPos().inRadius(this.getPos().testMovePosition(dir.get()), RADIUS_INITIAL_POS))
-                .filter(dir -> this.getPos().testMovePosition(dir.get()).isValid())
+                .filter(dir -> this.getInitialPos().inRadius(this.getPos().testMovePosition(dir.get().scale(SCALE)), RADIUS_INITIAL_POS))
+                .filter(dir -> this.getPos().testMovePosition(dir.get().scale(SCALE)).isValid())
                 .forEach(dir -> directionWeightedPool.addElement(dir, DEFAULT_POOL_VALUE));
         if (directionWeightedPool.size() < 1) {
             directionWeightedPool.addElement(Direction.DEFAULT_STAND, DEFAULT_POOL_VALUE);
