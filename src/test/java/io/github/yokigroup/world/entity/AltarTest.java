@@ -37,7 +37,7 @@ class AltarTest {
             Vector2 v = new Vector2Impl(30, 0);
             Position altarPos = new PositionImpl(v);
             TileBuilder tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, altarPos);
-            GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0,0)).build(messageHandler);
+            GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0,0)).changePlayerTileMapPosition(new Pair<>(0, 0)).build(messageHandler);
 
 
             public TestSubmodule(MessageHandler handler) {
@@ -78,13 +78,18 @@ class AltarTest {
 
         System.out.println("sasso");
         testMeg.handle(GameMapSubmoduleImpl.class, map -> {
+            System.out.println(map.getGameMap().getPlayerTileMapPosition().x() + "x" + "y" + map.getGameMap().getPlayerTileMapPosition().y());
            for(Entity entity : map.getEntitiesOnCurrentTile()) {
+
                if ( entity instanceof Altar ) {
+
                    Altar altar = (Altar) entity;
                     testMeg.handle(PlayerCharacterSubmoduleImpl.class, player -> {
                         assertEquals(Altar.AltarState.POWERED,  altar.getState());
                         altar.update();
-                        assertEquals(Altar.AltarState.POWERED,  altar.getState());
+
+                        System.out.println(player.getPosition().getPosition().getX());
+                        assertEquals(Altar.AltarState.USED,  altar.getState());
                         assertEquals(Altar.AltarState.POWERED,  altar.getState());
 
 
