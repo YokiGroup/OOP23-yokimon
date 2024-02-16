@@ -16,7 +16,7 @@ public final class App {
      * @param args
      */
     public static void main(final String[] args) {
-        Application.launch(JavaFXApp.class, args);
+        Application.launch(FightView.class, args);
         // The following line raises: Error: class io.github.yokigroup.view.App
         // is not a subclass of javafx.application.Application
         // JavaFXApp.launch(args);
