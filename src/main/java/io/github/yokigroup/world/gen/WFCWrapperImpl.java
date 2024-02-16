@@ -5,7 +5,6 @@ import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.gen.wfc.WaveFunctionCollapse;
 import io.github.yokigroup.world.gen.wfc.WaveFunctionCollapseImpl;
-import io.github.yokigroup.world.tile.Tile;
 import io.github.yokigroup.world.tile.TileBuilder;
 
 import java.util.HashSet;
