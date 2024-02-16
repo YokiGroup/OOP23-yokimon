@@ -64,7 +64,7 @@ public class TileBuilderImpl implements TileBuilder {
     }
 
     @Override
-    public final TileBuilder addAllAdjacencies(Set<Direction> directions) {
+    public final TileBuilder addAllAdjacencies(final Set<Direction> directions) {
         this.adjacencies.addAll(directions);
         return this;
     }
