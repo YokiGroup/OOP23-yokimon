@@ -3,6 +3,8 @@ package io.github.yokigroup.event.submodule;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.GameMap;
+import io.github.yokigroup.world.GameMapBuilder;
+import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
@@ -21,8 +23,13 @@ public final class GameMapSubmodule extends Submodule {
      */
     public GameMapSubmodule(final MessageHandler handler) {
         super(handler);
-        //this.gameMap = new GameMapImpl(MAP_DIM);
-        this.gameMap = null;
+        final Pair<Integer, Integer> playerTilePos = new Pair<>(MAP_DIM.x()/2+1, MAP_DIM.y()/2+1);
+        final GameMapBuilder builder = new GameMapBuilderImpl();
+
+        builder.setMapDimensions(MAP_DIM);
+        builder.setPlayerTileMapPosition(playerTilePos);
+        builder.setHomeTileAt(playerTilePos);
+        this.gameMap = builder.build(handler);
     }
 
     /**
