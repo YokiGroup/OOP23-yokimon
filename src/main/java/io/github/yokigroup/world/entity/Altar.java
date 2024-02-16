@@ -15,21 +15,17 @@ import java.util.Objects;
  * An altar gives a Yokimon to the player at the first interaction.
  */
 public class Altar extends Entity {
-    private final Yokimon gift;
     private AltarState state;
     private static final double RADIUS = 40;
     private static final double HITBOX_SIDE = 20;
     /**
      * Constructs an Altar object with the specified attributes.
      * @param pos The position of the Altar
-     * @param yokimon The Yokimon to give at the first interaction
      * @param messageHandler Message handler used to handle events
      */
-    public Altar(final Position pos,
-                 final Yokimon yokimon, final MessageHandler messageHandler) {
+    public Altar(final Position pos, final MessageHandler messageHandler) {
         super(pos, new RectangularHitbox(pos.getPosition(),
                 new Vector2Impl(HITBOX_SIDE, HITBOX_SIDE)), messageHandler);
-        this.gift = new YokimonImpl(yokimon);
         this.state = AltarState.POWERED;
     }
 
@@ -45,7 +41,9 @@ public class Altar extends Entity {
      * @return Optional<Yokimon> The Yokimon from the Altar
      */
     public final Yokimon getNewYokimon() {
-            return new YokimonImpl(this.gift);
+        //return new YokimonImpl(this.gift);
+        // TODO Generate a pokemon
+        return null;
     }
 
     /**
