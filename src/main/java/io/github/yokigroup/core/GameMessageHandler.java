@@ -11,8 +11,8 @@ import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 
 import java.lang.reflect.InvocationTargetException;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -22,19 +22,23 @@ import java.util.function.Function;
 public class GameMessageHandler implements MessageHandler {
     private final SubmoduleMap subModules;
 
-    /**
-     * Initializes game logic submodules.
-     * @return Initialized SubModuleMap
-     * @see SubmoduleMap
-     */
-    private SubmoduleMap initSubmodules() {
-        SubmoduleMap retMap = new SubmoduleMapImpl();
-        List<Class<? extends Submodule>> submoduleTypes = List.of(
+    protected Set<Class<? extends Submodule>> getSubmoduleTypes() {
+        return Set.of(
                 PartySubmodule.class,
                 PlayerCharacterSubmodule.class,
                 FightSubmodule.class,
                 GameMapSubmodule.class
         );
+    }
+
+    /**
+     * Initializes game logic submodules.
+     * @return Initialized SubModuleMap
+     * @see SubmoduleMap
+     */
+    private final SubmoduleMap initSubmodules() {
+        SubmoduleMap retMap = new SubmoduleMapImpl();
+        final var submoduleTypes = getSubmoduleTypes();
 
         submoduleTypes.forEach(s -> {
             try {
@@ -73,7 +77,7 @@ public class GameMessageHandler implements MessageHandler {
     }
 
     @Override
-    public void updateSubmodules() {
+    public final void updateSubmodules() {
         subModules.subModuleSet().forEach(Submodule::update);
     }
 }
