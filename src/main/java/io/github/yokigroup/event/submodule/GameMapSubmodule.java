@@ -26,9 +26,9 @@ public final class GameMapSubmodule extends Submodule {
         final Pair<Integer, Integer> playerTilePos = new Pair<>(MAP_DIM.x()/2+1, MAP_DIM.y()/2+1);
         final GameMapBuilder builder = new GameMapBuilderImpl();
 
-        builder.setMapDimensions(MAP_DIM);
-        builder.setPlayerTileMapPosition(playerTilePos);
-        builder.setHomeTileAt(playerTilePos);
+        builder.changeMapDimensions(MAP_DIM);
+        builder.changePlayerTileMapPosition(playerTilePos);
+        builder.putHomeTileAt(playerTilePos);
         this.gameMap = builder.build(handler);
     }
 

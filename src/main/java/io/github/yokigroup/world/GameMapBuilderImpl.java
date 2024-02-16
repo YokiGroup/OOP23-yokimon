@@ -32,27 +32,19 @@ public class GameMapBuilderImpl implements GameMapBuilder {
     }
 
     @Override
-    public final GameMapBuilder setMapDimensions(final Pair<Integer, Integer> dimensions) {
+    public final GameMapBuilder changeMapDimensions(final Pair<Integer, Integer> dimensions) {
         this.mapDimensions = dimensions;
         return this;
     }
 
     @Override
-    public final GameMapBuilder setPlayerTileMapPosition(final Pair<Integer, Integer> position) {
+    public final GameMapBuilder changePlayerTileMapPosition(final Pair<Integer, Integer> position) {
         this.playerTileMapPosition = position;
         return this;
     }
 
-    /*
     @Override
-    public final GameMapBuilder setStaticTileAt(final Pair<Integer, Integer> position, final Tile tile) {
-        this.tileMap.put(position, tile);
-        return this;
-    }
-    */
-
-    @Override
-    public final GameMapBuilder setHomeTileAt(final Pair<Integer, Integer> position) {
+    public final GameMapBuilder putHomeTileAt(final Pair<Integer, Integer> position) {
         this.tileMap.put(position, tileLoader.getHomeTile());
         return this;
     }
