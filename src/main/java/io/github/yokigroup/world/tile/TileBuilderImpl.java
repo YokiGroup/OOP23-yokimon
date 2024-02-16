@@ -2,7 +2,6 @@ package io.github.yokigroup.world.tile;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.world.entity.Altar;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
@@ -25,6 +24,7 @@ public class TileBuilderImpl implements TileBuilder {
 
     /**
      * Creates an empty tile with no entities, hitboxes nor adjacencies.
+     * @param id The id of the tile.
      */
     public TileBuilderImpl(final int id) {
         this.entities = new HashSet<>();
@@ -63,17 +63,17 @@ public class TileBuilderImpl implements TileBuilder {
         return this;
     }
 
+    @Override
+    public final Tile build(final MessageHandler handler) {
+        Set<Entity> createdEntities = generateEntities(handler);
+        return new TileImpl(id, this.adjacencies, this.hitboxes, createdEntities);
+    }
+
     private Set<Entity> generateEntities(MessageHandler handler) {
         return this.entities.stream()
-                .map(e -> switch(e.x()) {
+                .map(e -> switch (e.x()) {
                     case ENEMY -> new Enemy(e.y(), handler);
                     case ALTAR -> new Altar(e.y(), handler);
                 }).collect(Collectors.toSet());
-    }
-
-    @Override
-    public Tile build(MessageHandler handler) {
-        Set<Entity> createdEntities = generateEntities(handler);
-        return new TileImpl(id, this.adjacencies, this.hitboxes, createdEntities);
     }
 }
