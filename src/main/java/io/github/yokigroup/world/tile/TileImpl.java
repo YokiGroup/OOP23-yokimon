@@ -23,7 +23,7 @@ class TileImpl implements Tile {
      * @param hitboxes The invisible walls in a tile.
      * @param entities The entities on the tile.
      */
-    public TileImpl(final int id, final Set<Direction> adjacencies, final Set<Hitbox> hitboxes, final Set<Entity> entities) {
+    TileImpl(final int id, final Set<Direction> adjacencies, final Set<Hitbox> hitboxes, final Set<Entity> entities) {
         if (hitboxes == null) {
             throw new IllegalArgumentException("The hitboxes set is null.");
         } else if (entities == null) {

@@ -19,7 +19,7 @@ class GameMapImpl implements GameMap {
      * Initializes the game map through the usage of the wave function collapse algorithm.
      * @param mapDimensions The mapDimensions of the map in tiles.
      */
-    public GameMapImpl(final Pair<Integer, Integer> mapDimensions, final Map<Pair<Integer, Integer>, Tile> tileMap, final Pair<Integer, Integer> playerTileMapPosition) {
+    GameMapImpl(final Pair<Integer, Integer> mapDimensions, final Map<Pair<Integer, Integer>, Tile> tileMap, final Pair<Integer, Integer> playerTileMapPosition) {
         if (tileMap == null) {
             throw new IllegalArgumentException("The passed TileMap was null");
         }
