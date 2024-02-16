@@ -72,7 +72,7 @@ public class YokimonImpl implements Yokimon {
     }
     /**
      * Constructor for YokimonImpl with default level.
-     * @param id id of the Yokiomon
+     * @param id id of the Yokimon
      * @param name Name of the Yokimon
      * @param color Color of the Yokimon
      * @param baseStats Base stats of the Yokimon
