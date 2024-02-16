@@ -4,7 +4,6 @@ import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.file.loader.TileShapeLoader;
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.world.tile.Tile;
 import io.github.yokigroup.world.tile.TileBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
