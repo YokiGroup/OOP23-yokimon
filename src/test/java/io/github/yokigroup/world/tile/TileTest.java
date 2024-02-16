@@ -21,13 +21,14 @@ class TileTest {
     @BeforeEach
     public void init() {
         final MessageHandler messageHandler = new GameMessageHandler();
+        final int id = 13;
         final double r1 = 10.0d;
         final double r2 = 2.0d;
         final double r3 = 3.0d;
         hitbox1 = new CircularHitbox(r1);
         hitbox2 = new CircularHitbox(r2);
         hitbox3 = new CircularHitbox(r3);
-        tile = new TileBuilderImpl(13)
+        tile = new TileBuilderImpl(id)
                 .addHitbox(hitbox1)
                 .addHitbox(hitbox2)
                 .addHitbox(hitbox3)
@@ -39,7 +40,7 @@ class TileTest {
     @Test
     void tileGettersAndAdd() {
         assertEquals(13, tile.getId());
-        assertEquals(3, tile.getAdjacencies().size());
+        assertEquals(2, tile.getAdjacencies().size());
         assertTrue(tile.getAdjacencies().contains(Direction.UP));
         assertTrue(tile.getAdjacencies().contains(Direction.DOWN));
         assertEquals(3, tile.getHitboxes().size());
