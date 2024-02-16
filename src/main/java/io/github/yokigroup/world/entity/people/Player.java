@@ -17,13 +17,12 @@ public class Player extends People {
 
     /**
      * Constructor of the player.
-     * @param id identification id
      * @param pos initial Pos
      * @param messageHandler handler of Events
      */
-    public Player(final int id, final Position pos,
+    public Player(final Position pos,
                   final MessageHandler messageHandler) {
-        super(id, pos, messageHandler);
+        super(pos, messageHandler);
     }
 
     /**

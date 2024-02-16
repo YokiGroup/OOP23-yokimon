@@ -3,18 +3,22 @@ package io.github.yokigroup.world.tile;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.world.entity.Altar;
 import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.Direction;
+import io.github.yokigroup.world.entity.people.Enemy;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of a builder class to create a tile object.
  */
 public class TileBuilderImpl implements TileBuilder {
-    private final Set<Pair<EntityType, Vector2>> entities;
+    private final Set<Pair<EntityType, Position>> entities;
     private final Set<Hitbox> hitboxes;
     private final Set<Direction> adjacencies;
     private final int id;
@@ -42,13 +46,13 @@ public class TileBuilderImpl implements TileBuilder {
     }
 
     @Override
-    public final TileBuilder addEntity(final EntityType entityType, final Vector2 position) {
+    public final TileBuilder addEntity(final EntityType entityType, final Position position) {
         this.entities.add(new Pair<>(entityType, position));
         return this;
     }
 
     @Override
-    public final TileBuilder addAllEntities(final Set<Pair<EntityType, Vector2>> entities) {
+    public final TileBuilder addAllEntities(final Set<Pair<EntityType, Position>> entities) {
         this.entities.addAll(entities);
         return this;
     }
@@ -59,9 +63,17 @@ public class TileBuilderImpl implements TileBuilder {
         return this;
     }
 
+    private Set<Entity> generateEntities(MessageHandler handler) {
+        return this.entities.stream()
+                .map(e -> switch(e.x()) {
+                    case ENEMY -> new Enemy(e.y(), handler);
+                    case ALTAR -> new Altar(e.y(), handler);
+                }).collect(Collectors.toSet());
+    }
+
     @Override
     public Tile build(MessageHandler handler) {
-        Set<Entity> createdEntities = new HashSet<>(); // FIXME implement as soon as entity constructors are fixed
+        Set<Entity> createdEntities = generateEntities(handler);
         return new TileImpl(id, this.adjacencies, this.hitboxes, createdEntities);
     }
 }

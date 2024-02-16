@@ -5,6 +5,8 @@ import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.json.InvalidJsonException;
 import io.github.yokigroup.util.json.JsonParser;
 import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.world.entity.Position;
+import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
@@ -57,11 +59,11 @@ public class TileLoader extends IdJsonLoader<TileBuilder> {
         }));
     }
 
-    private Set<Pair<TileBuilder.EntityType, Vector2>> getEntities(final int id) {
+    private Set<Pair<TileBuilder.EntityType, Position>> getEntities(final int id) {
         final String SPAWN_POSITION_JPATH = "$." + (id == -1 ? "home" : id) + ".spawns[%d]";
         return ifNullReturnEmpty(doUntilPathException(new HashSet<>(), (c, i) -> {
             final String formattedJPath = String.format(SPAWN_POSITION_JPATH, i);
-            Vector2 position = getVector2(formattedJPath);
+            Position position = new PositionImpl(getVector2(formattedJPath));
             String type = getParser().read(formattedJPath + ".type");
             c.add(switch (type) {
                 case "enemy" -> new Pair<>(TileBuilder.EntityType.ENEMY, position);
