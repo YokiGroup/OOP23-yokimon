@@ -10,12 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import javax.naming.Name;
+import java.io.FileInputStream;
 
 public final class FightView extends Application {
 
@@ -28,8 +27,11 @@ public final class FightView extends Application {
     private static final String DEFAULT_NAME1 = "YOKIMON 1";
     private static final String DEFAULT_NAME2 = "YOKIMON 2";
     private static final String DEFAULT_LEVEL = "LEVEL";
+    private static final double YOKIMON_DIM = 200;
     private static Pane root_draft = new Pane();
     private Fight fight;
+    private static final String POKEMON1_URL = "https://i.pinimg.com/originals/ef/33/2f/ef332f79619b7503ff40c766eb370219.png";
+    private static final String POKEMON2_URL = "https://purepng.com/public/uploads/large/purepng.com-pokemonpokemonpocket-monsterspokemon-franchisefictional-speciesone-pokemonmany-pokemonone-pikachu-1701527784884jkxg4.png";
     private static final String BACKGROUND_URL = "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/204364595/original/86db6005cd51b4f60e71cca277f603a82cf5646a/draw-a-pixel-pokemon-battle-background.png";
     private static final String BACKGROUND_PNG = "C:/Users/Marilia/Downloads/forest-background-5th-style-pass-portfolio-edit.png";
 
@@ -47,11 +49,37 @@ public final class FightView extends Application {
         setBackground();
         setHealthBars();
         setInfo();
+        setYokimons();
 
         //FINAL SETUPS
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fight");
         primaryStage.show();
+    }
+
+    //TODO SUBSTITUTE WITH ACTUAL YOKIMONS
+    private void setYokimons() {
+
+        Image image1 = new Image("C:\\Users\\Marilia\\Downloads\\YOKIMON\\TANUKI.png");
+        Image image2 = new Image("C:\\Users\\Marilia\\Downloads\\YOKIMON\\NEKOMATA.png");;
+
+        //final Image image1 = new Image(POKEMON1_URL, YOKIMON_DIM, YOKIMON_DIM, false, true);
+        //final Image image2 = new Image(POKEMON2_URL, YOKIMON_DIM, YOKIMON_DIM, false, true);
+        ImagePattern pattern1 = new ImagePattern(image1);
+        ImagePattern pattern2 = new ImagePattern(image2);
+
+        Rectangle rect1 = new Rectangle(YOKIMON_DIM, YOKIMON_DIM);
+        rect1.setX(DELTA);
+        rect1.setY(SCREEN_HEIGTH - YOKIMON_DIM - 3 * DELTA);
+
+        Rectangle rect2 = new Rectangle(YOKIMON_DIM, YOKIMON_DIM);
+        rect2.setX(SCREEN_WIDTH - YOKIMON_DIM - DELTA);
+        rect2.setY(SCREEN_HEIGTH - YOKIMON_DIM - 3 * DELTA);
+
+        rect1.setFill(pattern1);
+        rect2.setFill(pattern2);
+        root_draft.getChildren().add(rect1);
+        root_draft.getChildren().add(rect2);
     }
 
 
