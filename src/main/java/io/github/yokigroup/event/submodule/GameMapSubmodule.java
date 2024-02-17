@@ -29,7 +29,7 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
      */
     public GameMapSubmodule(final MessageHandler handler, ModelObserver modelObs) {
         super(handler);
-        final Pair<Integer, Integer> playerTilePos = new Pair<>(MAP_DIM.x()/2+1, MAP_DIM.y()/2+1);
+        final Pair<Integer, Integer> playerTilePos = new Pair<>(MAP_DIM.x() / 2 + 1, MAP_DIM.y() / 2 + 1);
         final GameMapBuilder builder = new GameMapBuilderImpl();
 
         builder.changeMapDimensions(MAP_DIM);

@@ -1,6 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
@@ -15,7 +16,7 @@ import java.util.List;
  * Implementation of {@link PartySubmoduleAbs}.
  * @author Giovanni Paone
  */
-public class PartySubmodule extends PartySubmoduleAbs {
+public final class PartySubmodule extends PartySubmoduleAbs {
     private List<Yokimon> yokimonList;
     private final Publisher<NewYokimonNotification> newYokimonNotificationPub = new PublisherImpl<>();
 
@@ -29,14 +30,12 @@ public class PartySubmodule extends PartySubmoduleAbs {
     }
 
     private List<Yokimon> deepCopyOf(final List<Yokimon> list) {
-        // TODO wait for a copy constructor of yokimon to be pushed upstream
-        //return List.copyOf(list.stream().map(y -> new YokimonImpl(y)));
-        return List.copyOf(list);
+        return list.stream().map(YokimonImpl::new).map(Yokimon.class::cast).toList();
     }
 
     @Override
     public void addYokimon(final Yokimon y) {
-        yokimonList.add(y);
+        yokimonList.add(new YokimonImpl(y));
     }
 
     @Override
@@ -50,8 +49,8 @@ public class PartySubmodule extends PartySubmoduleAbs {
     }
 
     @Override
-    public boolean removeYokimon(final Yokimon y) {
-        return yokimonList.remove(y);
+    public void removeYokimon(final int index) {
+        yokimonList.remove(index);
     }
 
 }

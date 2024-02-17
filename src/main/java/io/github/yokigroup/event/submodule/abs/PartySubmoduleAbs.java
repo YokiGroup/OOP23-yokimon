@@ -6,17 +6,21 @@ import io.github.yokigroup.event.MessageHandler;
 import java.util.List;
 
 /**
- * Submodule containing a party's information (yokimon's group).
+ * Abstract class of a submodule containing information about the player's party of yokimons.
+ * @see Yokimon
  * @author Giovanni Paone
  */
 public abstract class PartySubmoduleAbs extends Submodule {
-    public PartySubmoduleAbs(MessageHandler handler) {
+
+    /**
+     * @param handler to init the submodule with
+     */
+    public PartySubmoduleAbs(final MessageHandler handler) {
         super(handler);
     }
 
     /**
      * Adds a yokimon to the party.
-     *
      * @param y yokimon to add
      */
     public abstract void addYokimon(Yokimon y);
@@ -40,10 +44,10 @@ public abstract class PartySubmoduleAbs extends Submodule {
     /**
      * Removes a yokimon from the party.
      *
-     * @param y yokimon to remove
-     * @return true if the yokimon has been removed
+     * @param index list index of yokimon to remove
+     * @see #listYokimons() for the yokimon index
      */
-    public abstract boolean removeYokimon(Yokimon y);
+    public abstract void removeYokimon(int index);
 
     @Override
     public void update() {

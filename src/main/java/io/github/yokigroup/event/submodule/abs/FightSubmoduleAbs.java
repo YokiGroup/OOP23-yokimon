@@ -1,16 +1,22 @@
 package io.github.yokigroup.event.submodule.abs;
 
+import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.event.MessageHandler;
 
 import java.util.Optional;
 
 /**
- * Handles queuing fights and starting them when the process.
+ * Abstract class of a submodule containing information about the player's upcoming fights.
+ * @see Yokimon
  * @author Giovanni Paone
  */
 public abstract class FightSubmoduleAbs extends Submodule {
-    public FightSubmoduleAbs(MessageHandler handler) {
+
+    /**
+     * @param handler to init the submodule with
+     */
+    public FightSubmoduleAbs(final MessageHandler handler) {
         super(handler);
     }
 

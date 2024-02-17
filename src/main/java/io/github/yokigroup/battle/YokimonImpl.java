@@ -54,7 +54,7 @@ public class YokimonImpl implements Yokimon {
     public YokimonImpl(final int id, final String name, final Color color, final Map<Yokimon.Stats, Integer> baseStats,
                        final GrowthRate growthRate, final int level, final Map<Integer, Attack> learnableMoves) {
         this.stats = new HashMap<>();
-        for (Stats stat : Stats.values()) {
+        for (final Stats stat : Stats.values()) {
             stats.put(stat, DEFAULT_STAT);
         }
         this.moves = new ArrayList<>();
@@ -115,6 +115,7 @@ public class YokimonImpl implements Yokimon {
     /**
      * @return The color of the yokimon.
      */
+    @Override
     public final Color getYokimonColor() {
         return this.color;
     }
@@ -233,7 +234,11 @@ public class YokimonImpl implements Yokimon {
         double xpToTake = n * this.growthRate.get();
         while (xpToTake >= this.xpNext - this.xp) {
             xpToTake -= this.xpNext - this.xp;
-            expCode = this.levelUtility.levelUp(this, 1);
+            if (expCode == ExpCode.NEW_MOVE) {
+                this.levelUtility.levelUp(this, 1);
+            } else {
+                expCode = this.levelUtility.levelUp(this, 1);
+            }
         }
         this.xp += xpToTake;
         return expCode;
@@ -262,7 +267,7 @@ public class YokimonImpl implements Yokimon {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        YokimonImpl yokimon = (YokimonImpl) o;
+        final YokimonImpl yokimon = (YokimonImpl) o;
         return id == yokimon.id && level == yokimon.level && maxHp == yokimon.maxHp && actualHp == yokimon.actualHp
                 && Double.compare(xp, yokimon.xp) == 0 && Double.compare(xpNext, yokimon.xpNext) == 0
                 && active == yokimon.active && Objects.equals(name, yokimon.name) && color == yokimon.color

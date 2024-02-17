@@ -5,12 +5,10 @@ import io.github.yokigroup.util.json.JsonParser;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.gen.TileShape;
 import io.github.yokigroup.world.gen.TileShapeImpl;
-import io.github.yokigroup.world.tile.Tile;
 import io.github.yokigroup.world.tile.TileBuilder;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -35,7 +33,7 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
      * Instance TileShapeLoader with an existing TileLoader.
      * @param loader loader to use
      */
-    public TileShapeLoader(TileLoader loader) {
+    public TileShapeLoader(final TileLoader loader) {
         super(TILE_JSON_RPATH);
         Objects.requireNonNull(loader);
         this.tileLoader = loader;

@@ -14,8 +14,8 @@ import java.util.Optional;
  * Implementation of {@link FightSubmoduleAbs}.
  * @author Giovanni Paone
  */
-public class FightSubmodule extends FightSubmoduleAbs {
-    private Optional<Fight> lastAnnouncedFight = Optional.empty();
+public final class FightSubmodule extends FightSubmoduleAbs {
+    private Fight lastAnnouncedFight = null;
     private Publisher<Fight> fightPub = new PublisherImpl<>();
 
     /**
@@ -35,7 +35,7 @@ public class FightSubmodule extends FightSubmoduleAbs {
 
     @Override
     public Optional<Fight> getLastAnnouncedFight() {
-        return lastAnnouncedFight;
+        return Optional.ofNullable(lastAnnouncedFight);
     }
 
 }
