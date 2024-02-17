@@ -56,7 +56,7 @@ public final class FightImpl implements Fight {
         this.oppYokimons = oppYokimons;
 
         if (nextYok.getNext(myYokimons).isEmpty() || nextYok.getNext(oppYokimons).isEmpty()) {
-            throw new RuntimeException ("Must instantiate fight with at least one Yokimon on each party.");
+            throw new RuntimeException("Must instantiate fight with at least one Yokimon on each party.");
         }
         this.currMyYokimon = nextYok.getNext(myYokimons).get();
         this.currOppYokimon = nextYok.getNext(oppYokimons).get();
@@ -173,7 +173,7 @@ public final class FightImpl implements Fight {
     }
 
     @Override
-    public double getHPPercentage(final Yokimon yokimon){
+    public double getHPPercentage(final Yokimon yokimon) {
         return (double) yokimon.getActualHp() / yokimon.getMaxHp();
     }
 
