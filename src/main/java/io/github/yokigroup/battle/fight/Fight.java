@@ -116,6 +116,6 @@ public interface Fight {
      * @param yokimon the yokimon whose HP percentage must be shown
      * @return the percentage of HP points left.
      */
-    public double getHPPercentage(Yokimon yokimon);
+    double getHPPercentage(Yokimon yokimon);
 
 }
