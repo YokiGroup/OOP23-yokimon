@@ -1,5 +1,6 @@
 package io.github.yokigroup.world.entity;
 
+import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
@@ -34,12 +35,8 @@ public abstract class Entity {
         this.resourceURL = resourceURL;
     }
 
-    public final String getResourceURL() {
-        return this.resourceURL;
-    }
-
-    public final Vector2 getDimensions() {
-        return this.dimensions;
+    public SpriteData getSpriteData() {
+        return new SpriteData(resourceURL, pos.getPosition(), dimensions);
     }
 
     /**
