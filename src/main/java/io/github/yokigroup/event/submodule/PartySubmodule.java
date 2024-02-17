@@ -43,8 +43,8 @@ public final class PartySubmodule extends PartySubmoduleAbs {
     }
 
     @Override
-    public boolean removeYokimon(final Yokimon y) {
-        return yokimonList.remove(new YokimonImpl(y));
+    public void removeYokimon(final int index) {
+        yokimonList.remove(index);
     }
 
 }

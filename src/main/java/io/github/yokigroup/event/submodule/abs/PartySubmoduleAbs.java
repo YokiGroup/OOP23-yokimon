@@ -44,10 +44,10 @@ public abstract class PartySubmoduleAbs extends Submodule {
     /**
      * Removes a yokimon from the party.
      *
-     * @param y yokimon to remove
-     * @return true if the yokimon has been removed
+     * @param index list index of yokimon to remove
+     * @see PartySubmoduleAbs#listYokimons() for the yokimon index
      */
-    public abstract boolean removeYokimon(Yokimon y);
+    public abstract void removeYokimon(int index);
 
     @Override
     public void update() {
