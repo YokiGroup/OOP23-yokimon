@@ -118,12 +118,12 @@ public class Enemy extends People {
 
         this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
         this.nonEntityCollisionCheck();
-        this.getMessageHandler().handle(GameMapSubmoduleImpl.class, map -> {
+        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
 
         for (Entity entity : map.getEntitiesOnCurrentTile()) {
              if (entity instanceof Player && this.getHitBox().collidesWith(entity.getHitBox()).isPresent()) {
-                 this.getMessageHandler().handle(FightSubmoduleImpl.class, fight -> {
-                     this.getMessageHandler().handle(PartySubmoduleImpl.class, playerParty -> {
+                 this.getMessageHandler().handle(FightSubmodule.class, fight -> {
+                     this.getMessageHandler().handle(PartySubmodule.class, playerParty -> {
                          fight.addEncounter();
                          this.shut();
                      });
@@ -147,7 +147,7 @@ public class Enemy extends People {
         if (!this.getIsActive()) {
             return;
         }
-        this.getMessageHandler().handle(PlayerCharacterSubmoduleImpl.class, pos -> {
+        this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {
             Objects.requireNonNull(pos.getPosition().getPosition(), "Position of the player isNull");
             if (!this.getPos().isValid()) {
                 resetPosition();

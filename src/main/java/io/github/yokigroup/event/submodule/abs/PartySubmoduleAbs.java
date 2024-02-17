@@ -5,8 +5,8 @@ import io.github.yokigroup.event.MessageHandler;
 
 import java.util.List;
 
-public abstract class PartySubmodule extends Submodule {
-    public PartySubmodule(MessageHandler handler) {
+public abstract class PartySubmoduleAbs extends Submodule {
+    public PartySubmoduleAbs(MessageHandler handler) {
         super(handler);
     }
 

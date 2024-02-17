@@ -2,8 +2,8 @@ package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.abs.GameMapSubmodule;
-import io.github.yokigroup.event.submodule.GameMapSubmoduleImpl;
+import io.github.yokigroup.event.submodule.abs.GameMapSubmoduleAbs;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.GameMap;
@@ -29,7 +29,7 @@ class AltarTest {
 
         Altar altar = new Altar(altarPos, messageHandler);
         Entity player = new Player(playerPos, messageHandler);
-        GameMap map = messageHandler.handle(GameMapSubmoduleImpl.class, GameMapSubmodule::getGameMap);
+        GameMap map = messageHandler.handle(GameMapSubmodule.class, GameMapSubmoduleAbs::getGameMap);
         map.getPlayerTile().getEntities().add(player);
         map.getPlayerTile().getEntities().add(altar);
         assertEquals(Altar.AltarState.POWERED, altar.getState());

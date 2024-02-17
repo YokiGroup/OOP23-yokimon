@@ -1,7 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.abs.GameMapSubmodule;
+import io.github.yokigroup.event.submodule.abs.GameMapSubmoduleAbs;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.GameMapBuilder;
@@ -15,13 +15,13 @@ import java.util.Set;
  * Submodule containing a GameMap and relevant methods to query the map's state.
  * @author Giovanni Paone
  */
-public final class GameMapSubmoduleImpl extends GameMapSubmodule {
+public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     private final GameMap gameMap;
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
-    public GameMapSubmoduleImpl(final MessageHandler handler) {
+    public GameMapSubmodule(final MessageHandler handler) {
         super(handler);
         final Pair<Integer, Integer> playerTilePos = new Pair<>(MAP_DIM.x()/2+1, MAP_DIM.y()/2+1);
         final GameMapBuilder builder = new GameMapBuilderImpl();

@@ -2,7 +2,7 @@ package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.abs.PartySubmodule;
+import io.github.yokigroup.event.submodule.abs.PartySubmoduleAbs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +11,13 @@ import java.util.List;
  * Submodule containing a party's information (yokimon's group).
  * @author Giovanni Paone
  */
-public class PartySubmoduleImpl extends PartySubmodule {
+public class PartySubmodule extends PartySubmoduleAbs {
     private List<Yokimon> yokimonList;
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
-    public PartySubmoduleImpl(final MessageHandler handler) {
+    public PartySubmodule(final MessageHandler handler) {
         super(handler);
         yokimonList = new ArrayList<>();
     }

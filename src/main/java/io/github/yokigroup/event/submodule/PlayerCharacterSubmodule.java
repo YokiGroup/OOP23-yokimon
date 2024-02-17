@@ -1,7 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.abs.PlayerCharacterSubmodule;
+import io.github.yokigroup.event.submodule.abs.PlayerCharacterSubmoduleAbs;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.Direction;
@@ -15,7 +15,7 @@ import io.github.yokigroup.world.entity.people.Player;
  * Handles player updates.
  * @author Giovanni Paone
  */
-public final class PlayerCharacterSubmoduleImpl extends PlayerCharacterSubmodule {
+public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs {
     private final Entity player;
 
     // FIXME Replace with proper implementation
@@ -23,7 +23,7 @@ public final class PlayerCharacterSubmoduleImpl extends PlayerCharacterSubmodule
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
-    public PlayerCharacterSubmoduleImpl(final MessageHandler handler) {
+    public PlayerCharacterSubmodule(final MessageHandler handler) {
         super(handler);
         Vector2 playerPos = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() /2, (double) GameMap.TILE_DIMENSIONS.y() /2);
         this.player = new Player(new PositionImpl(playerPos), handler);
@@ -32,7 +32,7 @@ public final class PlayerCharacterSubmoduleImpl extends PlayerCharacterSubmodule
     // TODO Change Direction reference
     @Override
     public void changeTile(final Direction dir) {
-        handler().handle(GameMapSubmoduleImpl.class, s -> {
+        handler().handle(GameMapSubmodule.class, s -> {
             s.getGameMap().movePlayerTileMapPosition(dir);
         });
     }

@@ -5,10 +5,9 @@ import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
-import io.github.yokigroup.world.entity.PositionImpl;
 
-public abstract class PlayerCharacterSubmodule extends Submodule {
-    public PlayerCharacterSubmodule(MessageHandler handler) {
+public abstract class PlayerCharacterSubmoduleAbs extends Submodule {
+    public PlayerCharacterSubmoduleAbs(MessageHandler handler) {
         super(handler);
     }
 
