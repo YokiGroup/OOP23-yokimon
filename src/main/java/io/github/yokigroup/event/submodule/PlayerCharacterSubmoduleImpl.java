@@ -1,6 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.abs.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.Direction;

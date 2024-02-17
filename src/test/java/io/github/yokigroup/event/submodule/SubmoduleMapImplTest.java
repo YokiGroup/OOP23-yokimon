@@ -2,6 +2,9 @@ package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.abs.FightSubmodule;
+import io.github.yokigroup.event.submodule.abs.PartySubmodule;
+import io.github.yokigroup.event.submodule.abs.Submodule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
