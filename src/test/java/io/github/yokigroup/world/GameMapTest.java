@@ -36,7 +36,7 @@ class GameMapTest {
                 .collect(Collectors.toSet());
         assertEquals(loader.getHomeTile().build(messageHandler), map.getTileAt(new Pair<>(1, 1)));
         assertTrue(tileIds.contains(map.getTileAt(new Pair<>(1, 2)).getId()));
-        assertTrue(tileIds.contains(map.getTileAt(new Pair<>(0, 3)).getId()));
+        assertTrue(tileIds.contains(map.getTileAt(new Pair<>(2, 0)).getId()));
     }
 
     @Test
