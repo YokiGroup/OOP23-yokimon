@@ -49,7 +49,7 @@ class EnemyTest {
             TileBuilder tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, pos1)
-                    .addEntity(TileBuilder.EntityType.ENEMY, pos1);
+                    .addEntity(TileBuilder.EntityType.ENEMY, pos2);
             final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0,0)).build(this.handler());
 
 
