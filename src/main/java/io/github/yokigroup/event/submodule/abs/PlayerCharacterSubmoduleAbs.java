@@ -6,8 +6,8 @@ import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 
-public abstract class PlayerCharacterSubmodule extends Submodule {
-    public PlayerCharacterSubmodule(MessageHandler handler) {
+public abstract class PlayerCharacterSubmoduleAbs extends Submodule {
+    public PlayerCharacterSubmoduleAbs(MessageHandler handler) {
         super(handler);
     }
 
