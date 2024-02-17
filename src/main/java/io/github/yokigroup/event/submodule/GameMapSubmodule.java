@@ -12,7 +12,7 @@ import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import java.util.Set;
 
 /**
- * Submodule containing a GameMap and relevant methods to query the map's state.
+ * Implementation of {@link GameMapSubmoduleAbs}.
  * @author Giovanni Paone
  */
 public final class GameMapSubmodule extends GameMapSubmoduleAbs {

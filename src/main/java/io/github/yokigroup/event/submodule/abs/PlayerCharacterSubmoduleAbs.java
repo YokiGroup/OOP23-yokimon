@@ -6,6 +6,10 @@ import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 
+/**
+ * Handles player updates.
+ * @author Giovanni Paone
+ */
 public abstract class PlayerCharacterSubmoduleAbs extends Submodule {
     public PlayerCharacterSubmoduleAbs(MessageHandler handler) {
         super(handler);

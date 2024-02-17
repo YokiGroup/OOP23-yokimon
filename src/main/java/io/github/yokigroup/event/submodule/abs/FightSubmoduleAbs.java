@@ -5,6 +5,10 @@ import io.github.yokigroup.event.MessageHandler;
 
 import java.util.Optional;
 
+/**
+ * Handles queuing fights and starting them when the process.
+ * @author Giovanni Paone
+ */
 public abstract class FightSubmoduleAbs extends Submodule {
     public FightSubmoduleAbs(MessageHandler handler) {
         super(handler);

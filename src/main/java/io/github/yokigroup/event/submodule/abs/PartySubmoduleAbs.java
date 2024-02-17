@@ -5,6 +5,10 @@ import io.github.yokigroup.event.MessageHandler;
 
 import java.util.List;
 
+/**
+ * Submodule containing a party's information (yokimon's group).
+ * @author Giovanni Paone
+ */
 public abstract class PartySubmoduleAbs extends Submodule {
     public PartySubmoduleAbs(MessageHandler handler) {
         super(handler);

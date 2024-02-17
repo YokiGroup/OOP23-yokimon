@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Submodule containing a party's information (yokimon's group).
+ * Implementation of {@link PartySubmoduleAbs}.
  * @author Giovanni Paone
  */
 public class PartySubmodule extends PartySubmoduleAbs {

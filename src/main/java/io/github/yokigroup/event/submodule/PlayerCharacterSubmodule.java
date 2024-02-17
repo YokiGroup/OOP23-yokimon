@@ -12,7 +12,7 @@ import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.people.Player;
 
 /**
- * Handles player updates.
+ * Implementation of {@link PlayerCharacterSubmoduleAbs}.
  * @author Giovanni Paone
  */
 public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs {

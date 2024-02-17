@@ -7,7 +7,7 @@ import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
 import java.util.Optional;
 
 /**
- * Handles queuing fights and starting them when the process.
+ * Implementation of {@link FightSubmoduleAbs}.
  * @author Giovanni Paone
  */
 public class FightSubmodule extends FightSubmoduleAbs {
@@ -19,8 +19,6 @@ public class FightSubmodule extends FightSubmoduleAbs {
     public FightSubmodule(final MessageHandler handler) {
         super(handler);
     }
-
-
 
     @Override
     public void addEncounter() {

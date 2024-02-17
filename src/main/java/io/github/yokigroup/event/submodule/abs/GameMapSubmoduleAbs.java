@@ -9,6 +9,10 @@ import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 import java.util.Set;
 
+/**
+ * Submodule containing a GameMap and relevant methods to query the map's state.
+ * @author Giovanni Paone
+ */
 public abstract class GameMapSubmoduleAbs extends Submodule {
     protected final Pair<Integer, Integer> MAP_DIM = new Pair<>(5, 5);
 
