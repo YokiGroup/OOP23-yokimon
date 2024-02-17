@@ -5,14 +5,22 @@ import io.github.yokigroup.event.MessageHandler;
 
 import java.util.List;
 
+/**
+ * Abstract class of a submodule containing information about the player's party of yokimons.
+ * @see Yokimon
+ * @author Giovanni Paone
+ */
 public abstract class PartySubmoduleAbs extends Submodule {
-    public PartySubmoduleAbs(MessageHandler handler) {
+
+    /**
+     * @param handler to init the submodule with
+     */
+    public PartySubmoduleAbs(final MessageHandler handler) {
         super(handler);
     }
 
     /**
      * Adds a yokimon to the party.
-     *
      * @param y yokimon to add
      */
     public abstract void addYokimon(Yokimon y);
