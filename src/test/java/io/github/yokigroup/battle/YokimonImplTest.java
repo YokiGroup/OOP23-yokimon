@@ -1,84 +1,68 @@
+
 package io.github.yokigroup.battle;
 
-import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
-import io.github.yokigroup.core.GameMessageHandler;
-import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.lang.*;
-import java.util.HashMap;
-import java.util.Map;
+
 
 class YokimonImplTest {
-
+    private static final int DEFAULT_LEVEL = 10;
+    private static final int NUM_MOVES = 3;
+    private static final int DEFAULT_ID = 7;
     private static YokimonLoader loader;
     private static AttackLoader loaderAttack;
-    private static MessageHandler messageHandler;
+
     @BeforeEach
     void setUp() {
         loader = new YokimonLoader();
         loaderAttack = new AttackLoader();
-        MessageHandler messageHandler = new GameMessageHandler();
     }
 
     @Test
-    void YokimonImpl(){
-        YokimonImpl stone = null;
+    void yokimonImpl() {
+        final YokimonImpl stone = null;
         assertThrows(NullPointerException.class, () -> new YokimonImpl(stone));
-
     }
     @Test
-    void getAllStats() {
-    Yokimon oni = loader.load(1);
+    void allStats() {
+    final Yokimon tengu = loader.load(DEFAULT_ID);
 
-    oni.setLevel(5);
-
-    assertEquals(5, oni.getLevel());
-
+    tengu.setLevel(DEFAULT_LEVEL);
+    assertEquals(DEFAULT_LEVEL, tengu.getLevel());
+    assertEquals(NUM_MOVES, tengu.getAttacks().size());
     }
 
     @Test
-    void getAttacks() {
+    void attacks() {
+            final Yokimon tengu = loader.load(7);
+
+            tengu.setLevel(DEFAULT_LEVEL);
+
+            assertEquals(NUM_MOVES, tengu.getAttacks().size());
+            final int atk4 = 4;
+            final int atk1 = 1;
+            for (int i = atk4; i > atk1; i--) {
+                assertTrue(tengu.getAttacks().contains(loaderAttack.load(i)));
+            }
+            assertFalse(tengu.getAttacks().contains(loaderAttack.load(atk1)));
     }
 
     @Test
-    void setExpNext() {
-/*
-        Attack shadowBall = new AttackImpl("Shadow ball", Color.BLACK, 90, Attack.Effect.NONE);
-        Attack strongPunch = new AttackImpl("strong punch", Color.RED, 80, Attack.Effect.NONE);
-        Attack curse = new AttackImpl("curse", Color.PURPLE, 70, Attack.Effect.NONE);
-        Attack slap = new AttackImpl("slap", Color.WHITE, 40, Attack.Effect.NONE);
-*/
-
-        /*
-        Attack  = new AttackImpl("", Color.WHITE, , Attack.effect.NONE);
-        */
-        Map<Integer, Attack> stone= new HashMap<>();
-/*
-        stone.put(1, slap);
-        stone.put(3, strongPunch);
-        stone.put(7, curse);
-        stone.put(15, shadowBall);
-        Map<Yokimon.Stats, Integer> baseStats1= new HashMap<>();
-        baseStats1.put(Yokimon.Stats.HP, 90);
-        baseStats1.put(Yokimon.Stats.ATK, 80);
-        baseStats1.put(Yokimon.Stats.DEF, 100);
-        baseStats1.put(Yokimon.Stats.SPD, 40);
-        Map<Yokimon.Stats, Integer> baseStats2= new HashMap<>();
-        baseStats2.put(Yokimon.Stats.HP, 120);
-        baseStats2.put(Yokimon.Stats.ATK, 100);
-        baseStats2.put(Yokimon.Stats.DEF, 60);
-        baseStats2.put(Yokimon.Stats.SPD, 70);
-        BasicImplDmgCalculator calc = new BasicImplDmgCalculator();
-        Yokimon oni = new YokimonImpl("oni", Color.RED, baseStats1, Yokimon.GrowthRate.MEDIUM, 10, stone );
-        Yokimon wani = new YokimonImpl("wani", Color.RED, baseStats2, Yokimon.GrowthRate.SLOW, 10, stone );
-        assertEquals(42, oni.getStat(Yokimon.Stats.HP));
-        assertEquals(12, calc.getDMG(oni, wani, slap));
-*/
+    void takeXP() {
+        Yokimon tengu = loader.load(DEFAULT_ID);
+        final int defXp = 1000;
+        final int defXp2 = 400;
+        assertEquals(Yokimon.ExpCode.NEW_MOVE, tengu.takeXp(defXp));
+        assertEquals(DEFAULT_LEVEL, tengu.getLevel());
+        assertEquals(Yokimon.ExpCode.LEVEL_UP, tengu.takeXp(defXp2));
+        assertEquals(Yokimon.ExpCode.OK, tengu.takeXp(1));
     }
 }

@@ -127,23 +127,30 @@ public abstract class People extends Entity {
      * Turns a vector to the direction where the entity is looking.
      * @param v vector
      */
-    public final void toDirection(final Vector2 v) {
+    public final void setDirection(final Vector2 v) {
         Objects.requireNonNull(v, "Vector passed to toDirection was null");
-        if (v.getX() > 0 && v.getY() == 0) {
-            this.direction = Direction.RIGHT;
-        } else if (v.getX() <= 0 && v.getY() == 0) {
-            this.direction = Direction.LEFT;
-        } else if (v.getY() > 0) {
-            this.direction = Direction.DOWN;
+        if (v.getY() == 0 && v.getX() == 0) {
+            return;
+        }
+        if (Math.abs(v.getX()) > Math.abs(v.getY())) {
+            if (v.getX() > 0) {
+                this.direction = Direction.RIGHT;
+            } else {
+                this.direction = Direction.LEFT;
+            }
         } else {
-            this.direction = Direction.UP;
+            if (v.getY() > 0) {
+                this.direction = Direction.DOWN;
+            } else {
+                this.direction = Direction.UP;
+            }
         }
     }
     /**
      * Returns whether the people entity is active or not.
      * @return boolean True if the people entity is active, false otherwise
      */
-    public final boolean getIsActive() {
+    public final boolean getActive() {
         return this.active;
     }
 
@@ -176,14 +183,25 @@ public abstract class People extends Entity {
     public abstract void resetPosition();
 
     /**
-     * Checks if an entity is colliding in.
+     * Check if the entity is colliding.
+     * @param vector vector2
      */
-    protected final void nonEntityCollisionCheck() {
+    protected final void collisionCheck(final Vector2 vector) {
+
+        this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
             map.getGameMap().getPlayerTile().getHitboxes().stream()
                     .map(block -> this.getHitBox().collidesWith(block))
                     .filter(Optional::isPresent)
                     .forEach(block -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(block.get()))));
+        });
+        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
+
+            map.getEntitiesOnCurrentTile().stream()
+                    .map(entity -> this.getHitBox().collidesWith(entity.getHitBox()))
+                    .filter(Optional::isPresent)
+                    .forEach(entity -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(entity.get()))));
+
         });
 
     }

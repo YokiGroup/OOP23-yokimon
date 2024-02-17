@@ -89,7 +89,7 @@ public abstract class Entity {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Entity entity = (Entity) o;
+        final Entity entity = (Entity) o;
         return Objects.equals(pos, entity.pos) && Objects.equals(hitBox, entity.hitBox);
     }
 
