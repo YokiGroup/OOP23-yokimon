@@ -9,8 +9,6 @@ import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Locale;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -58,7 +56,7 @@ final class OpponentAITest {
         //multiple attacks. BASIC --> the Attack with the biggest POWER value
 
         //                            first, the Attack with the biggest POWER value
-        //FIXME -> PMD STYLE CHECKS: LOCALE???
+        //FIXME -> PMD STYLE CHECKS: USE .EQUALS() INSTEAD
         assertEquals(Optional.of(attackLoader.load(1)).get().getName().toLowerCase(),
                 toTest.getMove(y2, y1).get().getName().toLowerCase());
         //                              then, another -random- one
