@@ -42,6 +42,11 @@ public final class PlayerCharacterSubmoduleImpl extends PlayerCharacterSubmodule
     }
 
     @Override
+    public Entity getPlayerEntity() {
+        return player;
+    }
+
+    @Override
     public void movePlayerBy(final Vector2 delta) {
         player.setPos(
                 new PositionImpl(player.getPos().getPosition().plus(delta))

@@ -3,6 +3,7 @@ package io.github.yokigroup.event.submodule;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.world.Direction;
+import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 
 public abstract class PlayerCharacterSubmodule extends Submodule {
@@ -21,6 +22,11 @@ public abstract class PlayerCharacterSubmodule extends Submodule {
      * @return position of player character.
      */
     public abstract Position getPosition();
+
+    /**
+     * @return Entity represented by the player
+     */
+    public abstract Entity getPlayerEntity();
 
     /**
      * moves player as specified by the input vector.
