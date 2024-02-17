@@ -5,7 +5,6 @@ import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.json.InvalidJsonException;
 import io.github.yokigroup.util.json.JsonParser;
 import io.github.yokigroup.world.Direction;
-import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
@@ -18,10 +17,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class TileLoader extends IdJsonLoader<TileBuilder> {
+/**
+ * Loads {@link TileBuilder TileBuilders} from the tile's json configuration.
+ */
+public final class TileLoader extends IdJsonLoader<TileBuilder> {
     private static final String TILE_JSON_RPATH = "tiles.json";
     private static final String TILE_SHAPE_JPATHF = "$.%s.shape[*]";
 
+    /**
+     * Initializes a TileLoader by parsing the default tiles.json.
+     */
     public TileLoader() {
         super(TILE_JSON_RPATH);
     }
@@ -32,22 +37,22 @@ public class TileLoader extends IdJsonLoader<TileBuilder> {
 
     private Hitbox getHitbox(final int id, final int index) {
         JsonParser parser = getParser();
-        final String TILE_HITBOX_TYPE_JPATHF = "$.%s.hitboxes[%d]";
-        final String TILE_HITBOX_TYPE_RPATH = ".type";
-        final String TILE_HITBOX_POSITION_RPATH = ".position";
-        final String TILE_HITBOX_DIMENSIONS_RPATH = ".dimensions";
-        final String TILE_HITBOX_RADIUS_RPATH = ".radius";
-        final String formattedHitboxJPath = String.format(TILE_HITBOX_TYPE_JPATHF, id == -1 ? "home" : "" + id, index);
-        final String type = parser.read(formattedHitboxJPath  +  TILE_HITBOX_TYPE_RPATH);
-        final Vector2 pos = getVector2(formattedHitboxJPath  +  TILE_HITBOX_POSITION_RPATH);
+        final String tileHitboxTypeJPATHF = "$.%s.hitboxes[%d]";
+        final String tileHitboxTypeRPATH = ".type";
+        final String tileHitboxPositionRPATH = ".position";
+        final String tileHitboxDimensionsRPATH = ".dimensions";
+        final String tileHitboxRadiusRpath = ".radius";
+        final String formattedHitboxJPATH = String.format(tileHitboxTypeJPATHF, id == -1 ? "home" : "" + id, index);
+        final String type = parser.read(formattedHitboxJPATH  +  tileHitboxTypeRPATH);
+        final Vector2 pos = getVector2(formattedHitboxJPATH  +  tileHitboxPositionRPATH);
 
         return switch (type) {
             case "rect" -> {
-                final Vector2 dim = getVector2(formattedHitboxJPath + TILE_HITBOX_DIMENSIONS_RPATH);
+                final Vector2 dim = getVector2(formattedHitboxJPATH + tileHitboxDimensionsRPATH);
                 yield new RectangularHitbox(pos, dim);
             }
             case "circle" -> {
-                final double radius = parser.read(formattedHitboxJPath + TILE_HITBOX_RADIUS_RPATH);
+                final double radius = parser.read(formattedHitboxJPATH + tileHitboxRadiusRpath);
                 yield new CircularHitbox(pos, radius);
             }
             default -> throw new RuntimeException(
@@ -63,12 +68,12 @@ public class TileLoader extends IdJsonLoader<TileBuilder> {
     }
 
     private Set<Pair<TileBuilder.EntityType, Position>> getEntities(final int id) {
-        final String SPAWN_POSITION_JPATH = "$." + (id == -1 ? "home" : id) + ".spawns[%d]";
+        final String spawnPositionJPATH = "$." + (id == -1 ? "home" : id) + ".spawns[%d]";
         return ifNullReturnEmpty(doUntilPathException(new HashSet<>(), (c, i) -> {
-            final String formattedJPath = String.format(SPAWN_POSITION_JPATH, i);
+            final String formattedJPath = String.format(spawnPositionJPATH, i);
             Position position = new PositionImpl(getVector2(formattedJPath));
             String type = getParser().read(formattedJPath + ".type");
-            c.add(switch (type) {
+            c.add( switch (type) {
                 case "enemy" -> new Pair<>(TileBuilder.EntityType.ENEMY, position);
                 case "altar" -> new Pair<>(TileBuilder.EntityType.ALTAR, position);
                 default -> throw new InvalidJsonException(String.format("invalid type %s", type));
@@ -92,6 +97,9 @@ public class TileLoader extends IdJsonLoader<TileBuilder> {
         return tileBuilder;
     }
 
+    /**
+     * @return {@link TileBuilder} representing the home tile
+     */
     public TileBuilder getHomeTile() {
         return getTileAt(-1);
     }
