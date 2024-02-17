@@ -4,6 +4,7 @@ import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
+import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
 
@@ -17,14 +18,16 @@ public class Altar extends Entity {
     private AltarState state;
     private static final double RADIUS = 40;
     private static final double HITBOX_SIDE = 20;
+    private static final Vector2 dimensions = new Vector2Impl(HITBOX_SIDE, HITBOX_SIDE);
     /**
      * Constructs an Altar object with the specified attributes.
      * @param pos The position of the Altar
      * @param messageHandler Message handler used to handle events
      */
     public Altar(final Position pos, final MessageHandler messageHandler) {
-        super(pos, new RectangularHitbox(pos.getPosition(),
-                new Vector2Impl(HITBOX_SIDE, HITBOX_SIDE)), messageHandler);
+        super(pos, new RectangularHitbox(pos.getPosition(), dimensions),
+                messageHandler, dimensions,
+                "view/game/textures/altar.png");
         this.state = AltarState.POWERED;
     }
 

@@ -1,6 +1,7 @@
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 import java.util.Objects;
@@ -10,21 +11,35 @@ import java.util.Objects;
  * It provides methods to manage and manipulate entities.
  */
 public abstract class Entity {
-
+    private final String resourceURL;
+    private final Vector2 dimensions;
     private Position pos;
     private Hitbox hitBox;
     private final MessageHandler messageHandler;
+
 
     /**
      * Constructs an Entity object with the specified attributes.
      * @param pos The position of the Entity
      * @param hitBox The hitBox of the Entity
      * @param messageHandler handler for the events
+     * @param dimensions dimensions of the entity
+     * @param resourceURL url of the entity image
      */
-    public Entity(final Position pos, final Hitbox hitBox, final MessageHandler messageHandler) {
+    public Entity(final Position pos, final Hitbox hitBox, final MessageHandler messageHandler, final Vector2 dimensions, final String resourceURL) {
         this.messageHandler = messageHandler;
         this.setHitBox(hitBox);
         this.setPos(pos);
+        this.dimensions = dimensions;
+        this.resourceURL = resourceURL;
+    }
+
+    public final String getResourceURL() {
+        return this.resourceURL;
+    }
+
+    public final Vector2 getDimensions() {
+        return this.dimensions;
     }
 
     /**

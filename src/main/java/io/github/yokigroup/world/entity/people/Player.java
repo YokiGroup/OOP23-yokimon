@@ -22,7 +22,7 @@ public class Player extends People {
      */
     public Player(final Position pos,
                   final MessageHandler messageHandler) {
-        super(pos, messageHandler);
+        super(pos, messageHandler, "view/game/textures/player.png");
     }
 
     /**
