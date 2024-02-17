@@ -8,7 +8,6 @@ import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.Position;
 
-import java.util.Optional;
 
 /**
  * This class describe the behaviour of the player entity in game map.
@@ -32,30 +31,20 @@ public class Player extends People {
      * @param vector vector
      */
     private void move(final Vector2 vector) {
-
-        this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
-        this.nonEntityCollisionCheck();
-        this.getMessageHandler().handle(GameMapSubmoduleImpl.class, map -> {
-
-            map.getEntitiesOnCurrentTile().stream()
-                    .map(entity -> this.getHitBox().collidesWith(entity.getHitBox()))
-                    .filter(Optional::isPresent)
-                    .forEach(entity -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(entity.get()))));
-
-        });
+       this.collisionCheck(vector);
     }
 
     /**
-     * If the player is out of map, it brings his position back to the centre of the tile.
+     * It brings his position back to the centre of the tile.
      */
     @Override
     public void resetPosition() {
-        if (!this.getPos().isValid()) {
+
             this.getMessageHandler().handle(GameMapSubmoduleImpl.class, map -> {
-                this.setPos(new PositionImpl(new Vector2Impl( (double) GameMap.TILE_DIMENSIONS.x() / 2,
-                        (double) GameMap.TILE_DIMENSIONS.y() / 2 )));
+                this.setPos(new PositionImpl(new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2,
+                        (double) GameMap.TILE_DIMENSIONS.y() / 2)));
             });
-        }
+
     }
 
     /**
@@ -63,11 +52,13 @@ public class Player extends People {
      */
     @Override
     public void update() {
-        Vector2 dir = new Vector2Impl(0, 0);
-        if (!this.getIsActive()) {
+        if (!this.getActive()) {
             return;
         }
-        resetPosition();
+        Vector2 dir = new Vector2Impl(0, 0);
+        if (!this.getPos().isValid()) {
+            resetPosition();
+        }
         move(dir.scale(SCALE));
     }
 }
