@@ -5,7 +5,7 @@ import io.github.yokigroup.event.submodule.FightSubmoduleImpl;
 import io.github.yokigroup.event.submodule.GameMapSubmoduleImpl;
 import io.github.yokigroup.event.submodule.PartySubmoduleImpl;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmoduleImpl;
-import io.github.yokigroup.event.submodule.Submodule;
+import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 

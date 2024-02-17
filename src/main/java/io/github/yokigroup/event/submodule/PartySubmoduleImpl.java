@@ -2,6 +2,7 @@ package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.abs.PartySubmodule;
 
 import java.util.ArrayList;
 import java.util.List;

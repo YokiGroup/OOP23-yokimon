@@ -1,6 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.abs.GameMapSubmodule;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.GameMapBuilder;

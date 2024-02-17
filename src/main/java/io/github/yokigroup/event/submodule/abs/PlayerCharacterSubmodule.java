@@ -1,4 +1,4 @@
-package io.github.yokigroup.event.submodule;
+package io.github.yokigroup.event.submodule.abs;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Vector2;
