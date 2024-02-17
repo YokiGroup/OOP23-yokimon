@@ -1,7 +1,7 @@
 package io.github.yokigroup.world.entity.people;
 
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.GameMapSubmoduleImpl;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.PositionImpl;
@@ -189,13 +189,13 @@ public abstract class People extends Entity {
     protected final void collisionCheck(final Vector2 vector) {
 
         this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
-        this.getMessageHandler().handle(GameMapSubmoduleImpl.class, map -> {
+        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
             map.getGameMap().getPlayerTile().getHitboxes().stream()
                     .map(block -> this.getHitBox().collidesWith(block))
                     .filter(Optional::isPresent)
                     .forEach(block -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(block.get()))));
         });
-        this.getMessageHandler().handle(GameMapSubmoduleImpl.class, map -> {
+        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
 
             map.getEntitiesOnCurrentTile().stream()
                     .map(entity -> this.getHitBox().collidesWith(entity.getHitBox()))

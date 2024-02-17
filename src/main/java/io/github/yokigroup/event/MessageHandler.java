@@ -1,6 +1,6 @@
 package io.github.yokigroup.event;
 
-import io.github.yokigroup.event.submodule.Submodule;
+import io.github.yokigroup.event.submodule.abs.Submodule;
 
 import java.util.function.Consumer;
 import java.util.function.Function;

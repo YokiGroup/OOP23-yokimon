@@ -2,6 +2,9 @@ package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
+import io.github.yokigroup.event.submodule.abs.PartySubmoduleAbs;
+import io.github.yokigroup.event.submodule.abs.Submodule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class SubmoduleMapImplTest {
     private SubmoduleMap map;
-    private PartySubmodule pSub;
-    private FightSubmodule fSub;
+    private PartySubmoduleAbs pSub;
+    private FightSubmoduleAbs fSub;
     private Set<Submodule> subModuleTestSet;
 
     @BeforeEach
@@ -23,15 +26,15 @@ class SubmoduleMapImplTest {
         MessageHandler handler = new GameMessageHandler();
 
         map = new SubmoduleMapImpl();
-        pSub = new PartySubmoduleImpl(handler);
-        fSub = new FightSubmoduleImpl(handler);
+        pSub = new PartySubmodule(handler);
+        fSub = new FightSubmodule(handler);
         subModuleTestSet = Set.of(pSub, fSub);
     }
 
     private void retrievalAsserts() {
         assertEquals(Optional.of(pSub), map.get(pSub.getClass()));
         assertEquals(Optional.of(fSub), map.get(fSub.getClass()));
-        assertEquals(Optional.empty(), map.get(PlayerCharacterSubmoduleImpl.class));
+        assertEquals(Optional.empty(), map.get(PlayerCharacterSubmodule.class));
     }
 
     @Test

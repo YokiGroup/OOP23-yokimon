@@ -2,8 +2,8 @@ package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.submodule.PartySubmoduleImpl;
-import io.github.yokigroup.event.submodule.PlayerCharacterSubmoduleImpl;
+import io.github.yokigroup.event.submodule.PartySubmodule;
+import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
 
@@ -50,13 +50,13 @@ public class Altar extends Entity {
      */
     @Override
     public void update() {
-        this.getMessageHandler().handle(PlayerCharacterSubmoduleImpl.class, pos -> {
+        this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {
             Objects.requireNonNull(pos.getPosition().getPosition(), "Position of the player invalid");
 
             if (this.state == AltarState.POWERED && pos.getPosition().isValid()
                     && pos.getPosition().inRadius(this.getPos(), RADIUS)) {
 
-                    this.getMessageHandler().handle(PartySubmoduleImpl.class, party -> {
+                    this.getMessageHandler().handle(PartySubmodule.class, party -> {
                     party.addYokimon(this.getNewYokimon());
                     this.state = AltarState.USED;
 

@@ -1,44 +1,50 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.abs.GameMapSubmoduleAbs;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.GameMap;
+import io.github.yokigroup.world.GameMapBuilder;
+import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 import java.util.Set;
 
-public abstract class GameMapSubmodule extends Submodule {
-    protected final Pair<Integer, Integer> MAP_DIM = new Pair<>(5, 5);
+/**
+ * Submodule containing a GameMap and relevant methods to query the map's state.
+ * @author Giovanni Paone
+ */
+public final class GameMapSubmodule extends GameMapSubmoduleAbs {
+    private final GameMap gameMap;
 
-    public GameMapSubmodule(MessageHandler handler) {
+    /**
+     * @param handler MessageHandler to call in order to query other submodules.
+     */
+    public GameMapSubmodule(final MessageHandler handler) {
         super(handler);
+        final Pair<Integer, Integer> playerTilePos = new Pair<>(MAP_DIM.x()/2+1, MAP_DIM.y()/2+1);
+        final GameMapBuilder builder = new GameMapBuilderImpl();
+
+        builder.changeMapDimensions(MAP_DIM);
+        builder.changePlayerTileMapPosition(playerTilePos);
+        builder.putHomeTileAt(playerTilePos);
+        this.gameMap = builder.build(handler);
     }
-
-    /**
-     * @return Submodule's GameMap reference
-     */
-    public abstract GameMap getGameMap();
-
-    /**
-     * @return hitboxes contained in the tile the player's currently on.
-     */
-    public abstract Set<Hitbox> getHitboxesOnCurrentTile();
-
-    /**
-     * Gets the entities contained in the Tile the player's currently on.
-     */
-    public abstract Set<Entity> getEntitiesOnCurrentTile();
 
     @Override
-    public void update() {
-        /*
-        this function should query the player's position and consider whether to change Tile if the player is crossing
-        the tile border.
-         */
-        handler().handle(PlayerCharacterSubmoduleImpl.class, s -> {
-
-            //s.getPosition().isValid();
-        });
+    public GameMap getGameMap() {
+        return this.gameMap;
     }
+
+    @Override
+    public Set<Hitbox> getHitboxesOnCurrentTile() {
+        return gameMap.getPlayerTile().getHitboxes();
+    }
+
+    @Override
+    public Set<Entity> getEntitiesOnCurrentTile() {
+        return gameMap.getPlayerTile().getEntities();
+    }
+
 }

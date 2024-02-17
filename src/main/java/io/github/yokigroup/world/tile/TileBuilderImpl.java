@@ -70,7 +70,7 @@ public class TileBuilderImpl implements TileBuilder {
     }
 
     @Override
-    public Set<Direction> getAdjacencies() {
+    public final Set<Direction> getAdjacencies() {
         return Set.copyOf(this.adjacencies);
     }
 

@@ -1,4 +1,4 @@
-package io.github.yokigroup.event.submodule;
+package io.github.yokigroup.event.submodule.abs;
 
 import io.github.yokigroup.event.MessageHandler;
 
@@ -17,6 +17,12 @@ public abstract class Submodule {
     public Submodule(final MessageHandler handler) {
         this.handler = handler;
     }
+
+    /*
+    public Submodule(final MessageHandler handler, final ViewInit view) {
+        this(handler);
+    }
+    */
 
     /**
      * Message bus used by submodules to communicate to each other.

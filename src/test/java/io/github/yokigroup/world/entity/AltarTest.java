@@ -2,11 +2,10 @@ package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
-
-import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.event.submodule.PartySubmoduleImpl;
-import io.github.yokigroup.event.submodule.PlayerCharacterSubmoduleImpl;
-import io.github.yokigroup.event.submodule.Submodule;
+import io.github.yokigroup.event.submodule.PartySubmodule;
+import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
+import io.github.yokigroup.event.submodule.abs.GameMapSubmoduleAbs;
+import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
@@ -27,7 +26,7 @@ class AltarTest {
     private static final double DISTANCE = 40;
 
     final private static class TestMessageHandler extends GameMessageHandler {
-        public static class TestSubmodule extends GameMapSubmodule {
+        public static class TestSubmodule extends GameMapSubmoduleAbs {
             final private Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - DISTANCE,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2);
             final private TileBuilder tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, new PositionImpl(v));
@@ -56,9 +55,9 @@ class AltarTest {
         @Override
         protected Set<Class<? extends Submodule>> getSubmoduleTypes() {
             return Set.of(
-                    PlayerCharacterSubmoduleImpl.class,
+                    PlayerCharacterSubmodule.class,
                     TestSubmodule.class,
-                    PartySubmoduleImpl.class
+                    PartySubmodule.class
             );
         }
     }
@@ -74,13 +73,10 @@ class AltarTest {
            for (final Entity entity : map.getEntitiesOnCurrentTile()) {
 
                if (entity instanceof Altar altar) {
-
-                   testMeg.handle(PlayerCharacterSubmoduleImpl.class, player -> {
+                   testMeg.handle(PlayerCharacterSubmodule.class, player -> {
                         assertEquals(Altar.AltarState.POWERED,  altar.getState());
                         altar.update();
                         assertEquals(Altar.AltarState.USED,  altar.getState());
-
-
                    });
                }
            }
