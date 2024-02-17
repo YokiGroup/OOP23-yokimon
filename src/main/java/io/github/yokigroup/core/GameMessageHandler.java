@@ -22,6 +22,9 @@ import java.util.function.Function;
 public class GameMessageHandler implements MessageHandler {
     private final SubmoduleMap subModules;
 
+    /**
+     * @return set of submodules to be instanced by the MessageHandler
+     */
     protected Set<Class<? extends Submodule>> getSubmoduleTypes() {
         return Set.of(
                 PartySubmodule.class,
