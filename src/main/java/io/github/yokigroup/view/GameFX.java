@@ -16,6 +16,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+/**
+ * Main JavaFX Application entry.
+ */
 public class GameFX extends Application {
     public final static Rectangle2D screenSize = Screen.getPrimary().getBounds();
 
@@ -25,14 +28,14 @@ public class GameFX extends Application {
         private final Scene gameScene;
 
 
-        public GameWindowResizeListener(Scene gameScene, Canvas gameCanvas, final double ratio) {
+        public GameWindowResizeListener(final Scene gameScene, final Canvas gameCanvas, final double ratio) {
             this.ratio = ratio;
             this.gameCanvas = gameCanvas;
             this.gameScene = gameScene;
         }
 
         @Override
-        public void changed(ObservableValue<? extends T> observableValue, T t, T t1) {
+        public void changed(final ObservableValue<? extends T> observableValue, final T t, final T t1) {
             final double paneWidth = gameScene.getWidth();
             final double paneHeight = gameScene.getHeight();
             final double currentRatio = paneWidth / paneHeight;
