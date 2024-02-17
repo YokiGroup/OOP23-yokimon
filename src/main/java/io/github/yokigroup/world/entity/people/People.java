@@ -39,6 +39,7 @@ public abstract class People extends Entity {
      * Default hitBot of the people.
      */
     private static final double HITBOX_RADIUS = 15;
+    private static final Vector2 dimensions = new Vector2Impl(HITBOX_RADIUS*2, HITBOX_RADIUS*2);
 
     /**
      * Constructs a People object with the specified attributes.
@@ -46,8 +47,9 @@ public abstract class People extends Entity {
      * @param messageHandler handler of events
      */
     public People(final Position pos,
-                  final MessageHandler messageHandler) {
-        super(pos, new CircularHitbox(pos.getPosition(), HITBOX_RADIUS), messageHandler);
+                  final MessageHandler messageHandler,
+                  final String resourceURL) {
+        super(pos, new CircularHitbox(pos.getPosition(), HITBOX_RADIUS), messageHandler, dimensions, resourceURL);
         this.direction = DEFAULT_DIRECTION;
         this.active = true;
         this.initialPos = pos;
