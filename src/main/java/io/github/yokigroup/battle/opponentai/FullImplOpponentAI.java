@@ -43,7 +43,7 @@ public class FullImplOpponentAI extends OpponentAI {
 
         //there are no available attacks
         if (attacks.isEmpty()) {
-            return Optional.empty();
+            return best;
         }
 
         int maxValue = 0;
