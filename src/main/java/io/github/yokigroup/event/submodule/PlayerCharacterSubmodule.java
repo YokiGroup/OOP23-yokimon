@@ -58,6 +58,7 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
         player.setPos(
                 new PositionImpl(player.getPos().getPosition().plus(delta))
         );
+        playerPub.notifyObservers(new SpriteData("view/game/textures/michele.png", this.player.getPos().getPosition(), new Vector2Impl(100, 100)));
     }
 
 }

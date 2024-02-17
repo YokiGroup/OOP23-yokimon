@@ -1,5 +1,9 @@
 package io.github.yokigroup.view;
 
+import io.github.yokigroup.core.GameMessageHandler;
+import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
+import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.view.observer.JavaFXModelObserver;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -43,21 +47,26 @@ public class GameFX extends Application {
                 gameCanvas.setHeight(paneWidth / ratio);
             }
 
-            var gc = gameCanvas.getGraphicsContext2D();
-            gc.setFill(Color.BLUE);
-            gc.fillRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
+//            var gc = gameCanvas.getGraphicsContext2D();
+//            gc.setFill(Color.BLUE);
+//            gc.fillRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
         }
     }
 
     @Override
     public void start(final Stage stage) throws Exception {
+        JavaFXModelObserver modelObs = new JavaFXModelObserver();
+        GameMessageHandler handler = new GameMessageHandler(modelObs);
+
         final double scaledY = screenSize.getHeight() * 2.0 / 3.0;
         final double ratio = 16.0/9.0; // 16:9 ratio
         final Dimension2D windowDim = new Dimension2D(scaledY*ratio, scaledY);
 
         final BorderPane rootElem = FXMLLoader.load(ClassLoader.getSystemResource("view/game/test.fxml"));
-        final Canvas gameCanvas = (Canvas) rootElem.getCenter(); // FIXME maybe casting like this isn't the smartest choice
         final Scene scene = new Scene(rootElem, windowDim.getWidth(), windowDim.getHeight());
+
+        final Canvas gameCanvas = (Canvas) rootElem.getCenter(); // FIXME maybe casting like this isn't the smartest choice
+        modelObs.init(gameCanvas.getGraphicsContext2D());
 
         final GameWindowResizeListener<Object> resizeListener = new GameWindowResizeListener<>(scene, gameCanvas, ratio);
         stage.widthProperty().addListener(resizeListener);
@@ -68,6 +77,9 @@ public class GameFX extends Application {
         stage.setTitle("Yokimon");
         stage.setScene(scene);
         stage.show();
+        handler.handle(PlayerCharacterSubmodule.class, s -> {
+            s.movePlayerBy(new Vector2Impl(0, 0));
+        });
     }
 
     public static void run(final String[] args) {

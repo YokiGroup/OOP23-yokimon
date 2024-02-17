@@ -10,7 +10,7 @@ import io.github.yokigroup.world.GameMap;
 import java.net.URL;
 
 public final class SpriteData implements EObserver<Vector2> {
-    private final URL spriteURL;
+    private final String spriteURL;
     private Vector2 position;
     private final Vector2 dim;
     private static final Vector2 tileDim = new Vector2Impl(GameMap.TILE_DIMENSIONS.x(), GameMap.TILE_DIMENSIONS.y());
@@ -18,7 +18,7 @@ public final class SpriteData implements EObserver<Vector2> {
     /**
      * @param spriteURL URL of the sprite image to render.
      */
-    public SpriteData(final URL spriteURL, final Vector2 initPos, final Vector2 dim) {
+    public SpriteData(final String spriteURL, final Vector2 initPos, final Vector2 dim) {
         this.spriteURL = spriteURL;
         this.position = initPos;
         this.dim = dim;
@@ -27,7 +27,7 @@ public final class SpriteData implements EObserver<Vector2> {
     /**
      * @return URL of the sprite
      */
-    public URL getSpriteURL() {
+    public String getSpriteURL() {
         return spriteURL;
     }
 
