@@ -13,7 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -70,7 +69,7 @@ public final class FightView extends Application {
 
         double textBoxHeigth = (double)SCREEN_WIDTH/8;
         double textBoxWidth = (double)SCREEN_WIDTH/3;
-        final Rectangle textBox = new Rectangle(textBoxWidth, textBoxHeigth, Color.ANTIQUEWHITE);
+        final Rectangle textBox = new Rectangle(textBoxWidth, textBoxHeigth, Color.WHITE);
         textBox.setX((double)SCREEN_WIDTH / 2 - textBoxWidth / 2 );
         textBox.setY(SCREEN_HEIGTH - textBoxHeigth - DELTA );
         textBox.setArcHeight(ARC_DIMENSION);
@@ -167,7 +166,7 @@ public final class FightView extends Application {
         root_draft.getChildren().add(healthbarOppYokimon);
     }
 
-    //FIXME
+    //FIXME --> SET BOX LAYOUT FOR EACH YOKIMON INFO (HEALTHBAR, NAME, LEVEL)
     //loadfont
     //classpath- > input stream dal font della classpath
     private void setInfo() {
