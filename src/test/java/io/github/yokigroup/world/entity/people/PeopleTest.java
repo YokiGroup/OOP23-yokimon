@@ -15,22 +15,22 @@ class PeopleTest {
     private static MessageHandler messageHandler;
     @BeforeEach
     void setUp() {
-        MessageHandler messageHandler = new GameMessageHandler();
+        //final MessageHandler messageHandler = new GameMessageHandler();
     }
     @Test
     void setDirection() {
-        Position playerPos = new PositionImpl(new Vector2Impl(0, 0));
-        Enemy en = new Enemy(playerPos, messageHandler);
-        Vector2 vector = new Vector2Impl(1, 0);
+        final Position playerPos = new PositionImpl(new Vector2Impl(0, 0));
+        final Enemy en = new Enemy(playerPos, messageHandler);
+        final Vector2 vector = new Vector2Impl(1, 0);
         en.setDirection(vector);
         assertEquals(People.Direction.RIGHT, en.getDirection());
-        Vector2 vector2 = new Vector2Impl(-1, 0);
+        final Vector2 vector2 = new Vector2Impl(-1, 0);
         en.setDirection(vector2);
         assertEquals(People.Direction.LEFT, en.getDirection());
-        Vector2 vector3 = new Vector2Impl(-1, 1);
+        final Vector2 vector3 = new Vector2Impl(-1, 1);
         en.setDirection(vector3);
         assertEquals(People.Direction.DOWN, en.getDirection());
-        Vector2 vector4 = new Vector2Impl(-1, -1);
+        final Vector2 vector4 = new Vector2Impl(-1, -1);
         en.setDirection(vector4);
         assertEquals(People.Direction.UP, en.getDirection());
     }

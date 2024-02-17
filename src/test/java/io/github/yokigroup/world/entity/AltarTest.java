@@ -26,14 +26,14 @@ class AltarTest {
     private TestMessageHandler testMeg;
     private static final double DISTANCE = 40;
 
-    private static class TestMessageHandler extends GameMessageHandler {
+    final private static class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmodule {
-            Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - DISTANCE,
+            final private Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - DISTANCE,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2);
-            TileBuilder tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, new PositionImpl(v));
-            GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0,0)).build(this.handler());
+            final private TileBuilder tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, new PositionImpl(v));
+            final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
 
-            public TestSubmodule(MessageHandler handler) {
+            public TestSubmodule(final MessageHandler handler) {
                 super(handler);
             }
 
@@ -71,7 +71,7 @@ class AltarTest {
     void altarTest() {
 
         testMeg.handle(TestMessageHandler.TestSubmodule.class, map -> {
-           for ( Entity entity : map.getEntitiesOnCurrentTile() ) {
+           for (final Entity entity : map.getEntitiesOnCurrentTile()) {
 
                if (entity instanceof Altar altar) {
 

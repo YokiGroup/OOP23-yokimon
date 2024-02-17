@@ -18,17 +18,17 @@ class PositionImplTest {
     private static final double POSITION = 400;
     @BeforeEach
     void setUp() {
-        MessageHandler messageHandler = new GameMessageHandler();
+        //final MessageHandler messageHandler = new GameMessageHandler();
     }
     @Test
     void isValid() {
 
-        Vector2 v = new Vector2Impl(POSITION, 0);
-        Position altarPos = new PositionImpl(v);
+        final Vector2 v = new Vector2Impl(POSITION, 0);
+        final Position altarPos = new PositionImpl(v);
 
-        Tile tile = new TileBuilderImpl(0)
+        final Tile tile = new TileBuilderImpl(0)
                 .addEntity(TileBuilder.EntityType.ALTAR, altarPos).build(messageHandler);
-        for (Entity entity : tile.getEntities()) {
+        for (final Entity entity : tile.getEntities()) {
             assertEquals(entity.getPos(), altarPos);
             entity.setPos(new PositionImpl(v.scale(POSITION)));
             assertTrue(entity.getPos().isValid());
@@ -39,11 +39,11 @@ class PositionImplTest {
 
     @Test
     void inRadius() {
-        Vector2 p1 = new Vector2Impl(0, 0);
-        Vector2 p2 = new Vector2Impl(4, 0);
+        final Vector2 p1 = new Vector2Impl(0, 0);
+        final Vector2 p2 = new Vector2Impl(4, 0);
 
-        Position pos1 = new PositionImpl(p1);
-        Position pos2 = new PositionImpl(p2);
+        final Position pos1 = new PositionImpl(p1);
+        final Position pos2 = new PositionImpl(p2);
 
         assertTrue(pos1.inRadius(pos2, 4));
     }
