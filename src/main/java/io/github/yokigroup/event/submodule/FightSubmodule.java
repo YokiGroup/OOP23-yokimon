@@ -10,8 +10,8 @@ import java.util.Optional;
  * Handles queuing fights and starting them when the process.
  * @author Giovanni Paone
  */
-public class FightSubmodule extends FightSubmoduleAbs {
-    private Optional<Fight> lastAnnouncedFight = Optional.empty();
+public final class FightSubmodule extends FightSubmoduleAbs {
+    private Fight lastAnnouncedFight = null;
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
@@ -30,7 +30,7 @@ public class FightSubmodule extends FightSubmoduleAbs {
 
     @Override
     public Optional<Fight> getLastAnnouncedFight() {
-        return lastAnnouncedFight;
+        return Optional.ofNullable(lastAnnouncedFight);
     }
 
 }
