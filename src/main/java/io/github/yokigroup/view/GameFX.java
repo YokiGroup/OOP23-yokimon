@@ -9,12 +9,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Dimension2D;
-import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
