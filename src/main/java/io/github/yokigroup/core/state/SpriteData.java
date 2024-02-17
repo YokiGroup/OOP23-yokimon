@@ -1,28 +1,11 @@
 package io.github.yokigroup.core.state;
 
-import io.github.yokigroup.event.observer.EObserver;
-import io.github.yokigroup.event.observer.PublisherImpl;
-import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.GameMap;
 
-import java.net.URL;
-
-public final class SpriteData implements EObserver<Vector2> {
-    private final String spriteURL;
-    private Vector2 position;
-    private final Vector2 dim;
+public record SpriteData(String spriteURL, Vector2 position, Vector2 dim) {
     private static final Vector2 tileDim = new Vector2Impl(GameMap.TILE_DIMENSIONS.x(), GameMap.TILE_DIMENSIONS.y());
-
-    /**
-     * @param spriteURL URL of the sprite image to render.
-     */
-    public SpriteData(final String spriteURL, final Vector2 initPos, final Vector2 dim) {
-        this.spriteURL = spriteURL;
-        this.position = initPos;
-        this.dim = dim;
-    }
 
     /**
      * @return URL of the sprite
@@ -45,10 +28,5 @@ public final class SpriteData implements EObserver<Vector2> {
      */
     public Vector2 getNormalizedDimension() {
         return dim.divide(tileDim);
-    }
-
-    @Override
-    public void update(PublisherImpl<Vector2> publisher, Vector2 arg) {
-        position = arg;
     }
 }
