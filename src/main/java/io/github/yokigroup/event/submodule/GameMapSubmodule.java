@@ -1,6 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.abs.GameMapSubmoduleAbs;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.GameMapBuilder;
@@ -14,9 +15,8 @@ import java.util.Set;
  * Submodule containing a GameMap and relevant methods to query the map's state.
  * @author Giovanni Paone
  */
-public final class GameMapSubmodule extends Submodule {
+public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     private final GameMap gameMap;
-    private final Pair<Integer, Integer> MAP_DIM = new Pair<>(5, 5);
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
@@ -32,36 +32,19 @@ public final class GameMapSubmodule extends Submodule {
         this.gameMap = builder.build(handler);
     }
 
-    /**
-     * @return Submodule's GameMap reference
-     */
+    @Override
     public GameMap getGameMap() {
         return this.gameMap;
     }
 
-    /**
-     * @return hitboxes contained in the tile the player's currently on.
-     */
+    @Override
     public Set<Hitbox> getHitboxesOnCurrentTile() {
         return gameMap.getPlayerTile().getHitboxes();
     }
 
-    /**
-     * Gets the entities contained in the Tile the player's currently on.
-     */
+    @Override
     public Set<Entity> getEntitiesOnCurrentTile() {
         return gameMap.getPlayerTile().getEntities();
     }
 
-    @Override
-    public void process() {
-        /*
-        this function should query the player's position and consider whether to change Tile if the player is crossing
-        the tile border.
-         */
-        handler().handle(PlayerCharacterSubmodule.class, s -> {
-
-            //s.getPosition().isValid();
-        });
-    }
 }

@@ -70,6 +70,11 @@ public interface TileBuilder {
     TileBuilder addAllAdjacencies(Set<Direction> directions);
 
     /**
+     * @return Current adjacency rules added to this builder
+     */
+    Set<Direction> getAdjacencies();
+
+    /**
      * Finalizes the tile object.
      * @param handler MessageHandler of the instanced game.
      * @return The built tile.

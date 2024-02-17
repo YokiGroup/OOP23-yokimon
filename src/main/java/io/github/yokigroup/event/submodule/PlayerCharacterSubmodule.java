@@ -1,76 +1,57 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.abs.PlayerCharacterSubmoduleAbs;
 import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.world.Direction;
+import io.github.yokigroup.world.GameMap;
+import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.PositionImpl;
+import io.github.yokigroup.world.entity.people.Player;
 
 /**
  * Handles player updates.
  * @author Giovanni Paone
  */
-public final class PlayerCharacterSubmodule extends Submodule {
-/*
+public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs {
     private final Entity player;
-*/
 
     // FIXME Replace with proper implementation
-    /**
-     * THIS WILL BE REMOVED AS SOON AS GameMap IS FINISHED.
-     */
-    public enum Direction {
-        /**
-         * Up direction.
-         */
-        UP,
-        /**
-         * Down direction.
-         */
-        DOWN,
-        /**
-         * Left direction.
-         */
-        LEFT,
-        /**
-         * Right direction.
-         */
-        RIGHT
-    }
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
     public PlayerCharacterSubmodule(final MessageHandler handler) {
         super(handler);
+        Vector2 playerPos = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() /2, (double) GameMap.TILE_DIMENSIONS.y() /2);
+        this.player = new Player(new PositionImpl(playerPos), handler);
     }
 
     // TODO Change Direction reference
-    /**
-     * attempts to change the tile of the player relative to the one it's in currently.
-     * @param dir direction to change the tile from, relative to the player's current tile
-     */
+    @Override
     public void changeTile(final Direction dir) {
-        //TODO change tile of player by going in dir
-    }
-
-    /**
-     * @return position of player character.
-     */
-    public Position getPosition() {
-        // FIXME implement
-        return new PositionImpl(null);
-    }
-
-    /**
-     * moves player as specified by the input vector.
-     * @param delta vector to move the player by
-     */
-    public void movePlayerBy(final Vector2 delta) {
-        // TODO move player by delta
+        handler().handle(GameMapSubmodule.class, s -> {
+            s.getGameMap().movePlayerTileMapPosition(dir);
+        });
     }
 
     @Override
-    public void process() {
-        // TODO collision check
+    public Position getPosition() {
+        return player.getPos();
     }
+
+    @Override
+    public Entity getPlayerEntity() {
+        return player;
+    }
+
+    @Override
+    public void movePlayerBy(final Vector2 delta) {
+        player.setPos(
+                new PositionImpl(player.getPos().getPosition().plus(delta))
+        );
+    }
+
 }

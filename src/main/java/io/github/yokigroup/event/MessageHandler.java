@@ -1,6 +1,6 @@
 package io.github.yokigroup.event;
 
-import io.github.yokigroup.event.submodule.Submodule;
+import io.github.yokigroup.event.submodule.abs.Submodule;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -27,4 +27,9 @@ public interface MessageHandler {
      * @return return value of handler function
      */
     <T extends Submodule, E> E handle(Class<T> subModuleType, Function<T, E> handler);
+
+    /**
+     * Updates every submodule, to be called in a game loop.
+     */
+    void updateSubmodules();
 }

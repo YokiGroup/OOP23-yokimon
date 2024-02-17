@@ -1,6 +1,7 @@
-package io.github.yokigroup.event.submodule;
+package io.github.yokigroup.event.submodule.abs;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.view.drawqueue.ViewInit;
 
 /**
  * Submodule interface.
@@ -18,6 +19,10 @@ public abstract class Submodule {
         this.handler = handler;
     }
 
+    public Submodule(final MessageHandler handler, final ViewInit view) {
+        this(handler);
+    }
+
     /**
      * Message bus used by submodules to communicate to each other.
      * @return handler reference held by submodule
@@ -29,5 +34,5 @@ public abstract class Submodule {
     /**
      * to be called by the logic that integrates this submodule to let it process its state.
      */
-    public abstract void process();
+    public abstract void update();
 }

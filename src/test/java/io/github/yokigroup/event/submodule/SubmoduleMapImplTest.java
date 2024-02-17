@@ -1,13 +1,15 @@
 package io.github.yokigroup.event.submodule;
 
+import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
+import io.github.yokigroup.event.submodule.abs.PartySubmoduleAbs;
+import io.github.yokigroup.event.submodule.abs.Submodule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,24 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class SubmoduleMapImplTest {
     private SubmoduleMap map;
-    private PartySubmodule pSub;
-    private FightSubmodule fSub;
+    private PartySubmoduleAbs pSub;
+    private FightSubmoduleAbs fSub;
     private Set<Submodule> subModuleTestSet;
 
     @BeforeEach
     void setUp() {
-        MessageHandler handler = new MessageHandler() {
-            // handle implementation do not matter for this test.
-            @Override
-            public <T extends Submodule> void handle(final Class<T> subModuleType, final Consumer<T> handler) {
-                return;
-            }
-
-            @Override
-            public <T extends Submodule, E> E handle(Class<T> subModuleType, Function<T, E> handler) {
-                return null;
-            }
-        };
+        MessageHandler handler = new GameMessageHandler();
 
         map = new SubmoduleMapImpl();
         pSub = new PartySubmodule(handler);

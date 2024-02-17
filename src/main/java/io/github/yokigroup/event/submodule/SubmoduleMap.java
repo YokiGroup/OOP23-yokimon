@@ -1,5 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
+import io.github.yokigroup.event.submodule.abs.Submodule;
+
 import java.util.Optional;
 import java.util.Set;
 
