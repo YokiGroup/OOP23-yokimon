@@ -44,7 +44,7 @@ public class GameMapBuilderImpl implements GameMapBuilder {
     }
 
     @Override
-    public GameMapBuilder putTileAt(TileBuilder tile, Pair<Integer, Integer> position) {
+    public final GameMapBuilder putTileAt(final TileBuilder tile, final Pair<Integer, Integer> position) {
         this.tileMap.put(position, tile);
         return this;
     }
