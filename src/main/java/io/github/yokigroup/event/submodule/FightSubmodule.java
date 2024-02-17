@@ -2,8 +2,12 @@ package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.battle.fight.Fight;
+import io.github.yokigroup.event.observer.Publisher;
+import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
+import io.github.yokigroup.view.observer.ModelObserver;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -12,12 +16,15 @@ import java.util.Optional;
  */
 public class FightSubmodule extends FightSubmoduleAbs {
     private Optional<Fight> lastAnnouncedFight = Optional.empty();
+    private Publisher<Fight> fightPub = new PublisherImpl<>();
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
-    public FightSubmodule(final MessageHandler handler) {
+    public FightSubmodule(final MessageHandler handler, ModelObserver modelObs) {
         super(handler);
+        Objects.requireNonNull(modelObs);
+        modelObs.addFightPublisher(fightPub);
     }
 
     @Override

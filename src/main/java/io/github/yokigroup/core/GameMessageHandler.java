@@ -1,6 +1,9 @@
 package io.github.yokigroup.core;
 
+import io.github.yokigroup.battle.fight.Fight;
+import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.submodule.FightSubmodule;
 import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.event.submodule.PartySubmodule;
@@ -8,6 +11,8 @@ import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
+import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.view.observer.notification.Notification;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -36,13 +41,13 @@ public class GameMessageHandler implements MessageHandler {
      * @return Initialized SubModuleMap
      * @see SubmoduleMap
      */
-    private SubmoduleMap initSubmodules() {
+    private SubmoduleMap initSubmodules(ModelObserver modelObs) {
         SubmoduleMap retMap = new SubmoduleMapImpl();
         final var submoduleTypes = getSubmoduleTypes();
 
         submoduleTypes.forEach(s -> {
             try {
-                retMap.register(s.getConstructor(MessageHandler.class).newInstance(this));
+                retMap.register(s.getConstructor(MessageHandler.class, ModelObserver.class).newInstance(this, modelObs));
             } catch (NoSuchMethodException | InvocationTargetException | InstantiationException
                      | IllegalAccessException e) {
                 throw new RuntimeException(e);
@@ -55,8 +60,33 @@ public class GameMessageHandler implements MessageHandler {
     /**
      * Initializes a GameOrchestrator with a new GameMap and PlayerCharacter, along with the required submodules.
      */
+    public GameMessageHandler(ModelObserver modelObs) {
+        subModules = initSubmodules(modelObs);
+    }
+
     public GameMessageHandler() {
-        subModules = initSubmodules();
+        // FIXME TEMPORARY HACK
+        this(new ModelObserver() {
+            @Override
+            public void addWorldSpritePublisher(int priority, Publisher<SpriteData> spriteObs) {
+
+            }
+
+            @Override
+            public void addWorldSpritePublishers(int priority, Publisher<Set<SpriteData>> spriteObs) {
+
+            }
+
+            @Override
+            public void addFightPublisher(Publisher<Fight> fightObs) {
+
+            }
+
+            @Override
+            public void addNotificationPublisher(Publisher<? extends Notification> notificationPub) {
+
+            }
+        });
     }
 
     @Override

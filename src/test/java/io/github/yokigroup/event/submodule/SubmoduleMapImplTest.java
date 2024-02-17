@@ -26,8 +26,9 @@ class SubmoduleMapImplTest {
         MessageHandler handler = new GameMessageHandler();
 
         map = new SubmoduleMapImpl();
-        pSub = new PartySubmodule(handler);
-        fSub = new FightSubmodule(handler);
+        // FIXME init these submodules
+        //pSub = new PartySubmodule(handler);
+        //fSub = new FightSubmodule(handler);
         subModuleTestSet = Set.of(pSub, fSub);
     }
 

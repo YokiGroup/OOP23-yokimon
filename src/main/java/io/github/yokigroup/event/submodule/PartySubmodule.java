@@ -2,7 +2,11 @@ package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.observer.Publisher;
+import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.abs.PartySubmoduleAbs;
+import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.view.observer.notification.NewYokimonNotification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +17,15 @@ import java.util.List;
  */
 public class PartySubmodule extends PartySubmoduleAbs {
     private List<Yokimon> yokimonList;
+    private final Publisher<NewYokimonNotification> newYokimonNotificationPub = new PublisherImpl<>();
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
-    public PartySubmodule(final MessageHandler handler) {
+    public PartySubmodule(final MessageHandler handler, ModelObserver modelObs) {
         super(handler);
         yokimonList = new ArrayList<>();
+        modelObs.addNotificationPublisher(newYokimonNotificationPub);
     }
 
     private List<Yokimon> deepCopyOf(final List<Yokimon> list) {
