@@ -56,7 +56,7 @@ public final class FightImpl implements Fight {
         this.oppYokimons = oppYokimons;
 
         if (nextYok.getNext(myYokimons).isEmpty() || nextYok.getNext(oppYokimons).isEmpty()) {
-            throw new RuntimeException("Must instantiate fight with at least one Yokimon on each party.");
+            throw new UnsupportedOperationException("Must instantiate fight with at least one Yokimon on each party.");
         }
         this.currMyYokimon = nextYok.getNext(myYokimons).get();
         this.currOppYokimon = nextYok.getNext(oppYokimons).get();
@@ -107,7 +107,7 @@ public final class FightImpl implements Fight {
         final Optional<Attack> nextOppAttack = oppAI.getMove(currMyYokimon, currOppYokimon);
 
         if (nextOppAttack.isEmpty()) {
-            throw new RuntimeException("Yokimon doesn't have any available attack.");
+            throw new UnsupportedOperationException("Yokimon doesn't have any available attack.");
         }
         final int damage = dmgCalc.getDMG(currOppYokimon, currMyYokimon, nextOppAttack.get());
         currMyYokimon.takeDamage(damage);
