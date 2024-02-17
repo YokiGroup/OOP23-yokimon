@@ -79,7 +79,7 @@ public class AttackImpl implements Attack {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AttackImpl attack = (AttackImpl) o;
+        final AttackImpl attack = (AttackImpl) o;
         return id == attack.id && power == attack.power && Objects.equals(name, attack.name)
                 && color == attack.color && effect == attack.effect;
     }
