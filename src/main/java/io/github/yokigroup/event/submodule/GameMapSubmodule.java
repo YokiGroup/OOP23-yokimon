@@ -15,6 +15,7 @@ import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of {@link GameMapSubmoduleAbs}.
@@ -46,9 +47,12 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     public boolean movePlayerToTile(Direction dir) {
         boolean success = gameMap.movePlayerTileMapPosition(dir);
         if (success) {
-            // get current tile's sprite and publish it
-            //tilePub.notifyObservers(gameMap.getPlayerTile());
-            // publish the new entities on the current tile
+            tilePub.notifyObservers(gameMap.getPlayerTile().getSpriteData());
+            entityPub.notifyObservers(
+                    getEntitiesOnCurrentTile().stream()
+                    .map(Entity::getSpriteData)
+                    .collect(Collectors.toSet())
+            );
         }
         return success;
     }
