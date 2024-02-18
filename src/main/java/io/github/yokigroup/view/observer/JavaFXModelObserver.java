@@ -3,6 +3,7 @@ package io.github.yokigroup.view.observer;
 import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.observer.Publisher;
+import io.github.yokigroup.view.CanvasPainter;
 import io.github.yokigroup.view.observer.notification.Notification;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -13,7 +14,7 @@ public class JavaFXModelObserver implements ModelObserver {
     private Set<Publisher<SpriteData>> spritePublishers = new HashSet<>();
 
     public void init(GraphicsContext gc) {
-        JavaFXDrawObserver drawObs = new JavaFXDrawObserver(gc);
+        DrawObserver drawObs = new DrawObserver(new CanvasPainter(gc));
         spritePublishers.forEach(p -> p.addObserver(drawObs));
     }
 
