@@ -46,7 +46,7 @@ public class LevelUpLogicImpl implements LevelUpLogic {
         // Level
         // Map<Yokimon.Stats, Integer> newStat = yokimon.getAllStats();
         yokimon.getAllStats().entrySet()
-               .forEach(i -> i.setValue(upGradeStat(yokimon, i.getKey())));
+                .forEach(i -> i.setValue(upGradeStat(yokimon, i.getKey())));
         // Reset hp
         yokimon.setMaxHp(yokimon.getStat(Yokimon.Stats.HP));
         yokimon.setActualHp(yokimon.getStat(Yokimon.Stats.HP));

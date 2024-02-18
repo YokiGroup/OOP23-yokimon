@@ -64,6 +64,15 @@ public class PositionImpl implements Position {
         return this.pos.minus(otherPos.getPosition()).length() <= radius;
     }
 
+    /**
+     * Return a protected copy of this object
+     * @return Position
+     */
+    @Override
+    public Position copyOf() {
+        return new PositionImpl(this.pos);
+    }
+
     @Override
     public final boolean equals(final Object o) {
         if (this == o) {

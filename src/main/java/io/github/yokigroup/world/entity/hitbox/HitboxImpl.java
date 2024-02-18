@@ -22,15 +22,6 @@ public abstract class HitboxImpl implements Hitbox {
     private final Body body;
 
     /**
-     * Copy constructor for Hitbox.
-     * @param hitbox The hitbox to copy.
-     * @throws IllegalArgumentException if the passed hitbox is not a HitboxImpl.
-     */
-    public HitboxImpl(final Hitbox hitbox) {
-        this(((HitboxImpl) hitbox).getBody(), hitbox.getPosition());
-    }
-
-    /**
      * Creates a hitbox.
      * @param body The body of the hitbox.
      * @param position The position of the hitbox.

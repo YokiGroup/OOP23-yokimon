@@ -42,5 +42,11 @@ public interface Position {
      */
     boolean inRadius(Position otherPos, double radius);
 
+    /**
+     * Return a copy of this Object
+     * @return Position
+     */
+    Position copyOf();
+
 
 }

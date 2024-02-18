@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EnemyTest {
-    private EnemyTest.TestMessageHandler testMeg;
+    private TestMessageHandler testMeg;
     private static final double X_TEST = 150;
     private static final double Y_TEST = 120;
     private static final double NUM_TEST = 20;
@@ -86,10 +86,9 @@ class EnemyTest {
             );
         }
     }
-
     @BeforeEach
     void setUp() {
-        testMeg = new EnemyTest.TestMessageHandler();
+        testMeg = new TestMessageHandler();
     }
     @Test
     void updateFollow() {

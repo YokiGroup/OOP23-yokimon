@@ -16,9 +16,9 @@ public abstract class Entity implements Sprite {
     private final String resourceURL;
     private final Vector2 dimensions;
     private Position pos;
-    private Hitbox hitBox;
+    private final Hitbox hitBox;
     private final MessageHandler messageHandler;
-    private final int ENTITY_DRAW_PRIORITY = 1;
+    private static final int ENTITY_DRAW_PRIORITY = 1;
 
 
     /**
@@ -29,13 +29,15 @@ public abstract class Entity implements Sprite {
      * @param dimensions dimensions of the entity
      * @param resourceURL url of the entity image
      */
-    public Entity(final Position pos, final Hitbox hitBox, final MessageHandler messageHandler, final Vector2 dimensions, final String resourceURL) {
+    public Entity(final Position pos, final Hitbox hitBox, final MessageHandler messageHandler,
+                  final Vector2 dimensions, final String resourceURL) {
         this.messageHandler = messageHandler;
-        this.setHitBox(hitBox);
+        this.hitBox = hitBox;
         this.setPos(pos);
         this.dimensions = dimensions;
         this.resourceURL = resourceURL;
     }
+
 
     protected String getResourceURL() {
         return resourceURL;
@@ -44,6 +46,7 @@ public abstract class Entity implements Sprite {
     @Override
     public final SpriteData getSpriteData() {
         return new SpriteData(getResourceURL(), pos.getPosition(), dimensions, ENTITY_DRAW_PRIORITY);
+
     }
 
     /**
@@ -51,7 +54,7 @@ public abstract class Entity implements Sprite {
      * @return Position, X e Y
      */
     public final Position getPos() {
-        return pos;
+        return pos.copyOf();
     }
 
     /**
@@ -69,7 +72,7 @@ public abstract class Entity implements Sprite {
     public final void setPos(final Position pos) {
         Objects.requireNonNull(pos, "Pos passed to the entity was null");
         if (pos.isValid()) {
-            this.pos = pos;
+            this.pos = pos.copyOf();
             this.hitBox.setPosition(pos.getPosition());
         }
 
@@ -80,16 +83,10 @@ public abstract class Entity implements Sprite {
      * @return This hitBox
      */
     public final Hitbox getHitBox() {
-        return this.hitBox;
+        return this.hitBox.copyOf();
     }
 
-    /**
-     * Set a new hitBox.
-     * @param hitBox new hitBox
-     */
-    protected final void setHitBox(final Hitbox hitBox) {
-        this.hitBox = hitBox;
-    }
+
     /**
      * Updates the state of the entity.
      */
