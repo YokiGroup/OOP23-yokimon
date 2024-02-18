@@ -14,13 +14,16 @@ public class CanvasPainter implements Painter {
     private final Map<String, Image> imageCache = new HashMap<>();
     private final GraphicsContext gc;
     private final List<SpriteData> drawQueue = new ArrayList<>();
-    private Set<SpriteData> tempDrawQueue = Set.of();
 
     private Image consultCache(String resourceURL) {
         if (!imageCache.containsKey(resourceURL)) {
             imageCache.put(resourceURL, new Image(resourceURL));
         }
         return imageCache.get(resourceURL);
+    }
+
+    private void sortDrawQueue() {
+        drawQueue.sort(Comparator.comparingInt(SpriteData::priority));
     }
 
     public CanvasPainter(GraphicsContext gc) {
@@ -45,16 +48,17 @@ public class CanvasPainter implements Painter {
     @Override
     public void addToPersistentDrawQueue(SpriteData sprite) {
         drawQueue.add(sprite);
+        sortDrawQueue();
     }
 
     @Override
     public void removeFromPersistentDrawQueue(SpriteData sprite) {
         drawQueue.remove(sprite);
+        sortDrawQueue();
     }
 
     @Override
     public void repaint() {
         drawQueue.forEach(this::paint);
-        tempDrawQueue.forEach(this::paint);
     }
 }
