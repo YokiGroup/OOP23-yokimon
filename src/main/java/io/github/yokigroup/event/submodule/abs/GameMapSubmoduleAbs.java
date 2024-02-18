@@ -49,7 +49,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
     public abstract Set<Entity> getEntitiesOnCurrentTile();
 
     @Override
-    protected final void updateCode(long delta) {
+    protected final void updateCode(double delta) {
         /*
         this function should query the player's position and consider whether to change Tile if the player is crossing
         the tile border.
