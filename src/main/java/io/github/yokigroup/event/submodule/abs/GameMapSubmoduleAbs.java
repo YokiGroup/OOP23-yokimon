@@ -4,6 +4,7 @@ import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
@@ -29,11 +30,12 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
         super(handler, modelObs);
     }
 
-
     /**
-     * @return Submodule's GameMap reference
+     * Moves the player to the tile contained in the given direction.
+     * @param dir direction of the tile relative to the one the player's currently on
+     * @return true if the tile change was successful
      */
-    public abstract GameMap getGameMap();
+    public abstract boolean movePlayerToTile(Direction dir);
 
     /**
      * @return hitboxes contained in the tile the player's currently on.

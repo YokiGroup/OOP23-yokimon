@@ -7,6 +7,7 @@ import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.abs.GameMapSubmoduleAbs;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.GameMapBuilder;
 import io.github.yokigroup.world.GameMapBuilderImpl;
@@ -42,8 +43,14 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     }
 
     @Override
-    public GameMap getGameMap() {
-        return this.gameMap;
+    public boolean movePlayerToTile(Direction dir) {
+        boolean success = gameMap.movePlayerTileMapPosition(dir);
+        if (success) {
+            // get current tile's sprite and publish it
+            //tilePub.notifyObservers(gameMap.getPlayerTile());
+            // publish the new entities on the current tile
+        }
+        return success;
     }
 
     @Override

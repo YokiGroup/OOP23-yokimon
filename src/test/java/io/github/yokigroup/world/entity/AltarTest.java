@@ -10,6 +10,7 @@ import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
@@ -38,8 +39,8 @@ class AltarTest {
             }
 
             @Override
-            public GameMap getGameMap() {
-                return map;
+            public boolean movePlayerToTile(Direction dir) {
+                return map.movePlayerTileMapPosition(dir);
             }
 
             @Override

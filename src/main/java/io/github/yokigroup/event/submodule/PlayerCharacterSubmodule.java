@@ -41,7 +41,7 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
     @Override
     public void changeTile(final Direction dir) {
         handler().handle(GameMapSubmodule.class, s -> {
-            s.getGameMap().movePlayerTileMapPosition(dir);
+            s.movePlayerToTile(dir);
         });
     }
 

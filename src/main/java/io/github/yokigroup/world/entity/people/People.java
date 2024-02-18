@@ -192,7 +192,7 @@ public abstract class People extends Entity {
 
         this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
-            map.getGameMap().getPlayerTile().getHitboxes().stream()
+            map.getHitboxesOnCurrentTile().stream()
                     .map(block -> this.getHitBox().collidesWith(block))
                     .filter(Optional::isPresent)
                     .forEach(block -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(block.get()))));
