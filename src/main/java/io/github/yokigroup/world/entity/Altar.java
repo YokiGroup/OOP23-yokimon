@@ -1,6 +1,7 @@
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
@@ -17,7 +18,7 @@ import java.util.Objects;
 public class Altar extends Entity {
     private AltarState state;
     private static final double RADIUS = 40;
-    private static final double HITBOX_SIDE = 20;
+    private static final double HITBOX_SIDE = 100;
     private static final Vector2 dimensions = new Vector2Impl(HITBOX_SIDE, HITBOX_SIDE);
     /**
      * Constructs an Altar object with the specified attributes.
@@ -26,9 +27,13 @@ public class Altar extends Entity {
      */
     public Altar(final Position pos, final MessageHandler messageHandler) {
         super(pos, new RectangularHitbox(pos.getPosition(), dimensions),
-                messageHandler, dimensions,
-                "view/game/textures/altar.png");
+                messageHandler, dimensions, "");
         this.state = AltarState.POWERED;
+    }
+
+    @Override
+    protected String getResourceURL() {
+        return "view/game/textures/altar_" + (state == AltarState.POWERED ? "full" : "empty") + ".png";
     }
 
     /**

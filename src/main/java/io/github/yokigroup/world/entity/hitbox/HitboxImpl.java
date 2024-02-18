@@ -2,6 +2,7 @@ package io.github.yokigroup.world.entity.hitbox;
 
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import org.dyn4j.collision.Fixture;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.geometry.AABB;
@@ -19,6 +20,15 @@ import java.util.Optional;
 public abstract class HitboxImpl implements Hitbox {
     private static final double LAMBDA = 1E-10d;
     private final Body body;
+
+    /**
+     * Copy constructor for Hitbox.
+     * @param hitbox The hitbox to copy.
+     * @throws IllegalArgumentException if the passed hitbox is not a HitboxImpl.
+     */
+    public HitboxImpl(final Hitbox hitbox) {
+        this(((HitboxImpl) hitbox).getBody(), hitbox.getPosition());
+    }
 
     /**
      * Creates a hitbox.
@@ -46,7 +56,8 @@ public abstract class HitboxImpl implements Hitbox {
         // Check for bounding box collisions
         final DetectFilter<Body, BodyFixture> filter = new DetectFilter<>(true, true, null);
         final Iterator<ConvexDetectResult<Body, BodyFixture>> results = world.detectIterator(
-                this.body.getFixture(0).getShape(),
+                // If you see any Fixture cast it's to suppress one of SpotBugs warnings, it's a library issue.
+                ((Fixture) this.body.getFixture(0)).getShape(),
                 this.body.getTransform(),
                 filter
         );
@@ -103,8 +114,9 @@ public abstract class HitboxImpl implements Hitbox {
         if (!(o instanceof HitboxImpl)) {
             return false;
         } else if (
-                this.body.getFixture(0).getShape().getClass()
-                != ((HitboxImpl) o).getBody().getFixture(0).getShape().getClass()
+                // If you see any Fixture cast it's to suppress one of SpotBugs warnings, it's a library issue.
+                ((Fixture) this.body.getFixture(0)).getShape().getClass()
+                != ((Fixture) ((HitboxImpl) o).getBody().getFixture(0)).getShape().getClass()
         ) {
             return false;
         }
@@ -119,7 +131,9 @@ public abstract class HitboxImpl implements Hitbox {
     public final int hashCode() {
         final int prime1 = 79;
         final int prime2 = 39;
-        return prime1 * this.getPosition().hashCode() + prime2 * (int) this.body.getFixture(0).getShape().getRadius();
+        // If you see any Fixture cast it's to suppress one of SpotBugs warnings, it's a library issue.
+        return prime1 * this.getPosition().hashCode() + prime2
+                * (int) ((Fixture) this.body.getFixture(0)).getShape().getRadius();
     }
 
     /**

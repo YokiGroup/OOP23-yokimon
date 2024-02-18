@@ -21,16 +21,18 @@ public class TileBuilderImpl implements TileBuilder {
     private final Set<Hitbox> hitboxes;
     private final Set<Direction> adjacencies;
     private final int id;
+    private final String resourceURL;
 
     /**
      * Creates an empty tile with no entities, hitboxes nor adjacencies.
      * @param id The id of the tile.
      */
-    public TileBuilderImpl(final int id) {
+    public TileBuilderImpl(final int id, String resourceURL) {
         this.entities = new HashSet<>();
         this.hitboxes = new HashSet<>();
         this.adjacencies = new HashSet<>();
         this.id = id;
+        this.resourceURL = resourceURL;
     }
 
     @Override
@@ -77,7 +79,7 @@ public class TileBuilderImpl implements TileBuilder {
     @Override
     public final Tile build(final MessageHandler handler) {
         final Set<Entity> createdEntities = generateEntities(handler);
-        return new TileImpl(id, this.adjacencies, this.hitboxes, createdEntities);
+        return new TileImpl(id, this.adjacencies, this.hitboxes, createdEntities, this.resourceURL);
     }
 
     private Set<Entity> generateEntities(final MessageHandler handler) {

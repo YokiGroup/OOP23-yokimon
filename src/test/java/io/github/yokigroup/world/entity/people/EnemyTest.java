@@ -11,12 +11,13 @@ import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.PositionImpl;
-import io.github.yokigroup.world.entity.TestMessageHandler;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
@@ -47,20 +48,20 @@ class EnemyTest {
             private final Position pos1 = new PositionImpl(v2);
             private final Position pos2 = new PositionImpl(v3);
 
-            TileBuilder tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, altarPos)
+            TileBuilder tile = new TileBuilderImpl(0, "").addEntity(TileBuilder.EntityType.ALTAR, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, pos1)
                     .addEntity(TileBuilder.EntityType.ENEMY, pos2);
             final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0,0)).build(this.handler());
 
 
-            public TestSubmodule(final MessageHandler handler) {
-                super(handler);
+            public TestSubmodule(final MessageHandler handler, ModelObserver modelObs) {
+                super(handler, modelObs);
             }
 
             @Override
-            public GameMap getGameMap() {
-                return map;
+            public boolean movePlayerToTile(Direction dir) {
+                return map.movePlayerTileMapPosition(dir);
             }
 
             @Override

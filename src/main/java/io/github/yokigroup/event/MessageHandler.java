@@ -24,6 +24,7 @@ public interface MessageHandler {
      * @param subModuleType type of the submodule called in play
      * @param handler handler function to determine what to do with the submodule
      * @param <T> Submodule to handle
+     * @param <E> value to return to caller
      * @return return value of handler function
      */
     <T extends Submodule, E> E handle(Class<T> subModuleType, Function<T, E> handler);

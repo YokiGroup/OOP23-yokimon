@@ -1,5 +1,6 @@
 package io.github.yokigroup.world.tile;
 
+import io.github.yokigroup.world.Sprite;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.Direction;
@@ -9,7 +10,7 @@ import java.util.Set;
 /**
  * A single tile of the map, containing entities and hitboxes for the player to interact with.
  */
-public interface Tile {
+public interface Tile extends Sprite {
     /**
      *
      * @return All the hitboxes in a tile.

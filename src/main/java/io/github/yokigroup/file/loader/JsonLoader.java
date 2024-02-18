@@ -43,7 +43,12 @@ public abstract class JsonLoader<T> {
         return parser;
     }
 
-    protected Vector2 getVector2(final String path) {
+    /**
+     * Read a vector object (a json object containing x and y coordinates) from path.
+     * @param path jpath expression representing the object to read
+     * @return parsed vector
+     */
+    protected final Vector2 getVector2(final String path) {
         final Map<String, Double> rawVec = parser.read(path);
         return new Vector2Impl(rawVec.get("x"), rawVec.get("y"));
     }

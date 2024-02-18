@@ -26,7 +26,7 @@ class PositionImplTest {
         final Vector2 v = new Vector2Impl(POSITION, 0);
         final Position altarPos = new PositionImpl(v);
 
-        final Tile tile = new TileBuilderImpl(0)
+        final Tile tile = new TileBuilderImpl(0, "")
                 .addEntity(TileBuilder.EntityType.ALTAR, altarPos).build(messageHandler);
         for (final Entity entity : tile.getEntities()) {
             assertEquals(entity.getPos(), altarPos);

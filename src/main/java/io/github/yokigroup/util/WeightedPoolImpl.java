@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
  * @param <T> The type of objects contained in the pool.
  */
 public class WeightedPoolImpl<T> implements WeightedPool<T> {
+    private static final Random RANDOMIZER = new Random();
     private final Set<Pair<T, Float>> itemPool;
 
     /**
@@ -65,7 +66,7 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
                 .map(Pair::y)
                 .reduce(0.0f, Float::sum);
         // Get a randomized weight from the total
-        final float randomWeight = new Random().nextFloat(sumWeight);
+        final float randomWeight = RANDOMIZER.nextFloat(sumWeight);
         float cumulativeWeight = 0.0f;
         for (final Pair<T, Float> pair : this.itemPool) {
             cumulativeWeight += pair.y();

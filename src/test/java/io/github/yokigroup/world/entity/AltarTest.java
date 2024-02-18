@@ -9,6 +9,8 @@ import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
@@ -29,16 +31,16 @@ class AltarTest {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
             final private Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - DISTANCE,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2);
-            final private TileBuilder tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, new PositionImpl(v));
+            final private TileBuilder tile = new TileBuilderImpl(0, "").addEntity(TileBuilder.EntityType.ALTAR, new PositionImpl(v));
             final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
 
-            public TestSubmodule(final MessageHandler handler) {
-                super(handler);
+            public TestSubmodule(final MessageHandler handler, ModelObserver modelObs) {
+                super(handler, modelObs);
             }
 
             @Override
-            public GameMap getGameMap() {
-                return map;
+            public boolean movePlayerToTile(Direction dir) {
+                return map.movePlayerTileMapPosition(dir);
             }
 
             @Override

@@ -38,9 +38,8 @@ public abstract class People extends Entity {
     /**
      * Default hitBot of the people.
      */
-    private static final double HITBOX_RADIUS = 15;
+    private static final double HITBOX_RADIUS = 60;
     private static final Vector2 DIMENSIONS = new Vector2Impl(HITBOX_RADIUS * 2, HITBOX_RADIUS * 2);
-
     /**
      * Constructs a People object with the specified attributes.
      * @param pos The position of the People
@@ -191,7 +190,7 @@ public abstract class People extends Entity {
 
         this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
-            map.getGameMap().getPlayerTile().getHitboxes().stream()
+            map.getHitboxesOnCurrentTile().stream()
                     .map(block -> this.getHitBox().collidesWith(block))
                     .filter(Optional::isPresent)
                     .forEach(block -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(block.get()))));

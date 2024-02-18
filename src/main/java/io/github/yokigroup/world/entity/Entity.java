@@ -1,7 +1,9 @@
 package io.github.yokigroup.world.entity;
 
+import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.world.Sprite;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 import java.util.Objects;
@@ -10,12 +12,13 @@ import java.util.Objects;
  * Entity class represents a generic entity in the game world.
  * It provides methods to manage and manipulate entities.
  */
-public abstract class Entity {
+public abstract class Entity implements Sprite {
     private final String resourceURL;
     private final Vector2 dimensions;
     private Position pos;
     private Hitbox hitBox;
     private final MessageHandler messageHandler;
+    private final int ENTITY_DRAW_PRIORITY = 1;
 
 
     /**
@@ -35,20 +38,15 @@ public abstract class Entity {
         this.resourceURL = resourceURL;
     }
 
-    /**
-     * Return resourceURL for this entity sprite.
-     * @return String
-     */
-    public final String getResourceURL() {
-        return this.resourceURL;
+
+    protected String getResourceURL() {
+        return resourceURL;
     }
 
-    /**
-     * Return the dimension of this entity.
-     * @return Vector2
-     */
-    public final Vector2 getDimensions() {
-        return this.dimensions;
+    @Override
+    public final SpriteData getSpriteData() {
+        return new SpriteData(getResourceURL(), pos.getPosition(), dimensions, ENTITY_DRAW_PRIORITY);
+
     }
 
     /**
