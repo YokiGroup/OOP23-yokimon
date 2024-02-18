@@ -24,18 +24,29 @@ public class InputSubmodule extends InputSubmoduleAbs {
         super(handler, ignoredModelObs);
     }
 
-    @Override
-    public void handleInput(String keyText) {
-        Direction toAdd;
-        toAdd = switch (keyText.toLowerCase(Locale.ROOT)) {
+    private Direction keyTextToDirection(String keyText) {
+        return switch (keyText.toLowerCase(Locale.ROOT)) {
             case "w" -> Direction.UP;
             case "a" -> Direction.LEFT;
             case "s" -> Direction.DOWN;
             case "d" -> Direction.RIGHT;
             default -> null;
         };
+    }
+
+    @Override
+    public void registerKeyPress(String keyText) {
+        Direction dir = keyTextToDirection(keyText);
         synchronized (this) {
-            if (toAdd != null) moveEvents.add(toAdd);
+            if (dir != null) moveEvents.add(dir);
+        }
+    }
+
+    @Override
+    public void registerKeyRelease(String keyText) {
+        Direction dir = keyTextToDirection(keyText);
+        synchronized (this) {
+            if (dir != null) moveEvents.remove(dir);
         }
     }
 
@@ -45,11 +56,10 @@ public class InputSubmodule extends InputSubmoduleAbs {
 
     @Override
     protected void updateCode(double delta) {
-        final double velocity = 125.;
+        final double velocity = 30.;
         Pair<Integer, Integer> dirSum;
         synchronized (this) {
             dirSum = moveEvents.stream().map(Direction::getOffset).reduce(new Pair<>(0, 0), this::sumPairs);
-            moveEvents = new HashSet<>();
         }
         final Vector2 moveOffset = new Vector2Impl(dirSum.x(), dirSum.y()).scale(delta*velocity);
         if(!moveOffset.equals(Vector2Impl.NULL_VECTOR)) {

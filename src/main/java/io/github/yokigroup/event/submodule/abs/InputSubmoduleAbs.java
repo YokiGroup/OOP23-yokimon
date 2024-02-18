@@ -12,5 +12,6 @@ public abstract class InputSubmoduleAbs extends Submodule {
         super(handler, ignoredModelObs);
     }
 
-    public abstract void handleInput(String keyText);
+    public abstract void registerKeyPress(String keyText);
+    public abstract void registerKeyRelease(String keyText);
 }
