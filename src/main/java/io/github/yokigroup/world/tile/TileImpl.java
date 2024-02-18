@@ -1,6 +1,7 @@
 package io.github.yokigroup.world.tile;
 
 import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
@@ -88,6 +89,7 @@ class TileImpl implements Tile {
 
     @Override
     public SpriteData getSpriteData() {
-        return new SpriteData(resourceURL, new Vector2Impl(0, 0), new Vector2Impl(GameMap.TILE_DIMENSIONS.x(), GameMap.TILE_DIMENSIONS.y()));
+        Vector2 mapDim = new Vector2Impl(GameMap.TILE_DIMENSIONS.x(), GameMap.TILE_DIMENSIONS.y());
+        return new SpriteData(resourceURL, mapDim.scale(0.5), mapDim);
     }
 }
