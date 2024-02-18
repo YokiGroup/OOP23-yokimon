@@ -20,7 +20,7 @@ class TileImpl implements Tile {
     private final Set<Hitbox> hitboxes;
     private final Set<Entity> entities;
     private final String resourceURL;
-    private final int TILE_DRAW_PRIORITY = -100;
+    private static final int TILE_DRAW_PRIORITY = -100;
 
     /**
      * Creates a tile with static and dynamic entities.
@@ -28,9 +28,11 @@ class TileImpl implements Tile {
      * @param adjacencies The connections this tile has.
      * @param hitboxes The invisible walls in a tile.
      * @param entities The entities on the tile.
+     * @param resourceURL The url of the tile texture resource.
      * @throws IllegalArgumentException If any of the arguments are null.
      */
-    TileImpl(final int id, final Set<Direction> adjacencies, final Set<Hitbox> hitboxes, final Set<Entity> entities, final String resourceURL) {
+    TileImpl(final int id, final Set<Direction> adjacencies, final Set<Hitbox> hitboxes,
+             final Set<Entity> entities, final String resourceURL) {
         if (hitboxes == null) {
             throw new IllegalArgumentException("The hitboxes set is null.");
         } else if (entities == null) {
@@ -90,7 +92,7 @@ class TileImpl implements Tile {
 
     @Override
     public SpriteData getSpriteData() {
-        Vector2 mapDim = new Vector2Impl(GameMap.TILE_DIMENSIONS.x(), GameMap.TILE_DIMENSIONS.y());
+        final Vector2 mapDim = new Vector2Impl(GameMap.TILE_DIMENSIONS.x(), GameMap.TILE_DIMENSIONS.y());
         return new SpriteData(resourceURL, mapDim.scale(0.5), mapDim, TILE_DRAW_PRIORITY);
     }
 }
