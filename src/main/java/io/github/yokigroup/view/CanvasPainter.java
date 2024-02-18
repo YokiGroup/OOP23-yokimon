@@ -47,18 +47,24 @@ public class CanvasPainter implements Painter {
 
     @Override
     public void addToPersistentDrawQueue(SpriteData sprite) {
-        drawQueue.add(sprite);
-        sortDrawQueue();
+        synchronized (this) {
+            drawQueue.add(sprite);
+            sortDrawQueue();
+        }
     }
 
     @Override
     public void removeFromPersistentDrawQueue(SpriteData sprite) {
-        drawQueue.remove(sprite);
-        sortDrawQueue();
+        synchronized (this) {
+            drawQueue.remove(sprite);
+            sortDrawQueue();
+        }
     }
 
     @Override
     public void repaint() {
-        drawQueue.forEach(this::paint);
+        synchronized (this) {
+            drawQueue.forEach(this::paint);
+        }
     }
 }
