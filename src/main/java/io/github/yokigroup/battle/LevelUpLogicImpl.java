@@ -1,5 +1,7 @@
 package io.github.yokigroup.battle;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static java.lang.Math.pow;
@@ -93,12 +95,13 @@ public class LevelUpLogicImpl implements LevelUpLogic {
     @Override
     public final void resetAttack(final Yokimon yokimon) {
         Objects.requireNonNull(yokimon, "Yokimon null at level-up logic resetAttack");
-        yokimon.getAttacks().clear();
+        List<Attack> newAttacks = new ArrayList<>();
         for (int i = 0; i <= yokimon.getLevel(); i++) {
             if (yokimon.getLearnableAttacks().containsKey(i)) {
-                yokimon.addAttack(yokimon.getLearnableAttacks().get(i));
+                newAttacks.add(yokimon.getLearnableAttacks().get(i));
             }
         }
+        yokimon.setAttacks(newAttacks);
     }
 
     @Override

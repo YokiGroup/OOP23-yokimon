@@ -146,6 +146,11 @@ public interface Yokimon {
     List<Attack> getAttacks();
 
     /**
+     * Reset the list of attacks
+     * @param attacks List of attacks
+     */
+    void setAttacks(List<Attack> attacks);
+    /**
      * Gives a new attack to the yokimon.
      * @param newAttack New attack.
      */

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * YokimonImpl is an implementation of the Yokimon interface,
@@ -164,7 +165,13 @@ public class YokimonImpl implements Yokimon {
 
     @Override
     public final List<Attack> getAttacks() {
-        return this.moves;
+        return List.copyOf(this.moves);
+    }
+
+    @Override
+    public void setAttacks(final List<Attack> attacks) {
+        this.moves.clear();
+        this.moves.addAll(attacks);
     }
 
     @Override
