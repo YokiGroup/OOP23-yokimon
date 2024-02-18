@@ -1,5 +1,6 @@
 package io.github.yokigroup.battle.fight;
 
+import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.battle.dmgcalculator.DmgCalculator;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.Attack;
@@ -16,6 +17,7 @@ import io.github.yokigroup.core.PublisherImpl;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * The actual Fight implementation communicating with the Logic.
@@ -51,9 +53,9 @@ public final class FightImpl implements Fight {
      * @param myYokimons my party
      * @param oppYokimons the opponent party
      */
-    public FightImpl(final List<Yokimon> myYokimons, final List<Yokimon> oppYokimons) {
-        this.myYokimons = myYokimons;
-        this.oppYokimons = oppYokimons;
+    public FightImpl(final List<Yokimon> myYokimons, final List<Yokimon> oppYokimons) throws UnsupportedOperationException {
+        this.myYokimons = myYokimons.stream().map(YokimonImpl::new).collect(Collectors.toList());
+        this.oppYokimons = oppYokimons.stream().map(YokimonImpl::new).collect(Collectors.toList());;
 
         if (nextYok.getNext(myYokimons).isEmpty() || nextYok.getNext(oppYokimons).isEmpty()) {
             throw new UnsupportedOperationException("Must instantiate fight with at least one Yokimon on each party.");
@@ -63,18 +65,6 @@ public final class FightImpl implements Fight {
         this.state = State.READY_TO_PROGRESS;
     }
 
-
-    /*
-    @Override
-    public void progress(Attack myAttack) {
-        if (state.equals(State.READY_TO_PROGRESS)) {
-            attack(myAttack);
-            if (state.equals(State.READY_TO_PROGRESS)) {
-                getAttacked();
-            }
-        }
-    }
-     */
 
     @Override
     public Success attack(final Attack myAttack) {
@@ -159,12 +149,12 @@ public final class FightImpl implements Fight {
 
     @Override
     public Yokimon getCurrentMyYokimon() {
-        return currMyYokimon;
+        return new YokimonImpl(currMyYokimon);
     }
 
     @Override
     public Yokimon getCurrentOpponent() {
-        return currOppYokimon;
+        return new YokimonImpl(currOppYokimon);
     }
 
     @Override
