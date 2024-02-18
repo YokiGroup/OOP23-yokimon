@@ -20,7 +20,7 @@ import io.github.yokigroup.world.entity.people.Player;
  * @author Giovanni Paone
  */
 public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs {
-    private final Entity player;
+    private final Player player;
     private Publisher<SpriteData> playerPub = new PublisherImpl<>();
 
     private void publishPlayerSpriteData() {
@@ -35,6 +35,7 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
         Vector2 playerPos = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2, (double) GameMap.TILE_DIMENSIONS.y() / 2);
         this.player = new Player(new PositionImpl(playerPos), handler);
         modelObs.addWorldSpritePublisher(playerPub);
+        publishPlayerSpriteData();
     }
 
     // TODO Change Direction reference
@@ -57,9 +58,7 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
 
     @Override
     public void movePlayerBy(final Vector2 delta) {
-        player.setPos(
-                new PositionImpl(player.getPos().getPosition().plus(delta))
-        );
+        player.move(delta);
         publishPlayerSpriteData();
     }
 

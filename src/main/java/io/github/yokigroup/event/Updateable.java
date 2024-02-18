@@ -1,7 +1,7 @@
 package io.github.yokigroup.event;
 
 public abstract class Updateable {
-    private long sinceLastUpdate = getCurrentMillis();
+    private long sinceLastUpdate = -1;
 
     private long getCurrentMillis() {
         return System.currentTimeMillis();
@@ -10,7 +10,8 @@ public abstract class Updateable {
     protected abstract void updateCode(double delta);
 
     public final void update() {
-        sinceLastUpdate = getCurrentMillis() - sinceLastUpdate;
-        updateCode(((double)sinceLastUpdate) / 1000.0);
+        if (sinceLastUpdate == -1) sinceLastUpdate = getCurrentMillis();
+        updateCode(((double)getCurrentMillis() - sinceLastUpdate) / 1000.0);
+        sinceLastUpdate = getCurrentMillis();
     }
 }

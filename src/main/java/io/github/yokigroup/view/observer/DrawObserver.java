@@ -4,6 +4,7 @@ import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.observer.EObserver;
 import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.view.Painter;
+import javafx.application.Platform;
 
 /**
  * Observer for drawing sprites to screen.
@@ -21,8 +22,10 @@ public final class DrawObserver implements EObserver<SpriteData> {
 
     @Override
     public void update(PublisherImpl<SpriteData> publisher, SpriteData lastArg, SpriteData arg) {
-        painter.removeFromPersistentDrawQueue(lastArg);
-        painter.addToPersistentDrawQueue(arg);
-        painter.repaint();
+        Platform.runLater(() -> {
+            painter.removeFromPersistentDrawQueue(lastArg);
+            painter.addToPersistentDrawQueue(arg);
+            painter.repaint();
+        });
     }
 }

@@ -6,17 +6,31 @@ import io.github.yokigroup.view.observer.ModelObserver;
 /**
  * Instances and keeps the game model updated.
  */
-public final class GameLogicImpl implements GameLogic {
-    private final MessageHandler handler = new GameMessageHandler();
+public final class GameLogicImpl extends Thread {
+    private final MessageHandler handler;
     private boolean running = true;
 
-    @Override
-    public void start(ModelObserver view) {
-
+    public GameLogicImpl(ModelObserver view) {
+        super();
+        handler = new GameMessageHandler(view);
     }
 
-    private void loop() {
+    public MessageHandler getMessageHandler() {
+        return handler;
+    }
+
+    @Override
+    public void run() {
+        gameLoop();
+    }
+
+    private void gameLoop() {
         while (running) {
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             handler.updateSubmodules();
         }
     }
