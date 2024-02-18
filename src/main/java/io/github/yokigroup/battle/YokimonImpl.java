@@ -39,7 +39,7 @@ public class YokimonImpl implements Yokimon {
     private final List<Attack> moves;
     private final Map<Integer, Attack> learnableMoves;
     private boolean active;
-    private final LevelUpLogic levelUtility = new LevelUpLogicImpl();
+    private final LevelUpLogic levelUtility;
 
     /**
      * Constructor for YokimonImpl.
@@ -53,6 +53,7 @@ public class YokimonImpl implements Yokimon {
      */
     public YokimonImpl(final int id, final String name, final Color color, final Map<Yokimon.Stats, Integer> baseStats,
                        final GrowthRate growthRate, final int level, final Map<Integer, Attack> learnableMoves) {
+        this.levelUtility = new LevelUpLogicImpl();
         this.stats = new HashMap<>();
         for (final Stats stat : Stats.values()) {
             stats.put(stat, DEFAULT_STAT);
@@ -92,7 +93,9 @@ public class YokimonImpl implements Yokimon {
                 yokimon.getYokimonColor(), Map.copyOf(yokimon.getAllBaseStats()), yokimon.getGrowRate(),
                 yokimon.getLevel(), Map.copyOf(yokimon.getLearnableAttacks()));
     }
+    private void resetYokimon(){
 
+    }
     /**
      * return the id of the yokimon.
      * @return int
@@ -127,7 +130,7 @@ public class YokimonImpl implements Yokimon {
 
     @Override
     public final Map<Stats, Integer> getAllBaseStats() {
-        return this.baseStats;
+        return Map.copyOf(this.baseStats);
     }
 
     @Override
@@ -168,7 +171,7 @@ public class YokimonImpl implements Yokimon {
 
     @Override
     public final List<Attack> getAttacks() {
-        return this.moves;
+        return List.copyOf(this.moves);
     }
 
     @Override

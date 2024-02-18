@@ -26,7 +26,8 @@ public abstract class Entity {
      * @param dimensions dimensions of the entity
      * @param resourceURL url of the entity image
      */
-    public Entity(final Position pos, final Hitbox hitBox, final MessageHandler messageHandler, final Vector2 dimensions, final String resourceURL) {
+    public Entity(final Position pos, final Hitbox hitBox, final MessageHandler messageHandler,
+                  final Vector2 dimensions, final String resourceURL) {
         this.messageHandler = messageHandler;
         this.setHitBox(hitBox);
         this.setPos(pos);
@@ -34,10 +35,18 @@ public abstract class Entity {
         this.resourceURL = resourceURL;
     }
 
+    /**
+     * Return resourceURL for this entity sprite.
+     * @return String
+     */
     public final String getResourceURL() {
         return this.resourceURL;
     }
 
+    /**
+     * Return the dimension of this entity.
+     * @return Vector2
+     */
     public final Vector2 getDimensions() {
         return this.dimensions;
     }
@@ -47,7 +56,7 @@ public abstract class Entity {
      * @return Position, X e Y
      */
     public final Position getPos() {
-        return pos;
+        return pos.copyOf();
     }
 
     /**
@@ -65,7 +74,7 @@ public abstract class Entity {
     public final void setPos(final Position pos) {
         Objects.requireNonNull(pos, "Pos passed to the entity was null");
         if (pos.isValid()) {
-            this.pos = pos;
+            this.pos = pos.copyOf();
             this.hitBox.setPosition(pos.getPosition());
         }
 

@@ -26,12 +26,15 @@ public class Player extends People {
     }
 
     /**
-     * given a vector, it changes the position of the player
+     * Given a vector, it changes the position of the player.
      * around the map.
      * @param vector vector
      */
-    private void move(final Vector2 vector) {
-       this.collisionCheck(vector);
+    public void move(final Vector2 vector) {
+        if (!this.getPos().isValid()) {
+            resetPosition();
+        }
+       this.collisionCheck(vector.scale(SCALE));
     }
 
     /**
@@ -46,17 +49,8 @@ public class Player extends People {
     }
 
     /**
-     * upDate move the player according to keyboards input taken.
+     * Do not call this method
      */
     @Override
-    public void update() {
-        if (!this.getActive()) {
-            return;
-        }
-        Vector2 dir = new Vector2Impl(0, 0);
-        if (!this.getPos().isValid()) {
-            resetPosition();
-        }
-        move(dir.scale(SCALE));
-    }
+    public void update() { }
 }
