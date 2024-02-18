@@ -34,24 +34,23 @@ class EnemyTest {
     private static final double X_TEST = 150;
     private static final double Y_TEST = 120;
     private static final double NUM_TEST = 20;
-    private static final Vector2 V_NEAR = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 + 50,
-            (double) GameMap.TILE_DIMENSIONS.y() / 2 + 30);
+    private static final Vector2 V_NEAR = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 + 200,
+            (double) GameMap.TILE_DIMENSIONS.y() / 2 + 100);
     final private static class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
             private final Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2 - Y_TEST - 1);
             private final Vector2 v2 = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2 - Y_TEST - 2);
-            private final Vector2 v3 = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - 150,
-                    (double) GameMap.TILE_DIMENSIONS.y() / 2 - Y_TEST - 3);
+
             private final Position altarPos = new PositionImpl(v);
             private final Position pos1 = new PositionImpl(v2);
-            private final Position pos2 = new PositionImpl(v3);
 
-            TileBuilder tile = new TileBuilderImpl(0, "").addEntity(TileBuilder.EntityType.ALTAR, altarPos)
+
+            TileBuilder tile = new TileBuilderImpl(0, "")
+                    .addEntity(TileBuilder.EntityType.ALTAR, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, altarPos)
-                    .addEntity(TileBuilder.EntityType.ENEMY, pos1)
-                    .addEntity(TileBuilder.EntityType.ENEMY, pos2);
+                    .addEntity(TileBuilder.EntityType.ENEMY, pos1);
             final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0,0)).build(this.handler());
 
 
@@ -72,6 +71,11 @@ class EnemyTest {
             @Override
             public Set<Entity> getEntitiesOnCurrentTile() {
                 return map.getPlayerTile().getEntities();
+            }
+
+            @Override
+            protected void updateEntities() {
+
             }
         }
 

@@ -3,6 +3,7 @@ package io.github.yokigroup.world.entity.people;
 import io.github.yokigroup.event.MessageHandler;
 
 import io.github.yokigroup.event.submodule.FightSubmodule;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;

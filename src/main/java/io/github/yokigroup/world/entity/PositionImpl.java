@@ -65,7 +65,7 @@ public class PositionImpl implements Position {
     }
 
     /**
-     * Return a protected copy of this object
+     * Return a protected copy of this object.
      * @return Position
      */
     @Override

@@ -21,10 +21,6 @@ public class YokimonImpl implements Yokimon {
      */
     public static final int DEFAULT_STAT = 1;
 
-    /**
-     * The default GrowthRate of the yokimon.
-     */
-    public static final GrowthRate DEFAULT_GROWRATE = GrowthRate.MEDIUM;
     private final int id;
     private final String name;
     private final Color color;
@@ -92,9 +88,6 @@ public class YokimonImpl implements Yokimon {
         this(Objects.requireNonNull(yokimon, "YokimonImpl passed was null").getId(), yokimon.getName(),
                 yokimon.getYokimonColor(), Map.copyOf(yokimon.getAllBaseStats()), yokimon.getGrowRate(),
                 yokimon.getLevel(), Map.copyOf(yokimon.getLearnableAttacks()));
-    }
-    private void resetYokimon(){
-
     }
     /**
      * return the id of the yokimon.
@@ -171,7 +164,7 @@ public class YokimonImpl implements Yokimon {
 
     @Override
     public final List<Attack> getAttacks() {
-        return List.copyOf(this.moves);
+        return this.moves;
     }
 
     @Override

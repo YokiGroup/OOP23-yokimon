@@ -38,15 +38,21 @@ public abstract class Entity implements Sprite {
         this.resourceURL = resourceURL;
     }
 
-
+    /**
+     * This method return a string with the Entity ResourceURL used to display his sprite in the view.
+     * @return String
+     */
     protected String getResourceURL() {
         return resourceURL;
     }
 
+    /**
+     * This method return the SpriteData to display his sprite in the view.
+     * @return SpriteData
+     */
     @Override
     public final SpriteData getSpriteData() {
-        return new SpriteData(getResourceURL(), pos.getPosition(), dimensions, ENTITY_DRAW_PRIORITY);
-
+        return new SpriteData(this.getResourceURL(), this.pos.getPosition(), this.dimensions, ENTITY_DRAW_PRIORITY);
     }
 
     /**

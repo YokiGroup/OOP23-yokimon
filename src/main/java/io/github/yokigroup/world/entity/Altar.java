@@ -1,7 +1,6 @@
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
@@ -19,18 +18,23 @@ public class Altar extends Entity {
     private AltarState state;
     private static final double RADIUS = 200;
     private static final double HITBOX_SIDE = 100;
-    private static final Vector2 dimensions = new Vector2Impl(HITBOX_SIDE, HITBOX_SIDE);
+    private static final Vector2 DIMENSIONS = new Vector2Impl(HITBOX_SIDE, HITBOX_SIDE);
     /**
      * Constructs an Altar object with the specified attributes.
      * @param pos The position of the Altar
      * @param messageHandler Message handler used to handle events
      */
     public Altar(final Position pos, final MessageHandler messageHandler) {
-        super(pos, new RectangularHitbox(pos.getPosition(), dimensions),
-                messageHandler, dimensions, "");
+        super(pos, new RectangularHitbox(pos.getPosition(), DIMENSIONS),
+                messageHandler, DIMENSIONS, "");
         this.state = AltarState.POWERED;
     }
 
+    /**
+     * This method return a string with the Altar ResourceURL used to display his sprite in the view.
+     * Returns a different image depending on the Altar state.
+     * @return String
+     */
     @Override
     protected String getResourceURL() {
         return "view/game/textures/altar_" + (state == AltarState.POWERED ? "full" : "empty") + ".png";
