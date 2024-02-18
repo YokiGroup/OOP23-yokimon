@@ -61,7 +61,7 @@ public class InputSubmodule extends InputSubmoduleAbs {
         synchronized (this) {
             dirSum = moveEvents.stream().map(Direction::getOffset).reduce(new Pair<>(0, 0), this::sumPairs);
         }
-        final Vector2 moveOffset = new Vector2Impl(dirSum.x(), dirSum.y()).scale(delta*velocity);
+        final Vector2 moveOffset = new Vector2Impl(dirSum.x(), dirSum.y()).normalize().scale(delta*velocity);
         if(!moveOffset.equals(Vector2Impl.NULL_VECTOR)) {
             handler().handle(PlayerCharacterSubmodule.class, s -> {
                 s.movePlayerBy(moveOffset);
