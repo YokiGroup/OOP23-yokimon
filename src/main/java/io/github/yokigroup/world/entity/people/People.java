@@ -38,7 +38,7 @@ public abstract class People extends Entity {
     /**
      * Default hitBot of the people.
      */
-    private static final double HITBOX_RADIUS = 15;
+    private static final double HITBOX_RADIUS = 60;
     private static final Vector2 dimensions = new Vector2Impl(HITBOX_RADIUS*2, HITBOX_RADIUS*2);
 
     /**
