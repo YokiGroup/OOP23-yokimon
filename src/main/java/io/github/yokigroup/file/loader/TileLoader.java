@@ -23,6 +23,7 @@ import java.util.Set;
 public final class TileLoader extends IdJsonLoader<TileBuilder> {
     private static final String TILE_JSON_RPATH = "tiles.json";
     private static final String TILE_SHAPE_JPATHF = "$.%s.shape[*]";
+    private String rootTilePath = null;
 
     /**
      * Initializes a TileLoader by parsing the default tiles.json.
@@ -89,9 +90,17 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
         return tileDirs;
     }
 
+    private String getRootTilePath() {
+        final String rootTilePathJPATH = "$.textureRoot";
+        if (rootTilePath == null) {
+            rootTilePath = getParser().read(rootTilePathJPATH);
+        }
+        return rootTilePath;
+    }
+
     private String getResourceURL(final int id) {
         final String resourceURLJPATH = "$." + (id == -1 ? "home" : "" + id) + ".texture";
-        return getParser().read(resourceURLJPATH);
+        return getRootTilePath()+getParser().read(resourceURLJPATH);
     }
 
     private TileBuilder getTileAt(final int id) {

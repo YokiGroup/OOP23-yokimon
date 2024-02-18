@@ -1,6 +1,7 @@
 {
+  "textureRoot": "view/game/textures/tiles/",
   "home": {
-    "texture": "immagine.jpg",
+    "texture": "battle-forest.png",
     "shape": [
       "DOWN",
       "LEFT",
