@@ -35,7 +35,6 @@ class EnemyTest {
     private static final double NUM_TEST = 20;
     private static final Vector2 V_NEAR = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 + 50,
             (double) GameMap.TILE_DIMENSIONS.y() / 2 + 30);
-    /*
     final private static class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
             private final Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
@@ -86,15 +85,9 @@ class EnemyTest {
             );
         }
     }
-    */
     @BeforeEach
     void setUp() {
-        testMeg = new TestMessageHandler(Set.of(PlayerCharacterSubmodule.class,
-                TestMessageHandler.TestSubmodule.class,
-                PartySubmodule.class,
-                FightSubmodule.class,
-                GameMapSubmodule.class)
-                );
+        testMeg = new TestMessageHandler();
     }
     @Test
     void updateFollow() {

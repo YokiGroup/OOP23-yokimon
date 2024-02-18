@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class AltarTest {
     private TestMessageHandler testMeg;
     private static final double DISTANCE = 40;
-    /*
+
     final private static class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
             final private Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - DISTANCE,
@@ -61,12 +61,10 @@ class AltarTest {
             );
         }
     }
-    */
+
     @BeforeEach
     void setUp() {
-        testMeg = new TestMessageHandler(Set.of(PlayerCharacterSubmodule.class,
-                TestMessageHandler.TestSubmodule.class,
-                PartySubmodule.class));
+        testMeg = new TestMessageHandler();
     }
     @Test
     void altarTest() {
