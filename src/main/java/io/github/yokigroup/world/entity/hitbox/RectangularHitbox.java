@@ -9,6 +9,7 @@ import org.dyn4j.geometry.Rectangle;
  * A rectangular hitbox implementation.
  */
 public class RectangularHitbox extends HitboxImpl {
+    private final Vector2 dimensions;
 
     /**
      * Creates a rectangular hitbox.
@@ -17,6 +18,7 @@ public class RectangularHitbox extends HitboxImpl {
      */
     public RectangularHitbox(final Vector2 position, final Vector2 dimensions) {
         super(makeRectangle(dimensions), position);
+        this.dimensions = dimensions;
     }
 
     /**
@@ -25,6 +27,12 @@ public class RectangularHitbox extends HitboxImpl {
      */
     public RectangularHitbox(final Vector2 dimensions) {
         super(makeRectangle(dimensions));
+        this.dimensions = dimensions;
+    }
+
+    @Override
+    public final Hitbox copyOf() {
+        return new RectangularHitbox(this.getPosition(), this.dimensions);
     }
 
     /**
