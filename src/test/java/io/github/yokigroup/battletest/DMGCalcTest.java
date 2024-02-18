@@ -26,8 +26,8 @@ class DMGCalcTest {
     private static final short EXP_VAL_FULL2 = 7;
     private static final short EXP_VAL_FULL3 = 33;
     private static final short EXP_VAL_FULL4 = 42;
-    private static Yokimon y1, y2;
-    private static Attack a1, a2;
+    private Yokimon y1, y2;
+    private Attack a1, a2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
 
@@ -36,7 +36,7 @@ class DMGCalcTest {
      * Instantiates variables for test.
      */
     @BeforeEach
-    void init() {
+     void init() {
         y1 = yokimonLoader.load(1);
         y2 = yokimonLoader.load(3);
         a1 = attackLoader.load(2);
