@@ -22,10 +22,8 @@ public final class DrawObserver implements EObserver<SpriteData> {
 
     @Override
     public void update(PublisherImpl<SpriteData> publisher, SpriteData lastArg, SpriteData arg) {
-        Platform.runLater(() -> {
-            painter.removeFromPersistentDrawQueue(lastArg);
-            painter.addToPersistentDrawQueue(arg);
-            painter.repaint();
-        });
+        painter.removeFromPersistentDrawQueue(lastArg);
+        painter.addToPersistentDrawQueue(arg);
+        Platform.runLater(painter::repaint);
     }
 }
