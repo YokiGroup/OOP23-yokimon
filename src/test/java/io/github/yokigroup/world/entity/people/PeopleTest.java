@@ -13,10 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PeopleTest {
     private static MessageHandler messageHandler;
-    @BeforeEach
-    void setUp() {
-        //final MessageHandler messageHandler = new GameMessageHandler();
-    }
     @Test
     void setDirection() {
         final Position playerPos = new PositionImpl(new Vector2Impl(0, 0));

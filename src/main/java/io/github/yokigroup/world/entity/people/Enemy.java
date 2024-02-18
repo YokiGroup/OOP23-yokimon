@@ -20,20 +20,20 @@ public class Enemy extends People {
     /**
      * This value represent the maximum distance at which the player will be in sight.
      */
-    private static final double RADIUS_PLAYER = 80.00;
+    private static final double RADIUS_PLAYER = 400.00;
     /**
      * This value represent the maximum distance at which the enemy will.
      * go from his initial pos.
      */
-    private static final double RADIUS_INITIAL_POS = 50.00;
+    private static final double RADIUS_INITIAL_POS = 300.00;
     /**
      * SCALE Offset of for general movement.
      */
-    private static final double SCALE = 10;
+    private static final double SCALE = 2.2;
     /**
      * Velocity Offset of the enemy when following the player.
      */
-    private static final double VELOCITY = 1.5;
+    private static final double VELOCITY = 2.6;
 
 
     private Direction wanderDir = Direction.DEFAULT_STAND;
@@ -41,7 +41,7 @@ public class Enemy extends People {
      * Default value for random directions.
      */
     private static final float DEFAULT_POOL_VALUE = 0.1f;
-    private static final float BONUS_POOL_VALUE = 0.8f;
+    private static final float BONUS_POOL_VALUE = 25f;
     private State state;
     /**
      * Constructs an Enemy object with the specified attributes.

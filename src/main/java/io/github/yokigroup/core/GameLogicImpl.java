@@ -6,7 +6,7 @@ import io.github.yokigroup.view.observer.ModelObserver;
 /**
  * Instances and keeps the game model updated.
  */
-public final class GameLogicImpl extends Thread {
+public final class GameLogicImpl extends Thread implements GameLogic {
     private final MessageHandler handler;
     private boolean running = true;
 
@@ -33,5 +33,10 @@ public final class GameLogicImpl extends Thread {
             }
             handler.updateSubmodules();
         }
+    }
+
+    @Override
+    public void stopGame() {
+        running = false;
     }
 }

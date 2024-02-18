@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class Altar extends Entity {
     private AltarState state;
-    private static final double RADIUS = 40;
+    private static final double RADIUS = 200;
     private static final double HITBOX_SIDE = 100;
     private static final Vector2 dimensions = new Vector2Impl(HITBOX_SIDE, HITBOX_SIDE);
     /**
@@ -65,7 +65,7 @@ public class Altar extends Entity {
                     && pos.getPosition().inRadius(this.getPos(), RADIUS)) {
 
                     this.getMessageHandler().handle(PartySubmodule.class, party -> {
-                    party.addYokimon(this.getNewYokimon());
+                    //party.addYokimon(this.getNewYokimon());
                     this.state = AltarState.USED;
 
                 });

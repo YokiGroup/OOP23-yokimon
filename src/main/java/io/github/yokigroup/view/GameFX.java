@@ -1,11 +1,8 @@
 package io.github.yokigroup.view;
 
 import io.github.yokigroup.core.GameLogicImpl;
-import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.InputSubmodule;
-import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
-import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.view.observer.ModelObserverImpl;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -80,7 +77,12 @@ public class GameFX extends Application {
 
         scene.setOnKeyPressed(
                 event -> handler.handle(InputSubmodule.class,
-                        (Consumer<InputSubmodule>) s -> s.handleInput(event.getText())
+                        (Consumer<InputSubmodule>) s -> s.registerKeyPress(event.getText())
+                )
+        );
+        scene.setOnKeyReleased(
+                event -> handler.handle(InputSubmodule.class,
+                        (Consumer<InputSubmodule>) s -> s.registerKeyRelease(event.getText())
                 )
         );
         gameThread.start();
@@ -90,6 +92,8 @@ public class GameFX extends Application {
         stage.heightProperty().addListener(resizeListener);
         stage.fullScreenProperty().addListener(resizeListener);
         stage.maximizedProperty().addListener(resizeListener);
+
+        stage.setOnCloseRequest(a -> gameThread.stopGame());
 
         stage.setTitle("Yokimon");
         stage.setScene(scene);

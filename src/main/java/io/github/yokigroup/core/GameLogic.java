@@ -7,7 +7,7 @@ import io.github.yokigroup.view.observer.ModelObserver;
  */
 public interface GameLogic {
     /**
-     * Starts the game logic.
+     * Stops the game.
      */
-    void start(ModelObserver view);
+    void stopGame();
 }
