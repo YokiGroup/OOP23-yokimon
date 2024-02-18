@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Test class for Next Yokimon.
  */
 final class NextYokTest {
-    private static Yokimon y1, y2, y3;
+    private Yokimon y1, y2, y3;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
 
     /**
