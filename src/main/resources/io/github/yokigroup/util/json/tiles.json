@@ -35,7 +35,7 @@
     ]
   },
   "1": {
-    "texture": "immagine.jpg",
+    "texture": "battle-forest.png",
     "shape": [
       "DOWN",
       "LEFT"
@@ -75,7 +75,7 @@
     ]
   },
   "2": {
-    "texture": "immagine.jpg",
+    "texture": "battle-forest.png",
     "shape": [
       "UP",
       "LEFT"
@@ -102,7 +102,7 @@
     ]
   },
   "3": {
-    "texture": "immagine.jpg",
+    "texture": "battle-forest.png",
     "shape": [
       "DOWN",
       "RIGHT"
@@ -126,7 +126,7 @@
     ]
   },
   "4": {
-    "texture": "immagine.jpg",
+    "texture": "battle-forest.png",
     "shape": [
       "UP",
       "RIGHT"

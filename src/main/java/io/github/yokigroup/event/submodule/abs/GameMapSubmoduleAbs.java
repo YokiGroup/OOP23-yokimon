@@ -3,12 +3,14 @@ package io.github.yokigroup.event.submodule.abs;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Pair;
+import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.view.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -22,6 +24,23 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
      */
     protected static final Pair<Integer, Integer> MAP_DIM = new Pair<>(5, 5);
 
+    private Optional<Direction> checkTileChange() {
+        final Pair<Integer, Integer> mapDim = GameMap.TILE_DIMENSIONS;
+        final Vector2 playerPos = handler().handle(PlayerCharacterSubmodule.class, PlayerCharacterSubmodule::getPosition).getPosition();
+        final double upperBoundProp = 39. / 40.;
+        final double lowerBoundProp = 1. / 40.;
+
+        if (playerPos.getX() > mapDim.x() * upperBoundProp) {
+            return Optional.of(Direction.RIGHT);
+        } else if (playerPos.getX() < mapDim.x() * lowerBoundProp) {
+            return Optional.of(Direction.LEFT);
+        } else if (playerPos.getY() > mapDim.y() * upperBoundProp) {
+            return Optional.of(Direction.DOWN);
+        } else if (playerPos.getY() < mapDim.y() * lowerBoundProp) {
+            return Optional.of(Direction.UP);
+        }
+        return Optional.empty();
+    }
 
     /**
      * @param handler to init the submodule with
@@ -49,6 +68,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
     public abstract Set<Entity> getEntitiesOnCurrentTile();
 
     protected abstract void updateEntities();
+    protected abstract void updateTile();
 
     @Override
     protected final void updateCode(double delta) {
@@ -57,9 +77,9 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
         this function should query the player's position and consider whether to change Tile if the player is crossing
         the tile border.
          */
-        handler().handle(PlayerCharacterSubmodule.class, s -> {
-
-            //s.getPosition().isValid();
+        checkTileChange().ifPresent(a -> {
+            movePlayerToTile(a);
+            updateTile();
         });
     }
 }
