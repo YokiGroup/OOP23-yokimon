@@ -11,5 +11,5 @@ public interface EObserver<T> {
      * @param publisher the publisher responsible about notifying this observer.
      * @param arg the element that underwent some changes.
      */
-    void update(PublisherImpl<T> publisher, T arg);
+    void update(Publisher<T> publisher, T arg);
 }
