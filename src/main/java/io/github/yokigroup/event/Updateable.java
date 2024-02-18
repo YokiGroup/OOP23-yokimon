@@ -7,9 +7,10 @@ public abstract class Updateable {
         return System.currentTimeMillis();
     }
 
-    protected abstract void updateCode(long delta);
+    protected abstract void updateCode(double delta);
 
     public final void update() {
-        updateCode(sinceLastUpdate = getCurrentMillis() - sinceLastUpdate);
+        sinceLastUpdate = getCurrentMillis() - sinceLastUpdate;
+        updateCode(((double)sinceLastUpdate) / 1000.0);
     }
 }
