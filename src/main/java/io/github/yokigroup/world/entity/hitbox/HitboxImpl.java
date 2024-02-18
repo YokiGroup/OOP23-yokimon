@@ -41,6 +41,9 @@ public abstract class HitboxImpl implements Hitbox {
 
     @Override
     public final Optional<Vector2> collidesWith(final Hitbox other) {
+        if (other == null) {
+            return Optional.empty();
+        }
         // Add the body to the world to check for collisions
         final World<Body> world = new World<>();
         world.addBody(((HitboxImpl) other).getBody());

@@ -44,9 +44,8 @@ public abstract class Entity implements Sprite {
     }
 
     @Override
-    public final SpriteData getSpriteData() {
+    public SpriteData getSpriteData() {
         return new SpriteData(getResourceURL(), pos.getPosition(), dimensions, ENTITY_DRAW_PRIORITY);
-
     }
 
     /**
@@ -82,7 +81,7 @@ public abstract class Entity implements Sprite {
      * Return the hitBox of the current Entity.
      * @return This hitBox
      */
-    public final Hitbox getHitBox() {
+    public Hitbox getHitBox() {
         return this.hitBox.copyOf();
     }
 

@@ -48,6 +48,9 @@ public class CanvasPainter implements Painter {
 
     @Override
     public void addToPersistentDrawQueue(SpriteData sprite) {
+        if (sprite == null) {
+            return;
+        }
         synchronized (this) {
             drawQueue.add(sprite);
             sortDrawQueue();
@@ -56,6 +59,9 @@ public class CanvasPainter implements Painter {
 
     @Override
     public void removeFromPersistentDrawQueue(SpriteData sprite) {
+        if (sprite == null) {
+            return;
+        }
         synchronized (this) {
             drawQueue.remove(sprite);
             sortDrawQueue();
