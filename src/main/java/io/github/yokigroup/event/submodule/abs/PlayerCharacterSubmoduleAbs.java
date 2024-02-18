@@ -2,6 +2,7 @@ package io.github.yokigroup.event.submodule.abs;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.view.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
@@ -16,8 +17,8 @@ public abstract class PlayerCharacterSubmoduleAbs extends Submodule {
     /**
      * @param handler to init the submodule with
      */
-    public PlayerCharacterSubmoduleAbs(final MessageHandler handler) {
-        super(handler);
+    public PlayerCharacterSubmoduleAbs(final MessageHandler handler, ModelObserver modelObs) {
+        super(handler, modelObs);
     }
 
     /**

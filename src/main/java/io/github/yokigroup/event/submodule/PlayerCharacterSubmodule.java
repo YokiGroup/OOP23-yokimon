@@ -29,7 +29,7 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
      * @param handler MessageHandler to call in order to query other submodules.
      */
     public PlayerCharacterSubmodule(final MessageHandler handler, ModelObserver modelObs) {
-        super(handler);
+        super(handler, modelObs);
         Vector2 playerPos = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2, (double) GameMap.TILE_DIMENSIONS.y() / 2);
         this.player = new Player(new PositionImpl(playerPos), handler);
         modelObs.addWorldSpritePublisher(1, playerPub);

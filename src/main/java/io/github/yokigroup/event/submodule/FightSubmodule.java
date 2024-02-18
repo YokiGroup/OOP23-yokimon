@@ -22,7 +22,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
      * @param handler MessageHandler to call in order to query other submodules.
      */
     public FightSubmodule(final MessageHandler handler, ModelObserver modelObs) {
-        super(handler);
+        super(handler, modelObs);
         Objects.requireNonNull(modelObs);
         modelObs.addFightPublisher(fightPub);
     }

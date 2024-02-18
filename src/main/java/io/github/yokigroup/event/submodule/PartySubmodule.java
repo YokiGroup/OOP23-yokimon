@@ -24,7 +24,7 @@ public final class PartySubmodule extends PartySubmoduleAbs {
      * @param handler MessageHandler to call in order to query other submodules.
      */
     public PartySubmodule(final MessageHandler handler, ModelObserver modelObs) {
-        super(handler);
+        super(handler, modelObs);
         yokimonList = new ArrayList<>();
         modelObs.addNotificationPublisher(newYokimonNotificationPub);
     }

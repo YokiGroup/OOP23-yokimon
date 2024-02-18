@@ -28,7 +28,7 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
      * @param handler MessageHandler to call in order to query other submodules.
      */
     public GameMapSubmodule(final MessageHandler handler, ModelObserver modelObs) {
-        super(handler);
+        super(handler, modelObs);
         final Pair<Integer, Integer> playerTilePos = new Pair<>(MAP_DIM.x() / 2 + 1, MAP_DIM.y() / 2 + 1);
         final GameMapBuilder builder = new GameMapBuilderImpl();
 

@@ -3,6 +3,7 @@ package io.github.yokigroup.event.submodule.abs;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Pair;
+import io.github.yokigroup.view.observer.ModelObserver;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
@@ -24,9 +25,10 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
     /**
      * @param handler to init the submodule with
      */
-    public GameMapSubmoduleAbs(final MessageHandler handler) {
-        super(handler);
+    public GameMapSubmoduleAbs(final MessageHandler handler, ModelObserver modelObs) {
+        super(handler, modelObs);
     }
+
 
     /**
      * @return Submodule's GameMap reference

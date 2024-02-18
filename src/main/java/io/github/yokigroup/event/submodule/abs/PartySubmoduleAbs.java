@@ -2,6 +2,7 @@ package io.github.yokigroup.event.submodule.abs;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.view.observer.ModelObserver;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ public abstract class PartySubmoduleAbs extends Submodule {
     /**
      * @param handler to init the submodule with
      */
-    public PartySubmoduleAbs(final MessageHandler handler) {
-        super(handler);
+    public PartySubmoduleAbs(final MessageHandler handler, ModelObserver modelObs) {
+        super(handler, modelObs);
     }
 
     /**
