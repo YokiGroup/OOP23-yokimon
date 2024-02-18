@@ -37,9 +37,13 @@ public abstract class Entity implements Sprite {
         this.resourceURL = resourceURL;
     }
 
+    protected String getResourceURL() {
+        return resourceURL;
+    }
+
     @Override
-    public SpriteData getSpriteData() {
-        return new SpriteData(resourceURL, pos.getPosition(), dimensions, ENTITY_DRAW_PRIORITY);
+    public final SpriteData getSpriteData() {
+        return new SpriteData(getResourceURL(), pos.getPosition(), dimensions, ENTITY_DRAW_PRIORITY);
     }
 
     /**
