@@ -90,7 +90,7 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
     }
 
     private String getResourceURL(final int id) {
-        final String resourceURLJPATH = "$" + (id == -1 ? "home" : "" + id) + ".texture";
+        final String resourceURLJPATH = "$." + (id == -1 ? "home" : "" + id) + ".texture";
         return getParser().read(resourceURLJPATH);
     }
 
