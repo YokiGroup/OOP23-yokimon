@@ -49,19 +49,17 @@ class GameMapImpl implements GameMap {
 
     @Override
     public final boolean movePlayerTileMapPosition(final Direction direction) {
-        for (final Direction dir : Direction.values()) {
-            if (getPlayerTile().getAdjacencies().contains(dir)) {
-                this.playerTileMapPosition = new Pair<>(
-                        this.playerTileMapPosition.x() + dir.getOffset().x(),
-                        this.playerTileMapPosition.y() + dir.getOffset().y()
-                );
-                if (playerTileMapPosition.x() < 0 || playerTileMapPosition.y() < 0
-                        || playerTileMapPosition.x() >= mapDimensions.x() || playerTileMapPosition.y() >= mapDimensions.y()) {
-                    throw new IllegalStateException("The player went out of bounds ("
-                            + playerTileMapPosition.y() + " " + playerTileMapPosition.y() + ").");
-                }
-                return true;
+        if (getPlayerTile().getAdjacencies().contains(direction)) {
+            this.playerTileMapPosition = new Pair<>(
+                    this.playerTileMapPosition.x() + direction.getOffset().x(),
+                    this.playerTileMapPosition.y() + direction.getOffset().y()
+            );
+            if (playerTileMapPosition.x() < 0 || playerTileMapPosition.y() < 0
+                    || playerTileMapPosition.x() >= mapDimensions.x() || playerTileMapPosition.y() >= mapDimensions.y()) {
+                throw new IllegalStateException("The player went out of bounds ("
+                        + playerTileMapPosition.y() + " " + playerTileMapPosition.y() + ").");
             }
+            return true;
         }
         return false;
     }
