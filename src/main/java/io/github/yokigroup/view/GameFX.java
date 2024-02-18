@@ -80,6 +80,11 @@ public class GameFX extends Application {
                         (Consumer<InputSubmodule>) s -> s.registerKeyPress(event.getText())
                 )
         );
+        scene.setOnKeyReleased(
+                event -> handler.handle(InputSubmodule.class,
+                        (Consumer<InputSubmodule>) s -> s.registerKeyRelease(event.getText())
+                )
+        );
         gameThread.start();
 
         final GameWindowResizeListener<Object> resizeListener = new GameWindowResizeListener<>(scene, gameCanvas, painter, ratio);

@@ -13,4 +13,5 @@ public abstract class InputSubmoduleAbs extends Submodule {
     }
 
     public abstract void registerKeyPress(String keyText);
+    public abstract void registerKeyRelease(String keyText);
 }
