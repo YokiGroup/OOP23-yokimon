@@ -94,13 +94,9 @@ public class Enemy extends People {
      */
     private Vector2 follow(final Vector2 playerPos) {
         Objects.requireNonNull(playerPos, "Player position NULL in follow");
-        /*
-        return new Vector2Impl(this.getPos().getPosition().minus(playerPos)
-                .normalize().scale(VELOCITY).plus(this.getPos().getPosition())); */
+
         return new Vector2Impl(playerPos.minus(this.getPos().getPosition()).normalize()
                 .scale(VELOCITY));
-
-        //.plus(this.getPos().getPosition())
     }
 
     /**

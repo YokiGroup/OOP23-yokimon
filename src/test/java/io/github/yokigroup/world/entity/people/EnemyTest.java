@@ -16,6 +16,7 @@ import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.PositionImpl;
+import io.github.yokigroup.world.entity.TestMessageHandler;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
@@ -28,12 +29,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EnemyTest {
-    private EnemyTest.TestMessageHandler testMeg;
+    private TestMessageHandler testMeg;
     private static final double X_TEST = 150;
     private static final double Y_TEST = 120;
     private static final double NUM_TEST = 20;
     private static final Vector2 V_NEAR = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 + 50,
             (double) GameMap.TILE_DIMENSIONS.y() / 2 + 30);
+    /*
     final private static class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
             private final Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
@@ -84,10 +86,15 @@ class EnemyTest {
             );
         }
     }
-
+    */
     @BeforeEach
     void setUp() {
-        testMeg = new EnemyTest.TestMessageHandler();
+        testMeg = new TestMessageHandler(Set.of(PlayerCharacterSubmodule.class,
+                TestMessageHandler.TestSubmodule.class,
+                PartySubmodule.class,
+                FightSubmodule.class,
+                GameMapSubmodule.class)
+                );
     }
     @Test
     void updateFollow() {
