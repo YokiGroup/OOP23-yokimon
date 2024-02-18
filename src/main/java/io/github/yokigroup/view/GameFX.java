@@ -1,6 +1,7 @@
 package io.github.yokigroup.view;
 
 import io.github.yokigroup.core.GameMessageHandler;
+import io.github.yokigroup.event.submodule.InputSubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.view.observer.ModelObserverImpl;
@@ -15,6 +16,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import java.util.function.Consumer;
 
 /**
  * Main JavaFX Application entry.
@@ -70,6 +73,12 @@ public class GameFX extends Application {
         Painter painter = new CanvasPainter(gameCanvas.getGraphicsContext2D());
         ModelObserverImpl modelObs = new ModelObserverImpl(painter);
         GameMessageHandler handler = new GameMessageHandler(modelObs);
+
+        scene.setOnKeyPressed(
+                event -> handler.handle(InputSubmodule.class,
+                        (Consumer<InputSubmodule>) s -> s.handleInput(event.getText())
+                )
+        );
 
         final GameWindowResizeListener<Object> resizeListener = new GameWindowResizeListener<>(scene, gameCanvas, painter, ratio);
         stage.widthProperty().addListener(resizeListener);
