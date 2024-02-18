@@ -1,4 +1,5 @@
 {
+  "textureRoot": "view/game/textures/tiles/",
   "home": {
     "texture": "immagine.jpg",
     "shape": [
