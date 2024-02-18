@@ -23,13 +23,13 @@ class TileBuilderTest {
         final Hitbox circleA = new CircularHitbox(1.0d);
         final Hitbox circleB = new CircularHitbox(3.0d);
         final Hitbox rectA = new RectangularHitbox(new Vector2Impl(1.0d, 3.2d));
-        final TileBuilder builderA = new TileBuilderImpl(0);
+        final TileBuilder builderA = new TileBuilderImpl(0, "");
         final Tile tileA = builderA.build(messageHandler);
         assertEquals(0, tileA.getId());
         assertTrue(tileA.getHitboxes().isEmpty());
         assertTrue(tileA.getEntities().isEmpty());
         assertTrue(tileA.getAdjacencies().isEmpty());
-        final TileBuilder builderB = new TileBuilderImpl(1)
+        final TileBuilder builderB = new TileBuilderImpl(1, "")
                 .addAdjacency(Direction.DOWN)
                 .addAllAdjacencies(Set.of(Direction.UP, Direction.RIGHT))
                 .addHitbox(circleA)

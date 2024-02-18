@@ -27,7 +27,7 @@ class TileTest {
         hitbox1 = new CircularHitbox(r1);
         hitbox2 = new CircularHitbox(r2);
         hitbox3 = new CircularHitbox(r3);
-        tile = new TileBuilderImpl(TILE_ID)
+        tile = new TileBuilderImpl(TILE_ID, "")
                 .addHitbox(hitbox1)
                 .addHitbox(hitbox2)
                 .addHitbox(hitbox3)

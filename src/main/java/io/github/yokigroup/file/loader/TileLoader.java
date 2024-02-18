@@ -89,8 +89,13 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
         return tileDirs;
     }
 
+    private String getResourceURL(final int id) {
+        final String resourceURLJPATH = "$" + (id == -1 ? "home" : "" + id) + ".texture";
+        return getParser().read(resourceURLJPATH);
+    }
+
     private TileBuilder getTileAt(final int id) {
-        TileBuilder tileBuilder = new TileBuilderImpl(id);
+        TileBuilder tileBuilder = new TileBuilderImpl(id, getResourceURL(id));
         tileBuilder.addAllHitboxes(getHitboxes(id));
         tileBuilder.addAllEntities(getEntities(id));
         tileBuilder.addAllAdjacencies(getTileDirs(id));

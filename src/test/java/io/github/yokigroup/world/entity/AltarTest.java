@@ -31,7 +31,7 @@ class AltarTest {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
             final private Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - DISTANCE,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2);
-            final private TileBuilder tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, new PositionImpl(v));
+            final private TileBuilder tile = new TileBuilderImpl(0, "").addEntity(TileBuilder.EntityType.ALTAR, new PositionImpl(v));
             final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
 
             public TestSubmodule(final MessageHandler handler, ModelObserver modelObs) {

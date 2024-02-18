@@ -31,8 +31,8 @@ class TileShapeTest {
 
     @Test
     void testGetTiles() {
-        final var tile1 = new TileBuilderImpl(0);
-        final var tile2 = new TileBuilderImpl(1);
+        final var tile1 = new TileBuilderImpl(0, "");
+        final var tile2 = new TileBuilderImpl(1, "");
         tileShape1 = new TileShapeImpl(Set.of(tile1, tile2), tileShapeSet1);
         final WeightedPool<TileBuilder> tileSet = tileShape1.getTiles();
         assertEquals(2, tileSet.size());

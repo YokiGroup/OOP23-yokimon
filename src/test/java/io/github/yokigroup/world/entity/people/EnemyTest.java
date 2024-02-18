@@ -48,7 +48,7 @@ class EnemyTest {
             private final Position pos1 = new PositionImpl(v2);
             private final Position pos2 = new PositionImpl(v3);
 
-            TileBuilder tile = new TileBuilderImpl(0).addEntity(TileBuilder.EntityType.ALTAR, altarPos)
+            TileBuilder tile = new TileBuilderImpl(0, "").addEntity(TileBuilder.EntityType.ALTAR, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, pos1)
                     .addEntity(TileBuilder.EntityType.ENEMY, pos2);
