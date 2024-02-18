@@ -29,7 +29,7 @@ public class InputSubmodule extends InputSubmoduleAbs {
     }
 
     @Override
-    public void update() {
+    protected void updateCode(long delta) {
 
     }
 }
