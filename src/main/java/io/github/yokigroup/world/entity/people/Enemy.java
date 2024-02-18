@@ -49,7 +49,7 @@ public class Enemy extends People {
      * @param messageHandler handle for events
      */
     public Enemy(final Position pos, final MessageHandler messageHandler) {
-        super(pos, messageHandler);
+        super(pos, messageHandler, "view/game/textures/enemy.png");
         this.state = State.WANDER;
 
     }
