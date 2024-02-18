@@ -1,4 +1,7 @@
 package io.github.yokigroup.view.observer.notification;
 
-public class NewYokimonNotification extends Notification {
+import io.github.yokigroup.battle.Yokimon;
+
+public interface NewYokimonNotification extends Notification {
+    Yokimon getNewYokimon();
 }
