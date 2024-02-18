@@ -4,13 +4,8 @@ import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
-import io.github.yokigroup.event.submodule.FightSubmodule;
-import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.event.submodule.PartySubmodule;
-import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
+import io.github.yokigroup.event.submodule.*;
 import io.github.yokigroup.event.submodule.abs.Submodule;
-import io.github.yokigroup.event.submodule.SubmoduleMap;
-import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 import io.github.yokigroup.view.observer.ModelObserver;
 import io.github.yokigroup.view.observer.notification.Notification;
 
@@ -35,7 +30,8 @@ public class GameMessageHandler implements MessageHandler {
                 PartySubmodule.class,
                 PlayerCharacterSubmodule.class,
                 FightSubmodule.class,
-                GameMapSubmodule.class
+                GameMapSubmodule.class,
+                InputSubmodule.class
         );
     }
 
