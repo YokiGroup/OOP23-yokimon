@@ -13,8 +13,8 @@ public interface ModelObserver {
         BATTLE
     }
 
-    void addWorldSpritePublisher(int priority, Publisher<SpriteData> spriteObs);
-    void addWorldSpritePublishers(int priority, Publisher<Set<SpriteData>> spriteObs);
+    void addWorldSpritePublisher(Publisher<SpriteData> spriteObs);
+    void addWorldSpritePublishers(Publisher<Set<SpriteData>> spriteObs);
     void addFightPublisher(Publisher<Fight> fightObs);
     void addNotificationPublisher(Publisher<? extends Notification> notificationPub);
 }

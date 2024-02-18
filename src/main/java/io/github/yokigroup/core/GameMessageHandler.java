@@ -71,12 +71,12 @@ public class GameMessageHandler implements MessageHandler {
         // FIXME TEMPORARY HACK
         this(new ModelObserver() {
             @Override
-            public void addWorldSpritePublisher(int priority, Publisher<SpriteData> spriteObs) {
+            public void addWorldSpritePublisher(Publisher<SpriteData> spriteObs) {
 
             }
 
             @Override
-            public void addWorldSpritePublishers(int priority, Publisher<Set<SpriteData>> spriteObs) {
+            public void addWorldSpritePublishers(Publisher<Set<SpriteData>> spriteObs) {
 
             }
 

@@ -34,7 +34,7 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
         super(handler, modelObs);
         Vector2 playerPos = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2, (double) GameMap.TILE_DIMENSIONS.y() / 2);
         this.player = new Player(new PositionImpl(playerPos), handler);
-        modelObs.addWorldSpritePublisher(1, playerPub);
+        modelObs.addWorldSpritePublisher(playerPub);
     }
 
     // TODO Change Direction reference

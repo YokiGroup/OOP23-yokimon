@@ -39,8 +39,8 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
         builder.putHomeTileAt(playerTilePos);
         this.gameMap = builder.build(handler);
 
-        modelObs.addWorldSpritePublisher(-100, tilePub);
-        modelObs.addWorldSpritePublishers(0, entityPub);
+        modelObs.addWorldSpritePublisher(tilePub);
+        modelObs.addWorldSpritePublishers(entityPub);
         tilePub.notifyObservers(gameMap.getPlayerTile().getSpriteData());
     }
 
