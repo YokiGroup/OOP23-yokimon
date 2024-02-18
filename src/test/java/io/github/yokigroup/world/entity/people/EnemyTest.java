@@ -73,6 +73,9 @@ class EnemyTest {
             public Set<Entity> getEntitiesOnCurrentTile() {
                 return map.getPlayerTile().getEntities();
             }
+
+            @Override
+            protected void updateEntities() { }
         }
 
         @Override
