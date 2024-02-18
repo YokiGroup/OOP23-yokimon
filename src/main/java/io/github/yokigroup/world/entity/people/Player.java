@@ -34,7 +34,7 @@ public class Player extends People {
         if (!this.getPos().isValid()) {
             resetPosition();
         }
-       this.collisionCheck(vector.scale(SCALE));
+        this.collisionCheck(vector.scale(SCALE));
     }
 
     /**

@@ -1,6 +1,8 @@
 package io.github.yokigroup.view;
 
+import io.github.yokigroup.core.GameLogicImpl;
 import io.github.yokigroup.core.GameMessageHandler;
+import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.InputSubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Vector2Impl;
@@ -71,14 +73,17 @@ public class GameFX extends Application {
 
         final Canvas gameCanvas = (Canvas) rootElem.getCenter(); // FIXME maybe casting like this isn't the smartest choice
         Painter painter = new CanvasPainter(gameCanvas.getGraphicsContext2D());
+
         ModelObserverImpl modelObs = new ModelObserverImpl(painter);
-        GameMessageHandler handler = new GameMessageHandler(modelObs);
+        GameLogicImpl gameThread = new GameLogicImpl(modelObs);
+        MessageHandler handler = gameThread.getMessageHandler();
 
         scene.setOnKeyPressed(
                 event -> handler.handle(InputSubmodule.class,
                         (Consumer<InputSubmodule>) s -> s.handleInput(event.getText())
                 )
         );
+        gameThread.start();
 
         final GameWindowResizeListener<Object> resizeListener = new GameWindowResizeListener<>(scene, gameCanvas, painter, ratio);
         stage.widthProperty().addListener(resizeListener);
@@ -89,9 +94,6 @@ public class GameFX extends Application {
         stage.setTitle("Yokimon");
         stage.setScene(scene);
         stage.show();
-        handler.handle(PlayerCharacterSubmodule.class, s -> {
-            s.movePlayerBy(new Vector2Impl(0, 0));
-        });
     }
 
     public static void run(final String[] args) {

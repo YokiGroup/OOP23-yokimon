@@ -34,7 +34,7 @@ public abstract class FightSubmoduleAbs extends Submodule {
     public abstract Optional<Fight> getLastAnnouncedFight();
 
     @Override
-    public final void update() {
+    protected final void updateCode(double delta) {
         if (getLastAnnouncedFight().isPresent()) {
             // TODO implement
         }

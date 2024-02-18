@@ -51,7 +51,7 @@ public abstract class PartySubmoduleAbs extends Submodule {
     public abstract void removeYokimon(int index);
 
     @Override
-    public void update() {
+    protected void updateCode(double delta) {
 
     }
 }

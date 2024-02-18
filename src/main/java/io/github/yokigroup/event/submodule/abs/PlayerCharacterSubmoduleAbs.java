@@ -45,7 +45,7 @@ public abstract class PlayerCharacterSubmoduleAbs extends Submodule {
     public abstract void movePlayerBy(Vector2 delta);
 
     @Override
-    public void update() {
+    protected void updateCode(double delta) {
         // TODO collision check
     }
 }
