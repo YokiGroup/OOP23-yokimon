@@ -1,5 +1,6 @@
 package io.github.yokigroup.world.entity.people;
 
+import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.util.Vector2;
@@ -8,6 +9,7 @@ import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
+import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -38,7 +40,7 @@ public abstract class People extends Entity {
     /**
      * Default hitBot of the people.
      */
-    private static final double HITBOX_RADIUS = 60;
+    private static final double HITBOX_RADIUS = 50;
     private static final Vector2 DIMENSIONS = new Vector2Impl(HITBOX_RADIUS * 2, HITBOX_RADIUS * 2);
     /**
      * Constructs a People object with the specified attributes.
@@ -51,6 +53,22 @@ public abstract class People extends Entity {
         this.direction = DEFAULT_DIRECTION;
         this.active = true;
         this.initialPos = pos.copyOf();
+    }
+
+    @Override
+    public final Hitbox getHitBox() {
+        if (!active) {
+            return null;
+        }
+        return super.getHitBox();
+    }
+
+    @Override
+    public SpriteData getSpriteData() {
+        if (!active) {
+            return null;
+        }
+        return super.getSpriteData();
     }
 
     /**
@@ -187,6 +205,7 @@ public abstract class People extends Entity {
      * @param vector vector2
      */
     protected final void collisionCheck(final Vector2 vector) {
+        if(!active) return;
 
         this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {

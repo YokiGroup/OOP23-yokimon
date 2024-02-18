@@ -1,23 +1,35 @@
 {
   "textureRoot": "view/game/textures/tiles/",
   "home": {
-    "texture": "battle-forest.png",
+    "texture": "home.png",
     "shape": [
       "DOWN",
       "LEFT",
       "RIGHT",
       "UP"
     ],
-    "hitboxes": [],
+    "hitboxes": [
+      {
+        "type": "rect",
+        "position": {
+          "x": 640.0,
+          "y": 80.0
+        },
+        "dimensions": {
+          "x": 1280.0,
+          "y": 160.0
+        }
+      }
+    ],
     "spawns": [
       {
         "type": "enemy",
-        "x": 400.0,
+        "x": 100.0,
         "y": 500.0
       },
       {
         "type": "altar",
-        "x": 800.0,
+        "x": 900.0,
         "y": 500.0
       }
     ]

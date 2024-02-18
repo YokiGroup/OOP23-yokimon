@@ -93,6 +93,8 @@ public class GameFX extends Application {
         stage.fullScreenProperty().addListener(resizeListener);
         stage.maximizedProperty().addListener(resizeListener);
 
+        stage.setOnCloseRequest(a -> gameThread.stopGame());
+
         stage.setTitle("Yokimon");
         stage.setScene(scene);
         stage.show();
