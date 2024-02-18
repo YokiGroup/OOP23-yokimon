@@ -27,7 +27,7 @@ public class Altar extends Entity {
      */
     public Altar(final Position pos, final MessageHandler messageHandler) {
         super(pos, new RectangularHitbox(pos.getPosition(), dimensions),
-                messageHandler, dimensions, "");
+                messageHandler, dimensions.scale(1.05), "");
         this.state = AltarState.POWERED;
     }
 
