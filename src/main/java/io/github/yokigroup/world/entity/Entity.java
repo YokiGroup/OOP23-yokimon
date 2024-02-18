@@ -83,7 +83,7 @@ public abstract class Entity implements Sprite {
      * @return This hitBox
      */
     public final Hitbox getHitBox() {
-        return this.hitBox;
+        return this.hitBox.copyOf();
     }
 
 
