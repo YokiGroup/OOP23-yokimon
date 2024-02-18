@@ -27,8 +27,7 @@ public class CanvasPainter implements Painter {
         this.gc = gc;
     }
 
-    @Override
-    public void paint(SpriteData sprite) {
+    private void paint(SpriteData sprite) {
         final Canvas canvas = gc.getCanvas();
         final Vector2 canvasDim = new Vector2Impl(canvas.getWidth(), canvas.getHeight());
         final Vector2 absSpriteDim = sprite.getNormalizedDimension().times(canvasDim);
@@ -41,12 +40,6 @@ public class CanvasPainter implements Painter {
                 absSpriteDim.getX(),
                 absSpriteDim.getY()
         );
-    }
-
-    @Override
-    public void paint(Set<SpriteData> sprites) {
-        tempDrawQueue.addAll(sprites);
-        sprites.forEach(this::paint);
     }
 
     @Override
