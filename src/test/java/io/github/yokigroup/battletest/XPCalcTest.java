@@ -24,7 +24,7 @@ final class XPCalcTest {
     private static final int EXP_VAL_FULL3 = 220;
     private static final int RAND_LEVEL = 12;
 
-    private static Yokimon y1, y2, y3;
+    private Yokimon y1, y2, y3;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
 
     /**
