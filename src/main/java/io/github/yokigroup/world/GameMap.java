@@ -35,7 +35,6 @@ public interface GameMap {
      * Moves the player position in that direction.
      * @param direction The direction to move the player position.
      * @return True if the player can move in that direction, false otherwise.
-     * @throws IllegalStateException If the player moved out of bounds.
      */
     boolean movePlayerTileMapPosition(Direction direction);
 }

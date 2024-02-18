@@ -78,6 +78,11 @@ class EnemyTest {
 
             }
 
+            @Override
+            protected void updateTile() {
+
+            }
+
         }
 
         @Override

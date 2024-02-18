@@ -50,15 +50,15 @@ class GameMapImpl implements GameMap {
     @Override
     public final boolean movePlayerTileMapPosition(final Direction direction) {
         if (getPlayerTile().getAdjacencies().contains(direction)) {
-            this.playerTileMapPosition = new Pair<>(
+            final Pair<Integer, Integer> tentativePlayerMapPos = new Pair<>(
                     this.playerTileMapPosition.x() + direction.getOffset().x(),
                     this.playerTileMapPosition.y() + direction.getOffset().y()
             );
-            if (playerTileMapPosition.x() < 0 || playerTileMapPosition.y() < 0
-                    || playerTileMapPosition.x() >= mapDimensions.x() || playerTileMapPosition.y() >= mapDimensions.y()) {
-                throw new IllegalStateException("The player went out of bounds ("
-                        + playerTileMapPosition.y() + " " + playerTileMapPosition.y() + ").");
+            if (tentativePlayerMapPos.x() < 0 || tentativePlayerMapPos.y() < 0
+                    || tentativePlayerMapPos.x() >= mapDimensions.x() || tentativePlayerMapPos.y() >= mapDimensions.y()) {
+                return false;
             }
+            this.playerTileMapPosition = tentativePlayerMapPos;
             return true;
         }
         return false;

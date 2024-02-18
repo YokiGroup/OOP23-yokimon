@@ -59,6 +59,11 @@ class AltarTest {
 
             }
 
+            @Override
+            protected void updateTile() {
+
+            }
+
         }
 
         @Override
