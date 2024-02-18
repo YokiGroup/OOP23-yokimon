@@ -1,7 +1,6 @@
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
@@ -31,6 +30,11 @@ public class Altar extends Entity {
         this.state = AltarState.POWERED;
     }
 
+    /**
+     * This method return a string with the Altar ResourceURL used to display his sprite in the view.
+     * Returns a different image depending on the Altar state.
+     * @return String
+     */
     @Override
     protected String getResourceURL() {
         return "view/game/textures/altar_" + (state == AltarState.POWERED ? "full" : "empty") + ".png";

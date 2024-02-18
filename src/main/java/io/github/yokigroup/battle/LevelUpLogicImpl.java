@@ -1,6 +1,6 @@
 package io.github.yokigroup.battle;
 
-import java.util.Objects;
+import java.util.*;
 
 import static java.lang.Math.pow;
 
@@ -44,9 +44,12 @@ public class LevelUpLogicImpl implements LevelUpLogic {
     public final void setStats(final Yokimon yokimon) {
         Objects.requireNonNull(yokimon, "Yokimon null at level-up logic setStats");
         // Level
-        // Map<Yokimon.Stats, Integer> newStat = yokimon.getAllStats();
-        yokimon.getAllStats().entrySet()
-                .forEach(i -> i.setValue(upGradeStat(yokimon, i.getKey())));
+        Map<Yokimon.Stats, Integer> newStat = yokimon.getAllStats();
+        Map<Yokimon.Stats, Integer> newStats = new HashMap<>();
+        for (var set : newStat.entrySet()) {
+            newStats.put(set.getKey(), upGradeStat(yokimon, set.getKey()));
+        }
+        yokimon.setStats(newStats);
         // Reset hp
         yokimon.setMaxHp(yokimon.getStat(Yokimon.Stats.HP));
         yokimon.setActualHp(yokimon.getStat(Yokimon.Stats.HP));
@@ -93,12 +96,13 @@ public class LevelUpLogicImpl implements LevelUpLogic {
     @Override
     public final void resetAttack(final Yokimon yokimon) {
         Objects.requireNonNull(yokimon, "Yokimon null at level-up logic resetAttack");
-        yokimon.getAttacks().clear();
+        List<Attack> newAttacks = new ArrayList<>();
         for (int i = 0; i <= yokimon.getLevel(); i++) {
             if (yokimon.getLearnableAttacks().containsKey(i)) {
-                yokimon.addAttack(yokimon.getLearnableAttacks().get(i));
+                newAttacks.add(yokimon.getLearnableAttacks().get(i));
             }
         }
+        yokimon.setAttacks(newAttacks);
     }
 
     @Override

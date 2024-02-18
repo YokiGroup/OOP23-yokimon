@@ -27,19 +27,20 @@ class AltarTest {
     private TestMessageHandler testMeg;
     private static final double DISTANCE = 40;
 
-    final private static class TestMessageHandler extends GameMessageHandler {
+    private final static class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
-            final private Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - DISTANCE,
+            private final Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - DISTANCE,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2);
-            final private TileBuilder tile = new TileBuilderImpl(0, "").addEntity(TileBuilder.EntityType.ALTAR, new PositionImpl(v));
-            final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
+            private final TileBuilder tile = new TileBuilderImpl(0, "")
+                    .addEntity(TileBuilder.EntityType.ALTAR, new PositionImpl(v));
+            private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
 
-            public TestSubmodule(final MessageHandler handler, ModelObserver modelObs) {
+            public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
                 super(handler, modelObs);
             }
 
             @Override
-            public boolean movePlayerToTile(Direction dir) {
+            public boolean movePlayerToTile(final Direction dir) {
                 return map.movePlayerTileMapPosition(dir);
             }
 
@@ -53,8 +54,11 @@ class AltarTest {
                 return map.getPlayerTile().getEntities();
             }
 
-            @Override
-            protected void updateEntities() {}
+
+            protected void updateEntities() {
+
+            }
+
         }
 
         @Override

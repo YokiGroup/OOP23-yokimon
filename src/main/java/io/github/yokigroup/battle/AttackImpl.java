@@ -6,30 +6,8 @@ import java.util.Objects;
  * AttackImpl class represents an implementation of the Attack interface.
  * It provides methods to manipulate and manage Attack objects.
  */
-public class AttackImpl implements Attack {
-    private final int id;
-    private final String name;
-    private final Color color;
-    private final int power;
-    private final Effect effect;
+public record AttackImpl(int id, String name, Color color, int power, Attack.Effect effect) implements Attack {
 
-    /**
-     * Constructs an AttackImpl object with the specified attributes.
-     * @param id id of the attack
-     * @param name The name of the Attack.
-     * @param color The color of the Attack.
-     * @param power The power of the Attack.
-     * @param effect The secondary effect of the Attack.
-     *
-     */
-    //Objects.requireNonNull(, " passed was null")
-    public AttackImpl(final int id, final String name, final Color color, final int power, final Effect effect) {
-        this.id = id;
-        this.name = name;
-        this.color = Objects.requireNonNull(color, "color passed was null");
-        this.power = power;
-        this.effect = Objects.requireNonNull(effect, "effect passed was null");
-    }
 
     /**
      * Constructs an AttackImpl object with generic attributes.
@@ -42,27 +20,27 @@ public class AttackImpl implements Attack {
     }
 
     @Override
-    public final int getId() {
+    public int getId() {
         return 0;
     }
 
     @Override
-    public final String getName() {
+    public String getName() {
         return this.name;
     }
 
     @Override
-    public final Color getColor() {
+    public Color getColor() {
         return this.color;
     }
 
     @Override
-    public final int attackPower() {
+    public int attackPower() {
         return this.power;
     }
 
     @Override
-    public final Effect getEffectID() {
+    public Effect getEffectID() {
         return this.effect;
     }
 
@@ -85,7 +63,7 @@ public class AttackImpl implements Attack {
     }
 
     /**
-     * Return a int for the hash code.
+     * Return an int for the hash code.
      * @return integer
      */
     @Override

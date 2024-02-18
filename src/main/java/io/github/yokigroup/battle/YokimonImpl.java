@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * YokimonImpl is an implementation of the Yokimon interface,
@@ -21,10 +22,6 @@ public class YokimonImpl implements Yokimon {
      */
     public static final int DEFAULT_STAT = 1;
 
-    /**
-     * The default GrowthRate of the yokimon.
-     */
-    public static final GrowthRate DEFAULT_GROWRATE = GrowthRate.MEDIUM;
     private final int id;
     private final String name;
     private final Color color;
@@ -93,9 +90,6 @@ public class YokimonImpl implements Yokimon {
                 yokimon.getYokimonColor(), Map.copyOf(yokimon.getAllBaseStats()), yokimon.getGrowRate(),
                 yokimon.getLevel(), Map.copyOf(yokimon.getLearnableAttacks()));
     }
-    private void resetYokimon(){
-
-    }
     /**
      * return the id of the yokimon.
      * @return int
@@ -125,9 +119,13 @@ public class YokimonImpl implements Yokimon {
 
     @Override
     public final Map<Stats, Integer> getAllStats() {
-        return this.stats;
+        return Map.copyOf(this.stats);
     }
-
+    @Override
+    public void setStats(Map<Stats, Integer> newStats) {
+        this.stats.clear();
+        this.stats.putAll(newStats);
+    }
     @Override
     public final Map<Stats, Integer> getAllBaseStats() {
         return Map.copyOf(this.baseStats);
@@ -143,10 +141,8 @@ public class YokimonImpl implements Yokimon {
         return this.baseStats.get(stat);
     }
 
-    @Override
-    public final void setStat(final Yokimon.Stats change, final int newValue) {
-        this.stats.replace(change, newValue);
-    }
+
+
 
     @Override
     public final int getLevel() {
@@ -172,6 +168,12 @@ public class YokimonImpl implements Yokimon {
     @Override
     public final List<Attack> getAttacks() {
         return List.copyOf(this.moves);
+    }
+
+    @Override
+    public void setAttacks(final List<Attack> attacks) {
+        this.moves.clear();
+        this.moves.addAll(attacks);
     }
 
     @Override
