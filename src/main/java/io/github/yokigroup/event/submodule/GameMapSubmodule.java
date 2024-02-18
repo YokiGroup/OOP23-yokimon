@@ -50,13 +50,24 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
         boolean success = gameMap.movePlayerTileMapPosition(dir);
         if (success) {
             tilePub.notifyObservers(gameMap.getPlayerTile().getSpriteData());
-            entityPub.notifyObservers(
-                    getEntitiesOnCurrentTile().stream()
-                    .map(Entity::getSpriteData)
-                    .collect(Collectors.toSet())
-            );
+            publishEntitySpriteData();
         }
         return success;
+    }
+
+    private void publishEntitySpriteData() {
+        entityPub.notifyObservers(
+                getEntitiesOnCurrentTile().stream()
+                        .map(Entity::getSpriteData)
+                        .collect(Collectors.toSet())
+        );
+
+    }
+
+    @Override
+    protected void updateEntities() {
+        getEntitiesOnCurrentTile().forEach(Entity::update);
+        publishEntitySpriteData();
     }
 
     @Override
