@@ -16,9 +16,9 @@ public abstract class Entity implements Sprite {
     private final String resourceURL;
     private final Vector2 dimensions;
     private Position pos;
-    private Hitbox hitBox;
+    private final Hitbox hitBox;
     private final MessageHandler messageHandler;
-    private final int ENTITY_DRAW_PRIORITY = 1;
+    private static final int ENTITY_DRAW_PRIORITY = 1;
 
 
     /**
@@ -32,7 +32,7 @@ public abstract class Entity implements Sprite {
     public Entity(final Position pos, final Hitbox hitBox, final MessageHandler messageHandler,
                   final Vector2 dimensions, final String resourceURL) {
         this.messageHandler = messageHandler;
-        this.setHitBox(hitBox);
+        this.hitBox = hitBox;
         this.setPos(pos);
         this.dimensions = dimensions;
         this.resourceURL = resourceURL;
@@ -86,13 +86,7 @@ public abstract class Entity implements Sprite {
         return this.hitBox;
     }
 
-    /**
-     * Set a new hitBox.
-     * @param hitBox new hitBox
-     */
-    protected final void setHitBox(final Hitbox hitBox) {
-        this.hitBox = hitBox;
-    }
+
     /**
      * Updates the state of the entity.
      */
