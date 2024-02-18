@@ -38,20 +38,20 @@ public class FullImplOpponentAI extends OpponentAI {
     @Override
     public Optional<Attack> getMove(final Yokimon currMyYokimon, final Yokimon currOppYokimon) {
 
-        List<Attack> attacks = currOppYokimon.getAttacks();
+        final List<Attack> attacks = currOppYokimon.getAttacks();
         Optional<Attack> best = Optional.empty();
-
-        int maxValue = 0;
 
         //there are no available attacks
         if (attacks.isEmpty()) {
-            return Optional.empty();
+            return best;
         }
 
-        //there are available attacks
-        for (Attack atk : attacks) {
+        int maxValue = 0;
 
-            int atkValue = dmgCalc.getDMG(currMyYokimon, currOppYokimon, atk);
+        //there are available attacks
+        for (final Attack atk : attacks) {
+
+            final int atkValue = dmgCalc.getDMG(currMyYokimon, currOppYokimon, atk);
             if (atkValue >= maxValue) {
                 maxValue = atkValue;
                 best = Optional.of(atk);

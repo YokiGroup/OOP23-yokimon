@@ -111,4 +111,11 @@ public interface Fight {
      */
     State getState();
 
+    /**
+     * This is meant for displaying the life bar in the view.
+     * @param yokimon the yokimon whose HP percentage must be shown
+     * @return the percentage of HP points left.
+     */
+    double getHPPercentage(Yokimon yokimon);
+
 }

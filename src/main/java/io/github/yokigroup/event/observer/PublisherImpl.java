@@ -23,6 +23,7 @@ public final class PublisherImpl<T> implements Publisher<T> {
         for (var obs : observerSet) {
             obs.update(this, lastArg, arg);
             lastArg = arg;
+
         }
     }
 }

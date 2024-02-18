@@ -12,5 +12,6 @@ public interface EObserver<T> {
      * @param lastArg last value possessed by arg on the last update call (starts out as {@code null})
      * @param arg the element that underwent some changes.
      */
+
     void update(PublisherImpl<T> publisher, T lastArg, T arg);
 }

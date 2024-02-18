@@ -27,7 +27,7 @@ public class FullImplDmgCalculator implements DmgCalculator {
      */
     protected double getDMGdouble(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
 
-       MultiplierDmgCalculator multipl = new MultiplierDmgCalculator();
+       final MultiplierDmgCalculator multipl = new MultiplierDmgCalculator();
        double total = multipl.getDMGdouble(attackingYokimon, attackedYokimon, attack);
 
         //hierarchy
