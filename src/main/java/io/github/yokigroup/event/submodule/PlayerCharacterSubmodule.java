@@ -23,7 +23,9 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
     private final Entity player;
     private Publisher<SpriteData> playerPub = new PublisherImpl<>();
 
-    // FIXME Replace with proper implementation
+    private void publishPlayerSpriteData() {
+        playerPub.notifyObservers(player.getSpriteData());
+    }
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
@@ -58,7 +60,7 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
         player.setPos(
                 new PositionImpl(player.getPos().getPosition().plus(delta))
         );
-        playerPub.notifyObservers(player.getSpriteData());
+        publishPlayerSpriteData();
     }
 
 }
