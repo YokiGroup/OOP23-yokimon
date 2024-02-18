@@ -27,6 +27,7 @@ public class CanvasPainter implements Painter {
     }
 
     public CanvasPainter(GraphicsContext gc) {
+        gc.setImageSmoothing(false);
         this.gc = gc;
     }
 
