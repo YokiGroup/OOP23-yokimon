@@ -25,7 +25,7 @@ public class InputSubmodule extends InputSubmoduleAbs {
     }
 
     @Override
-    public void handleInput(String keyText) {
+    public void registerKeyPress(String keyText) {
         Direction toAdd;
         toAdd = switch (keyText.toLowerCase(Locale.ROOT)) {
             case "w" -> Direction.UP;
