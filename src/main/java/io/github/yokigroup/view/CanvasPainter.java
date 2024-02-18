@@ -8,13 +8,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class CanvasPainter implements Painter {
     private final Map<String, Image> imageCache = new HashMap<>();
     private final GraphicsContext gc;
+    private final List<SpriteData> drawQueue = new ArrayList<>();
+    private Set<SpriteData> tempDrawQueue = Set.of();
 
     private Image consultCache(String resourceURL) {
         if (!imageCache.containsKey(resourceURL)) {
@@ -41,5 +41,27 @@ public class CanvasPainter implements Painter {
                 absSpriteDim.getX(),
                 absSpriteDim.getY()
         );
+    }
+
+    @Override
+    public void paint(Set<SpriteData> sprites) {
+        tempDrawQueue.addAll(sprites);
+        sprites.forEach(this::paint);
+    }
+
+    @Override
+    public void addToPersistentDrawQueue(SpriteData sprite) {
+        drawQueue.add(sprite);
+    }
+
+    @Override
+    public void removeFromPersistentDrawQueue(SpriteData sprite) {
+        drawQueue.remove(sprite);
+    }
+
+    @Override
+    public void repaint() {
+        drawQueue.forEach(this::paint);
+        tempDrawQueue.forEach(this::paint);
     }
 }

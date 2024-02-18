@@ -15,7 +15,7 @@ public class DrawSetObserver implements EObserver<Set<SpriteData>> {
     }
 
     @Override
-    public void update(PublisherImpl<Set<SpriteData>> publisher, Set<SpriteData> arg) {
-        arg.forEach(painter::paint);
+    public void update(PublisherImpl<Set<SpriteData>> publisher, Set<SpriteData> lastArg, Set<SpriteData> arg) {
+        painter.paint(arg);
     }
 }

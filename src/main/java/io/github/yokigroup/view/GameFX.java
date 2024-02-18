@@ -26,12 +26,14 @@ public class GameFX extends Application {
         private final double ratio;
         private final Canvas gameCanvas;
         private final Scene gameScene;
+        private final Painter painter;
 
 
-        public GameWindowResizeListener(final Scene gameScene, final Canvas gameCanvas, final double ratio) {
+        public GameWindowResizeListener(final Scene gameScene, final Canvas gameCanvas, Painter painter, final double ratio) {
             this.ratio = ratio;
             this.gameCanvas = gameCanvas;
             this.gameScene = gameScene;
+            this.painter = painter;
         }
 
         @Override
@@ -48,6 +50,7 @@ public class GameFX extends Application {
                 gameCanvas.setHeight(paneWidth / ratio);
             }
 
+            painter.repaint();
 //            var gc = gameCanvas.getGraphicsContext2D();
 //            gc.setFill(Color.BLUE);
 //            gc.fillRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
@@ -64,10 +67,11 @@ public class GameFX extends Application {
         final Scene scene = new Scene(rootElem, windowDim.getWidth(), windowDim.getHeight());
 
         final Canvas gameCanvas = (Canvas) rootElem.getCenter(); // FIXME maybe casting like this isn't the smartest choice
-        ModelObserverImpl modelObs = new ModelObserverImpl(new CanvasPainter(gameCanvas.getGraphicsContext2D()));
+        Painter painter = new CanvasPainter(gameCanvas.getGraphicsContext2D());
+        ModelObserverImpl modelObs = new ModelObserverImpl(painter);
         GameMessageHandler handler = new GameMessageHandler(modelObs);
 
-        final GameWindowResizeListener<Object> resizeListener = new GameWindowResizeListener<>(scene, gameCanvas, ratio);
+        final GameWindowResizeListener<Object> resizeListener = new GameWindowResizeListener<>(scene, gameCanvas, painter, ratio);
         stage.widthProperty().addListener(resizeListener);
         stage.heightProperty().addListener(resizeListener);
         stage.fullScreenProperty().addListener(resizeListener);
