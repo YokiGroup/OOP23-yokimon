@@ -4,7 +4,7 @@ import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.GameMap;
 
-public record SpriteData(String spriteURL, Vector2 position, Vector2 dim) {
+public record SpriteData(String spriteURL, Vector2 position, Vector2 dim, int priority) {
     private static final Vector2 tileDim = new Vector2Impl(GameMap.TILE_DIMENSIONS.x(), GameMap.TILE_DIMENSIONS.y());
 
     /**

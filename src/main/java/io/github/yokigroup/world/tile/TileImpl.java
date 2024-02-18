@@ -20,6 +20,7 @@ class TileImpl implements Tile {
     private final Set<Hitbox> hitboxes;
     private final Set<Entity> entities;
     private final String resourceURL;
+    private final int TILE_DRAW_PRIORITY = -100;
 
     /**
      * Creates a tile with static and dynamic entities.
@@ -90,6 +91,6 @@ class TileImpl implements Tile {
     @Override
     public SpriteData getSpriteData() {
         Vector2 mapDim = new Vector2Impl(GameMap.TILE_DIMENSIONS.x(), GameMap.TILE_DIMENSIONS.y());
-        return new SpriteData(resourceURL, mapDim.scale(0.5), mapDim);
+        return new SpriteData(resourceURL, mapDim.scale(0.5), mapDim, TILE_DRAW_PRIORITY);
     }
 }

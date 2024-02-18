@@ -18,6 +18,7 @@ public abstract class Entity implements Sprite {
     private Position pos;
     private Hitbox hitBox;
     private final MessageHandler messageHandler;
+    private final int ENTITY_DRAW_PRIORITY = 1;
 
 
     /**
@@ -38,7 +39,7 @@ public abstract class Entity implements Sprite {
 
     @Override
     public SpriteData getSpriteData() {
-        return new SpriteData(resourceURL, pos.getPosition(), dimensions);
+        return new SpriteData(resourceURL, pos.getPosition(), dimensions, ENTITY_DRAW_PRIORITY);
     }
 
     /**
