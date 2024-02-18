@@ -9,6 +9,7 @@ import org.dyn4j.geometry.Convex;
  * A circular hitbox implementation.
  */
 public class CircularHitbox extends HitboxImpl {
+    private final double radius;
 
     /**
      * Creates a circular hitbox.
@@ -17,6 +18,7 @@ public class CircularHitbox extends HitboxImpl {
      */
     public CircularHitbox(final Vector2 position, final double radius) {
         super(makeCircle(radius), position);
+        this.radius = radius;
     }
 
     /**
@@ -25,6 +27,12 @@ public class CircularHitbox extends HitboxImpl {
      */
     public CircularHitbox(final double radius) {
         super(makeCircle(radius));
+        this.radius = radius;
+    }
+
+    @Override
+    public final Hitbox copyOf() {
+        return new CircularHitbox(this.getPosition(), this.radius);
     }
 
     /**

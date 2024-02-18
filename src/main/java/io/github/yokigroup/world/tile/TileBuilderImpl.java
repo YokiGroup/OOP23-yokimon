@@ -26,8 +26,9 @@ public class TileBuilderImpl implements TileBuilder {
     /**
      * Creates an empty tile with no entities, hitboxes nor adjacencies.
      * @param id The id of the tile.
+     * @param resourceURL The url of the tile texture resource.
      */
-    public TileBuilderImpl(final int id, String resourceURL) {
+    public TileBuilderImpl(final int id, final String resourceURL) {
         this.entities = new HashSet<>();
         this.hitboxes = new HashSet<>();
         this.adjacencies = new HashSet<>();
