@@ -5,6 +5,8 @@ import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
 import io.github.yokigroup.event.submodule.abs.PartySubmoduleAbs;
 import io.github.yokigroup.event.submodule.abs.Submodule;
+import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.view.observer.ModelObserverImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,11 +26,12 @@ class SubmoduleMapImplTest {
     @BeforeEach
     void setUp() {
         MessageHandler handler = new GameMessageHandler();
+        ModelObserver obs = new ModelObserverImpl(null);
 
         map = new SubmoduleMapImpl();
         // FIXME init these submodules
-        //pSub = new PartySubmodule(handler);
-        //fSub = new FightSubmodule(handler);
+        pSub = new PartySubmodule(handler, obs);
+        fSub = new FightSubmodule(handler, obs);
         subModuleTestSet = Set.of(pSub, fSub);
     }
 
