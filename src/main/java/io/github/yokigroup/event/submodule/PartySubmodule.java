@@ -36,6 +36,7 @@ public final class PartySubmodule extends PartySubmoduleAbs {
     @Override
     public void addYokimon(final Yokimon y) {
         yokimonList.add(new YokimonImpl(y));
+        newYokimonNotificationPub.notifyObservers(() -> new YokimonImpl(y));
     }
 
     @Override
