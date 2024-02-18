@@ -115,10 +115,9 @@ public interface Yokimon {
 
     /**
      * Sets the value of the specified stat.
-     * @param change The stat to change.
-     * @param newValue The new value of the stat.
+     * @param newStats newStats
      */
-    void setStat(Stats change, int newValue);
+    void setStats(Map<Stats, Integer> newStats);
 
     /**
      * Return an int with the value of yokimon current level.

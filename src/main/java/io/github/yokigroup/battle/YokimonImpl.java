@@ -119,9 +119,13 @@ public class YokimonImpl implements Yokimon {
 
     @Override
     public final Map<Stats, Integer> getAllStats() {
-        return this.stats;
+        return Map.copyOf(this.stats);
     }
-
+    @Override
+    public void setStats(Map<Stats, Integer> newStats) {
+        this.stats.clear();
+        this.stats.putAll(newStats);
+    }
     @Override
     public final Map<Stats, Integer> getAllBaseStats() {
         return Map.copyOf(this.baseStats);
@@ -137,10 +141,8 @@ public class YokimonImpl implements Yokimon {
         return this.baseStats.get(stat);
     }
 
-    @Override
-    public final void setStat(final Yokimon.Stats change, final int newValue) {
-        this.stats.replace(change, newValue);
-    }
+
+
 
     @Override
     public final int getLevel() {
