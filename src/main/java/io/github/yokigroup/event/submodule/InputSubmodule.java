@@ -45,7 +45,7 @@ public class InputSubmodule extends InputSubmoduleAbs {
 
     @Override
     protected void updateCode(double delta) {
-        final double velocity = 1000.;
+        final double velocity = 125.;
         Pair<Integer, Integer> dirSum;
         synchronized (this) {
             dirSum = moveEvents.stream().map(Direction::getOffset).reduce(new Pair<>(0, 0), this::sumPairs);
