@@ -11,26 +11,23 @@ import javafx.scene.canvas.GraphicsContext;
 import java.util.HashSet;
 import java.util.Set;
 
-public class JavaFXModelObserver implements ModelObserver {
-    private final Set<Publisher<SpriteData>> spritePublishers = new HashSet<>();
-    private final Set<Publisher<Set<SpriteData>>> spriteSetPublishers = new HashSet<>();
+public class ModelObserverImpl implements ModelObserver {
+    private final DrawObserver drawObs;
+    private final DrawSetObserver drawSetObs;
 
-    public void init(GraphicsContext gc) {
-        Painter painter = new CanvasPainter(gc);
-        DrawObserver drawObs = new DrawObserver(painter);
-        DrawSetObserver drawSetObs = new DrawSetObserver(painter);
-        spritePublishers.forEach(p -> p.addObserver(drawObs));
-        spriteSetPublishers.forEach(p -> p.addObserver(drawSetObs));
+    public ModelObserverImpl(Painter painter) {
+        drawObs = new DrawObserver(painter);
+        drawSetObs = new DrawSetObserver(painter);
     }
 
     @Override
     public void addWorldSpritePublisher(int priority, Publisher<SpriteData> spriteObs) {
-        spritePublishers.add(spriteObs);
+        spriteObs.addObserver(drawObs);
     }
 
     @Override
     public void addWorldSpritePublishers(int priority, Publisher<Set<SpriteData>> spriteObs) {
-        spriteSetPublishers.add(spriteObs);
+        spriteObs.addObserver(drawSetObs);
     }
 
     @Override
