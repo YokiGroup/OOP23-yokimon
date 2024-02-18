@@ -42,6 +42,7 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
         modelObs.addWorldSpritePublisher(tilePub);
         modelObs.addWorldSpritePublishers(entityPub);
         tilePub.notifyObservers(gameMap.getPlayerTile().getSpriteData());
+        entityPub.notifyObservers(getEntitiesOnCurrentTile().stream().map(Entity::getSpriteData).collect(Collectors.toSet()));
     }
 
     @Override

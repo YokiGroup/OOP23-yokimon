@@ -9,7 +9,13 @@
       "UP"
     ],
     "hitboxes": [],
-    "spawns": []
+    "spawns": [
+      {
+        "type": "enemy",
+        "x": 400.0,
+        "y": 500.0
+      }
+    ]
   },
   "1": {
     "texture": "immagine.jpg",
