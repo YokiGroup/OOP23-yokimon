@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  */
 final class OpponentAITest {
     private static final int RAND_LEVEL = 15;
-    private static Yokimon y1, y2;
+    private Yokimon y1, y2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
 
