@@ -28,7 +28,7 @@ public class GenerationFactoryImpl implements  GenerationFactory {
      * Constructor of this class.
      */
     public GenerationFactoryImpl() {
-        IntStream.range(1, MULTIPLIER_DIFFICULTY+1).forEach(i -> variableNum.addElement(i, 1f));
+        IntStream.range(1, MULTIPLIER_DIFFICULTY + 1).forEach(i -> variableNum.addElement(i, 1f));
     }
     private Yokimon getYokimon(final int power) {
         final int finalPower = java.lang.Math.abs(power);
@@ -55,11 +55,11 @@ public class GenerationFactoryImpl implements  GenerationFactory {
     }
 
     /**
-     * Return the yokimon with Legend ID
+     * Return the yokimon with Legend ID.
      * @param level level
      * @return Yokimon legend
      */
-    private Yokimon getLegend(int level){
+    private Yokimon getLegend(final int level) {
         final Yokimon gift = YOKIMON_LOADER.load(LEGEND_ID);
         Objects.requireNonNull(gift, "Yokimon loaded was null");
         gift.setLevel(level);
