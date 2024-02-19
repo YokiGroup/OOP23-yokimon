@@ -8,6 +8,8 @@ import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.abs.PartySubmoduleAbs;
 import io.github.yokigroup.view.observer.ModelObserver;
 import io.github.yokigroup.view.observer.notification.NewYokimonNotification;
+import io.github.yokigroup.view.observer.notification.NewYokimonNotificationImpl;
+import io.github.yokigroup.view.observer.notification.Notification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.List;
  */
 public final class PartySubmodule extends PartySubmoduleAbs {
     private List<Yokimon> yokimonList;
-    private final Publisher<NewYokimonNotification> newYokimonNotificationPub = new PublisherImpl<>();
+    private final Publisher<Notification> newYokimonNotificationPub = new PublisherImpl<>();
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
@@ -36,7 +38,7 @@ public final class PartySubmodule extends PartySubmoduleAbs {
     @Override
     public void addYokimon(final Yokimon y) {
         yokimonList.add(new YokimonImpl(y));
-        newYokimonNotificationPub.notifyObservers(() -> new YokimonImpl(y));
+        newYokimonNotificationPub.notifyObservers(new NewYokimonNotificationImpl(y.getName()));
     }
 
     @Override

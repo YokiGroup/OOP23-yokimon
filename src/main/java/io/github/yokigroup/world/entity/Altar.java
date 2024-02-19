@@ -1,9 +1,11 @@
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
+import io.github.yokigroup.file.loader.YokimonLoader;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
@@ -52,9 +54,9 @@ public class Altar extends Entity {
      * @return Optional<Yokimon> The Yokimon from the Altar
      */
     public final Yokimon getNewYokimon() {
-        //return new YokimonImpl(this.gift);
         // TODO Generate a pokemon
-        return null;
+        YokimonLoader tempLoader = new YokimonLoader();
+        return tempLoader.load(1);
     }
 
     /**
@@ -69,7 +71,7 @@ public class Altar extends Entity {
                     && pos.getPosition().inRadius(this.getPos(), RADIUS)) {
 
                     this.getMessageHandler().handle(PartySubmodule.class, party -> {
-                    //party.addYokimon(this.getNewYokimon());
+                    party.addYokimon(this.getNewYokimon());
                     this.state = AltarState.USED;
 
                 });
