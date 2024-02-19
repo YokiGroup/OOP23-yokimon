@@ -48,9 +48,11 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
     }
 
     private Vector2 relocatedPosition(Direction dir) {
+        final double half = 0.5;
+        final double tileChangeOffset = 0.9;
         final Vector2 dirVec = Vector2Impl.castPair(dir.getOffset());
         final Vector2 halfMap = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS).scale(0.5);
-        return dirVec.times(halfMap).plus(halfMap);
+        return dirVec.times(halfMap).scale(tileChangeOffset).plus(halfMap);
     }
 
     /**
