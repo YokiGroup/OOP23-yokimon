@@ -89,7 +89,7 @@ public class GameMessageHandler implements MessageHandler {
             }
 
             @Override
-            public void addNotificationPublisher(Publisher<? extends Notification> notificationPub) {
+            public void addNotificationPublisher(Publisher<Notification> notificationPub) {
 
             }
         });

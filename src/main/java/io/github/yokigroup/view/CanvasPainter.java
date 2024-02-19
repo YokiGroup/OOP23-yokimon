@@ -6,15 +6,26 @@ import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CanvasPainter implements Painter {
     private final Map<String, Image> imageCache = new HashMap<>();
     private final GraphicsContext gc;
     private final List<SpriteData> drawQueue = new ArrayList<>();
+    private final Label eventLabel;
+    private Pair<Long, String> currentNotification = null; // notification with timestamp
 
     private Vector2 getCanvasDim() {
         Canvas canvas = gc.getCanvas();
@@ -32,12 +43,19 @@ public class CanvasPainter implements Painter {
         drawQueue.sort(Comparator.comparingInt(SpriteData::priority));
     }
 
-    public CanvasPainter(final GraphicsContext gc) {
+    public CanvasPainter(final GraphicsContext gc, Label eventLabel) {
         gc.setImageSmoothing(false);
+        gc.setTextAlign(TextAlignment.CENTER);
         this.gc = gc;
+        this.eventLabel = eventLabel;
     }
 
     private void paint(final SpriteData sprite) {
+        if (currentNotification != null &&
+                currentNotification.x() < System.currentTimeMillis()) {
+            currentNotification = null;
+            eventLabel.setText("");
+        }
         final Vector2 canvasDim = getCanvasDim();
         final Vector2 absSpriteDim = sprite.getNormalizedDimension().times(canvasDim);
         final Vector2 absSpritePos = sprite.getNormalizedPosition().times(canvasDim).minus(absSpriteDim.scale(.5));
@@ -49,6 +67,10 @@ public class CanvasPainter implements Painter {
                 absSpriteDim.getX(),
                 absSpriteDim.getY()
         );
+        if (currentNotification != null) {
+            eventLabel.setFont(new Font(canvasDim.getX()/20));
+            eventLabel.setText(currentNotification.y());
+        }
     }
 
     @Override
@@ -88,9 +110,8 @@ public class CanvasPainter implements Painter {
     }
 
     @Override
-    public void paintEventText(String eventText) {
-        Vector2 canvasDim = getCanvasDim();
-        gc.fillText(eventText, canvasDim.getX()/2, canvasDim.getY()/2);
+    public void paintEventText(final String eventText) {
+        currentNotification = new Pair<>(System.currentTimeMillis()+5000, eventText);
     }
 
     @Override

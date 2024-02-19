@@ -10,12 +10,16 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -68,8 +72,10 @@ public class GameFX extends Application {
         final BorderPane rootElem = FXMLLoader.load(ClassLoader.getSystemResource("view/game/test.fxml"));
         final Scene scene = new Scene(rootElem, windowDim.getWidth(), windowDim.getHeight());
 
-        final Canvas gameCanvas = (Canvas) rootElem.getCenter(); // FIXME maybe casting like this isn't the smartest choice
-        Painter painter = new CanvasPainter(gameCanvas.getGraphicsContext2D());
+        final List<Node> stackPane = ((StackPane)rootElem.getCenter()).getChildren();
+        final Canvas gameCanvas = (Canvas) stackPane.get(0); // FIXME maybe casting like this isn't the smartest choice
+        final Label eventLabel = (Label) ((BorderPane)stackPane.get(1)).getBottom();
+        Painter painter = new CanvasPainter(gameCanvas.getGraphicsContext2D(), eventLabel);
 
         ModelObserverImpl modelObs = new ModelObserverImpl(painter);
         GameLogicImpl gameThread = new GameLogicImpl(modelObs);
