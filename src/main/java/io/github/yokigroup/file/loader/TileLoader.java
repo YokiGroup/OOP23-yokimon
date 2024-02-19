@@ -10,6 +10,7 @@ import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
+import io.github.yokigroup.world.tile.Tile;
 import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
 
@@ -90,17 +91,9 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
         return tileDirs;
     }
 
-    private String getRootTilePath() {
-        final String rootTilePathJPATH = "$.textureRoot";
-        if (rootTilePath == null) {
-            rootTilePath = getParser().read(rootTilePathJPATH);
-        }
-        return rootTilePath;
-    }
-
     private String getResourceURL(final int id) {
         final String resourceURLJPATH = "$." + (id == -1 ? "home" : "" + id) + ".texture";
-        return getRootTilePath()+getParser().read(resourceURLJPATH);
+        return getParser().read(resourceURLJPATH);
     }
 
     private TileBuilder getTileAt(final int id) {

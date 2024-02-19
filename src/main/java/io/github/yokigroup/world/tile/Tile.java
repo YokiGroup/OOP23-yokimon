@@ -11,6 +11,7 @@ import java.util.Set;
  * A single tile of the map, containing entities and hitboxes for the player to interact with.
  */
 public interface Tile extends Sprite {
+    String ROOTURL = "io/github/yokigroup/view/textures/tiles/";
     /**
      *
      * @return All the hitboxes in a tile.

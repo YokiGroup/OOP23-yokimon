@@ -69,7 +69,7 @@ public class GameFX extends Application {
         final double ratio = 16.0/9.0; // 16:9 ratio
         final Dimension2D windowDim = new Dimension2D(scaledY*ratio, scaledY);
 
-        final BorderPane rootElem = FXMLLoader.load(ClassLoader.getSystemResource("view/game/test.fxml"));
+        final BorderPane rootElem = FXMLLoader.load(ClassLoader.getSystemResource("io/github/yokigroup/view/test.fxml"));
         final Scene scene = new Scene(rootElem, windowDim.getWidth(), windowDim.getHeight());
 
         final List<Node> stackPane = ((StackPane)rootElem.getCenter()).getChildren();

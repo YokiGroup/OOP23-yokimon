@@ -57,7 +57,7 @@ public abstract class JsonLoader<T> {
      * @param relativePath path of json file relative to {@code JsonParser.ROOT}
      */
     public JsonLoader(final String relativePath) {
-        this.parser = new JsonParserImpl(JsonParser.ROOT + "/" + relativePath);
+        this.parser = new JsonParserImpl(JsonParser.ROOT + relativePath);
     }
 
 }
