@@ -62,9 +62,9 @@ public class CanvasPainter implements Painter {
 
         gc.drawImage(
                 consultCache(sprite.spriteURL()),
-                absSpritePos.getX(),
+                absSpritePos.getX() + (sprite.flipped() ? absSpriteDim.getX() : 0),
                 absSpritePos.getY(),
-                absSpriteDim.getX(),
+                absSpriteDim.getX() * (sprite.flipped() ? -1 : 1),
                 absSpriteDim.getY()
         );
         if (currentNotification != null) {
