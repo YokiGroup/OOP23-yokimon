@@ -31,8 +31,9 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
     private Optional<Direction> checkTileChange() {
         final Pair<Integer, Integer> mapDim = GameMap.TILE_DIMENSIONS;
         final Vector2 playerPos = handler().handle(PlayerCharacterSubmodule.class, PlayerCharacterSubmodule::getPosition).getPosition();
-        final double upperBoundProp = 39. / 40.;
-        final double lowerBoundProp = 1. / 40.;
+        final double bound = 40.;
+        final double upperBoundProp = (bound - 1.) / bound;
+        final double lowerBoundProp = 1. - upperBoundProp;
 
         if (playerPos.getX() > mapDim.x() * upperBoundProp) {
             return Optional.of(Direction.RIGHT);
