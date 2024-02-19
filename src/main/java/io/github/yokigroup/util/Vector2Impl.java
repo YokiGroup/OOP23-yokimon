@@ -11,7 +11,7 @@ public final class Vector2Impl implements Vector2 {
     public static final Vector2 NULL_VECTOR = new Vector2Impl(0, 0);
 
     public static <T extends Number> Vector2 castPair(final Pair<T, T> pair) {
-        return new Vector2Impl((Double) pair.x(), (Double) pair.y());
+        return new Vector2Impl(pair.x().doubleValue(), pair.y().doubleValue());
     }
 
     /**
