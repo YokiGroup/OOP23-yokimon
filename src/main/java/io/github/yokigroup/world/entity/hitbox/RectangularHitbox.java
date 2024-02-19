@@ -40,8 +40,8 @@ public class RectangularHitbox extends HitboxImpl {
         if (!(o instanceof RectangularHitbox hitbox)) {
             return false;
         }
-        return hitbox.dimensions.getX() == this.dimensions.getX() && super.equals(o)
-                && hitbox.dimensions.getY() == this.dimensions.getY();
+        return hitbox.dimensions.getX() == this.dimensions.getX()
+                && hitbox.dimensions.getY() == this.dimensions.getY() && super.equals(o);
     }
 
     /**

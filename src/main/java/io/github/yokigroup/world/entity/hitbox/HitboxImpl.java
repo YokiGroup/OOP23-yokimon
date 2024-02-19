@@ -12,6 +12,7 @@ import org.dyn4j.world.World;
 import org.dyn4j.world.result.ConvexDetectResult;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -121,15 +122,14 @@ public abstract class HitboxImpl implements Hitbox {
         }
         final AABB aabb1 = this.body.createAABB();
         final AABB aabb2 = ((HitboxImpl) o).getBody().createAABB();
-        return this.body.getTransform().getTranslationX() == ((HitboxImpl) o).getBody().getTransform().getTranslationX();
+        return this.body.getTransform().getTranslationX() == ((HitboxImpl) o).getBody().getTransform().getTranslationX()
+                && aabb1.getHeight() == aabb2.getHeight()
+                && aabb1.getWidth() == aabb2.getWidth();
     }
 
     @Override
-    public final int hashCode() {
-        final int prime2 = 39;
-        // If you see any Fixture cast it's to suppress one of SpotBugs warnings, it's a library issue.
-        return this.getPosition().hashCode() + prime2
-                * (int) ((Fixture) this.body.getFixture(0)).getShape().getRadius();
+    public int hashCode() {
+        return Objects.hash(body);
     }
 
     /**
