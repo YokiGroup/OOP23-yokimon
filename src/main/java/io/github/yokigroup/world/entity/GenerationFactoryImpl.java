@@ -39,11 +39,11 @@ public class GenerationFactoryImpl implements  GenerationFactory {
                         .addElement(YOKIMON_LOADER.load(i), PROBABILITY_CHANCE_MAX - i + finalPower));
         final Yokimon gift = yokimonWeightedPool.getRandomizedElement();
         gift.setLevel(power * MULTIPLIER_DIFFICULTY + variableNum.getRandomizedElement());
-        return gift;
+        return Objects.requireNonNull(gift);
     }
     @Override
     public final Yokimon getYokimonAltar(final int power) {
-        return this.getYokimon(power);
+        return Objects.requireNonNull(this.getYokimon(power));
     }
 
     @Override
@@ -51,7 +51,7 @@ public class GenerationFactoryImpl implements  GenerationFactory {
         final List<Yokimon> enemyParty = new ArrayList<>();
         IntStream.range(0, (power / DIVISOR_NUM_YOKIMON) + 1)
                 .forEach(i -> enemyParty.add(getYokimon(power)));
-        return List.copyOf(enemyParty);
+        return Objects.requireNonNull(List.copyOf(enemyParty));
     }
 
     /**
@@ -63,7 +63,7 @@ public class GenerationFactoryImpl implements  GenerationFactory {
         final Yokimon gift = YOKIMON_LOADER.load(LEGEND_ID);
         Objects.requireNonNull(gift, "Yokimon loaded was null");
         gift.setLevel(level);
-        return gift;
+        return Objects.requireNonNull(gift);
     }
     @Override
     public final Yokimon getLegendAltar(final int power) {
@@ -77,7 +77,7 @@ public class GenerationFactoryImpl implements  GenerationFactory {
         IntStream.range(0, 3)
                 .forEach(i -> enemyParty.add(getYokimon(bossLevel - 3)));
         enemyParty.add(getLegend(bossLevel));
-        return List.copyOf(enemyParty);
+        return Objects.requireNonNull(List.copyOf(enemyParty));
     }
 }
 
