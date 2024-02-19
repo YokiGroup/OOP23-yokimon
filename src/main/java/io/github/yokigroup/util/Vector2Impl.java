@@ -10,6 +10,10 @@ public final class Vector2Impl implements Vector2 {
     private final org.dyn4j.geometry.Vector2 vector;
     public static final Vector2 NULL_VECTOR = new Vector2Impl(0, 0);
 
+    public static <T extends Number> Vector2 castPair(final Pair<T, T> pair) {
+        return new Vector2Impl(pair.x().doubleValue(), pair.y().doubleValue());
+    }
+
     /**
      *
      * @param x The first component of the vector.

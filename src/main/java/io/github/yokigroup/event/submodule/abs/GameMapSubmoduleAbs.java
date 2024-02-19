@@ -4,10 +4,13 @@ import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.view.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.world.entity.Position;
+import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 import java.util.Optional;
@@ -27,8 +30,9 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
     private Optional<Direction> checkTileChange() {
         final Pair<Integer, Integer> mapDim = GameMap.TILE_DIMENSIONS;
         final Vector2 playerPos = handler().handle(PlayerCharacterSubmodule.class, PlayerCharacterSubmodule::getPosition).getPosition();
-        final double upperBoundProp = 39. / 40.;
-        final double lowerBoundProp = 1. / 40.;
+        final double bound = 40.;
+        final double upperBoundProp = (bound - 1.) / bound;
+        final double lowerBoundProp = 1. - upperBoundProp;
 
         if (playerPos.getX() > mapDim.x() * upperBoundProp) {
             return Optional.of(Direction.RIGHT);
@@ -40,6 +44,15 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
             return Optional.of(Direction.UP);
         }
         return Optional.empty();
+    }
+
+    private Position relocatedPosition(Direction dir) {
+        final double half = 0.5;
+        final double tileChangeOffset = 0.9;
+        final Vector2 dirVec = Vector2Impl.castPair(dir.getOffset());
+        final Vector2 halfMap = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS).scale(half);
+
+        return new PositionImpl(dirVec.times(halfMap).scale(tileChangeOffset).plus(halfMap));
     }
 
     /**
@@ -78,8 +91,11 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
         the tile border.
          */
         checkTileChange().ifPresent(a -> {
-            movePlayerToTile(a);
-            updateTile();
+            if (movePlayerToTile(a)) {
+                handler().handle(PlayerCharacterSubmodule.class, s -> {
+                    s.movePlayerTo(relocatedPosition(a.getComplementary()));
+                });
+            }
         });
     }
 }

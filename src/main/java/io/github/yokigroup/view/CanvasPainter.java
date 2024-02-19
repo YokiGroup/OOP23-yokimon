@@ -9,13 +9,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CanvasPainter implements Painter {
     private final Map<String, Image> imageCache = new HashMap<>();
     private final GraphicsContext gc;
     private final List<SpriteData> drawQueue = new ArrayList<>();
 
-    private Image consultCache(String resourceURL) {
+    private Image consultCache(final String resourceURL) {
         if (!imageCache.containsKey(resourceURL)) {
             imageCache.put(resourceURL, new Image(resourceURL));
         }
@@ -26,12 +27,12 @@ public class CanvasPainter implements Painter {
         drawQueue.sort(Comparator.comparingInt(SpriteData::priority));
     }
 
-    public CanvasPainter(GraphicsContext gc) {
+    public CanvasPainter(final GraphicsContext gc) {
         gc.setImageSmoothing(false);
         this.gc = gc;
     }
 
-    private void paint(SpriteData sprite) {
+    private void paint(final SpriteData sprite) {
         final Canvas canvas = gc.getCanvas();
         final Vector2 canvasDim = new Vector2Impl(canvas.getWidth(), canvas.getHeight());
         final Vector2 absSpriteDim = sprite.getNormalizedDimension().times(canvasDim);
@@ -47,23 +48,37 @@ public class CanvasPainter implements Painter {
     }
 
     @Override
-    public void addToPersistentDrawQueue(SpriteData sprite) {
+    public void addToPersistentDrawQueue(final SpriteData sprite) {
         if (sprite == null) {
             return;
         }
+        addToPersistentDrawQueue(Set.of(sprite));
+    }
+
+    private Set<SpriteData> filterOutNullSpriteData(final Set<SpriteData> sprites) {
+        return sprites.stream().filter(Objects::nonNull).collect(Collectors.toSet());
+    }
+
+    @Override
+    public void addToPersistentDrawQueue(final Set<SpriteData> sprites) {
         synchronized (this) {
-            drawQueue.add(sprite);
+            drawQueue.addAll(filterOutNullSpriteData(sprites));
             sortDrawQueue();
         }
     }
 
     @Override
-    public void removeFromPersistentDrawQueue(SpriteData sprite) {
+    public void removeFromPersistentDrawQueue(final SpriteData sprite) {
         if (sprite == null) {
             return;
         }
+        removeFromPersistentDrawQueue(Set.of(sprite));
+    }
+
+    @Override
+    public void removeFromPersistentDrawQueue(final Set<SpriteData> sprites) {
         synchronized (this) {
-            drawQueue.remove(sprite);
+            drawQueue.removeAll(filterOutNullSpriteData(sprites));
             sortDrawQueue();
         }
     }

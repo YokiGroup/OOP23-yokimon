@@ -12,6 +12,7 @@ import org.dyn4j.world.World;
 import org.dyn4j.world.result.ConvexDetectResult;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -103,8 +104,13 @@ public abstract class HitboxImpl implements Hitbox {
         );
     }
 
+    /**
+     *
+     * @param o The other object to compare
+     * @return True if the two objects are the same.
+     */
     @Override
-    public final boolean equals(final Object o) {
+    public boolean equals(final Object o) {
         if (!(o instanceof HitboxImpl)) {
             return false;
         } else if (
@@ -122,12 +128,8 @@ public abstract class HitboxImpl implements Hitbox {
     }
 
     @Override
-    public final int hashCode() {
-        final int prime1 = 79;
-        final int prime2 = 39;
-        // If you see any Fixture cast it's to suppress one of SpotBugs warnings, it's a library issue.
-        return prime1 * this.getPosition().hashCode() + prime2
-                * (int) ((Fixture) this.body.getFixture(0)).getShape().getRadius();
+    public int hashCode() {
+        return Objects.hash(body);
     }
 
     /**

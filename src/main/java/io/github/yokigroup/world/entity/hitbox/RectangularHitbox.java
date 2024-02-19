@@ -35,6 +35,15 @@ public class RectangularHitbox extends HitboxImpl {
         return new RectangularHitbox(this.getPosition(), this.dimensions);
     }
 
+    @Override
+    public final boolean equals(final Object o) {
+        if (!(o instanceof RectangularHitbox hitbox)) {
+            return false;
+        }
+        return hitbox.dimensions.getX() == this.dimensions.getX()
+                && hitbox.dimensions.getY() == this.dimensions.getY() && super.equals(o);
+    }
+
     /**
      *
      * @param dimensions The dimensions of the rectangle.

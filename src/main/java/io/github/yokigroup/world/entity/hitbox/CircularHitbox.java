@@ -35,6 +35,14 @@ public class CircularHitbox extends HitboxImpl {
         return new CircularHitbox(this.getPosition(), this.radius);
     }
 
+    @Override
+    public final boolean equals(final Object o) {
+        if (!(o instanceof CircularHitbox hitbox)) {
+            return false;
+        }
+        return hitbox.radius == this.radius && super.equals(o);
+    }
+
     /**
      *
      * @param radius The radius of the circle.
