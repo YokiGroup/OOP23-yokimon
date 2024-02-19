@@ -67,6 +67,11 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
     }
 
     /**
+     * @return taxicab distance of player from home tile
+     */
+    public abstract int getDistanceFromHome();
+
+    /**
      * Moves the player to the tile contained in the given direction.
      * @param dir direction of the tile relative to the one the player's currently on
      * @return true if the tile change was successful

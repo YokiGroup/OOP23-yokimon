@@ -25,13 +25,14 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     private final GameMap gameMap;
     private final Publisher<SpriteData> tilePub = new PublisherImpl<>();
     private final Publisher<Set<SpriteData>> entityPub = new PublisherImpl<>();
+    private Pair<Integer, Integer> playerTilePos;
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
     public GameMapSubmodule(final MessageHandler handler, ModelObserver modelObs) {
         super(handler, modelObs);
-        final Pair<Integer, Integer> playerTilePos = new Pair<>(MAP_DIM.x() / 2 + 1, MAP_DIM.y() / 2 + 1);
+        playerTilePos = new Pair<>(MAP_DIM.x() / 2 + 1, MAP_DIM.y() / 2 + 1);
         final GameMapBuilder builder = new GameMapBuilderImpl();
 
         builder.changeMapDimensions(MAP_DIM);
@@ -46,10 +47,18 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     }
 
     @Override
+    public int getDistanceFromHome() {
+        Pair<Integer, Integer> homeTilePos = gameMap.getPlayerTileMapPosition();
+        return Math.abs(playerTilePos.x() - homeTilePos.x()) + Math.abs(playerTilePos.y() - homeTilePos.y());
+    }
+
+    @Override
     public boolean movePlayerToTile(Direction dir) {
         boolean success = gameMap.movePlayerTileMapPosition(dir);
         if (success) {
+            Pair<Integer, Integer> dirOffset = dir.getOffset();
             tilePub.notifyObservers(gameMap.getPlayerTile().getSpriteData());
+            playerTilePos = new Pair<>(playerTilePos.x() + dirOffset.x(), playerTilePos.y() + dirOffset.y());
             publishEntitySpriteData();
         }
         return success;
