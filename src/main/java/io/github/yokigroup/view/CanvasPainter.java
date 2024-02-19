@@ -111,7 +111,8 @@ public class CanvasPainter implements Painter {
 
     @Override
     public void paintEventText(final String eventText) {
-        currentNotification = new Pair<>(System.currentTimeMillis()+5000, eventText);
+        final long waitTime = 3000; // 3 seconds
+        currentNotification = new Pair<>(System.currentTimeMillis() + waitTime, eventText);
     }
 
     @Override
