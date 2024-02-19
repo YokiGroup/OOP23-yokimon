@@ -46,13 +46,17 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
         return Optional.empty();
     }
 
-    private Position relocatedPosition(Direction dir) {
+    private Position relocatedPosition(Position playerPos, Direction dir) {
         final double half = 0.5;
         final double tileChangeOffset = 0.9;
         final Vector2 dirVec = Vector2Impl.castPair(dir.getOffset());
         final Vector2 halfMap = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS).scale(half);
+        Vector2 dirMask = dirVec;
+        dirMask = dirMask.times(dirMask); // square it to change -1s to 1s
+        Vector2 newPos = dirVec.times(halfMap).scale(tileChangeOffset).plus(halfMap).times(dirMask);
+        dirMask = new Vector2Impl(dirMask.getY(), dirMask.getX()); // invert the mask
 
-        return new PositionImpl(dirVec.times(halfMap).scale(tileChangeOffset).plus(halfMap));
+        return new PositionImpl(playerPos.getPosition().times(dirMask).plus(newPos));
     }
 
     /**
@@ -93,7 +97,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
         checkTileChange().ifPresent(a -> {
             if (movePlayerToTile(a)) {
                 handler().handle(PlayerCharacterSubmodule.class, s -> {
-                    s.movePlayerTo(relocatedPosition(a.getComplementary()));
+                    s.movePlayerTo(relocatedPosition(s.getPosition(), a.getComplementary()));
                 });
             }
         });
