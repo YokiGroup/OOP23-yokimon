@@ -103,8 +103,13 @@ public abstract class HitboxImpl implements Hitbox {
         );
     }
 
+    /**
+     *
+     * @param o The other object to compare
+     * @return True if the two objects are the same.
+     */
     @Override
-    public final boolean equals(final Object o) {
+    public boolean equals(final Object o) {
         if (!(o instanceof HitboxImpl)) {
             return false;
         } else if (
@@ -116,17 +121,14 @@ public abstract class HitboxImpl implements Hitbox {
         }
         final AABB aabb1 = this.body.createAABB();
         final AABB aabb2 = ((HitboxImpl) o).getBody().createAABB();
-        return this.body.getTransform().getTranslationX() == ((HitboxImpl) o).getBody().getTransform().getTranslationX()
-                && aabb1.getHeight() == aabb2.getHeight()
-                && aabb1.getWidth() == aabb2.getWidth();
+        return this.body.getTransform().getTranslationX() == ((HitboxImpl) o).getBody().getTransform().getTranslationX();
     }
 
     @Override
     public final int hashCode() {
-        final int prime1 = 79;
         final int prime2 = 39;
         // If you see any Fixture cast it's to suppress one of SpotBugs warnings, it's a library issue.
-        return prime1 * this.getPosition().hashCode() + prime2
+        return this.getPosition().hashCode() + prime2
                 * (int) ((Fixture) this.body.getFixture(0)).getShape().getRadius();
     }
 
