@@ -3,8 +3,12 @@ package io.github.yokigroup.battle;
 import java.util.Objects;
 
 /**
- * AttackImpl class represents an implementation of the Attack interface.
- * It provides methods to manipulate and manage Attack objects.
+ * Record of an Attack
+ * @param id id for json loading
+ * @param name name of the attack
+ * @param color color of the attack
+ * @param power power of the attack
+ * @param effect effect, for now is not
  */
 public record AttackImpl(int id, String name, Color color, int power, Attack.Effect effect) implements Attack {
 

@@ -1,6 +1,4 @@
 package io.github.yokigroup.battle;
-//import java.util.HashMap;
-
 /**
  * Attack interface represents an attack that a Yokimon can perform.
  */
