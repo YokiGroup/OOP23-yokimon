@@ -3,6 +3,7 @@ package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Vector2;
@@ -59,6 +60,9 @@ public class Altar extends Entity {
     public final Yokimon getNewYokimon() {
         final GenerationFactory generator = new GenerationFactoryImpl();
         //TODO pavo num of tiles
+        this.getMessageHandler().handle(GameMapSubmodule.class, play -> {
+        });
+
         return generator.getYokimonAltar(1);
     }
 
