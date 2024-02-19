@@ -84,6 +84,11 @@ public class CanvasPainter implements Painter {
     }
 
     @Override
+    public void paintEventText(String eventText) {
+
+    }
+
+    @Override
     public void repaint() {
         synchronized (this) {
             drawQueue.forEach(this::paint);
