@@ -28,7 +28,7 @@ class TileImpl implements Tile {
      * @param adjacencies The connections this tile has.
      * @param hitboxes The invisible walls in a tile.
      * @param entities The entities on the tile.
-     * @param resourceURL The url of the tile texture resource.
+     * @param resourceURL The url of the tile texture resource (relative to {@link TileImpl#ROOTURL}).
      * @throws IllegalArgumentException If any of the arguments are null.
      */
     TileImpl(final int id, final Set<Direction> adjacencies, final Set<Hitbox> hitboxes,
@@ -44,7 +44,7 @@ class TileImpl implements Tile {
         this.adjacencies = Set.copyOf(adjacencies);
         this.hitboxes = Set.copyOf(hitboxes);
         this.entities = Set.copyOf(entities);
-        this.resourceURL = resourceURL;
+        this.resourceURL = ROOTURL + resourceURL;
     }
 
     @Override

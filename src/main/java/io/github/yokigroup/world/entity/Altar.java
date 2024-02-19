@@ -42,7 +42,7 @@ public class Altar extends Entity {
      */
     @Override
     protected String getResourceURL() {
-        return "view/game/textures/altar_" + (state == AltarState.POWERED ? "full" : "empty") + ".png";
+        return ROOTURL + "altar_" + (state == AltarState.POWERED ? "full" : "empty") + ".png";
     }
 
     /**

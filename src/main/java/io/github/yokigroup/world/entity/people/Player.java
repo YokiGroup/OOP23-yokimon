@@ -5,6 +5,7 @@ import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.GameMap;
+import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.Position;
 
@@ -22,7 +23,7 @@ public class Player extends People {
      */
     public Player(final Position pos,
                   final MessageHandler messageHandler) {
-        super(pos, messageHandler, "view/game/textures/player.png");
+        super(pos, messageHandler, "player.png");
     }
 
     /**

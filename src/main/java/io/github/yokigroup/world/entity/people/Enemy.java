@@ -7,6 +7,7 @@ import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.util.WeightedPoolImpl;
+import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 
 import java.util.Objects;
@@ -49,7 +50,7 @@ public class Enemy extends People {
      * @param messageHandler handle for events
      */
     public Enemy(final Position pos, final MessageHandler messageHandler) {
-        super(pos, messageHandler, "view/game/textures/enemy.png");
+        super(pos, messageHandler, "enemy.png");
         this.state = State.WANDER;
 
     }

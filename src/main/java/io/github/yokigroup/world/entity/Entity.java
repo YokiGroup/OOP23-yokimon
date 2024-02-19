@@ -19,6 +19,7 @@ public abstract class Entity implements Sprite {
     private final Hitbox hitBox;
     private final MessageHandler messageHandler;
     private static final int ENTITY_DRAW_PRIORITY = 1;
+    protected static String ROOTURL = "io/github/yokigroup/view/textures/";
 
 
     /**
@@ -27,7 +28,7 @@ public abstract class Entity implements Sprite {
      * @param hitBox The hitBox of the Entity
      * @param messageHandler handler for the events
      * @param dimensions dimensions of the entity
-     * @param resourceURL url of the entity image
+     * @param resourceURL url of the entity image (starting at {@link Entity#ROOTURL})
      */
     public Entity(final Position pos, final Hitbox hitBox, final MessageHandler messageHandler,
                   final Vector2 dimensions, final String resourceURL) {
@@ -36,7 +37,7 @@ public abstract class Entity implements Sprite {
         this.hitBox = hitBox.copyOf();
         this.setPos(pos);
         this.dimensions = dimensions;
-        this.resourceURL = resourceURL;
+        this.resourceURL = ROOTURL + resourceURL;
     }
 
     /**
