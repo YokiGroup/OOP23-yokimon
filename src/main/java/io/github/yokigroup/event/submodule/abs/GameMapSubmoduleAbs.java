@@ -1,6 +1,5 @@
 package io.github.yokigroup.event.submodule.abs;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Pair;
@@ -27,8 +26,6 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
      * Dimensions of the map to instance.
      */
     protected static final Pair<Integer, Integer> MAP_DIM = new Pair<>(5, 5);
-    private Direction lastDirection = null;
-    private Position lastRelocatedPosition = null;
 
     private Optional<Direction> checkTileChange() {
         final Pair<Integer, Integer> mapDim = GameMap.TILE_DIMENSIONS;
@@ -94,13 +91,10 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
         the tile border.
          */
         checkTileChange().ifPresent(a -> {
-            if (lastDirection == null || a != lastDirection.getComplementary()) {
-                if (movePlayerToTile(a)) {
-                    handler().handle(PlayerCharacterSubmodule.class, s -> {
-                        s.movePlayerTo(relocatedPosition(a.getComplementary()));
-                    });
-                    lastDirection = a;
-                }
+            if (movePlayerToTile(a)) {
+                handler().handle(PlayerCharacterSubmodule.class, s -> {
+                    s.movePlayerTo(relocatedPosition(a.getComplementary()));
+                });
             }
         });
     }
