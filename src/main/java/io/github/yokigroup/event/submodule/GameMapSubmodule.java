@@ -47,7 +47,7 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     }
 
     @Override
-    public int getDistanceFromHome() {
+    public int getPlayerDistanceFromHome() {
         Pair<Integer, Integer> homeTilePos = gameMap.getPlayerTileMapPosition();
         return Math.abs(playerTilePos.x() - homeTilePos.x()) + Math.abs(playerTilePos.y() - homeTilePos.y());
     }

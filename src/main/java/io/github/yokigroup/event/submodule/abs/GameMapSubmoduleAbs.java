@@ -69,7 +69,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
     /**
      * @return taxicab distance of player from home tile
      */
-    public abstract int getDistanceFromHome();
+    public abstract int getPlayerDistanceFromHome();
 
     /**
      * Moves the player to the tile contained in the given direction.
