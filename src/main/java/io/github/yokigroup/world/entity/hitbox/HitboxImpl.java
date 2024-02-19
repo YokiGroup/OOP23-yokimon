@@ -20,6 +20,7 @@ import java.util.Optional;
  */
 public abstract class HitboxImpl implements Hitbox {
     private static final double LAMBDA = 1E-10d;
+    private static final World<Body> COLLISION_WORLD = new World<>();
     private final Body body;
 
     /**
@@ -46,11 +47,10 @@ public abstract class HitboxImpl implements Hitbox {
             return Optional.empty();
         }
         // Add the body to the world to check for collisions
-        final World<Body> world = new World<>();
-        world.addBody(((HitboxImpl) other).getBody());
+        COLLISION_WORLD.addBody(((HitboxImpl) other).getBody());
         // Check for bounding box collisions
         final DetectFilter<Body, BodyFixture> filter = new DetectFilter<>(true, true, null);
-        final Iterator<ConvexDetectResult<Body, BodyFixture>> results = world.detectIterator(
+        final Iterator<ConvexDetectResult<Body, BodyFixture>> results = COLLISION_WORLD.detectIterator(
                 // If you see any Fixture cast it's to suppress one of SpotBugs warnings, it's a library issue.
                 ((Fixture) this.body.getFixture(0)).getShape(),
                 this.body.getTransform(),
@@ -69,7 +69,7 @@ public abstract class HitboxImpl implements Hitbox {
                 mtv = Optional.of(offset);
             }
         }
-        world.removeAllBodies();
+        COLLISION_WORLD.removeAllBodies();
         return mtv;
     }
 
