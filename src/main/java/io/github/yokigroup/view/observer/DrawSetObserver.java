@@ -4,6 +4,7 @@ import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.observer.EObserver;
 import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.view.Painter;
+import javafx.application.Platform;
 
 import java.util.Set;
 
@@ -20,6 +21,6 @@ public class DrawSetObserver implements EObserver<Set<SpriteData>> {
             lastArg.forEach(painter::removeFromPersistentDrawQueue);
         }
         arg.forEach(painter::addToPersistentDrawQueue);
-        painter.repaint();
+        Platform.runLater(painter::repaint);
     }
 }
