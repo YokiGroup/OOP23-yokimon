@@ -1,13 +1,16 @@
 package io.github.yokigroup.event.submodule.abs;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.view.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
 import java.util.Optional;
@@ -23,6 +26,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
      * Dimensions of the map to instance.
      */
     protected static final Pair<Integer, Integer> MAP_DIM = new Pair<>(5, 5);
+    private Direction lastDirection = null;
 
     private Optional<Direction> checkTileChange() {
         final Pair<Integer, Integer> mapDim = GameMap.TILE_DIMENSIONS;
@@ -40,6 +44,12 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
             return Optional.of(Direction.UP);
         }
         return Optional.empty();
+    }
+
+    private Vector2 relocatedPosition(Direction dir) {
+        final Vector2 dirVec = Vector2Impl.castPair(dir.getOffset());
+        final Vector2 halfMap = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS).scale(0.5);
+        return dirVec.times(halfMap).plus(halfMap);
     }
 
     /**
@@ -78,8 +88,14 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
         the tile border.
          */
         checkTileChange().ifPresent(a -> {
-            movePlayerToTile(a);
-            updateTile();
+            if (lastDirection == null || a != lastDirection.getComplementary()) {
+                if (movePlayerToTile(a)) {
+                    handler().handle(PlayerCharacterSubmodule.class, s -> {
+                        s.movePlayerTo(new PositionImpl(relocatedPosition(a.getComplementary())));
+                    });
+                    lastDirection = a;
+                }
+            }
         });
     }
 }

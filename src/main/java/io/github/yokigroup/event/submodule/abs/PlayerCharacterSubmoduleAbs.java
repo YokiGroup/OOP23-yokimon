@@ -38,11 +38,18 @@ public abstract class PlayerCharacterSubmoduleAbs extends Submodule {
     public abstract Entity getPlayerEntity();
 
     /**
-     * moves player as specified by the input vector.
+     * moves the player as specified by the input vector.
      *
      * @param delta vector to move the player by
      */
     public abstract void movePlayerBy(Vector2 delta);
+
+    /**
+     * moves the player to the specified position.
+     *
+     * @param pos position to move the player to
+     */
+    public abstract void movePlayerTo(Position pos);
 
     @Override
     protected void updateCode(double delta) {

@@ -32,7 +32,7 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
      */
     public PlayerCharacterSubmodule(final MessageHandler handler, ModelObserver modelObs) {
         super(handler, modelObs);
-        Vector2 playerPos = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2, (double) GameMap.TILE_DIMENSIONS.y() / 2);
+        Vector2 playerPos = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS).scale(0.5);
         this.player = new Player(new PositionImpl(playerPos), handler);
         modelObs.addWorldSpritePublisher(playerPub);
         publishPlayerSpriteData();
@@ -59,6 +59,12 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
     @Override
     public void movePlayerBy(final Vector2 delta) {
         player.move(delta);
+        publishPlayerSpriteData();
+    }
+
+    @Override
+    public void movePlayerTo(final Position pos) {
+        player.setPos(pos);
         publishPlayerSpriteData();
     }
 
