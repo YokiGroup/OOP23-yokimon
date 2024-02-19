@@ -3,6 +3,7 @@
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <BorderPane style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
@@ -13,10 +14,26 @@
       </Canvas>
             <BorderPane>
                <bottom>
-                  <Label text="Label" textAlignment="CENTER" textFill="RED" BorderPane.alignment="CENTER">
+                  <Label contentDisplay="CENTER" textAlignment="CENTER" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="65.0" />
                      </font>
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9200000166893005" green="0.5064600110054016" blue="0.11959999799728394" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8289473652839661" green="0.18037280440330505" blue="0.18037280440330505" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
                   </Label>
                </bottom>
             </BorderPane>
