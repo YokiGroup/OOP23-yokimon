@@ -1,5 +1,7 @@
 package io.github.yokigroup.world.entity;
 
+
+import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
@@ -51,6 +53,17 @@ public class Altar extends Entity {
     }
 
     /**
+     * Returns a Yokimon if the altar is powered, otherwise an optional empty.
+     * @return Optional<Yokimon> The Yokimon from the Altar
+     */
+    public final Yokimon getNewYokimon() {
+        final GenerationFactory generator = new GenerationFactoryImpl();
+        //TODO pavo num of tiles
+        return generator.getYokimonAltar(1);
+    }
+
+
+    /**
      * Updates the state of the Altar.
      */
     @Override
@@ -62,7 +75,7 @@ public class Altar extends Entity {
                     && pos.getPosition().inRadius(this.getPos(), RADIUS)) {
 
                     this.getMessageHandler().handle(PartySubmodule.class, party -> {
-                    //party.addYokimon(this.getNewYokimon());
+                    party.addYokimon(this.getNewYokimon());
                     this.state = AltarState.USED;
 
                 });

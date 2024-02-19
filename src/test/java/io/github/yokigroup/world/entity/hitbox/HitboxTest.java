@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class HitboxTest {
-    private static Hitbox circleHitbox1;
-    private static Hitbox circleHitbox2;
-    private static Hitbox circleHitbox3;
-    private static Hitbox rectangleHitbox1;
-    private static Hitbox rectangleHitbox2;
-    private static Hitbox rectangleHitbox3;
+    private Hitbox circleHitbox1;
+    private Hitbox circleHitbox2;
+    private Hitbox circleHitbox3;
+    private Hitbox rectangleHitbox1;
+    private Hitbox rectangleHitbox2;
+    private Hitbox rectangleHitbox3;
 
     @BeforeEach
     public void init() {

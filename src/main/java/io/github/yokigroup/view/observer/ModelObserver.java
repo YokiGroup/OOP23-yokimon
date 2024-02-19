@@ -16,5 +16,5 @@ public interface ModelObserver {
     void addWorldSpritePublisher(Publisher<SpriteData> spriteObs);
     void addWorldSpritePublishers(Publisher<Set<SpriteData>> spriteObs);
     void addFightPublisher(Publisher<Fight> fightObs);
-    void addNotificationPublisher(Publisher<? extends Notification> notificationPub);
+    void addNotificationPublisher(Publisher<Notification> notificationPub);
 }
