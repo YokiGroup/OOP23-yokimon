@@ -10,6 +10,7 @@ import io.github.yokigroup.view.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
@@ -27,6 +28,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
      */
     protected static final Pair<Integer, Integer> MAP_DIM = new Pair<>(5, 5);
     private Direction lastDirection = null;
+    private Position lastRelocatedPosition = null;
 
     private Optional<Direction> checkTileChange() {
         final Pair<Integer, Integer> mapDim = GameMap.TILE_DIMENSIONS;
@@ -47,12 +49,13 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
         return Optional.empty();
     }
 
-    private Vector2 relocatedPosition(Direction dir) {
+    private Position relocatedPosition(Direction dir) {
         final double half = 0.5;
         final double tileChangeOffset = 0.9;
         final Vector2 dirVec = Vector2Impl.castPair(dir.getOffset());
-        final Vector2 halfMap = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS).scale(0.5);
-        return dirVec.times(halfMap).scale(tileChangeOffset).plus(halfMap);
+        final Vector2 halfMap = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS).scale(half);
+
+        return new PositionImpl(dirVec.times(halfMap).scale(tileChangeOffset).plus(halfMap));
     }
 
     /**
@@ -94,7 +97,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
             if (lastDirection == null || a != lastDirection.getComplementary()) {
                 if (movePlayerToTile(a)) {
                     handler().handle(PlayerCharacterSubmodule.class, s -> {
-                        s.movePlayerTo(new PositionImpl(relocatedPosition(a.getComplementary())));
+                        s.movePlayerTo(relocatedPosition(a.getComplementary()));
                     });
                     lastDirection = a;
                 }
