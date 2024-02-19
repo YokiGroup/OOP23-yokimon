@@ -128,6 +128,10 @@ public abstract class HitboxImpl implements Hitbox {
                 && aabb1.getWidth() == aabb2.getWidth();
     }
 
+    /**
+     * Must return a unique hash value depending on the object's properties.
+     * @return The hash code of the hitbox.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(body);
