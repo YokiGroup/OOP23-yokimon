@@ -16,6 +16,11 @@ public class CanvasPainter implements Painter {
     private final GraphicsContext gc;
     private final List<SpriteData> drawQueue = new ArrayList<>();
 
+    private Vector2 getCanvasDim() {
+        Canvas canvas = gc.getCanvas();
+        return new Vector2Impl(canvas.getWidth(), canvas.getHeight());
+    }
+
     private Image consultCache(final String resourceURL) {
         if (!imageCache.containsKey(resourceURL)) {
             imageCache.put(resourceURL, new Image(resourceURL));
@@ -33,8 +38,7 @@ public class CanvasPainter implements Painter {
     }
 
     private void paint(final SpriteData sprite) {
-        final Canvas canvas = gc.getCanvas();
-        final Vector2 canvasDim = new Vector2Impl(canvas.getWidth(), canvas.getHeight());
+        final Vector2 canvasDim = getCanvasDim();
         final Vector2 absSpriteDim = sprite.getNormalizedDimension().times(canvasDim);
         final Vector2 absSpritePos = sprite.getNormalizedPosition().times(canvasDim).minus(absSpriteDim.scale(.5));
 
@@ -85,7 +89,8 @@ public class CanvasPainter implements Painter {
 
     @Override
     public void paintEventText(String eventText) {
-
+        Vector2 canvasDim = getCanvasDim();
+        gc.fillText(eventText, canvasDim.getX()/2, canvasDim.getY()/2);
     }
 
     @Override
