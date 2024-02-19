@@ -31,8 +31,9 @@ public abstract class Entity implements Sprite {
      */
     public Entity(final Position pos, final Hitbox hitBox, final MessageHandler messageHandler,
                   final Vector2 dimensions, final String resourceURL) {
+        Objects.requireNonNull(hitBox, "HIT-BOX passed to Entity was null");
         this.messageHandler = messageHandler;
-        this.hitBox = hitBox;
+        this.hitBox = hitBox.copyOf();
         this.setPos(pos);
         this.dimensions = dimensions;
         this.resourceURL = resourceURL;

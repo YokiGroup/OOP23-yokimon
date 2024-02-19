@@ -93,17 +93,6 @@ public class LevelUpLogicImpl implements LevelUpLogic {
         return code;
     }
 
-    @Override
-    public final void resetAttack(final Yokimon yokimon) {
-        Objects.requireNonNull(yokimon, "Yokimon null at level-up logic resetAttack");
-        List<Attack> newAttacks = new ArrayList<>();
-        for (int i = 0; i <= yokimon.getLevel(); i++) {
-            if (yokimon.getLearnableAttacks().containsKey(i)) {
-                newAttacks.add(yokimon.getLearnableAttacks().get(i));
-            }
-        }
-        yokimon.setAttacks(newAttacks);
-    }
 
     @Override
     public final void reset(final Yokimon yokimon) {

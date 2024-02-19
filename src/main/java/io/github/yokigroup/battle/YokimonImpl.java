@@ -64,7 +64,8 @@ public class YokimonImpl implements Yokimon {
         this.growthRate = Objects.requireNonNull(growthRate, "growthRate passed was null");
         this.level = level;
         this.learnableMoves = Map.copyOf(Objects.requireNonNull(learnableMoves, "learnableMoves passed was null"));
-        this.levelUtility.resetAttack(this);
+        this.resetAttack();
+        //this.levelUtility.resetAttack(this);
         this.levelUtility.reset(this);
 
     }
@@ -154,7 +155,7 @@ public class YokimonImpl implements Yokimon {
         if (n > 0) {
             this.level = n;
             this.levelUtility.reset(this);
-            this.levelUtility.resetAttack(this);
+            this.resetAttack();
         }
 
     }
@@ -289,5 +290,15 @@ public class YokimonImpl implements Yokimon {
     public int hashCode() {
         return Objects.hash(id, name, color, baseStats, stats, level, maxHp,
                 actualHp, growthRate, xp, xpNext, moves, learnableMoves, active);
+    }
+
+    private void resetAttack() {
+        List<Attack> newAttacks = new ArrayList<>();
+        for (int i = 0; i <= this.getLevel(); i++) {
+            if (this.getLearnableAttacks().containsKey(i)) {
+                newAttacks.add(this.getLearnableAttacks().get(i));
+            }
+        }
+        this.setAttacks(newAttacks);
     }
 }

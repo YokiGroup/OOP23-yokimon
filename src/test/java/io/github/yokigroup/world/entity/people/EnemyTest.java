@@ -87,6 +87,7 @@ class EnemyTest {
 
         @Override
         protected Set<Class<? extends Submodule>> getSubmoduleTypes() {
+
             return Set.of(
                     PlayerCharacterSubmodule.class,
                     EnemyTest.TestMessageHandler.TestSubmodule.class,
