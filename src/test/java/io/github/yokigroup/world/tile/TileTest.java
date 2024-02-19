@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TileTest {
     private static final int TILE_ID = 13;
-    private static Hitbox hitbox1;
-    private static Hitbox hitbox2;
-    private static Hitbox hitbox3;
-    private static Tile tile;
+    private Hitbox hitbox1;
+    private Hitbox hitbox2;
+    private Hitbox hitbox3;
+    private Tile tile;
 
     @BeforeEach
     public void init() {

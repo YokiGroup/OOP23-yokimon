@@ -8,8 +8,17 @@ import java.util.Objects;
 public final class Vector2Impl implements Vector2 {
     private static final String ERROR_STRING = "The other vector was null.";
     private final org.dyn4j.geometry.Vector2 vector;
+    /**
+     * A vector with components (0, 0)
+     */
     public static final Vector2 NULL_VECTOR = new Vector2Impl(0, 0);
 
+    /**
+     *
+     * @param pair The pair to cast to vector.
+     * @return A vector containing the pair's values.
+     * @param <T> The numerical type of the pair.
+     */
     public static <T extends Number> Vector2 castPair(final Pair<T, T> pair) {
         return new Vector2Impl(pair.x().doubleValue(), pair.y().doubleValue());
     }

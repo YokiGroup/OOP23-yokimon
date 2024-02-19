@@ -5,6 +5,8 @@ import org.dyn4j.dynamics.Body;
 import org.dyn4j.geometry.Circle;
 import org.dyn4j.geometry.Convex;
 
+import java.util.Objects;
+
 /**
  * A circular hitbox implementation.
  */
@@ -41,6 +43,11 @@ public class CircularHitbox extends HitboxImpl {
             return false;
         }
         return hitbox.radius == this.radius && super.equals(o);
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(super.hashCode(), radius);
     }
 
     /**

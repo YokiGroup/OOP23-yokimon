@@ -9,5 +9,6 @@ public interface Painter {
     void addToPersistentDrawQueue(Set<SpriteData> sprites);
     void removeFromPersistentDrawQueue(SpriteData sprite);
     void removeFromPersistentDrawQueue(Set<SpriteData> sprite);
+    void paintEventText(String eventText);
     void repaint();
 }

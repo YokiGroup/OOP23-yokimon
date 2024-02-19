@@ -6,6 +6,8 @@ import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.view.CanvasPainter;
 import io.github.yokigroup.view.Painter;
 import io.github.yokigroup.view.observer.notification.Notification;
+import io.github.yokigroup.view.observer.notification.NotificationVisitor;
+import io.github.yokigroup.view.observer.notification.NotificationVisitorImpl;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.HashSet;
@@ -14,10 +16,16 @@ import java.util.Set;
 public class ModelObserverImpl implements ModelObserver {
     private final DrawObserver drawObs;
     private final DrawSetObserver drawSetObs;
+    private final NotificationVisitorImpl notificationObs;
+
+    public DrawObserver getDrawObs() {
+        return drawObs;
+    }
 
     public ModelObserverImpl(Painter painter) {
         drawObs = new DrawObserver(painter);
         drawSetObs = new DrawSetObserver(painter);
+        notificationObs = new NotificationVisitorImpl(painter);
     }
 
     @Override
@@ -36,7 +44,7 @@ public class ModelObserverImpl implements ModelObserver {
     }
 
     @Override
-    public void addNotificationPublisher(Publisher<? extends Notification> notificationPub) {
-
+    public void addNotificationPublisher(Publisher<Notification> notificationPub) {
+        notificationPub.addObserver(notificationObs);
     }
 }
