@@ -122,7 +122,8 @@ public abstract class HitboxImpl implements Hitbox {
         }
         final AABB aabb1 = this.body.createAABB();
         final AABB aabb2 = ((HitboxImpl) o).getBody().createAABB();
-        return this.body.getTransform().getTranslationX() == ((HitboxImpl) o).getBody().getTransform().getTranslationX()
+        return this.getPosition().getX() == ((HitboxImpl) o).getPosition().getX()
+                && this.getPosition().getY() == ((HitboxImpl) o).getPosition().getY()
                 && aabb1.getHeight() == aabb2.getHeight()
                 && aabb1.getWidth() == aabb2.getWidth();
     }
