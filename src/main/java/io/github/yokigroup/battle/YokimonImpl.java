@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * YokimonImpl is an implementation of the Yokimon interface,
@@ -123,7 +122,7 @@ public class YokimonImpl implements Yokimon {
         return Map.copyOf(this.stats);
     }
     @Override
-    public void setStats(Map<Stats, Integer> newStats) {
+    public final void setStats(final Map<Stats, Integer> newStats) {
         this.stats.clear();
         this.stats.putAll(newStats);
     }
@@ -172,7 +171,7 @@ public class YokimonImpl implements Yokimon {
     }
 
     @Override
-    public void setAttacks(final List<Attack> attacks) {
+    public final void setAttacks(final List<Attack> attacks) {
         this.moves.clear();
         this.moves.addAll(attacks);
     }
