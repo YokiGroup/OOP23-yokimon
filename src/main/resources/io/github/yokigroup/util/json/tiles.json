@@ -3,10 +3,8 @@
   "home": {
     "texture": "home.png",
     "shape": [
-      "DOWN",
       "LEFT",
-      "RIGHT",
-      "UP"
+      "RIGHT"
     ],
     "hitboxes": [
       {
