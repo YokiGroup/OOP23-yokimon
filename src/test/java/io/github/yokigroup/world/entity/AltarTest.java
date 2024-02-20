@@ -2,6 +2,7 @@ package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.event.submodule.abs.GameMapSubmoduleAbs;
@@ -40,6 +41,11 @@ class AltarTest {
             }
 
             @Override
+            public int getPlayerDistanceFromHome() {
+                return 1;
+            }
+
+            @Override
             public boolean movePlayerToTile(final Direction dir) {
                 return map.movePlayerTileMapPosition(dir);
             }
@@ -71,7 +77,8 @@ class AltarTest {
             return Set.of(
                     PlayerCharacterSubmodule.class,
                     TestSubmodule.class,
-                    PartySubmodule.class
+                    PartySubmodule.class,
+                    GameMapSubmodule.class
             );
         }
     }
@@ -91,6 +98,9 @@ class AltarTest {
                         assertEquals(Altar.AltarState.POWERED,  altar.getState());
                         altar.update();
                         assertEquals(Altar.AltarState.USED,  altar.getState());
+                        testMeg.handle(PartySubmodule.class, party -> {
+                           assertEquals(1, party.listYokimons().size());
+                        });
                    });
                }
            }
