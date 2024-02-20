@@ -240,8 +240,8 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
     private Optional<Integer> getMinimumEntropy() {
         // Get the lowest shape count there is
         return this.shapeMap.values().stream()
-                .filter(p -> p.size() > 1) // If the size is 0 then it has already been collapsed
-                .map(p -> p.size())
+                .map(WeightedPool::size) // If the size is 0 then it has already been collapsed
+                .filter(size -> size > 1)
                 .reduce(Math::min);
     }
 
