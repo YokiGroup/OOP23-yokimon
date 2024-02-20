@@ -52,7 +52,7 @@ public abstract class People extends Entity {
      */
     public People(final Position pos, final MessageHandler messageHandler,
                   final double dimensions,  final String resourceURL) {
-        super(pos, new CircularHitbox(pos.getPosition(), dimensions), messageHandler,
+        super(pos, new CircularHitbox(pos.getPosition(), dimensions / 2), messageHandler,
                 new Vector2Impl(dimensions, dimensions), resourceURL);
         this.direction = DEFAULT_DIRECTION;
         this.active = true;
@@ -236,14 +236,14 @@ public abstract class People extends Entity {
         this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
             map.getHitboxesOnCurrentTile().stream()
-                    .map(block -> this.getHitBox().collidesWith(block))
+                    .map(block -> Objects.requireNonNull(this.getHitBox()).collidesWith(block))
                     .filter(Optional::isPresent)
                     .forEach(block -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(block.get()))));
         });
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
 
             map.getEntitiesOnCurrentTile().stream()
-                    .map(entity -> this.getHitBox().collidesWith(entity.getHitBox()))
+                    .map(entity -> Objects.requireNonNull(this.getHitBox()).collidesWith(entity.getHitBox()))
                     .filter(Optional::isPresent)
                     .forEach(entity -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(entity.get()))));
 
