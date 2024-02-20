@@ -3,14 +3,16 @@ package io.github.yokigroup.world.gen.wfc;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.util.WeightedPoolImpl;
+import io.github.yokigroup.util.*;
 import io.github.yokigroup.world.Direction;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -39,21 +41,19 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         this.shapeMap = new HashMap<>();
         // Fill up the map with all shapes being any random shape
         final Set<Set<Direction>> copiedShapes = Set.copyOf(shapes);
-        for (int i = 0; i < dimensions.x(); i++) {
-            for (int j = 0; j < dimensions.y(); j++) {
-                final WeightedPool<Set<Direction>> pool = new WeightedPoolImpl<>();
-                copiedShapes.forEach(s -> pool.addElement(Set.copyOf(s), 1.0f));
-                this.shapeMap.put(new Pair<>(i, j), pool);
-            }
-        }
+        this.getAllValidPositions().forEach(p -> {
+            final WeightedPool<Set<Direction>> pool = new WeightedPoolImpl<>();
+            copiedShapes.forEach(s -> pool.addElement(Set.copyOf(s), 1.0f));
+            this.shapeMap.put(p, pool);
+        });
         this.setStaticBorders(copiedShapes);
     }
 
     @Override
     public final Set<Direction> getShapeAt(final Pair<Integer, Integer> position) {
-        // If there's more than one possibility per position, the algorithm has not finished generating the map.
+        // If there's more than one possibility per position, the algorithm has not enough tiles to generate the map.
         if (shapeMap.get(position).size() > 1) {
-            throw new IllegalStateException("The WaveFunctionCollapse algorithm has not yet generated the map correctly.");
+            throw new IllegalStateException("The WaveFunctionCollapse algorithm has not generated the map correctly.");
         }
         return Map.copyOf(shapeMap).get(position).getRandomizedElement();
     }
@@ -104,9 +104,9 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @param shapes All the shapes to query.
      * @return A new shape set that doesn't have that direction.
      */
-    private Set<Set<Direction>> getTilesFromWall(final Direction dir, final Set<Set<Direction>> shapes) {
+    private Set<Set<Direction>> getTilesWithoutDirs(final Set<Direction> dir, final Set<Set<Direction>> shapes) {
         return shapes.stream()
-                .filter(s -> !s.contains(dir))
+                .filter(s -> !s.containsAll(dir))
                 .collect(Collectors.toSet());
     }
 
@@ -117,38 +117,40 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @param shapes The shapes that can be assigned.
      */
     private void setStaticBorders(final Set<Set<Direction>> shapes) {
-        final Set<Set<Direction>> topShapes = getTilesFromWall(Direction.UP, shapes);
-        final Set<Set<Direction>> bottomShapes = getTilesFromWall(Direction.DOWN, shapes);
-        final Set<Set<Direction>> leftShapes = getTilesFromWall(Direction.LEFT, shapes);
-        final Set<Set<Direction>> rightShapes = getTilesFromWall(Direction.RIGHT, shapes);
-        final Set<Set<Direction>> topLeftShapes = new HashSet<>(leftShapes);
-        topLeftShapes.retainAll(topShapes);
-        final Set<Set<Direction>> topRightShapes = new HashSet<>(rightShapes);
-        topRightShapes.retainAll(topShapes);
-        final Set<Set<Direction>> bottomLeftShapes = new HashSet<>(leftShapes);
-        bottomLeftShapes.retainAll(bottomShapes);
-        final Set<Set<Direction>> bottomRightShapes = new HashSet<>(rightShapes);
-        bottomRightShapes.retainAll(bottomShapes);
+        // Set the horizontal (top and bottom) walls
+        getAllValidPositions().stream().filter(p -> p.y() == 0)
+                .forEach(p -> this.setStaticShape(p, getTilesWithoutDirs(Set.of(Direction.UP), shapes)));
+        getAllValidPositions().stream().filter(p -> p.y() == this.dimensions.y() - 1)
+                .forEach(p -> this.setStaticShape(p, getTilesWithoutDirs(Set.of(Direction.DOWN), shapes)));
+        // Set the vertical (left and right) walls
+        getAllValidPositions().stream().filter(p -> p.x() == 0)
+                .forEach(p -> this.setStaticShape(p, getTilesWithoutDirs(Set.of(Direction.LEFT), shapes)));
+        getAllValidPositions().stream().filter(p -> p.x() == this.dimensions.y() - 1)
+                .forEach(p -> this.setStaticShape(p, getTilesWithoutDirs(Set.of(Direction.RIGHT), shapes)));
+        // Get the corners of the map
         final Pair<Integer, Integer> topLeft = new Pair<>(0, 0);
         final Pair<Integer, Integer> topRight = new Pair<>(this.dimensions.x() - 1, 0);
         final Pair<Integer, Integer> bottomLeft = new Pair<>(0, this.dimensions.y() - 1);
         final Pair<Integer, Integer> bottomRight = new Pair<>(this.dimensions.x() - 1, this.dimensions.y() - 1);
-        for (int i = 1; i < this.dimensions.x() - 1; i++) {
-            final Pair<Integer, Integer> posTop = new Pair<>(i, 0);
-            final Pair<Integer, Integer> posBottom = new Pair<>(i, this.dimensions.y() - 1);
-            this.setStaticShape(posTop, topShapes);
-            this.setStaticShape(posBottom, bottomShapes);
+        // Set the corners
+        this.setStaticShape(topLeft, getTilesWithoutDirs(Set.of(Direction.UP, Direction.LEFT), shapes));
+        this.setStaticShape(topRight, getTilesWithoutDirs(Set.of(Direction.UP, Direction.RIGHT), shapes));
+        this.setStaticShape(bottomLeft, getTilesWithoutDirs(Set.of(Direction.DOWN, Direction.LEFT), shapes));
+        this.setStaticShape(bottomRight, getTilesWithoutDirs(Set.of(Direction.DOWN, Direction.RIGHT), shapes));
+    }
+
+    /**
+     *
+     * @return A set with all the positions in the shape map.
+     */
+    private Set<Pair<Integer, Integer>> getAllValidPositions() {
+        final Set<Pair<Integer, Integer>> positions = new HashSet<>();
+        for (int i = 0; i < dimensions.x(); i++) {
+            for (int j = 0; j < dimensions.y(); j++) {
+                positions.add(new Pair<>(i, j));
+            }
         }
-        for (int j = 1; j < this.dimensions.y() - 1; j++) {
-            final Pair<Integer, Integer> posLeft = new Pair<>(0, j);
-            final Pair<Integer, Integer> posRight = new Pair<>(this.dimensions.x() - 1, j);
-            this.setStaticShape(posLeft, leftShapes);
-            this.setStaticShape(posRight, rightShapes);
-        }
-        this.setStaticShape(topLeft, topLeftShapes);
-        this.setStaticShape(topRight, topRightShapes);
-        this.setStaticShape(bottomLeft, bottomLeftShapes);
-        this.setStaticShape(bottomRight, bottomRightShapes);
+        return positions;
     }
 
     /**
@@ -157,10 +159,14 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @param centerPosition The central position of the update.
      */
     private void updateAdjacentShapes(final int depth, final Pair<Integer, Integer> centerPosition) {
-        // Get any shape from the center
-        final Set<Direction> centerShape = this.shapeMap.get(centerPosition).getRandomizedElement();
         // Get its coherence table
         final Set<Direction> coherenceShape = getCoherentDirections(this.shapeMap.get(centerPosition).getEntries());
+        // If there's no coherence it means there can no longer be updates in this path.
+        if (coherenceShape.isEmpty()) {
+            return;
+        }
+        // Get any shape from the center
+        final Set<Direction> centerShape = this.shapeMap.get(centerPosition).getRandomizedElement();
         // Check all directions
         for (final Direction dir : coherenceShape) {
             // Get the coordinate offset for that direction
@@ -175,8 +181,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
                 // Get the pool from the tile to update
                 final WeightedPool<Set<Direction>> pool = this.shapeMap.get(offsetPos);
                 // For all the shapes it has
-                pool.getEntries()
-                        .stream()
+                pool.getEntries().stream()
                         .filter(s -> centerShape.contains(dir) != s.contains(dirConnection)) // Check if it cannot connect
                         .forEach(pool::removeElement); // And remove it
                 // Set that new pool to the ShapeMap
@@ -201,7 +206,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
                     final Set<Direction> common = new HashSet<>(a);
                     common.retainAll(b);
                     return common;
-                }).orElse(EnumSet.noneOf(Direction.class));
+                }).orElse(Collections.emptySet());
         // Get all the common non-present directions by removing them from the set containing all the direction
         final Set<Direction> uncommonShapes = EnumSet.allOf(Direction.class);
         shapes.forEach(uncommonShapes::removeAll);
@@ -234,9 +239,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      */
     private Optional<Integer> getMinimumEntropy() {
         // Get the lowest shape count there is
-        return this.shapeMap
-                .values()
-                .stream()
+        return this.shapeMap.values().stream()
                 .map(WeightedPool::size)
                 .filter(s -> s > 1) // If the size is 1, then it has already been collapsed
                 .reduce(Math::min);
@@ -250,8 +253,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
     private Pair<Integer, Integer> getRandomLowestEntropy(final int minEntropy) {
         // Make a randomized pool of all the elements with the lowest entropy
         final WeightedPool<Pair<Integer, Integer>> randomizedPossibilities = new WeightedPoolImpl<>();
-        this.shapeMap.entrySet()
-                .stream()
+        this.shapeMap.entrySet().stream()
                 .filter(p -> p.getValue().size() == minEntropy)
                 .forEach(p -> randomizedPossibilities.addElement(p.getKey(), 1.0f));
         return randomizedPossibilities.getRandomizedElement();

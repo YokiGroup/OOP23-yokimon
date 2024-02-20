@@ -1,7 +1,5 @@
 package io.github.yokigroup.world.tile;
 
-import io.github.yokigroup.core.GameMessageHandler;
-import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
@@ -20,7 +18,6 @@ class TileTest {
 
     @BeforeEach
     public void init() {
-        final MessageHandler messageHandler = new GameMessageHandler();
         final double r1 = 10.0d;
         final double r2 = 2.0d;
         final double r3 = 3.0d;
@@ -33,7 +30,7 @@ class TileTest {
                 .addHitbox(hitbox3)
                 .addAdjacency(Direction.UP)
                 .addAdjacency(Direction.DOWN)
-                .build(messageHandler);
+                .build(null);
     }
 
     @Test

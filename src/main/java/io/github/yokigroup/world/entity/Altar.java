@@ -24,9 +24,11 @@ public class Altar extends Entity {
     private static final Vector2 DIMENSIONS = new Vector2Impl(HITBOX_SIDE * 5 / 10, HITBOX_SIDE);
 
     private static final double DIMENSION_SCALE = 1.05;
+
     /**
      * Constructs an Altar object with the specified attributes.
-     * @param pos The position of the Altar
+     *
+     * @param pos            The position of the Altar
      * @param messageHandler Message handler used to handle events
      */
     public Altar(final Position pos, final MessageHandler messageHandler) {
@@ -38,15 +40,17 @@ public class Altar extends Entity {
     /**
      * This method return a string with the Altar ResourceURL used to display his sprite in the view.
      * Returns a different image depending on the Altar state.
+     *
      * @return String
      */
     @Override
     protected String getResourceURL() {
-        return ROOTURL + "altar_" + (state == AltarState.POWERED ? "full" : "empty") + ".png";
+        return ROOT_URL + "altar_" + (state == AltarState.POWERED ? "full" : "empty") + ".png";
     }
 
     /**
      * Returns the current state of the Altar (if it's used or not).
+     *
      * @return altarState Current state of the Altar
      */
     public final AltarState getState() {
@@ -55,6 +59,7 @@ public class Altar extends Entity {
 
     /**
      * Returns a Yokimon if the altar is powered, otherwise an optional empty.
+     *
      * @return Optional<Yokimon> The Yokimon from the Altar
      */
     public final Yokimon getNewYokimon() {
@@ -78,7 +83,7 @@ public class Altar extends Entity {
             if (this.state == AltarState.POWERED && pos.getPosition().isValid()
                     && pos.getPosition().inRadius(this.getPos(), RADIUS)) {
 
-                    this.getMessageHandler().handle(PartySubmodule.class, party -> {
+                this.getMessageHandler().handle(PartySubmodule.class, party -> {
                     party.addYokimon(this.getNewYokimon());
                     this.state = AltarState.USED;
 

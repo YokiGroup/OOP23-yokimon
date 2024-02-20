@@ -19,16 +19,16 @@ public abstract class Entity implements Sprite {
     private final Hitbox hitBox;
     private final MessageHandler messageHandler;
     private static final int ENTITY_DRAW_PRIORITY = 1;
-    protected static String ROOTURL = "io/github/yokigroup/view/textures/";
-
+    protected static final String ROOT_URL = "io/github/yokigroup/view/textures/";
 
     /**
      * Constructs an Entity object with the specified attributes.
-     * @param pos The position of the Entity
-     * @param hitBox The hitBox of the Entity
+     *
+     * @param pos            The position of the Entity
+     * @param hitBox         The hitBox of the Entity
      * @param messageHandler handler for the events
-     * @param dimensions dimensions of the entity
-     * @param resourceURL url of the entity image (starting at {@link Entity#ROOTURL})
+     * @param dimensions     dimensions of the entity
+     * @param resourceURL    url of the entity image (starting at {@link Entity#ROOT_URL})
      */
     public Entity(final Position pos, final Hitbox hitBox, final MessageHandler messageHandler,
                   final Vector2 dimensions, final String resourceURL) {
@@ -37,11 +37,12 @@ public abstract class Entity implements Sprite {
         this.hitBox = hitBox.copyOf();
         this.setPos(pos);
         this.dimensions = dimensions;
-        this.resourceURL = ROOTURL + resourceURL;
+        this.resourceURL = ROOT_URL + resourceURL;
     }
 
     /**
      * This method return a string with the Entity ResourceURL used to display his sprite in the view.
+     *
      * @return String
      */
     protected String getResourceURL() {
@@ -50,6 +51,7 @@ public abstract class Entity implements Sprite {
 
     /**
      * This method return the SpriteData to display his sprite in the view.
+     *
      * @return SpriteData
      */
     @Override
@@ -59,6 +61,7 @@ public abstract class Entity implements Sprite {
 
     /**
      * return the current position of the entity.
+     *
      * @return Position, X e Y
      */
     public final Position getPos() {
@@ -67,6 +70,7 @@ public abstract class Entity implements Sprite {
 
     /**
      * return the messageHandler of this class.
+     *
      * @return MessageHandler
      */
     public final MessageHandler getMessageHandler() {
@@ -75,6 +79,7 @@ public abstract class Entity implements Sprite {
 
     /**
      * Set a new position for the entity, if it's valid it changes it.
+     *
      * @param pos new position
      */
     public final void setPos(final Position pos) {
@@ -88,6 +93,7 @@ public abstract class Entity implements Sprite {
 
     /**
      * Return the hitBox of the current Entity.
+     *
      * @return This hitBox
      */
     public Hitbox getHitBox() {
@@ -102,6 +108,7 @@ public abstract class Entity implements Sprite {
 
     /**
      * Control if the entity is equal to another.
+     *
      * @param o Entity
      * @return boolean
      */
@@ -119,6 +126,7 @@ public abstract class Entity implements Sprite {
 
     /**
      * Return and hash code of the entity.
+     *
      * @return int
      */
     @Override

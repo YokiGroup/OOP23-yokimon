@@ -3,11 +3,12 @@ package io.github.yokigroup.battle;
 import java.util.Objects;
 
 /**
- * Record of an Attack
- * @param id id for json loading
- * @param name name of the attack
- * @param color color of the attack
- * @param power power of the attack
+ * Record of an Attack.
+ *
+ * @param id     id for json loading
+ * @param name   name of the attack
+ * @param color  color of the attack
+ * @param power  power of the attack
  * @param effect effect, for now is not
  */
 public record AttackImpl(int id, String name, Color color, int power, Attack.Effect effect) implements Attack {
@@ -15,8 +16,9 @@ public record AttackImpl(int id, String name, Color color, int power, Attack.Eff
 
     /**
      * Constructs an AttackImpl object with generic attributes.
-     * @param id id of the attack
-     * @param name The name of the Attack.
+     *
+     * @param id    id of the attack
+     * @param name  The name of the Attack.
      * @param color The color of the Attack.
      */
     public AttackImpl(final int id, final String name, final Color color) {
@@ -50,6 +52,7 @@ public record AttackImpl(int id, String name, Color color, int power, Attack.Eff
 
     /**
      * Control if this attack is equal to another.
+     *
      * @param o Objects
      * @return boolean
      */
@@ -68,6 +71,7 @@ public record AttackImpl(int id, String name, Color color, int power, Attack.Eff
 
     /**
      * Return an int for the hash code.
+     *
      * @return integer
      */
     @Override

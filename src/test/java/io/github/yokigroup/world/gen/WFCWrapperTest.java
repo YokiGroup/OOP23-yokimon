@@ -1,7 +1,5 @@
 package io.github.yokigroup.world.gen;
 
-import io.github.yokigroup.core.GameMessageHandler;
-import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.file.loader.TileShapeLoader;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.Direction;
@@ -45,7 +43,6 @@ class WFCWrapperTest {
 
     @Test
     void setStaticTile() {
-        final MessageHandler messageHandler = new GameMessageHandler();
         final Pair<Integer, Integer> staticPos = new Pair<>(2, 2);
         final Set<Direction> staticTile = Set.of(Direction.UP, Direction.LEFT);
         this.wfcWrapper.setStaticTile(staticPos, staticTile);
@@ -56,6 +53,6 @@ class WFCWrapperTest {
                 assertTrue(allTiles.contains(wfcWrapper.getTileAt(pos)));
             }
         }
-        assertEquals(staticTile, wfcWrapper.getTileAt(staticPos).build(messageHandler).getAdjacencies());
+        assertEquals(staticTile, wfcWrapper.getTileAt(staticPos).build(null).getAdjacencies());
     }
 }

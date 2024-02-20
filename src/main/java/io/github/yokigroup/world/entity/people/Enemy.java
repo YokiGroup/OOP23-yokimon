@@ -7,7 +7,6 @@ import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.util.WeightedPoolImpl;
-import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 
 import java.util.Objects;
@@ -45,13 +44,15 @@ public class Enemy extends People {
     private static final float BONUS_POOL_VALUE = 25f;
     private static final double RAY_HIT_BOX = 130;
     private State state;
+
     /**
      * Constructs an Enemy object with the specified attributes.
-     * @param pos The position of the Enemy
+     *
+     * @param pos            The position of the Enemy
      * @param messageHandler handle for events
      */
     public Enemy(final Position pos, final MessageHandler messageHandler) {
-        super(pos, messageHandler,RAY_HIT_BOX, "enemy.png");
+        super(pos, messageHandler, RAY_HIT_BOX, "enemy.png");
         this.state = State.WANDER;
 
     }
@@ -62,8 +63,8 @@ public class Enemy extends People {
     @Override
     public void resetPosition() {
 
-            this.state = State.WANDER;
-            this.setPos(this.getInitialPos());
+        this.state = State.WANDER;
+        this.setPos(this.getInitialPos());
 
     }
 
@@ -83,6 +84,7 @@ public class Enemy extends People {
 
     /**
      * Return the Entity state.
+     *
      * @return Enemy.state
      */
     public final Enemy.State getState() {
@@ -91,6 +93,7 @@ public class Enemy extends People {
 
     /**
      * Update calls this method when the player is too close to the enemy.
+     *
      * @param playerPos position of the player
      * @return vector to follow the player
      */
@@ -104,6 +107,7 @@ public class Enemy extends People {
     /**
      * method used to randomize the direction where the enemy will go when
      * is wandering.
+     *
      * @return Vector2
      */
     private Vector2 wander() {
@@ -119,20 +123,20 @@ public class Enemy extends People {
             directionWeightedPool.addElement(Direction.DEFAULT_STAND, DEFAULT_POOL_VALUE);
         }
         wanderDir = directionWeightedPool.getRandomizedElement();
-           return wanderDir.get();
+        return wanderDir.get();
 
     }
 
     /**
      * return a new position given a vector, checking the hitBox of all the
      * entity in the tile.
-     * @param vector vector given
      *
+     * @param vector vector given
      */
     private void move(final Vector2 vector) {
         this.collisionCheck(vector);
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, player -> {
-            if (this.getHitBox().collidesWith(player.getPlayerEntity().getHitBox()).isPresent()) {
+            if (Objects.requireNonNull(this.getHitBox()).collidesWith(player.getPlayerEntity().getHitBox()).isPresent()) {
                 this.getMessageHandler().handle(FightSubmodule.class, fight -> {
                     fight.addEncounter();
                     this.shut();
@@ -140,9 +144,9 @@ public class Enemy extends People {
             }
         });
     }
+
     /**
      * Updates the state of the Enemy (switches between wander and follow).
-     *
      */
     @Override
     public void update() {

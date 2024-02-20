@@ -1,143 +1,418 @@
 {
-  "home": {
-    "texture": "immagine.jpg",
-    "shape": [
+  "home":{
+    "texture":"home.png",
+    "shape":[
+      "LEFT",
+      "RIGHT"
+    ],
+    "hitboxes":[
+      {
+        "type":"rect",
+        "position":{
+          "x":640.0,
+          "y":80.0
+        },
+        "dimensions":{
+          "x":1280.0,
+          "y":160.0
+        }
+      },
+      {
+        "type":"circle",
+        "position":{
+          "x":1000.0,
+          "y":440.0
+        },
+        "radius":35.0
+      }
+    ],
+    "spawns":[
+      {
+        "type":"altar",
+        "x":1120.0,
+        "y":560.0
+      }
+    ]
+  },
+  "1":{
+    "texture":"Tile_UDLR_1.png",
+    "shape":[
+      "UP",
       "DOWN",
       "LEFT",
-      "RIGHT",
-      "UP"
+      "RIGHT"
     ],
-    "hitboxes": [],
-    "spawns": []
+    "hitboxes":[
+      {
+        "type":"rect",
+        "position":{
+          "x":240.0,
+          "y":40.0
+        },
+        "dimensions":{
+          "x":480.0,
+          "y":80.0
+        }
+      },
+      {
+        "type":"rect",
+        "position":{
+          "x":1040.0,
+          "y":40.0
+        },
+        "dimensions":{
+          "x":480.0,
+          "y":80.0
+        }
+      }
+    ],
+    "spawns":[
+      {
+        "type":"enemy",
+        "x":1040.0,
+        "y":240.0
+      }
+    ]
   },
-  "1": {
-    "texture": "immagine.jpg",
-    "shape": [
+  "2":{
+    "texture":"Tile_UDL_1.png",
+    "shape":[
+      "UP",
       "DOWN",
       "LEFT"
     ],
-    "hitboxes": [
+    "hitboxes":[
       {
-        "type": "rect",
-        "position": {
-          "x": 10.0,
-          "y": 5.0
+        "type":"rect",
+        "position":{
+          "x":240.0,
+          "y":40.0
         },
-        "dimensions": {
-          "x": 5.0,
-          "y": 5.0
+        "dimensions":{
+          "x":480.0,
+          "y":80.0
         }
       },
       {
-        "type": "circle",
-        "position": {
-          "x": 30.0,
-          "y": 5.0
+        "type":"rect",
+        "position":{
+          "x":40.0,
+          "y":600.0
         },
-        "radius": 5.0
+        "dimensions":{
+          "x":80.0,
+          "y":240.0
+        }
       }
     ],
-    "spawns": [
+    "spawns":[
       {
-        "type": "enemy",
-        "x": 10.0,
-        "y": 30.0
+        "type":"enemy",
+        "x":640.0,
+        "y":320.0
       },
       {
-        "type": "altar",
-        "x": 50.0,
-        "y": 30.0
+        "type":"altar",
+        "x":1120.0,
+        "y":300.0
       }
     ]
   },
-  "2": {
-    "texture": "immagine.jpg",
-    "shape": [
+  "3":{
+    "texture":"Tile_UDR_1.png",
+    "shape":[
       "UP",
-      "LEFT"
-    ],
-    "hitboxes": [
-      {
-        "type": "rect",
-        "position": {
-          "x": 10.0,
-          "y": 5.0
-        },
-        "dimensions": {
-          "x": 5.0,
-          "y": 5.0
-        }
-      }
-    ],
-    "spawns": [
-      {
-        "type": "enemy",
-        "x": 10.0,
-        "y": 30.0
-      }
-    ]
-  },
-  "3": {
-    "texture": "immagine.jpg",
-    "shape": [
       "DOWN",
       "RIGHT"
     ],
-    "hitboxes": [
+    "hitboxes":[
       {
-        "type": "circle",
-        "position": {
-          "x": 30.0,
-          "y": 5.0
+        "type":"rect",
+        "position":{
+          "x":1040.0,
+          "y":680.0
         },
-        "radius": 5.0
+        "dimensions":{
+          "x":480.0,
+          "y":80.0
+        }
       }
     ],
-    "spawns": [
+    "spawns":[
       {
-        "type": "altar",
-        "x": 50.0,
-        "y": 30.0
+        "type":"enemy",
+        "x":920.0,
+        "y":240.0
       }
     ]
   },
-  "4": {
-    "texture": "immagine.jpg",
-    "shape": [
+  "4":{
+    "texture":"Tile_ULR_1.png",
+    "shape":[
       "UP",
+      "LEFT",
       "RIGHT"
     ],
-    "hitboxes": [
+    "hitboxes":[
       {
-        "type": "rect",
-        "position": {
-          "x": 10.0,
-          "y": 5.0
+        "type":"rect",
+        "position":{
+          "x":240.0,
+          "y":40.0
         },
-        "dimensions": {
-          "x": 5.0,
-          "y": 5.0
+        "dimensions":{
+          "x":480.0,
+          "y":80.0
         }
       },
       {
-        "type": "circle",
-        "position": {
-          "x": 30.0,
-          "y": 5.0
+        "type":"rect",
+        "position":{
+          "x":40.0,
+          "y":120.0
         },
-        "radius": 9.0
+        "dimensions":{
+          "x":80.0,
+          "y":240.0
+        }
       }
     ],
-    "spawns": [
+    "spawns":[
       {
-        "type": "enemy",
-        "x": 40.0,
-        "y": 50.0
+        "type":"enemy",
+        "x":360.0,
+        "y":360.0
+      }
+    ]
+  },
+  "5":{
+    "texture":"Tile_DLR_1.png",
+    "shape":[
+      "DOWN",
+      "LEFT",
+      "RIGHT"
+    ],
+    "hitboxes":[
+      {
+        "type":"rect",
+        "position":{
+          "x":640.0,
+          "y":40.0
+        },
+        "dimensions":{
+          "x":1280.0,
+          "y":80.0
+        }
       },
       {
-        "type": "altar",
-        "x": 20.0,
-        "y": 10.0
+        "type":"rect",
+        "position":{
+          "x":400.0,
+          "y":520.0
+        },
+        "dimensions":{
+          "x":160.0,
+          "y":240.0
+        }
+      }
+    ],
+    "spawns":[
+      {
+        "type":"enemy",
+        "x":1080.0,
+        "y":520.0
+      },
+      {
+        "type":"enemy",
+        "x":200.0,
+        "y":360.0
+      }
+    ]
+  },
+  "6":{
+    "texture":"Tile_UL_1.png",
+    "shape":[
+      "UP",
+      "LEFT"
+    ],
+    "hitboxes":[
+      {
+        "type":"rect",
+        "position":{
+          "x":40.0,
+          "y":120.0
+        },
+        "dimensions":{
+          "x":80.0,
+          "y":240.0
+        }
+      },
+      {
+        "type":"rect",
+        "position":{
+          "x":40.0,
+          "y":600.0
+        },
+        "dimensions":{
+          "x":80.0,
+          "y":240.0
+        }
+      }
+    ],
+    "spawns":[
+      {
+        "type":"altar",
+        "x":1080.0,
+        "y":340.0
+      }
+    ]
+  },
+  "7":{
+    "texture":"Tile_UR_1.png",
+    "shape":[
+      "UP",
+      "RIGHT"
+    ],
+    "hitboxes":[
+      {
+        "type":"rect",
+        "position":{
+          "x":240.0,
+          "y":40.0
+        },
+        "dimensions":{
+          "x":480.0,
+          "y":80.0
+        }
+      },
+      {
+        "type":"rect",
+        "position":{
+          "x":1040.0,
+          "y":40.0
+        },
+        "dimensions":{
+          "x":480.0,
+          "y":80.0
+        }
+      }
+    ],
+    "spawns":[
+      {
+        "type":"enemy",
+        "x":840.0,
+        "y":600.0
+      }
+    ]
+  },
+  "8":{
+    "texture":"Tile_DL_1.png",
+    "shape":[
+      "DOWN",
+      "LEFT"
+    ],
+    "hitboxes":[
+      {
+        "type":"rect",
+        "position":{
+          "x":640.0,
+          "y":40.0
+        },
+        "dimensions":{
+          "x":1280.0,
+          "y":80.0
+        }
+      },
+      {
+        "type":"rect",
+        "position":{
+          "x":40.0,
+          "y":600.0
+        },
+        "dimensions":{
+          "x":80.0,
+          "y":240.0
+        }
+      }
+    ],
+    "spawns":[
+      {
+        "type":"altar",
+        "x":920.0,
+        "y":340.0
+      }
+    ]
+  },
+  "9":{
+    "texture":"Tile_DR_1.png",
+    "shape":[
+      "DOWN",
+      "RIGHT"
+    ],
+    "hitboxes":[
+      {
+        "type":"rect",
+        "position":{
+          "x":640.0,
+          "y":40.0
+        },
+        "dimensions":{
+          "x":1280.0,
+          "y":80.0
+        }
+      },
+      {
+        "type":"circle",
+        "position":{
+          "x":120.0,
+          "y":600.0
+        },
+        "radius":25.0
+      }
+    ],
+    "spawns":[
+      {
+        "type":"altar",
+        "x":600.0,
+        "y":180.0
+      }
+    ]
+  },
+  "10":{
+    "texture":"Tile_LR_1.png",
+    "shape":[
+      "LEFT",
+      "RIGHT"
+    ],
+    "hitboxes":[
+      {
+        "type":"rect",
+        "position":{
+          "x":640.0,
+          "y":125.0
+        },
+        "dimensions":{
+          "x":1280.0,
+          "y":250.0
+        }
+      },
+      {
+        "type":"rect",
+        "position":{
+          "x":640.0,
+          "y":603.0
+        },
+        "dimensions":{
+          "x":1280.0,
+          "y":234.0
+        }
+      }
+    ],
+    "spawns":[
+      {
+        "type":"enemy",
+        "x":640.0,
+        "y":440.0
       }
     ]
   }
