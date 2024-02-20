@@ -15,14 +15,15 @@ import io.github.yokigroup.world.entity.Position;
 public class Player extends People {
 
     private static final double SCALE = 10;
+    private static final double RAY_HITBOX = 50;
     /**
      * Constructor of the player.
      * @param pos initial Pos
      * @param messageHandler handler of Events
      */
-    public Player(final Position pos, final double dimensions,
+    public Player(final Position pos,
                   final MessageHandler messageHandler) {
-        super(pos, messageHandler, dimensions, "player.png");
+        super(pos, messageHandler, RAY_HITBOX, "player.png");
     }
 
     /**
