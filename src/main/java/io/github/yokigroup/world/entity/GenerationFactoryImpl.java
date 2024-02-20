@@ -20,8 +20,8 @@ public class GenerationFactoryImpl implements  GenerationFactory {
     private static final int NUMBER_OF_YOKIMON = YOKIMON_LOADER.getAll().size();
     private static final int PROBABILITY_CHANCE_MAX = NUMBER_OF_YOKIMON + 2;
     private final WeightedPoolImpl<Integer> variableNum = new WeightedPoolImpl<>();
-    private static final int MULTIPLIER_DIFFICULTY = 3;
-    private static final int DIVISOR_NUM_YOKIMON = 5;
+    private static final int MULTIPLIER_DIFFICULTY = 5;
+    private static final int DIVISOR_NUM_YOKIMON = 3;
     private static final int LEGEND_ID = 15;
 
     /**

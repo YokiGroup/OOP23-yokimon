@@ -38,21 +38,23 @@ public abstract class People extends Entity {
      */
     private boolean active;
     /**
-     * Default hitBot of the people.
+     * Ray of the hitBox
      */
-    private static final double HITBOX_RADIUS = 50;
-    private static final Vector2 DIMENSIONS = new Vector2Impl(HITBOX_RADIUS * 2, HITBOX_RADIUS * 2);
+    private final double dimensions;
     /**
      * Constructs a People object with the specified attributes.
      * @param pos The position of the People
      * @param messageHandler handler of events
      * @param resourceURL String
      */
-    public People(final Position pos, final MessageHandler messageHandler, final String resourceURL) {
-        super(pos, new CircularHitbox(pos.getPosition(), HITBOX_RADIUS), messageHandler, DIMENSIONS, resourceURL);
+    public People(final Position pos, final MessageHandler messageHandler,
+                  final double dimensions,  final String resourceURL) {
+        super(pos, new CircularHitbox(pos.getPosition(), dimensions), messageHandler,
+                new Vector2Impl(dimensions, dimensions), resourceURL);
         this.direction = DEFAULT_DIRECTION;
         this.active = true;
         this.initialPos = pos.copyOf();
+        this.dimensions = dimensions;
     }
 
     @Override
@@ -200,6 +202,13 @@ public abstract class People extends Entity {
      */
     public abstract void resetPosition();
 
+    /**
+     * Return the ray value of this People Entity
+     * @return double
+     */
+    public final double getDimensions(){
+        return this.dimensions;
+    }
     /**
      * Check if the entity is colliding.
      * @param vector vector2
