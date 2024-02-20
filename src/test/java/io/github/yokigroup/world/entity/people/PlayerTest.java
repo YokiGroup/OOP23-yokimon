@@ -39,6 +39,11 @@ class PlayerTest {
             }
 
             @Override
+            public int getPlayerDistanceFromHome() {
+                return 1;
+            }
+
+            @Override
             public boolean movePlayerToTile(final Direction dir) {
                 return map.movePlayerTileMapPosition(dir);
             }

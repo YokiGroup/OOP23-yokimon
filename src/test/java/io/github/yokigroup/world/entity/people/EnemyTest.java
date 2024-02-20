@@ -59,6 +59,11 @@ class EnemyTest {
             }
 
             @Override
+            public int getPlayerDistanceFromHome() {
+                return 1;
+            }
+
+            @Override
             public boolean movePlayerToTile(Direction dir) {
                 return map.movePlayerTileMapPosition(dir);
             }
