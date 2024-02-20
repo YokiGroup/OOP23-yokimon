@@ -45,20 +45,6 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         this.setStaticBorders(copiedShapes);
     }
 
-    /**
-     *
-     * @return A set with all the positions in the shape map.
-     */
-    private Set<Pair<Integer, Integer>> getAllValidPositions() {
-        final Set<Pair<Integer, Integer>> positions = new HashSet<>();
-        for (int i = 0; i < dimensions.x(); i++) {
-            for (int j = 0; j < dimensions.y(); j++) {
-                positions.add(new Pair<>(i, j));
-            }
-        }
-        return positions;
-    }
-
     @Override
     public final Set<Direction> getShapeAt(final Pair<Integer, Integer> position) {
         // If there's more than one possibility per position, the algorithm has not enough tiles to generate the map.
@@ -243,6 +229,20 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         this.setStaticShape(topRight, topRightShapes);
         this.setStaticShape(bottomLeft, bottomLeftShapes);
         this.setStaticShape(bottomRight, bottomRightShapes);
+    }
+
+    /**
+     *
+     * @return A set with all the positions in the shape map.
+     */
+    private Set<Pair<Integer, Integer>> getAllValidPositions() {
+        final Set<Pair<Integer, Integer>> positions = new HashSet<>();
+        for (int i = 0; i < dimensions.x(); i++) {
+            for (int j = 0; j < dimensions.y(); j++) {
+                positions.add(new Pair<>(i, j));
+            }
+        }
+        return positions;
     }
 
     /**
