@@ -65,6 +65,13 @@ public interface Vector2 {
 
     /**
      *
+     * @param other The other vector to check distance for.
+     * @return The distance between the two vectors.
+     */
+    double distance(Vector2 other);
+
+    /**
+     *
      * @return the length of the vector.
      */
     double length();
