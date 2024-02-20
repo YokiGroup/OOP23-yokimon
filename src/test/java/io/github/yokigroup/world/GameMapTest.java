@@ -15,33 +15,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GameMapTest {
     private final TileLoader loader = new TileLoader();
-    private MessageHandler messageHandler;
     private GameMap map;
 
     @BeforeEach
     public void init() {
-        this.messageHandler = new GameMessageHandler();
         this.map = new GameMapBuilderImpl()
-                .changeMapDimensions(new Pair<>(3, 3))
-                .putHomeTileAt(new Pair<>(1, 1))
-                .changePlayerTileMapPosition(new Pair<>(1, 1))
-                .build(messageHandler);
+                .changeMapDimensions(new Pair<>(5, 5))
+                .putHomeTileAt(new Pair<>(2, 2))
+                .changePlayerTileMapPosition(new Pair<>(2, 2))
+                .build(null);
     }
 
     @Test
     void testGetTileAt() {
         final Set<Integer> tileIds = loader.getAll().values().stream()
-                .map(a -> a.build(messageHandler).getId())
+                .map(a -> a.build(null).getId())
                 .collect(Collectors.toSet());
-        assertEquals(loader.getHomeTile().build(messageHandler), map.getTileAt(new Pair<>(1, 1)));
+        assertEquals(-1, map.getTileAt(new Pair<>(2, 2)).getId());
         assertTrue(tileIds.contains(map.getTileAt(new Pair<>(1, 2)).getId()));
         assertTrue(tileIds.contains(map.getTileAt(new Pair<>(2, 0)).getId()));
     }
 
     @Test
     void testPlayerPosition() {
-        assertEquals(new Pair<>(1, 1), map.getPlayerTileMapPosition());
-        assertTrue(map.movePlayerTileMapPosition(Direction.UP));
-        assertTrue(map.movePlayerTileMapPosition(Direction.DOWN));
+        assertEquals(new Pair<>(2, 2), map.getPlayerTileMapPosition());
+        assertTrue(map.movePlayerTileMapPosition(Direction.LEFT));
+        assertTrue(map.movePlayerTileMapPosition(Direction.RIGHT));
     }
 }
