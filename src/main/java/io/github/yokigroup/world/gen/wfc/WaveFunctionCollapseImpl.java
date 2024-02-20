@@ -164,14 +164,14 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @param centerPosition The central position of the update.
      */
     private void updateAdjacentShapes(final int depth, final Pair<Integer, Integer> centerPosition) {
-        // Get any shape from the center
-        final Set<Direction> centerShape = this.shapeMap.get(centerPosition).getRandomizedElement();
         // Get its coherence table
         final Set<Direction> coherenceShape = getCoherentDirections(this.shapeMap.get(centerPosition).getEntries());
         // If there's no coherence it means there can no longer be updates in this path.
         if (coherenceShape.isEmpty()) {
             return;
         }
+        // Get any shape from the center
+        final Set<Direction> centerShape = this.shapeMap.get(centerPosition).getRandomizedElement();
         // Check all directions
         for (final Direction dir : coherenceShape) {
             // Get the coordinate offset for that direction
