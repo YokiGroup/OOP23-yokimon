@@ -5,12 +5,13 @@ import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.util.WeightedPoolImpl;
 import io.github.yokigroup.world.Direction;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -51,9 +52,9 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
 
     @Override
     public final Set<Direction> getShapeAt(final Pair<Integer, Integer> position) {
-        // If there's more than one possibility per position, the algorithm has not finished generating the map.
+        // If there's more than one possibility per position, the algorithm has not enough tiles to generate the map.
         if (shapeMap.get(position).size() > 1) {
-            throw new IllegalStateException("The WaveFunctionCollapse algorithm has not yet generated the map correctly.");
+            throw new IllegalStateException("The WaveFunctionCollapse algorithm has not generated the map correctly.");
         }
         return Map.copyOf(shapeMap).get(position).getRandomizedElement();
     }
@@ -104,7 +105,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @param shapes All the shapes to query.
      * @return A new shape set that doesn't have that direction.
      */
-    private Set<Set<Direction>> getTilesFromWall(final Direction dir, final Set<Set<Direction>> shapes) {
+    private Set<Set<Direction>> getTilesWithoutDir(final Direction dir, final Set<Set<Direction>> shapes) {
         return shapes.stream()
                 .filter(s -> !s.contains(dir))
                 .collect(Collectors.toSet());
@@ -117,10 +118,12 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @param shapes The shapes that can be assigned.
      */
     private void setStaticBorders(final Set<Set<Direction>> shapes) {
-        final Set<Set<Direction>> topShapes = getTilesFromWall(Direction.UP, shapes);
-        final Set<Set<Direction>> bottomShapes = getTilesFromWall(Direction.DOWN, shapes);
-        final Set<Set<Direction>> leftShapes = getTilesFromWall(Direction.LEFT, shapes);
-        final Set<Set<Direction>> rightShapes = getTilesFromWall(Direction.RIGHT, shapes);
+        // Get the shapes that don't have a specific direction
+        final Set<Set<Direction>> topShapes = getTilesWithoutDir(Direction.UP, shapes);
+        final Set<Set<Direction>> bottomShapes = getTilesWithoutDir(Direction.DOWN, shapes);
+        final Set<Set<Direction>> leftShapes = getTilesWithoutDir(Direction.LEFT, shapes);
+        final Set<Set<Direction>> rightShapes = getTilesWithoutDir(Direction.RIGHT, shapes);
+        // Get the shapes that can go in the corner (without 2 directions)
         final Set<Set<Direction>> topLeftShapes = new HashSet<>(leftShapes);
         topLeftShapes.retainAll(topShapes);
         final Set<Set<Direction>> topRightShapes = new HashSet<>(rightShapes);
@@ -129,22 +132,26 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         bottomLeftShapes.retainAll(bottomShapes);
         final Set<Set<Direction>> bottomRightShapes = new HashSet<>(rightShapes);
         bottomRightShapes.retainAll(bottomShapes);
+        // Get the corners of the map
         final Pair<Integer, Integer> topLeft = new Pair<>(0, 0);
         final Pair<Integer, Integer> topRight = new Pair<>(this.dimensions.x() - 1, 0);
         final Pair<Integer, Integer> bottomLeft = new Pair<>(0, this.dimensions.y() - 1);
         final Pair<Integer, Integer> bottomRight = new Pair<>(this.dimensions.x() - 1, this.dimensions.y() - 1);
+        // Set the horizontal (top and bottom) walls
         for (int i = 1; i < this.dimensions.x() - 1; i++) {
             final Pair<Integer, Integer> posTop = new Pair<>(i, 0);
             final Pair<Integer, Integer> posBottom = new Pair<>(i, this.dimensions.y() - 1);
             this.setStaticShape(posTop, topShapes);
             this.setStaticShape(posBottom, bottomShapes);
         }
+        // Set the vertical (left and right) walls
         for (int j = 1; j < this.dimensions.y() - 1; j++) {
             final Pair<Integer, Integer> posLeft = new Pair<>(0, j);
             final Pair<Integer, Integer> posRight = new Pair<>(this.dimensions.x() - 1, j);
             this.setStaticShape(posLeft, leftShapes);
             this.setStaticShape(posRight, rightShapes);
         }
+        // Set the corners
         this.setStaticShape(topLeft, topLeftShapes);
         this.setStaticShape(topRight, topRightShapes);
         this.setStaticShape(bottomLeft, bottomLeftShapes);
@@ -161,6 +168,10 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         final Set<Direction> centerShape = this.shapeMap.get(centerPosition).getRandomizedElement();
         // Get its coherence table
         final Set<Direction> coherenceShape = getCoherentDirections(this.shapeMap.get(centerPosition).getEntries());
+        // If there's no coherence it means there can no longer be updates in this path.
+        if (coherenceShape.isEmpty()) {
+            return;
+        }
         // Check all directions
         for (final Direction dir : coherenceShape) {
             // Get the coordinate offset for that direction
@@ -201,7 +212,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
                     final Set<Direction> common = new HashSet<>(a);
                     common.retainAll(b);
                     return common;
-                }).orElse(EnumSet.noneOf(Direction.class));
+                }).orElse(Collections.emptySet());
         // Get all the common non-present directions by removing them from the set containing all the direction
         final Set<Direction> uncommonShapes = EnumSet.allOf(Direction.class);
         shapes.forEach(uncommonShapes::removeAll);
