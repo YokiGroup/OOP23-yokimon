@@ -105,6 +105,14 @@ final class FightTest {
         }
         assertEquals(EXP_XPVALUE, toTest.getXP(toTest.getCurrentMyYokimon()));
     }
+
+    /**
+     * Test the SPD function, which declares which party is going to start the fight.
+     */
+    @Test
+    void testPlayerIsFirst() {
+        assertFalse(toTest.playerIsFirst());
+    }
 }
 
 
