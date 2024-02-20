@@ -1,14 +1,10 @@
 package io.github.yokigroup.view.render;
 
-import io.github.yokigroup.core.state.SpriteData;
-
-import java.util.stream.Stream;
-
 public abstract class Painter {
 
     private DrawQueue drawQueue;
     public enum State {
-        BATTLE,
+        FIGHT,
         WORLD
     }
     private State paintState;
