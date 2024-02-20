@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
  * both giving a Yokimon to the player when it steps near to an Altar and
  * generate the foes party.
  */
-public class GenerationFactoryImpl implements  GenerationFactory {
+public class GenerationFactoryImpl implements GenerationFactory {
     private static final YokimonLoader YOKIMON_LOADER = new YokimonLoader();
     private static final int NUMBER_OF_YOKIMON = YOKIMON_LOADER.getAll().size();
     private static final int PROBABILITY_CHANCE_MAX = NUMBER_OF_YOKIMON + 2;
@@ -30,6 +30,7 @@ public class GenerationFactoryImpl implements  GenerationFactory {
     public GenerationFactoryImpl() {
         IntStream.range(1, MULTIPLIER_DIFFICULTY + 1).forEach(i -> variableNum.addElement(i, 1f));
     }
+
     private Yokimon getYokimon(final int power) {
         final int finalPower = java.lang.Math.abs(power);
         final WeightedPoolImpl<Yokimon> yokimonWeightedPool = new WeightedPoolImpl<>();
@@ -41,6 +42,7 @@ public class GenerationFactoryImpl implements  GenerationFactory {
         gift.setLevel(power * MULTIPLIER_DIFFICULTY + variableNum.getRandomizedElement());
         return Objects.requireNonNull(gift);
     }
+
     @Override
     public final Yokimon getYokimonAltar(final int power) {
         return Objects.requireNonNull(this.getYokimon(power));
@@ -56,6 +58,7 @@ public class GenerationFactoryImpl implements  GenerationFactory {
 
     /**
      * Return the yokimon with Legend ID.
+     *
      * @param level level
      * @return Yokimon legend
      */
@@ -65,6 +68,7 @@ public class GenerationFactoryImpl implements  GenerationFactory {
         gift.setLevel(level);
         return Objects.requireNonNull(gift);
     }
+
     @Override
     public final Yokimon getLegendAltar(final int power) {
         return getLegend(power * MULTIPLIER_DIFFICULTY + variableNum.getRandomizedElement());

@@ -2,6 +2,7 @@ package io.github.yokigroup.file.loader;
 
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Color;
+import io.github.yokigroup.battle.LevelUpLogicImpl;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.util.json.JsonParser;
@@ -56,6 +57,8 @@ public final class YokimonLoader extends IdJsonLoader<Yokimon> {
             );
         });
 
-        return new YokimonImpl(id, name, color, baseStats, growthRate, learnableMoves);
+        final Yokimon yokimon = new YokimonImpl(id, name, color, baseStats, growthRate, learnableMoves);
+        yokimon.setLevelUPLogic(new LevelUpLogicImpl());
+        return yokimon;
     }
 }

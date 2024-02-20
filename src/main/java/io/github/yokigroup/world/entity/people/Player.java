@@ -16,9 +16,11 @@ public class Player extends People {
 
     private static final double SCALE = 10;
     private static final double RAY_HITBOX = 75;
+
     /**
      * Constructor of the player.
-     * @param pos initial Pos
+     *
+     * @param pos            initial Pos
      * @param messageHandler handler of Events
      */
     public Player(final Position pos,
@@ -29,6 +31,7 @@ public class Player extends People {
     /**
      * Given a vector, it changes the position of the player.
      * around the map.
+     *
      * @param vector vector
      */
     public void move(final Vector2 vector) {
@@ -44,15 +47,16 @@ public class Player extends People {
      */
     @Override
     public void resetPosition() {
-            this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
-                this.setPos(new PositionImpl(new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2,
-                        (double) GameMap.TILE_DIMENSIONS.y() / 2)));
-            });
+        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
+            this.setPos(new PositionImpl(new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2,
+                    (double) GameMap.TILE_DIMENSIONS.y() / 2)));
+        });
     }
 
     /**
-     * Do not call this method
+     * Do not call this method.
      */
     @Override
-    public void update() { }
+    public void update() {
+    }
 }

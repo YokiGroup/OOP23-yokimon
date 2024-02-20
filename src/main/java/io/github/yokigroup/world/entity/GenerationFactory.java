@@ -15,27 +15,33 @@ public interface GenerationFactory {
     /**
      * Return a yokimon that will be put on an Altar. How strong and rare it will be is
      * based of the power integer passed.
+     *
      * @param power integer
      * @return Yokimon
      */
     Yokimon getYokimonAltar(int power);
+
     /**
      * Return a List of yokimon that will be used by an enemy. How strong and rare they will be is
      * based of the power integer passed.
+     *
      * @param power integer
      * @return Yokimon
      */
-    List<Yokimon>  getEnemyParty(int power);
+    List<Yokimon> getEnemyParty(int power);
 
     /**
      * Return a legendary yokimon that will be put on an Altar. How strong and rare it will be is
      * based of the power integer passed.
+     *
      * @param power integer
      * @return Yokimon
      */
     Yokimon getLegendAltar(int power);
+
     /**
      * Return a List of yokimon that will be used by a Boss.
+     *
      * @return Yokimon
      */
     List<Yokimon> getBossParty();

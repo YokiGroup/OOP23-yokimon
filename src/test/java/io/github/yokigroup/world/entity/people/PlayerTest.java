@@ -93,11 +93,11 @@ class PlayerTest {
             assertEquals(0, map.getEntitiesOnCurrentTile().size());
         });
         testMeg.handle(PlayerCharacterSubmodule.class, play -> {
-            for (double i = scalable; i < scaleTot; i = i + scalable ) {
+            for (double i = scalable; i < scaleTot; i = i + scalable) {
                 play.movePlayerBy(new Vector2Impl(play.getPosition().getPosition().getX() + i,
                         play.getPosition().getPosition().getY()));
                 System.out.println("x =" + play.getPosition().getPosition().getX() + "y= " + play.getPosition().getPosition().getY());
-                System.out.println("x =" + GameMap.TILE_DIMENSIONS.x()/2 + "y= " + GameMap.TILE_DIMENSIONS.y()/2);
+                System.out.println("x =" + GameMap.TILE_DIMENSIONS.x() / 2 + "y= " + GameMap.TILE_DIMENSIONS.y() / 2);
                 //assertEquals(GameMap.TILE_DIMENSIONS.x() / 2 + i, play.getPosition().getPosition().getX());
                 /* assertEquals(new PositionImpl
                                 (new Vector2Impl(GameMap.TILE_DIMENSIONS.x() + i, GameMap.TILE_DIMENSIONS.y())),

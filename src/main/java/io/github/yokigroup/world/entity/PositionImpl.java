@@ -16,6 +16,7 @@ public class PositionImpl implements Position {
 
     /**
      * Constructor of the PositionImpl class, with the specified values.
+     *
      * @param pos pos = Pair<>
      */
     public PositionImpl(final Vector2 pos) {
@@ -42,6 +43,7 @@ public class PositionImpl implements Position {
     /**
      * Return true if the position passed is correct in the current tile
      * false if it's out of range of the map.
+     *
      * @return boolean
      */
     @Override
@@ -54,8 +56,9 @@ public class PositionImpl implements Position {
     /**
      * Return true if the distance between two vectors is less than radius,
      * false if it's more.
+     *
      * @param otherPos the other pair to check
-     * @param radius min distance
+     * @param radius   min distance
      * @return boolean
      */
     @Override
@@ -66,6 +69,7 @@ public class PositionImpl implements Position {
 
     /**
      * Return a protected copy of this object.
+     *
      * @return Position
      */
     @Override
