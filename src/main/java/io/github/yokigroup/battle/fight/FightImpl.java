@@ -45,7 +45,6 @@ public final class FightImpl implements Fight {
     private final List<Yokimon> defeatedOpps = new LinkedList<>();
 
     /* Current state of the fight and event publisher */
-    private boolean fightStarted;
     private State state;
     private final Publisher<Fight> publisher = new PublisherImpl<>();
 
@@ -69,10 +68,6 @@ public final class FightImpl implements Fight {
 
     @Override
     public Success attack(final Attack myAttack) {
-
-        if (!fightStarted) {
-            fightStarted = true;
-        }
 
         final int damage = dmgCalc.getDMG(currMyYokimon, currOppYokimon, myAttack);
         currOppYokimon.takeDamage(damage);
@@ -98,10 +93,6 @@ public final class FightImpl implements Fight {
 
     @Override
     public Success getAttacked() {
-
-        if (!fightStarted) {
-            fightStarted = true;
-        }
 
         final Optional<Attack> nextOppAttack = oppAI.getMove(currMyYokimon, currOppYokimon);
 
@@ -178,10 +169,7 @@ public final class FightImpl implements Fight {
 
     @Override
     public boolean playerIsFirst() {
-        if (!fightStarted) {
-            return currMyYokimon.getStat(Yokimon.Stats.SPD) >= currOppYokimon.getStat(Yokimon.Stats.SPD);
-        }
-        return false;
+        return currMyYokimon.getStat(Yokimon.Stats.SPD) >= currOppYokimon.getStat(Yokimon.Stats.SPD);
     }
 
 }
