@@ -106,7 +106,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      */
     private Set<Set<Direction>> getTilesWithoutDirs(final Set<Direction> dir, final Set<Set<Direction>> shapes) {
         return shapes.stream()
-                .filter(s -> !s.containsAll(dir))
+                .filter(s -> s.stream().noneMatch(dir::contains))
                 .collect(Collectors.toSet());
     }
 
@@ -222,7 +222,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @return True if the shapeMap at that position has been collapsed.
      */
     private boolean hasBeenCollapsed(final Pair<Integer, Integer> pos) {
-        return this.shapeMap.get(pos).size() == 1;
+        return this.shapeMap.get(pos).size() <= 1;
     }
 
     /**
@@ -240,8 +240,8 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
     private Optional<Integer> getMinimumEntropy() {
         // Get the lowest shape count there is
         return this.shapeMap.values().stream()
-                .map(WeightedPool::size)
-                .filter(s -> s > 1) // If the size is 1, then it has already been collapsed
+                .filter(p -> p.size() > 1) // If the size is 0 then it has already been collapsed
+                .map(p -> p.size())
                 .reduce(Math::min);
     }
 
