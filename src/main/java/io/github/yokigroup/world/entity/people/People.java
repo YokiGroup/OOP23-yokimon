@@ -5,14 +5,17 @@ import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.world.Sprite;
 import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.UnaryOperator;
 
 /**
  * People class represents a generic person entity in the game world.
@@ -65,10 +68,17 @@ public abstract class People extends Entity {
 
     @Override
     public SpriteData getSpriteData() {
+        SpriteData superSpriteData = super.getSpriteData();
         if (!active) {
             return null;
         }
-        return super.getSpriteData();
+        return new SpriteData(
+                superSpriteData.spriteURL(),
+                superSpriteData.position(),
+                superSpriteData.dim(),
+                superSpriteData.priority(),
+                getDirection().get().getX() == 1
+        );
     }
 
     /**
@@ -117,6 +127,10 @@ public abstract class People extends Entity {
          */
         private final Vector2 vector;
 
+        public static Direction valueOf(final Vector2 vector) {
+            return Arrays.stream(Direction.values()).filter(v -> vector.equals(v.get())).findFirst().orElse(null);
+        }
+
         /**
          * Constructor of Direction.
          * @param vector vector
@@ -150,6 +164,7 @@ public abstract class People extends Entity {
         if (v.getY() == 0 && v.getX() == 0) {
             return;
         }
+        /*
         if (Math.abs(v.getX()) > Math.abs(v.getY())) {
             if (v.getX() > 0) {
                 this.direction = Direction.RIGHT;
@@ -163,6 +178,8 @@ public abstract class People extends Entity {
                 this.direction = Direction.UP;
             }
         }
+        */
+        this.direction = Direction.valueOf(new Vector2Impl(Math.signum(v.getX()), Math.signum(v.getY())));
     }
     /**
      * Returns whether the people entity is active or not.
