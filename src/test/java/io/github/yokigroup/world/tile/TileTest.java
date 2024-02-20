@@ -1,7 +1,5 @@
 package io.github.yokigroup.world.tile;
 
-import io.github.yokigroup.core.GameMessageHandler;
-import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;

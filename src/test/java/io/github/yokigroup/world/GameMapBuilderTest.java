@@ -1,7 +1,5 @@
 package io.github.yokigroup.world;
 
-import io.github.yokigroup.core.GameMessageHandler;
-import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.file.loader.TileLoader;
 import io.github.yokigroup.util.Pair;
 import org.junit.jupiter.api.Test;

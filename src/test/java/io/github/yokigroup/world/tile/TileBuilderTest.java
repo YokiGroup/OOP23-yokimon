@@ -1,7 +1,5 @@
 package io.github.yokigroup.world.tile;
 
-import io.github.yokigroup.core.GameMessageHandler;
-import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.entity.PositionImpl;
