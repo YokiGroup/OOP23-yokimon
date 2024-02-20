@@ -14,11 +14,13 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -26,6 +28,7 @@ import java.util.function.Consumer;
  * Main JavaFX Application entry.
  */
 public class GameFX extends Application {
+    private final String ROOTRESOUCEPATH = "io/github/yokigroup/view/";
     public final static Rectangle2D screenSize = Screen.getPrimary().getBounds();
 
     private static class GameWindowResizeListener<T> implements ChangeListener<T> {
@@ -69,7 +72,7 @@ public class GameFX extends Application {
         final double ratio = 16.0/9.0; // 16:9 ratio
         final Dimension2D windowDim = new Dimension2D(scaledY*ratio, scaledY);
 
-        final BorderPane rootElem = FXMLLoader.load(ClassLoader.getSystemResource("io/github/yokigroup/view/test.fxml"));
+        final BorderPane rootElem = FXMLLoader.load(ClassLoader.getSystemResource(ROOTRESOUCEPATH + "test.fxml"));
         final Scene scene = new Scene(rootElem, windowDim.getWidth(), windowDim.getHeight());
 
         final List<Node> stackPane = ((StackPane)rootElem.getCenter()).getChildren();
@@ -101,6 +104,10 @@ public class GameFX extends Application {
 
         stage.setOnCloseRequest(a -> gameThread.stopGame());
 
+        final InputStream iconStream = ClassLoader.getSystemResourceAsStream(ROOTRESOUCEPATH + "icon.png");
+        if (iconStream != null) {
+            stage.getIcons().add(new Image(iconStream));
+        }
         stage.setTitle("Yokimon");
         stage.setScene(scene);
         stage.show();
