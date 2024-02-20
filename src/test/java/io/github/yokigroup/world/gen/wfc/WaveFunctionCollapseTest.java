@@ -31,6 +31,7 @@ class WaveFunctionCollapseTest {
         shpDic.put("UR", Set.of(Direction.UP, Direction.RIGHT));
         shpDic.put("DL", Set.of(Direction.DOWN, Direction.LEFT));
         shpDic.put("DR", Set.of(Direction.DOWN, Direction.RIGHT));
+        shpDic.put("LR", Set.of(Direction.LEFT, Direction.RIGHT));
         wfc = new WaveFunctionCollapseImpl(new Pair<>(WIDTH, HEIGHT), new HashSet<>(shpDic.values()));
     }
 
