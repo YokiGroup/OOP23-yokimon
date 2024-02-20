@@ -11,8 +11,8 @@ import io.github.yokigroup.battle.opponentai.FullImplOpponentAI;
 import io.github.yokigroup.battle.opponentai.OpponentAI;
 import io.github.yokigroup.battle.xpcalculator.FullImplXPCalculator;
 import io.github.yokigroup.battle.xpcalculator.XPCalculator;
-import io.github.yokigroup.core.Publisher;
-import io.github.yokigroup.core.PublisherImpl;
+import io.github.yokigroup.event.observer.Publisher;
+import io.github.yokigroup.event.observer.PublisherImpl;
 
 import java.util.List;
 import java.util.LinkedList;

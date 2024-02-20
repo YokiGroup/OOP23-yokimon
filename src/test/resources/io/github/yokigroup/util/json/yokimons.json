@@ -1,29 +1,17 @@
 {
   "1": {
-    "name": "Oni",
-    "growthRate": "MEDIUM",
-    "color": "RED",
+    "name": "Pippo Pugile",
+    "growthRate": "FAST",
+    "color": "BLACK",
     "stats": {
-      "ATK": 80,
-      "DEF": 100,
-      "SPD": 40,
-      "HP": 90
+      "ATK": 1,
+      "DEF": 1,
+      "SPD": 1,
+      "HP": 10
     },
     "moves": [
       {
         "level": 1,
-        "skillId": 4
-      },
-      {
-        "level": 3,
-        "skillId": 2
-      },
-      {
-        "level": 7,
-        "skillId": 3
-      },
-      {
-        "level": 15,
         "skillId": 1
       }
     ]
@@ -33,10 +21,10 @@
     "growthRate": "MEDIUM",
     "color": "PURPLE",
     "stats": {
-      "ATK": 80,
-      "DEF": 100,
-      "SPD": 40,
-      "HP": 90
+      "ATK": 90,
+      "DEF": 75,
+      "SPD": 110,
+      "HP": 75
     },
     "moves": [
       {
@@ -62,10 +50,10 @@
     "growthRate": "MEDIUM",
     "color": "PURPLE",
     "stats": {
-      "ATK": 80,
+      "ATK": 75,
       "DEF": 100,
-      "SPD": 40,
-      "HP": 90
+      "SPD": 65,
+      "HP": 95
     },
     "moves": [
       {
@@ -91,10 +79,331 @@
     "growthRate": "MEDIUM",
     "color": "WHITE",
     "stats": {
-      "ATK": 80,
-      "DEF": 100,
-      "SPD": 40,
+      "ATK": 90,
+      "DEF": 90,
+      "SPD": 90,
       "HP": 90
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+
+  "5": {
+    "name": "Tanuki",
+    "growthRate": "FAST",
+    "color": "WHITE",
+    "stats": {
+      "ATK": 75,
+      "DEF": 100,
+      "SPD": 70,
+      "HP": 100
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+
+  "6": {
+    "name": "Sazae-oni",
+    "growthRate": "MEDIUM",
+    "color": "WHITE",
+    "stats": {
+      "ATK": 20,
+      "DEF": 300,
+      "SPD": 20,
+      "HP": 50
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+  "7": {
+    "name": "Tengu",
+    "growthRate": "MEDIUM",
+    "color": "RED",
+    "stats": {
+      "ATK": 95,
+      "DEF": 70,
+      "SPD": 110,
+      "HP": 95
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+  "8": {
+    "name": "Wani",
+    "growthRate": "SLOW",
+    "color": "RED",
+    "stats": {
+      "ATK": 120,
+      "DEF": 60,
+      "SPD": 80,
+      "HP": 120
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+  "9": {
+    "name": "Yatagarasu",
+    "growthRate": "FAST",
+    "color": "BLACK",
+    "stats": {
+      "ATK": 65,
+      "DEF": 60,
+      "SPD": 150,
+      "HP": 60
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+  "10": {
+    "name": "Yosuzume",
+    "growthRate": "FAST",
+    "color": "BLACK",
+    "stats": {
+      "ATK": 75,
+      "DEF": 70,
+      "SPD": 120,
+      "HP": 70
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+  "11": {
+    "name": "Inugami",
+    "growthRate": "SLOW",
+    "color": "WHITE",
+    "stats": {
+      "ATK": 100,
+      "DEF": 100,
+      "SPD": 100,
+      "HP": 100
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+  "12": {
+    "name": "KAPPA",
+    "growthRate": "MEDIUM",
+    "color": "WHITE",
+    "stats": {
+      "ATK": 65,
+      "DEF": 150,
+      "SPD": 75,
+      "HP": 75
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+  "13": {
+    "name": "SonWukong",
+    "growthRate": "SLOW",
+    "color": "WHITE",
+    "stats": {
+      "ATK": 120,
+      "DEF": 120,
+      "SPD": 120,
+      "HP": 120
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+  "14": {
+    "name": "Woman",
+    "growthRate": "FAST",
+    "color": "PURPLE",
+    "stats": {
+      "ATK": 50,
+      "DEF": 50,
+      "SPD": 50,
+      "HP": 50
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 4
+      },
+      {
+        "level": 3,
+        "skillId": 2
+      },
+      {
+        "level": 7,
+        "skillId": 3
+      },
+      {
+        "level": 15,
+        "skillId": 1
+      }
+    ]
+  },
+  "15": {
+    "name": "Akugyo",
+    "growthRate": "FAST",
+    "color": "WHITE",
+    "stats": {
+      "ATK": 85,
+      "DEF": 70,
+      "SPD": 60,
+      "HP": 85
     },
     "moves": [
       {

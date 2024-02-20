@@ -1,12 +1,17 @@
 package io.github.yokigroup.event.submodule;
 
+import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
+import io.github.yokigroup.event.submodule.abs.PartySubmoduleAbs;
+import io.github.yokigroup.event.submodule.abs.Submodule;
+import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.view.observer.ModelObserverImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,23 +19,19 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class SubmoduleMapImplTest {
     private SubmoduleMap map;
-    private PartySubmodule pSub;
-    private FightSubmodule fSub;
+    private PartySubmoduleAbs pSub;
+    private FightSubmoduleAbs fSub;
     private Set<Submodule> subModuleTestSet;
 
     @BeforeEach
     void setUp() {
-        MessageHandler handler = new MessageHandler() {
-            @Override
-            public <T extends Submodule> void handle(final Class<T> subModuleType, final Consumer<T> handler) {
-                // Handle implementation does not matter for this test.
-                return;
-            }
-        };
+        MessageHandler handler = new GameMessageHandler();
+        ModelObserver obs = new ModelObserverImpl(null);
 
         map = new SubmoduleMapImpl();
-        pSub = new PartySubmodule(handler);
-        fSub = new FightSubmodule(handler);
+        // FIXME init these submodules
+        pSub = new PartySubmodule(handler, obs);
+        fSub = new FightSubmodule(handler, obs);
         subModuleTestSet = Set.of(pSub, fSub);
     }
 

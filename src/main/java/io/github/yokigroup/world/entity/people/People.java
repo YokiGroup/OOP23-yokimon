@@ -1,14 +1,21 @@
 package io.github.yokigroup.world.entity.people;
 
-import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
-import io.github.yokigroup.world.entity.hitbox.Hitbox;
+import io.github.yokigroup.world.Sprite;
+import io.github.yokigroup.world.entity.PositionImpl;
+import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
+import io.github.yokigroup.world.entity.hitbox.Hitbox;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.UnaryOperator;
 
 /**
  * People class represents a generic person entity in the game world.
@@ -16,52 +23,129 @@ import java.util.List;
  */
 public abstract class People extends Entity {
 
-    private final static float DEFAULT_DIRECTION = 0;
+    /**
+     * Direction where the People Entities first watch.
+     */
+    private static final Direction DEFAULT_DIRECTION = Direction.UP;
     /**
      * The position the entity is first spawned.
      */
-    protected final Position initialPos;
+    private final Position initialPos;
+
     /**
-     * The direction where the entity is looking.
+     * Direction where the player is looking.
      */
-    protected float direction;
-
-    protected boolean active;
-
-    protected List<Yokimon> Party;
-
+    private Direction direction;
+    /**
+     * People get up-dated only if active is true.
+     */
+    private boolean active;
+    /**
+     * Ray of the hitBox
+     */
+    private final double dimensions;
     /**
      * Constructs a People object with the specified attributes.
      * @param pos The position of the People
-     * @param hitbox The hitbox of the People
-     * @param party The party of Yokimon belonging to the People
+     * @param messageHandler handler of events
+     * @param resourceURL String
      */
-    public People(Position pos, Hitbox hitbox, List<Yokimon> party, MessageHandler messageHandler) {
-        super(pos, hitbox, messageHandler);
-        this.Party = List.copyOf(party);
+    public People(final Position pos, final MessageHandler messageHandler,
+                  final double dimensions,  final String resourceURL) {
+        super(pos, new CircularHitbox(pos.getPosition(), dimensions / 2), messageHandler,
+                new Vector2Impl(dimensions, dimensions), resourceURL);
         this.direction = DEFAULT_DIRECTION;
         this.active = true;
-        this.initialPos = pos;
+        this.initialPos = pos.copyOf();
+        this.dimensions = dimensions;
+    }
+
+    @Override
+    public final Hitbox getHitBox() {
+        if (!active) {
+            return null;
+        }
+        return super.getHitBox();
+    }
+
+    @Override
+    public SpriteData getSpriteData() {
+        SpriteData superSpriteData = super.getSpriteData();
+        if (!active) {
+            return null;
+        }
+        return new SpriteData(
+                superSpriteData.spriteURL(),
+                superSpriteData.position(),
+                superSpriteData.dim(),
+                superSpriteData.priority(),
+                getDirection().get().getX() == -1
+        );
     }
 
     /**
      * Direction enum represents the possible default directions in the game world.
      */
     public enum Direction {
+        /**
+         * The entity doesn't move.
+         */
+        DEFAULT_STAND(new Vector2Impl(0, 0)),
+        /**
+         * UP direction.
+         */
         UP(new Vector2Impl(0, -1)),
+        /**
+         * UP_RIGHT direction.
+         */
         UP_RIGHT(new Vector2Impl(1, -1)),
+        /**
+         * RIGHT direction.
+         */
         RIGHT(new Vector2Impl(1, 0)),
+        /**
+         * DOWN_RIGHT direction.
+         */
         DOWN_RIGHT(new Vector2Impl(1, 1)),
-        DOWN(new Vector2Impl(0,1)),
+        /**
+         * DOWN direction.
+         */
+        DOWN(new Vector2Impl(0, 1)),
+        /**
+         * LEFT_DOWN direction.
+         */
         LEFT_DOWN(new Vector2Impl(-1, 1)),
-        LEFT(new Vector2Impl(-1,0)),
+        /**
+         * LEFT direction.
+         */
+        LEFT(new Vector2Impl(-1, 0)),
+        /**
+         * UP_LEFT direction.
+         */
         UP_LEFT(new Vector2Impl(-1, -1));
 
+        /**
+         * Vector which represent the direction.
+         */
         private final Vector2 vector;
-        Direction(Vector2 vector) {
+
+        public static Direction valueOf(final Vector2 vector) {
+            return Arrays.stream(Direction.values()).filter(v -> vector.equals(v.get())).findFirst().orElse(null);
+        }
+
+        /**
+         * Constructor of Direction.
+         * @param vector vector
+         */
+        Direction(final Vector2 vector) {
             this.vector = vector;
         }
-        public Vector2 get(){
+
+        /**
+         * return the vector stored in this direction.
+         * @return vector
+         */
+        public Vector2 get() {
             return vector;
         }
     }
@@ -69,67 +153,102 @@ public abstract class People extends Entity {
      * Returns the direction in which the people entity is currently looking.
      * @return float The angle in radiant
      */
-    public float getDirection() {
+    public final Direction getDirection() {
         return this.direction;
     }
 
     /**
+     * Turns a vector to the direction where the entity is looking.
+     * @param v vector
+     */
+    public final void setDirection(final Vector2 v) {
+        Objects.requireNonNull(v, "Vector passed to toDirection was null");
+        if (v.getY() == 0 && v.getX() == 0) {
+            return;
+        }
+        /*
+        if (Math.abs(v.getX()) > Math.abs(v.getY())) {
+            if (v.getX() > 0) {
+                this.direction = Direction.RIGHT;
+            } else {
+                this.direction = Direction.LEFT;
+            }
+        } else {
+            if (v.getY() > 0) {
+                this.direction = Direction.DOWN;
+            } else {
+                this.direction = Direction.UP;
+            }
+        }
+        */
+        this.direction = Direction.valueOf(new Vector2Impl(Math.signum(v.getX()), Math.signum(v.getY())));
+    }
+    /**
      * Returns whether the people entity is active or not.
      * @return boolean True if the people entity is active, false otherwise
      */
-    public boolean getIsActive() {
+    public final boolean getActive() {
         return this.active;
     }
 
     /**
      * Sets the people entity as active.
      */
-    public void setActive() {
+    public final void setActive() {
         this.active = true;
     }
 
     /**
      * Sets the people entity as inactive.
      */
-    public void shut() {
+    public final void shut() {
         this.active = false;
     }
 
     /**
-     * Returns the party of Yokimon belonging to the people entity.
-     * @return List<Yokimon> The party of Yokimon
-     */
-    public List<Yokimon> getListOfYokimon() {
-        return this.Party;
-    }
-
-    /**
-     * Adds a new Yokimon to the party of the people entity.
-     * @param newYokimon The new Yokimon to add
-     * @return true if the operation worked
-     */
-    public boolean addYokimon(Yokimon newYokimon) {
-        if(this.Party == null){
-            return false;
-        }
-        this.Party.add(newYokimon);
-        return true;
-    }
-
-    /**
-     * Adds a list of new Yokimon to the party of the people entity.
-     * @param newYokimons The list of new Yokimon to add
-     * @return message Status message
-     */
-    public boolean addListOfYokimon(List<Yokimon> newYokimons) {
-       return this.Party.addAll(newYokimons);
-    }
-    /**
      * Returns the initial position of the entity.
      * @return Position Initial position of the entity
      */
-    public Position getInitialPos() {
-        return this.initialPos;
+    public final Position getInitialPos() {
+        return this.initialPos.copyOf();
+    }
+
+    /**
+     * If the position is not valid this method reset the position of the map to
+     * the initial one, or to the centre of the tile if the entity is the player.
+     */
+    public abstract void resetPosition();
+
+    /**
+     * Return the ray value of this People Entity
+     * @return double
+     */
+    public final double getDimensions(){
+        return this.dimensions;
+    }
+    /**
+     * Check if the entity is colliding.
+     * @param vector vector2
+     */
+    protected final void collisionCheck(final Vector2 vector) {
+        if(!active) return;
+
+        this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
+        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
+            map.getHitboxesOnCurrentTile().stream()
+                    .map(block -> Objects.requireNonNull(this.getHitBox()).collidesWith(block))
+                    .filter(Optional::isPresent)
+                    .forEach(block -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(block.get()))));
+        });
+        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
+
+            map.getEntitiesOnCurrentTile().stream()
+                    .map(entity -> Objects.requireNonNull(this.getHitBox()).collidesWith(entity.getHitBox()))
+                    .filter(Optional::isPresent)
+                    .forEach(entity -> this.setPos(new PositionImpl(this.getPos().getPosition().plus(entity.get()))));
+
+        });
+
     }
 
 }

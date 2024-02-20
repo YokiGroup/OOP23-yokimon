@@ -1,4 +1,4 @@
-package io.github.yokigroup.core;
+package io.github.yokigroup.event.observer;
 
 /**
  * A class must implement this interface in order to subscribe to an observable.
@@ -9,7 +9,9 @@ public interface EObserver<T> {
     /**
      * Update the observer about some changes.
      * @param publisher the publisher responsible about notifying this observer.
+     * @param lastArg last value possessed by arg on the last update call (starts out as {@code null})
      * @param arg the element that underwent some changes.
      */
-    void update(Publisher<T> publisher, T arg);
+
+    void update(PublisherImpl<T> publisher, T lastArg, T arg);
 }

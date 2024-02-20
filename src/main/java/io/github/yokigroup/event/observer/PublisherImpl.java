@@ -1,4 +1,4 @@
-package io.github.yokigroup.core;
+package io.github.yokigroup.event.observer;
 
 import java.util.Set;
 import java.util.HashSet;
@@ -11,6 +11,7 @@ public final class PublisherImpl<T> implements Publisher<T> {
 
     /* The observers subscribed to this publisher */
     private final Set<EObserver<T>> observerSet = new HashSet<>();
+    private T lastArg = null;
 
     @Override
     public void addObserver(final EObserver<T> obs) {
@@ -19,8 +20,10 @@ public final class PublisherImpl<T> implements Publisher<T> {
 
     @Override
     public void notifyObservers(final T arg) {
-        for (final var obs : observerSet) {
-            obs.update(this, arg);
+        for (var obs : observerSet) {
+            obs.update(this, lastArg, arg);
+            lastArg = arg;
+
         }
     }
 }

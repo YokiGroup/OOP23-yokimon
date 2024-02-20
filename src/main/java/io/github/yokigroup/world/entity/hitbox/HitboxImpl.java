@@ -2,6 +2,7 @@ package io.github.yokigroup.world.entity.hitbox;
 
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import org.dyn4j.collision.Fixture;
 import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.geometry.AABB;
@@ -11,6 +12,7 @@ import org.dyn4j.world.World;
 import org.dyn4j.world.result.ConvexDetectResult;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -18,6 +20,7 @@ import java.util.Optional;
  */
 public abstract class HitboxImpl implements Hitbox {
     private static final double LAMBDA = 1E-10d;
+    private static final World<Body> COLLISION_WORLD = new World<>();
     private final Body body;
 
     /**
@@ -40,13 +43,16 @@ public abstract class HitboxImpl implements Hitbox {
 
     @Override
     public final Optional<Vector2> collidesWith(final Hitbox other) {
+        if (other == null) {
+            return Optional.empty();
+        }
         // Add the body to the world to check for collisions
-        final World<Body> world = new World<>();
-        world.addBody(((HitboxImpl) other).getBody());
+        COLLISION_WORLD.addBody(((HitboxImpl) other).getBody());
         // Check for bounding box collisions
         final DetectFilter<Body, BodyFixture> filter = new DetectFilter<>(true, true, null);
-        final Iterator<ConvexDetectResult<Body, BodyFixture>> results = world.detectIterator(
-                this.body.getFixture(0).getShape(),
+        final Iterator<ConvexDetectResult<Body, BodyFixture>> results = COLLISION_WORLD.detectIterator(
+                // If you see any Fixture cast it's to suppress one of SpotBugs warnings, it's a library issue.
+                ((Fixture) this.body.getFixture(0)).getShape(),
                 this.body.getTransform(),
                 filter
         );
@@ -63,7 +69,7 @@ public abstract class HitboxImpl implements Hitbox {
                 mtv = Optional.of(offset);
             }
         }
-        world.removeAllBodies();
+        COLLISION_WORLD.removeAllBodies();
         return mtv;
     }
 
@@ -98,28 +104,37 @@ public abstract class HitboxImpl implements Hitbox {
         );
     }
 
+    /**
+     *
+     * @param o The other object to compare
+     * @return True if the two objects are the same.
+     */
     @Override
-    public final boolean equals(final Object other) {
-        if (!(other instanceof HitboxImpl)) {
+    public boolean equals(final Object o) {
+        if (!(o instanceof HitboxImpl)) {
             return false;
         } else if (
-                this.body.getFixture(0).getShape().getClass()
-                != ((HitboxImpl) other).getBody().getFixture(0).getShape().getClass()
+                // If you see any Fixture cast it's to suppress one of SpotBugs warnings, it's a library issue.
+                ((Fixture) this.body.getFixture(0)).getShape().getClass()
+                != ((Fixture) ((HitboxImpl) o).getBody().getFixture(0)).getShape().getClass()
         ) {
             return false;
         }
         final AABB aabb1 = this.body.createAABB();
-        final AABB aabb2 = ((HitboxImpl) other).getBody().createAABB();
-        return this.body.getTransform().getTranslationX() == ((HitboxImpl) other).getBody().getTransform().getTranslationX()
+        final AABB aabb2 = ((HitboxImpl) o).getBody().createAABB();
+        return this.getPosition().getX() == ((HitboxImpl) o).getPosition().getX()
+                && this.getPosition().getY() == ((HitboxImpl) o).getPosition().getY()
                 && aabb1.getHeight() == aabb2.getHeight()
                 && aabb1.getWidth() == aabb2.getWidth();
     }
 
+    /**
+     * Must return a unique hash value depending on the object's properties.
+     * @return The hash code of the hitbox.
+     */
     @Override
-    public final int hashCode() {
-        final int prime1 = 79;
-        final int prime2 = 39;
-        return prime1 * this.getPosition().hashCode() + prime2 * (int) this.body.getFixture(0).getShape().getRadius();
+    public int hashCode() {
+        return Objects.hash(body);
     }
 
     /**

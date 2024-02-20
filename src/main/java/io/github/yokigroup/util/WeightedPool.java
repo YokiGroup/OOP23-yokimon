@@ -21,6 +21,7 @@ public interface WeightedPool<T> {
      * Adds an element to the pool, the weights can be an arbitrary value.
      * @param element The element to add to the pool.
      * @param weight The chance of an element to be chosen.
+     * @throws IllegalArgumentException in case the weight was negative.
      */
     void addElement(T element, float weight);
 
@@ -33,12 +34,14 @@ public interface WeightedPool<T> {
     /**
      * Gets one of the elements in the pool by their weight without removing it.
      * @return One of the elements in the pool.
+     * @throws IllegalStateException in case the pool is empty.
      */
     T getRandomizedElement();
 
     /**
      * Gets one of the elements in the pool by their weight and removes it.
      * @return One of the elements in the pool.
+     * @throws IllegalStateException in case the pool is empty.
      */
     T removeRandomizedElement();
 

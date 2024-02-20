@@ -1,10 +1,27 @@
 package io.github.yokigroup.util;
 
+import java.util.Objects;
+
 /**
  * An implementation of the binding to a vector2 class.
  */
-public class Vector2Impl implements Vector2 {
+public final class Vector2Impl implements Vector2 {
+    private static final String ERROR_STRING = "The other vector was null.";
     private final org.dyn4j.geometry.Vector2 vector;
+    /**
+     * A vector with components (0, 0)
+     */
+    public static final Vector2 NULL_VECTOR = new Vector2Impl(0, 0);
+
+    /**
+     *
+     * @param pair The pair to cast to vector.
+     * @return A vector containing the pair's values.
+     * @param <T> The numerical type of the pair.
+     */
+    public static <T extends Number> Vector2 castPair(final Pair<T, T> pair) {
+        return new Vector2Impl(pair.x().doubleValue(), pair.y().doubleValue());
+    }
 
     /**
      *
@@ -31,69 +48,86 @@ public class Vector2Impl implements Vector2 {
     }
 
     @Override
-    public final double getX() {
+    public double getX() {
         return vector.x;
     }
 
     @Override
-    public final double getY() {
+    public double getY() {
         return vector.y;
     }
 
     @Override
-    public final Vector2 plus(final Vector2 other) {
+    public Vector2 plus(final Vector2 other) {
+        if (other == null) {
+            throw new IllegalArgumentException(ERROR_STRING);
+        }
         return new Vector2Impl(this.getX() + other.getX(), this.getY() + other.getY());
     }
 
     @Override
-    public final Vector2 minus(final Vector2 other) {
+    public Vector2 minus(final Vector2 other) {
+        if (other == null) {
+            throw new IllegalArgumentException(ERROR_STRING);
+        }
         return new Vector2Impl(this.getX() - other.getX(), this.getY() - other.getY());
     }
 
     @Override
-    public final Vector2 times(final Vector2 other) {
+    public Vector2 times(final Vector2 other) {
+        if (other == null) {
+            throw new IllegalArgumentException(ERROR_STRING);
+        }
         return new Vector2Impl(this.getX() * other.getX(), this.getY() * other.getY());
     }
 
     @Override
-    public final Vector2 divide(final Vector2 other) {
+    public Vector2 divide(final Vector2 other) {
+        if (other == null) {
+            throw new IllegalArgumentException(ERROR_STRING);
+        }
         return new Vector2Impl(this.getX() / other.getX(), this.getY() / other.getY());
     }
 
     @Override
-    public final Vector2 scale(final double value) {
+    public Vector2 scale(final double value) {
         return new Vector2Impl(this.getX() * value, this.getY() * value);
     }
 
     @Override
-    public final Vector2 normalize() {
+    public Vector2 normalize() {
         final org.dyn4j.geometry.Vector2 normalized = this.vector.getNormalized();
         return new Vector2Impl(normalized.x, normalized.y);
     }
 
     @Override
-    public final double length() {
+    public double length() {
         return this.vector.getMagnitude();
     }
 
     @Override
-    public final double dot(final Vector2 other) {
+    public double dot(final Vector2 other) {
+        if (other == null) {
+            throw new IllegalArgumentException(ERROR_STRING);
+        }
         return this.vector.dot(((Vector2Impl) other).getVector());
     }
 
     @Override
-    public final boolean equals(final Object other) {
-        if (!(other instanceof Vector2Impl)) {
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        return this.getX() == ((Vector2Impl) other).getX() && this.getY() == ((Vector2Impl) other).getY();
+        final Vector2Impl vector2 = (Vector2Impl) o;
+        return Objects.equals(vector, vector2.vector);
     }
 
     @Override
-    public final int hashCode() {
-        final int prime1 = 43;
-        final int prime2 = 61;
-        return Double.hashCode(prime1 * this.getX()) * Double.hashCode(prime2 * this.getY());
+    public int hashCode() {
+        return Objects.hash(vector);
     }
 
     private org.dyn4j.geometry.Vector2 getVector() {

@@ -28,9 +28,15 @@ public interface Hitbox {
      */
     Vector2 getPosition();
 
+    /**
+     *
+     * @return A copy of this hitbox.
+     */
+    Hitbox copyOf();
+
 
     @Override
-    boolean equals(Object other);
+    boolean equals(Object o);
 
     @Override
     int hashCode();

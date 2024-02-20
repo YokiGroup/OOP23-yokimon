@@ -1,19 +1,19 @@
-package io.github.yokigroup.world.gen.wfc;
+package io.github.yokigroup.world;
 
 import io.github.yokigroup.util.Pair;
 
 /**
- * The shapes allowed by the wave function collapse algorithm, and their opposites.
+ * Enum that stores the directions of a tile.
  */
-public enum WfcShapeDirection {
+public enum Direction {
     /**
      * Can connect to tiles that have the shape "DOWN".
      */
-    UP(new Pair<>(0, 1)),
+    UP(new Pair<>(0, -1)),
     /**
      * Can connect to tiles that have the shape "UP".
      */
-    DOWN(new Pair<>(0, -1)),
+    DOWN(new Pair<>(0, 1)),
     /**
      * Can connect to tiles that have the shape "RIGHT".
      */
@@ -28,8 +28,9 @@ public enum WfcShapeDirection {
     /**
      *
      * @return The opposite direction.
+     * @throws IllegalStateException If it goes into an unknown value (impossible).
      */
-    public WfcShapeDirection getConnection() {
+    public Direction getComplementary() {
         return switch (this) {
             case UP -> DOWN;
             case DOWN -> UP;
@@ -51,7 +52,7 @@ public enum WfcShapeDirection {
      *
      * @param offset The coordinate offset of the direction.
      */
-    WfcShapeDirection(final Pair<Integer, Integer> offset) {
+    Direction(final Pair<Integer, Integer> offset) {
         this.offset = offset;
     }
 }

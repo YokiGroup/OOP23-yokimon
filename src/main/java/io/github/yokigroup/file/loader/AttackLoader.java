@@ -5,7 +5,7 @@ import io.github.yokigroup.battle.AttackImpl;
 import io.github.yokigroup.battle.Color;
 import io.github.yokigroup.util.json.JsonParser;
 
-public class AttackLoader extends AbstractJsonLoader<Attack> {
+public class AttackLoader extends IdJsonLoader<Attack> {
     private static final String ATTACKJSONRPATH = "skills.json";
     private static final String ATTACK_NAME_JPATHF = "$.%d.name";
     private static final String ATTACK_COLOR_JPATHF = "$.%d.color";
@@ -17,7 +17,7 @@ public class AttackLoader extends AbstractJsonLoader<Attack> {
     }
 
     @Override
-    public Attack load(int id) {
+    public Attack load(final int id) {
         JsonParser parser = getParser();
 
         int power = parser.read(String.format(ATTACK_POWER_JPATHF, id));
@@ -25,6 +25,6 @@ public class AttackLoader extends AbstractJsonLoader<Attack> {
         Color color = Color.valueOf(parser.read(String.format(ATTACK_COLOR_JPATHF, id)));
         Attack.Effect effect = Attack.Effect.valueOf(parser.read(String.format(ATTACK_EFFECT_JPATHF, id)));
 
-        return new AttackImpl(name, color, power, effect);
+        return new AttackImpl(id, name, color, power, effect);
     }
 }

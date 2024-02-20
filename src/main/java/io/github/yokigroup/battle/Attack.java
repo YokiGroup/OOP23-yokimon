@@ -1,6 +1,4 @@
 package io.github.yokigroup.battle;
-//import java.util.HashMap;
-
 /**
  * Attack interface represents an attack that a Yokimon can perform.
  */
@@ -15,7 +13,11 @@ public interface Attack {
          */
         NONE
     }
-
+    /**
+     *
+     * @return return the attack id
+     */
+    int getId();
     /**
      * Return the name of the Attack.
      * @return String name.

@@ -1,69 +1,59 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.observer.Publisher;
+import io.github.yokigroup.event.observer.PublisherImpl;
+import io.github.yokigroup.event.submodule.abs.PartySubmoduleAbs;
+import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.view.observer.notification.NewYokimonNotification;
+import io.github.yokigroup.view.observer.notification.NewYokimonNotificationImpl;
+import io.github.yokigroup.view.observer.notification.Notification;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Submodule containing a party's information (yokimon's group).
+ * Implementation of {@link PartySubmoduleAbs}.
  * @author Giovanni Paone
  */
-public class PartySubmodule extends Submodule {
+public final class PartySubmodule extends PartySubmoduleAbs {
     private List<Yokimon> yokimonList;
+    private final Publisher<Notification> newYokimonNotificationPub = new PublisherImpl<>();
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
-    public PartySubmodule(final MessageHandler handler) {
-        super(handler);
+    public PartySubmodule(final MessageHandler handler, ModelObserver modelObs) {
+        super(handler, modelObs);
         yokimonList = new ArrayList<>();
+        modelObs.addNotificationPublisher(newYokimonNotificationPub);
     }
 
     private List<Yokimon> deepCopyOf(final List<Yokimon> list) {
-        // TODO wait for a copy constructor of yokimon to be pushed upstream
-        //return List.copyOf(list.stream().map(y -> new YokimonImpl(y)));
-        return List.copyOf(list);
+        return list.stream().map(YokimonImpl::new).map(Yokimon.class::cast).toList();
     }
 
-    /**
-     * Adds a yokimon to the party.
-     * @param y yokimon to add
-     */
+    @Override
     public void addYokimon(final Yokimon y) {
-        yokimonList.add(y);
+        yokimonList.add(new YokimonImpl(y));
+        newYokimonNotificationPub.notifyObservers(new NewYokimonNotificationImpl(y.getName()));
     }
 
-    /**
-     * Lists all the yokimons in the party.
-     * @return defensive copy (watch out!) of yokimons in the party
-     * @see #setParty(List) setParty
-     */
+    @Override
     public List<Yokimon> listYokimons() {
         return deepCopyOf(yokimonList);
     }
 
-    /**
-     * Sets (and overwrites) the current party.
-     * Best used in tandem with {@code listYokimons} to update the party.
-     * @param party party to set
-     */
+    @Override
     public void setParty(final List<Yokimon> party) {
         yokimonList = deepCopyOf(party);
     }
 
-    /**
-     * Removes a yokimon from the party.
-     * @param y yokimon to remove
-     * @return true if the yokimon has been removed
-     */
-    public boolean removeYokimon(final Yokimon y) {
-        return yokimonList.remove(y);
-    }
-
     @Override
-    public void process() {
-
+    public void removeYokimon(final int index) {
+        yokimonList.remove(index);
     }
+
 }

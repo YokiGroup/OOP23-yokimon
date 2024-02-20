@@ -62,6 +62,11 @@ public interface Yokimon {
     }
 
     /**
+     * Return the id of the yokimon.
+     * @return return the id of the yokimon
+     */
+    int getId();
+    /**
      *
      * @return The GrowthRate of the yokimon.
      */
@@ -110,10 +115,9 @@ public interface Yokimon {
 
     /**
      * Sets the value of the specified stat.
-     * @param change The stat to change.
-     * @param newValue The new value of the stat.
+     * @param newStats newStats
      */
-    void setStat(Stats change, int newValue);
+    void setStats(Map<Stats, Integer> newStats);
 
     /**
      * Return an int with the value of yokimon current level.
@@ -140,6 +144,11 @@ public interface Yokimon {
      */
     List<Attack> getAttacks();
 
+    /**
+     * Reset the list of attacks
+     * @param attacks List of attacks
+     */
+    void setAttacks(List<Attack> attacks);
     /**
      * Gives a new attack to the yokimon.
      * @param newAttack New attack.

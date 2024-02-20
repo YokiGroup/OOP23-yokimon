@@ -1,12 +1,8 @@
 package io.github.yokigroup.world;
 
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.world.gen.WFCWrapper;
-import io.github.yokigroup.world.gen.WFCWrapperImpl;
 import io.github.yokigroup.world.tile.Tile;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,21 +10,26 @@ import java.util.Map;
  * Contains tiles, their entities and the player world position.
  * Allows the player to switch screens (tiles) by walking around.
  */
-public class GameMapImpl implements GameMap {
-    private final WFCWrapper wfc;
+class GameMapImpl implements GameMap {
     private final Map<Pair<Integer, Integer>, Tile> tileMap;
-    private Pair<Integer, Integer> worldPlayerPosition;
+    private final Pair<Integer, Integer> mapDimensions;
+    private Pair<Integer, Integer> playerTileMapPosition;
 
     /**
      * Initializes the game map through the usage of the wave function collapse algorithm.
-     * @param dimensions The dimensions of the map in tiles.
+     * @param mapDimensions The mapDimensions of the map in tiles.
+     * @param tileMap The map of the tiles.
+     * @param playerTileMapPosition The player position on the tileMap.
+     * @throws IllegalArgumentException if the TileMap is null.
      */
-    public GameMapImpl(final Pair<Integer, Integer> dimensions) {
-        // TODO: add proper wfc initialization
-        this.wfc = new WFCWrapperImpl(dimensions, Collections.emptySet());
-        this.tileMap = new HashMap<>();
-        // TODO: initialize the map through the WFC algorithm
-        this.worldPlayerPosition = new Pair<>(dimensions.x() / 2, dimensions.y() / 2);
+    GameMapImpl(final Pair<Integer, Integer> mapDimensions, final Map<Pair<Integer, Integer>, Tile> tileMap,
+                final Pair<Integer, Integer> playerTileMapPosition) {
+        if (tileMap == null) {
+            throw new IllegalArgumentException("The passed TileMap was null");
+        }
+        this.playerTileMapPosition = playerTileMapPosition;
+        this.mapDimensions = mapDimensions;
+        this.tileMap = Map.copyOf(tileMap);
     }
 
     @Override
@@ -37,12 +38,29 @@ public class GameMapImpl implements GameMap {
     }
 
     @Override
-    public final Pair<Integer, Integer> getPlayerWorldPosition() {
-        return new Pair<>(this.worldPlayerPosition.x(), this.worldPlayerPosition.y());
+    public final Pair<Integer, Integer> getPlayerTileMapPosition() {
+        return new Pair<>(this.playerTileMapPosition.x(), this.playerTileMapPosition.y());
     }
 
     @Override
     public final Tile getPlayerTile() {
-        return getTileAt(this.worldPlayerPosition);
+        return getTileAt(this.playerTileMapPosition);
+    }
+
+    @Override
+    public final boolean movePlayerTileMapPosition(final Direction direction) {
+        if (getPlayerTile().getAdjacencies().contains(direction)) {
+            final Pair<Integer, Integer> tentativePlayerMapPos = new Pair<>(
+                    this.playerTileMapPosition.x() + direction.getOffset().x(),
+                    this.playerTileMapPosition.y() + direction.getOffset().y()
+            );
+            if (tentativePlayerMapPos.x() < 0 || tentativePlayerMapPos.y() < 0
+                    || tentativePlayerMapPos.x() >= mapDimensions.x() || tentativePlayerMapPos.y() >= mapDimensions.y()) {
+                return false;
+            }
+            this.playerTileMapPosition = tentativePlayerMapPos;
+            return true;
+        }
+        return false;
     }
 }

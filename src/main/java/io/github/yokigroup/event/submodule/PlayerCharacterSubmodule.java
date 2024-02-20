@@ -1,73 +1,71 @@
 package io.github.yokigroup.event.submodule;
 
+import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.observer.Publisher;
+import io.github.yokigroup.event.observer.PublisherImpl;
+import io.github.yokigroup.event.submodule.abs.PlayerCharacterSubmoduleAbs;
 import io.github.yokigroup.util.Vector2;
+import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.world.Direction;
+import io.github.yokigroup.world.GameMap;
+import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.Position;
 import io.github.yokigroup.world.entity.PositionImpl;
+import io.github.yokigroup.world.entity.people.Player;
 
 /**
- * Handles player position updates.
+ * Implementation of {@link PlayerCharacterSubmoduleAbs}.
  * @author Giovanni Paone
  */
-public class PlayerCharacterSubmodule extends Submodule {
-/*
-    private final Entity player;
-*/
+public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs {
+    private final Player player;
+    private Publisher<SpriteData> playerPub = new PublisherImpl<>();
 
-    // FIXME Replace with proper implementation
-    /**
-     * THIS WILL BE REMOVED AS SOON AS GameMap IS FINISHED.
-     */
-    public enum Direction {
-        /**
-         * Up direction.
-         */
-        UP,
-        /**
-         * Down direction.
-         */
-        DOWN,
-        /**
-         * Left direction.
-         */
-        LEFT,
-        /**
-         * Right direction.
-         */
-        RIGHT
+    private void publishPlayerSpriteData() {
+        playerPub.notifyObservers(player.getSpriteData());
     }
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
-    public PlayerCharacterSubmodule(final MessageHandler handler) {
-        super(handler);
+    public PlayerCharacterSubmodule(final MessageHandler handler, ModelObserver modelObs) {
+        super(handler, modelObs);
+        Vector2 playerPos = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS).scale(0.5);
+        this.player = new Player(new PositionImpl(playerPos), handler);
+        modelObs.addWorldSpritePublisher(playerPub);
+        publishPlayerSpriteData();
     }
 
     // TODO Change Direction reference
-    /**
-     * attempts to change the tile of the player relative to the one it's in currently.
-     * @param dir direction to change the tile from, relative to the player's current tile
-     */
+    @Override
     public void changeTile(final Direction dir) {
-        //TODO change tile of player by going in dir
-    }
-
-    public Position getPosition(){
-        // FIXME implement
-        return new PositionImpl(null);
-    }
-
-    /**
-     * moves player as specified by the input vector.
-     * @param delta vector to move the player by
-     */
-    public void movePlayerBy(final Vector2 delta) {
-        // TODO move player by delta
+        handler().handle(GameMapSubmodule.class, s -> {
+            s.movePlayerToTile(dir);
+        });
     }
 
     @Override
-    public void process() {
-        // TODO collision check
+    public Position getPosition() {
+        return player.getPos();
     }
+
+    @Override
+    public Entity getPlayerEntity() {
+        return player;
+    }
+
+    @Override
+    public void movePlayerBy(final Vector2 delta) {
+        player.move(delta);
+        publishPlayerSpriteData();
+    }
+
+    @Override
+    public void movePlayerTo(final Position pos) {
+        player.setPos(pos);
+        publishPlayerSpriteData();
+    }
+
 }

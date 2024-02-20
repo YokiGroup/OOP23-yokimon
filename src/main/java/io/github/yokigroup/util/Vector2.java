@@ -21,6 +21,7 @@ public interface Vector2 {
      * Sums two vectors together.
      * @param other The other opertator.
      * @return a new vector containing the addition between this and another vector (component per component).
+     * @throws IllegalArgumentException in case the other vector is null.
      */
     Vector2 plus(Vector2 other);
 
@@ -28,6 +29,7 @@ public interface Vector2 {
      * Subtracts two vectors together.
      * @param other The other opertator.
      * @return a new vector containing the subtraction between this and another vector (component per component).
+     * @throws IllegalArgumentException in case the other vector is null.
      */
     Vector2 minus(Vector2 other);
 
@@ -35,6 +37,7 @@ public interface Vector2 {
      * Multiplies two vectors together.
      * @param other The other opertator.
      * @return a new vector containing the multiplication between this and another vector (component per component).
+     * @throws IllegalArgumentException in case the other vector is null.
      */
     Vector2 times(Vector2 other);
 
@@ -42,6 +45,7 @@ public interface Vector2 {
      * Divides two vectors together.
      * @param other The other opertator.
      * @return a new vector containing the division between this and another vector (component per component).
+     * @throws IllegalArgumentException in case the other vector is null.
      */
     Vector2 divide(Vector2 other);
 
@@ -69,6 +73,7 @@ public interface Vector2 {
      * Calculates the dot product between two vectors.
      * @param other The other operator.
      * @return the dot product between the two vectors.
+     * @throws IllegalArgumentException in case the other vector is null.
      */
     double dot(Vector2 other);
 

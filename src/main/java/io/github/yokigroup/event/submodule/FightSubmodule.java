@@ -2,44 +2,40 @@ package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.battle.fight.Fight;
+import io.github.yokigroup.event.observer.Publisher;
+import io.github.yokigroup.event.observer.PublisherImpl;
+import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
+import io.github.yokigroup.view.observer.ModelObserver;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Handles queuing fights and starting them when the process.
+ * Implementation of {@link FightSubmoduleAbs}.
  * @author Giovanni Paone
  */
-public class FightSubmodule extends Submodule {
-    private Optional<Fight> lastAnnouncedFight = Optional.empty();
+public final class FightSubmodule extends FightSubmoduleAbs {
+    private Fight lastAnnouncedFight = null;
+    private Publisher<Fight> fightPub = new PublisherImpl<>();
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
-    public FightSubmodule(final MessageHandler handler) {
-        super(handler);
-    }
-
-    /**
-     * Adds Fight {@param f} to be processed as next encounter.
-     * @param f
-     */
-    public void addEncounter(final Fight f) {
-        // FIXME perhaps Fight could adopt the Builder design pattern?
-        lastAnnouncedFight = Optional.ofNullable(f);
-    }
-
-    /**
-     * Get last Fight added and not yet processed by the game logic.
-     * @return last Fight as detailed above, if any
-     */
-    public Optional<Fight> getLastAnnouncedFight() {
-        return lastAnnouncedFight;
+    public FightSubmodule(final MessageHandler handler, ModelObserver modelObs) {
+        super(handler, modelObs);
+        Objects.requireNonNull(modelObs);
+        modelObs.addFightPublisher(fightPub);
     }
 
     @Override
-    public final void process() {
-        if (lastAnnouncedFight.isPresent()) {
-            // TODO implement
-        }
+    public void addEncounter() {
+        // FIXME implement
+        //lastAnnouncedFight = Optional.ofNullable(f);
     }
+
+    @Override
+    public Optional<Fight> getLastAnnouncedFight() {
+        return Optional.ofNullable(lastAnnouncedFight);
+    }
+
 }

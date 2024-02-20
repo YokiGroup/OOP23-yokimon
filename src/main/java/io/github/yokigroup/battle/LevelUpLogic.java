@@ -22,12 +22,6 @@ public interface LevelUpLogic {
      */
     Yokimon.ExpCode levelUp(Yokimon yokimon, int plus);
 
-    /**
-     * Set the moves of the yokimon given as parameter to what.
-     * they should be based on it's level
-     * @param yokimon a yokimon
-     */
-    void resetAttack(Yokimon yokimon);
 
     /**
      * Reset xp, xpNext and stats on what they should be

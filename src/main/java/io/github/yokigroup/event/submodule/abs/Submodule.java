@@ -1,6 +1,8 @@
-package io.github.yokigroup.event.submodule;
+package io.github.yokigroup.event.submodule.abs;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.event.Updateable;
 
 /**
  * Submodule interface.
@@ -8,13 +10,13 @@ import io.github.yokigroup.event.MessageHandler;
  * @see MessageHandler EventHandler
  * @author Giovanni Paone
  */
-public abstract class Submodule {
+public abstract class Submodule extends Updateable {
     private final MessageHandler handler;
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
-    public Submodule(final MessageHandler handler) {
+    protected Submodule(final MessageHandler handler, ModelObserver ignoredModelObs) {
         this.handler = handler;
     }
 
@@ -25,9 +27,4 @@ public abstract class Submodule {
     protected final MessageHandler handler() {
         return handler;
     }
-
-    /**
-     * to be called by the logic that integrates this submodule to let it process its state.
-     */
-    public abstract void process();
 }

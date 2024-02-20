@@ -5,10 +5,13 @@ import org.dyn4j.dynamics.Body;
 import org.dyn4j.geometry.Convex;
 import org.dyn4j.geometry.Rectangle;
 
+import java.util.Objects;
+
 /**
  * A rectangular hitbox implementation.
  */
 public class RectangularHitbox extends HitboxImpl {
+    private final Vector2 dimensions;
 
     /**
      * Creates a rectangular hitbox.
@@ -17,6 +20,7 @@ public class RectangularHitbox extends HitboxImpl {
      */
     public RectangularHitbox(final Vector2 position, final Vector2 dimensions) {
         super(makeRectangle(dimensions), position);
+        this.dimensions = dimensions;
     }
 
     /**
@@ -25,6 +29,26 @@ public class RectangularHitbox extends HitboxImpl {
      */
     public RectangularHitbox(final Vector2 dimensions) {
         super(makeRectangle(dimensions));
+        this.dimensions = dimensions;
+    }
+
+    @Override
+    public final Hitbox copyOf() {
+        return new RectangularHitbox(this.getPosition(), this.dimensions);
+    }
+
+    @Override
+    public final boolean equals(final Object o) {
+        if (!(o instanceof RectangularHitbox hitbox)) {
+            return false;
+        }
+        return hitbox.dimensions.getX() == this.dimensions.getX()
+                && hitbox.dimensions.getY() == this.dimensions.getY() && super.equals(o);
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(super.hashCode(), dimensions);
     }
 
     /**
