@@ -4,7 +4,7 @@ package io.github.yokigroup.battle;
  * Class interface used to relieve the YokimonImpl class from
  * heavy logical tasks and to manage the level up mechanics.
  */
-interface LevelUpLogic {
+public interface LevelUpLogic {
 
     /**
      * Set the stats of the yokimon given as parameter to what

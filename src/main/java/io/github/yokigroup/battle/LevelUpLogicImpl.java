@@ -9,7 +9,7 @@ import static java.lang.Math.pow;
 /**
  * Implementation of LevelUpLogic.
  */
-final class LevelUpLogicImpl implements LevelUpLogic {
+public class LevelUpLogicImpl implements LevelUpLogic {
     /**
      * Value used for the divisor for xp calculation.
      */
@@ -96,7 +96,7 @@ final class LevelUpLogicImpl implements LevelUpLogic {
 
 
     @Override
-    public final void reset(final Yokimon yokimon) {
+    public void reset(final Yokimon yokimon) {
         Objects.requireNonNull(yokimon, "Yokimon null at level-up logic reset");
         yokimon.setExpNext(this.nextBoundXp(yokimon.getLevel()));
         yokimon.setExp(this.expectedXp(yokimon.getLevel()));

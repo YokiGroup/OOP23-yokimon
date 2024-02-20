@@ -141,9 +141,8 @@ public interface Yokimon {
      * return false if the level up is not possible.
      *
      * @param n Number of level.
-     * @return Exit status.
      */
-    boolean levelUP(int n);
+    void levelUP(int n);
 
     /**
      * Returns a list of attacks the Yokimon currently has.
@@ -203,6 +202,11 @@ public interface Yokimon {
      */
     void setMaxHp(int newValue);
 
+    /**
+     * Set the level_up logic
+     * @param logic Logic level_up
+     */
+    void setLevelUPLogic(LevelUpLogic logic);
     /**
      * Subtracts to the Actual Hp of the yokimon the parameter damage
      * if the Hp of the yokimon reaches zero, it returns true

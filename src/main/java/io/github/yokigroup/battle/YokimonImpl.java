@@ -1,10 +1,11 @@
 package io.github.yokigroup.battle;
 
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * YokimonImpl is an implementation of the Yokimon interface,
@@ -35,7 +36,7 @@ public class YokimonImpl implements Yokimon {
     private final List<Attack> moves;
     private final Map<Integer, Attack> learnableMoves;
     private boolean active;
-    private final static LevelUpLogic levelUtility = new LevelUpLogicImpl();
+    private Optional<LevelUpLogic> levelUtility = Optional.empty();
 
     /**
      * Constructor for YokimonImpl.
@@ -64,8 +65,6 @@ public class YokimonImpl implements Yokimon {
         this.level = level;
         this.learnableMoves = Map.copyOf(Objects.requireNonNull(learnableMoves, "learnableMoves passed was null"));
         this.resetAttack();
-        //this.levelUtility.resetAttack(this);
-        levelUtility.reset(this);
 
     }
 
@@ -157,18 +156,17 @@ public class YokimonImpl implements Yokimon {
 
     @Override
     public final void setLevel(final int n) {
-        if (n > 0) {
+        if (n > 0 && this.levelUtility.isPresent()) {
             this.level = n;
-            levelUtility.reset(this);
+            this.levelUtility.get().reset(this);
             this.resetAttack();
         }
 
     }
 
     @Override
-    public final boolean levelUP(final int n) {
-        levelUtility.levelUp(this, n);
-        return true;
+    public final void levelUP(final int n) {
+        this.levelUtility.ifPresent(levelUpLogic -> levelUpLogic.levelUp(this, n));
     }
 
     @Override
@@ -181,6 +179,7 @@ public class YokimonImpl implements Yokimon {
         this.moves.clear();
         this.moves.addAll(attacks);
     }
+
     @Override
     public final void addAttack(final Attack newAttack) {
         this.moves.add(newAttack);
@@ -215,6 +214,13 @@ public class YokimonImpl implements Yokimon {
     }
 
     @Override
+    public void setLevelUPLogic(LevelUpLogic logic) {
+        Objects.requireNonNull(logic, "Logic passed was null");
+        this.levelUtility = Optional.of(logic);
+        this.levelUtility.get().reset(this);
+    }
+
+    @Override
     public final boolean takeDamage(final int damage) {
         if (damage >= this.actualHp) {
             this.actualHp = 0;
@@ -241,17 +247,22 @@ public class YokimonImpl implements Yokimon {
 
     @Override
     public final ExpCode takeXp(final int n) {
+
         ExpCode expCode = ExpCode.OK;
-        double xpToTake = n * this.growthRate.get();
-        while (xpToTake >= this.xpNext - this.xp) {
-            xpToTake -= this.xpNext - this.xp;
-            if (expCode == ExpCode.NEW_MOVE) {
-                levelUtility.levelUp(this, 1);
-            } else {
-                expCode = levelUtility.levelUp(this, 1);
+        if (levelUtility.isPresent()) {
+            double xpToTake = n * this.growthRate.get();
+            while (xpToTake >= this.xpNext - this.xp) {
+                xpToTake -= this.xpNext - this.xp;
+                if (expCode == ExpCode.NEW_MOVE) {
+                    this.levelUtility.get().levelUp(this, 1);
+                } else {
+                    expCode = this.levelUtility.get().levelUp(this, 1);
+                }
             }
+            this.xp += xpToTake;
+
         }
-        this.xp += xpToTake;
+
         return expCode;
     }
 
