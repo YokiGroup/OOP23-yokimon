@@ -9,7 +9,7 @@ import static java.lang.Math.pow;
 /**
  * Implementation of LevelUpLogic.
  */
-public class LevelUpLogicImpl implements LevelUpLogic {
+final class LevelUpLogicImpl implements LevelUpLogic {
     /**
      * Value used for the divisor for xp calculation.
      */
@@ -23,15 +23,15 @@ public class LevelUpLogicImpl implements LevelUpLogic {
     /**
      * This method calculates the next XP bound to
      * level up again.
+     *
      * @param level Level of the level upped yokimon.
      * @return Double with the new value.
      */
     private double nextBoundXp(final int level) {
-            return pow(level + 1, EXPONENT);
+        return pow(level + 1, EXPONENT);
     }
 
     /**
-     *
      * @param level The level of the yokimon.
      * @return Expected total xp for that level.
      */
@@ -43,7 +43,7 @@ public class LevelUpLogicImpl implements LevelUpLogic {
     }
 
     @Override
-    public final void setStats(final Yokimon yokimon) {
+    public void setStats(final Yokimon yokimon) {
         Objects.requireNonNull(yokimon, "Yokimon null at level-up logic setStats");
         // Level
         Map<Yokimon.Stats, Integer> newStat = yokimon.getAllStats();
@@ -58,9 +58,8 @@ public class LevelUpLogicImpl implements LevelUpLogic {
     }
 
     /**
-     *
      * @param yokimon The yokimon to upgrade the stat of.
-     * @param stat The stat to upgrade.
+     * @param stat    The stat to upgrade.
      * @return The upgraded stat.
      */
     private int upGradeStat(final Yokimon yokimon, final Yokimon.Stats stat) {
@@ -75,16 +74,16 @@ public class LevelUpLogicImpl implements LevelUpLogic {
     }
 
     @Override
-    public final Yokimon.ExpCode levelUp(final Yokimon yokimon, final int plus) {
+    public Yokimon.ExpCode levelUp(final Yokimon yokimon, final int plus) {
         Objects.requireNonNull(yokimon, "Yokimon null at level-up logic level-up");
         Yokimon.ExpCode code = Yokimon.ExpCode.LEVEL_UP;
         // Control if the yokimon learn a new move
-            for (int i = yokimon.getLevel() + 1; i <= yokimon.getLevel() + plus; i++) {
-                if (yokimon.getLearnableAttacks().containsKey(i)) {
-                    yokimon.addAttack(yokimon.getLearnableAttacks().get(i));
-                    code = Yokimon.ExpCode.NEW_MOVE;
-                }
+        for (int i = yokimon.getLevel() + 1; i <= yokimon.getLevel() + plus; i++) {
+            if (yokimon.getLearnableAttacks().containsKey(i)) {
+                yokimon.addAttack(yokimon.getLearnableAttacks().get(i));
+                code = Yokimon.ExpCode.NEW_MOVE;
             }
+        }
         // Set new level
         yokimon.setLevel(yokimon.getLevel() + plus);
         // Set the new exp bound
