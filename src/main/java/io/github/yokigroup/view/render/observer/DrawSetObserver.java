@@ -10,22 +10,21 @@ import java.util.Set;
 
 public class DrawSetObserver extends ViewObserver<Set<SpriteData>> {
 
-    /**
-     * @param painter painter to invoke
-     */
-    public DrawSetObserver(final Painter painter) {
-        super(painter);
+    public DrawSetObserver(Painter painter, DrawQueue drawQueue) {
+        super(painter, drawQueue);
     }
 
     @Override
-    public void update(final PublisherImpl<Set<SpriteData>> publisher, final Set<SpriteData> lastArg, final Set<SpriteData> arg) {
-        final Painter painter = getPainter();
-        DrawQueue drawQueue = painter.drawQueue();
+    public void update(final Set<SpriteData> lastArg, final Set<SpriteData> arg) {
+        final Painter painter = painter();
+        DrawQueue drawQueue = drawQueue();
         if (lastArg != null) {
             drawQueue.removeFromDrawQueue(lastArg);
         }
         drawQueue.addToDrawQueue(arg);
         painter.changeDrawQueue(drawQueue);
-        Platform.runLater(painter::repaint);
+        if (painter.getPaintState() == Painter.State.WORLD) {
+            Platform.runLater(painter::repaint);
+        }
     }
 }

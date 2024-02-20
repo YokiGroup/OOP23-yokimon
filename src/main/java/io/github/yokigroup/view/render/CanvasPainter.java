@@ -43,7 +43,7 @@ public class CanvasPainter extends Painter {
         this.eventLabel = eventLabel;
     }
 
-    public CanvasPainter(final GraphicsContext gc, final Label eventLabel, final DrawQueueReader drawQueue) {
+    public CanvasPainter(final GraphicsContext gc, final Label eventLabel, final DrawQueue drawQueue) {
         super(drawQueue);
         gc.setImageSmoothing(false);
         gc.setTextAlign(TextAlignment.CENTER);
