@@ -8,8 +8,9 @@ import java.util.Objects;
 public final class Vector2Impl implements Vector2 {
     private static final String ERROR_STRING = "The other vector was null.";
     private final org.dyn4j.geometry.Vector2 vector;
+
     /**
-     * A vector with components (0, 0)
+     * A vector with components (0, 0).
      */
     public static final Vector2 NULL_VECTOR = new Vector2Impl(0, 0);
 
