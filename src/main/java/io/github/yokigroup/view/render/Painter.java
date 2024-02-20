@@ -6,20 +6,33 @@ import java.util.stream.Stream;
 
 public abstract class Painter {
 
-    private DrawQueueReader drawQueue;
+    private DrawQueue drawQueue;
+    public enum State {
+        BATTLE,
+        WORLD
+    }
+    private State paintState;
 
-    public Painter(final DrawQueueReader drawQueue) {
+    public Painter(final DrawQueue drawQueue) {
         this.drawQueue = drawQueue;
     }
 
-    public final void changeDrawQueue(final DrawQueueReader queue) {
+    public final void changeDrawQueue(final DrawQueue queue) {
         synchronized (this) {
             drawQueue = queue;
         }
     }
 
     public final DrawQueue drawQueue() {
-        return new DrawQueueImpl(drawQueue);
+        return drawQueue;
+    }
+
+    public void setPaintState(final State paintState) {
+        this.paintState = paintState;
+    }
+
+    public State getPaintState() {
+        return paintState;
     }
 
     public abstract void paintEventText(String eventText);
