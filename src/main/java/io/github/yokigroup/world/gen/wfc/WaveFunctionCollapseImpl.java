@@ -23,6 +23,8 @@ import java.util.stream.Collectors;
 public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
     private final int maxDepth;
     private final Pair<Integer, Integer> dimensions;
+    private final Map<Pair<Integer, Integer>, WeightedPool<Set<Direction>>> resetMap;
+
     private final Map<Pair<Integer, Integer>, WeightedPool<Set<Direction>>> shapeMap;
 
     /**
@@ -39,6 +41,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         this.maxDepth = shapes.size() / 2;
         this.dimensions = dimensions;
         this.shapeMap = new HashMap<>();
+        this.resetMap = new HashMap<>();
         // Fill up the map with all shapes being any random shape
         final Set<Set<Direction>> copiedShapes = Set.copyOf(shapes);
         this.getAllValidPositions().forEach(p -> {
@@ -86,6 +89,10 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      */
     @Override
     public final void generateShapeMap() {
+        if (this.resetMap.isEmpty()) {
+            this.getAllValidPositions()
+                    .forEach(p -> this.resetMap.put(p, this.shapeMap.get(p).deepCopy(Set::copyOf)));
+        }
         // Get the lowest entropy in the map
         Optional<Integer> lowestEntropy = getMinimumEntropy();
         while (lowestEntropy.isPresent()) {
@@ -96,6 +103,73 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
             // Get the lowest entropy in the map again
             lowestEntropy = getMinimumEntropy();
         }
+        removeIsolatedTiles();
+    }
+
+    /**
+     * The wave function collapse algorithm often generates islands, as it is not able to make sure to connect
+     * all the tiles together. This function connects the disconnected tiles by regenerating them.
+     */
+    private void removeIsolatedTiles() {
+        final Pair<Integer, Integer> centerPos = new Pair<>(dimensions.x() / 2, dimensions.y() / 2);
+        Set<Pair<Integer, Integer>> disconnectedTiles = getDisconnectedTiles(centerPos);
+        if (!disconnectedTiles.isEmpty()) {
+            disconnectedTiles.addAll(getAdjacentPositions(disconnectedTiles));
+            disconnectedTiles.forEach(t -> setStaticShape(t, resetMap.get(t).getEntries()));
+            generateShapeMap();
+        }
+    }
+
+    /**
+     *
+     * @param positions The position to check.
+     * @return A set of positions containing all the adjacent positions that are not in the input set.
+     */
+    private Set<Pair<Integer, Integer>> getAdjacentPositions(final Set<Pair<Integer, Integer>> positions) {
+        final Set<Pair<Integer, Integer>> result = new HashSet<>();
+        positions.forEach(p -> {
+            for (final Direction dir : Direction.values()) {
+                final Pair<Integer, Integer> offsetPos = new Pair<>(
+                        p.x() + dir.getOffset().x(),
+                        p.y() + dir.getOffset().y()
+                );
+                if (checkBounds(offsetPos) && !positions.contains(offsetPos)) {
+                    result.add(offsetPos);
+                }
+            }
+        });
+        return result;
+    }
+
+    /**
+     *
+     * @param pos The starting position of the search.
+     * @return A set containing all the non-reachable tiles on the map.
+     */
+    private Set<Pair<Integer, Integer>> getDisconnectedTiles(final Pair<Integer, Integer> pos) {
+        Set<Pair<Integer, Integer>> visitedLocations = new HashSet<>();
+        floodFill(pos, visitedLocations);
+        final Set<Pair<Integer, Integer>> unvisitedLocations = getAllValidPositions();
+        unvisitedLocations.removeAll(visitedLocations);
+        return unvisitedLocations;
+    }
+
+    /**
+     * Fills up the visitedLocation set with all the positions it can find traversing the map.
+     * @param pos The starting position.
+     * @param visitedLocations The set of currently visited locations.
+     */
+    private void floodFill(final Pair<Integer, Integer> pos, final Set<Pair<Integer, Integer>> visitedLocations) {
+        this.getShapeAt(pos)
+                .forEach(d -> {
+                    final Pair<Integer, Integer> offsetPos = new Pair<>(
+                        pos.x() + d.getOffset().x(), pos.y() + d.getOffset().y()
+                    );
+                    if (checkBounds(offsetPos) && !visitedLocations.contains(offsetPos)) {
+                        visitedLocations.add(offsetPos);
+                        floodFill(offsetPos, visitedLocations);
+                    }
+                });
     }
 
     /**
