@@ -79,7 +79,7 @@ public abstract class People extends Entity {
                 superSpriteData.position(),
                 superSpriteData.dim(),
                 superSpriteData.priority(),
-                getDirection().get().getX() == 1
+                getDirection().get().getX() == -1
         );
     }
 

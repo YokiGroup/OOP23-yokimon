@@ -36,6 +36,7 @@ public class Player extends People {
             resetPosition();
         }
         this.collisionCheck(vector.scale(SCALE));
+        setDirection(vector);
     }
 
     /**
