@@ -34,41 +34,9 @@ class WaveFunctionCollapseTest {
         wfc = new WaveFunctionCollapseImpl(new Pair<>(WIDTH, HEIGHT), new HashSet<>(shpDic.values()));
     }
 
-    private void printMap() {
-        for (int j = 0; j < HEIGHT; j++) {
-            for (int i = 0; i < WIDTH; i++) {
-                Pair<Integer, Integer> pos = new Pair<>(i, j);
-                System.out.print("[");
-                if (wfc.getShapeAt(pos).contains(Direction.UP)) {
-                    System.out.print("^");
-                } else {
-                    System.out.print(" ");
-                }
-                if (wfc.getShapeAt(pos).contains(Direction.DOWN)) {
-                    System.out.print("v");
-                } else {
-                    System.out.print(" ");
-                }
-                if (wfc.getShapeAt(pos).contains(Direction.LEFT)) {
-                    System.out.print("<");
-                } else {
-                    System.out.print(" ");
-                }
-                if (wfc.getShapeAt(pos).contains(Direction.RIGHT)) {
-                    System.out.print(">");
-                } else {
-                    System.out.print(" ");
-                }
-                System.out.print("]");
-            }
-            System.out.println("");
-        }
-    }
-
     @Test
     void testGetShapeAt() {
         wfc.generateShapeMap();
-        printMap();
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
                 final Pair<Integer, Integer> pos = new Pair<>(i, j);
