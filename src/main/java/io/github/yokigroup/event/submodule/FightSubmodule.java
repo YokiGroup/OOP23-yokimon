@@ -5,7 +5,7 @@ import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
-import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.view.render.observer.ModelObserver;
 
 import java.util.Objects;
 import java.util.Optional;

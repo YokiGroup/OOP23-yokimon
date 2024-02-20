@@ -1,16 +1,12 @@
-package io.github.yokigroup.view.observer;
+package io.github.yokigroup.view.render.observer;
 
 import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.observer.Publisher;
-import io.github.yokigroup.view.CanvasPainter;
-import io.github.yokigroup.view.Painter;
-import io.github.yokigroup.view.observer.notification.Notification;
-import io.github.yokigroup.view.observer.notification.NotificationVisitor;
-import io.github.yokigroup.view.observer.notification.NotificationVisitorImpl;
-import javafx.scene.canvas.GraphicsContext;
+import io.github.yokigroup.view.render.Painter;
+import io.github.yokigroup.view.notification.Notification;
+import io.github.yokigroup.view.notification.NotificationVisitorImpl;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class ModelObserverImpl implements ModelObserver {

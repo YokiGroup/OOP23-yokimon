@@ -3,7 +3,9 @@ package io.github.yokigroup.view;
 import io.github.yokigroup.core.GameLogicImpl;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.InputSubmodule;
-import io.github.yokigroup.view.observer.ModelObserverImpl;
+import io.github.yokigroup.view.render.CanvasPainter;
+import io.github.yokigroup.view.render.Painter;
+import io.github.yokigroup.view.render.observer.ModelObserverImpl;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -60,9 +62,6 @@ public class GameFX extends Application {
             }
 
             painter.repaint();
-//            var gc = gameCanvas.getGraphicsContext2D();
-//            gc.setFill(Color.BLUE);
-//            gc.fillRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
         }
     }
 

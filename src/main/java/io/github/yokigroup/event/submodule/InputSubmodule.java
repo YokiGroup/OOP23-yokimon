@@ -5,10 +5,9 @@ import io.github.yokigroup.event.submodule.abs.InputSubmoduleAbs;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
-import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;

@@ -11,7 +11,7 @@ import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
-import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.GameMapBuilderImpl;

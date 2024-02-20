@@ -13,8 +13,8 @@ import io.github.yokigroup.event.Updateable;
 import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 import io.github.yokigroup.event.submodule.abs.Submodule;
-import io.github.yokigroup.view.observer.ModelObserver;
-import io.github.yokigroup.view.observer.notification.Notification;
+import io.github.yokigroup.view.render.observer.ModelObserver;
+import io.github.yokigroup.view.notification.Notification;
 
 import java.lang.reflect.InvocationTargetException;
 

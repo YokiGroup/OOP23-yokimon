@@ -6,7 +6,7 @@ import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.abs.GameMapSubmoduleAbs;
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.GameMapBuilder;

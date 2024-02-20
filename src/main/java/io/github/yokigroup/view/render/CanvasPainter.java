@@ -1,4 +1,4 @@
-package io.github.yokigroup.view;
+package io.github.yokigroup.view.render;
 
 import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.util.Pair;
@@ -11,19 +11,15 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CanvasPainter implements Painter {
+public class CanvasPainter extends Painter {
     private final Map<String, Image> imageCache = new HashMap<>();
     private final GraphicsContext gc;
-    private final List<SpriteData> drawQueue = new ArrayList<>();
     private final Label eventLabel;
     private Pair<Long, String> currentNotification = null; // notification with timestamp
 
@@ -39,11 +35,16 @@ public class CanvasPainter implements Painter {
         return imageCache.get(resourceURL);
     }
 
-    private void sortDrawQueue() {
-        drawQueue.sort(Comparator.comparingInt(SpriteData::priority));
+    public CanvasPainter(final GraphicsContext gc, final Label eventLabel) {
+        super(new DrawQueueImpl());
+        gc.setImageSmoothing(false);
+        gc.setTextAlign(TextAlignment.CENTER);
+        this.gc = gc;
+        this.eventLabel = eventLabel;
     }
 
-    public CanvasPainter(final GraphicsContext gc, Label eventLabel) {
+    public CanvasPainter(final GraphicsContext gc, final Label eventLabel, final DrawQueueReader drawQueue) {
+        super(drawQueue);
         gc.setImageSmoothing(false);
         gc.setTextAlign(TextAlignment.CENTER);
         this.gc = gc;
@@ -73,40 +74,8 @@ public class CanvasPainter implements Painter {
         }
     }
 
-    @Override
-    public void addToPersistentDrawQueue(final SpriteData sprite) {
-        if (sprite == null) {
-            return;
-        }
-        addToPersistentDrawQueue(Set.of(sprite));
-    }
-
     private Set<SpriteData> filterOutNullSpriteData(final Set<SpriteData> sprites) {
         return sprites.stream().filter(Objects::nonNull).collect(Collectors.toSet());
-    }
-
-    @Override
-    public void addToPersistentDrawQueue(final Set<SpriteData> sprites) {
-        synchronized (this) {
-            drawQueue.addAll(filterOutNullSpriteData(sprites));
-            sortDrawQueue();
-        }
-    }
-
-    @Override
-    public void removeFromPersistentDrawQueue(final SpriteData sprite) {
-        if (sprite == null) {
-            return;
-        }
-        removeFromPersistentDrawQueue(Set.of(sprite));
-    }
-
-    @Override
-    public void removeFromPersistentDrawQueue(final Set<SpriteData> sprites) {
-        synchronized (this) {
-            drawQueue.removeAll(filterOutNullSpriteData(sprites));
-            sortDrawQueue();
-        }
     }
 
     @Override
@@ -118,7 +87,7 @@ public class CanvasPainter implements Painter {
     @Override
     public void repaint() {
         synchronized (this) {
-            drawQueue.forEach(this::paint);
+            drawQueue().stream().forEach(this::paint);
         }
     }
 }

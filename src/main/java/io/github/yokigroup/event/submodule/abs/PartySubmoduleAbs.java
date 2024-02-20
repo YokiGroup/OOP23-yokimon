@@ -2,7 +2,7 @@ package io.github.yokigroup.event.submodule.abs;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.view.render.observer.ModelObserver;
 
 import java.util.List;
 

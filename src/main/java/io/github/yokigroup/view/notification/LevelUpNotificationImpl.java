@@ -1,4 +1,4 @@
-package io.github.yokigroup.view.observer.notification;
+package io.github.yokigroup.view.notification;
 
 public class LevelUpNotificationImpl implements LevelUpNotification {
     private final int levelReached;

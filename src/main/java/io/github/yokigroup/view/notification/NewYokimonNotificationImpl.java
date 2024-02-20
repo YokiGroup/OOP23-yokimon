@@ -1,4 +1,4 @@
-package io.github.yokigroup.view.observer.notification;
+package io.github.yokigroup.view.notification;
 
 public class NewYokimonNotificationImpl implements NewYokimonNotification {
     private final String yokimonName;

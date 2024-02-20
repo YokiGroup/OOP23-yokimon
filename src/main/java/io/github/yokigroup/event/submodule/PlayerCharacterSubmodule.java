@@ -7,7 +7,7 @@ import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.abs.PlayerCharacterSubmoduleAbs;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
-import io.github.yokigroup.view.observer.ModelObserver;
+import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.entity.Entity;

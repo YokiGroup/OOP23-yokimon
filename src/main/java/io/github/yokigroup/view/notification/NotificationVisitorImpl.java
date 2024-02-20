@@ -1,8 +1,8 @@
-package io.github.yokigroup.view.observer.notification;
+package io.github.yokigroup.view.notification;
 
 import io.github.yokigroup.event.observer.EObserver;
 import io.github.yokigroup.event.observer.PublisherImpl;
-import io.github.yokigroup.view.Painter;
+import io.github.yokigroup.view.render.Painter;
 import javafx.application.Platform;
 
 public class NotificationVisitorImpl implements NotificationVisitor, EObserver<Notification> {
