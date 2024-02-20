@@ -45,6 +45,7 @@ public final class FightImpl implements Fight {
     private final List<Yokimon> defeatedOpps = new LinkedList<>();
 
     /* Current state of the fight and event publisher */
+    private boolean fightStarted;
     private State state;
     private final Publisher<Fight> publisher = new PublisherImpl<>();
 
@@ -55,7 +56,7 @@ public final class FightImpl implements Fight {
      */
     public FightImpl(final List<Yokimon> myYokimons, final List<Yokimon> oppYokimons) throws UnsupportedOperationException {
         this.myYokimons = myYokimons.stream().map(YokimonImpl::new).collect(Collectors.toList());
-        this.oppYokimons = oppYokimons.stream().map(YokimonImpl::new).collect(Collectors.toList());;
+        this.oppYokimons = oppYokimons.stream().map(YokimonImpl::new).collect(Collectors.toList());
 
         if (nextYok.getNext(myYokimons).isEmpty() || nextYok.getNext(oppYokimons).isEmpty()) {
             throw new UnsupportedOperationException("Must instantiate fight with at least one Yokimon on each party.");
@@ -68,6 +69,10 @@ public final class FightImpl implements Fight {
 
     @Override
     public Success attack(final Attack myAttack) {
+
+        if (!fightStarted) {
+            fightStarted = true;
+        }
 
         final int damage = dmgCalc.getDMG(currMyYokimon, currOppYokimon, myAttack);
         currOppYokimon.takeDamage(damage);
@@ -93,6 +98,10 @@ public final class FightImpl implements Fight {
 
     @Override
     public Success getAttacked() {
+
+        if (!fightStarted) {
+            fightStarted = true;
+        }
 
         final Optional<Attack> nextOppAttack = oppAI.getMove(currMyYokimon, currOppYokimon);
 
@@ -165,6 +174,14 @@ public final class FightImpl implements Fight {
     @Override
     public double getHPPercentage(final Yokimon yokimon) {
         return (double) yokimon.getActualHp() / yokimon.getMaxHp();
+    }
+
+    @Override
+    public boolean playerIsFirst() {
+        if (!fightStarted) {
+            return currMyYokimon.getStat(Yokimon.Stats.SPD) >= currOppYokimon.getStat(Yokimon.Stats.SPD);
+        }
+        return false;
     }
 
 }
