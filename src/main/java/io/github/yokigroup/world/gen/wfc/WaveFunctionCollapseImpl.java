@@ -148,6 +148,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      */
     private Set<Pair<Integer, Integer>> getDisconnectedTiles(final Pair<Integer, Integer> pos) {
         Set<Pair<Integer, Integer>> visitedLocations = new HashSet<>();
+        visitedLocations.add(pos);
         floodFill(pos, visitedLocations);
         final Set<Pair<Integer, Integer>> unvisitedLocations = getAllValidPositions();
         unvisitedLocations.removeAll(visitedLocations);
