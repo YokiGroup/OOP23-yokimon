@@ -3,7 +3,6 @@ package io.github.yokigroup.world.gen.wfc;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.util.WeightedPoolImpl;
-import io.github.yokigroup.util.*;
 import io.github.yokigroup.world.Direction;
 
 import java.util.Collections;
@@ -112,7 +111,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      */
     private void removeIsolatedTiles() {
         final Pair<Integer, Integer> centerPos = new Pair<>(dimensions.x() / 2, dimensions.y() / 2);
-        Set<Pair<Integer, Integer>> disconnectedTiles = getDisconnectedTiles(centerPos);
+        final Set<Pair<Integer, Integer>> disconnectedTiles = getDisconnectedTiles(centerPos);
         if (!disconnectedTiles.isEmpty()) {
             disconnectedTiles.addAll(getAdjacentPositions(disconnectedTiles));
             disconnectedTiles.forEach(t -> setStaticShape(t, resetMap.get(t).getEntries()));
@@ -147,7 +146,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
      * @return A set containing all the non-reachable tiles on the map.
      */
     private Set<Pair<Integer, Integer>> getDisconnectedTiles(final Pair<Integer, Integer> pos) {
-        Set<Pair<Integer, Integer>> visitedLocations = new HashSet<>();
+        final Set<Pair<Integer, Integer>> visitedLocations = new HashSet<>();
         visitedLocations.add(pos);
         floodFill(pos, visitedLocations);
         final Set<Pair<Integer, Integer>> unvisitedLocations = getAllValidPositions();
