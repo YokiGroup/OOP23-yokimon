@@ -1,6 +1,7 @@
 package io.github.yokigroup.world.gen.wfc;
 
 import io.github.yokigroup.util.Pair;
+import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.util.WeightedPool;
 import io.github.yokigroup.util.WeightedPoolImpl;
 import io.github.yokigroup.world.Direction;
@@ -13,7 +14,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 
 /**
  * An implementation of the wave function collapse algorithm.
@@ -40,14 +40,26 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         this.shapeMap = new HashMap<>();
         // Fill up the map with all shapes being any random shape
         final Set<Set<Direction>> copiedShapes = Set.copyOf(shapes);
+        this.getAllValidPositions().forEach(p -> {
+            final WeightedPool<Set<Direction>> pool = new WeightedPoolImpl<>();
+            copiedShapes.forEach(s -> pool.addElement(Set.copyOf(s), 1.0f));
+            this.shapeMap.put(p, pool);
+        });
+        this.setStaticBorders(copiedShapes);
+    }
+
+    /**
+     *
+     * @return A set with all the positions in the shape map.
+     */
+    private Set<Pair<Integer, Integer>> getAllValidPositions() {
+        final Set<Pair<Integer, Integer>> positions = new HashSet<>();
         for (int i = 0; i < dimensions.x(); i++) {
             for (int j = 0; j < dimensions.y(); j++) {
-                final WeightedPool<Set<Direction>> pool = new WeightedPoolImpl<>();
-                copiedShapes.forEach(s -> pool.addElement(Set.copyOf(s), 1.0f));
-                this.shapeMap.put(new Pair<>(i, j), pool);
+                positions.add(new Pair<>(i, j));
             }
         }
-        this.setStaticBorders(copiedShapes);
+        return positions;
     }
 
     @Override
@@ -97,6 +109,66 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
             // Get the lowest entropy in the map again
             lowestEntropy = getMinimumEntropy();
         }
+        final Pair<Integer, Integer> centerPos = new Pair<>(dimensions.x() / 2, dimensions.y() / 2);
+        Set<Pair<Integer, Integer>> unreachablePos = getUnreachablePositions(centerPos);
+        while (!unreachablePos.isEmpty()) {
+            final Pair<Integer, Integer> closestPos = getClosestPos(centerPos, unreachablePos);
+            final Set<Direction> directions = EnumSet.allOf(Direction.class);
+            directions.removeAll(getShapeAt(closestPos));
+            final WeightedPool<Direction> randomDirs = new WeightedPoolImpl<>();
+            directions.forEach(p -> randomDirs.addElement(p, 1.0f));
+            getShapeAt(closestPos).add(randomDirs.getRandomizedElement());
+            unreachablePos = getUnreachablePositions(centerPos);
+        }
+    }
+
+    /**
+     *
+     * @param start The reference position.
+     * @param positions The positions to get the closest from.
+     * @return The closest position to start from the positions set.
+     */
+    private Pair<Integer, Integer> getClosestPos(final Pair<Integer, Integer> start, final Set<Pair<Integer, Integer>> positions) {
+        if (positions == null || positions.isEmpty()) {
+            throw new IllegalArgumentException("The passed position set was empty or null.");
+        }
+        return positions.stream()
+                .map(Vector2Impl::castPair)
+                .reduce((a, b) -> Vector2Impl.castPair(start).minus(a).length() > Vector2Impl.castPair(start).minus(b).length() ? b : a)
+                .map(a -> new Pair<>((int) a.getX(), (int) a.getY()))
+                .get();
+    }
+
+    /**
+     *
+     * @param pos The starting position of the search.
+     * @return A set containing the coordinates of unreachable positions on the map.
+     */
+    private Set<Pair<Integer, Integer>> getUnreachablePositions(final Pair<Integer, Integer> pos) {
+        final Set<Pair<Integer, Integer>> visitedPositions = new HashSet<>();
+        // Arbitrary position values to flood-fill from
+        floodFill(pos, visitedPositions);
+        final Set<Pair<Integer, Integer>> notVisitedPositions = getAllValidPositions();
+        notVisitedPositions.removeAll(visitedPositions);
+        return notVisitedPositions;
+    }
+
+    /**
+     * Starts a flood-filling algorithm from a given position to get all the adjacent shapes.
+     * @param pos The starting position.
+     * @param visitedPositions The mutable set of visited positions.
+     */
+    private void floodFill(final Pair<Integer, Integer> pos, final Set<Pair<Integer, Integer>> visitedPositions) {
+        getShapeAt(pos).forEach(d -> {
+            final Pair<Integer, Integer> offsetPos = new Pair<>(
+                    pos.x() + d.getOffset().x(),
+                    pos.y() + d.getOffset().y()
+            );
+            if (!visitedPositions.contains(offsetPos)) {
+                visitedPositions.add(offsetPos);
+                floodFill(offsetPos, visitedPositions);
+            }
+        });
     }
 
     /**
