@@ -136,7 +136,7 @@ public class Enemy extends People {
     private void move(final Vector2 vector) {
         this.collisionCheck(vector);
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, player -> {
-            if (this.getHitBox().collidesWith(player.getPlayerEntity().getHitBox()).isPresent()) {
+            if (Objects.requireNonNull(this.getHitBox()).collidesWith(player.getPlayerEntity().getHitBox()).isPresent()) {
                 this.getMessageHandler().handle(FightSubmodule.class, fight -> {
                     fight.addEncounter();
                     this.shut();
