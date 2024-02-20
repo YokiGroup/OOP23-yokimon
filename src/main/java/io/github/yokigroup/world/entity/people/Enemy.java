@@ -43,7 +43,7 @@ public class Enemy extends People {
      */
     private static final float DEFAULT_POOL_VALUE = 0.1f;
     private static final float BONUS_POOL_VALUE = 25f;
-    private static final double RAY_HIT_BOX = 100;
+    private static final double RAY_HIT_BOX = 130;
     private State state;
     /**
      * Constructs an Enemy object with the specified attributes.
