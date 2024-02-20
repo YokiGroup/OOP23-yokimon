@@ -2,7 +2,6 @@ package io.github.yokigroup.core;
 
 import io.github.yokigroup.view.App;
 import io.github.yokigroup.view.GameWindow;
-import io.github.yokigroup.view.observer.ModelObserverImpl;
 
 public class Main {
     private final GameWindow gameWindow = new App();
