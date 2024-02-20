@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.EnumSet;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 /**
@@ -33,17 +34,19 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
             throw new IllegalArgumentException("The WaveFunctionCollapse's shape set must not be null.");
         }
         // Arbitrary max depth
-        this.maxDepth = shapes.size();
+        this.maxDepth = shapes.size() / 2;
         this.dimensions = dimensions;
         this.shapeMap = new HashMap<>();
         // Fill up the map with all shapes being any random shape
+        final Set<Set<Direction>> copiedShapes = Set.copyOf(shapes);
         for (int i = 0; i < dimensions.x(); i++) {
             for (int j = 0; j < dimensions.y(); j++) {
                 final WeightedPool<Set<Direction>> pool = new WeightedPoolImpl<>();
-                Set.copyOf(shapes).forEach(s -> pool.addElement(Set.copyOf(s), 1.0f));
+                copiedShapes.forEach(s -> pool.addElement(Set.copyOf(s), 1.0f));
                 this.shapeMap.put(new Pair<>(i, j), pool);
             }
         }
+        this.setStaticBorders(copiedShapes);
     }
 
     @Override
@@ -93,6 +96,59 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
             // Get the lowest entropy in the map again
             lowestEntropy = getMinimumEntropy();
         }
+    }
+
+    /**
+     *
+     * @param dir The direction to get.
+     * @param shapes All the shapes to query.
+     * @return A new shape set that doesn't have that direction.
+     */
+    private Set<Set<Direction>> getTilesFromWall(final Direction dir, final Set<Set<Direction>> shapes) {
+        return shapes.stream()
+                .filter(s -> !s.contains(dir))
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Sets the borders of the shapeMap to not contain connections.
+     * For example a shape on the left border cannot connect to a shape
+     * in the "LEFT" direction.
+     * @param shapes The shapes that can be assigned.
+     */
+    private void setStaticBorders(final Set<Set<Direction>> shapes) {
+        final Set<Set<Direction>> topShapes = getTilesFromWall(Direction.UP, shapes);
+        final Set<Set<Direction>> bottomShapes = getTilesFromWall(Direction.DOWN, shapes);
+        final Set<Set<Direction>> leftShapes = getTilesFromWall(Direction.LEFT, shapes);
+        final Set<Set<Direction>> rightShapes = getTilesFromWall(Direction.RIGHT, shapes);
+        final Set<Set<Direction>> topLeftShapes = new HashSet<>(leftShapes);
+        topLeftShapes.retainAll(topShapes);
+        final Set<Set<Direction>> topRightShapes = new HashSet<>(rightShapes);
+        topRightShapes.retainAll(topShapes);
+        final Set<Set<Direction>> bottomLeftShapes = new HashSet<>(leftShapes);
+        bottomLeftShapes.retainAll(bottomShapes);
+        final Set<Set<Direction>> bottomRightShapes = new HashSet<>(rightShapes);
+        bottomRightShapes.retainAll(bottomShapes);
+        final Pair<Integer, Integer> topLeft = new Pair<>(0, 0);
+        final Pair<Integer, Integer> topRight = new Pair<>(this.dimensions.x() - 1, 0);
+        final Pair<Integer, Integer> bottomLeft = new Pair<>(0, this.dimensions.y() - 1);
+        final Pair<Integer, Integer> bottomRight = new Pair<>(this.dimensions.x() - 1, this.dimensions.y() - 1);
+        for (int i = 1; i < this.dimensions.x() - 1; i++) {
+            final Pair<Integer, Integer> posTop = new Pair<>(i, 0);
+            final Pair<Integer, Integer> posBottom = new Pair<>(i, this.dimensions.y() - 1);
+            this.setStaticShape(posTop, topShapes);
+            this.setStaticShape(posBottom, bottomShapes);
+        }
+        for (int j = 1; j < this.dimensions.y() - 1; j++) {
+            final Pair<Integer, Integer> posLeft = new Pair<>(0, j);
+            final Pair<Integer, Integer> posRight = new Pair<>(this.dimensions.x() - 1, j);
+            this.setStaticShape(posLeft, leftShapes);
+            this.setStaticShape(posRight, rightShapes);
+        }
+        this.setStaticShape(topLeft, topLeftShapes);
+        this.setStaticShape(topRight, topRightShapes);
+        this.setStaticShape(bottomLeft, bottomLeftShapes);
+        this.setStaticShape(bottomRight, bottomRightShapes);
     }
 
     /**
