@@ -102,6 +102,11 @@ public final class Vector2Impl implements Vector2 {
     }
 
     @Override
+    public double distance(final Vector2 other) {
+        return this.minus(other).length();
+    }
+
+    @Override
     public double length() {
         return this.vector.getMagnitude();
     }
