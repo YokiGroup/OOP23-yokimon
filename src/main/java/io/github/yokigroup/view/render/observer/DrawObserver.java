@@ -20,7 +20,7 @@ public final class DrawObserver extends ViewObserver<SpriteData> {
     @Override
     public void update(final PublisherImpl<SpriteData> publisher, final SpriteData lastArg, final SpriteData arg) {
         final Painter painter = getPainter();
-        DrawQueue drawQueue = painter.drawQueue();
+        final DrawQueue drawQueue = painter.drawQueue();
         drawQueue.removeFromDrawQueue(lastArg);
         drawQueue.addToDrawQueue(arg);
         painter.changeDrawQueue(drawQueue);
