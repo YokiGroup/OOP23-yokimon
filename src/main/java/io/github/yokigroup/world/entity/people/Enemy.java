@@ -43,14 +43,15 @@ public class Enemy extends People {
      */
     private static final float DEFAULT_POOL_VALUE = 0.1f;
     private static final float BONUS_POOL_VALUE = 25f;
+    private static final double RAY_HIT_BOX = 50;
     private State state;
     /**
      * Constructs an Enemy object with the specified attributes.
      * @param pos The position of the Enemy
      * @param messageHandler handle for events
      */
-    public Enemy(final Position pos, final double dimensions, final MessageHandler messageHandler) {
-        super(pos, messageHandler, dimensions, "enemy.png");
+    public Enemy(final Position pos, final MessageHandler messageHandler) {
+        super(pos, messageHandler,RAY_HIT_BOX, "enemy.png");
         this.state = State.WANDER;
 
     }
