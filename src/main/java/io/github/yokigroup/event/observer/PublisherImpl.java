@@ -21,9 +21,8 @@ public final class PublisherImpl<T> implements Publisher<T> {
     @Override
     public void notifyObservers(final T arg) {
         for (var obs : observerSet) {
-            obs.update(this, lastArg, arg);
+            obs.update(lastArg, arg);
             lastArg = arg;
-
         }
     }
 }
