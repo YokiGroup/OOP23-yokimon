@@ -21,7 +21,7 @@ public class Enemy extends People {
     /**
      * This value represent the maximum distance at which the player will be in sight.
      */
-    private static final double RADIUS_PLAYER = 400.00;
+    private static final double RADIUS_PLAYER = 300.00;
     /**
      * This value represent the maximum distance at which the enemy will.
      * go from his initial pos.
@@ -49,8 +49,8 @@ public class Enemy extends People {
      * @param pos The position of the Enemy
      * @param messageHandler handle for events
      */
-    public Enemy(final Position pos, final MessageHandler messageHandler) {
-        super(pos, messageHandler, "enemy.png");
+    public Enemy(final Position pos, final double dimensions, final MessageHandler messageHandler) {
+        super(pos, messageHandler, dimensions, "enemy.png");
         this.state = State.WANDER;
 
     }

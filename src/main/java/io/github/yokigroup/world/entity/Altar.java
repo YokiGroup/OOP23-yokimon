@@ -59,11 +59,11 @@ public class Altar extends Entity {
      */
     public final Yokimon getNewYokimon() {
         final GenerationFactory generator = new GenerationFactoryImpl();
-        //TODO pavo num of tiles
-        this.getMessageHandler().handle(GameMapSubmodule.class, play -> {
+        return this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
+            return generator.getYokimonAltar(map.getPlayerDistanceFromHome());
         });
 
-        return generator.getYokimonAltar(1);
+
     }
 
 
