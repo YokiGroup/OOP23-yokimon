@@ -118,4 +118,10 @@ public interface Fight {
      */
     double getHPPercentage(Yokimon yokimon);
 
+    /**
+     * This method must be used at each turn.
+     * @return if the player must attack first.
+     */
+    boolean playerIsFirst();
+
 }
