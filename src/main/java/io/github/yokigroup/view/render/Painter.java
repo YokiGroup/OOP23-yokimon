@@ -8,7 +8,7 @@ public abstract class Painter {
 
     private DrawQueueReader drawQueue;
 
-    public Painter(DrawQueueReader drawQueue) {
+    public Painter(final DrawQueueReader drawQueue) {
         this.drawQueue = drawQueue;
     }
 
