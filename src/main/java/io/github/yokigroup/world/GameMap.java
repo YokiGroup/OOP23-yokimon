@@ -1,10 +1,7 @@
 package io.github.yokigroup.world;
 
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.world.entity.people.Enemy;
 import io.github.yokigroup.world.tile.Tile;
-
-import java.util.Set;
 
 /**
  * A map containing tiles the player can traverse on.
