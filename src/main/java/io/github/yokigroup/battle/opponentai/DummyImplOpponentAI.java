@@ -6,7 +6,7 @@ import io.github.yokigroup.battle.Yokimon;
 import java.util.Optional;
 
 /**
- * Dummy version of the AI, where the opponent always chooses the first attack on the attacks list.
+ * Dummy version of {@link OpponentAI}, where the opponent always chooses the first {@link Attack} on the attacks list.
  */
 public class DummyImplOpponentAI extends OpponentAI {
 
