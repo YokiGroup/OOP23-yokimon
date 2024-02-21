@@ -1,13 +1,15 @@
 package io.github.yokigroup.battle.nextyokimon;
 
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.fight.Fight;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
- * This is meant to select the best next Yokimon to use in the fight, once the current one is defeated.
- * Different criteria for the choice are applied for different implementations of this interface.
+ * Used as a {@link Fight} component.
+ * This is meant to select the best next {@link Yokimon} to use in the fight, once the current one is defeated.
+ * Different criteria for the choice are applied based on different implementations of this interface.
  */
 public abstract class NextYokimon {
     /**
