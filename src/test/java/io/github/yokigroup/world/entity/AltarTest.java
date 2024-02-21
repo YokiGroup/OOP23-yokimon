@@ -25,7 +25,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AltarTest {
-    private TestMessageHandler testMeg;
+    //private TestMessageHandler testMeg;
     private static final double DISTANCE = 40;
 
     private final static class TestMessageHandler extends GameMessageHandler {
@@ -85,11 +85,11 @@ class AltarTest {
 
     @BeforeEach
     void setUp() {
-        testMeg = new TestMessageHandler();
+        //testMeg = new TestMessageHandler();
     }
     @Test
     void altarTest() {
-
+        TestMessageHandler testMeg = new TestMessageHandler();
         testMeg.handle(TestMessageHandler.TestSubmodule.class, map -> {
            for (final Entity entity : map.getEntitiesOnCurrentTile()) {
 

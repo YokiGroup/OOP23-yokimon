@@ -87,8 +87,8 @@ class PlayerTest {
     }
     @Test
     void move() {
-        final double scalable = 50;
-        final double scaleTot = 250;
+        final int scalable = 50;
+        final int scaleTot = 250;
         testMeg.handle(GameMapSubmodule.class, map -> {
             assertEquals(0, map.getEntitiesOnCurrentTile().size());
         });
