@@ -2,21 +2,38 @@ package io.github.yokigroup.view.render;
 
 import io.github.yokigroup.core.state.SpriteData;
 
-import java.util.*;
+
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class DrawQueueImpl implements DrawQueue {
+public final class DrawQueueImpl implements DrawQueue {
     private final Queue<SpriteData> queue = new PriorityQueue<>(Comparator.comparingInt(SpriteData::priority));
 
+    /**
+     * ...
+     */
     public DrawQueueImpl() {
     }
 
+    /**
+     * ...
+     * @param drawQueue ...
+     */
     public DrawQueueImpl(final DrawQueueReader drawQueue) {
         addToDrawQueue(drawQueue.stream().collect(Collectors.toUnmodifiableSet()));
     }
 
+    /**
+     * ...
+     * @param arg ...
+     * @return ...
+     */
     private Collection<SpriteData> preprocessCollection(final Collection<SpriteData> arg) {
         if (arg == null) {
             return null;
@@ -38,7 +55,7 @@ public class DrawQueueImpl implements DrawQueue {
     }
 
     @Override
-    public void addToDrawQueue(Collection<SpriteData> sprites) {
+    public void addToDrawQueue(final Collection<SpriteData> sprites) {
         synDoIfNotNull(queue::addAll, preprocessCollection(sprites));
     }
 
