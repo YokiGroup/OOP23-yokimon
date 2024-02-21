@@ -27,7 +27,7 @@ public class NotificationVisitorImpl implements NotificationVisitor, EObserver<N
     }
 
     @Override
-    public void update(PublisherImpl<Notification> publisher, Notification lastArg, Notification arg) {
+    public void update(Notification lastArg, Notification arg) {
         painter.paintEventText(arg.getMessage(this));
         Platform.runLater(painter::repaint);
     }

@@ -15,7 +15,7 @@ public interface WeightedPool<T> {
      * @param copyFunction The function to make sure to deep copy the generic element.
      * @return A copied WeightedPool.
      */
-    WeightedPool<T> deepCopy(WeightedPool<T> pool, UnaryOperator<T> copyFunction);
+    WeightedPool<T> deepCopy(UnaryOperator<T> copyFunction);
 
     /**
      * Adds an element to the pool, the weights can be an arbitrary value.

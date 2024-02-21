@@ -45,7 +45,7 @@ public class DrawQueueImpl implements DrawQueue {
     }
 
     @Override
-    public void removeFromDrawQueue(Collection<SpriteData> sprites) {
+    public void removeFromDrawQueue(final Collection<SpriteData> sprites) {
         synDoIfNotNull(queue::removeAll, preprocessCollection(sprites));
     }
 

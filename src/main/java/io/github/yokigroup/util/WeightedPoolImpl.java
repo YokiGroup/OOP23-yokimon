@@ -33,9 +33,9 @@ public class WeightedPoolImpl<T> implements WeightedPool<T> {
     }
 
     @Override
-    public final WeightedPool<T> deepCopy(final WeightedPool<T> pool, final UnaryOperator<T> copyFunction) {
+    public final WeightedPool<T> deepCopy(final UnaryOperator<T> copyFunction) {
         final WeightedPool<T> copyPool = new WeightedPoolImpl<>();
-        for (final Pair<T, Float> pair : pool.getItemPool()) {
+        for (final Pair<T, Float> pair : this.getItemPool()) {
             copyPool.addElement(copyFunction.apply(pair.x()), pair.y());
         }
         return copyPool;
