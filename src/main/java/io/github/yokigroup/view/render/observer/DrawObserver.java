@@ -22,9 +22,5 @@ public final class DrawObserver extends ViewObserver<SpriteDataWithState> {
         final DrawQueue drawQueue = painter.drawQueue(arg.state());
         drawQueue.removeFromDrawQueue(lastArg.spriteData());
         drawQueue.addToDrawQueue(arg.spriteData());
-        if (painter.getPaintState() == arg.state()) {
-            Platform.runLater(painter::repaint);
-        }
-
     }
 }

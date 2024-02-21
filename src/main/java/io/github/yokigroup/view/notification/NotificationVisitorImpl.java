@@ -1,16 +1,14 @@
 package io.github.yokigroup.view.notification;
 
 import io.github.yokigroup.event.observer.EObserver;
-import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.view.render.Painter;
-import javafx.application.Platform;
 
 public class NotificationVisitorImpl implements NotificationVisitor, EObserver<Notification> {
     private final Painter painter;
     // FIXME locales
 
 
-    public NotificationVisitorImpl(Painter painter) {
+    public NotificationVisitorImpl(final Painter painter) {
         this.painter = painter;
     }
 
@@ -21,14 +19,13 @@ public class NotificationVisitorImpl implements NotificationVisitor, EObserver<N
     }
 
     @Override
-    public String getNewYokimonNotificationText(NewYokimonNotification notification) {
+    public String getNewYokimonNotificationText(final NewYokimonNotification notification) {
         final String newYokimonMsg = "Obtained %s";
         return String.format(newYokimonMsg, notification.yokimonName());
     }
 
     @Override
-    public void update(Notification lastArg, Notification arg) {
-        painter.paintEventText(arg.getMessage(this));
-        Platform.runLater(painter::repaint);
+    public void update(final Notification lastArg, final Notification arg) {
+        painter.setEventText(arg.getMessage(this));
     }
 }
