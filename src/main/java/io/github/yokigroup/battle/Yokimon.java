@@ -61,6 +61,12 @@ public interface Yokimon {
     }
 
     /**
+     * Return a copy of this Yokimon
+     * @return Yokimon
+     */
+    Yokimon copyOf();
+
+    /**
      * Return the id of the yokimon.
      *
      * @return return the id of the yokimon
@@ -246,13 +252,6 @@ public interface Yokimon {
      * @return Double current xp.
      */
     double getXp();
-
-    /**
-     * Return the current xpNextLevel amount of the yokimon.
-     *
-     * @return Double getNextLevelXp.
-     */
-    double getNextXp();
 
     /**
      * Adds a certain amount of XP to the Yokimon, potentially triggering level-up and
