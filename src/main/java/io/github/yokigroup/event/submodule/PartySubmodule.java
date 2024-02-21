@@ -12,6 +12,7 @@ import io.github.yokigroup.view.notification.Notification;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Implementation of {@link PartySubmoduleAbs}.
@@ -31,6 +32,7 @@ public final class PartySubmodule extends PartySubmoduleAbs {
     }
 
     private List<Yokimon> deepCopyOf(final List<Yokimon> list) {
+        Objects.requireNonNull(list);
         return list.stream().map(YokimonImpl::new).map(Yokimon.class::cast).toList();
     }
 

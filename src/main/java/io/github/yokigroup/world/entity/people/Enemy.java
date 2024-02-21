@@ -139,7 +139,7 @@ public class Enemy extends People {
             if (Objects.requireNonNull(this.getHitBox()).collidesWith(player.getPlayerEntity().getHitBox()).isPresent()) {
                 this.getMessageHandler().handle(FightSubmodule.class, fight -> {
                     fight.addEncounter();
-                    this.shut();
+                    this.deactivate();
                 });
             }
         });
@@ -149,8 +149,8 @@ public class Enemy extends People {
      * Updates the state of the Enemy (switches between wander and follow).
      */
     @Override
-    public void update() {
-        if (!this.getActive()) {
+    public void updateCode(double delta) {
+        if (!this.isActive()) {
             return;
         }
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {
@@ -168,7 +168,7 @@ public class Enemy extends People {
                 v = new Vector2Impl(follow(pos.getPosition().getPosition()));
             }
             this.setDirection(v);
-            this.move(v.scale(SCALE));
+            this.move(v.scale(SCALE).scale(delta));
 
         });
 

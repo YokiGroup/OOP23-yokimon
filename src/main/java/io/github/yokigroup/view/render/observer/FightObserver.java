@@ -12,6 +12,5 @@ public class FightObserver extends ViewObserver<Fight> {
 
     @Override
     public void update(final Fight lastArg, final Fight arg) {
-        painter().setPaintState(RenderState.FIGHT);
     }
 }

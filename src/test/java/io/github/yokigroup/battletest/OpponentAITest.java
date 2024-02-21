@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 /**
  * Test class for Opponent AI.
  */
+
 final class OpponentAITest {
     private static final int RAND_LEVEL = 15;
     private Yokimon y1, y2;
@@ -39,10 +40,8 @@ final class OpponentAITest {
     void testDummyImpl() {
         final OpponentAI toTest = new DummyImplOpponentAI();
 
-        assertEquals(Optional.of(attackLoader.load(4)).get().getName().toLowerCase(),
-                        toTest.getMove(y2, y1).get().getName().toLowerCase());
-        assertEquals(Optional.of(attackLoader.load(4)).get().getName().toLowerCase(),
-                toTest.getMove(y2, y1).get().getName().toLowerCase());
+        assertEquals(attackLoader.load(18),toTest.getMove(y2, y1).get());
+        assertEquals(attackLoader.load(18),toTest.getMove(y2, y1).get());
     }
 
     /**
@@ -56,15 +55,12 @@ final class OpponentAITest {
         //multiple attacks. BASIC --> the Attack with the biggest POWER value
 
         //                            first, the Attack with the biggest POWER value
-        //FIXME -> PMD STYLE CHECKS: USE .EQUALS() INSTEAD
-        assertEquals(Optional.of(attackLoader.load(1)).get().getName().toLowerCase(),
-                toTest.getMove(y2, y1).get().getName().toLowerCase());
+
+        assertEquals(attackLoader.load(13),toTest.getMove(y2, y1).get());
         //                              then, another -random- one
-        assertNotEquals(Optional.of(attackLoader.load(1)).get().getName().toLowerCase(),
-                toTest.getMove(y2, y1).get().getName().toLowerCase());
+        assertNotEquals(attackLoader.load(13),toTest.getMove(y2, y1).get());
         //                              then again the best one
-        assertEquals(Optional.of(attackLoader.load(1)).get().getName().toLowerCase(),
-                toTest.getMove(y2, y1).get().getName().toLowerCase());
+        assertEquals(attackLoader.load(13),toTest.getMove(y2, y1).get());
     }
 
 }

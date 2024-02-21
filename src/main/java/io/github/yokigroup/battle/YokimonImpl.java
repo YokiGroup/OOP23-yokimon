@@ -65,7 +65,7 @@ public class YokimonImpl implements Yokimon {
         this.level = level;
         this.learnableMoves = Map.copyOf(Objects.requireNonNull(learnableMoves, "learnableMoves passed was null"));
         this.resetAttack();
-
+        this.setLevelUPLogic(new LevelUpLogicImpl());
     }
 
     /**
@@ -92,8 +92,10 @@ public class YokimonImpl implements Yokimon {
         this(Objects.requireNonNull(yokimon, "YokimonImpl passed was null").getId(), yokimon.getName(),
                 yokimon.getYokimonColor(), Map.copyOf(yokimon.getAllBaseStats()), yokimon.getGrowRate(),
                 yokimon.getLevel(), Map.copyOf(yokimon.getLearnableAttacks()));
+        this.setAttacks(List.copyOf(yokimon.getAttacks()));
+        this.setExp(yokimon.getXp());
+        this.setActualHp(yokimon.getActualHp());
     }
-
     /**
      * return the id of the yokimon.
      *
@@ -213,8 +215,7 @@ public class YokimonImpl implements Yokimon {
         this.maxHp = newValue;
     }
 
-    @Override
-    public void setLevelUPLogic(LevelUpLogic logic) {
+private void setLevelUPLogic(final LevelUpLogic logic) {
         Objects.requireNonNull(logic, "Logic passed was null");
         this.levelUtility = Optional.of(logic);
         this.levelUtility.get().reset(this);
@@ -238,11 +239,6 @@ public class YokimonImpl implements Yokimon {
     @Override
     public final double getXp() {
         return this.xp;
-    }
-
-    @Override
-    public final double getNextXp() {
-        return this.xpNext;
     }
 
     @Override
@@ -310,8 +306,11 @@ public class YokimonImpl implements Yokimon {
                 actualHp, growthRate, xp, xpNext, moves, learnableMoves, active);
     }
 
+    /**
+     * Reset the current moves based of the yokimon level
+     */
     private void resetAttack() {
-        List<Attack> newAttacks = new ArrayList<>();
+        final List<Attack> newAttacks = new ArrayList<>();
         for (int i = 0; i <= this.getLevel(); i++) {
             if (this.getLearnableAttacks().containsKey(i)) {
                 newAttacks.add(this.getLearnableAttacks().get(i));

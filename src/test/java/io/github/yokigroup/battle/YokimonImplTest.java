@@ -14,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class YokimonImplTest {
-    private static final int DEFAULT_LEVEL = 10;
+    private static final int DEFAULT_LEVEL = 7;
     private static final int NUM_MOVES = 3;
-    private static final int DEFAULT_ID = 7;
+    private static final int DEFAULT_ID = 1;
     private static YokimonLoader loader;
     private static AttackLoader loaderAttack;
 
@@ -42,24 +42,27 @@ class YokimonImplTest {
 
     @Test
     void attacks() {
-            final Yokimon tengu = loader.load(7);
+            final Yokimon tengu = loader.load(DEFAULT_ID);
 
             tengu.setLevel(DEFAULT_LEVEL);
 
             assertEquals(NUM_MOVES, tengu.getAttacks().size());
-            final int atk4 = 4;
-            final int atk1 = 1;
-            for (int i = atk4; i > atk1; i--) {
-                assertTrue(tengu.getAttacks().contains(loaderAttack.load(i)));
-            }
-            assertFalse(tengu.getAttacks().contains(loaderAttack.load(atk1)));
+            final int atk1 = 18;
+            final int atk2 = 20;
+            final int atk3 = 20;
+            final int atk4 = 14;
+            assertTrue(tengu.getAttacks().contains(loaderAttack.load(atk1)));
+            assertTrue(tengu.getAttacks().contains(loaderAttack.load(atk2)));
+            assertTrue(tengu.getAttacks().contains(loaderAttack.load(atk3)));
+
+            assertFalse(tengu.getAttacks().contains(loaderAttack.load(atk4)));
     }
 
     @Test
     void takeXP() {
         Yokimon tengu = loader.load(DEFAULT_ID);
-        final int defXp = 1000;
-        final int defXp2 = 400;
+        final int defXp = 343;
+        final int defXp2 = 300;
         assertEquals(Yokimon.ExpCode.NEW_MOVE, tengu.takeXp(defXp));
         assertEquals(DEFAULT_LEVEL, tengu.getLevel());
         assertEquals(Yokimon.ExpCode.LEVEL_UP, tengu.takeXp(defXp2));

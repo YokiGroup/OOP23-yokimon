@@ -85,12 +85,17 @@ class PlayerTest {
     void setUp() {
         testMeg = new TestMessageHandler();
     }
+
     @Test
     void move() {
-        final double scalable = 50;
-        final double scaleTot = 250;
+        final int scalable = 50;
+        final int scaleTot = 250;
         testMeg.handle(GameMapSubmodule.class, map -> {
-            assertEquals(0, map.getEntitiesOnCurrentTile().size());
+            assertEquals(1, map.getEntitiesOnCurrentTile().size());
+            map.getEntitiesOnCurrentTile().forEach(en -> {
+                System.out.println(en.getHitBox().toString());
+                System.out.println(en.getPos().getPosition().getX() + "    " + en.getPos().getPosition().getY());
+            } );
         });
         testMeg.handle(PlayerCharacterSubmodule.class, play -> {
             for (double i = scalable; i < scaleTot; i = i + scalable) {

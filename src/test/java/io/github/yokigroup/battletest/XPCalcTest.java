@@ -24,7 +24,7 @@ final class XPCalcTest {
     private static final int EXP_VAL_FULL3 = 220;
     private static final int RAND_LEVEL = 12;
 
-    private Yokimon y1, y2, y3;
+    private Yokimon tengu, oni, nekomata;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
 
     /**
@@ -32,9 +32,9 @@ final class XPCalcTest {
      */
     @BeforeEach
     void init() {
-        y1 = yokimonLoader.load(1);
-        y2 = yokimonLoader.load(2);
-        y3 = yokimonLoader.load(3);
+        tengu = yokimonLoader.load(1);
+        oni = yokimonLoader.load(2);
+        nekomata = yokimonLoader.load(3);
     }
 
     /**
@@ -45,8 +45,8 @@ final class XPCalcTest {
         final XPCalculator toTest = new DummyImplXPCalculator();
 
         assertEquals(EXP_VAL_DUMMY1, toTest.getXP(List.of()));
-        assertEquals(EXP_VAL_DUMMY2, toTest.getXP(List.of(y1, y2, y3)));
-        assertEquals(EXP_VAL_DUMMY3, toTest.getXP(List.of(y1, y2)));
+        assertEquals(EXP_VAL_DUMMY2, toTest.getXP(List.of(tengu, oni, nekomata)));
+        assertEquals(EXP_VAL_DUMMY3, toTest.getXP(List.of(tengu, oni)));
     }
 
     /**
@@ -57,10 +57,10 @@ final class XPCalcTest {
         final XPCalculator toTest = new FullImplXPCalculator();
 
         assertEquals(EXP_VAL_FULL1, toTest.getXP(List.of()));
-        assertEquals(EXP_VAL_FULL2, toTest.getXP(List.of(y1, y2, y3)));
-        assertEquals(EXP_VAL_FULL3, toTest.getXP(List.of(y1, y2)));
+        assertEquals(EXP_VAL_FULL2, toTest.getXP(List.of(tengu, oni, nekomata)));
+        assertEquals(EXP_VAL_FULL3, toTest.getXP(List.of(tengu, oni)));
 
-        y2.setLevel(RAND_LEVEL);
-        assertNotEquals(EXP_VAL_FULL3, toTest.getXP(List.of(y1, y2)));
+        oni.setLevel(RAND_LEVEL);
+        assertNotEquals(EXP_VAL_FULL3, toTest.getXP(List.of(tengu, oni)));
     }
 }

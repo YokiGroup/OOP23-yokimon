@@ -2,11 +2,13 @@ package io.github.yokigroup.battle.opponentai;
 
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.fight.Fight;
 
 import java.util.Optional;
 
 /**
- * The AI responsible for choosing the next best move for the opponent to use.
+ * Used as a {@link Fight} component.
+ * The AI responsible for choosing the next best {@link Attack} for the opponent to use.
  * Different criteria for the choice are applied for different implementations of this interface.
  */
 public abstract class OpponentAI {
@@ -14,7 +16,7 @@ public abstract class OpponentAI {
     /**
      * @param currMyYokimon Yokimon from player's party currently involved in the fight
      * @param currOppYokimon the Yokimon whose AI must be implemented
-     * @return the most suitable attack for the opponent to use
+     * @return the most suitable {@link Attack} for the opponent to use
      */
     public abstract Optional<Attack> getMove(Yokimon currMyYokimon, Yokimon currOppYokimon);
 }

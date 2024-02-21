@@ -4,14 +4,8 @@ import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
-import io.github.yokigroup.event.submodule.FightSubmodule;
-import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.event.submodule.InputSubmodule;
-import io.github.yokigroup.event.submodule.PartySubmodule;
-import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
+import io.github.yokigroup.event.submodule.*;
 import io.github.yokigroup.event.Updateable;
-import io.github.yokigroup.event.submodule.SubmoduleMap;
-import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
@@ -39,16 +33,18 @@ public class GameMessageHandler implements MessageHandler {
                 PlayerCharacterSubmodule.class,
                 FightSubmodule.class,
                 GameMapSubmodule.class,
-                InputSubmodule.class
+                InputSubmodule.class,
+                GameOverSubmodule.class
         );
     }
 
     /**
      * Initializes game logic submodules.
      * @return Initialized SubModuleMap
+     * @param modelObs modelObs
      * @see SubmoduleMap
      */
-    private SubmoduleMap initSubmodules(ModelObserver modelObs) {
+    private SubmoduleMap initSubmodules(final ModelObserver modelObs) {
         SubmoduleMap retMap = new SubmoduleMapImpl();
         final var submoduleTypes = getSubmoduleTypes();
 
@@ -64,10 +60,7 @@ public class GameMessageHandler implements MessageHandler {
         return retMap;
     }
 
-    /**
-     * Initializes a GameOrchestrator with a new GameMap and PlayerCharacter, along with the required submodules.
-     */
-    public GameMessageHandler(ModelObserver modelObs) {
+    public GameMessageHandler(final ModelObserver modelObs) {
         subModules = initSubmodules(modelObs);
     }
 
@@ -89,15 +82,24 @@ public class GameMessageHandler implements MessageHandler {
             @Override
             public void addNotificationPublisher(final Publisher<Notification> notificationPub) {
             }
+
+            @Override
+            public void addStateChangePublisher(Publisher<RenderState> renderStatePublisher) {
+            }
         });
     }
 
     @Override
-    public final <T extends Submodule> void handle(final Class<T> subModuleType, final Consumer<T> handler) {
-        this.handle(subModuleType, a -> {
+    public final <T extends Submodule> void handle(final Class<T> subModuleTypes, final Consumer<T> handler) {
+        this.handle(subModuleTypes, a -> {
             handler.accept(a);
             return null;
         });
+    }
+
+    @Override
+    public <T extends Submodule> void handle(Set<Class<T>> subModuleTypes, Consumer<T> handler) {
+        subModuleTypes.forEach(smt -> handle(smt, handler));
     }
 
     @Override

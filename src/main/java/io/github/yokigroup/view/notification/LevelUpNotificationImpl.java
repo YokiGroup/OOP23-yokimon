@@ -20,7 +20,7 @@ public class LevelUpNotificationImpl implements LevelUpNotification {
     }
 
     @Override
-    public String getMessage(NotificationVisitor visitor) {
+    public String getMessage(final NotificationVisitor visitor) {
         return visitor.getLevelUpNotificationText(this);
     }
 }

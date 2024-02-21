@@ -35,10 +35,6 @@ public abstract class People extends Entity {
      */
     private Direction direction;
     /**
-     * People get up-dated only if active is true.
-     */
-    private boolean active;
-    /**
      * Ray of the hitBox.
      */
     private final double dimensions;
@@ -56,14 +52,13 @@ public abstract class People extends Entity {
         super(pos, new CircularHitbox(pos.getPosition(), dimensions / 2), messageHandler,
                 new Vector2Impl(dimensions, dimensions), resourceURL);
         this.direction = DEFAULT_DIRECTION;
-        this.active = true;
         this.initialPos = pos.copyOf();
         this.dimensions = dimensions;
     }
 
     @Override
     public final Hitbox getHitBox() {
-        if (!active) {
+        if (!isActive()) {
             return null;
         }
         return super.getHitBox();
@@ -76,8 +71,8 @@ public abstract class People extends Entity {
      */
     @Override
     public SpriteData getSpriteData() {
-        SpriteData superSpriteData = super.getSpriteData();
-        if (!active) {
+        final SpriteData superSpriteData = super.getSpriteData();
+        if (!isActive()) {
             return null;
         }
         return new SpriteData(
@@ -183,45 +178,7 @@ public abstract class People extends Entity {
         if (v.getY() == 0 && v.getX() == 0) {
             return;
         }
-        /*
-        if (Math.abs(v.getX()) > Math.abs(v.getY())) {
-            if (v.getX() > 0) {
-                this.direction = Direction.RIGHT;
-            } else {
-                this.direction = Direction.LEFT;
-            }
-        } else {
-            if (v.getY() > 0) {
-                this.direction = Direction.DOWN;
-            } else {
-                this.direction = Direction.UP;
-            }
-        }
-        */
         this.direction = Direction.valueOf(new Vector2Impl(Math.signum(v.getX()), Math.signum(v.getY())));
-    }
-
-    /**
-     * Returns whether the people entity is active or not.
-     *
-     * @return boolean True if the people entity is active, false otherwise
-     */
-    public final boolean getActive() {
-        return this.active;
-    }
-
-    /**
-     * Sets the people entity as active.
-     */
-    public final void setActive() {
-        this.active = true;
-    }
-
-    /**
-     * Sets the people entity as inactive.
-     */
-    public final void shut() {
-        this.active = false;
     }
 
     /**
@@ -254,7 +211,9 @@ public abstract class People extends Entity {
      * @param vector vector2
      */
     protected final void collisionCheck(final Vector2 vector) {
-        if (!active) return;
+        if (!isActive()) {
+            return;
+        }
 
         this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {

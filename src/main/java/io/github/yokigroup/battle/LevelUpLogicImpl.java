@@ -46,9 +46,9 @@ public class LevelUpLogicImpl implements LevelUpLogic {
     public void setStats(final Yokimon yokimon) {
         Objects.requireNonNull(yokimon, "Yokimon null at level-up logic setStats");
         // Level
-        Map<Yokimon.Stats, Integer> newStat = yokimon.getAllStats();
-        Map<Yokimon.Stats, Integer> newStats = new HashMap<>();
-        for (var set : newStat.entrySet()) {
+        final Map<Yokimon.Stats, Integer> newStat = yokimon.getAllStats();
+        final Map<Yokimon.Stats, Integer> newStats = new HashMap<>();
+        for (final var set : newStat.entrySet()) {
             newStats.put(set.getKey(), upGradeStat(yokimon, set.getKey()));
         }
         yokimon.setStats(newStats);

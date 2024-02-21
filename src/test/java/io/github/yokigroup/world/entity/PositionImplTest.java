@@ -16,10 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class PositionImplTest {
     private static MessageHandler messageHandler;
     private static final double POSITION = 400;
+
     @BeforeEach
     void setUp() {
         //final MessageHandler messageHandler = new GameMessageHandler();
     }
+
     @Test
     void isValid() {
 

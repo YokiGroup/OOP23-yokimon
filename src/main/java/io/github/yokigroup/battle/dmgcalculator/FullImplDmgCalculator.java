@@ -2,10 +2,12 @@ package io.github.yokigroup.battle.dmgcalculator;
 
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.Color;
 
 /**
- * Complete version of Damage Calculator, that takes into consideration
- * the two Yokimons' color and the attack color, and the colors' hierarchy as well.
+ * Complete version of {@link DmgCalculator}, that takes into consideration
+ * the two {@link Yokimon} colors and the {@link Attack} color, and the colors' hierarchy as well.
+ * @see Color
  */
 public class FullImplDmgCalculator implements DmgCalculator {
 
@@ -17,12 +19,12 @@ public class FullImplDmgCalculator implements DmgCalculator {
     /**
      * This version uses a multiplier in case a Yokimon and the attack are of the same color.
      * It also considers a hierarchy which states as follows:
-     * PURPLE beats RED beats BLACK beats PURPLE
-     * WHITE is neutral
+     * PURPLE beats RED beats BLACK beats PURPLE.
+     * WHITE is neutral.
      *
      * @param attackingYokimon the offending Yokimon
      * @param attackedYokimon the offended Yokimon
-     * @param attack the attack used by the first one
+     * @param attack the attack used by the attacking Yokimon
      * @return the actual damage (to subtract from the HP of the attacked Yokimon)
      */
     protected double getDMGdouble(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
@@ -82,12 +84,12 @@ public class FullImplDmgCalculator implements DmgCalculator {
     /**
      * This version uses a multiplier in case a Yokimon and the attack are of the same color.
      * It also considers a hierarchy which states as follows:
-     * PURPLE beats RED beats BLACK beats PURPLE
-     * WHITE is neutral
+     * PURPLE beats RED beats BLACK beats PURPLE.
+     * WHITE is neutral.
      *
      * @param attackingYokimon the offending Yokimon
      * @param attackedYokimon the offended Yokimon
-     * @param attack the attack used by the first one
+     * @param attack the attack used by the attacking Yokimon
      * @return the actual damage (to subtract from the HP of the attacked Yokimon)
      */
     @Override

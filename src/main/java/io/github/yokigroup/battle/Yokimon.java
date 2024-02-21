@@ -206,7 +206,7 @@ public interface Yokimon {
      * Set the level_up logic
      * @param logic Logic level_up
      */
-    void setLevelUPLogic(LevelUpLogic logic);
+   // void setLevelUPLogic(LevelUpLogic logic);
     /**
      * Subtracts to the Actual Hp of the yokimon the parameter damage
      * if the Hp of the yokimon reaches zero, it returns true
@@ -246,13 +246,6 @@ public interface Yokimon {
      * @return Double current xp.
      */
     double getXp();
-
-    /**
-     * Return the current xpNextLevel amount of the yokimon.
-     *
-     * @return Double getNextLevelXp.
-     */
-    double getNextXp();
 
     /**
      * Adds a certain amount of XP to the Yokimon, potentially triggering level-up and

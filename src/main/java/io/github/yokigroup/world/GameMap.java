@@ -20,6 +20,12 @@ public interface GameMap {
     Tile getTileAt(Pair<Integer, Integer> position);
 
     /**
+     * This function returns if the player has slain all the enemies on the map.
+     * @return True if all the enemies have been disabled.
+     */
+    boolean areAllEnemiesSlain();
+
+    /**
      *
      * @return The player's world coordinates.
      */

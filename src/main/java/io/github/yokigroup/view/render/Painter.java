@@ -6,7 +6,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Painter {
+/**
+ * Implementation-independent abstract class used for painting to a screen.
+ */
+public abstract class Painter implements DrawCallable {
 
     private final Map<RenderState, DrawQueue> drawQueues;
     private RenderState paintState;
@@ -21,17 +24,16 @@ public abstract class Painter {
     public final DrawQueue drawQueue(final RenderState state) {
         return drawQueues.get(state);
     }
-
     public void setPaintState(final RenderState paintState) {
         this.paintState = paintState;
-        paintEventText("");
-        Platform.runLater(this::repaint);
+        setEventText("");
     }
 
     public RenderState getPaintState() {
         return paintState;
     }
 
-    public abstract void paintEventText(String eventText);
+    public abstract void setEventText(String eventText);
+
     public abstract void repaint();
 }
