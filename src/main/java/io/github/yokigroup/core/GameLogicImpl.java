@@ -29,11 +29,6 @@ public final class GameLogicImpl extends Thread implements GameLogic {
 
     private void gameLoop() {
         while (running) {
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
             handler.updateSubmodules();
             renderer.safeDraw();
         }
