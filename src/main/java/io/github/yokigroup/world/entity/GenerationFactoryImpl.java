@@ -33,12 +33,12 @@ public class GenerationFactoryImpl implements GenerationFactory {
 
     private Yokimon getYokimon(final int power) {
         final int finalPower = Math.abs(power);
-        final WeightedPoolImpl<Yokimon> yokimonWeightedPool = new WeightedPoolImpl<>();
+        final WeightedPoolImpl<Integer> yokimonID = new WeightedPoolImpl<>();
 
         IntStream.range(1, NUMBER_OF_YOKIMON)
-                .forEach(i -> yokimonWeightedPool
-                        .addElement(YOKIMON_LOADER.load(i), PROBABILITY_CHANCE_MAX - i + finalPower));
-        final Yokimon gift = yokimonWeightedPool.getRandomizedElement();
+                .forEach(i -> yokimonID.addElement(i, PROBABILITY_CHANCE_MAX - i + finalPower));
+
+        final Yokimon gift = YOKIMON_LOADER.load(yokimonID.getRandomizedElement());
         gift.setLevel(power * MULTIPLIER_DIFFICULTY + variableNum.getRandomizedElement());
         return Objects.requireNonNull(gift);
     }
