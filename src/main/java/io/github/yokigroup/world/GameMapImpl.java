@@ -8,7 +8,6 @@ import io.github.yokigroup.world.tile.Tile;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * The map of the game.
