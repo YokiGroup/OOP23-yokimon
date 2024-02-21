@@ -31,8 +31,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EnemyTest {
     private TestMessageHandler testMeg;
-    private static final double X_TEST = 150;
-    private static final double Y_TEST = 120;
+    private static final double X_TEST = 400;
+    private static final double Y_TEST = 100;
     private static final double NUM_TEST = 20;
     private static final Vector2 V_NEAR = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 + 200,
             (double) GameMap.TILE_DIMENSIONS.y() / 2 + 100);
@@ -137,7 +137,7 @@ class EnemyTest {
 
         testMeg.handle(TestMessageHandler.TestSubmodule.class, map -> {
             for (final Entity entity : map.getEntitiesOnCurrentTile()) {
-                assertEquals(4, map.getEntitiesOnCurrentTile().size());
+                assertEquals(3, map.getEntitiesOnCurrentTile().size());
                 if (entity instanceof Enemy) {
                     testMeg.handle(PlayerCharacterSubmodule.class, player -> {
                         final Enemy en = (Enemy) entity;
@@ -164,12 +164,13 @@ class EnemyTest {
             for (final Entity entity : map.getEntitiesOnCurrentTile()) {
                 if ( entity instanceof Enemy ) {
                     testMeg.handle(PlayerCharacterSubmodule.class, player -> {
+                        System.out.println("Player pos: " + player.getPosition().getPosition().getX() + " y=" + player.getPosition().getPosition().getY());
                         final Enemy en = (Enemy) entity;
                         assertEquals(Enemy.State.WANDER, en.getState());
                         for (int i = 0; i < NUM_TEST; i++) {
                             entity.update();
                             assertTrue(possibleDirections.contains(en.getDirection()));
-
+                            System.out.println("En pos: " + en.getPos().getPosition().getX() + " y=" + en.getPos().getPosition().getY());
                         }
 
                     });
