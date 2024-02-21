@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 /**
  * Implementation of {@link GameMapSubmoduleAbs}.
- *
  * @author Giovanni Paone
  */
 public final class GameMapSubmodule extends GameMapSubmoduleAbs {

@@ -21,7 +21,7 @@ import io.github.yokigroup.world.entity.people.Player;
  */
 public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs {
     private final Player player;
-    private final Publisher<SpriteData> playerPub = new PublisherImpl<>();
+    private Publisher<SpriteData> playerPub = new PublisherImpl<>();
 
     private void publishPlayerSpriteData() {
         playerPub.notifyObservers(player.getSpriteData());

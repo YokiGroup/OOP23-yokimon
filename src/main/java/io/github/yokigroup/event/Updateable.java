@@ -10,9 +10,7 @@ public abstract class Updateable {
     protected abstract void updateCode(double delta);
 
     public final void update() {
-        if (sinceLastUpdate == -1) {
-            sinceLastUpdate = getCurrentMillis();
-        }
+        if (sinceLastUpdate == -1) sinceLastUpdate = getCurrentMillis();
         updateCode(((double)getCurrentMillis() - sinceLastUpdate) / 1000.0);
         sinceLastUpdate = getCurrentMillis();
     }

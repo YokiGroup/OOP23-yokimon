@@ -22,7 +22,6 @@ public class CanvasPainter extends Painter {
     private final GraphicsContext gc;
     private final Label eventLabel;
     private Pair<Long, String> currentNotification = null; // notification with timestamp
-    private final static int CANVAS_DIM_DIVISOR = 20;
 
     private Vector2 getCanvasDim() {
         Canvas canvas = gc.getCanvas();
@@ -53,8 +52,8 @@ public class CanvasPainter extends Painter {
     }
 
     private void paint(final SpriteData sprite) {
-        if (currentNotification != null
-                && currentNotification.x() < System.currentTimeMillis()) {
+        if (currentNotification != null &&
+                currentNotification.x() < System.currentTimeMillis()) {
             currentNotification = null;
             eventLabel.setText("");
         }
@@ -70,7 +69,7 @@ public class CanvasPainter extends Painter {
                 absSpriteDim.getY()
         );
         if (currentNotification != null) {
-            eventLabel.setFont(new Font(canvasDim.getX() / CANVAS_DIM_DIVISOR));
+            eventLabel.setFont(new Font(canvasDim.getX()/20));
             eventLabel.setText(currentNotification.y());
         }
     }

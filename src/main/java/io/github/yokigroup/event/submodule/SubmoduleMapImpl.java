@@ -2,7 +2,11 @@ package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.submodule.abs.Submodule;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Map of submodules. Used to collect all submodules used by a game component into one place.
@@ -18,7 +22,6 @@ public final class SubmoduleMapImpl implements SubmoduleMap {
 
     @Override
     public <T extends Submodule> void registerAll(final Set<T> sSet) {
-        Objects.requireNonNull(sSet);
         sSet.forEach(this::register);
     }
 

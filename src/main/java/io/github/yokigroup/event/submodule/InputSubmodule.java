@@ -10,7 +10,6 @@ import io.github.yokigroup.world.Direction;
 
 import java.util.HashSet;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Set;
 
 public class InputSubmodule extends InputSubmoduleAbs {
@@ -18,13 +17,13 @@ public class InputSubmodule extends InputSubmoduleAbs {
 
     /**
      * @param handler         MessageHandler to call in order to query other submodules.
-     * @param ignoredModelObs ModelObserver
+     * @param ignoredModelObs
      */
-    public InputSubmodule(final MessageHandler handler, final ModelObserver ignoredModelObs) {
+    public InputSubmodule(MessageHandler handler, ModelObserver ignoredModelObs) {
         super(handler, ignoredModelObs);
     }
 
-    private Direction keyTextToDirection(final String keyText) {
+    private Direction keyTextToDirection(String keyText) {
         return switch (keyText.toLowerCase(Locale.ROOT)) {
             case "w" -> Direction.UP;
             case "a" -> Direction.LEFT;
@@ -34,40 +33,23 @@ public class InputSubmodule extends InputSubmoduleAbs {
         };
     }
 
-    /**
-     * Manage the input press, adding a moveEvents.
-     *
-     * @param keyText String
-     */
     @Override
-    public void registerKeyPress(final String keyText) {
+    public void registerKeyPress(String keyText) {
         Direction dir = keyTextToDirection(keyText);
         synchronized (this) {
-            if (dir != null) {
-                moveEvents.add(dir);
-            }
+            if (dir != null) moveEvents.add(dir);
         }
     }
 
-    /**
-     * Manage the input press, removing a moveEvents.
-     *
-     * @param keyText String
-     */
     @Override
-    public void registerKeyRelease(final String keyText) {
+    public void registerKeyRelease(String keyText) {
         Direction dir = keyTextToDirection(keyText);
         synchronized (this) {
-            if (dir != null) {
-                moveEvents.remove(dir);
-            }
+            if (dir != null) moveEvents.remove(dir);
         }
     }
 
-    private Pair<Integer, Integer> sumPairs(final Pair<Integer, Integer> pairOne,
-                                            final Pair<Integer, Integer> pairTwo) {
-        Objects.requireNonNull(pairOne);
-        Objects.requireNonNull(pairTwo);
+    private Pair<Integer, Integer> sumPairs(final Pair<Integer, Integer> pairOne, final Pair<Integer, Integer> pairTwo) {
         return new Pair<>(pairOne.x() + pairTwo.x(), pairOne.y() + pairTwo.y());
     }
 
@@ -78,8 +60,8 @@ public class InputSubmodule extends InputSubmoduleAbs {
         synchronized (this) {
             dirSum = moveEvents.stream().map(Direction::getOffset).reduce(new Pair<>(0, 0), this::sumPairs);
         }
-        final Vector2 moveOffset = new Vector2Impl(dirSum.x(), dirSum.y()).normalize().scale(delta * velocity);
-        if (!moveOffset.equals(Vector2Impl.NULL_VECTOR)) {
+        final Vector2 moveOffset = new Vector2Impl(dirSum.x(), dirSum.y()).normalize().scale(delta*velocity);
+        if(!moveOffset.equals(Vector2Impl.NULL_VECTOR)) {
             handler().handle(PlayerCharacterSubmodule.class, s -> {
                 s.movePlayerBy(moveOffset);
             });
