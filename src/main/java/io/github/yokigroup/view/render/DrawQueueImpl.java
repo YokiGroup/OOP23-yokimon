@@ -17,7 +17,10 @@ public class DrawQueueImpl implements DrawQueue {
         addToDrawQueue(drawQueue.stream().collect(Collectors.toUnmodifiableSet()));
     }
 
-    private Collection<SpriteData> preprocessCollection(Collection<SpriteData> arg) {
+    private Collection<SpriteData> preprocessCollection(final Collection<SpriteData> arg) {
+        if (arg == null) {
+            return null;
+        }
         return arg.stream().filter(Objects::nonNull).collect(Collectors.toUnmodifiableSet());
     }
 

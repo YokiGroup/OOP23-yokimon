@@ -13,6 +13,7 @@ import io.github.yokigroup.event.Updateable;
 import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 import io.github.yokigroup.event.submodule.abs.Submodule;
+import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.view.notification.Notification;
 
@@ -74,23 +75,19 @@ public class GameMessageHandler implements MessageHandler {
         // FIXME TEMPORARY HACK
         this(new ModelObserver() {
             @Override
-            public void addWorldSpritePublisher(Publisher<SpriteData> spriteObs) {
-
+            public void addSpritePublisher(final RenderState state, final Publisher<SpriteData> spriteObs) {
             }
 
             @Override
-            public void addWorldSpritePublishers(Publisher<Set<SpriteData>> spriteObs) {
-
+            public void addSpritePublishers(final RenderState state, final Publisher<Set<SpriteData>> spriteObs) {
             }
 
             @Override
-            public void addFightPublisher(Publisher<Fight> fightObs) {
-
+            public void addFightPublisher(final Publisher<Fight> fightObs) {
             }
 
             @Override
-            public void addNotificationPublisher(Publisher<Notification> notificationPub) {
-
+            public void addNotificationPublisher(final Publisher<Notification> notificationPub) {
             }
         });
     }

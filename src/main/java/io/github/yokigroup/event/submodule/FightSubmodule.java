@@ -21,6 +21,7 @@ import java.util.Optional;
 public final class FightSubmodule extends FightSubmoduleAbs {
     private Fight lastAnnouncedFight = null;
     private Publisher<Fight> fightPub = new PublisherImpl<>();
+    private final String BATTLEBGURL = "io/github/yokigroup/view/textures/tiles/battle-forest.png";
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.

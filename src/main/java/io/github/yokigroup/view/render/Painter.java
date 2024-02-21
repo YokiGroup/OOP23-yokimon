@@ -1,21 +1,23 @@
 package io.github.yokigroup.view.render;
 
+import io.github.yokigroup.view.render.observer.ModelObserver;
+
 public abstract class Painter {
 
     private DrawQueue drawQueue;
-    public enum State {
-        FIGHT,
-        WORLD
-    }
-    private State paintState;
+    private RenderState paintState;
 
     public Painter(final DrawQueue drawQueue) {
         this.drawQueue = drawQueue;
     }
 
     public final void changeDrawQueue(final DrawQueue queue) {
-        synchronized (this) {
+        synchronized (drawQueue) {
             drawQueue = queue;
+        }
+        synchronized (drawQueue) {
+            paintEventText("");
+            repaint();
         }
     }
 
@@ -23,11 +25,11 @@ public abstract class Painter {
         return drawQueue;
     }
 
-    public void setPaintState(final State paintState) {
+    public void setPaintState(final RenderState paintState) {
         this.paintState = paintState;
     }
 
-    public State getPaintState() {
+    public RenderState getPaintState() {
         return paintState;
     }
 

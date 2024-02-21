@@ -6,6 +6,7 @@ import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.abs.GameMapSubmoduleAbs;
 import io.github.yokigroup.util.Pair;
+import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
@@ -30,7 +31,7 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
-    public GameMapSubmodule(final MessageHandler handler, ModelObserver modelObs) {
+    public GameMapSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
         playerTilePos = new Pair<>(MAP_DIM.x() / 2 + 1, MAP_DIM.y() / 2 + 1);
         final GameMapBuilder builder = new GameMapBuilderImpl();
@@ -40,8 +41,8 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
         builder.putHomeTileAt(playerTilePos);
         this.gameMap = builder.build(handler);
 
-        modelObs.addWorldSpritePublisher(tilePub);
-        modelObs.addWorldSpritePublishers(entityPub);
+        modelObs.addSpritePublisher(RenderState.WORLD, tilePub);
+        modelObs.addSpritePublishers(RenderState.WORLD, entityPub);
         tilePub.notifyObservers(gameMap.getPlayerTile().getSpriteData());
         entityPub.notifyObservers(getEntitiesOnCurrentTile().stream().map(Entity::getSpriteData).collect(Collectors.toSet()));
     }

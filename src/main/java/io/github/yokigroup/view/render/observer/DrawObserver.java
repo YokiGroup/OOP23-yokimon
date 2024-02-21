@@ -4,6 +4,7 @@ import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.view.render.DrawQueue;
 import io.github.yokigroup.view.render.Painter;
+import io.github.yokigroup.view.render.RenderState;
 import javafx.application.Platform;
 
 import java.util.Set;
@@ -27,7 +28,7 @@ public final class DrawObserver extends ViewObserver<SpriteData> {
         final DrawQueue drawQueue = drawQueue();
         drawQueue.removeFromDrawQueue(lastArg);
         drawQueue.addToDrawQueue(arg);
-        if (painter.getPaintState() == Painter.State.WORLD) {
+        if (painter.getPaintState() == RenderState.WORLD) {
             Platform.runLater(painter::repaint);
         }
     }
