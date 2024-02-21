@@ -24,6 +24,7 @@ public abstract class Painter {
 
     public void setPaintState(final RenderState paintState) {
         this.paintState = paintState;
+        paintEventText("");
         Platform.runLater(this::repaint);
     }
 
