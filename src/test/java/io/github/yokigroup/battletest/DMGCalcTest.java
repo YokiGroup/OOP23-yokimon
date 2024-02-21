@@ -18,16 +18,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class DMGCalcTest {
 
-    private static final int EXP_VAL_BASIC1 = 20;
-    private static final int EXP_VAL_BASIC2 = 17;
-    private static final int EXP_VAL_MULT1 = 24;
-    private static final int EXP_VAL_MULT2 = 14;
-    private static final short EXP_VAL_FULL1 = 12;
-    private static final short EXP_VAL_FULL2 = 7;
-    private static final short EXP_VAL_FULL3 = 33;
-    private static final short EXP_VAL_FULL4 = 42;
-    private Yokimon tengu, oni;
-    private Attack shadowB, katanaS;
+    private static final int EXP_VAL_BASIC1 = 22;
+    private static final int EXP_VAL_BASIC2 = 20;
+    private static final int EXP_VAL_MULT1 = 22;
+    private static final int EXP_VAL_MULT2 = 20;
+    private static final short EXP_VAL_FULL1 = 22;
+    private static final short EXP_VAL_FULL2 = 20;
+    private static final short EXP_VAL_FULL3 = 26;
+    private static final short EXP_VAL_FULL4 = 23;
+    private Yokimon y1, y2;
+    private Attack a1, a2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
 
@@ -37,10 +37,10 @@ class DMGCalcTest {
      */
     @BeforeEach
      void init() {
-        tengu = yokimonLoader.load(1);
-        oni = yokimonLoader.load(2);
-        shadowB = attackLoader.load(1);
-        katanaS = attackLoader.load(2);
+        y1 = yokimonLoader.load(1);
+        y2 = yokimonLoader.load(2);
+        a1 = attackLoader.load(1);
+        a2 = attackLoader.load(2);
     }
 
     /**
@@ -49,17 +49,9 @@ class DMGCalcTest {
     @Test
     void testBasicImpl() {
         final DmgCalculator toTest = new BasicImplDmgCalculator();
-        System.out.println(tengu.getAllStats().toString());
+        assertEquals(EXP_VAL_BASIC1, toTest.getDMG(y1, y2, a1));
+        assertEquals(EXP_VAL_BASIC2, toTest.getDMG(y1, y2, a2));
 
-
-        assertEquals(EXP_VAL_BASIC1, toTest.getDMG(tengu, oni, shadowB)); //7*90/7*4 = 20
-        assertEquals(EXP_VAL_BASIC2, toTest.getDMG(tengu, oni, katanaS)); //7*70/7*4 = 17
-
-    }
-    @Test
-    void showStats() {
-        System.out.println(tengu.getAllStats().toString());
-        System.out.println(oni.getAllStats().toString());
     }
 
     /**
@@ -68,9 +60,8 @@ class DMGCalcTest {
     @Test
     void testMultiplierImpl() {
         final DmgCalculator toTest = new MultiplierDmgCalculator();
-
-        assertEquals(EXP_VAL_MULT1, toTest.getDMG(tengu, oni, shadowB)); //80*1.2/4 = 24
-        assertEquals(EXP_VAL_MULT2, toTest.getDMG(tengu, oni, katanaS)); //70/1.2/4 = 14
+        assertEquals(EXP_VAL_MULT1, toTest.getDMG(y1, y2, a1));
+        assertEquals(EXP_VAL_MULT2, toTest.getDMG(y1, y2, a2));
     }
 
     /**
@@ -80,9 +71,9 @@ class DMGCalcTest {
     void testFullImpl() {
         final DmgCalculator toTest = new FullImplDmgCalculator();
 
-        assertEquals(EXP_VAL_FULL1, toTest.getDMG(tengu, oni, shadowB)); //80*1.2*0.5 = 48/4 = 12
-        assertEquals(EXP_VAL_FULL2, toTest.getDMG(tengu, oni, katanaS)); //70/1.2*0.5 = 29/4 = 7
-        assertEquals(EXP_VAL_FULL3, toTest.getDMG(oni, tengu, shadowB)); //80/1.2*2 = 133/4 = 33
-        assertEquals(EXP_VAL_FULL4, toTest.getDMG(oni, tengu, katanaS)); //70*1.2*2 = 168/4 = 42
+        assertEquals(EXP_VAL_FULL1, toTest.getDMG(y1, y2, a1));
+        assertEquals(EXP_VAL_FULL2, toTest.getDMG(y1, y2, a2));
+        assertEquals(EXP_VAL_FULL3, toTest.getDMG(y2, y1, a1));
+        assertEquals(EXP_VAL_FULL4, toTest.getDMG(y2, y1, a2));
     }
 }

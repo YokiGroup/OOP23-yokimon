@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * This version simply selects the next on the list as next fighter.
+ * This version of {@link NextYokimon} simply selects the next on the list as the next fighter.
  */
 public class DummyImplNextYokimon extends NextYokimon {
 
