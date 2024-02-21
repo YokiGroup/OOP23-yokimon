@@ -1,7 +1,10 @@
 package io.github.yokigroup.world;
 
 import io.github.yokigroup.util.Pair;
+import io.github.yokigroup.world.entity.people.Enemy;
 import io.github.yokigroup.world.tile.Tile;
+
+import java.util.Set;
 
 /**
  * A map containing tiles the player can traverse on.
@@ -18,6 +21,12 @@ public interface GameMap {
      * @return The tile at that position.
      */
     Tile getTileAt(Pair<Integer, Integer> position);
+
+    /**
+     * This function returns if the player has slain all the enemies on the map.
+     * @return True if all the enemies have been disabled.
+     */
+    boolean areAllEnemiesSlain();
 
     /**
      *
