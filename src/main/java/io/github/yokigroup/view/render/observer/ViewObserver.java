@@ -6,22 +6,15 @@ import io.github.yokigroup.view.render.Painter;
 
 public abstract class ViewObserver<T> implements EObserver<T> {
     private final Painter painter;
-    private final DrawQueue drawQueue;
 
     /**
      * @param painter painter to invoke
-     * @param drawQueue draw queue to use
      */
-    public ViewObserver(final Painter painter, final DrawQueue drawQueue) {
+    public ViewObserver(final Painter painter) {
         this.painter = painter;
-        this.drawQueue = drawQueue;
     }
 
     protected Painter painter() {
         return painter;
-    }
-
-    protected DrawQueue drawQueue() {
-        return drawQueue;
     }
 }

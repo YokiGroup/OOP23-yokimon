@@ -1,44 +1,36 @@
 package io.github.yokigroup.view.render;
 
+import javafx.application.Platform;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * Abstract class
+ * Implementation-independent abstract class used for painting to a screen.
  */
 public abstract class Painter {
 
-    private DrawQueue drawQueue;
+    private final Map<RenderState, DrawQueue> drawQueues;
+    private RenderState paintState;
 
-    public enum State {
-        FIGHT,
-        WORLD
+    public Painter() {
+        drawQueues = new HashMap<>();
+        Arrays.stream(RenderState.values()).forEach(
+                s -> drawQueues.put(s, new DrawQueueImpl())
+        );
     }
 
-    private State paintState;
-
-    /**
-     * constructor of this class
-     * @param drawQueue DrawQueue
-     */
-    public Painter(final DrawQueue drawQueue) {
-        this.drawQueue = drawQueue;
+    public final DrawQueue drawQueue(final RenderState state) {
+        return drawQueues.get(state);
+    }
+    public void setPaintState(final RenderState paintState) {
+        this.paintState = paintState;
+        paintEventText("");
+        Platform.runLater(this::repaint);
     }
 
-    public final void changeDrawQueue(final DrawQueue queue) {
-        synchronized (this) {
-            drawQueue = queue;
-        }
-    }
-
-    public final DrawQueue drawQueue() {
-        return drawQueue;
-    }
-
-    public void setPaintState(final State paintState) {
-        // FIXME temporary
-        // this.paintState = paintState;
-        this.paintState = State.WORLD;
-    }
-
-    public State getPaintState() {
+    public RenderState getPaintState() {
         return paintState;
     }
 

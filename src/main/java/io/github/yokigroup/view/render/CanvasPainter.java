@@ -37,7 +37,7 @@ public class CanvasPainter extends Painter {
     }
 
     public CanvasPainter(final GraphicsContext gc, final Label eventLabel) {
-        super(new DrawQueueImpl());
+        super();
         gc.setImageSmoothing(false);
         gc.setTextAlign(TextAlignment.CENTER);
         this.gc = gc;
@@ -45,7 +45,7 @@ public class CanvasPainter extends Painter {
     }
 
     public CanvasPainter(final GraphicsContext gc, final Label eventLabel, final DrawQueue drawQueue) {
-        super(drawQueue);
+        super();
         gc.setImageSmoothing(false);
         gc.setTextAlign(TextAlignment.CENTER);
         this.gc = gc;
@@ -87,7 +87,7 @@ public class CanvasPainter extends Painter {
 
     @Override
     public void repaint() {
-        final DrawQueue drawQueue = drawQueue();
+        final DrawQueue drawQueue = drawQueue(getPaintState());
         synchronized (drawQueue) {
             drawQueue.stream().forEach(this::paint);
         }
