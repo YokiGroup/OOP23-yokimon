@@ -19,22 +19,20 @@ import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlayerTest {
 
     private TestMessageHandler testMeg;
 
-    private final static class TestMessageHandler extends GameMessageHandler {
+    private static final class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
 
             private final TileBuilder tile = new TileBuilderImpl(0, "");
             private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
 
-            public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
+             TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
                 super(handler, modelObs);
             }
 
@@ -95,13 +93,14 @@ class PlayerTest {
             map.getEntitiesOnCurrentTile().forEach(en -> {
                 System.out.println(en.getHitBox().toString());
                 System.out.println(en.getPos().getPosition().getX() + "    " + en.getPos().getPosition().getY());
-            } );
+            });
         });
         testMeg.handle(PlayerCharacterSubmodule.class, play -> {
             for (double i = scalable; i < scaleTot; i = i + scalable) {
                 play.movePlayerBy(new Vector2Impl(play.getPosition().getPosition().getX() + i,
                         play.getPosition().getPosition().getY()));
-                System.out.println("x =" + play.getPosition().getPosition().getX() + "y= " + play.getPosition().getPosition().getY());
+                System.out.println("x =" + play.getPosition().getPosition().getX() + "y= "
+                        + play.getPosition().getPosition().getY());
                 System.out.println("x =" + GameMap.TILE_DIMENSIONS.x() / 2 + "y= " + GameMap.TILE_DIMENSIONS.y() / 2);
                 //assertEquals(GameMap.TILE_DIMENSIONS.x() / 2 + i, play.getPosition().getPosition().getX());
                 /* assertEquals(new PositionImpl
