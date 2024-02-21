@@ -17,7 +17,7 @@ public final class DrawObserver extends ViewObserver<SpriteDataWithState> {
     }
 
     @Override
-    public void update(SpriteDataWithState lastArg, SpriteDataWithState arg) {
+    public void update(final SpriteDataWithState lastArg, final SpriteDataWithState arg) {
         final Painter painter = painter();
         final DrawQueue drawQueue = painter.drawQueue(arg.state());
         drawQueue.removeFromDrawQueue(lastArg.spriteData());
