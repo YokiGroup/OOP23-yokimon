@@ -197,7 +197,7 @@ public abstract class People extends Entity {
     public abstract void resetPosition();
 
     /**
-     * Return the ray value of this People Entity
+     * Return the ray value of this People Entity.
      *
      * @return double
      */

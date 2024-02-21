@@ -1,6 +1,5 @@
 package io.github.yokigroup.world.entity.people;
 
-import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
 
 import io.github.yokigroup.event.submodule.FightSubmodule;
@@ -13,7 +12,6 @@ import io.github.yokigroup.world.entity.GenerationFactory;
 import io.github.yokigroup.world.entity.GenerationFactoryImpl;
 import io.github.yokigroup.world.entity.Position;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -149,7 +147,7 @@ public class Enemy extends People {
     }
 
     /**
-     * Add an encounter for this type of enemy
+     * Add an encounter for this type of enemy.
      */
     protected void encounter() {
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
@@ -159,11 +157,12 @@ public class Enemy extends People {
             });
         });
     }
+
     /**
      * Updates the state of the Enemy (switches between wander and follow).
      */
     @Override
-    public void updateCode(double delta) {
+    public void updateCode(final double delta) {
         if (!this.isActive()) {
             return;
         }

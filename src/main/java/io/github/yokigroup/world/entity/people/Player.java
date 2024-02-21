@@ -57,6 +57,6 @@ public class Player extends People {
      * Do not call this method.
      */
     @Override
-    public void updateCode(double delta) {
+    public void updateCode(final double delta) {
     }
 }
