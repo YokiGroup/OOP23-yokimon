@@ -22,10 +22,10 @@ class YokimonLoaderTest {
         AttackLoader attackLoader = new AttackLoader();
         Yokimon y = loader.load(1);
 
-        assertEquals("Pippo Pugile", y.getName());
-        assertEquals(Yokimon.GrowthRate.FAST, y.getGrowRate());
-        assertEquals(Color.BLACK, y.getYokimonColor());
-        assertEquals(attackLoader.load(1), y.getAttacks().get(0));
+        assertEquals("Tengu", y.getName());
+        assertEquals(Yokimon.GrowthRate.MEDIUM, y.getGrowRate());
+        assertEquals(Color.RED, y.getYokimonColor());
+        assertEquals(attackLoader.load(18), y.getAttacks().get(0));
         // FIXME check the validity of all yokimon fields (with reflection if need be)
 
     }

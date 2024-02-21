@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Test class for Next Yokimon.
  */
 final class NextYokTest {
-    private Yokimon y1, y2, y3;
+    private Yokimon tengu, oni, nekomata;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
 
     /**
@@ -25,9 +25,9 @@ final class NextYokTest {
      */
     @BeforeEach
     void init() {
-        y1 = yokimonLoader.load(1);
-        y2 = yokimonLoader.load(2);
-        y3 = yokimonLoader.load(3);
+        tengu = yokimonLoader.load(1);
+        oni = yokimonLoader.load(2);
+        nekomata = yokimonLoader.load(3);
     }
 
     /**
@@ -39,16 +39,16 @@ final class NextYokTest {
 
         final List<Yokimon> party1 = new LinkedList<>();
 
-        party1.add(y1); party1.add(y2); party1.add(y3);
-        assertEquals(Optional.of(y1), toTest.getNext(party1));
+        party1.add(tengu); party1.add(oni); party1.add(nekomata);
+        assertEquals(Optional.of(tengu), toTest.getNext(party1));
 
-        party1.remove(y1);
-        assertEquals(Optional.of(y2), toTest.getNext(party1));
+        party1.remove(tengu);
+        assertEquals(Optional.of(oni), toTest.getNext(party1));
 
-        party1.remove(y2);
-        assertEquals(Optional.of(y3), toTest.getNext(party1));
+        party1.remove(oni);
+        assertEquals(Optional.of(nekomata), toTest.getNext(party1));
 
-        party1.remove(y3);
+        party1.remove(nekomata);
         assertEquals(Optional.empty(), toTest.getNext(party1));
 
     }

@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  */
 final class OpponentAITest {
     private static final int RAND_LEVEL = 15;
-    private Yokimon y1, y2;
+    private Yokimon tengu, oni;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
 
@@ -28,8 +28,8 @@ final class OpponentAITest {
      */
     @BeforeEach
     public void init() {
-        y1 = yokimonLoader.load(1);
-        y2 = yokimonLoader.load(2);
+        tengu = yokimonLoader.load(1);
+        oni = yokimonLoader.load(2);
     }
 
     /**
@@ -40,9 +40,9 @@ final class OpponentAITest {
         final OpponentAI toTest = new DummyImplOpponentAI();
 
         assertEquals(Optional.of(attackLoader.load(4)).get().getName().toLowerCase(),
-                        toTest.getMove(y2, y1).get().getName().toLowerCase());
+                        toTest.getMove(oni, tengu).get().getName().toLowerCase());
         assertEquals(Optional.of(attackLoader.load(4)).get().getName().toLowerCase(),
-                toTest.getMove(y2, y1).get().getName().toLowerCase());
+                toTest.getMove(oni, tengu).get().getName().toLowerCase());
     }
 
     /**
@@ -51,20 +51,20 @@ final class OpponentAITest {
     @Test
     void testFullImplBasicDMGCalc() {
         final OpponentAI toTest = new FullImplOpponentAI(new BasicImplDmgCalculator());
-        y1.levelUP(RAND_LEVEL);
+        tengu.levelUP(RAND_LEVEL);
 
         //multiple attacks. BASIC --> the Attack with the biggest POWER value
 
         //                            first, the Attack with the biggest POWER value
         //FIXME -> PMD STYLE CHECKS: USE .EQUALS() INSTEAD
         assertEquals(Optional.of(attackLoader.load(1)).get().getName().toLowerCase(),
-                toTest.getMove(y2, y1).get().getName().toLowerCase());
+                toTest.getMove(oni, tengu).get().getName().toLowerCase());
         //                              then, another -random- one
         assertNotEquals(Optional.of(attackLoader.load(1)).get().getName().toLowerCase(),
-                toTest.getMove(y2, y1).get().getName().toLowerCase());
+                toTest.getMove(oni, tengu).get().getName().toLowerCase());
         //                              then again the best one
         assertEquals(Optional.of(attackLoader.load(1)).get().getName().toLowerCase(),
-                toTest.getMove(y2, y1).get().getName().toLowerCase());
+                toTest.getMove(oni, tengu).get().getName().toLowerCase());
     }
 
 }

@@ -1,9 +1,9 @@
 {
   "1": {
-    "name": "ULTRA COLPO FOLGORANTE DISTRUTTIVO DI MASSA",
-    "color": "PURPLE",
+    "name": "Shadow Ball",
+    "color": "BLACK",
     "effect": "NONE",
-    "power": 9001
+    "power": 90
   },
   "2": {
     "name": "Strong Punch",
@@ -21,6 +21,120 @@
     "name": "Slap",
     "color": "WHITE",
     "effect": "NONE",
-    "power": 70
+    "power": 40
+  },
+  "5": {
+    "name": "Flame Throw",
+    "color": "RED",
+    "effect": "NONE",
+    "power": 95
+  },
+  "6": {
+    "name": "TailSwipe",
+    "color": "WHITE",
+    "effect": "NONE",
+    "power": 60
+  },
+  "7": {
+    "name": "Whirlpool",
+    "color": "PURPLE",
+    "effect": "NONE",
+    "power": 60
+  },
+  "8": {
+    "name": "Bite",
+    "color": "BLACK",
+    "effect": "NONE",
+    "power": 60
+  },
+  "9": {
+    "name": "Revenge",
+    "color": "RED",
+    "effect": "NONE",
+    "power": 60
+  },
+  "10": {
+    "name": "Confusion",
+    "color": "PURPLE",
+    "effect": "NONE",
+    "power": 50
+  },
+  "11": {
+    "name": "Scratch",
+    "color": "WHITE",
+    "effect": "NONE",
+    "power": 40
+  },
+  "12": {
+    "name": "Tsunami",
+    "color": "RED",
+    "effect": "NONE",
+    "power": 100
+  },
+  "13": {
+    "name": "Psychic",
+    "color": "PURPLE",
+    "effect": "NONE",
+    "power": 90
+  },
+  "14": {
+    "name": "Soul Attack",
+    "color": "BLACK",
+    "effect": "NONE",
+    "power": 100
+  },
+  "15": {
+    "name": "Dream Eater",
+    "color": "PURPLE",
+    "effect": "NONE",
+    "power": 110
+  },
+  "16": {
+    "name": "Nine Tail Smash",
+    "color": "WHITE",
+    "effect": "NONE",
+    "power": 140
+  },
+  "17": {
+    "name": "Cut Attributes",
+    "color": "WHITE",
+    "effect": "NONE",
+    "power": 500
+  },
+  "18": {
+    "name": "KatanaSlash",
+    "color": "RED",
+    "effect": "NONE",
+    "power": 90
+  },
+  "19": {
+    "name": "DragonRage",
+    "color": "RED",
+    "effect": "NONE",
+    "power": 120
+  },
+  "20": {
+    "name": "Shadow Sneak",
+    "color": "BLACK",
+    "effect": "NONE",
+    "power": 40
+  },
+  "21": {
+    "name": "Extreme Speed",
+    "color": "WHITE",
+    "effect": "NONE",
+    "power": 80
+  },
+  "22": {
+    "name": "CelestialGun",
+    "color": "WHITE",
+    "effect": "NONE",
+    "power": 175
+  },
+  "23": {
+    "name": "Mock",
+    "color": "WHITE",
+    "effect": "NONE",
+    "power": 0
   }
 }

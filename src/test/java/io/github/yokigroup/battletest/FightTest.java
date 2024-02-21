@@ -21,7 +21,7 @@ final class FightTest {
     private static final int EXP_XPVALUE = 320;
 
     private static Fight toTest;
-    private static Yokimon y1, y2, y3, y4, y5;
+    private static Yokimon tengu, nekomata, baku, oni, oni2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
 
@@ -31,21 +31,21 @@ final class FightTest {
     @BeforeEach
     void init() {
 
-        y1 =  yokimonLoader.load(1);
-        y2 =  yokimonLoader.load(3);
-        y3 =  yokimonLoader.load(4);
+        tengu =  yokimonLoader.load(1);
+        nekomata =  yokimonLoader.load(3);
+        baku =  yokimonLoader.load(4);
 
-        y4 = yokimonLoader.load(2);
-        y5 = yokimonLoader.load(2);
+        oni = yokimonLoader.load(2);
+        oni2 = yokimonLoader.load(2);
 
         final List<Yokimon> myParty = new LinkedList<>();
-        myParty.add(y1);
-        myParty.add(y2);
-        myParty.add(y3);
+        myParty.add(tengu);
+        myParty.add(nekomata);
+        myParty.add(baku);
 
         final List<Yokimon> oppParty = new LinkedList<>();
-        oppParty.add(y4);
-        oppParty.add(y5);
+        oppParty.add(oni);
+        oppParty.add(oni2);
 
         toTest = new FightImpl(myParty, oppParty);
     }
@@ -55,8 +55,8 @@ final class FightTest {
      */
     @Test
     void testInstantiation() {
-        assertEquals(y1, toTest.getCurrentMyYokimon());
-        assertEquals(y4, toTest.getCurrentOpponent());
+        assertEquals(tengu, toTest.getCurrentMyYokimon());
+        assertEquals(oni, toTest.getCurrentOpponent());
     }
 
     /**
@@ -67,11 +67,11 @@ final class FightTest {
         toTest.attack(attackLoader.load(2));
         assertNotEquals(toTest.getCurrentOpponent().getActualHp(),
                         toTest.getCurrentOpponent().getMaxHp());
-        assertEquals(y4, toTest.getCurrentOpponent());             // should still be alive
+        assertEquals(oni, toTest.getCurrentOpponent());             // should still be alive
         assertFalse(toTest.isOver());
         assertFalse(toTest.victory());
         toTest.attack(attackLoader.load(4));
-        assertEquals(y5, toTest.getCurrentOpponent());            // should have changed
+        assertEquals(oni2, toTest.getCurrentOpponent());            // should have changed
         toTest.attack(attackLoader.load(1));
         toTest.attack(attackLoader.load(1));
         assertTrue(toTest.isOver());
