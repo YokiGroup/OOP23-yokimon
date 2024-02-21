@@ -9,7 +9,6 @@ import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -20,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 final class OpponentAITest {
     private static final int RAND_LEVEL = 15;
+    private static final int ATK_ID1 = 18;
+    private static final int ATK_ID2 = 13;
     private Yokimon y1, y2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
@@ -40,8 +41,8 @@ final class OpponentAITest {
     void testDummyImpl() {
         final OpponentAI toTest = new DummyImplOpponentAI();
 
-        assertEquals(attackLoader.load(18),toTest.getMove(y2, y1).get());
-        assertEquals(attackLoader.load(18),toTest.getMove(y2, y1).get());
+        assertEquals(attackLoader.load(ATK_ID1), toTest.getMove(y2, y1).get());
+        assertEquals(attackLoader.load(ATK_ID1), toTest.getMove(y2, y1).get());
     }
 
     /**
@@ -56,11 +57,11 @@ final class OpponentAITest {
 
         //                            first, the Attack with the biggest POWER value
 
-        assertEquals(attackLoader.load(13),toTest.getMove(y2, y1).get());
+        assertEquals(attackLoader.load(ATK_ID2), toTest.getMove(y2, y1).get());
         //                              then, another -random- one
-        assertNotEquals(attackLoader.load(13),toTest.getMove(y2, y1).get());
+        assertNotEquals(attackLoader.load(ATK_ID2), toTest.getMove(y2, y1).get());
         //                              then again the best one
-        assertEquals(attackLoader.load(13),toTest.getMove(y2, y1).get());
+        assertEquals(attackLoader.load(ATK_ID2), toTest.getMove(y2, y1).get());
     }
 
 }
