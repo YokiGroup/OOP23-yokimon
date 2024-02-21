@@ -10,7 +10,8 @@ import java.util.Random;
 import java.util.Optional;
 
 /**
- * Fuller version of OpponentAI, responsible for choosing the next best move for the opponent to use.
+ * Fuller version of @{@link OpponentAI}, responsible for choosing the next best move for the opponent to use.
+ * @see DmgCalculator
  */
 public class FullImplOpponentAI extends OpponentAI {
 
@@ -28,7 +29,7 @@ public class FullImplOpponentAI extends OpponentAI {
     }
 
     /**
-     * It alternates the most effective move (based on DmgCalculator) with a random one,
+     * It alternates the most effective {@link Attack} (based on {@link DmgCalculator}) with a random one,
      * chosen from the available attacks list.
      *
      * @param currMyYokimon Yokimon from player's party currently involved in the fight
