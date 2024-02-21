@@ -30,7 +30,7 @@ public final class GameLogicImpl extends Thread implements GameLogic {
     private void gameLoop() {
         while (running) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(5);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
