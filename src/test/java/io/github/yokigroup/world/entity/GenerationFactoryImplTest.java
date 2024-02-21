@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class GenerationFactoryImplTest {
     private final GenerationFactory generator = new GenerationFactoryImpl();
 

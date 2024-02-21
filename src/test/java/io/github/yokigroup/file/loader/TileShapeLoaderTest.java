@@ -51,7 +51,7 @@ class TileShapeLoaderTest {
         assertNotNull(loadedTileShape);
 
         assertEquals(2, loadedTileShape.getTiles().size());
-        for (var t: loadedTileShape.getTiles().getEntries()){
+        for (var t: loadedTileShape.getTiles().getEntries()) {
             Tile builtTile = t.build(handler);
             if (builtTile.getHitboxes().size() == 2) {
                 loadedTile = builtTile;

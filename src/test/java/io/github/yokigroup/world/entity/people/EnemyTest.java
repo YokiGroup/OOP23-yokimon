@@ -36,7 +36,7 @@ class EnemyTest {
     private static final double NUM_TEST = 20;
     private static final Vector2 V_NEAR = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 + 200,
             (double) GameMap.TILE_DIMENSIONS.y() / 2 + 100);
-    private final static class TestMessageHandler extends GameMessageHandler {
+    private static final class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
             private final Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2 - Y_TEST - 1);
@@ -164,15 +164,15 @@ class EnemyTest {
             for (final Entity entity : map.getEntitiesOnCurrentTile()) {
                 if (entity instanceof Enemy) {
                     testMeg.handle(PlayerCharacterSubmodule.class, player -> {
-                        System.out.println("Player pos: " + player.getPosition().getPosition().getX() +
-                                " y=" + player.getPosition().getPosition().getY());
+                        System.out.println("Player pos: " + player.getPosition().getPosition().getX()
+                                + " y=" + player.getPosition().getPosition().getY());
                         final Enemy en = (Enemy) entity;
                         assertEquals(Enemy.State.WANDER, en.getState());
                         for (int i = 0; i < NUM_TEST; i++) {
                             entity.update();
                             assertTrue(possibleDirections.contains(en.getDirection()));
-                            System.out.println("En pos: " + en.getPos().getPosition().getX() +
-                                    " y=" + en.getPos().getPosition().getY());
+                            System.out.println("En pos: " + en.getPos().getPosition().getX()
+                                    + " y=" + en.getPos().getPosition().getY());
                         }
 
                     });
