@@ -4,6 +4,9 @@ import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameMapSubmodule;
 
+/**
+ * Altar which always return a sonGuWong Yokimon
+ */
 public class AltarLegend extends Altar{
     /**
      * Constructs an Altar object with the specified attributes.
@@ -15,6 +18,9 @@ public class AltarLegend extends Altar{
         super(pos, messageHandler);
     }
 
+    /**
+     * Return always a sonGuWong.
+     */
     @Override
     public Yokimon getNewYokimon() {
         final GenerationFactory generator = new GenerationFactoryImpl();
