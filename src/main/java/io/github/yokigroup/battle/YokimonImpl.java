@@ -227,7 +227,9 @@ private void setLevelUPLogic(final LevelUpLogic logic) {
             this.actualHp = 0;
             this.active = false;
         }
-        this.actualHp -= damage;
+        else {
+            this.actualHp -= damage;
+        }
         return this.active;
     }
 

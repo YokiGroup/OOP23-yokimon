@@ -158,19 +158,18 @@ class EnemyTest {
     @Test
     void direction() {
         final Set<People.Direction> possibleDirections = Set.of(People.Direction.UP, People.Direction.DOWN,
-                People.Direction.LEFT, People.Direction.RIGHT);
+                People.Direction.LEFT, People.Direction.RIGHT, People.Direction.DOWN_RIGHT, People.Direction.LEFT_DOWN,
+                People.Direction.UP_LEFT, People.Direction.UP_RIGHT);
 
         testMeg.handle(TestMessageHandler.TestSubmodule.class, map -> {
             for (final Entity entity : map.getEntitiesOnCurrentTile()) {
                 if ( entity instanceof Enemy ) {
                     testMeg.handle(PlayerCharacterSubmodule.class, player -> {
-                        System.out.println("Player pos: " + player.getPosition().getPosition().getX() + " y=" + player.getPosition().getPosition().getY());
                         final Enemy en = (Enemy) entity;
                         assertEquals(Enemy.State.WANDER, en.getState());
                         for (int i = 0; i < NUM_TEST; i++) {
                             entity.update();
                             assertTrue(possibleDirections.contains(en.getDirection()));
-                            System.out.println("En pos: " + en.getPos().getPosition().getX() + " y=" + en.getPos().getPosition().getY());
                         }
 
                     });

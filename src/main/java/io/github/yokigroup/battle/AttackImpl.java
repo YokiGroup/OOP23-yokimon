@@ -13,18 +13,6 @@ import java.util.Objects;
  */
 public record AttackImpl(int id, String name, Color color, int power, Attack.Effect effect) implements Attack {
 
-
-    /**
-     * Constructs an AttackImpl object with generic attributes.
-     *
-     * @param id    id of the attack
-     * @param name  The name of the Attack.
-     * @param color The color of the Attack.
-     */
-    public AttackImpl(final int id, final String name, final Color color) {
-        this(id, name, color, 100, Effect.NONE);
-    }
-
     @Override
     public int getId() {
         return 0;
