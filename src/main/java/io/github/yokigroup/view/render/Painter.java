@@ -1,5 +1,7 @@
 package io.github.yokigroup.view.render;
 
+import javafx.application.Platform;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +24,7 @@ public abstract class Painter {
 
     public void setPaintState(final RenderState paintState) {
         this.paintState = paintState;
+        Platform.runLater(this::repaint);
     }
 
     public RenderState getPaintState() {
