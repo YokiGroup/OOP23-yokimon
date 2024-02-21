@@ -33,7 +33,9 @@ public abstract class Painter {
     }
 
     public void setPaintState(final State paintState) {
-        this.paintState = paintState;
+        // FIXME temporary
+        // this.paintState = paintState;
+        this.paintState = State.WORLD;
     }
 
     public State getPaintState() {
