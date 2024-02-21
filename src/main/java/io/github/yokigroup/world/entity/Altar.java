@@ -76,7 +76,7 @@ public class Altar extends Entity {
      * Updates the state of the Altar.
      */
     @Override
-    public void update() {
+    public void updateCode(double delta) {
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {
             Objects.requireNonNull(pos.getPosition().getPosition(), "Position of the player invalid");
 

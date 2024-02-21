@@ -116,11 +116,11 @@ class EnemyTest {
                         final Enemy en = (Enemy) entity;
                         final Position near = new PositionImpl(V_NEAR);
                         entity.setPos(near);
-                        entity.update();
+                        entity.updateCode();
 
                         assertEquals(Enemy.State.FOLLOW, en.getState());
                         for (int i = 0; i < NUM_TEST; i++) {
-                            entity.update();
+                            entity.updateCode();
                             assertEquals(Enemy.State.FOLLOW, en.getState());
                         }
 
@@ -143,7 +143,7 @@ class EnemyTest {
                         final Enemy en = (Enemy) entity;
                         assertEquals(Enemy.State.WANDER, en.getState());
                         for (int i = 0; i < NUM_TEST ; i++) {
-                            entity.update();
+                            entity.updateCode();
                             assertEquals(Enemy.State.WANDER, en.getState());
                         }
 
@@ -168,7 +168,7 @@ class EnemyTest {
                         final Enemy en = (Enemy) entity;
                         assertEquals(Enemy.State.WANDER, en.getState());
                         for (int i = 0; i < NUM_TEST; i++) {
-                            entity.update();
+                            entity.updateCode();
                             assertTrue(possibleDirections.contains(en.getDirection()));
                         }
 
