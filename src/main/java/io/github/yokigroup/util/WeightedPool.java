@@ -11,7 +11,6 @@ public interface WeightedPool<T> {
 
     /**
      * Creates a copy of the WeightedPool object.
-     * @param pool The pool to copy.
      * @param copyFunction The function to make sure to deep copy the generic element.
      * @return A copied WeightedPool.
      */
