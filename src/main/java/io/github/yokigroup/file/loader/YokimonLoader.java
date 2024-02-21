@@ -57,8 +57,6 @@ public final class YokimonLoader extends IdJsonLoader<Yokimon> {
             );
         });
 
-        final Yokimon yokimon = new YokimonImpl(id, name, color, baseStats, growthRate, learnableMoves);
-        yokimon.setLevelUPLogic(new LevelUpLogicImpl());
-        return yokimon;
+        return new YokimonImpl(id, name, color, baseStats, growthRate, learnableMoves);
     }
 }

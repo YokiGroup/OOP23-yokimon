@@ -61,12 +61,6 @@ public interface Yokimon {
     }
 
     /**
-     * Return a copy of this Yokimon
-     * @return Yokimon
-     */
-    Yokimon copyOf();
-
-    /**
      * Return the id of the yokimon.
      *
      * @return return the id of the yokimon
@@ -212,7 +206,7 @@ public interface Yokimon {
      * Set the level_up logic
      * @param logic Logic level_up
      */
-    void setLevelUPLogic(LevelUpLogic logic);
+   // void setLevelUPLogic(LevelUpLogic logic);
     /**
      * Subtracts to the Actual Hp of the yokimon the parameter damage
      * if the Hp of the yokimon reaches zero, it returns true
