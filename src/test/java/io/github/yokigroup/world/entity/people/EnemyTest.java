@@ -36,7 +36,7 @@ class EnemyTest {
     private static final double NUM_TEST = 20;
     private static final Vector2 V_NEAR = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 + 200,
             (double) GameMap.TILE_DIMENSIONS.y() / 2 + 100);
-    final private static class TestMessageHandler extends GameMessageHandler {
+    private final static class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
             private final Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2 - Y_TEST - 1);
@@ -47,14 +47,14 @@ class EnemyTest {
             private final Position pos1 = new PositionImpl(v2);
 
 
-            TileBuilder tile = new TileBuilderImpl(0, "")
+            private final TileBuilder tile = new TileBuilderImpl(0, "")
                     .addEntity(TileBuilder.EntityType.ALTAR, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, pos1);
-            final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0,0)).build(this.handler());
+            private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
 
 
-            public TestSubmodule(final MessageHandler handler, ModelObserver modelObs) {
+            TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
                 super(handler, modelObs);
             }
 
@@ -64,7 +64,7 @@ class EnemyTest {
             }
 
             @Override
-            public boolean movePlayerToTile(Direction dir) {
+            public boolean movePlayerToTile(final Direction dir) {
                 return map.movePlayerTileMapPosition(dir);
             }
 
@@ -142,7 +142,7 @@ class EnemyTest {
                     testMeg.handle(PlayerCharacterSubmodule.class, player -> {
                         final Enemy en = (Enemy) entity;
                         assertEquals(Enemy.State.WANDER, en.getState());
-                        for (int i = 0; i < NUM_TEST ; i++) {
+                        for (int i = 0; i < NUM_TEST; i++) {
                             entity.update();
                             assertEquals(Enemy.State.WANDER, en.getState());
                         }
@@ -162,15 +162,17 @@ class EnemyTest {
 
         testMeg.handle(TestMessageHandler.TestSubmodule.class, map -> {
             for (final Entity entity : map.getEntitiesOnCurrentTile()) {
-                if ( entity instanceof Enemy ) {
+                if (entity instanceof Enemy) {
                     testMeg.handle(PlayerCharacterSubmodule.class, player -> {
-                        System.out.println("Player pos: " + player.getPosition().getPosition().getX() + " y=" + player.getPosition().getPosition().getY());
+                        System.out.println("Player pos: " + player.getPosition().getPosition().getX() +
+                                " y=" + player.getPosition().getPosition().getY());
                         final Enemy en = (Enemy) entity;
                         assertEquals(Enemy.State.WANDER, en.getState());
                         for (int i = 0; i < NUM_TEST; i++) {
                             entity.update();
                             assertTrue(possibleDirections.contains(en.getDirection()));
-                            System.out.println("En pos: " + en.getPos().getPosition().getX() + " y=" + en.getPos().getPosition().getY());
+                            System.out.println("En pos: " + en.getPos().getPosition().getX() +
+                                    " y=" + en.getPos().getPosition().getY());
                         }
 
                     });
