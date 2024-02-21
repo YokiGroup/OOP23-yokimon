@@ -77,7 +77,7 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
 
     @Override
     protected void updateEntities() {
-        getEntitiesOnCurrentTile().forEach(Entity::update);
+        gameMap.getPlayerTile().updateEntities();
         publishEntitySpriteData();
     }
 
