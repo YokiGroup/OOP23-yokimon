@@ -13,6 +13,7 @@ import io.github.yokigroup.battle.xpcalculator.FullImplXPCalculator;
 import io.github.yokigroup.battle.xpcalculator.XPCalculator;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
+import io.github.yokigroup.event.submodule.FightSubmodule;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -20,7 +21,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * The actual Fight implementation communicating with the Logic.
+ * The actual {@link Fight} implementation communicating with the Logic.
+ * @see FightSubmodule
  */
 public final class FightImpl implements Fight {
 
@@ -52,6 +54,7 @@ public final class FightImpl implements Fight {
      * Builder to instantiate the fight through the Logic.
      * @param myYokimons my party
      * @param oppYokimons the opponent party
+     * @throws UnsupportedOperationException in case one of the party is empty.
      */
     public FightImpl(final List<Yokimon> myYokimons, final List<Yokimon> oppYokimons) throws UnsupportedOperationException {
         this.myYokimons = myYokimons.stream().map(YokimonImpl::new).collect(Collectors.toList());
