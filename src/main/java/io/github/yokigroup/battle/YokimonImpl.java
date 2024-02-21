@@ -66,7 +66,6 @@ public class YokimonImpl implements Yokimon {
         this.learnableMoves = Map.copyOf(Objects.requireNonNull(learnableMoves, "learnableMoves passed was null"));
         this.resetAttack();
         this.setLevelUPLogic(new LevelUpLogicImpl());
-
     }
 
     /**
@@ -93,10 +92,9 @@ public class YokimonImpl implements Yokimon {
         this(Objects.requireNonNull(yokimon, "YokimonImpl passed was null").getId(), yokimon.getName(),
                 yokimon.getYokimonColor(), Map.copyOf(yokimon.getAllBaseStats()), yokimon.getGrowRate(),
                 yokimon.getLevel(), Map.copyOf(yokimon.getLearnableAttacks()));
-        this.setLevelUPLogic(new LevelUpLogicImpl());
+        this.setAttacks(List.copyOf(yokimon.getAttacks()));
         this.setExp(yokimon.getXp());
         this.setActualHp(yokimon.getActualHp());
-        this.setAttacks(List.copyOf(yokimon.getAttacks()));
     }
     /**
      * return the id of the yokimon.
@@ -217,8 +215,7 @@ public class YokimonImpl implements Yokimon {
         this.maxHp = newValue;
     }
 
-
-    private void setLevelUPLogic(final LevelUpLogic logic) {
+private void setLevelUPLogic(final LevelUpLogic logic) {
         Objects.requireNonNull(logic, "Logic passed was null");
         this.levelUtility = Optional.of(logic);
         this.levelUtility.get().reset(this);
