@@ -247,12 +247,6 @@ public interface Yokimon {
      */
     double getXp();
 
-    /**
-     * Return the current xpNextLevel amount of the yokimon.
-     *
-     * @return Double getNextLevelXp.
-     */
-    double getNextXp();
 
     /**
      * Adds a certain amount of XP to the Yokimon, potentially triggering level-up and
