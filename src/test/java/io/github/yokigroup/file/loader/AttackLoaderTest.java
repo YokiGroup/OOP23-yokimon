@@ -4,8 +4,7 @@ import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Color;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AttackLoaderTest {
     private static AttackLoader loader;
@@ -17,13 +16,13 @@ class AttackLoaderTest {
 
     @Test
     void load() {
-        final int attack_id = 1;
+        final int attackId = 1;
         final String expectedName = "Shadow Ball";
         final Color expectedColor = Color.BLACK;
         final Attack.Effect expectedEffect = Attack.Effect.NONE;
         final int expectedPower = 90;
 
-        Attack toTest = loader.load(attack_id);
+        Attack toTest = loader.load(attackId);
 
         assertEquals(expectedName, toTest.getName());
         assertEquals(expectedColor, toTest.getColor());
