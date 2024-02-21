@@ -29,7 +29,8 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
 
     private Optional<Direction> checkTileChange() {
         final Pair<Integer, Integer> mapDim = GameMap.TILE_DIMENSIONS;
-        final Vector2 playerPos = handler().handle(PlayerCharacterSubmodule.class, PlayerCharacterSubmodule::getPosition).getPosition();
+        final Vector2 playerPos = handler().handle(PlayerCharacterSubmodule.class,
+                                    PlayerCharacterSubmodule::getPosition).getPosition();
         final double bound = 40.;
         final double upperBoundProp = (bound - 1.) / bound;
         final double lowerBoundProp = 1. - upperBoundProp;
@@ -46,7 +47,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
         return Optional.empty();
     }
 
-    private Position relocatedPosition(Position playerPos, Direction dir) {
+    private Position relocatedPosition(final Position playerPos, final Direction dir) {
         final double half = 0.5;
         final double tileChangeOffset = 0.9;
         final Vector2 dirVec = Vector2Impl.castPair(dir.getOffset());
@@ -61,6 +62,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
 
     /**
      * @param handler to init the submodule with
+     * @param modelObs ...
      */
     public GameMapSubmoduleAbs(final MessageHandler handler, ModelObserver modelObs) {
         super(handler, modelObs);
@@ -89,11 +91,18 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
      */
     public abstract Set<Entity> getEntitiesOnCurrentTile();
 
+    /**
+     * ...
+     */
     protected abstract void updateEntities();
+
+    /**
+     * ...
+     */
     protected abstract void updateTile();
 
     @Override
-    protected final void updateCode(double delta) {
+    protected final void updateCode(final double delta) {
         updateEntities();
         /*
         this function should query the player's position and consider whether to change Tile if the player is crossing
