@@ -57,10 +57,13 @@ public class CanvasPainter extends Painter {
         if (currentNotification != null
                 && currentNotification.x() < System.currentTimeMillis()) {
             currentNotification = null;
+            eventLabel.setText("");
         }
         final Vector2 canvasDim = getCanvasDim();
         final Vector2 absSpriteDim = sprite.getNormalizedDimension().times(canvasDim);
         final Vector2 absSpritePos = sprite.getNormalizedPosition().times(canvasDim).minus(absSpriteDim.scale(.5));
+
+        eventLabel.setFont(new Font(canvasDim.getX() / CANVAS_DIM_DIVISOR));
 
         gc.drawImage(
                 consultCache(sprite.spriteURL()),
@@ -70,7 +73,6 @@ public class CanvasPainter extends Painter {
                 absSpriteDim.getY()
         );
         if (currentNotification != null) {
-            eventLabel.setFont(new Font(canvasDim.getX() / CANVAS_DIM_DIVISOR));
             eventLabel.setText(currentNotification.y());
         }
     }
