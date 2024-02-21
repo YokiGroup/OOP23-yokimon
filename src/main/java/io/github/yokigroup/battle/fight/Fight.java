@@ -2,14 +2,19 @@ package io.github.yokigroup.battle.fight;
 
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.Attack;
+import io.github.yokigroup.event.submodule.FightSubmodule;
+import io.github.yokigroup.event.observer.EObserver;
+import io.github.yokigroup.battle.LevelUpLogic;
 
 /**
- * Interface for Fight.
+ * The game mechanics necessary for the fight.
+ * @see FightSubmodule
+ * @see EObserver
  */
 public interface Fight {
 
     /**
-     * Different success rates trigger a different quote on the view.
+     * Different success rates trigger a different quote on the View right after a move.
      */
      enum Success {
         /**
@@ -39,7 +44,7 @@ public interface Fight {
     }
 
     /**
-     * Meant for signaling the state of the fight (Observer pattern).
+     * Meant for signaling the state of the fight
      */
     enum State {
         /**
@@ -57,20 +62,14 @@ public interface Fight {
     }
 
     /**
-     * Progress the fight one turn.
-     * @param myAttack the player's attack.
-     */
-    //void progress(Attack myAttack);
-
-    /**
-     * Method through which the Logic can communicate which attack the player wants to use and do so.
-     * @param myAttack the attack that's meant to be used by my Yokimon
-     * @return success rate over my Yokimon's attack
+     * Method through which the Logic can communicate which {@link Attack} the player wants to use and do so.
+     * @param myAttack the attack that's meant to be used by my {@link Yokimon}
+     * @return success rate over my {@link Yokimon}'s attack
      */
     Success attack(Attack myAttack);
 
     /**
-     * Triggers the current opponent Yokimon attack.
+     * Triggers the current opponent Yokimon {@link Attack}.
      * @return success rate over opponent's attack
      */
     Success getAttacked();
@@ -82,7 +81,7 @@ public interface Fight {
     boolean isOver();
 
     /**
-     * @return whether my Yokimon won
+     * @return whether my {@link Yokimon} won
      */
     boolean victory();
 
@@ -94,14 +93,14 @@ public interface Fight {
     int getXP(Yokimon yokimon);
 
     /**
-     * Useful for the View and for the level-up mechanism.
-     * @return my party's Yokimon currently involved in the fight
+     * Useful for the View and for the {@link LevelUpLogic} mechanism.
+     * @return my party's {@link Yokimon} currently involved in the fight
      */
     Yokimon getCurrentMyYokimon();
 
     /**
      * Useful for the View.
-     * @return my opponent's Yokimon currently involved in the fight
+     * @return my opponent's {@link Yokimon} currently involved in the fight
      */
     Yokimon getCurrentOpponent();
 
@@ -112,8 +111,8 @@ public interface Fight {
     State getState();
 
     /**
-     * This is meant for displaying the life bar in the view.
-     * @param yokimon the yokimon whose HP percentage must be shown
+     * This is meant to display the life bar in the View.
+     * @param yokimon the {@link Yokimon} whose HP percentage must be shown
      * @return the percentage of HP points left.
      */
     double getHPPercentage(Yokimon yokimon);
