@@ -24,9 +24,9 @@ import java.util.stream.Collectors;
  */
 public final class FightImpl implements Fight {
 
-    private static final int TOPLIMIT_FAIL = 8;
-    private static final int TOPLIMIT_WEAK = 18;
-    private static final int TOPLIMIT_GOOD = 30;
+    private static final int TOPLIMIT_FAIL = 10;
+    private static final int TOPLIMIT_WEAK = 15;
+    private static final int TOPLIMIT_GOOD = 25;
 
     /* parties */
     private final List<Yokimon> myYokimons;
