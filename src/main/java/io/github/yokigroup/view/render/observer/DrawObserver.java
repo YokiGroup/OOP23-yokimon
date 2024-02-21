@@ -1,35 +1,30 @@
 package io.github.yokigroup.view.render.observer;
 
-import io.github.yokigroup.core.state.SpriteData;
-import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.view.render.DrawQueue;
 import io.github.yokigroup.view.render.Painter;
-import io.github.yokigroup.view.render.RenderState;
 import javafx.application.Platform;
-
-import java.util.Set;
 
 /**
  * Observer for drawing sprites to screen.
  */
-public final class DrawObserver extends ViewObserver<SpriteData> {
+public final class DrawObserver extends ViewObserver<SpriteDataWithState> {
 
     /**
      * @param painter   painter to invoke
-     * @param drawQueue draw queue to use
      */
-    public DrawObserver(final Painter painter, final DrawQueue drawQueue) {
-        super(painter, drawQueue);
+    public DrawObserver(final Painter painter) {
+        super(painter);
     }
 
     @Override
-    public void update(final SpriteData lastArg, final SpriteData arg) {
+    public void update(SpriteDataWithState lastArg, SpriteDataWithState arg) {
         final Painter painter = painter();
-        final DrawQueue drawQueue = drawQueue();
-        drawQueue.removeFromDrawQueue(lastArg);
-        drawQueue.addToDrawQueue(arg);
-        if (painter.getPaintState() == RenderState.WORLD) {
+        final DrawQueue drawQueue = painter.drawQueue(arg.state());
+        drawQueue.removeFromDrawQueue(lastArg.spriteData());
+        drawQueue.addToDrawQueue(arg.spriteData());
+        if (painter.getPaintState() == arg.state()) {
             Platform.runLater(painter::repaint);
         }
+
     }
 }

@@ -1,28 +1,23 @@
 package io.github.yokigroup.view.render;
 
-import io.github.yokigroup.view.render.observer.ModelObserver;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Painter {
 
-    private DrawQueue drawQueue;
+    private final Map<RenderState, DrawQueue> drawQueues;
     private RenderState paintState;
 
-    public Painter(final DrawQueue drawQueue) {
-        this.drawQueue = drawQueue;
+    public Painter() {
+        drawQueues = new HashMap<>();
+        Arrays.stream(RenderState.values()).forEach(
+                s -> drawQueues.put(s, new DrawQueueImpl())
+        );
     }
 
-    public final void changeDrawQueue(final DrawQueue queue) {
-        synchronized (drawQueue) {
-            drawQueue = queue;
-        }
-        synchronized (drawQueue) {
-            paintEventText("");
-            repaint();
-        }
-    }
-
-    public final DrawQueue drawQueue() {
-        return drawQueue;
+    public final DrawQueue drawQueue(final RenderState state) {
+        return drawQueues.get(state);
     }
 
     public void setPaintState(final RenderState paintState) {
