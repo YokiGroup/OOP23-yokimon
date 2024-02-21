@@ -86,8 +86,9 @@ public class CanvasPainter extends Painter {
 
     @Override
     public void repaint() {
-        synchronized (this) {
-            drawQueue().stream().forEach(this::paint);
+        final DrawQueue drawQueue = drawQueue();
+        synchronized (drawQueue) {
+            drawQueue.stream().forEach(this::paint);
         }
     }
 }
