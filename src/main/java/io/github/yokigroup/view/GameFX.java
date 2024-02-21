@@ -60,8 +60,6 @@ public class GameFX extends Application {
                 gameCanvas.setWidth(paneWidth);
                 gameCanvas.setHeight(paneWidth / ratio);
             }
-
-            painter.repaint();
         }
     }
 
@@ -80,7 +78,7 @@ public class GameFX extends Application {
         Painter painter = new CanvasPainter(gameCanvas.getGraphicsContext2D(), eventLabel);
 
         ModelObserverImpl modelObs = new ModelObserverImpl(painter);
-        GameLogicImpl gameThread = new GameLogicImpl(modelObs);
+        GameLogicImpl gameThread = new GameLogicImpl(modelObs, painter);
         MessageHandler handler = gameThread.getMessageHandler();
 
         scene.setOnKeyPressed(

@@ -22,8 +22,5 @@ public class DrawSetObserver extends ViewObserver<Pair<RenderState, Set<SpriteDa
         DrawQueue drawQueue = painter.drawQueue(arg.x());
         drawQueue.removeFromDrawQueue(lastArg.y());
         drawQueue.addToDrawQueue(arg.y());
-        if (painter.getPaintState() == RenderState.WORLD) {
-            Platform.runLater(painter::repaint);
-        }
     }
 }

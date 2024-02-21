@@ -1,9 +1,14 @@
 package io.github.yokigroup.world;
 
 import io.github.yokigroup.util.Pair;
+import io.github.yokigroup.world.entity.Entity;
+import io.github.yokigroup.world.entity.people.Enemy;
 import io.github.yokigroup.world.tile.Tile;
 
+import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * The map of the game.
@@ -35,6 +40,17 @@ class GameMapImpl implements GameMap {
     @Override
     public final Tile getTileAt(final Pair<Integer, Integer> position) {
         return this.tileMap.get(position);
+    }
+
+    @Override
+    public boolean areAllEnemiesSlain() {
+        final Optional<Entity> aliveEntities = this.tileMap.values().stream()
+                .map(Tile::getEntities)
+                .flatMap(Collection::stream)
+                .filter(e -> e instanceof Enemy)
+                .filter(e -> ((Enemy) e).isActive())
+                .findAny();
+        return aliveEntities.isEmpty();
     }
 
     @Override

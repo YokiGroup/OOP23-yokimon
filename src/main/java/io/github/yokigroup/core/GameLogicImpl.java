@@ -1,6 +1,7 @@
 package io.github.yokigroup.core;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.view.render.DrawCallable;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 
 /**
@@ -8,11 +9,13 @@ import io.github.yokigroup.view.render.observer.ModelObserver;
  */
 public final class GameLogicImpl extends Thread implements GameLogic {
     private final MessageHandler handler;
+    private final DrawCallable renderer;
     private boolean running = true;
 
-    public GameLogicImpl(ModelObserver view) {
+    public GameLogicImpl(final ModelObserver view, final DrawCallable renderer) {
         super();
-        handler = new GameMessageHandler(view);
+        this.handler = new GameMessageHandler(view);
+        this.renderer = renderer;
     }
 
     public MessageHandler getMessageHandler() {
@@ -32,6 +35,7 @@ public final class GameLogicImpl extends Thread implements GameLogic {
                 throw new RuntimeException(e);
             }
             handler.updateSubmodules();
+            renderer.safeDraw();
         }
     }
 

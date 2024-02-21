@@ -4,6 +4,7 @@ import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -80,7 +81,7 @@ public class CanvasPainter extends Painter {
     }
 
     @Override
-    public void paintEventText(final String eventText) {
+    public void setEventText(final String eventText) {
         final long waitTime = 3000; // 3 seconds
         currentNotification = new Pair<>(System.currentTimeMillis() + waitTime, eventText);
     }
@@ -91,5 +92,10 @@ public class CanvasPainter extends Painter {
         synchronized (drawQueue) {
             drawQueue.stream().forEach(this::paint);
         }
+    }
+
+    @Override
+    public void safeDraw() {
+        Platform.runLater(this::repaint);
     }
 }
