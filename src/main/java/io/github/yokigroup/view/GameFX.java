@@ -30,7 +30,7 @@ import java.util.function.Consumer;
  * Main JavaFX Application entry.
  */
 public class GameFX extends Application {
-    private final String ROOTRESOUCEPATH = "io/github/yokigroup/view/";
+    private final String ROOT_RESOUCE_PATH = "io/github/yokigroup/view/";
     public final static Rectangle2D screenSize = Screen.getPrimary().getBounds();
 
     private static class GameWindowResizeListener<T> implements ChangeListener<T> {
@@ -68,15 +68,15 @@ public class GameFX extends Application {
     @Override
     public void start(final Stage stage) throws Exception {
         final double scaledY = screenSize.getHeight() * 2.0 / 3.0;
-        final double ratio = 16.0/9.0; // 16:9 ratio
-        final Dimension2D windowDim = new Dimension2D(scaledY*ratio, scaledY);
+        final double ratio = 16.0 / 9.0; // 16:9 ratio
+        final Dimension2D windowDim = new Dimension2D(scaledY * ratio, scaledY);
 
-        final BorderPane rootElem = FXMLLoader.load(ClassLoader.getSystemResource(ROOTRESOUCEPATH + "test.fxml"));
+        final BorderPane rootElem = FXMLLoader.load(ClassLoader.getSystemResource(ROOT_RESOUCE_PATH + "test.fxml"));
         final Scene scene = new Scene(rootElem, windowDim.getWidth(), windowDim.getHeight());
 
-        final List<Node> stackPane = ((StackPane)rootElem.getCenter()).getChildren();
+        final List<Node> stackPane = ((StackPane) rootElem.getCenter()).getChildren();
         final Canvas gameCanvas = (Canvas) stackPane.get(0); // FIXME maybe casting like this isn't the smartest choice
-        final Label eventLabel = (Label) ((BorderPane)stackPane.get(1)).getBottom();
+        final Label eventLabel = (Label) ((BorderPane) stackPane.get(1)).getBottom();
         Painter painter = new CanvasPainter(gameCanvas.getGraphicsContext2D(), eventLabel);
 
         ModelObserverImpl modelObs = new ModelObserverImpl(painter);
@@ -103,7 +103,7 @@ public class GameFX extends Application {
 
         stage.setOnCloseRequest(a -> gameThread.stopGame());
 
-        final InputStream iconStream = ClassLoader.getSystemResourceAsStream(ROOTRESOUCEPATH + "icon.png");
+        final InputStream iconStream = ClassLoader.getSystemResourceAsStream(ROOT_RESOUCE_PATH + "icon.png");
         if (iconStream != null) {
             stage.getIcons().add(new Image(iconStream));
         }
@@ -112,6 +112,10 @@ public class GameFX extends Application {
         stage.show();
     }
 
+    /**
+     * Runs this view.
+     * @param args String[]
+     */
     public static void run(final String[] args) {
         launch(args);
     }

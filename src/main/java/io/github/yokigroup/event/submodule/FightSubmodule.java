@@ -19,8 +19,8 @@ import java.util.Optional;
  * @author Giovanni Paone
  */
 public final class FightSubmodule extends FightSubmoduleAbs {
-    private Fight lastAnnouncedFight = null;
-    private Publisher<Fight> fightPub = new PublisherImpl<>();
+    private final Fight lastAnnouncedFight = null;
+    private final Publisher<Fight> fightPub = new PublisherImpl<>();
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.

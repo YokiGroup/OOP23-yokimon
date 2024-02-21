@@ -45,9 +45,10 @@ public class GameMessageHandler implements MessageHandler {
     /**
      * Initializes game logic submodules.
      * @return Initialized SubModuleMap
+     * @param modelObs modelObs
      * @see SubmoduleMap
      */
-    private SubmoduleMap initSubmodules(ModelObserver modelObs) {
+    private SubmoduleMap initSubmodules(final ModelObserver modelObs) {
         SubmoduleMap retMap = new SubmoduleMapImpl();
         final var submoduleTypes = getSubmoduleTypes();
 
@@ -63,10 +64,7 @@ public class GameMessageHandler implements MessageHandler {
         return retMap;
     }
 
-    /**
-     * Initializes a GameOrchestrator with a new GameMap and PlayerCharacter, along with the required submodules.
-     */
-    public GameMessageHandler(ModelObserver modelObs) {
+    public GameMessageHandler(final ModelObserver modelObs) {
         subModules = initSubmodules(modelObs);
     }
 

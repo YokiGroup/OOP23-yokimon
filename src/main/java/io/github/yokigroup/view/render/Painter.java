@@ -1,14 +1,23 @@
 package io.github.yokigroup.view.render;
 
+/**
+ * Abstract class
+ */
 public abstract class Painter {
 
     private DrawQueue drawQueue;
+
     public enum State {
         FIGHT,
         WORLD
     }
+
     private State paintState;
 
+    /**
+     * constructor of this class
+     * @param drawQueue DrawQueue
+     */
     public Painter(final DrawQueue drawQueue) {
         this.drawQueue = drawQueue;
     }
@@ -32,5 +41,6 @@ public abstract class Painter {
     }
 
     public abstract void paintEventText(String eventText);
+
     public abstract void repaint();
 }
