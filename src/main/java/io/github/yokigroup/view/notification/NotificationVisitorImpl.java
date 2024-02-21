@@ -25,6 +25,14 @@ public class NotificationVisitorImpl implements NotificationVisitor, EObserver<N
     }
 
     @Override
+    public String getDeathNotificationText(final DeathNotification notification) {
+        return switch (notification.getCause()) {
+            case DEFEATED_IN_BATTLE -> "Sei stato sconfitto...";
+            case UNPREPARED_FOR_BATTLE -> "Senza yokimon non puoi combattere";
+        };
+    }
+
+    @Override
     public void update(final Notification lastArg, final Notification arg) {
         painter.setEventText(arg.getMessage(this));
     }

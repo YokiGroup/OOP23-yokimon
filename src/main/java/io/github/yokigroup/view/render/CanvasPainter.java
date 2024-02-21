@@ -57,7 +57,6 @@ public class CanvasPainter extends Painter {
         if (currentNotification != null
                 && currentNotification.x() < System.currentTimeMillis()) {
             currentNotification = null;
-            eventLabel.setText("");
         }
         final Vector2 canvasDim = getCanvasDim();
         final Vector2 absSpriteDim = sprite.getNormalizedDimension().times(canvasDim);

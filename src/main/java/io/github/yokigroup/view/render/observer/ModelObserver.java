@@ -13,4 +13,5 @@ public interface ModelObserver {
     void addSpritePublishers(RenderState state, Publisher<Set<SpriteData>> spriteObs);
     void addFightPublisher(Publisher<Fight> fightObs);
     void addNotificationPublisher(Publisher<Notification> notificationPub);
+    void addStateChangePublisher(Publisher<RenderState> renderStatePublisher);
 }
