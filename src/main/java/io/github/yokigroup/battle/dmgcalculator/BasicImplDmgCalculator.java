@@ -4,8 +4,8 @@ import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Yokimon;
 
 /**
- * Basic version for Damage Calculator, that only takes into consideration
- * the two Yokimons' stats and the attack power.
+ * Basic version for {@link DmgCalculator}, that only takes into consideration
+ * the two {@link Yokimon} stats and the {@link Attack} power.
  */
 public class BasicImplDmgCalculator implements DmgCalculator {
     private static final int DIVISOR = 4;

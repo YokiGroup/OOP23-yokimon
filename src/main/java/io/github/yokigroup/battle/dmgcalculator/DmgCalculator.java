@@ -2,9 +2,12 @@ package io.github.yokigroup.battle.dmgcalculator;
 
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.fight.Fight;
 
 /**
- * Interface for Damage Calculator.
+ * Used as a {@link Fight} component.
+ * Its purpose is to calculate the actual damage (in terms of HP) induced by an {@link Attack}
+ * @see Yokimon
  */
 public interface DmgCalculator {
 

@@ -2,10 +2,12 @@ package io.github.yokigroup.battle.dmgcalculator;
 
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.Color;
 
 /**
- * Fuller version of Damage Calculator, that takes into consideration
- * the two Yokimons' color and the attack color.
+ * This version of {@link DmgCalculator} takes into consideration
+ * the two {@link Yokimon} color and the {@link Attack} color.
+ * @see Color
  */
 public class MultiplierDmgCalculator implements DmgCalculator {
 

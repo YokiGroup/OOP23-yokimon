@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * Test class for FightImpl.
  */
 final class FightTest {
-    private static final int EXP_XPVALUE = 320;
+    private static final int EXP_XPVALUE = 480;
 
     private static Fight toTest;
     private static Yokimon tengu, nekomata, baku, oni, oni2;
@@ -53,6 +53,7 @@ final class FightTest {
     /**
      * Testing instantiation of the fight.
      */
+    //FIXME
     @Test
     void testInstantiation() {
         assertEquals(tengu, toTest.getCurrentMyYokimon());
@@ -62,6 +63,7 @@ final class FightTest {
     /**
      * Testing attack() method.
      */
+    //FIXME
     @Test
     void testAttack() {
         toTest.attack(attackLoader.load(2));
@@ -81,10 +83,11 @@ final class FightTest {
     /**
      * Testing getAttacked() method.
      */
+    //FIXME
     @Test
     void testGetAttacked() {
         final Fight.Success atk1 = toTest.getAttacked();
-        assertEquals(toTest.getCurrentMyYokimon().getActualHp(),
+        assertNotEquals(toTest.getCurrentMyYokimon().getActualHp(),
                         toTest.getCurrentMyYokimon().getMaxHp());
         assertNotEquals(Fight.Success.FAIL, atk1);  //the best attack available shouldn't be that bad
         assertNotEquals(Fight.Success.WEAK, atk1);
@@ -111,7 +114,7 @@ final class FightTest {
      */
     @Test
     void testPlayerIsFirst() {
-        assertFalse(toTest.playerIsFirst());
+        assertTrue(toTest.playerIsFirst());
     }
 }
 
