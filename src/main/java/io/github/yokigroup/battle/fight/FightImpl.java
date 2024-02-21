@@ -70,9 +70,7 @@ public final class FightImpl implements Fight {
     public Success attack(final Attack myAttack) {
 
         final int damage = dmgCalc.getDMG(currMyYokimon, currOppYokimon, myAttack);
-        currOppYokimon.takeDamage(damage);
-
-        if (!currOppYokimon.active()) {
+        if (currOppYokimon.takeDamage(damage)) {
             oppYokimons.remove(currOppYokimon);
             defeatedOpps.add(currMyYokimon);
 
