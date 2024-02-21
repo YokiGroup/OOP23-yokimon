@@ -150,7 +150,7 @@ public class Enemy extends People {
      */
     @Override
     public void update() {
-        if (!this.getActive()) {
+        if (!this.isActive()) {
             return;
         }
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {

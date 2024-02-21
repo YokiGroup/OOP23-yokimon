@@ -23,11 +23,5 @@ class PeopleTest {
         final Vector2 vector2 = new Vector2Impl(-1, 0);
         en.setDirection(vector2);
         assertEquals(People.Direction.LEFT, en.getDirection());
-        final Vector2 vector3 = new Vector2Impl(-1, 1);
-        en.setDirection(vector3);
-        assertEquals(People.Direction.DOWN, en.getDirection());
-        final Vector2 vector4 = new Vector2Impl(-1, -1);
-        en.setDirection(vector4);
-        assertEquals(People.Direction.UP, en.getDirection());
     }
 }

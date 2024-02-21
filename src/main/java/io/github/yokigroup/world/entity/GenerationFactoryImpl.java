@@ -23,7 +23,7 @@ public class GenerationFactoryImpl implements GenerationFactory {
     private static final int MULTIPLIER_DIFFICULTY = 5;
     private static final int DIVISOR_NUM_YOKIMON = 3;
     private static final int LEGEND_ID = 15;
-
+    private static final int BOSS_LEVEL = 40;
     /**
      * Constructor of this class.
      */
@@ -32,7 +32,7 @@ public class GenerationFactoryImpl implements GenerationFactory {
     }
 
     private Yokimon getYokimon(final int power) {
-        final int finalPower = java.lang.Math.abs(power);
+        final int finalPower = Math.abs(power);
         final WeightedPoolImpl<Yokimon> yokimonWeightedPool = new WeightedPoolImpl<>();
 
         IntStream.range(1, NUMBER_OF_YOKIMON)
@@ -51,7 +51,7 @@ public class GenerationFactoryImpl implements GenerationFactory {
     @Override
     public final List<Yokimon> getEnemyParty(final int power) {
         final List<Yokimon> enemyParty = new ArrayList<>();
-        IntStream.range(0, (power / DIVISOR_NUM_YOKIMON) + 1)
+        IntStream.range(0, power / DIVISOR_NUM_YOKIMON + 1)
                 .forEach(i -> enemyParty.add(getYokimon(power)));
         return Objects.requireNonNull(List.copyOf(enemyParty));
     }
@@ -76,11 +76,10 @@ public class GenerationFactoryImpl implements GenerationFactory {
 
     @Override
     public final List<Yokimon> getBossParty() {
-        final int bossLevel = 40;
         final List<Yokimon> enemyParty = new ArrayList<>();
         IntStream.range(0, 3)
-                .forEach(i -> enemyParty.add(getYokimon(bossLevel - 3)));
-        enemyParty.add(getLegend(bossLevel));
+                .forEach(i -> enemyParty.add(getYokimon(BOSS_LEVEL - 3)));
+        enemyParty.add(getLegend(BOSS_LEVEL));
         return Objects.requireNonNull(List.copyOf(enemyParty));
     }
 }

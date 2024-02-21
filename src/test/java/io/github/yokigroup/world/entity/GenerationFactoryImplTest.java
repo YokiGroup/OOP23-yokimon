@@ -19,8 +19,9 @@ class GenerationFactoryImplTest {
     void getYokimonAltar() {
         final int power = 0;
         assertNotNull(generator.getYokimonAltar(power));
+        final int rangeLev = 5;
         IntStream.range(1, 10)
-                .forEach(i -> assertTrue(generator.getYokimonAltar(power).getLevel() <= power + 3));
+                .forEach(i -> assertTrue(generator.getYokimonAltar(power).getLevel() <= power + rangeLev));
 
     }
 

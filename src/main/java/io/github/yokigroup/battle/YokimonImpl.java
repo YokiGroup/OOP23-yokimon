@@ -214,7 +214,7 @@ public class YokimonImpl implements Yokimon {
     }
 
     @Override
-    public void setLevelUPLogic(LevelUpLogic logic) {
+    public final void setLevelUPLogic(final LevelUpLogic logic) {
         Objects.requireNonNull(logic, "Logic passed was null");
         this.levelUtility = Optional.of(logic);
         this.levelUtility.get().reset(this);
@@ -310,8 +310,11 @@ public class YokimonImpl implements Yokimon {
                 actualHp, growthRate, xp, xpNext, moves, learnableMoves, active);
     }
 
+    /**
+     * Reset the current moves based of the yokimon level
+     */
     private void resetAttack() {
-        List<Attack> newAttacks = new ArrayList<>();
+        final List<Attack> newAttacks = new ArrayList<>();
         for (int i = 0; i <= this.getLevel(); i++) {
             if (this.getLearnableAttacks().containsKey(i)) {
                 newAttacks.add(this.getLearnableAttacks().get(i));

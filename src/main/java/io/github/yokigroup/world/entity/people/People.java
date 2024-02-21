@@ -76,7 +76,7 @@ public abstract class People extends Entity {
      */
     @Override
     public SpriteData getSpriteData() {
-        SpriteData superSpriteData = super.getSpriteData();
+        final SpriteData superSpriteData = super.getSpriteData();
         if (!active) {
             return null;
         }
@@ -183,21 +183,6 @@ public abstract class People extends Entity {
         if (v.getY() == 0 && v.getX() == 0) {
             return;
         }
-        /*
-        if (Math.abs(v.getX()) > Math.abs(v.getY())) {
-            if (v.getX() > 0) {
-                this.direction = Direction.RIGHT;
-            } else {
-                this.direction = Direction.LEFT;
-            }
-        } else {
-            if (v.getY() > 0) {
-                this.direction = Direction.DOWN;
-            } else {
-                this.direction = Direction.UP;
-            }
-        }
-        */
         this.direction = Direction.valueOf(new Vector2Impl(Math.signum(v.getX()), Math.signum(v.getY())));
     }
 
@@ -206,15 +191,8 @@ public abstract class People extends Entity {
      *
      * @return boolean True if the people entity is active, false otherwise
      */
-    public final boolean getActive() {
+    public final boolean isActive() {
         return this.active;
-    }
-
-    /**
-     * Sets the people entity as active.
-     */
-    public final void setActive() {
-        this.active = true;
     }
 
     /**
@@ -254,7 +232,9 @@ public abstract class People extends Entity {
      * @param vector vector2
      */
     protected final void collisionCheck(final Vector2 vector) {
-        if (!active) return;
+        if (!active) {
+            return;
+        }
 
         this.setPos(new PositionImpl(this.getPos().getPosition().plus(vector)));
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
