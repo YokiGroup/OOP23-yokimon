@@ -31,6 +31,7 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
+     * @param modelObs the model Observer.
      */
     public GameMapSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
@@ -55,7 +56,7 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     }
 
     @Override
-    public boolean movePlayerToTile(Direction dir) {
+    public boolean movePlayerToTile(final Direction dir) {
         boolean success = gameMap.movePlayerTileMapPosition(dir);
         if (success) {
             Pair<Integer, Integer> dirOffset = dir.getOffset();
