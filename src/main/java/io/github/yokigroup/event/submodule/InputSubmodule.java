@@ -47,7 +47,7 @@ public final class InputSubmodule extends InputSubmoduleAbs {
 
     private boolean readConfirmationEvent(final String keyText, final Runnable ifPresent) {
         boolean confirmed = switch (keyText) {
-            case "\n", " " -> true;
+            case "\n", "\r", " " -> true;
             default -> false;
         };
         if (confirmed) {
