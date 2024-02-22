@@ -62,11 +62,20 @@ public interface Fight {
     }
 
     /**
-     * Method through which the Logic can communicate which {@link Attack} the player wants to use and do so.
-     * @param myAttack the attack that's meant to be used by my {@link Yokimon}
-     * @return success rate over my {@link Yokimon}'s attack
+     * Sets an attack to use in the next {@link this#attack()}.
+     * @param attack attack to use
+     * @throws IllegalArgumentException if the attack is not possessed by the fighting yokimon
      */
-    Success attack(Attack myAttack);
+    void setAttack(Attack attack) throws IllegalArgumentException;
+
+    /**
+     * Method through which the Logic can communicate which {@link Attack} the player wants to use and do so.
+     * Unselects the attack after a successful invocation
+     * @return success rate over my {@link Yokimon}'s attack
+     * @throws IllegalStateException if an attack has not been selected
+     * @see this#setAttack(Attack) 
+     */
+    Success attack() throws IllegalStateException;
 
     /**
      * Triggers the current opponent Yokimon {@link Attack}.

@@ -63,10 +63,11 @@ final class FightTest {
      */
     @Test
     void testAttack() {
-        toTest.attack(attackLoader.load(2));
+        toTest.setAttack(attackLoader.load(18));
+        toTest.attack();
         assertNotEquals(toTest.getCurrentOpponent().getActualHp(),
                         toTest.getCurrentOpponent().getMaxHp());
-        assertNotEquals(oni, toTest.getCurrentOpponent());
+        assertEquals(oni, toTest.getCurrentOpponent());
         assertFalse(toTest.isOver());
         assertFalse(toTest.victory());
     }
