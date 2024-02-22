@@ -29,11 +29,13 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     private final Publisher<Fight> fightPub = new PublisherImpl<>();
     private final Publisher<SpriteData> backgroundPub = new PublisherImpl<>();
     private final SpriteData battleBackground;
+    private static final int LAST_PRIORITY = -100;
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
+     * @param modelObs the model Observer.
      */
-    public FightSubmodule(final MessageHandler handler, ModelObserver modelObs) {
+    public FightSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
         Objects.requireNonNull(modelObs);
         modelObs.addFightPublisher(fightPub);
@@ -43,7 +45,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
                 "io/github/yokigroup/view/textures/tiles/battle-forest.png",
                 mapDim.scale(0.5),
                 mapDim,
-                -100
+                LAST_PRIORITY
         );
         backgroundPub.notifyObservers(battleBackground);
     }
