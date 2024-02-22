@@ -37,9 +37,9 @@ class AltarTest {
             private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
             //Without public modifier GameMessageHandler reflection cannot access this constructor
 
-            //CheckStyle: RedundantModifier OFF
+            //CHECKSTYLE: RedundantModifier OFF
             public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
-                //CheckStyle: RedundantModifier ON
+                //CHECKSTYLE: RedundantModifier ON
 
                 super(handler, modelObs);
             }

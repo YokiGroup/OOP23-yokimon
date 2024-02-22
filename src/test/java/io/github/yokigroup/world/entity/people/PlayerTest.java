@@ -30,7 +30,7 @@ class PlayerTest {
     private static final Vector2 V_P = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2,
 
             (double) GameMap.TILE_DIMENSIONS.y() / 2);
-    private TestMessageHandler handler;
+
 
     private static final class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
@@ -90,14 +90,9 @@ class PlayerTest {
         }
     }
 
-    @BeforeEach
-    void setUp() {
-        handler = new TestMessageHandler();
-    }
-
     @Test
     void move() {
-
+        final TestMessageHandler handler = new TestMessageHandler();
         final int scaleTot = 5;
         final double scaleCompensate = 0.1;
         handler.handle(PlayerCharacterSubmodule.class, play -> {

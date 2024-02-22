@@ -2,19 +2,18 @@ package io.github.yokigroup.file.loader;
 
 import io.github.yokigroup.battle.Color;
 import io.github.yokigroup.battle.Yokimon;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class YokimonLoaderTest {
-    private static final YokimonLoader loader = new YokimonLoader();
+    private static final YokimonLoader LOADER = new YokimonLoader();
 
 
     @Test
     void load() {
         final AttackLoader attackLoader = new AttackLoader();
-        final Yokimon y = loader.load(1);
+        final Yokimon y = LOADER.load(1);
         final int katanaSlashId = 18;
         assertEquals("Tengu", y.getName());
         assertEquals(Yokimon.GrowthRate.MEDIUM, y.getGrowRate());
@@ -26,7 +25,7 @@ class YokimonLoaderTest {
 
     @Test
     void testGetAll() {
-        final Map<Integer, Yokimon> allYokimons = loader.getAll();
-        assertEquals(loader.load(2).getName(), allYokimons.get(2).getName());
+        final Map<Integer, Yokimon> allYokimons = LOADER.getAll();
+        assertEquals(LOADER.load(2).getName(), allYokimons.get(2).getName());
     }
 }
