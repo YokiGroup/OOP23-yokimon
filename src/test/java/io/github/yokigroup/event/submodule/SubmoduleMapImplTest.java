@@ -25,8 +25,8 @@ class SubmoduleMapImplTest {
 
     @BeforeEach
     void setUp() {
-        MessageHandler handler = new GameMessageHandler();
-        ModelObserver obs = new ModelObserverImpl(null);
+        final MessageHandler handler = new GameMessageHandler();
+        final ModelObserver obs = new ModelObserverImpl(null);
 
         map = new SubmoduleMapImpl();
         // FIXME init these submodules
