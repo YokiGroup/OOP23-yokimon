@@ -18,7 +18,6 @@ import io.github.yokigroup.world.entity.Entity;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
