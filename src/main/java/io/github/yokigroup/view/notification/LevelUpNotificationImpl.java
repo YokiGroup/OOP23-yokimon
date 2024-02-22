@@ -1,9 +1,17 @@
 package io.github.yokigroup.view.notification;
 
-public class LevelUpNotificationImpl implements LevelUpNotification {
+/**
+ * Notification system to notify a level-up event.
+ */
+public final class LevelUpNotificationImpl implements LevelUpNotification {
     private final int levelReached;
     private final String yokimonName;
 
+    /**
+     * Constructor for LevelUpNotificationImpl.
+     * @param levelReached the Yokimon's new level.
+     * @param yokimonName the Yokimon's name.
+     */
     public LevelUpNotificationImpl(final int levelReached, final String yokimonName) {
         this.levelReached = levelReached;
         this.yokimonName = yokimonName;
@@ -20,7 +28,7 @@ public class LevelUpNotificationImpl implements LevelUpNotification {
     }
 
     @Override
-    public String getMessage(NotificationVisitor visitor) {
+    public String getMessage(final NotificationVisitor visitor) {
         return visitor.getLevelUpNotificationText(this);
     }
 }
