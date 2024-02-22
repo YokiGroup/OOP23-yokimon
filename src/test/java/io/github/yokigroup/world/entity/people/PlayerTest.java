@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 class PlayerTest {
-    private static final Vector2 V_P = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 ,
+    private static final Vector2 V_P = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2,
             (double) GameMap.TILE_DIMENSIONS.y() / 2 + 50);
     private TestMessageHandler handler;
 
@@ -32,7 +32,8 @@ class PlayerTest {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
 
             private final TileBuilder tile = new TileBuilderImpl(0, "");
-            private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
+            private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0))
+                                        .build(this.handler());
 
              TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
                 super(handler, modelObs);
@@ -113,18 +114,23 @@ class PlayerTest {
         for (double i = scalable; i < scaleTot; i = i + scalable) {
             double finalI = i;
 
-                System.out.println("SAS x =" + player.getPos().getPosition().getX() + "y= " + player.getPos().getPosition().getY());
+                System.out.println("SAS x =" + player.getPos().getPosition().getX()
+                                    + "y= " + player.getPos().getPosition().getY());
 
                 player.move(new Vector2Impl(V_P.getX() + finalI, V_P.getY()));
-                System.out.println("x =" + player.getPos().getPosition().getX() + "y= " + player.getPos().getPosition().getY());
+                System.out.println("x =" + player.getPos().getPosition().getX() + "y= "
+                                    + player.getPos().getPosition().getY());
         }
         for (double i = scalable; i < scaleTot; i = i + scalable) {
             double finalI = i;
             handler.handle(PlayerCharacterSubmodule.class, play -> {
-                System.out.println("x =" + play.getPosition().getPosition().getX() + "y= " + play.getPosition().getPosition().getY());
+                System.out.println("x =" + play.getPosition().getPosition().getX() + "y= "
+                                    + play.getPosition().getPosition().getY());
 
                 play.movePlayerBy(new Vector2Impl(finalI, 0.00));
-                System.out.println("x =" + play.getPosition().getPosition().getX() + "y= " + play.getPosition().getPosition().getY());
+                System.out.println("x =" + play.getPosition().getPosition().getX() + "y= "
+                                    + play.getPosition().getPosition().getY());
+
                 //   System.out.println("x =" + GameMap.TILE_DIMENSIONS.x() / 2 + "y= " + GameMap.TILE_DIMENSIONS.y() / 2);
 
                 //assertEquals(GameMap.TILE_DIMENSIONS.x() / 2 + i, play.getPosition().getPosition().getX());

@@ -34,7 +34,7 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
      */
     public PlayerCharacterSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
-        Vector2 playerPos = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS).scale(0.5);
+        final Vector2 playerPos = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS).scale(0.5);
         this.player = new Player(new PositionImpl(playerPos), handler);
         modelObs.addSpritePublisher(RenderState.WORLD, playerPub);
         publishPlayerSpriteData();

@@ -56,7 +56,7 @@ public final class FightImpl implements Fight {
      * @param oppYokimons the opponent party
      * @throws UnsupportedOperationException in case one of the party is empty.
      */
-    public FightImpl(final List<Yokimon> myYokimons, final List<Yokimon> oppYokimons) throws UnsupportedOperationException {
+    public FightImpl(final List<Yokimon> myYokimons, final List<Yokimon> oppYokimons) {
         this.myYokimons = myYokimons.stream().map(YokimonImpl::new).collect(Collectors.toList());
         this.oppYokimons = oppYokimons.stream().map(YokimonImpl::new).collect(Collectors.toList());
 

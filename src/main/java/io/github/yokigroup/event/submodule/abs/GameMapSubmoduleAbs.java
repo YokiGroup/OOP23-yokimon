@@ -54,7 +54,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
         final Vector2 halfMap = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS).scale(half);
         Vector2 dirMask = dirVec;
         dirMask = dirMask.times(dirMask); // square it to change -1s to 1s
-        Vector2 newPos = dirVec.times(halfMap).scale(tileChangeOffset).plus(halfMap).times(dirMask);
+        final Vector2 newPos = dirVec.times(halfMap).scale(tileChangeOffset).plus(halfMap).times(dirMask);
         dirMask = new Vector2Impl(dirMask.getY(), dirMask.getX()); // invert the mask
 
         return new PositionImpl(playerPos.getPosition().times(dirMask).plus(newPos));
@@ -62,7 +62,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
 
     /**
      * @param handler to init the submodule with
-     * @param modelObs ...
+     * @param modelObs the model Observer.
      */
     public GameMapSubmoduleAbs(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
@@ -91,14 +91,8 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
      */
     public abstract Set<Entity> getEntitiesOnCurrentTile();
 
-    /**
-     * ...
-     */
     protected abstract void updateEntities();
 
-    /**
-     * ...
-     */
     protected abstract void updateTile();
 
     @Override

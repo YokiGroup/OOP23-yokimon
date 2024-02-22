@@ -34,7 +34,6 @@ public record SpriteData(String spriteURL, Vector2 position, Vector2 dim, int pr
     }
 
     /**
-     *
      * Constructor of this record with default flipped parameter.
      * @param spriteURL String
      * @param position Vector2

@@ -8,10 +8,8 @@ import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
-import io.github.yokigroup.file.loader.YokimonLoader;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
-import io.github.yokigroup.view.notification.Notification;
 import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.GameMap;
@@ -26,7 +24,7 @@ import java.util.Optional;
  * @author Giovanni Paone
  */
 public final class FightSubmodule extends FightSubmoduleAbs {
-    private final Fight lastAnnouncedFight = null;
+    private static final Fight LAST_ANNOUNCED_FIGHT = null;
     private final Publisher<Fight> fightPub = new PublisherImpl<>();
     private final Publisher<SpriteData> backgroundPub = new PublisherImpl<>();
     private final Publisher<RenderState> renderStatePub = new PublisherImpl<>();
@@ -53,7 +51,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     }
 
     @Override
-    public void addEncounter(List<Yokimon> enemyParty) {
+    public void addEncounter(final List<Yokimon> enemyParty) {
         Objects.requireNonNull(enemyParty, "Enemy party was null");
         // FIXME implement
         //lastAnnouncedFight = Optional.ofNullable(f);
@@ -72,7 +70,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
 
     @Override
     public Optional<Fight> getLastAnnouncedFight() {
-        return Optional.ofNullable(lastAnnouncedFight);
+        return Optional.ofNullable(LAST_ANNOUNCED_FIGHT);
     }
 
 }

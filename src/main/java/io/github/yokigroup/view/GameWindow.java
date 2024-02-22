@@ -5,9 +5,5 @@ package io.github.yokigroup.view;
  */
 public interface GameWindow {
 
-    /**
-     * Create a new game window.
-     * @param args ...
-     */
     void create(String[] args);
 }

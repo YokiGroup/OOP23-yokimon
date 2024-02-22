@@ -15,8 +15,8 @@ public final class GameLogicImpl extends Thread implements GameLogic {
 
     /**
      * Constructor for GameLogicImpl.
-     * @param view ...
-     * @param renderer ...
+     * @param view
+     * @param renderer
      */
     public GameLogicImpl(final ModelObserver view, final DrawCallable renderer) {
         super();
@@ -42,7 +42,7 @@ public final class GameLogicImpl extends Thread implements GameLogic {
             try {
                 Thread.sleep(SLEEP_TIME);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                throw new IllegalStateException(e);
             }
             handler.updateSubmodules();
             renderer.safeDraw();

@@ -2,7 +2,6 @@ package io.github.yokigroup.view.render.observer;
 
 import io.github.yokigroup.view.render.DrawQueue;
 import io.github.yokigroup.view.render.Painter;
-import javafx.application.Platform;
 
 /**
  * Observer for drawing sprites to screen.

@@ -51,15 +51,15 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
 
     @Override
     public int getPlayerDistanceFromHome() {
-        Pair<Integer, Integer> homeTilePos = gameMap.getPlayerTileMapPosition();
+        final Pair<Integer, Integer> homeTilePos = gameMap.getPlayerTileMapPosition();
         return Math.abs(playerTilePos.x() - homeTilePos.x()) + Math.abs(playerTilePos.y() - homeTilePos.y());
     }
 
     @Override
     public boolean movePlayerToTile(final Direction dir) {
-        boolean success = gameMap.movePlayerTileMapPosition(dir);
+        final boolean success = gameMap.movePlayerTileMapPosition(dir);
         if (success) {
-            Pair<Integer, Integer> dirOffset = dir.getOffset();
+            final Pair<Integer, Integer> dirOffset = dir.getOffset();
             tilePub.notifyObservers(gameMap.getPlayerTile().getSpriteData());
             playerTilePos = new Pair<>(playerTilePos.x() + dirOffset.x(), playerTilePos.y() + dirOffset.y());
             publishEntitySpriteData();

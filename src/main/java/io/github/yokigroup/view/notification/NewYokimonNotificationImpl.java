@@ -7,7 +7,7 @@ public final class NewYokimonNotificationImpl implements NewYokimonNotification 
     private final String yokimonName;
 
     /**
-     * Constructor for NewYokimonNotificationImpl
+     * Constructor for NewYokimonNotificationImpl.
      * @param yokimonName the new Yokimon's name.
      */
     public NewYokimonNotificationImpl(final String yokimonName) {

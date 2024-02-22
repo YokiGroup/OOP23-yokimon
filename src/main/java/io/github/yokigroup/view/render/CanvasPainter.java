@@ -23,7 +23,7 @@ public class CanvasPainter extends Painter {
     private final GraphicsContext gc;
     private final Label eventLabel;
     private Pair<Long, String> currentNotification = null; // notification with timestamp
-    private final static int CANVAS_DIM_DIVISOR = 20;
+    private static final int CANVAS_DIM_DIVISOR = 20;
 
     private Vector2 getCanvasDim() {
         Canvas canvas = gc.getCanvas();

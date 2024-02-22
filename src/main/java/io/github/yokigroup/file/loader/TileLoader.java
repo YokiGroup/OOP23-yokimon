@@ -23,7 +23,6 @@ import java.util.Set;
 public final class TileLoader extends IdJsonLoader<TileBuilder> {
     private static final String TILE_JSON_RPATH = "tiles.json";
     private static final String TILE_SHAPE_JPATHF = "$.%s.shape[*]";
-    private String rootTilePath = null;
 
     /**
      * Initializes a TileLoader by parsing the default tiles.json.
@@ -37,13 +36,13 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
     }
 
     private Hitbox getHitbox(final int id, final int index) {
-        JsonParser parser = getParser();
+        final JsonParser parser = getParser();
         final String tileHitboxTypeJPATHF = "$.%s.hitboxes[%d]";
         final String tileHitboxTypeRPATH = ".type";
         final String tileHitboxPositionRPATH = ".position";
         final String tileHitboxDimensionsRPATH = ".dimensions";
         final String tileHitboxRadiusRpath = ".radius";
-        final String formattedHitboxJPATH = String.format(tileHitboxTypeJPATHF, id == -1 ? "home" : "" + id, index);
+        final String formattedHitboxJPATH = String.format(tileHitboxTypeJPATHF, id == -1 ? "home" : String.valueOf(id), index);
         final String type = parser.read(formattedHitboxJPATH  +  tileHitboxTypeRPATH);
         final Vector2 pos = getVector2(formattedHitboxJPATH  +  tileHitboxPositionRPATH);
 

@@ -30,7 +30,7 @@ public final class SubmoduleMapImpl implements SubmoduleMap {
     @Override
     @SuppressWarnings("unchecked")
     public <T extends Submodule> Optional<T> get(final Class<T> type) {
-        Submodule tempSub = submodules.get(type);
+        final Submodule tempSub = submodules.get(type);
         T retSub = null;
         if (type.isInstance(tempSub)) {
             retSub = (T) tempSub;

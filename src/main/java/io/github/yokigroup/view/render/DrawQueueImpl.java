@@ -15,25 +15,13 @@ import java.util.stream.Stream;
 public final class DrawQueueImpl implements DrawQueue {
     private final Queue<SpriteData> queue = new PriorityQueue<>(Comparator.comparingInt(SpriteData::priority));
 
-    /**
-     * ...
-     */
     public DrawQueueImpl() {
     }
 
-    /**
-     * ...
-     * @param drawQueue ...
-     */
     public DrawQueueImpl(final DrawQueueReader drawQueue) {
         addToDrawQueue(drawQueue.stream().collect(Collectors.toUnmodifiableSet()));
     }
 
-    /**
-     * ...
-     * @param arg ...
-     * @return ...
-     */
     private Collection<SpriteData> preprocessCollection(final Collection<SpriteData> arg) {
         if (arg == null) {
             return null;

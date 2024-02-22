@@ -17,7 +17,7 @@ import java.util.Set;
  * Input submodule.
  */
 public class InputSubmodule extends InputSubmoduleAbs {
-    private Set<Direction> moveEvents = new HashSet<>();
+    private final Set<Direction> moveEvents = new HashSet<>();
 
     /**
      * @param handler         MessageHandler to call in order to query other submodules.
@@ -44,7 +44,7 @@ public class InputSubmodule extends InputSubmoduleAbs {
      */
     @Override
     public void registerKeyPress(final String keyText) {
-        Direction dir = keyTextToDirection(keyText);
+        final Direction dir = keyTextToDirection(keyText);
         synchronized (this) {
             if (dir != null) {
                 moveEvents.add(dir);
@@ -59,7 +59,7 @@ public class InputSubmodule extends InputSubmoduleAbs {
      */
     @Override
     public void registerKeyRelease(final String keyText) {
-        Direction dir = keyTextToDirection(keyText);
+        final Direction dir = keyTextToDirection(keyText);
         synchronized (this) {
             if (dir != null) {
                 moveEvents.remove(dir);

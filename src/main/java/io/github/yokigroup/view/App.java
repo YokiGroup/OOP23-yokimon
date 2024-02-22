@@ -10,17 +10,10 @@ import javafx.application.Application;
 
 public final class App implements GameWindow {
 
-    /**
-     * ...
-     */
     public App() { }
 
-    /**
-     * ...
-     * @param args ...
-     */
     @Override
-    public void create(String[] args) {
+    public void create(final String[] args) {
         Application.launch(GameFX.class, args);
         // The following line raises: Error: class io.github.yokigroup.view.App
         // is not a subclass of javafx.application.Application

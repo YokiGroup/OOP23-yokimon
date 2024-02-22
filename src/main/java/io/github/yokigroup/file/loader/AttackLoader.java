@@ -24,12 +24,12 @@ public final class AttackLoader extends IdJsonLoader<Attack> {
 
     @Override
     public Attack load(final int id) {
-        JsonParser parser = getParser();
+        final JsonParser parser = getParser();
 
-        int power = parser.read(String.format(ATTACK_POWER_J_PATH_F, id));
-        String name = parser.read(String.format(ATTACK_NAME_J_PATH_F, id));
-        Color color = Color.valueOf(parser.read(String.format(ATTACK_COLOR_J_PATH_F, id)));
-        Attack.Effect effect = Attack.Effect.valueOf(parser.read(String.format(ATTACK_EFFECT_J_PATH_F, id)));
+        final int power = parser.read(String.format(ATTACK_POWER_J_PATH_F, id));
+        final String name = parser.read(String.format(ATTACK_NAME_J_PATH_F, id));
+        final Color color = Color.valueOf(parser.read(String.format(ATTACK_COLOR_J_PATH_F, id)));
+        final Attack.Effect effect = Attack.Effect.valueOf(parser.read(String.format(ATTACK_EFFECT_J_PATH_F, id)));
 
         return new AttackImpl(id, name, color, power, effect);
     }

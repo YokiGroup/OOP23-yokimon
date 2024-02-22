@@ -4,12 +4,20 @@ import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
-import io.github.yokigroup.event.submodule.*;
+
 import io.github.yokigroup.event.Updateable;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
+import io.github.yokigroup.event.submodule.PartySubmodule;
+import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
+import io.github.yokigroup.event.submodule.FightSubmodule;
+import io.github.yokigroup.event.submodule.InputSubmodule;
+import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.abs.Submodule;
+import io.github.yokigroup.event.submodule.GameOverSubmodule;
 import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.view.notification.Notification;
+import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -45,7 +53,7 @@ public class GameMessageHandler implements MessageHandler {
      * @see SubmoduleMap
      */
     private SubmoduleMap initSubmodules(final ModelObserver modelObs) {
-        SubmoduleMap retMap = new SubmoduleMapImpl();
+        final SubmoduleMap retMap = new SubmoduleMapImpl();
         final var submoduleTypes = getSubmoduleTypes();
 
         submoduleTypes.forEach(s -> {
@@ -62,7 +70,7 @@ public class GameMessageHandler implements MessageHandler {
 
     /**
      * Constructor for game message handler.
-     * @param modelObs ...
+     * @param modelObs the model Observer.
      */
     public GameMessageHandler(final ModelObserver modelObs) {
         subModules = initSubmodules(modelObs);
@@ -91,16 +99,16 @@ public class GameMessageHandler implements MessageHandler {
             }
 
             @Override
-            public void addStateChangePublisher(Publisher<RenderState> renderStatePublisher) {
+            public void addStateChangePublisher(final Publisher<RenderState> renderStatePublisher) {
             }
         });
     }
 
     /**
-     * ...
+     *
      * @param subModuleTypes type of the submodule called in play ...
      * @param handler handler function to determine what to do with the submodule ...
-     * @param <T> ...
+     * @param <T>
      */
     @Override
     public final <T extends Submodule> void handle(final Class<T> subModuleTypes, final Consumer<T> handler) {
@@ -111,13 +119,13 @@ public class GameMessageHandler implements MessageHandler {
     }
 
     @Override
-    public <T extends Submodule> void handle(Set<Class<T>> subModuleTypes, Consumer<T> handler) {
+    public <T extends Submodule> void handle(final Set<Class<T>> subModuleTypes, final Consumer<T> handler) {
         subModuleTypes.forEach(smt -> handle(smt, handler));
     }
 
     @Override
     public final <T extends Submodule, E> E handle(final Class<T> subModuleType, final Function<T, E> handler) {
-        Optional<T> submodule = subModules.get(subModuleType);
+        final Optional<T> submodule = subModules.get(subModuleType);
         if (submodule.isEmpty()) {
             throw new IllegalArgumentException(this.getClass() + " does not contain submodule " + subModuleType);
         }

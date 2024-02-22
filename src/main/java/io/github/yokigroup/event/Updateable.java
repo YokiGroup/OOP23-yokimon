@@ -24,11 +24,8 @@ public abstract class Updateable implements Deactivatable {
         return System.currentTimeMillis();
     }
 
-    /**
-     * ...
-     * @param delta ...
-     */
-    protected abstract void updateCode(final double delta);
+    protected abstract void updateCode(double delta);
+
 
     public final void update() {
         if (!isActive) {

@@ -27,7 +27,6 @@ public abstract class IdJsonLoader<T> extends JsonLoader<T> {
      * @return classes loaded from the json file represented in a map of entries (id, instance)
      */
     public Map<Integer, T> getAll() {
-        Map<Integer, T> retMap = new HashMap<>();
         return doUntilPathException(new HashMap<>(), (c, i) -> {
             c.put(i + 1, load(i + 1));
         });

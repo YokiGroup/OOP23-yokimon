@@ -67,11 +67,6 @@ public class GameFX extends Application {
         }
     }
 
-    /**
-     * ...
-     * @param stage ...
-     * @throws Exception ...
-     */
     @Override
     public void start(final Stage stage) throws Exception {
         final double scaledY = SCREEN_SIZE.getHeight() * 2.0 / 3.0;

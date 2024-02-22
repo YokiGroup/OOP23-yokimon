@@ -3,7 +3,7 @@ package io.github.yokigroup.view.notification;
 /**
  * Notification system for Level-up events.
  */
-public interface LevelUpNotification extends Notification{
+public interface LevelUpNotification extends Notification {
     /**
      * The new level of the Yokimon.
      * @return the new level.
