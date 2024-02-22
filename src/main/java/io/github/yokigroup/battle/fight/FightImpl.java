@@ -14,6 +14,8 @@ import io.github.yokigroup.battle.xpcalculator.XPCalculator;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.FightSubmodule;
+import io.github.yokigroup.util.WeightedPool;
+import io.github.yokigroup.util.WeightedPoolImpl;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -26,10 +28,14 @@ import java.util.stream.Collectors;
  * @see FightSubmodule
  */
 public final class FightImpl implements Fight {
-
-    private static final int TOPLIMIT_FAIL = 10;
-    private static final int TOPLIMIT_WEAK = 15;
-    private static final int TOPLIMIT_GOOD = 25;
+    /* attack success pool */
+    private static final WeightedPool<Success> SUCCESS_WEIGHTED_POOL = new WeightedPoolImpl<>();
+    static {
+        SUCCESS_WEIGHTED_POOL.addElement(Success.FAIL, 0.05f);
+        SUCCESS_WEIGHTED_POOL.addElement(Success.WEAK, 0.2f);
+        SUCCESS_WEIGHTED_POOL.addElement(Success.GOOD, 0.7f);
+        SUCCESS_WEIGHTED_POOL.addElement(Success.SUPER, 0.2f);
+    }
 
     /* parties */
     private final List<Yokimon> myYokimons;
@@ -71,6 +77,15 @@ public final class FightImpl implements Fight {
         this.selectAttack(currMyYokimon.getAttacks().get(0));
     }
 
+    private int addDamageModifiers(final Success attackSuccessValue, final int damage) {
+        return switch (attackSuccessValue) {
+            case FAIL -> 0;
+            case WEAK -> damage / 2;
+            case SUPER -> damage * 2;
+            default -> damage;
+        };
+    }
+
     @Override
     public void selectAttack(final Attack attack) throws IllegalArgumentException {
         Objects.requireNonNull(attack);
@@ -89,7 +104,10 @@ public final class FightImpl implements Fight {
 
     @Override
     public Success attack() {
-        final int damage = dmgCalc.getDMG(currMyYokimon, currOppYokimon, selectedAttack);
+        final Success attackSuccessValue = SUCCESS_WEIGHTED_POOL.getRandomizedElement();
+        final int damage = addDamageModifiers(attackSuccessValue,
+                dmgCalc.getDMG(currMyYokimon, currOppYokimon, selectedAttack));
+
         if (currOppYokimon.takeDamage(damage)) {
             oppYokimons.remove(currOppYokimon);
             defeatedOpps.add(currMyYokimon);
@@ -103,11 +121,10 @@ public final class FightImpl implements Fight {
                 currMyYokimon.takeXp(xpGain);
                 state = State.WIN;
                 publisher.notifyObservers(this);
-                return Success.VICTORY;
             }
         }
         selectedAttack = null;
-        return successRate(damage);
+        return attackSuccessValue;
     }
 
     @Override
@@ -118,7 +135,9 @@ public final class FightImpl implements Fight {
         if (nextOppAttack.isEmpty()) {
             throw new UnsupportedOperationException("Yokimon doesn't have any available attack.");
         }
-        final int damage = dmgCalc.getDMG(currOppYokimon, currMyYokimon, nextOppAttack.get());
+        final Success attackSuccessValue = SUCCESS_WEIGHTED_POOL.getRandomizedElement();
+        final int damage = addDamageModifiers(attackSuccessValue,
+                dmgCalc.getDMG(currOppYokimon, currMyYokimon, nextOppAttack.get()));
         currMyYokimon.takeDamage(damage);
 
         if (!currMyYokimon.active()) {
@@ -128,27 +147,12 @@ public final class FightImpl implements Fight {
 
             if (nextMyYok.isPresent()) {
                 currMyYokimon = nextMyYok.get();
-                return successRate(damage);
             } else {
                 state = State.LOSE;
                 publisher.notifyObservers(this);
-                return Success.LOSS;
             }
         }
-        return successRate(damage);
-    }
-
-    private Success successRate(final int damage) {
-       if (damage < TOPLIMIT_FAIL) {
-           return Success.FAIL;
-       }
-       if (damage < TOPLIMIT_WEAK) {
-           return Success.WEAK;
-       }
-       if (damage < TOPLIMIT_GOOD) {
-           return Success.GOOD;
-       }
-       return Success.SUPER;
+        return attackSuccessValue;
     }
 
     @Override
