@@ -64,7 +64,7 @@ final class FightTest {
     @Test
     void testAttack() {
         final int id = 18;
-        toTest.setAttack(attackLoader.load(id));
+        toTest.selectAttack(attackLoader.load(18));
         toTest.attack();
         assertNotEquals(toTest.getCurrentOpponent().getActualHp(),
                         toTest.getCurrentOpponent().getMaxHp());
