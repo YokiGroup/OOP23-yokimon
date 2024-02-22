@@ -128,7 +128,9 @@ public final class InputSubmodule extends InputSubmoduleAbs {
             });
         });
 
-
+        if (clickedConfirmEvent) {
+            handler().handle(FightSubmodule.class, FightSubmodule::confirmAttack);
+        }
 
         moveEvents.clear();
         clickedConfirmEvent = false;

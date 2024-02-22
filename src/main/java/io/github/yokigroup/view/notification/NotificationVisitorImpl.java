@@ -39,6 +39,18 @@ public class NotificationVisitorImpl implements NotificationVisitor, EObserver<N
     }
 
     @Override
+    public String getAttackOutcomeNotificationText(final AttackOutcomeNotification notification) {
+        return switch (notification.getAttackOutcome()) {
+            case FAIL -> "non hai fatto male :(";
+            case GOOD -> "hai fatto male :)";
+            case LOSS -> "sei morto HAHAHA";
+            case SUPER -> "HAI FATTO UN MALE CANE";
+            case VICTORY -> "HAI VINTO";
+            case WEAK -> "hai fatto poco male :(";
+        };
+    }
+
+    @Override
     public void update(final Notification lastArg, final Notification arg) {
         painter.setEventText(arg.getMessage(this));
     }

@@ -12,6 +12,7 @@ import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
 import io.github.yokigroup.event.submodule.abs.GameStateSubmoduleAbs;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.view.notification.AttackOutcomeNotificationImpl;
 import io.github.yokigroup.view.notification.AttackSelectedNotificationImpl;
 import io.github.yokigroup.view.notification.Notification;
 import io.github.yokigroup.view.render.RenderState;
@@ -87,7 +88,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     }
 
     @Override
-    public void nextAttack() {
+    public void nextAttack() throws IllegalStateException {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
         final List<Attack> attacks  = currentFight.getCurrentMyYokimon().getAttacks();
         final int nextAttackIndex = (attacks.indexOf(currentFight.getSelectedAttack()) + 1) % attacks.size();
@@ -96,13 +97,19 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     }
 
     @Override
-    public void prevAttack() {
+    public void prevAttack() throws IllegalStateException {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
         final List<Attack> attacks  = currentFight.getCurrentMyYokimon().getAttacks();
         int nextAttackIndex = attacks.indexOf(currentFight.getSelectedAttack()) - 1;
         nextAttackIndex = nextAttackIndex < 0 ? (attacks.size() - 1) : nextAttackIndex;
         currentFight.selectAttack(attacks.get(nextAttackIndex));
         notificationPublisher.notifyObservers(new AttackSelectedNotificationImpl(currentFight.getSelectedAttack()));
+    }
+
+    @Override
+    public void confirmAttack() {
+        final Fight currentFight = getLastAnnouncedFightOrThrowException();
+        notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack()));
     }
 
 }

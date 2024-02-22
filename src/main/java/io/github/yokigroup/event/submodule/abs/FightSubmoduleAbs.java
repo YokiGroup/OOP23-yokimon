@@ -37,10 +37,21 @@ public abstract class FightSubmoduleAbs extends Submodule {
     public abstract Optional<Fight> getLastAnnouncedFight();
 
     /**
-     *
+     * Changes the currently selected attack to the next one available by the selected yokimon.
+     * @throws IllegalStateException if the player is not in a fight
      */
-    public abstract void nextAttack();
-    public abstract void prevAttack();
+    public abstract void nextAttack() throws IllegalStateException;
+
+    /**
+     * Changes the currently selected attack to the previous one available by the selected yokimon.
+     * @throws IllegalStateException if the player is not in a fight
+     */
+    public abstract void prevAttack() throws IllegalStateException;
+
+    /**
+     * Confirms the selected attack.
+     */
+    public abstract void confirmAttack();
 
     @Override
     protected final void updateCode(final double delta) {
