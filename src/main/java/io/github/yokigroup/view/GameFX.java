@@ -30,8 +30,12 @@ import java.util.function.Consumer;
  * Main JavaFX Application entry.
  */
 public class GameFX extends Application {
-    private final String ROOT_RESOUCE_PATH = "io/github/yokigroup/view/";
-    public final static Rectangle2D screenSize = Screen.getPrimary().getBounds();
+    private static final String ROOT_RESOUCE_PATH = "io/github/yokigroup/view/";
+
+    /**
+     * The size of the current screen.
+     */
+    public static final Rectangle2D SCREEN_SIZE = Screen.getPrimary().getBounds();
 
     private static class GameWindowResizeListener<T> implements ChangeListener<T> {
         private final double ratio;
@@ -40,7 +44,7 @@ public class GameFX extends Application {
         private final Painter painter;
 
 
-        public GameWindowResizeListener(final Scene gameScene, final Canvas gameCanvas, Painter painter, final double ratio) {
+        GameWindowResizeListener(final Scene gameScene, final Canvas gameCanvas, final Painter painter, final double ratio) {
             this.ratio = ratio;
             this.gameCanvas = gameCanvas;
             this.gameScene = gameScene;
@@ -63,9 +67,14 @@ public class GameFX extends Application {
         }
     }
 
+    /**
+     * ...
+     * @param stage ...
+     * @throws Exception ...
+     */
     @Override
     public void start(final Stage stage) throws Exception {
-        final double scaledY = screenSize.getHeight() * 2.0 / 3.0;
+        final double scaledY = SCREEN_SIZE.getHeight() * 2.0 / 3.0;
         final double ratio = 16.0 / 9.0; // 16:9 ratio
         final Dimension2D windowDim = new Dimension2D(scaledY * ratio, scaledY);
 
