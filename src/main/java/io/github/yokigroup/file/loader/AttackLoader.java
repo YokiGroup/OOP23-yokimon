@@ -5,13 +5,19 @@ import io.github.yokigroup.battle.AttackImpl;
 import io.github.yokigroup.battle.Color;
 import io.github.yokigroup.util.json.JsonParser;
 
-public class AttackLoader extends IdJsonLoader<Attack> {
+/**
+ * Loads Attacks from JSON file.
+ */
+public final class AttackLoader extends IdJsonLoader<Attack> {
     private static final String ATTACK_JSONR_PATH = "skills.json";
     private static final String ATTACK_NAME_J_PATH_F = "$.%d.name";
     private static final String ATTACK_COLOR_J_PATH_F = "$.%d.color";
     private static final String ATTACK_POWER_J_PATH_F = "$.%d.power";
     private static final String ATTACK_EFFECT_J_PATH_F = "$.%d.effect";
 
+    /**
+     * Constructor for AttackLoader.
+     */
     public AttackLoader() {
         super(ATTACK_JSONR_PATH);
     }
