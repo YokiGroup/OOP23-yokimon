@@ -10,12 +10,8 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class YokimonLoaderTest {
-    private static YokimonLoader loader;
+    private static final YokimonLoader loader = new YokimonLoader();
 
-    @BeforeEach
-    void setUp() {
-        loader = new YokimonLoader();
-    }
 
     @Test
     void load() {

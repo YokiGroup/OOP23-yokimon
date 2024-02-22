@@ -114,7 +114,6 @@ class EnemyTest {
 
     @Test
     void updateFollow() {
-        System.out.println("sas");
         testMeg.handle(TestMessageHandler.TestSubmodule.class, map -> {
             for (final Entity entity : map.getEntitiesOnCurrentTile()) {
                 if (entity instanceof Enemy) {
