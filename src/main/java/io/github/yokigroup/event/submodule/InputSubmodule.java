@@ -8,13 +8,15 @@ import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.function.BiPredicate;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class InputSubmodule extends InputSubmoduleAbs {
-    Set<Direction> moveEvents = new HashSet<>();
+    private Set<Direction> moveEvents = new HashSet<>();
+    private boolean clickedConfirmEvent = false;
+
 
     /**
      * @param handler         MessageHandler to call in order to query other submodules.
@@ -24,44 +26,73 @@ public class InputSubmodule extends InputSubmoduleAbs {
         super(handler, ignoredModelObs);
     }
 
-    private Direction keyTextToDirection(final String keyText) {
-        return switch (keyText.toLowerCase(Locale.ROOT)) {
+    private boolean readDirEvent(final String keyText, final Consumer<Direction> ifPresent) {
+        final Direction dir = switch (keyText.toLowerCase(Locale.ROOT)) {
             case "w" -> Direction.UP;
             case "a" -> Direction.LEFT;
             case "s" -> Direction.DOWN;
             case "d" -> Direction.RIGHT;
             default -> null;
         };
+        if (dir != null) {
+            synchronized (this) {
+                ifPresent.accept(dir);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private boolean readConfirmationEvent(final String keyText, final Runnable ifPresent) {
+        boolean confirmed = switch (keyText) {
+            case "\n", " " -> true;
+            default -> false;
+        };
+        if (confirmed) {
+            synchronized (this) {
+                ifPresent.run();
+            }
+        }
+        return confirmed;
+    }
+
+    private <T> void cycleUntilTrue(List<Predicate<T>> predicates, T input) {
+        for (var event : predicates) {
+            if (event.test(input)) {
+                return;
+            }
+        }
     }
 
     /**
-     * Manage the input press, adding a moveEvents.
+     * Register a keyPress event to the submodule.
      *
      * @param keyText String
      */
     @Override
     public void registerKeyPress(final String keyText) {
-        Direction dir = keyTextToDirection(keyText);
-        synchronized (this) {
-            if (dir != null) {
-                moveEvents.add(dir);
-            }
-        }
+        cycleUntilTrue(
+                List.of(
+                        k -> this.readDirEvent(k, d -> moveEvents.add(d)),
+                        k -> this.readConfirmationEvent(k, () -> clickedConfirmEvent = true)
+                ),
+                keyText
+        );
     }
 
     /**
-     * Manage the input press, removing a moveEvents.
+     * Register a keyRelease event to the submodule.
      *
      * @param keyText String
      */
     @Override
     public void registerKeyRelease(final String keyText) {
-        Direction dir = keyTextToDirection(keyText);
-        synchronized (this) {
-            if (dir != null) {
-                moveEvents.remove(dir);
-            }
-        }
+        cycleUntilTrue(
+                List.of(
+                        k -> this.readDirEvent(k, d -> moveEvents.remove(d))
+                ),
+                keyText
+        );
     }
 
     private Pair<Integer, Integer> sumPairs(final Pair<Integer, Integer> pairOne,
@@ -83,6 +114,9 @@ public class InputSubmodule extends InputSubmoduleAbs {
             handler().handle(PlayerCharacterSubmodule.class, s -> {
                 s.movePlayerBy(moveOffset);
             });
+        }
+        if (clickedConfirmEvent) {
+            clickedConfirmEvent = false;
         }
     }
 }
