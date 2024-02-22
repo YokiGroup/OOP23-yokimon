@@ -41,7 +41,7 @@ public record SpriteData(String spriteURL, Vector2 position, Vector2 dim, int pr
      * @param dim Vector2
      * @param priority int
      */
-    public SpriteData(final String spriteURL,final Vector2 position,final Vector2 dim,final int priority) {
+    public SpriteData(final String spriteURL, final Vector2 position, final Vector2 dim, final int priority) {
         this(spriteURL, position, dim, priority, false);
     }
 
