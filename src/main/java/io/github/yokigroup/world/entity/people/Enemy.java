@@ -152,7 +152,7 @@ public class Enemy extends People {
     protected void encounter() {
         this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
             this.getMessageHandler().handle(FightSubmodule.class, fight -> {
-                GenerationFactory generator = new GenerationFactoryImpl();
+                final GenerationFactory generator = new GenerationFactoryImpl();
                 fight.addEncounter(generator.getEnemyParty(map.getPlayerDistanceFromHome()));
             });
         });

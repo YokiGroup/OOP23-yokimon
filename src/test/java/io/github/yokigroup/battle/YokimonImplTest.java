@@ -60,7 +60,7 @@ class YokimonImplTest {
 
     @Test
     void takeXP() {
-        Yokimon tengu = loader.load(DEFAULT_ID);
+        final Yokimon tengu = loader.load(DEFAULT_ID);
         final int defXp = 343;
         final int defXp2 = 300;
         assertEquals(Yokimon.ExpCode.NEW_MOVE, tengu.takeXp(defXp));

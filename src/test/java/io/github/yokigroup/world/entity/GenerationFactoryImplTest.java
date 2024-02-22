@@ -1,5 +1,7 @@
 package io.github.yokigroup.world.entity;
 
+import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GenerationFactoryImplTest {
     private final GenerationFactory generator = new GenerationFactoryImpl();
+    private static final int ID = 15;
+    private static final int BOSS_LEV = 40;
 
     @BeforeEach
     void setUp() {
@@ -16,7 +20,7 @@ class GenerationFactoryImplTest {
     }
 
     @Test
-    void getYokimonAltar() {
+    void yokimonAltar() {
         final int power = 0;
         assertNotNull(generator.getYokimonAltar(power));
         final int rangeLev = 5;
@@ -26,11 +30,19 @@ class GenerationFactoryImplTest {
     }
 
     @Test
-    void getEnemyParty() {
+    void enemyParty() {
         final int power = 1;
         IntStream.range(1, 10)
                 .forEach(i -> assertEquals(1, generator.getEnemyParty(power).size()));
 
+    }
+
+    @Test
+    void  bossParty() {
+        final YokimonLoader loader = new YokimonLoader();
+        final Yokimon son = loader.load(ID);
+        son.setLevel(BOSS_LEV);
+        assertTrue(generator.getBossParty().contains(son));
     }
 
 }

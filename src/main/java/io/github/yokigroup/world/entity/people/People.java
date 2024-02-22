@@ -71,10 +71,10 @@ public abstract class People extends Entity {
      */
     @Override
     public SpriteData getSpriteData() {
-        final SpriteData superSpriteData = super.getSpriteData();
         if (!isActive()) {
             return null;
         }
+        final SpriteData superSpriteData = super.getSpriteData();
         return new SpriteData(
                 superSpriteData.spriteURL(),
                 superSpriteData.position(),

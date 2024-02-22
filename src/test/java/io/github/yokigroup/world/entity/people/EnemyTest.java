@@ -36,6 +36,7 @@ class EnemyTest {
     private static final double NUM_TEST = 20;
     private static final Vector2 V_NEAR = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 + 200,
             (double) GameMap.TILE_DIMENSIONS.y() / 2 + 100);
+
     final private static class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
             private final Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
@@ -51,10 +52,10 @@ class EnemyTest {
                     .addEntity(TileBuilder.EntityType.ALTAR, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, pos1);
-            final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0,0)).build(this.handler());
+            final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
 
 
-            public TestSubmodule(final MessageHandler handler, ModelObserver modelObs) {
+            TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
                 super(handler, modelObs);
             }
 
@@ -64,7 +65,7 @@ class EnemyTest {
             }
 
             @Override
-            public boolean movePlayerToTile(Direction dir) {
+            public boolean movePlayerToTile(final Direction dir) {
                 return map.movePlayerTileMapPosition(dir);
             }
 
@@ -102,10 +103,12 @@ class EnemyTest {
             );
         }
     }
+
     @BeforeEach
     void setUp() {
         testMeg = new TestMessageHandler();
     }
+
     @Test
     void updateFollow() {
 
@@ -132,6 +135,7 @@ class EnemyTest {
         });
 
     }
+
     @Test
     void updateWander() {
 
@@ -142,7 +146,7 @@ class EnemyTest {
                     testMeg.handle(PlayerCharacterSubmodule.class, player -> {
                         final Enemy en = (Enemy) entity;
                         assertEquals(Enemy.State.WANDER, en.getState());
-                        for (int i = 0; i < NUM_TEST ; i++) {
+                        for (int i = 0; i < NUM_TEST; i++) {
                             entity.update();
                             assertEquals(Enemy.State.WANDER, en.getState());
                         }
@@ -155,6 +159,7 @@ class EnemyTest {
         });
 
     }
+
     @Test
     void direction() {
         final Set<People.Direction> possibleDirections = Set.of(People.Direction.UP, People.Direction.DOWN,
@@ -163,7 +168,7 @@ class EnemyTest {
 
         testMeg.handle(TestMessageHandler.TestSubmodule.class, map -> {
             for (final Entity entity : map.getEntitiesOnCurrentTile()) {
-                if ( entity instanceof Enemy ) {
+                if (entity instanceof Enemy) {
                     testMeg.handle(PlayerCharacterSubmodule.class, player -> {
                         final Enemy en = (Enemy) entity;
                         assertEquals(Enemy.State.WANDER, en.getState());

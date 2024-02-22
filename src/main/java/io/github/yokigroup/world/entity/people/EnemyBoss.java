@@ -16,7 +16,7 @@ public class EnemyBoss extends Enemy {
      * @param pos            The position of the Enemy
      * @param messageHandler handle for events
      */
-    public EnemyBoss(final Position pos,final MessageHandler messageHandler) {
+    public EnemyBoss(final Position pos, final MessageHandler messageHandler) {
         super(pos, messageHandler);
     }
 
@@ -26,8 +26,9 @@ public class EnemyBoss extends Enemy {
     @Override
     protected void encounter() {
         this.getMessageHandler().handle(FightSubmodule.class, fight -> {
-            GenerationFactory generator = new GenerationFactoryImpl();
+            final GenerationFactory generator = new GenerationFactoryImpl();
             fight.addEncounter(generator.getBossParty());
         });
     }
 }
+
