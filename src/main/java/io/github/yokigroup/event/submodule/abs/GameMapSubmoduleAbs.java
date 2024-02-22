@@ -64,7 +64,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
      * @param handler to init the submodule with
      * @param modelObs ...
      */
-    public GameMapSubmoduleAbs(final MessageHandler handler, ModelObserver modelObs) {
+    public GameMapSubmoduleAbs(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
     }
 
