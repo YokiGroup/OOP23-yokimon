@@ -6,6 +6,8 @@ import io.github.yokigroup.event.submodule.FightSubmodule;
 import io.github.yokigroup.event.observer.EObserver;
 import io.github.yokigroup.battle.LevelUpLogic;
 
+import java.util.Optional;
+
 /**
  * The game mechanics necessary for the fight.
  * @see FightSubmodule
@@ -66,16 +68,21 @@ public interface Fight {
      * @param attack attack to use
      * @throws IllegalArgumentException if the attack is not possessed by the fighting yokimon
      */
-    void setAttack(Attack attack) throws IllegalArgumentException;
+    void selectAttack(Attack attack) throws IllegalArgumentException;
+
+    /**
+     * Gets the selected attack.
+     * @return the current selected attack, empty optional otherwise.
+     */
+    Attack getSelectedAttack();
 
     /**
      * Method through which the Logic can communicate which {@link Attack} the player wants to use and do so.
      * Unselects the attack after a successful invocation
      * @return success rate over my {@link Yokimon}'s attack
-     * @throws IllegalStateException if an attack has not been selected
-     * @see this#setAttack(Attack) 
+     * @see this#selectAttack(Attack)
      */
-    Success attack() throws IllegalStateException;
+    Success attack();
 
     /**
      * Triggers the current opponent Yokimon {@link Attack}.
