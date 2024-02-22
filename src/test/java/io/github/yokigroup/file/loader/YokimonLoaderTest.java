@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class YokimonLoaderTest {
     private static YokimonLoader loader;
@@ -21,11 +21,11 @@ class YokimonLoaderTest {
     void load() {
         AttackLoader attackLoader = new AttackLoader();
         Yokimon y = loader.load(1);
-
+        final int katanaSlashId = 18;
         assertEquals("Tengu", y.getName());
         assertEquals(Yokimon.GrowthRate.MEDIUM, y.getGrowRate());
         assertEquals(Color.RED, y.getYokimonColor());
-        assertEquals(attackLoader.load(18), y.getAttacks().get(0));
+        assertEquals(attackLoader.load(katanaSlashId), y.getAttacks().get(0));
         // FIXME check the validity of all yokimon fields (with reflection if need be)
 
     }

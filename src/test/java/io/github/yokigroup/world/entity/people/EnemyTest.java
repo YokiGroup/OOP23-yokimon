@@ -37,8 +37,10 @@ class EnemyTest {
     private static final Vector2 V_NEAR = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 + 200,
             (double) GameMap.TILE_DIMENSIONS.y() / 2 + 100);
 
-    final private static class TestMessageHandler extends GameMessageHandler {
+    private static final class TestMessageHandler extends GameMessageHandler {
+        //CheckStyle: OFF
         public static class TestSubmodule extends GameMapSubmoduleAbs {
+            //CheckStyle: ON
             private final Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2 - Y_TEST - 1);
             private final Vector2 v2 = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
@@ -48,14 +50,15 @@ class EnemyTest {
             private final Position pos1 = new PositionImpl(v2);
 
 
-            TileBuilder tile = new TileBuilderImpl(0, "")
+            private final TileBuilder tile = new TileBuilderImpl(0, "")
                     .addEntity(TileBuilder.EntityType.ALTAR, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, pos1);
-            final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
+            private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
 
-
-            TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
+            //CheckStyle: OFF
+            public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
+                //CheckStyle: ON
                 super(handler, modelObs);
             }
 
@@ -111,7 +114,7 @@ class EnemyTest {
 
     @Test
     void updateFollow() {
-
+        System.out.println("sas");
         testMeg.handle(TestMessageHandler.TestSubmodule.class, map -> {
             for (final Entity entity : map.getEntitiesOnCurrentTile()) {
                 if (entity instanceof Enemy) {

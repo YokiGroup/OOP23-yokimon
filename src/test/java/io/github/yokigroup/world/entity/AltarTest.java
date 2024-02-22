@@ -28,7 +28,7 @@ class AltarTest {
     //private TestMessageHandler testMeg;
     private static final double DISTANCE = 40;
 
-    private final static class TestMessageHandler extends GameMessageHandler {
+    private static final class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
             private final Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - DISTANCE,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2);
@@ -36,7 +36,9 @@ class AltarTest {
                     .addEntity(TileBuilder.EntityType.ALTAR, new PositionImpl(v));
             private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
 
+            //CheckStyle: OFF
             public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
+                //CheckStyle: ON
                 super(handler, modelObs);
             }
 

@@ -15,7 +15,6 @@ import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.Entity;
-import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
@@ -28,17 +27,18 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlayerTest {
-    private static final Vector2 V_P = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 ,
+    private static final Vector2 V_P = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2,
             (double) GameMap.TILE_DIMENSIONS.y() / 2);
     private TestMessageHandler handler;
 
-    private final static class TestMessageHandler extends GameMessageHandler {
+    private static final class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
 
             private final TileBuilder tile = new TileBuilderImpl(0, "");
             private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
-
+            //CheckStyle: OFF
             public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
+                //CheckStyle: ON
                 super(handler, modelObs);
             }
 
@@ -94,16 +94,15 @@ class PlayerTest {
     void move() {
 
         final int scaleTot = 5;
-            handler.handle(PlayerCharacterSubmodule.class, play -> {
-                System.out.println("x =" + play.getPosition().getPosition().getX() + "y= " + play.getPosition().getPosition().getY());
-                for (double i = 1; i < scaleTot; i++) {
-                    final double scalable = -50;
-                    play.movePlayerBy(new Vector2Impl(scalable, 0.00).scale(0.1));
-                    System.out.println("x =" + play.getPosition().getPosition().getX() + "y= " + play.getPosition().getPosition().getY());
-                    assertEquals(V_P.getX() + scalable * i, play.getPosition().getPosition().getX());
-                    assertEquals(V_P.getY(), play.getPosition().getPosition().getY());
-                }
-            });
+        final double scaleCompensate = 0.1;
+        handler.handle(PlayerCharacterSubmodule.class, play -> {
+            for (double i = 1; i < scaleTot; i++) {
+                final double scalable = -50;
+                play.movePlayerBy(new Vector2Impl(scalable, 0.00).scale(scaleCompensate));
+                assertEquals(V_P.getX() + scalable * i, play.getPosition().getPosition().getX());
+                assertEquals(V_P.getY(), play.getPosition().getPosition().getY());
+            }
+        });
 
     }
 }
