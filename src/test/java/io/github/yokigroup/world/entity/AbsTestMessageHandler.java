@@ -1,3 +1,4 @@
+
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.core.GameMessageHandler;
@@ -20,11 +21,17 @@ import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
 
 import java.util.Set;
-
+/**
+ * Test Class which extends GameMessageHandler.
+ */
 public final class AbsTestMessageHandler extends GameMessageHandler {
     private static final double X_TEST = 400;
     private static final double Y_TEST = 100;
     private static final double DISTANCE = 40;
+
+    /**
+     * TestSubmodule for create a dummy map used for Entities test.
+     */
     public static class TestSubmodule extends GameMapSubmoduleAbs {
         private final Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
                 (double) GameMap.TILE_DIMENSIONS.y() / 2 - Y_TEST - 1);
@@ -46,6 +53,12 @@ public final class AbsTestMessageHandler extends GameMessageHandler {
         //Without public modifier GameMessageHandler reflection cannot access this constructor
 
         //CHECKSTYLE: RedundantModifier OFF
+
+        /**
+         * Constructor.
+         * @param handler MessageHandler
+         * @param modelObs ModelObserver
+         */
         public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
 //CHECKSTYLE: RedundantModifier ON
             super(handler, modelObs);
