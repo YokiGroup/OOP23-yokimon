@@ -23,8 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 final class FightTest {
 
-    private static Fight toTest;
-    private static Yokimon tengu, nekomata, baku, oni, oni2;
+    private Fight toTest;
+    private Yokimon tengu, nekomata, baku, oni, oni2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
 
@@ -68,7 +68,7 @@ final class FightTest {
     @Test
     void testAttack() {
         final int id = 18;
-        toTest.selectAttack(attackLoader.load(18));
+        toTest.selectAttack(attackLoader.load(id));
         toTest.attack();
         assertNotEquals(toTest.getCurrentOpponent().getActualHp(),
                 toTest.getCurrentOpponent().getMaxHp());

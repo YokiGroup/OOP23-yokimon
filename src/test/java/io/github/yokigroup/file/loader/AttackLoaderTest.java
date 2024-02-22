@@ -7,15 +7,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AttackLoaderTest {
-    private static AttackLoader loader;
-
-    @BeforeEach
-    void setUp() {
-        loader = new AttackLoader();
-    }
 
     @Test
     void load() {
+        final AttackLoader loader = new AttackLoader();
+
         final int attackId = 1;
         final String expectedName = "Shadow Ball";
         final Color expectedColor = Color.BLACK;
