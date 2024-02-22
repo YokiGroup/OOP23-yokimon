@@ -79,11 +79,11 @@ public class GameFX extends Application {
         final List<Node> stackPane = ((StackPane) rootElem.getCenter()).getChildren();
         final Canvas gameCanvas = (Canvas) stackPane.get(0); // FIXME maybe casting like this isn't the smartest choice
         final Label eventLabel = (Label) ((BorderPane) stackPane.get(1)).getBottom();
-        Painter painter = new CanvasPainter(gameCanvas.getGraphicsContext2D(), eventLabel);
+        final Painter painter = new CanvasPainter(gameCanvas.getGraphicsContext2D(), eventLabel);
 
-        ModelObserverImpl modelObs = new ModelObserverImpl(painter);
-        GameLogicImpl gameThread = new GameLogicImpl(modelObs, painter);
-        MessageHandler handler = gameThread.getMessageHandler();
+        final ModelObserverImpl modelObs = new ModelObserverImpl(painter);
+        final GameLogicImpl gameThread = new GameLogicImpl(modelObs, painter);
+        final MessageHandler handler = gameThread.getMessageHandler();
 
         scene.setOnKeyPressed(
                 event -> handler.handle(InputSubmodule.class,

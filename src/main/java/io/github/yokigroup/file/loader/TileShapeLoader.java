@@ -18,8 +18,7 @@ import java.util.Set;
  */
 public class TileShapeLoader extends JsonLoader<TileShape> {
     private static final String TILE_JSON_RPATH = "tiles.json";
-    private Map<Set<Direction>, Set<TileBuilder>> tiles = new HashMap<>();
-    private final JsonParser parser = getParser();
+    private final Map<Set<Direction>, Set<TileBuilder>> tiles = new HashMap<>();
     private final IdJsonLoader<TileBuilder> tileLoader;
 
     /**
@@ -39,14 +38,8 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
         this.tileLoader = loader;
     }
 
-    private Set<Direction> convertToTileShapeSet(final Set<String> rawInput) {
-        Set<Direction> retSet = new HashSet<>();
-        rawInput.forEach(s -> retSet.add(Direction.valueOf(s)));
-        return retSet;
-    }
-
     private Pair<Set<Direction>, TileBuilder> load(final int id) {
-        TileBuilder tileBuilder = tileLoader.load(id);
+        final TileBuilder tileBuilder = tileLoader.load(id);
         return new Pair<>(tileBuilder.getAdjacencies(), tileBuilder);
     }
 
@@ -64,16 +57,16 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
      * @return Set of all the possible {@link TileShape}s, each {@link TileShape} containing all tiles of that shape.
      */
     public Set<TileShape> getAll() {
-        Set<TileShape> shapes = new HashSet<>();
+        final Set<TileShape> shapes = new HashSet<>();
 
         if (tiles.isEmpty()) {
             doUntilPathException(null, (c, i) -> {
-                var nextTile = load(i + 1);
+                final var nextTile = load(i + 1);
                 insertTile(nextTile.x(), nextTile.y());
             });
         }
 
-        for (var tileEntry: tiles.entrySet()) {
+        for (final var tileEntry: tiles.entrySet()) {
             shapes.add(new TileShapeImpl(tileEntry.getValue(), tileEntry.getKey()));
         }
 

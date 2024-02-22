@@ -30,9 +30,9 @@ public final class YokimonLoader extends IdJsonLoader<Yokimon> {
     }
 
     private Map<Yokimon.Stats, Integer> getBaseStats(final int id) {
-        Map<Yokimon.Stats, Integer> baseStats = new HashMap<>();
-        JsonParser parser = getParser();
-        for (var stat: Yokimon.Stats.values()) {
+        final Map<Yokimon.Stats, Integer> baseStats = new HashMap<>();
+        final JsonParser parser = getParser();
+        for (final var stat: Yokimon.Stats.values()) {
             baseStats.put(stat, parser.read(String.format(YOKI_STATS_JPATHF, id, stat)));
         }
         return baseStats;
@@ -40,8 +40,8 @@ public final class YokimonLoader extends IdJsonLoader<Yokimon> {
 
     @Override
     public Yokimon load(final int id) {
-        JsonParser parser = getParser();
-        AttackLoader attackLoader = new AttackLoader();
+        final JsonParser parser = getParser();
+        final AttackLoader attackLoader = new AttackLoader();
 
         final String name = parser.read(String.format(YOKI_NAME_JPATHF, id));
         final Color color = Color.valueOf(parser.read(String.format(YOKI_COLOR_JPATHF, id)));

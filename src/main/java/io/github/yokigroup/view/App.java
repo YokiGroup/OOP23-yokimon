@@ -10,8 +10,6 @@ import javafx.application.Application;
 
 public final class App implements GameWindow {
 
-    public App() { }
-
     @Override
     public void create(final String[] args) {
         Application.launch(GameFX.class, args);

@@ -11,22 +11,18 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class CanvasPainter extends Painter {
     private final Map<String, Image> imageCache = new HashMap<>();
     private final GraphicsContext gc;
     private final Label eventLabel;
-    private Pair<Long, String> currentNotification = null; // notification with timestamp
+    private Pair<Long, String> currentNotification; // notification with timestamp
     private static final int CANVAS_DIM_DIVISOR = 20;
 
     private Vector2 getCanvasDim() {
-        Canvas canvas = gc.getCanvas();
+        final Canvas canvas = gc.getCanvas();
         return new Vector2Impl(canvas.getWidth(), canvas.getHeight());
     }
 
@@ -38,14 +34,6 @@ public class CanvasPainter extends Painter {
     }
 
     public CanvasPainter(final GraphicsContext gc, final Label eventLabel) {
-        super();
-        gc.setImageSmoothing(false);
-        gc.setTextAlign(TextAlignment.CENTER);
-        this.gc = gc;
-        this.eventLabel = eventLabel;
-    }
-
-    public CanvasPainter(final GraphicsContext gc, final Label eventLabel, final DrawQueue drawQueue) {
         super();
         gc.setImageSmoothing(false);
         gc.setTextAlign(TextAlignment.CENTER);
@@ -75,10 +63,6 @@ public class CanvasPainter extends Painter {
         if (currentNotification != null) {
             eventLabel.setText(currentNotification.y());
         }
-    }
-
-    private Set<SpriteData> filterOutNullSpriteData(final Set<SpriteData> sprites) {
-        return sprites.stream().filter(Objects::nonNull).collect(Collectors.toSet());
     }
 
     @Override

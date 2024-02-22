@@ -5,7 +5,7 @@ import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.view.render.Painter;
 
 public class BattleArrangerImpl extends Arranger implements BattleArranger {
-    public BattleArrangerImpl(final Painter painter) {
+    public BattleArrangerImpl() {
         super(null);
     }
 

@@ -23,6 +23,7 @@ import java.util.Set;
 public final class TileLoader extends IdJsonLoader<TileBuilder> {
     private static final String TILE_JSON_RPATH = "tiles.json";
     private static final String TILE_SHAPE_JPATHF = "$.%s.shape[*]";
+    private static final String HOME = "home";
 
     /**
      * Initializes a TileLoader by parsing the default tiles.json.
@@ -42,7 +43,7 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
         final String tileHitboxPositionRPATH = ".position";
         final String tileHitboxDimensionsRPATH = ".dimensions";
         final String tileHitboxRadiusRpath = ".radius";
-        final String formattedHitboxJPATH = String.format(tileHitboxTypeJPATHF, id == -1 ? "home" : String.valueOf(id), index);
+        final String formattedHitboxJPATH = String.format(tileHitboxTypeJPATHF, id == -1 ? HOME : String.valueOf(id), index);
         final String type = parser.read(formattedHitboxJPATH  +  tileHitboxTypeRPATH);
         final Vector2 pos = getVector2(formattedHitboxJPATH  +  tileHitboxPositionRPATH);
 
@@ -68,11 +69,11 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
     }
 
     private Set<Pair<TileBuilder.EntityType, Position>> getEntities(final int id) {
-        final String spawnPositionJPATH = "$." + (id == -1 ? "home" : id) + ".spawns[%d]";
+        final String spawnPositionJPATH = "$." + (id == -1 ? HOME : id) + ".spawns[%d]";
         return ifNullReturnEmpty(doUntilPathException(new HashSet<>(), (c, i) -> {
             final String formattedJPath = String.format(spawnPositionJPATH, i);
-            Position position = new PositionImpl(getVector2(formattedJPath));
-            String type = getParser().read(formattedJPath + ".type");
+            final Position position = new PositionImpl(getVector2(formattedJPath));
+            final String type = getParser().read(formattedJPath + ".type");
             c.add(switch (type) {
                 case "enemy" -> new Pair<>(TileBuilder.EntityType.ENEMY, position);
                 case "altar" -> new Pair<>(TileBuilder.EntityType.ALTAR, position);
@@ -82,7 +83,7 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
     }
 
     private Set<Direction> getTileDirs(final int id) {
-        List<String> rawTileDirs = getParser().read(String.format(TILE_SHAPE_JPATHF, id == -1 ? "home" : "" + id));
+        List<String> rawTileDirs = getParser().read(String.format(TILE_SHAPE_JPATHF, id == -1 ? HOME : "" + id));
         Set<Direction> tileDirs = new HashSet<>();
 
         rawTileDirs.forEach(d -> tileDirs.add(Direction.valueOf(d)));
@@ -90,12 +91,12 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
     }
 
     private String getResourceURL(final int id) {
-        final String resourceURLJPATH = "$." + (id == -1 ? "home" : "" + id) + ".texture";
+        final String resourceURLJPATH = "$." + (id == -1 ? HOME : "" + id) + ".texture";
         return getParser().read(resourceURLJPATH);
     }
 
     private TileBuilder getTileAt(final int id) {
-        TileBuilder tileBuilder = new TileBuilderImpl(id, getResourceURL(id));
+        final TileBuilder tileBuilder = new TileBuilderImpl(id, getResourceURL(id));
         tileBuilder.addAllHitboxes(getHitboxes(id));
         tileBuilder.addAllEntities(getEntities(id));
         tileBuilder.addAllAdjacencies(getTileDirs(id));

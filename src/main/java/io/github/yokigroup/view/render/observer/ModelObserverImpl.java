@@ -21,8 +21,7 @@ public class ModelObserverImpl implements ModelObserver {
     private final FightObserver fightObserver;
     private final NotificationVisitorImpl notificationObs;
     private final RenderStateObserver renderStateObserver;
-    private final DrawQueue worldDrawQueue = new DrawQueueImpl();
-    private final DrawQueue fightDrawQueue = new DrawQueueImpl();
+
     private <T, E> EObserver<T> createConversionObserver(final EObserver<E> obs, final Function<T, E> conversionFun) {
         return (lastArg, arg) -> obs.update(conversionFun.apply(lastArg), conversionFun.apply(arg));
     }

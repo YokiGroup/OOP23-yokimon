@@ -28,7 +28,7 @@ public final class JsonParserImpl implements JsonParser {
     @Override
     public <T> T read(final String jsonPath) {
         Objects.requireNonNull(jsonPath);
-        JsonPath path = JsonPath.compile(jsonPath);
+        final JsonPath path = JsonPath.compile(jsonPath);
         try {
             return doc.read(path);
         } catch (com.jayway.jsonpath.JsonPathException e) {

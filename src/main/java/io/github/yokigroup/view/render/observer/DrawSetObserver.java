@@ -17,7 +17,7 @@ public class DrawSetObserver extends ViewObserver<Pair<RenderState, Set<SpriteDa
     @Override
     public void update(final Pair<RenderState, Set<SpriteData>> lastArg, final Pair<RenderState, Set<SpriteData>> arg) {
         final Painter painter = painter();
-        DrawQueue drawQueue = painter.drawQueue(arg.x());
+        final DrawQueue drawQueue = painter.drawQueue(arg.x());
         drawQueue.removeFromDrawQueue(lastArg.y());
         drawQueue.addToDrawQueue(arg.y());
     }

@@ -28,7 +28,6 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     private final Publisher<Fight> fightPub = new PublisherImpl<>();
     private final Publisher<SpriteData> backgroundPub = new PublisherImpl<>();
     private final Publisher<RenderState> renderStatePub = new PublisherImpl<>();
-    private final SpriteData battleBackground;
     private static final int LAST_PRIORITY = -100;
 
     /**
@@ -41,7 +40,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
         modelObs.addFightPublisher(fightPub);
         modelObs.addSpritePublisher(RenderState.FIGHT, backgroundPub);
         final Vector2 mapDim = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS);
-        battleBackground = new SpriteData(
+        SpriteData battleBackground = new SpriteData(
                 "io/github/yokigroup/view/textures/tiles/battle-forest.png",
                 mapDim.scale(0.5),
                 mapDim,

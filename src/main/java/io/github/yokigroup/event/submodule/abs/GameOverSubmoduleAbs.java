@@ -24,7 +24,6 @@ public abstract class GameOverSubmoduleAbs extends Submodule {
     public abstract void triggerBattleWithNoYokimonsGO();
 
     @Override
-    protected void updateCode(double delta) {
-
+    protected void updateCode(final double delta) {
     }
 }

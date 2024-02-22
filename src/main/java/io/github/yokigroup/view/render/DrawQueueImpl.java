@@ -3,11 +3,7 @@ package io.github.yokigroup.view.render;
 import io.github.yokigroup.core.state.SpriteData;
 
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,7 +20,7 @@ public final class DrawQueueImpl implements DrawQueue {
 
     private Collection<SpriteData> preprocessCollection(final Collection<SpriteData> arg) {
         if (arg == null) {
-            return null;
+            return Collections.emptySet();
         }
         return arg.stream().filter(Objects::nonNull).collect(Collectors.toUnmodifiableSet());
     }
