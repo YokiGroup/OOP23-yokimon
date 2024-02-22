@@ -1,7 +1,5 @@
 package io.github.yokigroup.view.render;
 
-import javafx.application.Platform;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,19 +19,40 @@ public abstract class Painter implements DrawCallable {
         );
     }
 
+    /**
+     * ...
+     * @param state ...
+     * @return ...
+     */
     public final DrawQueue drawQueue(final RenderState state) {
         return drawQueues.get(state);
     }
+
+    /**
+     * ...
+     * @param paintState ...
+     */
     public void setPaintState(final RenderState paintState) {
         this.paintState = paintState;
         setEventText("");
     }
 
+    /**
+     * ...
+     * @return ...
+     */
     public RenderState getPaintState() {
         return paintState;
     }
 
+    /**
+     * ...
+     * @param eventText ...
+     */
     public abstract void setEventText(String eventText);
 
+    /**
+     * ...
+     */
     public abstract void repaint();
 }
