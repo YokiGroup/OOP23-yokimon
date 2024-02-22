@@ -9,8 +9,16 @@ import javafx.application.Application;
 /** Main application entry-point's class. */
 
 public final class App implements GameWindow {
+
+    /**
+     * ...
+     */
     public App() { }
 
+    /**
+     * ...
+     * @param args ...
+     */
     @Override
     public void create(String[] args) {
         Application.launch(GameFX.class, args);
