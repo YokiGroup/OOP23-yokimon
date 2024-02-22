@@ -22,7 +22,7 @@ class AttackLoaderTest {
         final Attack.Effect expectedEffect = Attack.Effect.NONE;
         final int expectedPower = 90;
 
-        Attack toTest = loader.load(attackId);
+        final Attack toTest = loader.load(attackId);
 
         assertEquals(expectedName, toTest.getName());
         assertEquals(expectedColor, toTest.getColor());
