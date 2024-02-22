@@ -62,7 +62,7 @@ public class Altar extends Entity {
      *
      * @return Optional<Yokimon> The Yokimon from the Altar
      */
-    public Yokimon getNewYokimon() {
+    protected Yokimon getNewYokimon() {
         final GenerationFactory generator = new GenerationFactoryImpl();
         return this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
             return generator.getYokimonAltar(map.getPlayerDistanceFromHome());
