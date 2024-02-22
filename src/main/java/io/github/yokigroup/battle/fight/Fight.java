@@ -44,7 +44,7 @@ public interface Fight {
     }
 
     /**
-     * Meant for signaling the state of the fight
+     * Meant for signaling the state of the fight.
      */
     enum State {
         /**
