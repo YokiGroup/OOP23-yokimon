@@ -8,16 +8,26 @@ import io.github.yokigroup.view.render.observer.ModelObserver;
  * Instances and keeps the game model updated.
  */
 public final class GameLogicImpl extends Thread implements GameLogic {
+    private static final int SLEEP_TIME = 5;
     private final MessageHandler handler;
     private final DrawCallable renderer;
     private boolean running = true;
 
+    /**
+     * Constructor for GameLogicImpl.
+     * @param view ...
+     * @param renderer ...
+     */
     public GameLogicImpl(final ModelObserver view, final DrawCallable renderer) {
         super();
         this.handler = new GameMessageHandler(view);
         this.renderer = renderer;
     }
 
+    /**
+     * The message handler.
+     * @return the message handler.
+     */
     public MessageHandler getMessageHandler() {
         return handler;
     }
@@ -30,7 +40,7 @@ public final class GameLogicImpl extends Thread implements GameLogic {
     private void gameLoop() {
         while (running) {
             try {
-                Thread.sleep(5);
+                Thread.sleep(SLEEP_TIME);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
