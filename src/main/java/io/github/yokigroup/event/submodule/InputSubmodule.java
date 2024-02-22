@@ -1,6 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.abs.GameStateSubmoduleAbs;
 import io.github.yokigroup.event.submodule.abs.InputSubmoduleAbs;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
@@ -8,16 +9,16 @@ import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * Input submodule.
  */
-public class InputSubmodule extends InputSubmoduleAbs {
+public final class InputSubmodule extends InputSubmoduleAbs {
     private final Set<Direction> moveEvents = new HashSet<>();
+    private boolean clickedConfirmEvent = false;
 
     /**
      * @param handler         MessageHandler to call in order to query other submodules.
@@ -27,44 +28,73 @@ public class InputSubmodule extends InputSubmoduleAbs {
         super(handler, ignoredModelObs);
     }
 
-    private Direction keyTextToDirection(final String keyText) {
-        return switch (keyText.toLowerCase(Locale.ROOT)) {
+    private boolean readDirEvent(final String keyText, final Consumer<Direction> ifPresent) {
+        final Direction dir = switch (keyText.toLowerCase(Locale.ROOT)) {
             case "w" -> Direction.UP;
             case "a" -> Direction.LEFT;
             case "s" -> Direction.DOWN;
             case "d" -> Direction.RIGHT;
             default -> null;
         };
+        if (dir != null) {
+            synchronized (this) {
+                ifPresent.accept(dir);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private boolean readConfirmationEvent(final String keyText, final Runnable ifPresent) {
+        boolean confirmed = switch (keyText) {
+            case "\n", " " -> true;
+            default -> false;
+        };
+        if (confirmed) {
+            synchronized (this) {
+                ifPresent.run();
+            }
+        }
+        return confirmed;
+    }
+
+    private <T> void cycleUntilTrue(List<Predicate<T>> predicates, T input) {
+        for (var event : predicates) {
+            if (event.test(input)) {
+                return;
+            }
+        }
     }
 
     /**
-     * Manage the input press, adding a moveEvents.
+     * Register a keyPress event to the submodule.
      *
      * @param keyText String
      */
     @Override
     public void registerKeyPress(final String keyText) {
-        final Direction dir = keyTextToDirection(keyText);
-        synchronized (this) {
-            if (dir != null) {
-                moveEvents.add(dir);
-            }
-        }
+        cycleUntilTrue(
+                List.of(
+                        k -> this.readDirEvent(k, moveEvents::add),
+                        k -> this.readConfirmationEvent(k, () -> clickedConfirmEvent = true)
+                ),
+                keyText
+        );
     }
 
     /**
-     * Manage the input press, removing a moveEvents.
+     * Register a keyRelease event to the submodule.
      *
      * @param keyText String
      */
     @Override
     public void registerKeyRelease(final String keyText) {
-        final Direction dir = keyTextToDirection(keyText);
-        synchronized (this) {
-            if (dir != null) {
-                moveEvents.remove(dir);
-            }
-        }
+        cycleUntilTrue(
+                List.of(
+                        k -> this.readDirEvent(k, moveEvents::remove)
+                ),
+                keyText
+        );
     }
 
     private Pair<Integer, Integer> sumPairs(final Pair<Integer, Integer> pairOne,
@@ -74,12 +104,7 @@ public class InputSubmodule extends InputSubmoduleAbs {
         return new Pair<>(pairOne.x() + pairTwo.x(), pairOne.y() + pairTwo.y());
     }
 
-    /**
-     * Update position.
-     * @param delta the movement offset.
-     */
-    @Override
-    protected void updateCode(final double delta) {
+    private void handlePlayerPositionChange(final double delta) {
         final double velocity = 52.;
         Pair<Integer, Integer> dirSum;
         synchronized (this) {
@@ -90,6 +115,26 @@ public class InputSubmodule extends InputSubmoduleAbs {
             handler().handle(PlayerCharacterSubmodule.class, s -> {
                 s.movePlayerBy(moveOffset);
             });
+        }
+    }
+
+    private void handleFightInputs() {
+
+    }
+
+    private void handleGameOverInputs() {
+        if (clickedConfirmEvent) {
+            System.exit(0);
+        }
+    }
+
+    @Override
+    protected void updateCode(final double delta) {
+        final GameStateSubmoduleAbs.GameState currentState = handler().handle(GameStateSubmodule.class, GameStateSubmodule::getGameState);
+        switch (currentState) {
+            case WORLD -> handlePlayerPositionChange(delta);
+            case FIGHT -> handleFightInputs();
+            case GAMEOVER -> handleGameOverInputs();
         }
     }
 }
