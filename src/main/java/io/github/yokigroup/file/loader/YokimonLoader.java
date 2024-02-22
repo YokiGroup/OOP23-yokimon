@@ -2,7 +2,6 @@ package io.github.yokigroup.file.loader;
 
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Color;
-import io.github.yokigroup.battle.LevelUpLogicImpl;
 import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.YokimonImpl;
 import io.github.yokigroup.util.json.JsonParser;
