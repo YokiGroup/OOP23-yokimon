@@ -8,17 +8,13 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class YokimonLoaderTest {
-    private static YokimonLoader loader;
+    private static final YokimonLoader loader = new YokimonLoader();
 
-    @BeforeEach
-    void setUp() {
-        loader = new YokimonLoader();
-    }
 
     @Test
     void load() {
-        AttackLoader attackLoader = new AttackLoader();
-        Yokimon y = loader.load(1);
+        final AttackLoader attackLoader = new AttackLoader();
+        final Yokimon y = loader.load(1);
         final int katanaSlashId = 18;
         assertEquals("Tengu", y.getName());
         assertEquals(Yokimon.GrowthRate.MEDIUM, y.getGrowRate());
@@ -29,8 +25,8 @@ class YokimonLoaderTest {
     }
 
     @Test
-    void getAll() {
-        Map<Integer, Yokimon> allYokimons = loader.getAll();
+    void testGetAll() {
+        final Map<Integer, Yokimon> allYokimons = loader.getAll();
         assertEquals(loader.load(2).getName(), allYokimons.get(2).getName());
     }
 }

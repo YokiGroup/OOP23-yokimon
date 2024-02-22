@@ -1,5 +1,6 @@
 package io.github.yokigroup.world.entity.people;
 
+import io.github.yokigroup.core.GameMessageHandler;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PeopleTest {
-    private static MessageHandler messageHandler;
+    private static final MessageHandler messageHandler = new GameMessageHandler();
     @Test
     void setDirection() {
         final Position playerPos = new PositionImpl(new Vector2Impl(0, 0));

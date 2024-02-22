@@ -98,7 +98,7 @@ class PlayerTest {
         final int scaleTot = 5;
         final double scaleCompensate = 0.1;
         handler.handle(PlayerCharacterSubmodule.class, play -> {
-            for (double i = 1; i < scaleTot; i++) {
+            for (int i = 1; i < scaleTot; i++) {
                 final double scalable = -50;
                 play.movePlayerBy(new Vector2Impl(scalable, 0.00).scale(scaleCompensate));
                 assertEquals(V_P.getX() + scalable * i, play.getPosition().getPosition().getX());
