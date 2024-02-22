@@ -1,8 +1,13 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.submodule.abs.Submodule;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.Optional;
+import java.util.HashSet;
 
-import java.util.*;
 
 /**
  * Map of submodules. Used to collect all submodules used by a game component into one place.
