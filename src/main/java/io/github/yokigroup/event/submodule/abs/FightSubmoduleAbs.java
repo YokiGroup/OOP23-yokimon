@@ -5,6 +5,7 @@ import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -22,9 +23,9 @@ public abstract class FightSubmoduleAbs extends Submodule {
     }
 
     /**
-     * Generates fight to be processed as next encounter.
+     * Process next encounter.
      */
-    public abstract void addEncounter();
+    public abstract void addEncounter(List<Yokimon> enemyParty);
 
     /**
      * Get last Fight added and not yet processed by the game logic.

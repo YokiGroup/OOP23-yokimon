@@ -3,10 +3,13 @@ package io.github.yokigroup.world.entity.people;
 import io.github.yokigroup.event.MessageHandler;
 
 import io.github.yokigroup.event.submodule.FightSubmodule;
+import io.github.yokigroup.event.submodule.GameMapSubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.util.WeightedPoolImpl;
+import io.github.yokigroup.world.entity.GenerationFactory;
+import io.github.yokigroup.world.entity.GenerationFactoryImpl;
 import io.github.yokigroup.world.entity.Position;
 
 import java.util.Objects;
@@ -137,11 +140,21 @@ public class Enemy extends People {
         this.collisionCheck(vector);
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, player -> {
             if (Objects.requireNonNull(this.getHitBox()).collidesWith(player.getPlayerEntity().getHitBox()).isPresent()) {
-                this.getMessageHandler().handle(FightSubmodule.class, fight -> {
-                    fight.addEncounter();
-                    this.deactivate();
-                });
+                encounter();
+                this.deactivate();
             }
+        });
+    }
+
+    /**
+     * Add an encounter for this type of enemy.
+     */
+    protected void encounter() {
+        this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
+            this.getMessageHandler().handle(FightSubmodule.class, fight -> {
+                final GenerationFactory generator = new GenerationFactoryImpl();
+                fight.addEncounter(generator.getEnemyParty(map.getPlayerDistanceFromHome()));
+            });
         });
     }
 
@@ -149,7 +162,7 @@ public class Enemy extends People {
      * Updates the state of the Enemy (switches between wander and follow).
      */
     @Override
-    public void updateCode(double delta) {
+    public void updateCode(final double delta) {
         if (!this.isActive()) {
             return;
         }

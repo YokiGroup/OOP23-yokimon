@@ -60,7 +60,7 @@ class AltarTest {
                 return map.getPlayerTile().getEntities();
             }
 
-
+            @Override
             protected void updateEntities() {
 
             }
@@ -89,7 +89,7 @@ class AltarTest {
     }
     @Test
     void altarTest() {
-        TestMessageHandler testMeg = new TestMessageHandler();
+        final TestMessageHandler testMeg = new TestMessageHandler();
         testMeg.handle(TestMessageHandler.TestSubmodule.class, map -> {
            for (final Entity entity : map.getEntitiesOnCurrentTile()) {
 

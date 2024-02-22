@@ -51,7 +51,8 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     }
 
     @Override
-    public void addEncounter() {
+    public void addEncounter(List<Yokimon> enemyParty) {
+        Objects.requireNonNull(enemyParty, "Enemy party was null");
         // FIXME implement
         //lastAnnouncedFight = Optional.ofNullable(f);
         final int partyYokimonsNum = handler().handle(PartySubmodule.class, s -> {
@@ -61,10 +62,8 @@ public final class FightSubmodule extends FightSubmoduleAbs {
             handler().handle(GameOverSubmodule.class, GameOverSubmodule::triggerBattleWithNoYokimonsGO);
         } else {
             renderStatePub.notifyObservers(RenderState.FIGHT);
-            YokimonLoader loader = new YokimonLoader();
-            Yokimon a = loader.load(1);
             handler().handle(PartySubmodule.class, s -> {
-                fightPub.notifyObservers(new FightImpl(s.listYokimons(), List.of(a)));
+                fightPub.notifyObservers(new FightImpl(s.listYokimons(), enemyParty));
             });
         }
     }

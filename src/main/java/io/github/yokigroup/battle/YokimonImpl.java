@@ -96,6 +96,7 @@ public class YokimonImpl implements Yokimon {
         this.setExp(yokimon.getXp());
         this.setActualHp(yokimon.getActualHp());
     }
+
     /**
      * return the id of the yokimon.
      *
@@ -215,7 +216,7 @@ public class YokimonImpl implements Yokimon {
         this.maxHp = newValue;
     }
 
-private void setLevelUPLogic(final LevelUpLogic logic) {
+    private void setLevelUPLogic(final LevelUpLogic logic) {
         Objects.requireNonNull(logic, "Logic passed was null");
         this.levelUtility = Optional.of(logic);
         this.levelUtility.get().reset(this);
@@ -226,8 +227,7 @@ private void setLevelUPLogic(final LevelUpLogic logic) {
         if (damage >= this.actualHp) {
             this.actualHp = 0;
             this.active = false;
-        }
-        else {
+        } else {
             this.actualHp -= damage;
         }
         return this.active;
@@ -309,7 +309,7 @@ private void setLevelUPLogic(final LevelUpLogic logic) {
     }
 
     /**
-     * Reset the current moves based of the yokimon level
+     * Reset the current moves based of the yokimon level.
      */
     private void resetAttack() {
         final List<Attack> newAttacks = new ArrayList<>();

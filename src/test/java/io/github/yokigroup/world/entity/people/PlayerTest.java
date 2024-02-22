@@ -59,7 +59,7 @@ class PlayerTest {
                 return map.getPlayerTile().getEntities();
             }
 
-
+            @Override
             protected void updateEntities() {
 
             }
