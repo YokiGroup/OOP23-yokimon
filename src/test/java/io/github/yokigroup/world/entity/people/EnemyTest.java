@@ -60,9 +60,9 @@ class EnemyTest {
 
             private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
 
-            //CheckStyle: OFF
+//CHECKSTYLE: RedundantModifier OFF
             public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
-                //CheckStyle: ON
+//CHECKSTYLE: RedundantModifier ON
                 super(handler, modelObs);
             }
 
