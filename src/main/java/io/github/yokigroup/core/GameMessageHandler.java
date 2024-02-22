@@ -65,10 +65,17 @@ public class GameMessageHandler implements MessageHandler {
         return retMap;
     }
 
+    /**
+     * Constructor for game message handler.
+     * @param modelObs ...
+     */
     public GameMessageHandler(final ModelObserver modelObs) {
         subModules = initSubmodules(modelObs);
     }
 
+    /**
+     * Constructor for game message handler.
+     */
     public GameMessageHandler() {
         // FIXME TEMPORARY HACK
         this(new ModelObserver() {
@@ -90,6 +97,12 @@ public class GameMessageHandler implements MessageHandler {
         });
     }
 
+    /**
+     * ...
+     * @param subModuleTypes type of the submodule called in play ...
+     * @param handler handler function to determine what to do with the submodule ...
+     * @param <T> ...
+     */
     @Override
     public final <T extends Submodule> void handle(final Class<T> subModuleTypes, final Consumer<T> handler) {
         this.handle(subModuleTypes, a -> {
