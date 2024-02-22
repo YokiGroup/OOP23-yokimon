@@ -1,6 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.abs.GameStateSubmoduleAbs;
 import io.github.yokigroup.event.submodule.abs.InputSubmoduleAbs;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
@@ -9,7 +10,6 @@ import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 
 import java.util.*;
-import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -102,8 +102,7 @@ public class InputSubmodule extends InputSubmoduleAbs {
         return new Pair<>(pairOne.x() + pairTwo.x(), pairOne.y() + pairTwo.y());
     }
 
-    @Override
-    protected void updateCode(double delta) {
+    private void handlePlayerPositionChange(final double delta) {
         final double velocity = 52.;
         Pair<Integer, Integer> dirSum;
         synchronized (this) {
@@ -115,8 +114,25 @@ public class InputSubmodule extends InputSubmoduleAbs {
                 s.movePlayerBy(moveOffset);
             });
         }
+    }
+
+    private void handleFightInputs() {
+
+    }
+
+    private void handleGameOverInputs() {
         if (clickedConfirmEvent) {
-            clickedConfirmEvent = false;
+            System.exit(0);
+        }
+    }
+
+    @Override
+    protected void updateCode(final double delta) {
+        final GameStateSubmoduleAbs.GameState currentState = handler().handle(GameStateSubmodule.class, GameStateSubmodule::getGameState);
+        switch (currentState) {
+            case WORLD -> handlePlayerPositionChange(delta);
+            case FIGHT -> handleFightInputs();
+            case GAMEOVER -> handleGameOverInputs();
         }
     }
 }

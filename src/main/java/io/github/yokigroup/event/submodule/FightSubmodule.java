@@ -8,6 +8,7 @@ import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
+import io.github.yokigroup.event.submodule.abs.GameStateSubmoduleAbs;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
@@ -19,6 +20,7 @@ import io.github.yokigroup.world.GameMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
  * Implementation of {@link FightSubmoduleAbs}.
@@ -29,7 +31,6 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     private final Fight lastAnnouncedFight = null;
     private final Publisher<Fight> fightPub = new PublisherImpl<>();
     private final Publisher<SpriteData> backgroundPub = new PublisherImpl<>();
-    private final Publisher<RenderState> renderStatePub = new PublisherImpl<>();
     private final SpriteData battleBackground;
 
     /**
@@ -40,7 +41,6 @@ public final class FightSubmodule extends FightSubmoduleAbs {
         Objects.requireNonNull(modelObs);
         modelObs.addFightPublisher(fightPub);
         modelObs.addSpritePublisher(RenderState.FIGHT, backgroundPub);
-        modelObs.addStateChangePublisher(renderStatePub);
         final Vector2 mapDim = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS);
         battleBackground = new SpriteData(
                 "io/github/yokigroup/view/textures/tiles/battle-forest.png",
@@ -62,7 +62,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
         if (partyYokimonsNum == 0) {
             handler().handle(GameOverSubmodule.class, GameOverSubmodule::triggerBattleWithNoYokimonsGO);
         } else {
-            renderStatePub.notifyObservers(RenderState.FIGHT);
+            handler().handle(GameStateSubmodule.class, (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.FIGHT));
             handler().handle(PartySubmodule.class, s -> {
                 fightPub.notifyObservers(new FightImpl(s.listYokimons(), enemyParty));
             });

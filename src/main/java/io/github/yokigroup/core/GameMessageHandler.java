@@ -34,7 +34,8 @@ public class GameMessageHandler implements MessageHandler {
                 FightSubmodule.class,
                 GameMapSubmodule.class,
                 InputSubmodule.class,
-                GameOverSubmodule.class
+                GameOverSubmodule.class,
+                GameStateSubmodule.class
         );
     }
 
