@@ -15,9 +15,11 @@ import java.util.Optional;
 public abstract class FightSubmoduleAbs extends Submodule {
 
     /**
+     * Constructor for FightSubmoduleAbs.
      * @param handler to init the submodule with
+     * @param modelObs the model observer.
      */
-    public FightSubmoduleAbs(final MessageHandler handler, ModelObserver modelObs) {
+    public FightSubmoduleAbs(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
     }
 
