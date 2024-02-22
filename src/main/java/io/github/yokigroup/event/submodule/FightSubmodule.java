@@ -35,11 +35,12 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     /**
      * @param handler MessageHandler to call in order to query other submodules.
      */
-    public FightSubmodule(final MessageHandler handler, ModelObserver modelObs) {
+    public FightSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
         Objects.requireNonNull(modelObs);
         modelObs.addFightPublisher(fightPub);
         modelObs.addSpritePublisher(RenderState.FIGHT, backgroundPub);
+        modelObs.addStateChangePublisher(renderStatePub);
         final Vector2 mapDim = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS);
         battleBackground = new SpriteData(
                 "io/github/yokigroup/view/textures/tiles/battle-forest.png",
