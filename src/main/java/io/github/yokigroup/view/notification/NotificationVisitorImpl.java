@@ -33,6 +33,12 @@ public class NotificationVisitorImpl implements NotificationVisitor, EObserver<N
     }
 
     @Override
+    public String getSelectedAttackNotiticationText(final AttackSelectedNotification notification) {
+        final String attackSelectedMsg = "Selected %s";
+        return String.format(attackSelectedMsg, notification.getSelectedAttack().getName());
+    }
+
+    @Override
     public void update(final Notification lastArg, final Notification arg) {
         painter.setEventText(arg.getMessage(this));
     }

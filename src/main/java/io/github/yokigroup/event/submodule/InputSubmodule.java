@@ -119,7 +119,19 @@ public final class InputSubmodule extends InputSubmoduleAbs {
     }
 
     private void handleFightInputs() {
+        handler().handle(FightSubmodule.class, s -> {
+            moveEvents.forEach(e -> {
+                switch (e) {
+                    case UP -> s.nextAttack();
+                    case DOWN -> s.prevAttack();
+                }
+            });
+        });
 
+
+
+        moveEvents.clear();
+        clickedConfirmEvent = false;
     }
 
     private void handleGameOverInputs() {
