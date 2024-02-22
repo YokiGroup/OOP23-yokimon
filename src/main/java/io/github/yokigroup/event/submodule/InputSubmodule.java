@@ -13,8 +13,11 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Input submodule.
+ */
 public class InputSubmodule extends InputSubmoduleAbs {
-    Set<Direction> moveEvents = new HashSet<>();
+    private Set<Direction> moveEvents = new HashSet<>();
 
     /**
      * @param handler         MessageHandler to call in order to query other submodules.
@@ -71,8 +74,12 @@ public class InputSubmodule extends InputSubmoduleAbs {
         return new Pair<>(pairOne.x() + pairTwo.x(), pairOne.y() + pairTwo.y());
     }
 
+    /**
+     * Update position.
+     * @param delta the movement offset.
+     */
     @Override
-    protected void updateCode(double delta) {
+    protected void updateCode(final double delta) {
         final double velocity = 52.;
         Pair<Integer, Integer> dirSum;
         synchronized (this) {
