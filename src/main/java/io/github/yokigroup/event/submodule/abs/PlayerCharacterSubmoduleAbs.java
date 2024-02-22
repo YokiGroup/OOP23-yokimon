@@ -16,8 +16,9 @@ public abstract class PlayerCharacterSubmoduleAbs extends Submodule {
 
     /**
      * @param handler to init the submodule with
+     * @param modelObs the model Observer.
      */
-    public PlayerCharacterSubmoduleAbs(final MessageHandler handler, ModelObserver modelObs) {
+    public PlayerCharacterSubmoduleAbs(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
     }
 
@@ -52,7 +53,7 @@ public abstract class PlayerCharacterSubmoduleAbs extends Submodule {
     public abstract void movePlayerTo(Position pos);
 
     @Override
-    protected void updateCode(double delta) {
+    protected void updateCode(final double delta) {
         // TODO collision check
     }
 }
