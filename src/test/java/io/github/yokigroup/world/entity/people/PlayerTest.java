@@ -20,6 +20,7 @@ import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -38,9 +39,11 @@ class PlayerTest {
 
             private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0))
                     .build(this.handler());
-            //CheckStyle: OFF
+            //Without public modifier GameMessageHandler reflection cannot access this constructor
+
+            //CHECKSTYLE: RedundantModifier OFF
             public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
-                //CheckStyle: ON
+                //CHECKSTYLE: RedundantModifier ON
                 super(handler, modelObs);
             }
 

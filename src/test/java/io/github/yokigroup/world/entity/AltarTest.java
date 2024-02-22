@@ -35,11 +35,11 @@ class AltarTest {
             private final TileBuilder tile = new TileBuilderImpl(0, "")
                     .addEntity(TileBuilder.EntityType.ALTAR, new PositionImpl(v));
             private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
+            //Without public modifier GameMessageHandler reflection cannot access this constructor
 
-
-            //CheckStyle: OFF
+            //CheckStyle: RedundantModifier OFF
             public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
-                //CheckStyle: ON
+                //CheckStyle: RedundantModifier ON
 
                 super(handler, modelObs);
             }

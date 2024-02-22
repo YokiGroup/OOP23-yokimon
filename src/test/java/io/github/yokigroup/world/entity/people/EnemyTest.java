@@ -39,10 +39,7 @@ class EnemyTest {
 
     private static final class TestMessageHandler extends GameMessageHandler {
 
-        //CheckStyle: OFF
-
         public static class TestSubmodule extends GameMapSubmoduleAbs {
-            //CheckStyle: ON
             private final Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2 - Y_TEST - 1);
             private final Vector2 v2 = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
@@ -59,8 +56,9 @@ class EnemyTest {
 
 
             private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
+            //Without public modifier GameMessageHandler reflection cannot access this constructor
 
-//CHECKSTYLE: RedundantModifier OFF
+            //CHECKSTYLE: RedundantModifier OFF
             public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
 //CHECKSTYLE: RedundantModifier ON
                 super(handler, modelObs);
