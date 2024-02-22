@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 final class FightTest {
 
     private static Fight toTest;
-    private Yokimon tengu, nekomata, baku, oni, oni2;
+    private static Yokimon tengu, nekomata, baku, oni, oni2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
 
@@ -63,11 +63,10 @@ final class FightTest {
      */
     @Test
     void testAttack() {
-        final int id = 18;
-        toTest.setAttack(attackLoader.load(id));
+        toTest.setAttack(attackLoader.load(18));
         toTest.attack();
         assertNotEquals(toTest.getCurrentOpponent().getActualHp(),
-                        toTest.getCurrentOpponent().getMaxHp());
+                toTest.getCurrentOpponent().getMaxHp());
         assertEquals(oni, toTest.getCurrentOpponent());
         assertFalse(toTest.isOver());
         assertFalse(toTest.victory());
@@ -80,7 +79,7 @@ final class FightTest {
     void testGetAttacked() {
         final Fight.Success atk1 = toTest.getAttacked();
         assertNotEquals(toTest.getCurrentMyYokimon().getActualHp(),
-                        toTest.getCurrentMyYokimon().getMaxHp());
+                toTest.getCurrentMyYokimon().getMaxHp());
         assertNotEquals(Fight.Success.FAIL, atk1);  //the best attack available shouldn't be that bad
         assertEquals(Fight.Success.WEAK, atk1);
         assertFalse(toTest.isOver());
@@ -95,5 +94,3 @@ final class FightTest {
         assertTrue(toTest.playerIsFirst());
     }
 }
-
-
