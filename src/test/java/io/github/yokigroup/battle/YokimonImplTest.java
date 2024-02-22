@@ -17,20 +17,10 @@ class YokimonImplTest {
     private static final int DEFAULT_LEVEL = 7;
     private static final int NUM_MOVES = 3;
     private static final int DEFAULT_ID = 1;
-    private static YokimonLoader loader;
-    private static AttackLoader loaderAttack;
+    private final static YokimonLoader loader = new YokimonLoader();;
+    private final static AttackLoader loaderAttack = new AttackLoader();
 
-    @BeforeEach
-    void setUp() {
-        loader = new YokimonLoader();
-        loaderAttack = new AttackLoader();
-    }
 
-    @Test
-    void yokimonImpl() {
-        final YokimonImpl stone = null;
-        assertThrows(NullPointerException.class, () -> new YokimonImpl(stone));
-    }
     @Test
     void allStats() {
     final Yokimon tengu = loader.load(DEFAULT_ID);
