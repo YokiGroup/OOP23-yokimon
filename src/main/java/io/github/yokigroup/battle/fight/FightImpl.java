@@ -17,6 +17,7 @@ import io.github.yokigroup.event.submodule.FightSubmodule;
 
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,7 @@ public final class FightImpl implements Fight {
     private final List<Yokimon> oppYokimons;
     private Yokimon currMyYokimon;
     private Yokimon currOppYokimon;
+    private Attack selectedAttack = null;
 
 
     /* structures */
@@ -68,11 +70,24 @@ public final class FightImpl implements Fight {
         this.state = State.READY_TO_PROGRESS;
     }
 
+    @Override
+    public void setAttack(final Attack attack) throws IllegalArgumentException {
+        Objects.requireNonNull(attack);
+        if (getCurrentMyYokimon().getAttacks().contains(attack)) {
+            selectedAttack = Objects.requireNonNull(attack);
+        } else {
+            throw new IllegalArgumentException("Attack given is not possessed by yokimon " +
+                    getCurrentMyYokimon().getName());
+        }
+    }
 
     @Override
-    public Success attack(final Attack myAttack) {
+    public Success attack() throws IllegalStateException {
+        if (selectedAttack == null) {
+            throw new IllegalStateException("No attack has been selected");
+        }
 
-        final int damage = dmgCalc.getDMG(currMyYokimon, currOppYokimon, myAttack);
+        final int damage = dmgCalc.getDMG(currMyYokimon, currOppYokimon, selectedAttack);
         if (currOppYokimon.takeDamage(damage)) {
             oppYokimons.remove(currOppYokimon);
             defeatedOpps.add(currMyYokimon);
@@ -89,6 +104,7 @@ public final class FightImpl implements Fight {
                 return Success.VICTORY;
             }
         }
+        selectedAttack = null;
         return successRate(damage);
     }
 
