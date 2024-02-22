@@ -11,7 +11,7 @@ public interface Deactivatable {
     void activate();
 
     /**
-     * Deactivates the object, does nothing if it's already inactive
+     * Deactivates the object, does nothing if it's already inactive.
      */
     void deactivate();
 
