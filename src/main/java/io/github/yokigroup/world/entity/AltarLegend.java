@@ -22,7 +22,7 @@ public class AltarLegend extends Altar {
      * Return always a sonGuWong.
      */
     @Override
-    public Yokimon getNewYokimon() {
+    protected Yokimon getNewYokimon() {
         final GenerationFactory generator = new GenerationFactoryImpl();
         return this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
             return generator.getLegendAltar(map.getPlayerDistanceFromHome());

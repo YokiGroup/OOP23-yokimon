@@ -17,9 +17,9 @@ import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Objects;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,7 +36,11 @@ class AltarTest {
                     .addEntity(TileBuilder.EntityType.ALTAR, new PositionImpl(v));
             private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
 
-            TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
+
+            //CheckStyle: OFF
+            public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
+                //CheckStyle: ON
+
                 super(handler, modelObs);
             }
 
@@ -74,19 +78,15 @@ class AltarTest {
 
         @Override
         protected Set<Class<? extends Submodule>> getSubmoduleTypes() {
-            return Set.of(
+            return Objects.requireNonNull(Set.of(
                     PlayerCharacterSubmodule.class,
                     TestSubmodule.class,
                     PartySubmodule.class,
                     GameMapSubmodule.class
-            );
+            ));
         }
     }
 
-    @BeforeEach
-    void setUp() {
-        //testMeg = new TestMessageHandler();
-    }
     @Test
     void altarTest() {
         final TestMessageHandler testMeg = new TestMessageHandler();

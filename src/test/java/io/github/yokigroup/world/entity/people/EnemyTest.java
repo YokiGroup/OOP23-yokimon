@@ -39,7 +39,10 @@ class EnemyTest {
 
     private static final class TestMessageHandler extends GameMessageHandler {
 
+        //CheckStyle: OFF
+
         public static class TestSubmodule extends GameMapSubmoduleAbs {
+            //CheckStyle: ON
             private final Vector2 v = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
                     (double) GameMap.TILE_DIMENSIONS.y() / 2 - Y_TEST - 1);
             private final Vector2 v2 = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2 - X_TEST,
@@ -54,10 +57,12 @@ class EnemyTest {
                     .addEntity(TileBuilder.EntityType.ENEMY, altarPos)
                     .addEntity(TileBuilder.EntityType.ENEMY, pos1);
 
+
             private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0)).build(this.handler());
 
-
-            TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
+            //CheckStyle: OFF
+            public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
+                //CheckStyle: ON
                 super(handler, modelObs);
             }
 
@@ -113,7 +118,7 @@ class EnemyTest {
 
     @Test
     void updateFollow() {
-
+        System.out.println("sas");
         testMeg.handle(TestMessageHandler.TestSubmodule.class, map -> {
             for (final Entity entity : map.getEntitiesOnCurrentTile()) {
                 if (entity instanceof Enemy) {

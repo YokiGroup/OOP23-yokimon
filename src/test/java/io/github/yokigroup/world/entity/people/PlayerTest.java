@@ -15,27 +15,32 @@ import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.Entity;
-import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.Objects;
 import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlayerTest {
     private static final Vector2 V_P = new Vector2Impl((double) GameMap.TILE_DIMENSIONS.x() / 2,
-            (double) GameMap.TILE_DIMENSIONS.y() / 2 + 50);
+
+            (double) GameMap.TILE_DIMENSIONS.y() / 2);
     private TestMessageHandler handler;
 
     private static final class TestMessageHandler extends GameMessageHandler {
         public static class TestSubmodule extends GameMapSubmoduleAbs {
 
             private final TileBuilder tile = new TileBuilderImpl(0, "");
-            private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0))
-                                        .build(this.handler());
 
-             TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
+            private final GameMap map = new GameMapBuilderImpl().putTileAt(tile, new Pair<>(0, 0))
+                    .build(this.handler());
+            //CheckStyle: OFF
+            public TestSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
+                //CheckStyle: ON
                 super(handler, modelObs);
             }
 
@@ -73,12 +78,12 @@ class PlayerTest {
 
         @Override
         protected Set<Class<? extends Submodule>> getSubmoduleTypes() {
-            return Set.of(
+            return Objects.requireNonNull(Set.of(
                     PlayerCharacterSubmodule.class,
                     TestMessageHandler.TestSubmodule.class,
                     PartySubmodule.class,
                     GameMapSubmodule.class
-            );
+            ));
         }
     }
 
@@ -89,56 +94,17 @@ class PlayerTest {
 
     @Test
     void move() {
-        final int scalable = 50;
-        final int scaleTot = 250;
-        /*testMeg.handle(GameMapSubmodule.class, map -> {
-            assertEquals(1, map.getEntitiesOnCurrentTile().size());
 
-            map.getEntitiesOnCurrentTile().forEach(en -> {
-                System.out.println(en.getHitBox().toString());
-                System.out.println(en.getPos().getPosition().getX() + "    " + en.getPos().getPosition().getY());
-<<<<<<< HEAD
-            });
+        final int scaleTot = 5;
+        final double scaleCompensate = 0.1;
+        handler.handle(PlayerCharacterSubmodule.class, play -> {
+            for (double i = 1; i < scaleTot; i++) {
+                final double scalable = -50;
+                play.movePlayerBy(new Vector2Impl(scalable, 0.00).scale(scaleCompensate));
+                assertEquals(V_P.getX() + scalable * i, play.getPosition().getPosition().getX());
+                assertEquals(V_P.getY(), play.getPosition().getPosition().getY());
+            }
         });
-        testMeg.handle(PlayerCharacterSubmodule.class, play -> {
-            for (double i = scalable; i < scaleTot; i = i + scalable) {
-                play.movePlayerBy(new Vector2Impl(play.getPosition().getPosition().getX() + i,
-                        play.getPosition().getPosition().getY()));
-                System.out.println("x =" + play.getPosition().getPosition().getX() + "y= "
-                        + play.getPosition().getPosition().getY());
-                System.out.println("x =" + GameMap.TILE_DIMENSIONS.x() / 2 + "y= " + GameMap.TILE_DIMENSIONS.y() / 2);
-=======
-            } );
-        });*/
-        Player player = new Player(new PositionImpl(V_P), handler);
-        for (double i = scalable; i < scaleTot; i = i + scalable) {
-            double finalI = i;
 
-                System.out.println("SAS x =" + player.getPos().getPosition().getX()
-                                    + "y= " + player.getPos().getPosition().getY());
-
-                player.move(new Vector2Impl(V_P.getX() + finalI, V_P.getY()));
-                System.out.println("x =" + player.getPos().getPosition().getX() + "y= "
-                                    + player.getPos().getPosition().getY());
-        }
-        for (double i = scalable; i < scaleTot; i = i + scalable) {
-            double finalI = i;
-            handler.handle(PlayerCharacterSubmodule.class, play -> {
-                System.out.println("x =" + play.getPosition().getPosition().getX() + "y= "
-                                    + play.getPosition().getPosition().getY());
-
-                play.movePlayerBy(new Vector2Impl(finalI, 0.00));
-                System.out.println("x =" + play.getPosition().getPosition().getX() + "y= "
-                                    + play.getPosition().getPosition().getY());
-
-                //   System.out.println("x =" + GameMap.TILE_DIMENSIONS.x() / 2 + "y= " + GameMap.TILE_DIMENSIONS.y() / 2);
-
-                //assertEquals(GameMap.TILE_DIMENSIONS.x() / 2 + i, play.getPosition().getPosition().getX());
-                /* assertEquals(new PositionImpl
-                                (new Vector2Impl(GameMap.TILE_DIMENSIONS.x() + i, GameMap.TILE_DIMENSIONS.y())),
-                        play.getPosition());*/
-
-            });
-        }
     }
 }
