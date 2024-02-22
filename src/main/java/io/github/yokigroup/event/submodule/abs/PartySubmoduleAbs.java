@@ -15,8 +15,9 @@ public abstract class PartySubmoduleAbs extends Submodule {
 
     /**
      * @param handler to init the submodule with
+     * @param modelObs the model Observer.
      */
-    public PartySubmoduleAbs(final MessageHandler handler, ModelObserver modelObs) {
+    public PartySubmoduleAbs(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
     }
 
@@ -51,7 +52,7 @@ public abstract class PartySubmoduleAbs extends Submodule {
     public abstract void removeYokimon(int index);
 
     @Override
-    protected void updateCode(double delta) {
+    protected void updateCode(final double delta) {
 
     }
 }
