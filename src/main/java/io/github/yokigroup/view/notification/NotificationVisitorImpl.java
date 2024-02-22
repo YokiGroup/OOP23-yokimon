@@ -43,9 +43,7 @@ public class NotificationVisitorImpl implements NotificationVisitor, EObserver<N
         return switch (notification.getAttackOutcome()) {
             case FAIL -> "non hai fatto male :(";
             case GOOD -> "hai fatto male :)";
-            case LOSS -> "sei morto HAHAHA";
             case SUPER -> "HAI FATTO UN MALE CANE";
-            case VICTORY -> "HAI VINTO";
             case WEAK -> "hai fatto poco male :(";
         };
     }
