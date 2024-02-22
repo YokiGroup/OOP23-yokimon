@@ -1,5 +1,6 @@
 package io.github.yokigroup.event;
 
+
 public abstract class Updateable implements Deactivatable {
     private long sinceLastUpdate = -1;
     private boolean isActive = true;
@@ -23,7 +24,11 @@ public abstract class Updateable implements Deactivatable {
         return System.currentTimeMillis();
     }
 
-    protected abstract void updateCode(double delta);
+    /**
+     * ...
+     * @param delta ...
+     */
+    protected abstract void updateCode(final double delta);
 
     public final void update() {
         if (!isActive) {
@@ -32,7 +37,7 @@ public abstract class Updateable implements Deactivatable {
         if (sinceLastUpdate == -1) {
             sinceLastUpdate = getCurrentMillis();
         }
-        updateCode(((double)getCurrentMillis() - sinceLastUpdate) / 1000.0);
+        updateCode(((double) getCurrentMillis() - sinceLastUpdate) / 1000.0);
         sinceLastUpdate = getCurrentMillis();
     }
 }
