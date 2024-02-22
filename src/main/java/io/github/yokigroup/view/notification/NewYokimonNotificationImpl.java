@@ -1,8 +1,15 @@
 package io.github.yokigroup.view.notification;
 
-public class NewYokimonNotificationImpl implements NewYokimonNotification {
+/**
+ * Notification system for when a new Yokimon is found.
+ */
+public final class NewYokimonNotificationImpl implements NewYokimonNotification {
     private final String yokimonName;
 
+    /**
+     * Constructor for NewYokimonNotificationImpl
+     * @param yokimonName the new Yokimon's name.
+     */
     public NewYokimonNotificationImpl(final String yokimonName) {
         this.yokimonName = yokimonName;
     }
