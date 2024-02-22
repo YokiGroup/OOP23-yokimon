@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 final class FightTest {
 
     private static Fight toTest;
-    private static Yokimon tengu, nekomata, baku, oni, oni2;
+    private Yokimon tengu, nekomata, baku, oni, oni2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
 
