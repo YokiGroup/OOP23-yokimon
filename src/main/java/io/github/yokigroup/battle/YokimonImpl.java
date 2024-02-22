@@ -307,7 +307,7 @@ private void setLevelUPLogic(final LevelUpLogic logic) {
     }
 
     /**
-     * Reset the current moves based of the yokimon level
+     * Reset the current moves based of the yokimon level.
      */
     private void resetAttack() {
         final List<Attack> newAttacks = new ArrayList<>();
