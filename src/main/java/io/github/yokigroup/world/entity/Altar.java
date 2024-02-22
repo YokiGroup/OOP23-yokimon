@@ -62,7 +62,7 @@ public class Altar extends Entity {
      *
      * @return Optional<Yokimon> The Yokimon from the Altar
      */
-    public final Yokimon getNewYokimon() {
+    public Yokimon getNewYokimon() {
         final GenerationFactory generator = new GenerationFactoryImpl();
         return this.getMessageHandler().handle(GameMapSubmodule.class, map -> {
             return generator.getYokimonAltar(map.getPlayerDistanceFromHome());
@@ -76,7 +76,7 @@ public class Altar extends Entity {
      * Updates the state of the Altar.
      */
     @Override
-    public void updateCode(double delta) {
+    public void updateCode(final double delta) {
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, pos -> {
             Objects.requireNonNull(pos.getPosition().getPosition(), "Position of the player invalid");
 

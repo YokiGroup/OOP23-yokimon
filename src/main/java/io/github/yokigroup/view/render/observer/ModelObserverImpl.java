@@ -23,6 +23,7 @@ public class ModelObserverImpl implements ModelObserver {
     private final DrawSetObserver drawSetObs;
     private final FightObserver fightObserver;
     private final NotificationVisitorImpl notificationObs;
+    private final RenderStateObserver renderStateObserver;
     private final DrawQueue worldDrawQueue = new DrawQueueImpl();
     private final DrawQueue fightDrawQueue = new DrawQueueImpl();
     private <T, E> EObserver<T> createConversionObserver(final EObserver<E> obs, final Function<T, E> conversionFun) {
@@ -38,6 +39,7 @@ public class ModelObserverImpl implements ModelObserver {
         this.drawSetObs = new DrawSetObserver(painter);
         this.fightObserver = new FightObserver(painter);
         this.notificationObs = new NotificationVisitorImpl(painter);
+        this.renderStateObserver = new RenderStateObserver(painter);
         painter.setPaintState(RenderState.WORLD);
     }
 
@@ -77,5 +79,10 @@ public class ModelObserverImpl implements ModelObserver {
     @Override
     public void addNotificationPublisher(final Publisher<Notification> notificationPub) {
         notificationPub.addObserver(notificationObs);
+    }
+
+    @Override
+    public void addStateChangePublisher(final Publisher<RenderState> renderStatePublisher) {
+        renderStatePublisher.addObserver(renderStateObserver);
     }
 }

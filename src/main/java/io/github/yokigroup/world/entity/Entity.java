@@ -20,6 +20,9 @@ public abstract class Entity extends Updateable implements Sprite {
     private final Hitbox hitBox;
     private final MessageHandler messageHandler;
     private static final int ENTITY_DRAW_PRIORITY = 1;
+    /**
+     * Path for the textures.
+     */
     protected static final String ROOT_URL = "io/github/yokigroup/view/textures/";
 
     /**

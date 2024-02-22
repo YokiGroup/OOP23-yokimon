@@ -4,14 +4,8 @@ import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
-import io.github.yokigroup.event.submodule.FightSubmodule;
-import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.event.submodule.InputSubmodule;
-import io.github.yokigroup.event.submodule.PartySubmodule;
-import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
+import io.github.yokigroup.event.submodule.*;
 import io.github.yokigroup.event.Updateable;
-import io.github.yokigroup.event.submodule.SubmoduleMap;
-import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
@@ -39,7 +33,8 @@ public class GameMessageHandler implements MessageHandler {
                 PlayerCharacterSubmodule.class,
                 FightSubmodule.class,
                 GameMapSubmodule.class,
-                InputSubmodule.class
+                InputSubmodule.class,
+                GameOverSubmodule.class
         );
     }
 
@@ -93,6 +88,10 @@ public class GameMessageHandler implements MessageHandler {
 
             @Override
             public void addNotificationPublisher(final Publisher<Notification> notificationPub) {
+            }
+
+            @Override
+            public void addStateChangePublisher(Publisher<RenderState> renderStatePublisher) {
             }
         });
     }

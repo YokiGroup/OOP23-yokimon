@@ -11,6 +11,7 @@ import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.view.notification.Notification;
 import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.GameMap;
@@ -28,6 +29,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     private final Fight lastAnnouncedFight = null;
     private final Publisher<Fight> fightPub = new PublisherImpl<>();
     private final Publisher<SpriteData> backgroundPub = new PublisherImpl<>();
+    private final Publisher<RenderState> renderStatePub = new PublisherImpl<>();
     private final SpriteData battleBackground;
     private static final int LAST_PRIORITY = -100;
 
@@ -51,14 +53,21 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     }
 
     @Override
-    public void addEncounter() {
+    public void addEncounter(List<Yokimon> enemyParty) {
+        Objects.requireNonNull(enemyParty, "Enemy party was null");
         // FIXME implement
         //lastAnnouncedFight = Optional.ofNullable(f);
-        YokimonLoader loader = new YokimonLoader();
-        Yokimon a = loader.load(1);
-        handler().handle(PartySubmodule.class, s -> {
-            fightPub.notifyObservers(new FightImpl(s.listYokimons(), List.of(a)));
+        final int partyYokimonsNum = handler().handle(PartySubmodule.class, s -> {
+            return s.listYokimons().size();
         });
+        if (partyYokimonsNum == 0) {
+            handler().handle(GameOverSubmodule.class, GameOverSubmodule::triggerBattleWithNoYokimonsGO);
+        } else {
+            renderStatePub.notifyObservers(RenderState.FIGHT);
+            handler().handle(PartySubmodule.class, s -> {
+                fightPub.notifyObservers(new FightImpl(s.listYokimons(), enemyParty));
+            });
+        }
     }
 
     @Override

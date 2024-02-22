@@ -71,10 +71,10 @@ public abstract class People extends Entity {
      */
     @Override
     public SpriteData getSpriteData() {
-        final SpriteData superSpriteData = super.getSpriteData();
         if (!isActive()) {
             return null;
         }
+        final SpriteData superSpriteData = super.getSpriteData();
         return new SpriteData(
                 superSpriteData.spriteURL(),
                 superSpriteData.position(),
@@ -197,7 +197,7 @@ public abstract class People extends Entity {
     public abstract void resetPosition();
 
     /**
-     * Return the ray value of this People Entity
+     * Return the ray value of this People Entity.
      *
      * @return double
      */

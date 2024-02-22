@@ -15,7 +15,7 @@ public abstract class Submodule extends Updateable {
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
-     * @param ignoredModelObs ...
+     * @param ignoredModelObs {@link ModelObserver} used to instantiate the submodule
      */
     protected Submodule(final MessageHandler handler, final ModelObserver ignoredModelObs) {
         this.handler = handler;
