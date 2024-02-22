@@ -10,7 +10,6 @@ import io.github.yokigroup.world.entity.PositionImpl;
 import io.github.yokigroup.world.entity.hitbox.CircularHitbox;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
-import io.github.yokigroup.world.tile.Tile;
 import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
 
@@ -75,7 +74,7 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
             final String formattedJPath = String.format(spawnPositionJPATH, i);
             Position position = new PositionImpl(getVector2(formattedJPath));
             String type = getParser().read(formattedJPath + ".type");
-            c.add( switch (type) {
+            c.add(switch (type) {
                 case "enemy" -> new Pair<>(TileBuilder.EntityType.ENEMY, position);
                 case "altar" -> new Pair<>(TileBuilder.EntityType.ALTAR, position);
                 default -> throw new InvalidJsonException(String.format("invalid type %s", type));
