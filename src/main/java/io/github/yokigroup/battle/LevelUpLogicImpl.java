@@ -9,7 +9,7 @@ import static java.lang.Math.pow;
 /**
  * Implementation of LevelUpLogic.
  */
-public class LevelUpLogicImpl implements LevelUpLogic {
+public final class LevelUpLogicImpl implements LevelUpLogic {
     /**
      * Value used for the divisor for xp calculation.
      */
