@@ -15,7 +15,7 @@ class YokimonImplTest {
     private static final int DEFAULT_LEVEL = 7;
     private static final int NUM_MOVES = 3;
     private static final int DEFAULT_ID = 1;
-    private static final YokimonLoader LOADER = new YokimonLoader();;
+    private static final YokimonLoader LOADER = new YokimonLoader();
     private static final AttackLoader LOADER_ATTACK = new AttackLoader();
 
 

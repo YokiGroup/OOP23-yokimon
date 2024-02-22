@@ -68,10 +68,11 @@ public final class FightImpl implements Fight {
         this.currMyYokimon = nextYok.getNext(myYokimons).get();
         this.currOppYokimon = nextYok.getNext(oppYokimons).get();
         this.state = State.READY_TO_PROGRESS;
+        this.selectAttack(currMyYokimon.getAttacks().get(0));
     }
 
     @Override
-    public void setAttack(final Attack attack) throws IllegalArgumentException {
+    public void selectAttack(final Attack attack) throws IllegalArgumentException {
         Objects.requireNonNull(attack);
         if (getCurrentMyYokimon().getAttacks().contains(attack)) {
             selectedAttack = Objects.requireNonNull(attack);
@@ -82,11 +83,12 @@ public final class FightImpl implements Fight {
     }
 
     @Override
-    public Success attack() throws IllegalStateException {
-        if (selectedAttack == null) {
-            throw new IllegalStateException("No attack has been selected");
-        }
+    public Attack getSelectedAttack() {
+        return selectedAttack;
+    }
 
+    @Override
+    public Success attack() {
         final int damage = dmgCalc.getDMG(currMyYokimon, currOppYokimon, selectedAttack);
         if (currOppYokimon.takeDamage(damage)) {
             oppYokimons.remove(currOppYokimon);
