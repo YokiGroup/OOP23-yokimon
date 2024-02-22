@@ -106,7 +106,6 @@ public final class FightImpl implements Fight {
                 return Success.VICTORY;
             }
         }
-        selectedAttack = null;
         return successRate(damage);
     }
 

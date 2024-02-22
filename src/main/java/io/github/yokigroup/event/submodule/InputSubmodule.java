@@ -47,7 +47,7 @@ public final class InputSubmodule extends InputSubmoduleAbs {
 
     private boolean readConfirmationEvent(final String keyText, final Runnable ifPresent) {
         boolean confirmed = switch (keyText) {
-            case "\n", " " -> true;
+            case "\n", "\r", " " -> true;
             default -> false;
         };
         if (confirmed) {
@@ -119,7 +119,21 @@ public final class InputSubmodule extends InputSubmoduleAbs {
     }
 
     private void handleFightInputs() {
+        handler().handle(FightSubmodule.class, s -> {
+            moveEvents.forEach(e -> {
+                switch (e) {
+                    case UP -> s.nextAttack();
+                    case DOWN -> s.prevAttack();
+                }
+            });
+        });
 
+        if (clickedConfirmEvent) {
+            handler().handle(FightSubmodule.class, FightSubmodule::confirmAttack);
+        }
+
+        moveEvents.clear();
+        clickedConfirmEvent = false;
     }
 
     private void handleGameOverInputs() {
