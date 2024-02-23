@@ -106,8 +106,12 @@ public final class FightImpl implements Fight {
                 return Success.VICTORY;
             }
         }
+<<<<<<< Updated upstream
         selectedAttack = null;
         return successRate(damage);
+=======
+        return attackSuccessValue;
+>>>>>>> Stashed changes
     }
 
     @Override

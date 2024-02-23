@@ -72,13 +72,12 @@ public interface Fight {
 
     /**
      * Gets the selected attack.
-     * @return the current selected attack, empty optional otherwise.
+     * @return the current selected attack.
      */
     Attack getSelectedAttack();
 
     /**
      * Method through which the Logic can communicate which {@link Attack} the player wants to use and do so.
-     * Unselects the attack after a successful invocation
      * @return success rate over my {@link Yokimon}'s attack
      * @see this#selectAttack(Attack)
      */
