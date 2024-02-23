@@ -6,6 +6,8 @@ import io.github.yokigroup.event.submodule.FightSubmodule;
 import io.github.yokigroup.event.observer.EObserver;
 import io.github.yokigroup.battle.yokimon.LevelUpLogic;
 
+import java.util.List;
+
 
 /**
  * The game mechanics necessary for the fight.
@@ -115,6 +117,11 @@ public interface Fight {
      * @return my party's {@link Yokimon} currently involved in the fight
      */
     Yokimon getCurrentMyYokimon();
+
+    /**
+     * @return the player's party
+     */
+    List<Yokimon> getPlayerParty();
 
     /**
      * Useful for the View.

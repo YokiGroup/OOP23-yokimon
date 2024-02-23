@@ -72,13 +72,18 @@ public final class FightImpl implements Fight {
         if (myYokimons.isEmpty() || oppYokimons.isEmpty()) {
             throw new UnsupportedOperationException("Must instantiate fight with at least one Yokimon on each party.");
         }
-        this.myYokimons = myYokimons.stream().map(YokimonImpl::new).collect(Collectors.toList());
-        this.oppYokimons = oppYokimons.stream().map(YokimonImpl::new).collect(Collectors.toList());
+        this.myYokimons = deepCopyOf(myYokimons);
+        this.oppYokimons = deepCopyOf(oppYokimons);
 
         this.currMyYokimon = myYokimons.get(0);
         this.currOppYokimon = oppYokimons.get(0);
         this.state = State.PLAYER_TURN;
         this.selectAttack(currMyYokimon.getAttacks().get(0));
+    }
+
+    private List<Yokimon> deepCopyOf(final List<Yokimon> yokimonList) {
+        Objects.requireNonNull(yokimonList);
+        return yokimonList.stream().map(YokimonImpl::new).collect(Collectors.toList());
     }
 
     private int addDamageModifiers(final Success attackSuccessValue, final int damage) {
@@ -180,6 +185,11 @@ public final class FightImpl implements Fight {
             return null;
         }
         return new YokimonImpl(currMyYokimon);
+    }
+
+    @Override
+    public List<Yokimon> getPlayerParty() {
+        return deepCopyOf(this.myYokimons);
     }
 
     @Override

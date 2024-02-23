@@ -39,7 +39,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     private final SpriteData battleBackground;
 
     /**
-     * @param handler MessageHandler to call in order to query other submodules.
+     * @param handler  MessageHandler to call in order to query other submodules.
      * @param modelObs the model Observer.
      */
     public FightSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
@@ -89,7 +89,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     @Override
     public void nextAttack() throws IllegalStateException {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
-        final List<Attack> attacks  = currentFight.getCurrentMyYokimon().getAttacks();
+        final List<Attack> attacks = currentFight.getCurrentMyYokimon().getAttacks();
         final int nextAttackIndex = (attacks.indexOf(currentFight.getSelectedAttack()) + 1) % attacks.size();
         currentFight.selectAttack(attacks.get(nextAttackIndex));
         notificationPublisher.notifyObservers(new AttackSelectedNotificationImpl(currentFight.getSelectedAttack()));
@@ -98,7 +98,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     @Override
     public void prevAttack() throws IllegalStateException {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
-        final List<Attack> attacks  = currentFight.getCurrentMyYokimon().getAttacks();
+        final List<Attack> attacks = currentFight.getCurrentMyYokimon().getAttacks();
         int nextAttackIndex = attacks.indexOf(currentFight.getSelectedAttack()) - 1;
         nextAttackIndex = nextAttackIndex < 0 ? (attacks.size() - 1) : nextAttackIndex;
         currentFight.selectAttack(attacks.get(nextAttackIndex));
@@ -108,11 +108,23 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     @Override
     public void confirmAttack() {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
-        notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack(), AttackOutcomeNotification.Attacker.PLAYER));
         fightPub.notifyObservers(currentFight);
-        if (currentFight.isOver()) {
-            handler().handle(GameStateSubmodule.class, (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.WORLD));
+        switch (currentFight.getState()) {
+            case PLAYER_TURN ->
+                    notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack(), AttackOutcomeNotification.Attacker.PLAYER));
+            case OPPONENT_TURN ->
+                    notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.getAttacked(), AttackOutcomeNotification.Attacker.ENEMY));
         }
+        switch (currentFight.getState()) {
+            case LOSE -> {
+                handler().handle(GameOverSubmodule.class, GameOverSubmodule::triggerDeathGameGO);
+            }
+            case WIN -> {
+                handler().handle(PartySubmodule.class, (Consumer<PartySubmodule>) s -> s.setParty(currentFight.getPlayerParty()));
+                handler().handle(GameStateSubmodule.class, (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.WORLD));
+            }
+        }
+        fightPub.notifyObservers(currentFight);
     }
 
 }
