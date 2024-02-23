@@ -47,11 +47,11 @@ dependencies {
     // https://mvnrepository.com/artifact/org.dyn4j/dyn4j
     implementation("org.dyn4j:dyn4j:5.0.1")
 
-    // https://mvnrepository.com/artifact/com.github.java-json-tools/json-schema-validator
-    implementation("com.github.java-json-tools:json-schema-validator:2.2.14")
-
     // https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path
     implementation("com.jayway.jsonpath:json-path:2.9.0")
+
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-nop
+    implementation("org.slf4j:slf4j-nop:2.0.12")
 
     // JUnit API and testing engine
     val jUnitVersion = "5.10.1"

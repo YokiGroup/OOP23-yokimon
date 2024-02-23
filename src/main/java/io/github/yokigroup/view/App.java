@@ -17,6 +17,6 @@ public final class App implements GameWindow {
         // is not a subclass of javafx.application.Application
         // JavaFXApp.launch(args);
         // While the following would do just fine:
-        GameFX.run(args);
+        // GameFX.run(args);
     }
 }
