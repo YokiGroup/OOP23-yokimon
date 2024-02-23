@@ -1,7 +1,5 @@
 package io.github.yokigroup.battle.yokimon;
 
-import io.github.yokigroup.battle.yokimon.Yokimon;
-
 /**
  * Class interface used to relieve the YokimonImpl class from
  * heavy logical tasks and to manage the level up mechanics.
