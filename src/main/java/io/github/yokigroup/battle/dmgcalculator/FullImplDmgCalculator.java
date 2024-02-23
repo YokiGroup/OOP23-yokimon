@@ -36,46 +36,26 @@ public class FullImplDmgCalculator implements DmgCalculator {
         switch (attackingYokimon.getYokimonColor()) {
             case PURPLE -> {
                 switch (attackedYokimon.getYokimonColor()) {
-                    case BLACK -> {
-                        total = total * WEAK;
-                    }
-                    case RED -> {
-                        total = total * STRONG;
-                    }
-                    default -> {
-                        total = total * NORMAL;
-                    }
+                    case BLACK, PURPLE -> total = total * WEAK;
+                    case RED -> total = total * STRONG;
+                    default -> total = total * NORMAL;
                 }
             }
             case RED -> {
                 switch (attackedYokimon.getYokimonColor()) {
-                    case PURPLE -> {
-                        total = total * WEAK;
-                    }
-                    case BLACK -> {
-                        total = total * STRONG;
-                    }
-                    default -> {
-                        total = total * NORMAL;
-                    }
+                    case PURPLE, RED -> total = total * WEAK;
+                    case BLACK -> total = total * STRONG;
+                    default -> total = total * NORMAL;
                 }
             }
             case BLACK -> {
                 switch (attackedYokimon.getYokimonColor()) {
-                    case RED -> {
-                        total = total * WEAK;
-                    }
-                    case PURPLE -> {
-                        total = total * STRONG;
-                    }
-                    default -> {
-                        total = total * NORMAL;
-                    }
+                    case RED, BLACK -> total = total * WEAK;
+                    case PURPLE -> total = total * STRONG;
+                    default -> total = total * NORMAL;
                 }
             }
-            default -> {
-                total = total * NORMAL;
-            }
+            default -> total = total * NORMAL;
         }
 
         return total;
