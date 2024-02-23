@@ -31,11 +31,11 @@
         "skillId": 1
       },
       {
-        "level": 26,
+        "level": 22,
         "skillId": 12
       },
       {
-        "level": 30,
+        "level": 25,
         "skillId": 14
       }
     ]
@@ -122,11 +122,11 @@
         "skillId": 1
       },
       {
-        "level": 25,
+        "level": 20,
         "skillId": 14
       },
       {
-        "level": 35,
+        "level": 26,
         "skillId": 5
       }
     ]
@@ -216,11 +216,11 @@
         "skillId": 13
       },
       {
-        "level": 25,
+        "level": 23,
         "skillId": 21
       },
       {
-        "level": 37,
+        "level": 30,
         "skillId": 16
       }
     ]
@@ -314,11 +314,11 @@
         "skillId": 1
       },
       {
-        "level": 26,
+        "level": 27,
         "skillId": 5
       },
       {
-        "level": 45,
+        "level": 32,
         "skillId": 17
       }
     ]
@@ -368,7 +368,7 @@
         "skillId": 12
       },
       {
-        "level": 45,
+        "level": 33,
         "skillId": 19
       }
     ]
@@ -413,7 +413,7 @@
         "skillId": 9
       },
       {
-        "level": 26,
+        "level": 24,
         "skillId": 5
       }
     ]
@@ -454,11 +454,11 @@
         "skillId": 9
       },
       {
-        "level": 26,
+        "level": 25,
         "skillId": 5
       },
       {
-        "level": 35,
+        "level": 27,
         "skillId": 14
       }
 
@@ -545,11 +545,15 @@
         "skillId": 1
       },
       {
+        "level": 22,
+        "skillId": 5
+      },
+      {
         "level": 26,
         "skillId": 13
       },
       {
-        "level": 50,
+        "level": 32,
         "skillId": 17
       }
     ]
@@ -598,7 +602,7 @@
         "skillId": 12
       },
       {
-        "level": 37,
+        "level": 30,
         "skillId": 19
       }
     ]
@@ -648,7 +652,7 @@
         "skillId": 1
       },
       {
-        "level": 37,
+        "level": 30,
         "skillId": 19
       }
     ]
