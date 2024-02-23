@@ -3,6 +3,7 @@ package io.github.yokigroup.event.submodule;
 import io.github.yokigroup.battle.attack.Attack;
 import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.battle.fight.FightImpl;
+import io.github.yokigroup.view.notification.AttackOutcomeNotification;
 import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.battle.fight.Fight;
@@ -107,7 +108,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     @Override
     public void confirmAttack() {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
-        notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack()));
+        notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack(), AttackOutcomeNotification.Attacker.PLAYER));
         fightPub.notifyObservers(currentFight);
         if (currentFight.isOver()) {
             handler().handle(GameStateSubmodule.class, (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.WORLD));
