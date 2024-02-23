@@ -61,4 +61,21 @@ class WaveFunctionCollapseTest {
         // Check if the static shape is correct
         assertEquals(shpDic.get("LR"), wfc.getShapeAt(posCenter));
     }
+
+    @Test
+    void testDirections() {
+        wfc.generateShapeMap();
+        for (int i = 0; i < WIDTH; i++) {
+            for (int j = 0; j < HEIGHT; j++) {
+                final Pair<Integer, Integer> pos = new Pair<>(i, j);
+                wfc.getShapeAt(pos).forEach(d -> {
+                    final Pair<Integer, Integer> newPos = new Pair<>(
+                            pos.x() + d.getOffset().x(),
+                            pos.y() + d.getOffset().y()
+                    );
+                    assertTrue(wfc.getShapeAt(newPos).contains(d.getComplementary()));
+                });
+            }
+        }
+    }
 }
