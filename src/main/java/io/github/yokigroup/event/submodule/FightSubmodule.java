@@ -109,6 +109,9 @@ public final class FightSubmodule extends FightSubmoduleAbs {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
         notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack()));
         fightPub.notifyObservers(currentFight);
+        if (currentFight.isOver()) {
+            handler().handle(GameStateSubmodule.class, (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.WORLD));
+        }
     }
 
 }

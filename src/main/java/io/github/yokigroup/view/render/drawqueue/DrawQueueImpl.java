@@ -54,6 +54,11 @@ public final class DrawQueueImpl implements DrawQueue {
     }
 
     @Override
+    public void empty() {
+        queue.clear();
+    }
+
+    @Override
     public Stream<SpriteData> stream() {
         return queue.stream();
     }

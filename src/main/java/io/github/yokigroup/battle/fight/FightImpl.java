@@ -166,11 +166,17 @@ public final class FightImpl implements Fight {
 
     @Override
     public Yokimon getCurrentMyYokimon() {
+        if (currMyYokimon == null) {
+            return null;
+        }
         return new YokimonImpl(currMyYokimon);
     }
 
     @Override
     public Yokimon getCurrentOpponent() {
+        if (currOppYokimon == null) {
+            return null;
+        }
         return new YokimonImpl(currOppYokimon);
     }
 

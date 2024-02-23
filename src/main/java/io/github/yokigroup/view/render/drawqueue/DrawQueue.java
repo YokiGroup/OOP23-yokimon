@@ -10,4 +10,6 @@ public interface DrawQueue extends DrawQueueReader {
     void removeFromDrawQueue(SpriteData sprite);
     void removeFromDrawQueue(Collection<SpriteData> sprite);
 
+    void empty();
+
 }

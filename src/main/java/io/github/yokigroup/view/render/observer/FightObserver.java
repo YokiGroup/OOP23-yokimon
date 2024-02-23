@@ -1,7 +1,8 @@
 package io.github.yokigroup.view.render.observer;
 
-import io.github.yokigroup.battle.Yokimon;
 import io.github.yokigroup.battle.fight.Fight;
+import io.github.yokigroup.battle.yokimon.Yokimon;
+import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
@@ -12,9 +13,11 @@ import io.github.yokigroup.world.GameMap;
 
 import java.util.Locale;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class FightObserver extends ViewObserver<Fight> {
     private static final String YOKIMON_SPRITES_ROOT_DIR = "io/github/yokigroup/view/textures/yokimons/";
+    String currentPlayerYokimonName = null, currentEnemyYokimonName = null;
     final Consumer<String> setPlayerYokimonLabel;
     final Consumer<String> setEnemyYokimonLabel;
 
@@ -58,10 +61,28 @@ public class FightObserver extends ViewObserver<Fight> {
         setPlayerYokimonLabel.accept(getYokimonHPStr(fight.getCurrentMyYokimon()));
     }
 
+    private void unDrawYokimonStats() {
+        setEnemyYokimonLabel.accept("");
+        setPlayerYokimonLabel.accept("");
+    }
+
     @Override
     public void update(final Fight lastArg, final Fight arg) {
         final DrawQueue fightDrawQueue = painter().drawQueue(RenderState.FIGHT);
-        drawYokimons(fightDrawQueue, arg);
-        drawYokimonStats(arg);
+        final String playerYokimonName = arg.getCurrentMyYokimon().getName();
+        final String enemyYokimonName = arg.getCurrentOpponent().getName();
+        if (!(playerYokimonName.equals(currentPlayerYokimonName) && enemyYokimonName.equals(currentEnemyYokimonName))) {
+            fightDrawQueue.removeFromDrawQueue(
+                    fightDrawQueue.stream().filter(a -> a.priority() == 1).collect(Collectors.toUnmodifiableSet())
+            );
+            drawYokimons(fightDrawQueue, arg);
+            currentPlayerYokimonName = playerYokimonName;
+            currentEnemyYokimonName = enemyYokimonName;
+        }
+        if (arg.isOver()) {
+            unDrawYokimonStats();
+        } else {
+            drawYokimonStats(arg);
+        }
     }
 }
