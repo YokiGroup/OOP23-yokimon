@@ -43,12 +43,14 @@ public class GameFX extends Application {
         private final double ratio;
         private final Canvas gameCanvas;
         private final Scene gameScene;
+        private final StackPane stackPane;
 
 
-        GameWindowResizeListener(final Scene gameScene, final Canvas gameCanvas, final double ratio) {
+        GameWindowResizeListener(final Scene gameScene, final Canvas gameCanvas, final StackPane stackPane, final double ratio) {
             this.ratio = ratio;
             this.gameCanvas = gameCanvas;
             this.gameScene = gameScene;
+            this.stackPane = stackPane;
         }
 
         @Override
@@ -67,6 +69,8 @@ public class GameFX extends Application {
             }
             gameCanvas.setWidth(newWidth);
             gameCanvas.setHeight(newHeight);
+            stackPane.setPrefSize(newWidth, newHeight);
+            stackPane.setMaxSize(newWidth, newHeight);
         }
     }
 
@@ -79,10 +83,11 @@ public class GameFX extends Application {
         final BorderPane rootElem = FXMLLoader.load(ClassLoader.getSystemResource(ROOT_RESOUCE_PATH + "test.fxml"));
         final Scene scene = new Scene(rootElem, windowDim.getWidth(), windowDim.getHeight());
 
-        final List<Node> stackPane = ((StackPane) rootElem.getCenter()).getChildren();
-        final Canvas gameCanvas = (Canvas) stackPane.get(0); // FIXME maybe casting like this isn't the smartest choice
+        final StackPane stackPane = ((StackPane) rootElem.getCenter());
+        final List<Node> stackPaneList = stackPane.getChildren();
+        final Canvas gameCanvas = (Canvas) stackPaneList.get(0); // FIXME maybe casting like this isn't the smartest choice
 
-        final BorderPane borderPane = ((BorderPane) stackPane.get(1));
+        final BorderPane borderPane = ((BorderPane) stackPaneList.get(1));
         final AnchorPane anchorPane = (AnchorPane) borderPane.getTop();
         final Label eventLabel = (Label) borderPane.getBottom();
         final Label playerYokimonLabel = (Label) anchorPane.getChildren().stream().filter(n -> n.getId().equals("playerYokimonLabel")).findFirst().orElseThrow();
@@ -106,7 +111,7 @@ public class GameFX extends Application {
         );
         gameThread.start();
 
-        final GameWindowResizeListener<Object> resizeListener = new GameWindowResizeListener<>(scene, gameCanvas, ratio);
+        final GameWindowResizeListener<Object> resizeListener = new GameWindowResizeListener<>(scene, gameCanvas, stackPane, ratio);
         stage.widthProperty().addListener(resizeListener);
         stage.heightProperty().addListener(resizeListener);
         stage.fullScreenProperty().addListener(resizeListener);
