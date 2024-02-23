@@ -106,6 +106,11 @@ public final class AbsTestMessageHandler extends GameMessageHandler {
 
         }
 
+        /**
+         * Should return true if all Enemies on the map are dead,
+         * but this is a test implementation.
+         * @return false
+         */
         @Override
         protected boolean areAllEnemiesSlain() {
             return false;
