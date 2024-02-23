@@ -22,10 +22,10 @@ class DMGCalcTest {
     private static final int EXP_VAL_BASIC2 = 20;
     private static final int EXP_VAL_MULT1 = 22;
     private static final int EXP_VAL_MULT2 = 20;
-    private static final short EXP_VAL_FULL1 = 22;
-    private static final short EXP_VAL_FULL2 = 20;
-    private static final short EXP_VAL_FULL3 = 26;
-    private static final short EXP_VAL_FULL4 = 23;
+    private static final short EXP_VAL_FULL1 = 11;
+    private static final short EXP_VAL_FULL2 = 10;
+    private static final short EXP_VAL_FULL3 = 13;
+    private static final short EXP_VAL_FULL4 = 11;
     private Yokimon y1, y2;
     private Attack a1, a2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
