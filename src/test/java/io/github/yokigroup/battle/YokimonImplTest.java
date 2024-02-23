@@ -3,12 +3,10 @@ package io.github.yokigroup.battle;
 
 import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -17,13 +15,13 @@ class YokimonImplTest {
     private static final int DEFAULT_LEVEL = 7;
     private static final int NUM_MOVES = 3;
     private static final int DEFAULT_ID = 1;
-    private final static YokimonLoader loader = new YokimonLoader();;
-    private final static AttackLoader loaderAttack = new AttackLoader();
+    private static final YokimonLoader LOADER = new YokimonLoader();
+    private static final AttackLoader LOADER_ATTACK = new AttackLoader();
 
 
     @Test
     void allStats() {
-    final Yokimon tengu = loader.load(DEFAULT_ID);
+    final Yokimon tengu = LOADER.load(DEFAULT_ID);
 
     tengu.setLevel(DEFAULT_LEVEL);
     assertEquals(DEFAULT_LEVEL, tengu.getLevel());
@@ -32,7 +30,7 @@ class YokimonImplTest {
 
     @Test
     void attacks() {
-            final Yokimon tengu = loader.load(DEFAULT_ID);
+            final Yokimon tengu = LOADER.load(DEFAULT_ID);
 
             tengu.setLevel(DEFAULT_LEVEL);
 
@@ -41,16 +39,16 @@ class YokimonImplTest {
             final int atk2 = 20;
             final int atk3 = 20;
             final int atk4 = 14;
-            assertTrue(tengu.getAttacks().contains(loaderAttack.load(atk1)));
-            assertTrue(tengu.getAttacks().contains(loaderAttack.load(atk2)));
-            assertTrue(tengu.getAttacks().contains(loaderAttack.load(atk3)));
+            assertTrue(tengu.getAttacks().contains(LOADER_ATTACK.load(atk1)));
+            assertTrue(tengu.getAttacks().contains(LOADER_ATTACK.load(atk2)));
+            assertTrue(tengu.getAttacks().contains(LOADER_ATTACK.load(atk3)));
 
-            assertFalse(tengu.getAttacks().contains(loaderAttack.load(atk4)));
+            assertFalse(tengu.getAttacks().contains(LOADER_ATTACK.load(atk4)));
     }
 
     @Test
     void takeXP() {
-        final Yokimon tengu = loader.load(DEFAULT_ID);
+        final Yokimon tengu = LOADER.load(DEFAULT_ID);
         final int defXp = 343;
         final int defXp2 = 300;
         assertEquals(Yokimon.ExpCode.NEW_MOVE, tengu.takeXp(defXp));

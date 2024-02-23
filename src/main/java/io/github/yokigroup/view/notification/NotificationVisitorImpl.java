@@ -33,6 +33,22 @@ public class NotificationVisitorImpl implements NotificationVisitor, EObserver<N
     }
 
     @Override
+    public String getSelectedAttackNotiticationText(final AttackSelectedNotification notification) {
+        final String attackSelectedMsg = "Selected %s";
+        return String.format(attackSelectedMsg, notification.getSelectedAttack().getName());
+    }
+
+    @Override
+    public String getAttackOutcomeNotificationText(final AttackOutcomeNotification notification) {
+        return switch (notification.getAttackOutcome()) {
+            case FAIL -> "non hai fatto male :(";
+            case GOOD -> "hai fatto male :)";
+            case SUPER -> "HAI FATTO UN MALE CANE";
+            case WEAK -> "hai fatto poco male :(";
+        };
+    }
+
+    @Override
     public void update(final Notification lastArg, final Notification arg) {
         painter.setEventText(arg.getMessage(this));
     }

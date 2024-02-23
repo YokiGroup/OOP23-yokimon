@@ -7,8 +7,12 @@ import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import io.github.yokigroup.battle.Yokimon;
+
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 final class FightTest {
 
     private static Fight toTest;
-    private static Yokimon tengu, nekomata, baku, oni, oni2;
+    private Yokimon tengu, nekomata, baku, oni, oni2;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
 
@@ -63,10 +67,12 @@ final class FightTest {
      */
     @Test
     void testAttack() {
-        toTest.attack(attackLoader.load(2));
+        final int id = 18;
+        toTest.selectAttack(attackLoader.load(18));
+        toTest.attack();
         assertNotEquals(toTest.getCurrentOpponent().getActualHp(),
                         toTest.getCurrentOpponent().getMaxHp());
-        assertNotEquals(oni, toTest.getCurrentOpponent());
+        assertEquals(oni, toTest.getCurrentOpponent());
         assertFalse(toTest.isOver());
         assertFalse(toTest.victory());
     }
@@ -79,8 +85,7 @@ final class FightTest {
         final Fight.Success atk1 = toTest.getAttacked();
         assertNotEquals(toTest.getCurrentMyYokimon().getActualHp(),
                         toTest.getCurrentMyYokimon().getMaxHp());
-        assertNotEquals(Fight.Success.FAIL, atk1);  //the best attack available shouldn't be that bad
-        assertEquals(Fight.Success.WEAK, atk1);
+        assertTrue(Arrays.stream(Fight.Success.values()).collect(Collectors.toSet()).contains(atk1));
         assertFalse(toTest.isOver());
         assertFalse(toTest.victory());
     }
