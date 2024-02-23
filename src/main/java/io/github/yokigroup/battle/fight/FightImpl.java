@@ -75,8 +75,8 @@ public final class FightImpl implements Fight {
         this.myYokimons = deepCopyOf(myYokimons);
         this.oppYokimons = deepCopyOf(oppYokimons);
 
-        this.currMyYokimon = myYokimons.get(0);
-        this.currOppYokimon = oppYokimons.get(0);
+        this.currMyYokimon = this.myYokimons.get(0);
+        this.currOppYokimon = this.oppYokimons.get(0);
         this.state = State.PLAYER_TURN;
         this.selectAttack(currMyYokimon.getAttacks().get(0));
     }
