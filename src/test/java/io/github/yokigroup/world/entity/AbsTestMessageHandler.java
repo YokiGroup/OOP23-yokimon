@@ -107,6 +107,11 @@ public final class AbsTestMessageHandler extends GameMessageHandler {
         }
 
         @Override
+        protected boolean areAllEnemiesSlain() {
+            return false;
+        }
+
+        @Override
         protected void updateTile() {
 
         }
