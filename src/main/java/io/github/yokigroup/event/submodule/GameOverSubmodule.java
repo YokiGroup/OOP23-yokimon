@@ -1,6 +1,6 @@
 package io.github.yokigroup.event.submodule;
 
-import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
@@ -14,8 +14,6 @@ import io.github.yokigroup.view.notification.Notification;
 import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.GameMap;
-
-import java.util.function.Consumer;
 
 public class GameOverSubmodule extends GameOverSubmoduleAbs {
     private final Publisher<SpriteData> deathScreenPub = new PublisherImpl<>();

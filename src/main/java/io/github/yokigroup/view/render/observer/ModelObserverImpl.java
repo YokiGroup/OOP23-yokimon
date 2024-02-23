@@ -1,13 +1,11 @@
 package io.github.yokigroup.view.render.observer;
 
 import io.github.yokigroup.battle.fight.Fight;
-import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.observer.EObserver;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.view.render.DrawQueue;
-import io.github.yokigroup.view.render.DrawQueueImpl;
-import io.github.yokigroup.view.render.Painter;
+import io.github.yokigroup.view.render.painter.Painter;
 import io.github.yokigroup.view.notification.Notification;
 import io.github.yokigroup.view.notification.NotificationVisitorImpl;
 import io.github.yokigroup.view.render.RenderState;

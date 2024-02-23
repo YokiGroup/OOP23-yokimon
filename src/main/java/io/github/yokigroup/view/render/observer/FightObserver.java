@@ -1,11 +1,11 @@
 package io.github.yokigroup.view.render.observer;
 
 import io.github.yokigroup.battle.fight.Fight;
-import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
-import io.github.yokigroup.view.render.DrawQueue;
-import io.github.yokigroup.view.render.Painter;
+import io.github.yokigroup.view.render.drawqueue.DrawQueue;
+import io.github.yokigroup.view.render.painter.Painter;
 import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.world.GameMap;
 

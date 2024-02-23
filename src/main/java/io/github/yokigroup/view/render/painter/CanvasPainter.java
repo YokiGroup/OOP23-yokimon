@@ -1,9 +1,10 @@
-package io.github.yokigroup.view.render;
+package io.github.yokigroup.view.render.painter;
 
-import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
+import io.github.yokigroup.view.render.drawqueue.DrawQueue;
 import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

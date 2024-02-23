@@ -1,7 +1,7 @@
 package io.github.yokigroup.core;
 
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.view.render.DrawCallable;
+import io.github.yokigroup.view.render.painter.DrawCallable;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 
 /**
