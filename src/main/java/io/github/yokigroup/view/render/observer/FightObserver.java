@@ -54,8 +54,8 @@ public class FightObserver extends ViewObserver<Fight> {
     }
 
     private void drawYokimonStats(final Fight fight) {
-        setEnemyYokimonLabel.accept(getYokimonHPStr(fight.getCurrentMyYokimon()));
-        setPlayerYokimonLabel.accept(getYokimonHPStr(fight.getCurrentOpponent()));
+        setEnemyYokimonLabel.accept(getYokimonHPStr(fight.getCurrentOpponent()));
+        setPlayerYokimonLabel.accept(getYokimonHPStr(fight.getCurrentMyYokimon()));
     }
 
     @Override

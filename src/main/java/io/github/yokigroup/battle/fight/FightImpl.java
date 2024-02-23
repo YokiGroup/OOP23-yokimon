@@ -108,7 +108,7 @@ public final class FightImpl implements Fight {
         final int damage = addDamageModifiers(attackSuccessValue,
                 dmgCalc.getDMG(currMyYokimon, currOppYokimon, selectedAttack));
 
-        if (currOppYokimon.takeDamage(damage)) {
+        if (!currOppYokimon.takeDamage(damage)) {
             oppYokimons.remove(currOppYokimon);
             defeatedOpps.add(currMyYokimon);
 
