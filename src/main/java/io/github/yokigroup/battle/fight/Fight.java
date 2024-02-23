@@ -9,6 +9,7 @@ import io.github.yokigroup.battle.yokimon.LevelUpLogic;
 
 /**
  * The game mechanics necessary for the fight.
+ *
  * @see FightSubmodule
  * @see EObserver
  */
@@ -17,7 +18,7 @@ public interface Fight {
     /**
      * Different success rates trigger a different quote on the View right after a move.
      */
-     enum Success {
+    enum Success {
         /**
          * The attack was successful.
          */
@@ -41,9 +42,13 @@ public interface Fight {
      */
     enum State {
         /**
-         * The fight has been instantiated. We can proceed.
+         * It's the player's turn.
          */
-         READY_TO_PROGRESS,
+        PLAYER_TURN,
+        /**
+         * It's the opponent's turn.
+         */
+        OPPONENT_TURN,
         /**
          * The fight ended with the player's victory.
          */
@@ -56,6 +61,7 @@ public interface Fight {
 
     /**
      * Sets an attack to use in the next.
+     *
      * @param attack attack to use
      * @throws IllegalArgumentException if the attack is not possessed by the fighting yokimon
      */
@@ -63,12 +69,14 @@ public interface Fight {
 
     /**
      * Gets the selected attack.
+     *
      * @return the current selected attack.
      */
     Attack getSelectedAttack();
 
     /**
      * Method through which the Logic can communicate which {@link Attack} the player wants to use and do so.
+     *
      * @return success rate over my {@link Yokimon}'s attack
      * @see this#selectAttack(Attack)
      */
@@ -76,12 +84,14 @@ public interface Fight {
 
     /**
      * Triggers the current opponent Yokimon {@link Attack}.
+     *
      * @return success rate over opponent's attack
      */
     Success getAttacked();
 
     /**
      * Triggers end of the fight.
+     *
      * @return to Logic whether the fight is over
      */
     boolean isOver();
@@ -93,6 +103,7 @@ public interface Fight {
 
     /**
      * Method to calculate how many XP points my current Yokimon earns, in case of victory.
+     *
      * @param yokimon the Yokimon whose XP points must be updated
      * @return xp points to be added
      */
@@ -100,24 +111,28 @@ public interface Fight {
 
     /**
      * Useful for the View and for the {@link LevelUpLogic} mechanism.
+     *
      * @return my party's {@link Yokimon} currently involved in the fight
      */
     Yokimon getCurrentMyYokimon();
 
     /**
      * Useful for the View.
+     *
      * @return my opponent's {@link Yokimon} currently involved in the fight
      */
     Yokimon getCurrentOpponent();
 
     /**
      * The current state of the fight.
+     *
      * @return the state.
      */
     State getState();
 
     /**
      * This is meant to display the life bar in the View.
+     *
      * @param yokimon the {@link Yokimon} whose HP percentage must be shown
      * @return the percentage of HP points left.
      */
@@ -125,6 +140,7 @@ public interface Fight {
 
     /**
      * This method must be used at each turn.
+     *
      * @return if the player must attack first.
      */
     boolean playerIsFirst();
