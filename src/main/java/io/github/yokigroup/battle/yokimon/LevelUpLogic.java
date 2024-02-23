@@ -1,4 +1,6 @@
-package io.github.yokigroup.battle;
+package io.github.yokigroup.battle.yokimon;
+
+import io.github.yokigroup.battle.yokimon.Yokimon;
 
 /**
  * Class interface used to relieve the YokimonImpl class from

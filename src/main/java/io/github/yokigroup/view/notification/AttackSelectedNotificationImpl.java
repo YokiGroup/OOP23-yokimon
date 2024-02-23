@@ -1,6 +1,6 @@
 package io.github.yokigroup.view.notification;
 
-import io.github.yokigroup.battle.Attack;
+import io.github.yokigroup.battle.attack.Attack;
 
 public final class AttackSelectedNotificationImpl implements AttackSelectedNotification {
     private final Attack selectedAttack;

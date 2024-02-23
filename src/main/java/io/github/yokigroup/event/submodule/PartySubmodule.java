@@ -1,7 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
-import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.battle.YokimonImpl;
+import io.github.yokigroup.battle.yokimon.Yokimon;
+import io.github.yokigroup.battle.yokimon.YokimonImpl;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;

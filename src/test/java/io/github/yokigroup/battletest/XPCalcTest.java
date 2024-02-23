@@ -3,7 +3,7 @@ package io.github.yokigroup.battletest;
 import java.util.List;
 import io.github.yokigroup.battle.xpcalculator.FullImplXPCalculator;
 import io.github.yokigroup.battle.xpcalculator.XPCalculator;
-import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.battle.xpcalculator.DummyImplXPCalculator;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;

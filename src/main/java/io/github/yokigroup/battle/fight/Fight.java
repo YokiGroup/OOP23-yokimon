@@ -1,12 +1,11 @@
 package io.github.yokigroup.battle.fight;
 
-import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.battle.Attack;
+import io.github.yokigroup.battle.yokimon.Yokimon;
+import io.github.yokigroup.battle.attack.Attack;
 import io.github.yokigroup.event.submodule.FightSubmodule;
 import io.github.yokigroup.event.observer.EObserver;
-import io.github.yokigroup.battle.LevelUpLogic;
+import io.github.yokigroup.battle.yokimon.LevelUpLogic;
 
-import java.util.Optional;
 
 /**
  * The game mechanics necessary for the fight.
@@ -56,7 +55,7 @@ public interface Fight {
     }
 
     /**
-     * Sets an attack to use in the next {@link this#attack()}.
+     * Sets an attack to use in the next.
      * @param attack attack to use
      * @throws IllegalArgumentException if the attack is not possessed by the fighting yokimon
      */

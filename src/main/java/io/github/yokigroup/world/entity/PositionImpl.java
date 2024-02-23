@@ -17,8 +17,8 @@ public class PositionImpl implements Position {
     /**
      * Constructor of the PositionImpl class, with the specified values.
      *
-     * @param pos pos = Pair<>
-     */
+     * @param pos Vector2 which indicate the position in the current tile
+     * */
     public PositionImpl(final Vector2 pos) {
         Objects.requireNonNull(pos, "Pos passed in PositionImpl was null");
         this.pos = new Vector2Impl(pos);

@@ -1,7 +1,7 @@
 package io.github.yokigroup.battle.dmgcalculator;
 
-import io.github.yokigroup.battle.Attack;
-import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.attack.Attack;
+import io.github.yokigroup.battle.yokimon.Yokimon;
 
 /**
  * Basic version for {@link DmgCalculator}, that only takes into consideration
