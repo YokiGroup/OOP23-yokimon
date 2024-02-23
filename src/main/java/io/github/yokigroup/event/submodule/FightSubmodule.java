@@ -60,8 +60,6 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     @Override
     public void addEncounter(final List<Yokimon> enemyParty) {
         Objects.requireNonNull(enemyParty, "Enemy party was null");
-        // FIXME implement
-        //lastAnnouncedFight = Optional.ofNullable(f);
         final int partyYokimonsNum = handler().handle(PartySubmodule.class, s -> {
             return s.listYokimons().size();
         });
