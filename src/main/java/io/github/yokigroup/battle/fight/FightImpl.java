@@ -123,7 +123,6 @@ public final class FightImpl implements Fight {
                 publisher.notifyObservers(this);
             }
         }
-        selectedAttack = null;
         return attackSuccessValue;
     }
 
