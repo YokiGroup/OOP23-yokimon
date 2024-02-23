@@ -9,7 +9,11 @@ import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -58,7 +62,7 @@ public final class InputSubmodule extends InputSubmoduleAbs {
         return confirmed;
     }
 
-    private <T> void cycleUntilTrue(List<Predicate<T>> predicates, T input) {
+    private <T> void cycleUntilTrue(final List<Predicate<T>> predicates, T input) {
         for (var event : predicates) {
             if (event.test(input)) {
                 return;
@@ -144,7 +148,8 @@ public final class InputSubmodule extends InputSubmoduleAbs {
 
     @Override
     protected void updateCode(final double delta) {
-        final GameStateSubmoduleAbs.GameState currentState = handler().handle(GameStateSubmodule.class, GameStateSubmodule::getGameState);
+        final GameStateSubmoduleAbs.GameState currentState = handler()
+                .handle(GameStateSubmodule.class, GameStateSubmodule::getGameState);
         switch (currentState) {
             case WORLD -> handlePlayerPositionChange(delta);
             case FIGHT -> handleFightInputs();

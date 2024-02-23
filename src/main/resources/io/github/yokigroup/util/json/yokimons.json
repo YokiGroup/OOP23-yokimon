@@ -517,9 +517,9 @@
     "growthRate": "FAST",
     "color": "PURPLE",
     "stats": {
-      "ATK": 50,
+      "ATK": 110,
       "DEF": 50,
-      "SPD": 50,
+      "SPD": 110,
       "HP": 50
     },
     "moves": [

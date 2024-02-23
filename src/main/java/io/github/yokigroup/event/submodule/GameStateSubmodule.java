@@ -40,11 +40,11 @@ public final class GameStateSubmodule extends GameStateSubmoduleAbs {
         modelObs.addStateChangePublisher(renderStatePublisher);
     }
 
-    private void deactivateSubmodule(Class<? extends Submodule> submodule) {
+    private void deactivateSubmodule(final Class<? extends Submodule> submodule) {
         handler().handle(submodule, Submodule::deactivate);
     }
 
-    private void activateSubmodule(Class<? extends Submodule> submodule) {
+    private void activateSubmodule(final Class<? extends Submodule> submodule) {
         handler().handle(submodule, Submodule::activate);
     }
 

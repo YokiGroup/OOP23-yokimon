@@ -2,7 +2,6 @@ package io.github.yokigroup.file.loader;
 
 import io.github.yokigroup.battle.Attack;
 import io.github.yokigroup.battle.Color;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

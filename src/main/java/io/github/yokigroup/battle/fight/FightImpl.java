@@ -25,16 +25,22 @@ import java.util.stream.Collectors;
 
 /**
  * The actual {@link Fight} implementation communicating with the Logic.
+ *
  * @see FightSubmodule
  */
 public final class FightImpl implements Fight {
+    final static float FAIL_RATE = 0.05f;
+    final static float WEAK_RATE = 0.2f;
+    final static float GOOD_RATE = 0.7f;
+    final static float SUPER_RATE = 0.2f;
     /* attack success pool */
     private static final WeightedPool<Success> SUCCESS_WEIGHTED_POOL = new WeightedPoolImpl<>();
+
     static {
-        SUCCESS_WEIGHTED_POOL.addElement(Success.FAIL, 0.05f);
-        SUCCESS_WEIGHTED_POOL.addElement(Success.WEAK, 0.2f);
-        SUCCESS_WEIGHTED_POOL.addElement(Success.GOOD, 0.7f);
-        SUCCESS_WEIGHTED_POOL.addElement(Success.SUPER, 0.2f);
+        SUCCESS_WEIGHTED_POOL.addElement(Success.FAIL, FAIL_RATE);
+        SUCCESS_WEIGHTED_POOL.addElement(Success.WEAK, WEAK_RATE);
+        SUCCESS_WEIGHTED_POOL.addElement(Success.GOOD, GOOD_RATE);
+        SUCCESS_WEIGHTED_POOL.addElement(Success.SUPER, SUPER_RATE);
     }
 
     /* parties */
@@ -60,7 +66,8 @@ public final class FightImpl implements Fight {
 
     /**
      * Builder to instantiate the fight through the Logic.
-     * @param myYokimons my party
+     *
+     * @param myYokimons  my party
      * @param oppYokimons the opponent party
      * @throws UnsupportedOperationException in case one of the party is empty.
      */
@@ -92,8 +99,8 @@ public final class FightImpl implements Fight {
         if (getCurrentMyYokimon().getAttacks().contains(attack)) {
             selectedAttack = Objects.requireNonNull(attack);
         } else {
-            throw new IllegalArgumentException("Attack given is not possessed by yokimon " +
-                    getCurrentMyYokimon().getName());
+            throw new IllegalArgumentException("Attack given is not possessed by yokimon "
+                    + getCurrentMyYokimon().getName());
         }
     }
 

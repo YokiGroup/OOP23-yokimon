@@ -6,7 +6,6 @@ import io.github.yokigroup.event.submodule.FightSubmodule;
 import io.github.yokigroup.event.observer.EObserver;
 import io.github.yokigroup.battle.LevelUpLogic;
 
-import java.util.Optional;
 
 /**
  * The game mechanics necessary for the fight.
