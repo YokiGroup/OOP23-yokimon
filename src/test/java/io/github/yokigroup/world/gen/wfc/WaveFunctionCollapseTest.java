@@ -49,7 +49,7 @@ class WaveFunctionCollapseTest {
     @Test
     void setStaticShape() {
         final Pair<Integer, Integer> posCenter = new Pair<>(WIDTH / 2, HEIGHT / 2);
-        wfc.setStaticShape(posCenter, Set.of(shpDic.get("UDLR")));
+        wfc.setStaticShape(posCenter, Set.of(shpDic.get("LR")));
         wfc.generateShapeMap();
         // Check if the shapes are an actual shape
         for (int i = 0; i < WIDTH; i++) {
@@ -59,6 +59,6 @@ class WaveFunctionCollapseTest {
             }
         }
         // Check if the static shape is correct
-        assertEquals(shpDic.get("UDLR"), wfc.getShapeAt(posCenter));
+        assertEquals(shpDic.get("LR"), wfc.getShapeAt(posCenter));
     }
 }
