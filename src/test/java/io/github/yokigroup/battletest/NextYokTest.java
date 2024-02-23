@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Optional;
 
-import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.battle.nextyokimon.DummyImplNextYokimon;
 import io.github.yokigroup.battle.nextyokimon.NextYokimon;
 import io.github.yokigroup.file.loader.YokimonLoader;

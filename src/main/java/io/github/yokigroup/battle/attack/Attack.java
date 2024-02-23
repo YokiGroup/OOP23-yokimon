@@ -1,4 +1,4 @@
-package io.github.yokigroup.battle;
+package io.github.yokigroup.battle.attack;
 
 /**
  * Attack interface represents an attack that a Yokimon can perform.

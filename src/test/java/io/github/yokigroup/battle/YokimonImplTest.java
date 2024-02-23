@@ -1,6 +1,7 @@
 
 package io.github.yokigroup.battle;
 
+import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
 package io.github.yokigroup.file.loader;
 
-import io.github.yokigroup.battle.Color;
-import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.attack.Color;
+import io.github.yokigroup.battle.yokimon.Yokimon;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;

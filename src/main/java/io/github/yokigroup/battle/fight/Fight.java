@@ -1,10 +1,10 @@
 package io.github.yokigroup.battle.fight;
 
-import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.battle.Attack;
+import io.github.yokigroup.battle.yokimon.Yokimon;
+import io.github.yokigroup.battle.attack.Attack;
 import io.github.yokigroup.event.submodule.FightSubmodule;
 import io.github.yokigroup.event.observer.EObserver;
-import io.github.yokigroup.battle.LevelUpLogic;
+import io.github.yokigroup.battle.yokimon.LevelUpLogic;
 
 
 /**

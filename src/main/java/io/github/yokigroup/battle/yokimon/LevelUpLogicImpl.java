@@ -1,4 +1,4 @@
-package io.github.yokigroup.battle;
+package io.github.yokigroup.battle.yokimon;
 
 import java.util.HashMap;
 import java.util.Map;

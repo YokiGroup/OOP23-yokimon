@@ -1,7 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
-import io.github.yokigroup.battle.Attack;
-import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.attack.Attack;
+import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.battle.fight.FightImpl;
 import io.github.yokigroup.core.state.SpriteData;
 import io.github.yokigroup.event.MessageHandler;

@@ -1,6 +1,6 @@
 package io.github.yokigroup.battle.nextyokimon;
 
-import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.battle.fight.Fight;
 
 import java.util.List;
