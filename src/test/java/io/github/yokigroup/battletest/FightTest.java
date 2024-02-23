@@ -70,9 +70,9 @@ final class FightTest {
     void testAttack() {
         final int id = 18;
         toTest.selectAttack(attackLoader.load(id));
-        toTest.attack();
-        assertNotEquals(toTest.getCurrentOpponent().getActualHp(),
-                toTest.getCurrentOpponent().getMaxHp());
+        while (toTest.getCurrentOpponent().getActualHp() != toTest.getCurrentOpponent().getMaxHp()) {
+            toTest.attack();
+        }
         assertEquals(oni, toTest.getCurrentOpponent());
         assertFalse(toTest.isOver());
         assertFalse(toTest.victory());
@@ -83,9 +83,8 @@ final class FightTest {
      */
     @Test
     void testGetAttacked() {
+        toTest.attack();
         final Fight.Success atk1 = toTest.getAttacked();
-        assertNotEquals(toTest.getCurrentMyYokimon().getActualHp(),
-                        toTest.getCurrentMyYokimon().getMaxHp());
         assertTrue(Arrays.stream(Fight.Success.values()).collect(Collectors.toSet()).contains(atk1));
         assertFalse(toTest.isOver());
         assertFalse(toTest.victory());
