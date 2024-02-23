@@ -1,6 +1,6 @@
 package io.github.yokigroup.view.render.observer;
 
-import io.github.yokigroup.view.render.Painter;
+import io.github.yokigroup.view.render.painter.Painter;
 import io.github.yokigroup.view.render.RenderState;
 
 public class RenderStateObserver extends ViewObserver<RenderState> {

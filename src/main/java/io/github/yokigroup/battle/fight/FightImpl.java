@@ -77,7 +77,7 @@ public final class FightImpl implements Fight {
 
         this.currMyYokimon = myYokimons.get(0);
         this.currOppYokimon = oppYokimons.get(0);
-        this.state = State.READY_TO_PROGRESS;
+        this.state = State.PLAYER_TURN;
         this.selectAttack(currMyYokimon.getAttacks().get(0));
     }
 
@@ -108,10 +108,16 @@ public final class FightImpl implements Fight {
 
     @Override
     public Success attack() {
+        if (state != State.PLAYER_TURN) {
+            throw new IllegalAccessError("attack() cannot be invoked if it's not the player's turn");
+        }
+
         final Success attackSuccessValue = SUCCESS_WEIGHTED_POOL.getRandomizedElement();
         final int damage = addDamageModifiers(attackSuccessValue,
                 dmgCalc.getDMG(currMyYokimon, currOppYokimon, selectedAttack));
-        if (currOppYokimon.takeDamage(damage)) {
+
+        state = State.OPPONENT_TURN;
+        if (!currOppYokimon.takeDamage(damage)) {
             oppYokimons.remove(0);
             defeatedOpps.add(currMyYokimon);
             if (oppYokimons.isEmpty()) {
@@ -128,6 +134,10 @@ public final class FightImpl implements Fight {
 
     @Override
     public Success getAttacked() {
+        if (state != State.OPPONENT_TURN) {
+            throw new IllegalAccessError("getAttacked() cannot be invoked if it's not the opponent's turn");
+        }
+
         final Optional<Attack> nextOppAttack = oppAI.getMove(currMyYokimon, currOppYokimon);
         if (nextOppAttack.isEmpty()) {
             throw new UnsupportedOperationException("Yokimon doesn't have any available attack.");
@@ -136,6 +146,7 @@ public final class FightImpl implements Fight {
         final int damage = addDamageModifiers(attackSuccessValue,
                 dmgCalc.getDMG(currOppYokimon, currMyYokimon, nextOppAttack.get()));
         currMyYokimon.takeDamage(damage);
+        state = State.PLAYER_TURN;
         if (!currMyYokimon.active()) {
             myYokimons.remove(0);
             if (myYokimons.isEmpty()) {
@@ -165,11 +176,17 @@ public final class FightImpl implements Fight {
 
     @Override
     public Yokimon getCurrentMyYokimon() {
+        if (currMyYokimon == null) {
+            return null;
+        }
         return new YokimonImpl(currMyYokimon);
     }
 
     @Override
     public Yokimon getCurrentOpponent() {
+        if (currOppYokimon == null) {
+            return null;
+        }
         return new YokimonImpl(currOppYokimon);
     }
 

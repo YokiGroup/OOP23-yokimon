@@ -1,4 +1,4 @@
-package io.github.yokigroup.view.render;
+package io.github.yokigroup.view.render.painter;
 
 /**
  * Implementation-independent interface used to safely issue a draw call to the view.

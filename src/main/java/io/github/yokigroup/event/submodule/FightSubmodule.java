@@ -3,7 +3,8 @@ package io.github.yokigroup.event.submodule;
 import io.github.yokigroup.battle.attack.Attack;
 import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.battle.fight.FightImpl;
-import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.view.notification.AttackOutcomeNotification;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.event.observer.Publisher;
@@ -60,8 +61,6 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     @Override
     public void addEncounter(final List<Yokimon> enemyParty) {
         Objects.requireNonNull(enemyParty, "Enemy party was null");
-        // FIXME implement
-        //lastAnnouncedFight = Optional.ofNullable(f);
         final int partyYokimonsNum = handler().handle(PartySubmodule.class, s -> {
             return s.listYokimons().size();
         });
@@ -109,7 +108,11 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     @Override
     public void confirmAttack() {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
-        notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack()));
+        notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack(), AttackOutcomeNotification.Attacker.PLAYER));
+        fightPub.notifyObservers(currentFight);
+        if (currentFight.isOver()) {
+            handler().handle(GameStateSubmodule.class, (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.WORLD));
+        }
     }
 
 }

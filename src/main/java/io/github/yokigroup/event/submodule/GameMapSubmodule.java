@@ -1,6 +1,6 @@
 package io.github.yokigroup.event.submodule;
 
-import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
@@ -35,7 +35,7 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
      */
     public GameMapSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
-        playerTilePos = new Pair<>(MAP_DIM.x() / 2 + 1, MAP_DIM.y() / 2 + 1);
+        playerTilePos = new Pair<>(MAP_DIM.x() / 2, MAP_DIM.y() / 2);
         final GameMapBuilder builder = new GameMapBuilderImpl();
 
         builder.changeMapDimensions(MAP_DIM);

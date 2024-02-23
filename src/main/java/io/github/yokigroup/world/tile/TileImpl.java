@@ -1,6 +1,6 @@
 package io.github.yokigroup.world.tile;
 
-import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.world.GameMap;

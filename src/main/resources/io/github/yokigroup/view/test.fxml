@@ -9,45 +9,57 @@
 <BorderPane style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <StackPane>
-         <children>
-            <Canvas fx:id="canvas" height="1080.0" width="1920.0">
-      </Canvas>
-            <BorderPane>
-               <bottom>
-                  <Label contentDisplay="CENTER" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <Canvas>
+         </Canvas>
+         <BorderPane>
+            <bottom>
+               <Label fx:id="globalLabel" contentDisplay="CENTER" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                  <font>
+                     <Font size="65.0" />
+                  </font>
+                  <textFill>
+                     <LinearGradient startX="1.0" startY="0.6857142857142858">
+                        <stops>
+                           <Stop>
+                              <color>
+                                 <Color red="0.9200000166893005" green="0.44316595792770386" blue="0.11959999799728394" />
+                              </color>
+                           </Stop>
+                           <Stop offset="0.007518796992481203">
+                              <color>
+                                 <Color red="0.9200000166893005" green="0.44316595792770386" blue="0.11959999799728394" />
+                              </color>
+                           </Stop>
+                           <Stop offset="0.7901849217638688">
+                              <color>
+                                 <Color red="0.5263158082962036" green="0.09990253299474716" blue="0.09990253299474716" />
+                              </color>
+                           </Stop>
+                           <Stop offset="1.0">
+                              <color>
+                                 <Color />
+                              </color>
+                           </Stop>
+                        </stops>
+                     </LinearGradient>
+                  </textFill>
+               </Label>
+            </bottom>
+            <top>
+               <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <Label fx:id="playerYokimonLabel" textFill="#f8e12e" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font size="65.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="1.0" endY="1.0" startX="1.0" startY="0.6857142857142858">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.9200000166893005" green="0.44316595792770386" blue="0.11959999799728394" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="0.007518796992481203">
-                                 <color>
-                                    <Color red="0.9200000166893005" green="0.44316595792770386" blue="0.11959999799728394" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="0.7901849217638688">
-                                 <color>
-                                    <Color red="0.5263158082962036" green="0.09990253299474716" blue="0.09990253299474716" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
                   </Label>
-               </bottom>
-            </BorderPane>
-         </children>
+                  <Label fx:id="enemyYokimonLabel" textFill="#f8e12e" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="65.0" />
+                     </font>
+                  </Label>
+               </AnchorPane>
+            </top>
+         </BorderPane>
       </StackPane>
    </center>
 </BorderPane>

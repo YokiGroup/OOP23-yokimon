@@ -1,7 +1,7 @@
 package io.github.yokigroup.view.render.observer;
 
-import io.github.yokigroup.view.render.DrawQueue;
-import io.github.yokigroup.view.render.Painter;
+import io.github.yokigroup.view.render.drawqueue.DrawQueue;
+import io.github.yokigroup.view.render.painter.Painter;
 
 /**
  * Observer for drawing sprites to screen.

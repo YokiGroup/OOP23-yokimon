@@ -1,6 +1,6 @@
-package io.github.yokigroup.view.render;
+package io.github.yokigroup.view.render.drawqueue;
 
-import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 
 
 import java.util.*;
@@ -51,6 +51,11 @@ public final class DrawQueueImpl implements DrawQueue {
     @Override
     public void removeFromDrawQueue(final Collection<SpriteData> sprites) {
         synDoIfNotNull(queue::removeAll, preprocessCollection(sprites));
+    }
+
+    @Override
+    public void empty() {
+        queue.clear();
     }
 
     @Override
