@@ -60,7 +60,7 @@ public class Altar extends Entity {
     /**
      * Returns a Yokimon if the altar is powered, otherwise an optional empty.
      *
-     * @return Optional<Yokimon> The Yokimon from the Altar
+     * @return Optional Yokimon The Yokimon from the Altar
      */
     protected Yokimon getNewYokimon() {
         final GenerationFactory generator = new GenerationFactoryImpl();

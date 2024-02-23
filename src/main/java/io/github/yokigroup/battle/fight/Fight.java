@@ -55,7 +55,7 @@ public interface Fight {
     }
 
     /**
-     * Sets an attack to use in the next {@link this#attack()}.
+     * Sets an attack to use in the next.
      * @param attack attack to use
      * @throws IllegalArgumentException if the attack is not possessed by the fighting yokimon
      */
