@@ -27,7 +27,8 @@ public final class GameStateSubmodule extends GameStateSubmoduleAbs {
                     GameMapSubmodule.class
             ),
             GameState.GAMEOVER, Set.of(
-
+            ),
+            GameState.VICTORY, Set.of(
             )
     );
 
@@ -62,7 +63,8 @@ public final class GameStateSubmodule extends GameStateSubmoduleAbs {
                 switch (currentState) {
                     case WORLD -> RenderState.WORLD;
                     case FIGHT -> RenderState.FIGHT;
-                    case GAMEOVER -> RenderState.DEATH; // FIXME not always true
+                    case GAMEOVER -> RenderState.DEATH;
+                    case VICTORY ->  RenderState.VICTORY;
                 }
         );
     }

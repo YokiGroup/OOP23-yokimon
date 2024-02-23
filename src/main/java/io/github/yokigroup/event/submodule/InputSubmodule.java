@@ -141,7 +141,7 @@ public final class InputSubmodule extends InputSubmoduleAbs {
         clickedConfirmEvent = false;
     }
 
-    private void handleGameOverInputs() {
+    private void handleGameFinishedInputs() {
         if (clickedConfirmEvent) {
             System.exit(0);
         }
@@ -158,7 +158,7 @@ public final class InputSubmodule extends InputSubmoduleAbs {
         switch (currentState) {
             case WORLD -> handlePlayerPositionChange(delta);
             case FIGHT -> handleFightInputs();
-            case GAMEOVER -> handleGameOverInputs();
+            case GAMEOVER, VICTORY -> handleGameFinishedInputs();
         }
     }
 }

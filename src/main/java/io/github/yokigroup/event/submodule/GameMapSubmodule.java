@@ -84,6 +84,11 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     }
 
     @Override
+    protected boolean areAllEnemiesSlain() {
+        return gameMap.areAllEnemiesSlain();
+    }
+
+    @Override
     protected void updateTile() {
         tilePub.notifyObservers(gameMap.getPlayerTile().getSpriteData());
     }

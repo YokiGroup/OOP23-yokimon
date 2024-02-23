@@ -93,6 +93,11 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
 
     protected abstract void updateEntities();
 
+    /**
+     * @return true if all the enemies in the map are dead
+     */
+    protected abstract boolean areAllEnemiesSlain();
+
     protected abstract void updateTile();
 
     @Override

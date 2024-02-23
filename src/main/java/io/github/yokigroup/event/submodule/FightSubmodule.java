@@ -65,7 +65,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
             return s.listYokimons().size();
         });
         if (partyYokimonsNum == 0) {
-            handler().handle(GameOverSubmodule.class, GameOverSubmodule::triggerBattleWithNoYokimonsGO);
+            handler().handle(GameEndSubmodule.class, GameEndSubmodule::triggerBattleWithNoYokimonsGO);
         } else {
             handler().handle(GameStateSubmodule.class, (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.FIGHT));
             lastAnnouncedFight = handler().handle(PartySubmodule.class, s -> {
@@ -117,11 +117,15 @@ public final class FightSubmodule extends FightSubmoduleAbs {
         }
         switch (currentFight.getState()) {
             case LOSE -> {
-                handler().handle(GameOverSubmodule.class, GameOverSubmodule::triggerDeathGameGO);
+                handler().handle(GameEndSubmodule.class, GameEndSubmodule::triggerDeathGameGO);
             }
             case WIN -> {
                 handler().handle(PartySubmodule.class, (Consumer<PartySubmodule>) s -> s.setParty(currentFight.getPlayerParty()));
-                handler().handle(GameStateSubmodule.class, (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.WORLD));
+                if (handler().handle(GameMapSubmodule.class, GameMapSubmodule::areAllEnemiesSlain)) {
+                    handler().handle(GameEndSubmodule.class, GameEndSubmodule::triggerVictory);
+                } else {
+                    handler().handle(GameStateSubmodule.class, (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.WORLD));
+                }
             }
         }
         fightPub.notifyObservers(currentFight);

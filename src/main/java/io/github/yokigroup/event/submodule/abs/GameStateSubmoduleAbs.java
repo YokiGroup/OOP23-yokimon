@@ -24,7 +24,11 @@ public abstract class GameStateSubmoduleAbs extends Submodule {
         /**
          * game is over.
          */
-        GAMEOVER
+        GAMEOVER,
+        /**
+         * game is won.
+         */
+        VICTORY
     };
 
     /**
