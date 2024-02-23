@@ -33,9 +33,10 @@
       {
         "level": 26,
         "skillId": 12
-      },{
+      },
+      {
         "level": 30,
-        "skillId": 20
+        "skillId": 14
       }
     ]
   },
@@ -159,7 +160,7 @@
       },
       {
         "level": 10,
-        "skillId": 3
+        "skillId": 10
       },
       {
         "level": 15,
@@ -201,10 +202,6 @@
       {
         "level": 10,
         "skillId": 6
-      },
-      {
-        "level": 15,
-        "skillId": 8
       },
       {
         "level": 15,
@@ -537,7 +534,7 @@
       },
       {
         "level": 10,
-        "skillId": 3
+        "skillId": 23
       },
       {
         "level": 14,
