@@ -1,20 +1,19 @@
 package io.github.yokigroup.core;
 
+import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.core.exception.GameInitFailException;
-import io.github.yokigroup.event.submodule.FightSubmodule;
-import io.github.yokigroup.event.submodule.GameEndSubmodule;
-import io.github.yokigroup.event.submodule.GameMapSubmodule;
-import io.github.yokigroup.event.submodule.GameStateSubmodule;
-import io.github.yokigroup.event.submodule.InputSubmodule;
-import io.github.yokigroup.event.submodule.PartySubmodule;
-import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
-import io.github.yokigroup.event.submodule.SubmoduleMap;
-import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.observer.Publisher;
 
 import io.github.yokigroup.event.Updateable;
+import io.github.yokigroup.event.submodule.*;
 import io.github.yokigroup.event.submodule.abs.Submodule;
+import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
+import io.github.yokigroup.view.notification.Notification;
+import io.github.yokigroup.view.render.observer.ModelObserverImpl;
+
 import java.lang.reflect.InvocationTargetException;
 
 import java.util.Optional;
@@ -71,6 +70,33 @@ public class GameMessageHandler implements MessageHandler {
      */
     public GameMessageHandler(final ModelObserver modelObs) {
         subModules = initSubmodules(modelObs);
+    }
+
+    /**
+     * Empty Constructor that does not use a {@link ModelObserver}.
+     */
+    public GameMessageHandler() {
+        this(new ModelObserver() {
+            @Override
+            public void addSpritePublisher(final RenderState state, final Publisher<SpriteData> spriteObs) {
+            }
+
+            @Override
+            public void addSpritePublishers(final RenderState state, final Publisher<Set<SpriteData>> spriteObs) {
+            }
+
+            @Override
+            public void addFightPublisher(final Publisher<Fight> fightObs) {
+            }
+
+            @Override
+            public void addNotificationPublisher(final Publisher<Notification> notificationPub) {
+            }
+
+            @Override
+            public void addStateChangePublisher(final Publisher<RenderState> renderStatePublisher) {
+            }
+        });
     }
 
     /**
