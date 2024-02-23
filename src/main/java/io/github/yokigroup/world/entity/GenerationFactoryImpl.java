@@ -37,7 +37,7 @@ public class GenerationFactoryImpl implements GenerationFactory {
         final WeightedPoolImpl<Integer> yokimonID = new WeightedPoolImpl<>();
 
         IntStream.range(1, NUMBER_OF_YOKIMON)
-                .forEach(i -> yokimonID.addElement(i, PROBABILITY_CHANCE_MAX - i + finalPower));
+                .forEach(i -> yokimonID.addElement(i, PROBABILITY_CHANCE_MAX - i + finalPower * 2));
 
         final Yokimon gift = YOKIMONS.get(yokimonID.getRandomizedElement());
         gift.setLevel(power * MULTIPLIER_DIFFICULTY + variableNum.getRandomizedElement());
@@ -52,7 +52,7 @@ public class GenerationFactoryImpl implements GenerationFactory {
     @Override
     public final List<Yokimon> getEnemyParty(final int power) {
         final List<Yokimon> enemyParty = new ArrayList<>();
-        IntStream.range(0, power)
+        IntStream.rangeClosed(0, power)
                 .forEach(i -> enemyParty.add(getYokimon(power)));
         return Objects.requireNonNull(List.copyOf(enemyParty));
     }
