@@ -29,10 +29,10 @@ import java.util.stream.Collectors;
  * @see FightSubmodule
  */
 public final class FightImpl implements Fight {
-    final static float FAIL_RATE = 0.05f;
-    final static float WEAK_RATE = 0.2f;
-    final static float GOOD_RATE = 0.7f;
-    final static float SUPER_RATE = 0.2f;
+    static final float FAIL_RATE = 0.05f;
+    static final float WEAK_RATE = 0.2f;
+    static final float GOOD_RATE = 0.7f;
+    static final float SUPER_RATE = 0.2f;
     /* attack success pool */
     private static final WeightedPool<Success> SUCCESS_WEIGHTED_POOL = new WeightedPoolImpl<>();
 
