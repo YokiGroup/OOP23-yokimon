@@ -1,9 +1,9 @@
 package io.github.yokigroup.view.render.observer;
 
-import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.view.render.DrawQueue;
-import io.github.yokigroup.view.render.Painter;
+import io.github.yokigroup.view.render.drawqueue.DrawQueue;
+import io.github.yokigroup.view.render.painter.Painter;
 import io.github.yokigroup.view.render.RenderState;
 import java.util.Set;
 

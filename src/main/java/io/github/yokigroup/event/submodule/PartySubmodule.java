@@ -1,7 +1,7 @@
 package io.github.yokigroup.event.submodule;
 
-import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.battle.YokimonImpl;
+import io.github.yokigroup.battle.yokimon.Yokimon;
+import io.github.yokigroup.battle.yokimon.YokimonImpl;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
@@ -13,6 +13,7 @@ import io.github.yokigroup.view.notification.Notification;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of {@link PartySubmoduleAbs}.
@@ -34,7 +35,7 @@ public final class PartySubmodule extends PartySubmoduleAbs {
 
     private List<Yokimon> deepCopyOf(final List<Yokimon> list) {
         Objects.requireNonNull(list);
-        return list.stream().map(YokimonImpl::new).map(Yokimon.class::cast).toList();
+        return list.stream().map(YokimonImpl::new).collect(Collectors.toList());
     }
 
     @Override

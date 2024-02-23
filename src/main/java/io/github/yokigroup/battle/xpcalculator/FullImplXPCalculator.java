@@ -1,6 +1,6 @@
 package io.github.yokigroup.battle.xpcalculator;
 
-import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.yokimon.Yokimon;
 
 import java.util.List;
 

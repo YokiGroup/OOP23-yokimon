@@ -1,4 +1,8 @@
-package io.github.yokigroup.view.render;
+package io.github.yokigroup.view.render.painter;
+
+import io.github.yokigroup.view.render.RenderState;
+import io.github.yokigroup.view.render.drawqueue.DrawQueue;
+import io.github.yokigroup.view.render.drawqueue.DrawQueueImpl;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -33,6 +37,10 @@ public abstract class Painter implements DrawCallable {
     }
 
     public abstract void setEventText(String eventText);
+
+    public abstract void setPlayerYokimonLabel(String text);
+
+    public abstract void setEnemyYokimonLabel(String text);
 
     public abstract void repaint();
 }

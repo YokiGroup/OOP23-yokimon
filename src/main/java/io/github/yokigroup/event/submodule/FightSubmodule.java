@@ -1,9 +1,10 @@
 package io.github.yokigroup.event.submodule;
 
-import io.github.yokigroup.battle.Attack;
-import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.attack.Attack;
+import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.battle.fight.FightImpl;
-import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.view.notification.AttackOutcomeNotification;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.event.observer.Publisher;
@@ -38,7 +39,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     private final SpriteData battleBackground;
 
     /**
-     * @param handler MessageHandler to call in order to query other submodules.
+     * @param handler  MessageHandler to call in order to query other submodules.
      * @param modelObs the model Observer.
      */
     public FightSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
@@ -60,8 +61,6 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     @Override
     public void addEncounter(final List<Yokimon> enemyParty) {
         Objects.requireNonNull(enemyParty, "Enemy party was null");
-        // FIXME implement
-        //lastAnnouncedFight = Optional.ofNullable(f);
         final int partyYokimonsNum = handler().handle(PartySubmodule.class, s -> {
             return s.listYokimons().size();
         });
@@ -90,7 +89,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     @Override
     public void nextAttack() throws IllegalStateException {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
-        final List<Attack> attacks  = currentFight.getCurrentMyYokimon().getAttacks();
+        final List<Attack> attacks = currentFight.getCurrentMyYokimon().getAttacks();
         final int nextAttackIndex = (attacks.indexOf(currentFight.getSelectedAttack()) + 1) % attacks.size();
         currentFight.selectAttack(attacks.get(nextAttackIndex));
         notificationPublisher.notifyObservers(new AttackSelectedNotificationImpl(currentFight.getSelectedAttack()));
@@ -99,7 +98,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     @Override
     public void prevAttack() throws IllegalStateException {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
-        final List<Attack> attacks  = currentFight.getCurrentMyYokimon().getAttacks();
+        final List<Attack> attacks = currentFight.getCurrentMyYokimon().getAttacks();
         int nextAttackIndex = attacks.indexOf(currentFight.getSelectedAttack()) - 1;
         nextAttackIndex = nextAttackIndex < 0 ? (attacks.size() - 1) : nextAttackIndex;
         currentFight.selectAttack(attacks.get(nextAttackIndex));
@@ -109,7 +108,23 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     @Override
     public void confirmAttack() {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
-        notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack()));
+        fightPub.notifyObservers(currentFight);
+        switch (currentFight.getState()) {
+            case PLAYER_TURN ->
+                    notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack(), AttackOutcomeNotification.Attacker.PLAYER));
+            case OPPONENT_TURN ->
+                    notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.getAttacked(), AttackOutcomeNotification.Attacker.ENEMY));
+        }
+        switch (currentFight.getState()) {
+            case LOSE -> {
+                handler().handle(GameOverSubmodule.class, GameOverSubmodule::triggerDeathGameGO);
+            }
+            case WIN -> {
+                handler().handle(PartySubmodule.class, (Consumer<PartySubmodule>) s -> s.setParty(currentFight.getPlayerParty()));
+                handler().handle(GameStateSubmodule.class, (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.WORLD));
+            }
+        }
+        fightPub.notifyObservers(currentFight);
     }
 
 }

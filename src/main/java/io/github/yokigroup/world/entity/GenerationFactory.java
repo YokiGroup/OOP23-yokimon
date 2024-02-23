@@ -1,7 +1,7 @@
 package io.github.yokigroup.world.entity;
 
 
-import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.yokimon.Yokimon;
 
 import java.util.List;
 

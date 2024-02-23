@@ -1,21 +1,16 @@
 package io.github.yokigroup.file.loader;
 
-import io.github.yokigroup.battle.Attack;
-import io.github.yokigroup.battle.Color;
-import org.junit.jupiter.api.BeforeEach;
+import io.github.yokigroup.battle.attack.Attack;
+import io.github.yokigroup.battle.attack.Color;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AttackLoaderTest {
-    private static AttackLoader loader;
-
-    @BeforeEach
-    void setUp() {
-        loader = new AttackLoader();
-    }
 
     @Test
     void load() {
+        final AttackLoader loader = new AttackLoader();
+
         final int attackId = 1;
         final String expectedName = "Shadow Ball";
         final Color expectedColor = Color.BLACK;

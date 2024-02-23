@@ -1,4 +1,4 @@
-package io.github.yokigroup.battle;
+package io.github.yokigroup.battle.attack;
 
 /**
  * This enum represents the different colors that yokimon can take on or the color which an attack will have.

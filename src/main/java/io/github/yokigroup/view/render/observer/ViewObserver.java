@@ -1,7 +1,7 @@
 package io.github.yokigroup.view.render.observer;
 
 import io.github.yokigroup.event.observer.EObserver;
-import io.github.yokigroup.view.render.Painter;
+import io.github.yokigroup.view.render.painter.Painter;
 
 public abstract class ViewObserver<T> implements EObserver<T> {
     private final Painter painter;

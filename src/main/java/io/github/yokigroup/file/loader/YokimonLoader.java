@@ -1,9 +1,9 @@
 package io.github.yokigroup.file.loader;
 
-import io.github.yokigroup.battle.Attack;
-import io.github.yokigroup.battle.Color;
-import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.battle.YokimonImpl;
+import io.github.yokigroup.battle.attack.Attack;
+import io.github.yokigroup.battle.attack.Color;
+import io.github.yokigroup.battle.yokimon.Yokimon;
+import io.github.yokigroup.battle.yokimon.YokimonImpl;
 import io.github.yokigroup.util.json.JsonParser;
 
 import java.util.HashMap;

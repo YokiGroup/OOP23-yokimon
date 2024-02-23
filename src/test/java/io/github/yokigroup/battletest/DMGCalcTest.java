@@ -1,7 +1,7 @@
 package io.github.yokigroup.battletest;
 
-import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.battle.Attack;
+import io.github.yokigroup.battle.yokimon.Yokimon;
+import io.github.yokigroup.battle.attack.Attack;
 import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
 import io.github.yokigroup.battle.dmgcalculator.DmgCalculator;
 import io.github.yokigroup.battle.dmgcalculator.FullImplDmgCalculator;

@@ -115,6 +115,9 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         if (!disconnectedTiles.isEmpty()) {
             disconnectedTiles.addAll(getAdjacentPositions(disconnectedTiles));
             disconnectedTiles.forEach(t -> setStaticShape(t, resetMap.get(t).getEntries()));
+            // Make sure all tiles get the new valid positions
+            getAllValidPositions()
+                    .forEach(p -> updateAdjacentShapes(maxDepth, p));
             generateShapeMap();
         }
     }
@@ -132,7 +135,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
                         p.x() + dir.getOffset().x(),
                         p.y() + dir.getOffset().y()
                 );
-                if (checkBounds(offsetPos) && !positions.contains(offsetPos)) {
+                if (checkBounds(offsetPos)) {
                     result.add(offsetPos);
                 }
             }

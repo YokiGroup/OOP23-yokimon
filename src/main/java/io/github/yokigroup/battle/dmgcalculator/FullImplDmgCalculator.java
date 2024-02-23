@@ -1,8 +1,8 @@
 package io.github.yokigroup.battle.dmgcalculator;
 
-import io.github.yokigroup.battle.Attack;
-import io.github.yokigroup.battle.Yokimon;
-import io.github.yokigroup.battle.Color;
+import io.github.yokigroup.battle.attack.Attack;
+import io.github.yokigroup.battle.yokimon.Yokimon;
+import io.github.yokigroup.battle.attack.Color;
 
 /**
  * Complete version of {@link DmgCalculator}, that takes into consideration

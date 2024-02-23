@@ -6,7 +6,7 @@ import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import io.github.yokigroup.battle.Yokimon;
+import io.github.yokigroup.battle.yokimon.Yokimon;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -23,8 +23,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 final class FightTest {
 
-    private static Fight toTest;
-    private Yokimon tengu, nekomata, baku, oni, oni2;
+    private Fight toTest;
+    private Yokimon tengu;
+    private Yokimon oni;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
 
@@ -35,11 +36,11 @@ final class FightTest {
     void init() {
 
         tengu =  yokimonLoader.load(1);
-        nekomata =  yokimonLoader.load(3);
-        baku =  yokimonLoader.load(4);
+        final Yokimon nekomata = yokimonLoader.load(3);
+        final Yokimon baku = yokimonLoader.load(4);
 
         oni = yokimonLoader.load(2);
-        oni2 = yokimonLoader.load(2);
+        final Yokimon oni2 = yokimonLoader.load(2);
 
         final List<Yokimon> myParty = new LinkedList<>();
         myParty.add(tengu);
@@ -68,10 +69,10 @@ final class FightTest {
     @Test
     void testAttack() {
         final int id = 18;
-        toTest.selectAttack(attackLoader.load(18));
+        toTest.selectAttack(attackLoader.load(id));
         toTest.attack();
         assertNotEquals(toTest.getCurrentOpponent().getActualHp(),
-                        toTest.getCurrentOpponent().getMaxHp());
+                toTest.getCurrentOpponent().getMaxHp());
         assertEquals(oni, toTest.getCurrentOpponent());
         assertFalse(toTest.isOver());
         assertFalse(toTest.victory());
@@ -98,5 +99,3 @@ final class FightTest {
         assertTrue(toTest.playerIsFirst());
     }
 }
-
-

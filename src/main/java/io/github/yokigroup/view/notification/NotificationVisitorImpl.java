@@ -1,7 +1,7 @@
 package io.github.yokigroup.view.notification;
 
 import io.github.yokigroup.event.observer.EObserver;
-import io.github.yokigroup.view.render.Painter;
+import io.github.yokigroup.view.render.painter.Painter;
 
 public class NotificationVisitorImpl implements NotificationVisitor, EObserver<Notification> {
     private final Painter painter;
@@ -40,12 +40,16 @@ public class NotificationVisitorImpl implements NotificationVisitor, EObserver<N
 
     @Override
     public String getAttackOutcomeNotificationText(final AttackOutcomeNotification notification) {
-        return switch (notification.getAttackOutcome()) {
-            case FAIL -> "non hai fatto male :(";
-            case GOOD -> "hai fatto male :)";
-            case SUPER -> "HAI FATTO UN MALE CANE";
-            case WEAK -> "hai fatto poco male :(";
+        String damageQuantityStr = switch (notification.getAttackOutcome()) {
+            case FAIL -> "non ha fatto male";
+            case GOOD -> "ha fatto male";
+            case SUPER -> "ha fatto molto male";
+            case WEAK -> "ha fatto poco male";
         };
+        return switch (notification.getAttacker()) {
+            case PLAYER -> "il tuo yokimon ";
+            case ENEMY -> "lo yokimon nemico";
+        } + damageQuantityStr;
     }
 
     @Override

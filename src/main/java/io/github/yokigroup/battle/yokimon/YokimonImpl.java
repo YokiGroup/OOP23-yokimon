@@ -1,4 +1,7 @@
-package io.github.yokigroup.battle;
+package io.github.yokigroup.battle.yokimon;
+
+import io.github.yokigroup.battle.attack.Attack;
+import io.github.yokigroup.battle.attack.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;

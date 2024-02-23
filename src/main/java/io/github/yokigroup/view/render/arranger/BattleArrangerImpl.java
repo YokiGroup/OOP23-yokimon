@@ -1,8 +1,7 @@
 package io.github.yokigroup.view.render.arranger;
 
-import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.observer.Publisher;
-import io.github.yokigroup.view.render.Painter;
 
 public class BattleArrangerImpl extends Arranger implements BattleArranger {
     public BattleArrangerImpl() {

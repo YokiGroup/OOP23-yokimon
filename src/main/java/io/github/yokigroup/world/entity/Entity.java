@@ -1,6 +1,6 @@
 package io.github.yokigroup.world.entity;
 
-import io.github.yokigroup.core.state.SpriteData;
+import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.Updateable;
 import io.github.yokigroup.util.Vector2;

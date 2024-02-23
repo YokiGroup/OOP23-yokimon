@@ -1,4 +1,4 @@
-package io.github.yokigroup.core.state;
+package io.github.yokigroup.view.render.drawable;
 
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
