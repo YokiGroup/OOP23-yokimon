@@ -37,7 +37,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
             throw new IllegalArgumentException("The WaveFunctionCollapse's shape set must not be null.");
         }
         // Arbitrary max depth
-        this.maxDepth = shapes.size() * shapes.size();
+        this.maxDepth = shapes.size() / 2;
         this.dimensions = dimensions;
         this.shapeMap = new HashMap<>();
         this.resetMap = new HashMap<>();
