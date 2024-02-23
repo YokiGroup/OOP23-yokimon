@@ -12,6 +12,7 @@ import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.view.notification.Notification;
+import io.github.yokigroup.view.render.observer.ModelObserverImpl;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -69,6 +70,33 @@ public class GameMessageHandler implements MessageHandler {
      */
     public GameMessageHandler(final ModelObserver modelObs) {
         subModules = initSubmodules(modelObs);
+    }
+
+    /**
+     * Empty Constructor that does not use a {@link ModelObserver}.
+     */
+    public GameMessageHandler() {
+        this(new ModelObserver() {
+            @Override
+            public void addSpritePublisher(final RenderState state, final Publisher<SpriteData> spriteObs) {
+            }
+
+            @Override
+            public void addSpritePublishers(final RenderState state, final Publisher<Set<SpriteData>> spriteObs) {
+            }
+
+            @Override
+            public void addFightPublisher(final Publisher<Fight> fightObs) {
+            }
+
+            @Override
+            public void addNotificationPublisher(final Publisher<Notification> notificationPub) {
+            }
+
+            @Override
+            public void addStateChangePublisher(final Publisher<RenderState> renderStatePublisher) {
+            }
+        });
     }
 
     /**
