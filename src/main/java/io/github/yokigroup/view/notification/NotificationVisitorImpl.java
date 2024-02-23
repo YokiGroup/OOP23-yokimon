@@ -48,7 +48,7 @@ public class NotificationVisitorImpl implements NotificationVisitor, EObserver<N
         };
         return switch (notification.getAttacker()) {
             case PLAYER -> "il tuo yokimon ";
-            case ENEMY -> "lo yokimon nemico";
+            case ENEMY -> "lo yokimon nemico ";
         } + damageQuantityStr;
     }
 
