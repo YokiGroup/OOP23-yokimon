@@ -112,7 +112,7 @@ public final class FightImpl implements Fight {
         final int damage = addDamageModifiers(attackSuccessValue,
                 dmgCalc.getDMG(currMyYokimon, currOppYokimon, selectedAttack));
         if (currOppYokimon.takeDamage(damage)) {
-            oppYokimons.remove(currOppYokimon);
+            oppYokimons.remove(0);
             defeatedOpps.add(currMyYokimon);
             if (oppYokimons.isEmpty()) {
                 final int xpGain = xpCalc.getXP(defeatedOpps);
@@ -137,7 +137,7 @@ public final class FightImpl implements Fight {
                 dmgCalc.getDMG(currOppYokimon, currMyYokimon, nextOppAttack.get()));
         currMyYokimon.takeDamage(damage);
         if (!currMyYokimon.active()) {
-            myYokimons.remove(currMyYokimon);
+            myYokimons.remove(0);
             if (myYokimons.isEmpty()) {
                 state = State.LOSE;
                 publisher.notifyObservers(this);
