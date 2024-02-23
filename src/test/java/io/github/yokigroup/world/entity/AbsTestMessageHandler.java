@@ -122,9 +122,8 @@ public final class AbsTestMessageHandler extends GameMessageHandler {
         }
 
     }
-    @Override
-    protected Set<Class<? extends Submodule>> getSubmoduleTypes() {
 
+    private Set<Class<? extends Submodule>> getSubmoduleTypes() {
         return Set.of(
                 PlayerCharacterSubmodule.class,
                 AbsTestMessageHandler.TestSubmodule.class,

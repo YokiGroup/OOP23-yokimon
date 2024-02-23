@@ -12,7 +12,6 @@ import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.view.notification.Notification;
-import io.github.yokigroup.view.render.observer.ModelObserverImpl;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -27,20 +26,6 @@ import java.util.function.Function;
 public class GameMessageHandler implements MessageHandler {
     private final SubmoduleMap subModules;
 
-    /**
-     * @return set of submodules to be instanced by the MessageHandler
-     */
-    protected Set<Class<? extends Submodule>> getSubmoduleTypes() {
-        return Set.of(
-                PartySubmodule.class,
-                PlayerCharacterSubmodule.class,
-                FightSubmodule.class,
-                GameMapSubmodule.class,
-                InputSubmodule.class,
-                GameEndSubmodule.class,
-                GameStateSubmodule.class
-        );
-    }
 
     /**
      * Initializes game logic submodules.
@@ -49,18 +34,36 @@ public class GameMessageHandler implements MessageHandler {
      * @see SubmoduleMap
      */
     private SubmoduleMap initSubmodules(final ModelObserver modelObs) {
-        final SubmoduleMap retMap = new SubmoduleMapImpl();
-        final var submoduleTypes = getSubmoduleTypes();
+        final var submoduleTypes = Set.of(
+                PartySubmodule.class,
+                PlayerCharacterSubmodule.class,
+                FightSubmodule.class,
+                GameMapSubmodule.class,
+                InputSubmodule.class,
+                GameEndSubmodule.class,
+                GameStateSubmodule.class
+        );
+        return instantiateSubmodules(modelObs, submoduleTypes);
+    }
 
+    /**
+     * creates a {@link SubmoduleMap} with the given instantiated submodules
+     * @param submoduleTypes
+     * @throws GameInitFailException if the initialization did not succeed
+     * @return
+     */
+    protected final SubmoduleMap instantiateSubmodules(ModelObserver modelObs,
+                                                       Set<Class<? extends Submodule>> submoduleTypes) {
+        final SubmoduleMap retMap = new SubmoduleMapImpl();
         submoduleTypes.forEach(s -> {
             try {
-                retMap.register(s.getConstructor(MessageHandler.class, ModelObserver.class).newInstance(this, modelObs));
+                retMap.register(s.getConstructor(MessageHandler.class, ModelObserver.class)
+                        .newInstance(this, modelObs));
             } catch (NoSuchMethodException | InvocationTargetException | InstantiationException
                      | IllegalAccessException e) {
                 throw new GameInitFailException(e);
             }
         });
-
         return retMap;
     }
 
