@@ -24,7 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 final class FightTest {
 
     private Fight toTest;
-    private Yokimon tengu, nekomata, baku, oni, oni2;
+    private Yokimon tengu;
+    private Yokimon oni;
     private final YokimonLoader yokimonLoader = new YokimonLoader();
     private final AttackLoader attackLoader = new AttackLoader();
 
@@ -35,11 +36,11 @@ final class FightTest {
     void init() {
 
         tengu =  yokimonLoader.load(1);
-        nekomata =  yokimonLoader.load(3);
-        baku =  yokimonLoader.load(4);
+        final Yokimon nekomata = yokimonLoader.load(3);
+        final Yokimon baku = yokimonLoader.load(4);
 
         oni = yokimonLoader.load(2);
-        oni2 = yokimonLoader.load(2);
+        final Yokimon oni2 = yokimonLoader.load(2);
 
         final List<Yokimon> myParty = new LinkedList<>();
         myParty.add(tengu);
