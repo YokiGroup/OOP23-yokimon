@@ -28,6 +28,7 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     private final Publisher<SpriteData> tilePub = new PublisherImpl<>();
     private final Publisher<Set<SpriteData>> entityPub = new PublisherImpl<>();
     private Pair<Integer, Integer> playerTilePos;
+    private final Pair<Integer, Integer> homeTilePos;
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
@@ -35,7 +36,8 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
      */
     public GameMapSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
-        playerTilePos = new Pair<>(MAP_DIM.x() / 2 + 1, MAP_DIM.y() / 2 + 1);
+        playerTilePos = new Pair<>(MAP_DIM.x() / 2, MAP_DIM.y() / 2);
+        homeTilePos = playerTilePos;
         final GameMapBuilder builder = new GameMapBuilderImpl();
 
         builder.changeMapDimensions(MAP_DIM);
@@ -51,7 +53,6 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
 
     @Override
     public int getPlayerDistanceFromHome() {
-        final Pair<Integer, Integer> homeTilePos = gameMap.getPlayerTileMapPosition();
         return Math.abs(playerTilePos.x() - homeTilePos.x()) + Math.abs(playerTilePos.y() - homeTilePos.y());
     }
 
