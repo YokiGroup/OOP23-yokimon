@@ -159,6 +159,7 @@ public final class FightImpl implements Fight {
                 publisher.notifyObservers(this);
             } else {
                 this.currMyYokimon = myYokimons.get(0);
+                selectAttack(currMyYokimon.getAttacks().get(0));
             }
         }
         return attackSuccessValue;
