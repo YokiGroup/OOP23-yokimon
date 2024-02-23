@@ -1,6 +1,7 @@
 package io.github.yokigroup.core;
 
 import io.github.yokigroup.battle.fight.Fight;
+import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
@@ -55,7 +56,7 @@ public class GameMessageHandler implements MessageHandler {
                 retMap.register(s.getConstructor(MessageHandler.class, ModelObserver.class).newInstance(this, modelObs));
             } catch (NoSuchMethodException | InvocationTargetException | InstantiationException
                      | IllegalAccessException e) {
-                throw new RuntimeException(e);
+                throw new GameInitFailException(e);
             }
         });
 
@@ -68,34 +69,6 @@ public class GameMessageHandler implements MessageHandler {
      */
     public GameMessageHandler(final ModelObserver modelObs) {
         subModules = initSubmodules(modelObs);
-    }
-
-    /**
-     * Constructor for game message handler.
-     */
-    public GameMessageHandler() {
-        // FIXME TEMPORARY HACK
-        this(new ModelObserver() {
-            @Override
-            public void addSpritePublisher(final RenderState state, final Publisher<SpriteData> spriteObs) {
-            }
-
-            @Override
-            public void addSpritePublishers(final RenderState state, final Publisher<Set<SpriteData>> spriteObs) {
-            }
-
-            @Override
-            public void addFightPublisher(final Publisher<Fight> fightObs) {
-            }
-
-            @Override
-            public void addNotificationPublisher(final Publisher<Notification> notificationPub) {
-            }
-
-            @Override
-            public void addStateChangePublisher(final Publisher<RenderState> renderStatePublisher) {
-            }
-        });
     }
 
     /**

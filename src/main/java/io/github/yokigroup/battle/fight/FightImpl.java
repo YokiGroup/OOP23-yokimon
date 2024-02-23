@@ -46,7 +46,7 @@ public final class FightImpl implements Fight {
     private final List<Yokimon> oppYokimons;
     private Yokimon currMyYokimon;
     private Yokimon currOppYokimon;
-    private Attack selectedAttack = null;
+    private Attack selectedAttack;
 
 
     /* structures */
@@ -96,7 +96,7 @@ public final class FightImpl implements Fight {
     }
 
     @Override
-    public void selectAttack(final Attack attack) throws IllegalArgumentException {
+    public void selectAttack(final Attack attack) {
         Objects.requireNonNull(attack);
         if (getCurrentMyYokimon().getAttacks().contains(attack)) {
             selectedAttack = Objects.requireNonNull(attack);
