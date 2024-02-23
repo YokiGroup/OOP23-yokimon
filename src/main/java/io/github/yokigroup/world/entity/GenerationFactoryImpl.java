@@ -52,7 +52,7 @@ public class GenerationFactoryImpl implements GenerationFactory {
     @Override
     public final List<Yokimon> getEnemyParty(final int power) {
         final List<Yokimon> enemyParty = new ArrayList<>();
-        IntStream.rangeClosed(0, power)
+        IntStream.rangeClosed(0, power != 0 ? power : 1)
                 .forEach(i -> enemyParty.add(getYokimon(power)));
         return Objects.requireNonNull(List.copyOf(enemyParty));
     }
