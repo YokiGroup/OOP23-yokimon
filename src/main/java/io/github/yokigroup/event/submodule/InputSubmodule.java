@@ -23,6 +23,7 @@ import java.util.function.Predicate;
 public final class InputSubmodule extends InputSubmoduleAbs {
     private final Set<Direction> moveEvents = new HashSet<>();
     private boolean clickedConfirmEvent = false;
+    private GameStateSubmoduleAbs.GameState lastQueriedState = null;
 
     /**
      * @param handler         MessageHandler to call in order to query other submodules.
@@ -150,6 +151,10 @@ public final class InputSubmodule extends InputSubmoduleAbs {
     protected void updateCode(final double delta) {
         final GameStateSubmoduleAbs.GameState currentState = handler()
                 .handle(GameStateSubmodule.class, GameStateSubmodule::getGameState);
+        if (currentState != lastQueriedState) {
+            clickedConfirmEvent = false;
+            lastQueriedState = currentState;
+        }
         switch (currentState) {
             case WORLD -> handlePlayerPositionChange(delta);
             case FIGHT -> handleFightInputs();
