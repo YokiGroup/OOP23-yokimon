@@ -37,7 +37,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
             throw new IllegalArgumentException("The WaveFunctionCollapse's shape set must not be null.");
         }
         // Arbitrary max depth
-        this.maxDepth = shapes.size() / 2;
+        this.maxDepth = shapes.size() * shapes.size();
         this.dimensions = dimensions;
         this.shapeMap = new HashMap<>();
         this.resetMap = new HashMap<>();
@@ -115,6 +115,9 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         if (!disconnectedTiles.isEmpty()) {
             disconnectedTiles.addAll(getAdjacentPositions(disconnectedTiles));
             disconnectedTiles.forEach(t -> setStaticShape(t, resetMap.get(t).getEntries()));
+            // Make sure all tiles get the new valid positions
+            getAllValidPositions()
+                    .forEach(p -> updateAdjacentShapes(maxDepth, p));
             generateShapeMap();
         }
     }
@@ -132,7 +135,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
                         p.x() + dir.getOffset().x(),
                         p.y() + dir.getOffset().y()
                 );
-                if (checkBounds(offsetPos) && !positions.contains(offsetPos)) {
+                if (checkBounds(offsetPos)) {
                     result.add(offsetPos);
                 }
             }
