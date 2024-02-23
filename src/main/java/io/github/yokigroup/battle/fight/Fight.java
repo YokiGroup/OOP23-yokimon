@@ -67,7 +67,7 @@ public interface Fight {
      * @param attack attack to use
      * @throws IllegalArgumentException if the attack is not possessed by the fighting yokimon
      */
-    void selectAttack(Attack attack) throws IllegalArgumentException;
+    void selectAttack(Attack attack);
 
     /**
      * Gets the selected attack.
