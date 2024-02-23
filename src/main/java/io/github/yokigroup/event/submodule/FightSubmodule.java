@@ -110,6 +110,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     public void confirmAttack() {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
         notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack()));
+        fightPub.notifyObservers(currentFight);
     }
 
 }

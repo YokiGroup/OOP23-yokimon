@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
@@ -24,6 +25,7 @@ import javafx.stage.Stage;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -41,14 +43,12 @@ public class GameFX extends Application {
         private final double ratio;
         private final Canvas gameCanvas;
         private final Scene gameScene;
-        private final Painter painter;
 
 
-        GameWindowResizeListener(final Scene gameScene, final Canvas gameCanvas, final Painter painter, final double ratio) {
+        GameWindowResizeListener(final Scene gameScene, final Canvas gameCanvas, final double ratio) {
             this.ratio = ratio;
             this.gameCanvas = gameCanvas;
             this.gameScene = gameScene;
-            this.painter = painter;
         }
 
         @Override
@@ -56,14 +56,17 @@ public class GameFX extends Application {
             final double paneWidth = gameScene.getWidth();
             final double paneHeight = gameScene.getHeight();
             final double currentRatio = paneWidth / paneHeight;
+            double newHeight, newWidth;
 
             if (currentRatio > ratio) { // width has to be truncated
-                gameCanvas.setHeight(paneHeight);
-                gameCanvas.setWidth(paneHeight * ratio);
+                newHeight = paneHeight;
+                newWidth = paneHeight * ratio;
             } else { // height has to be truncated
-                gameCanvas.setWidth(paneWidth);
-                gameCanvas.setHeight(paneWidth / ratio);
+                newHeight = paneWidth / ratio;
+                newWidth = paneWidth;
             }
+            gameCanvas.setWidth(newWidth);
+            gameCanvas.setHeight(newHeight);
         }
     }
 
@@ -78,8 +81,14 @@ public class GameFX extends Application {
 
         final List<Node> stackPane = ((StackPane) rootElem.getCenter()).getChildren();
         final Canvas gameCanvas = (Canvas) stackPane.get(0); // FIXME maybe casting like this isn't the smartest choice
-        final Label eventLabel = (Label) ((BorderPane) stackPane.get(1)).getBottom();
-        final Painter painter = new CanvasPainter(gameCanvas.getGraphicsContext2D(), eventLabel);
+
+        final BorderPane borderPane = ((BorderPane) stackPane.get(1));
+        final AnchorPane anchorPane = (AnchorPane) borderPane.getTop();
+        final Label eventLabel = (Label) borderPane.getBottom();
+        final Label playerYokimonLabel = (Label) anchorPane.getChildren().stream().filter(n -> n.getId().equals("playerYokimonLabel")).findFirst().orElseThrow();
+        final Label enemyYokimonLabel = (Label) anchorPane.getChildren().stream().filter(n -> n.getId().equals("enemyYokimonLabel")).findFirst().orElseThrow();
+
+        final Painter painter = new CanvasPainter(gameCanvas.getGraphicsContext2D(), eventLabel, playerYokimonLabel, enemyYokimonLabel);
 
         final ModelObserverImpl modelObs = new ModelObserverImpl(painter);
         final GameLogicImpl gameThread = new GameLogicImpl(modelObs, painter);
@@ -97,7 +106,7 @@ public class GameFX extends Application {
         );
         gameThread.start();
 
-        final GameWindowResizeListener<Object> resizeListener = new GameWindowResizeListener<>(scene, gameCanvas, painter, ratio);
+        final GameWindowResizeListener<Object> resizeListener = new GameWindowResizeListener<>(scene, gameCanvas, ratio);
         stage.widthProperty().addListener(resizeListener);
         stage.heightProperty().addListener(resizeListener);
         stage.fullScreenProperty().addListener(resizeListener);

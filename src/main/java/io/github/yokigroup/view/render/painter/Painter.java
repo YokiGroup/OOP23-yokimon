@@ -38,5 +38,9 @@ public abstract class Painter implements DrawCallable {
 
     public abstract void setEventText(String eventText);
 
+    public abstract void setPlayerYokimonLabel(String text);
+
+    public abstract void setEnemyYokimonLabel(String text);
+
     public abstract void repaint();
 }
