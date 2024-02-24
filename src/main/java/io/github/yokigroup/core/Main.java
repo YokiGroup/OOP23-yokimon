@@ -7,7 +7,7 @@ import io.github.yokigroup.view.GameWindow;
  * The main class to run the program with.
  */
 final class Main {
-    final private GameWindow gameWindow = new App();
+    private final GameWindow gameWindow = new App();
 
     private Main() {
     }
