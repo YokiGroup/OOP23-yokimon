@@ -29,55 +29,32 @@ public class FullImplDmgCalculator implements DmgCalculator {
      * @return the actual damage (to subtract from the HP of the attacked Yokimon)
      */
     protected double getDMGdouble(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
-
-        final MultiplierDmgCalculator multipl = new MultiplierDmgCalculator();
-        double total = multipl.getDMGdouble(attackingYokimon, attackedYokimon, attack);
+       final MultiplierDmgCalculator multipl = new MultiplierDmgCalculator();
+       double total = multipl.getDMGdouble(attackingYokimon, attackedYokimon, attack);
+       final Color attackedYokimonColor = attackedYokimon.getYokimonColor();
 
         //hierarchy
-        switch (attackingYokimon.getYokimonColor()) {
-            case PURPLE -> {
-                switch (attackedYokimon.getYokimonColor()) {
-                    case BLACK, PURPLE -> {
-                        total = total * WEAK;
-                    }
-                    case RED -> {
-                        total = total * STRONG;
-                    }
-                    default -> {
-                        total = total * NORMAL;
-                    }
-                }
-            }
-            case RED -> {
-                switch (attackedYokimon.getYokimonColor()) {
-                    case PURPLE, RED -> {
-                        total = total * WEAK;
-                    }
-                    case BLACK -> {
-                        total = total * STRONG;
-                    }
-                    default -> {
-                        total = total * NORMAL;
-                    }
-                }
-            }
-            case BLACK -> {
-                switch (attackedYokimon.getYokimonColor()) {
-                    case RED, BLACK -> {
-                        total = total * WEAK;
-                    }
-                    case PURPLE -> {
-                        total = total * STRONG;
-                    }
-                    default -> {
-                        total = total * NORMAL;
-                    }
-                }
-            }
-            default -> {
-                total = total * NORMAL;
-            }
-        }
+        total = switch (attackingYokimon.getYokimonColor()) {
+            case PURPLE -> switch (attackedYokimonColor) {
+                    case BLACK, PURPLE -> total * WEAK;
+                    case RED -> total * STRONG;
+                    default -> total * NORMAL;
+                };
+
+            case RED -> switch (attackedYokimonColor) {
+                    case PURPLE, RED -> total * WEAK;
+                    case BLACK -> total * STRONG;
+                    default -> total * NORMAL;
+                };
+
+            case BLACK -> switch (attackedYokimonColor) {
+                    case RED, BLACK -> total * WEAK;
+                    case PURPLE -> total * STRONG;
+                    default -> total * NORMAL;
+                };
+
+            default -> total * NORMAL;
+        };
 
         return total;
     }
