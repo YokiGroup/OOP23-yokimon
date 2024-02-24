@@ -17,9 +17,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CanvasPainter extends Painter {
-    private Label globalLabel;
-    private Label enemyYokimonLabel;
-    private Label playerYokimonLabel;
+    private final Label globalLabel;
+    private final Label enemyYokimonLabel;
+    private final Label playerYokimonLabel;
     private final Map<String, Image> imageCache = new HashMap<>();
     private final GraphicsContext gc;
     private Pair<Long, String> currentNotification; // notification with timestamp
