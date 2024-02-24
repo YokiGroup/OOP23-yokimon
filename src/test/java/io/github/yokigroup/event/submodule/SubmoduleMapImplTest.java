@@ -6,7 +6,6 @@ import io.github.yokigroup.event.submodule.abs.FightSubmoduleAbs;
 import io.github.yokigroup.event.submodule.abs.PartySubmoduleAbs;
 import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.view.render.observer.ModelObserver;
-import io.github.yokigroup.view.render.observer.ModelObserverImpl;
 import io.github.yokigroup.view.render.observer.NOPModelObserver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
