@@ -6,7 +6,7 @@ public final class AttackOutcomeNotificationImpl implements AttackOutcomeNotific
     private final Fight.Success attackOutcome;
     private final Attacker attacker;
 
-    public AttackOutcomeNotificationImpl(final Fight.Success attackOutcome, Attacker attacker) {
+    public AttackOutcomeNotificationImpl(final Fight.Success attackOutcome, final Attacker attacker) {
         this.attackOutcome = attackOutcome;
         this.attacker = attacker;
     }
