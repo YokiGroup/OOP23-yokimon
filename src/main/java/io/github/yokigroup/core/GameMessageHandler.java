@@ -20,6 +20,8 @@ import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.view.notification.Notification;
+import io.github.yokigroup.view.render.observer.ModelObserverImpl;
+import io.github.yokigroup.view.render.observer.NOPModelObserver;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -76,38 +78,20 @@ public class GameMessageHandler implements MessageHandler {
     }
 
     /**
-     * Constructor for game message handler.
-     * @param modelObs the model Observer.
+     * Constructor for the game message handler.
+     * @param modelObs the model observer.
+     * @see ModelObserver
      */
     public GameMessageHandler(final ModelObserver modelObs) {
         subModules = initSubmodules(modelObs);
     }
 
     /**
-     * Empty Constructor that does not use a {@link ModelObserver}.
+     * Empty constructor for the game message handler.
+     * Initializes the game logic with a {@link NOPModelObserver} so as not to communicate with a view.
      */
     public GameMessageHandler() {
-        this(new ModelObserver() {
-            @Override
-            public void addSpritePublisher(final RenderState state, final Publisher<SpriteData> spriteObs) {
-            }
-
-            @Override
-            public void addSpritePublishers(final RenderState state, final Publisher<Set<SpriteData>> spriteObs) {
-            }
-
-            @Override
-            public void addFightPublisher(final Publisher<Fight> fightObs) {
-            }
-
-            @Override
-            public void addNotificationPublisher(final Publisher<Notification> notificationPub) {
-            }
-
-            @Override
-            public void addStateChangePublisher(final Publisher<RenderState> renderStatePublisher) {
-            }
-        });
+        this(new NOPModelObserver());
     }
 
     /**
