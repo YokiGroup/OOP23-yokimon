@@ -68,6 +68,7 @@ public final class GameFX extends Application {
             }
             gameCanvas.setWidth(newWidth);
             gameCanvas.setHeight(newHeight);
+            stackPane.setMinSize(newWidth, newHeight);
             stackPane.setPrefSize(newWidth, newHeight);
             stackPane.setMaxSize(newWidth, newHeight);
         }
