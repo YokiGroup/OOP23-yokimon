@@ -13,12 +13,14 @@ import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.view.render.observer.ModelObserver;
+import io.github.yokigroup.view.render.observer.NOPModelObserver;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.GameMap;
 import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
+import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 /**
@@ -28,6 +30,21 @@ public final class AbsTestMessageHandler extends GameMessageHandler {
     private static final double X_TEST = 400;
     private static final double Y_TEST = 100;
     private static final double DISTANCE = 40;
+
+    private Set<Class<? extends Submodule>> getSubmoduleTypes() {
+        return Set.of(
+                PlayerCharacterSubmodule.class,
+                AbsTestMessageHandler.TestSubmodule.class,
+                PartySubmodule.class,
+                FightSubmodule.class,
+                GameMapSubmodule.class
+
+        );
+    }
+
+    public AbsTestMessageHandler() {
+        this.instantiateSubmodules(new NOPModelObserver(), getSubmoduleTypes());
+    }
 
     /**
      * TestSubmodule for create a dummy map used for Entities test.
@@ -121,16 +138,5 @@ public final class AbsTestMessageHandler extends GameMessageHandler {
 
         }
 
-    }
-
-    private Set<Class<? extends Submodule>> getSubmoduleTypes() {
-        return Set.of(
-                PlayerCharacterSubmodule.class,
-                AbsTestMessageHandler.TestSubmodule.class,
-                PartySubmodule.class,
-                FightSubmodule.class,
-                GameMapSubmodule.class
-
-        );
     }
 }

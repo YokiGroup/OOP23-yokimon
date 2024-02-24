@@ -1,6 +1,5 @@
 package io.github.yokigroup.core;
 
-import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.event.submodule.FightSubmodule;
 import io.github.yokigroup.event.submodule.GameEndSubmodule;
@@ -11,16 +10,11 @@ import io.github.yokigroup.event.submodule.PartySubmodule;
 import io.github.yokigroup.event.submodule.PlayerCharacterSubmodule;
 import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
-import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.observer.Publisher;
 
 import io.github.yokigroup.event.Updateable;
 import io.github.yokigroup.event.submodule.abs.Submodule;
-import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
-import io.github.yokigroup.view.notification.Notification;
-import io.github.yokigroup.view.render.observer.ModelObserverImpl;
 import io.github.yokigroup.view.render.observer.NOPModelObserver;
 
 import java.lang.reflect.InvocationTargetException;
@@ -34,17 +28,15 @@ import java.util.function.Function;
  * Game loop. Responsible for receiving events and updating entities
  */
 public class GameMessageHandler implements MessageHandler {
-    private final SubmoduleMap subModules;
+    private SubmoduleMap subModules;
 
 
     /**
-     * Initializes game logic submodules.
-     * @return Initialized SubModuleMap
-     * @param modelObs modelObs
+     * @return Set of submodules used by the {@link GameMessageHandler}
      * @see SubmoduleMap
      */
-    private SubmoduleMap initSubmodules(final ModelObserver modelObs) {
-        final var submoduleTypes = Set.of(
+    private Set<Class<? extends Submodule>> createSubmoduleSet() {
+        return Set.of(
                 PartySubmodule.class,
                 PlayerCharacterSubmodule.class,
                 FightSubmodule.class,
@@ -53,7 +45,6 @@ public class GameMessageHandler implements MessageHandler {
                 GameEndSubmodule.class,
                 GameStateSubmodule.class
         );
-        return instantiateSubmodules(modelObs, submoduleTypes);
     }
 
     /**
@@ -62,7 +53,7 @@ public class GameMessageHandler implements MessageHandler {
      * @throws GameInitFailException if the initialization did not succeed
      * @return
      */
-    protected final SubmoduleMap instantiateSubmodules(ModelObserver modelObs,
+    protected final void instantiateSubmodules(ModelObserver modelObs,
                                                        Set<Class<? extends Submodule>> submoduleTypes) {
         final SubmoduleMap retMap = new SubmoduleMapImpl();
         submoduleTypes.forEach(s -> {
@@ -74,7 +65,7 @@ public class GameMessageHandler implements MessageHandler {
                 throw new GameInitFailException(e);
             }
         });
-        return retMap;
+        subModules = retMap;
     }
 
     /**
@@ -83,7 +74,7 @@ public class GameMessageHandler implements MessageHandler {
      * @see ModelObserver
      */
     public GameMessageHandler(final ModelObserver modelObs) {
-        subModules = initSubmodules(modelObs);
+        instantiateSubmodules(modelObs, createSubmoduleSet());
     }
 
     /**
