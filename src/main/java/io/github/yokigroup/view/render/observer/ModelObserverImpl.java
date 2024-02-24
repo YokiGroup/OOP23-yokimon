@@ -13,6 +13,9 @@ import io.github.yokigroup.view.render.RenderState;
 import java.util.Set;
 import java.util.function.Function;
 
+/**
+ * Implementation of {@link ModelObserver}.
+ */
 public final class ModelObserverImpl implements ModelObserver {
     private final DrawObserver drawObs;
     private final DrawSetObserver drawSetObs;
@@ -24,6 +27,9 @@ public final class ModelObserverImpl implements ModelObserver {
         return (lastArg, arg) -> obs.update(conversionFun.apply(lastArg), conversionFun.apply(arg));
     }
 
+    /**
+     * @param painter {@link Painter} to issue draw requests to.
+     */
     public ModelObserverImpl(final Painter painter) {
         this.drawObs = new DrawObserver(painter);
         this.drawSetObs = new DrawSetObserver(painter);
