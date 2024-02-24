@@ -117,7 +117,8 @@ public final class FightSubmodule extends FightSubmoduleAbs {
                     notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.getAttacked(),
                             AttackOutcomeNotification.Attacker.ENEMY));
             default -> {
-                //FIXME
+                throw new AssertionError("Fight state cannot be anything other than PLAYERTURN "
+                        + "or OPPONENTTURN at this stage of the program");
             }
         }
         switch (currentFight.getState()) {
@@ -135,7 +136,6 @@ public final class FightSubmodule extends FightSubmoduleAbs {
                 }
             }
             default -> {
-                //FIXME
             }
         }
         fightPub.notifyObservers(currentFight);
