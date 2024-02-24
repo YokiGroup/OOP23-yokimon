@@ -19,6 +19,7 @@ import io.github.yokigroup.view.render.observer.NOPModelObserver;
 
 import java.lang.reflect.InvocationTargetException;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -50,9 +51,8 @@ public class GameMessageHandler implements MessageHandler {
     /**
      * creates a {@link SubmoduleMap} with the given instantiated submodules.
      * @param submoduleTypes set of submodules to initialize
-     * @param modelObs
+     * @param modelObs model observer to instantiate the submodules with
      * @throws GameInitFailException if the initialization did not succeed
-     * @return
      */
     protected final void instantiateSubmodules(final ModelObserver modelObs,
                                                        final Set<Class<? extends Submodule>> submoduleTypes) {
