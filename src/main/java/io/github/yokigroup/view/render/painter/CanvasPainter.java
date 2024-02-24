@@ -16,6 +16,9 @@ import javafx.scene.text.TextAlignment;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implementation of {@link Painter} specific to JavaFX.
+ */
 public class CanvasPainter extends Painter {
     private final Label globalLabel;
     private final Label enemyYokimonLabel;
@@ -37,6 +40,12 @@ public class CanvasPainter extends Painter {
         return imageCache.get(resourceURL);
     }
 
+    /**
+     * @param gc {@link GraphicsContext} to draw to.
+     * @param eventLabel global label used to announce events to
+     * @param playerYokimonLabel label used for displaying the player's yokimon's stats during combat
+     * @param enemyYokimonLabel label used for displaying the enemy's yokimon's stats during combat
+     */
     public CanvasPainter(final GraphicsContext gc, final Label eventLabel,
                          final Label playerYokimonLabel, final Label enemyYokimonLabel) {
         super();
