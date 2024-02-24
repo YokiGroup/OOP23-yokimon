@@ -100,11 +100,6 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     }
 
     @Override
-    protected void updateTile() {
-        tilePub.notifyObservers(gameMap.getPlayerTile().getSpriteData());
-    }
-
-    @Override
     public Set<Hitbox> getHitboxesOnCurrentTile() {
         return gameMap.getPlayerTile().getHitboxes();
     }
