@@ -1,7 +1,6 @@
 package io.github.yokigroup.file.loader;
 
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.util.json.JsonParser;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.gen.TileShape;
 import io.github.yokigroup.world.gen.TileShapeImpl;
