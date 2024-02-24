@@ -31,8 +31,6 @@ public abstract class GameStateSubmoduleAbs extends Submodule {
         VICTORY
     }
 
-    ;
-
     /**
      * @param handler         MessageHandler to call in order to query other submodules.
      * @param ignoredModelObs {@link ModelObserver} used to instantiate the submodule
