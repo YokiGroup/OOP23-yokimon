@@ -20,7 +20,6 @@ import io.github.yokigroup.world.GameMapBuilderImpl;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
 import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
-import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 /**
@@ -31,6 +30,10 @@ public final class AbsTestMessageHandler extends GameMessageHandler {
     private static final double Y_TEST = 100;
     private static final double DISTANCE = 40;
 
+    /**
+     * Method take Submodules needed by AbsMessageHandler.
+     * @return Set of submodules for tests
+     */
     private Set<Class<? extends Submodule>> getSubmoduleTypes() {
         return Set.of(
                 PlayerCharacterSubmodule.class,
