@@ -6,7 +6,6 @@ import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.view.render.drawqueue.DrawQueue;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -38,7 +37,8 @@ public class CanvasPainter extends Painter {
         return imageCache.get(resourceURL);
     }
 
-    public CanvasPainter(final GraphicsContext gc, final Label eventLabel, final Label playerYokimonLabel, final Label enemyYokimonLabel) {
+    public CanvasPainter(final GraphicsContext gc, final Label eventLabel,
+                         final Label playerYokimonLabel, final Label enemyYokimonLabel) {
         super();
         gc.setImageSmoothing(false);
         gc.setTextAlign(TextAlignment.CENTER);
@@ -76,27 +76,27 @@ public class CanvasPainter extends Painter {
     }
 
     @Override
-    public void setEventText(final String eventText) {
+    public final void setEventText(final String eventText) {
         final long waitTime = 3000; // 3 seconds
         currentNotification = new Pair<>(System.currentTimeMillis() + waitTime, eventText);
     }
 
     @Override
-    public void setPlayerYokimonLabel(final String text) {
+    public final void setPlayerYokimonLabel(final String text) {
         Platform.runLater(() -> {
             playerYokimonLabel.setText(text);
         });
     }
 
     @Override
-    public void setEnemyYokimonLabel(final String text) {
+    public final void setEnemyYokimonLabel(final String text) {
         Platform.runLater(() -> {
             enemyYokimonLabel.setText(text);
         });
     }
 
     @Override
-    public void repaint() {
+    public final void repaint() {
         final DrawQueue drawQueue = drawQueue(getPaintState());
         synchronized (drawQueue) {
             drawQueue.stream().forEach(this::paint);
@@ -104,7 +104,7 @@ public class CanvasPainter extends Painter {
     }
 
     @Override
-    public void safeDraw() {
+    public final void safeDraw() {
         Platform.runLater(this::repaint);
     }
 }
