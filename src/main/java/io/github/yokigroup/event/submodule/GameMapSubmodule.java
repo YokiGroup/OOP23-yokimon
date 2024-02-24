@@ -1,5 +1,6 @@
 package io.github.yokigroup.event.submodule;
 
+import io.github.yokigroup.event.Updateable;
 import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
@@ -52,6 +53,12 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     }
 
     @Override
+    public void deactivate() {
+        super.deactivate();
+        gameMap.getTileAt(playerTilePos).getEntities().forEach(Updateable::resetDTime);
+    }
+
+    @Override
     public int getPlayerDistanceFromHome() {
         return Math.abs(playerTilePos.x() - homeTilePos.x()) + Math.abs(playerTilePos.y() - homeTilePos.y());
     }
@@ -61,12 +68,16 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
         final boolean success = gameMap.movePlayerTileMapPosition(dir);
         if (success) {
             final Pair<Integer, Integer> dirOffset = dir.getOffset();
+            // reset dtime of previous tile
+            gameMap.getTileAt(playerTilePos).getEntities().forEach(Updateable::resetDTime);
             tilePub.notifyObservers(gameMap.getPlayerTile().getSpriteData());
             playerTilePos = new Pair<>(playerTilePos.x() + dirOffset.x(), playerTilePos.y() + dirOffset.y());
             publishEntitySpriteData();
         }
         return success;
     }
+
+
 
     private void publishEntitySpriteData() {
         entityPub.notifyObservers(
