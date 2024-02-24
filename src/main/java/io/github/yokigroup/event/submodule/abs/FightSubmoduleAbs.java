@@ -26,6 +26,7 @@ public abstract class FightSubmoduleAbs extends Submodule {
 
     /**
      * Process next encounter.
+     * @param enemyParty list of yokimon with a minimum of 1 yokimon
      */
     public abstract void addEncounter(List<Yokimon> enemyParty);
 
