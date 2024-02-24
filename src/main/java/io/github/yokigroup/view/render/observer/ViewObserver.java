@@ -13,7 +13,7 @@ public abstract class ViewObserver<T> implements EObserver<T> {
         this.painter = painter;
     }
 
-    protected Painter painter() {
+    protected final Painter painter() {
         return painter;
     }
 }
