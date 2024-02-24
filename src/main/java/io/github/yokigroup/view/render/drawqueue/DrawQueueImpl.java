@@ -2,7 +2,6 @@ package io.github.yokigroup.view.render.drawqueue;
 
 import io.github.yokigroup.view.render.drawable.SpriteData;
 
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,15 +12,11 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Implementation of {@link DrawQueue}.
+ */
 public final class DrawQueueImpl implements DrawQueue {
     private final Queue<SpriteData> queue = new PriorityQueue<>(Comparator.comparingInt(SpriteData::priority));
-
-    public DrawQueueImpl() {
-    }
-
-    public DrawQueueImpl(final DrawQueueReader drawQueue) {
-        addToDrawQueue(drawQueue.stream().collect(Collectors.toUnmodifiableSet()));
-    }
 
     private Collection<SpriteData> preprocessCollection(final Collection<SpriteData> arg) {
         if (arg == null) {
