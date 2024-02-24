@@ -82,11 +82,11 @@ public final class GameFX extends Application {
         final BorderPane rootElem = FXMLLoader.load(ClassLoader.getSystemResource(ROOT_RESOUCE_PATH + "test.fxml"));
         final Scene scene = new Scene(rootElem, windowDim.getWidth(), windowDim.getHeight());
 
-        final StackPane stackPane = ((StackPane) rootElem.getCenter());
+        final StackPane stackPane = (StackPane) rootElem.getCenter();
         final List<Node> stackPaneList = stackPane.getChildren();
         final Canvas gameCanvas = (Canvas) stackPaneList.get(0); // FIXME maybe casting like this isn't the smartest choice
 
-        final BorderPane borderPane = ((BorderPane) stackPaneList.get(1));
+        final BorderPane borderPane = (BorderPane) stackPaneList.get(1);
         final AnchorPane anchorPane = (AnchorPane) borderPane.getTop();
         final Label eventLabel = (Label) borderPane.getBottom();
         final Label playerYokimonLabel = (Label) anchorPane.getChildren().stream()
