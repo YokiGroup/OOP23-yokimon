@@ -66,6 +66,7 @@ public final class GameFX extends Application {
                 newHeight = paneWidth / ratio;
                 newWidth = paneWidth;
             }
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             gameCanvas.setWidth(newWidth);
             gameCanvas.setHeight(newHeight);
             stackPane.setMinSize(newWidth, newHeight);
