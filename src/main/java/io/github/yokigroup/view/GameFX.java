@@ -79,9 +79,9 @@ public final class GameFX extends Application {
         final AnchorPane anchorPane = (AnchorPane) borderPane.getTop();
         final Label eventLabel = (Label) borderPane.getBottom();
         final Label playerYokimonLabel = (Label) anchorPane.getChildren().stream()
-                .filter(n -> n.getId().equals("playerYokimonLabel")).findFirst().orElseThrow();
+                .filter(n -> "playerYokimonLabel".equals(n.getId())).findFirst().orElseThrow();
         final Label enemyYokimonLabel = (Label) anchorPane.getChildren().stream()
-                .filter(n -> n.getId().equals("enemyYokimonLabel")).findFirst().orElseThrow();
+                .filter(n -> "enemyYokimonLabel".equals(n.getId())).findFirst().orElseThrow();
 
         final Painter painter = new CanvasPainter(gameCanvas
                 .getGraphicsContext2D(), eventLabel, playerYokimonLabel, enemyYokimonLabel);
