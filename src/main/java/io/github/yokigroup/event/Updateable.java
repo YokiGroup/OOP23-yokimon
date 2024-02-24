@@ -15,6 +15,10 @@ public abstract class Updateable implements Deactivatable {
         isActive = false;
     }
 
+    public final void resetDTime() {
+        sinceLastUpdate = -1;
+    }
+
     @Override
     public final boolean isActive() {
         return isActive;
