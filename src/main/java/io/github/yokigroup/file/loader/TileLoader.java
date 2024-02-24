@@ -13,6 +13,7 @@ import io.github.yokigroup.world.entity.hitbox.RectangularHitbox;
 import io.github.yokigroup.world.tile.TileBuilder;
 import io.github.yokigroup.world.tile.TileBuilderImpl;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,7 +29,7 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
     /**
      * Initializes a TileLoader by parsing the default tiles.json.
      */
-    public TileLoader() {
+    public TileLoader() throws IOException {
         super(TILE_JSON_RPATH);
     }
 

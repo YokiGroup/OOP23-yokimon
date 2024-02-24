@@ -2,9 +2,11 @@ package io.github.yokigroup.world.entity;
 
 
 import io.github.yokigroup.battle.yokimon.Yokimon;
+import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import io.github.yokigroup.util.WeightedPoolImpl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,16 @@ import java.util.stream.IntStream;
  * generate the foes party.
  */
 public class GenerationFactoryImpl implements GenerationFactory {
-    private static final YokimonLoader YOKIMON_LOADER = new YokimonLoader();
+    private static final YokimonLoader YOKIMON_LOADER;
+
+    static {
+        try {
+            YOKIMON_LOADER = new YokimonLoader();
+        } catch (IOException e) {
+            throw new GameInitFailException(e);
+        }
+    }
+
     private static final Map<Integer, Yokimon> YOKIMONS = YOKIMON_LOADER.getAll();
     private static final int NUMBER_OF_YOKIMON = YOKIMONS.size();
     private static final int PROBABILITY_CHANCE_MAX = NUMBER_OF_YOKIMON + 2;

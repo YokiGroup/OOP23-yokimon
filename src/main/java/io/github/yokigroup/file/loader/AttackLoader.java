@@ -5,6 +5,8 @@ import io.github.yokigroup.battle.attack.AttackImpl;
 import io.github.yokigroup.battle.attack.Color;
 import io.github.yokigroup.util.json.JsonParser;
 
+import java.io.IOException;
+
 /**
  * Loads Attacks from JSON file.
  */
@@ -18,7 +20,7 @@ public final class AttackLoader extends IdJsonLoader<Attack> {
     /**
      * Constructor for AttackLoader.
      */
-    public AttackLoader() {
+    public AttackLoader() throws IOException {
         super(ATTACK_JSONR_PATH);
     }
 

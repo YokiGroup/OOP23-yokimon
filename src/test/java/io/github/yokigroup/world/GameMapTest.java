@@ -1,10 +1,12 @@
 package io.github.yokigroup.world;
 
+import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.file.loader.TileLoader;
 import io.github.yokigroup.util.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,7 +16,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GameMapTest {
     private static final int WIDTH = 5;
     private static final int HEIGHT = 5;
-    private final TileLoader loader = new TileLoader();
+    private final TileLoader loader;
+
+    {
+        try {
+            loader = new TileLoader();
+        } catch (IOException e) {
+            throw new GameInitFailException(e);
+        }
+    }
+
     private GameMap map;
 
     @BeforeEach

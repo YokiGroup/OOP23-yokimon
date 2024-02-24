@@ -1,5 +1,6 @@
 package io.github.yokigroup.world;
 
+import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.file.loader.TileLoader;
 import io.github.yokigroup.file.loader.TileShapeLoader;
@@ -9,6 +10,7 @@ import io.github.yokigroup.world.gen.WFCWrapperImpl;
 import io.github.yokigroup.world.tile.Tile;
 import io.github.yokigroup.world.tile.TileBuilder;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -18,7 +20,16 @@ import java.util.stream.Collectors;
  */
 public class GameMapBuilderImpl implements GameMapBuilder {
     private final Map<Pair<Integer, Integer>, TileBuilder> tileMap;
-    private final TileLoader tileLoader = new TileLoader();
+    private final TileLoader tileLoader;
+
+    {
+        try {
+            tileLoader = new TileLoader();
+        } catch (IOException e) {
+            throw new GameInitFailException(e);
+        }
+    }
+
     private Pair<Integer, Integer> playerTileMapPosition;
     private Pair<Integer, Integer> mapDimensions;
 
@@ -56,7 +67,12 @@ public class GameMapBuilderImpl implements GameMapBuilder {
 
     @Override
     public final GameMap build(final MessageHandler handler) {
-        final TileShapeLoader loader = new TileShapeLoader(tileLoader);
+        final TileShapeLoader loader;
+        try {
+            loader = new TileShapeLoader(tileLoader);
+        } catch (IOException e) {
+            throw new GameInitFailException(e);
+        }
         final WFCWrapper wfc = new WFCWrapperImpl(this.mapDimensions, loader.getAll());
         final Map<Pair<Integer, Integer>, Tile> builtTiles = tileMap.entrySet().stream()
                 .map(a -> new Pair<>(a.getKey(), a.getValue().build(handler)))

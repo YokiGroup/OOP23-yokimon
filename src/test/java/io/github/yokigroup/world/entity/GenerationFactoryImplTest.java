@@ -1,10 +1,12 @@
 package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.battle.yokimon.Yokimon;
+import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -43,7 +45,12 @@ class GenerationFactoryImplTest {
 
     @Test
     void  bossParty() {
-        final YokimonLoader loader = new YokimonLoader();
+        final YokimonLoader loader;
+        try {
+            loader = new YokimonLoader();
+        } catch (IOException e) {
+            throw new GameInitFailException(e);
+        }
         final Yokimon son = loader.load(ID);
         son.setLevel(BOSS_LEV);
         assertTrue(generator.getBossParty().contains(son));

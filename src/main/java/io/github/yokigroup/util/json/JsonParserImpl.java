@@ -16,12 +16,10 @@ public final class JsonParserImpl implements JsonParser {
      * Constructs a JsonParseImpl.
      * @param resourcePath file to open and parse, located on the classpath by the SystemClassLoader
      */
-    public JsonParserImpl(final String resourcePath) {
+    public JsonParserImpl(final String resourcePath) throws IOException {
         Objects.requireNonNull(resourcePath);
         try (var is = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath)) {
             doc = JsonPath.parse(is);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
