@@ -3,6 +3,9 @@ package io.github.yokigroup.event.submodule.abs;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 
+/**
+ * Submodule tasked with receiving and handling the various conditions that lead to the game's end.
+ */
 public abstract class GameEndSubmoduleAbs extends Submodule {
 
     /**
