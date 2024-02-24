@@ -14,7 +14,6 @@ import io.github.yokigroup.view.notification.Notification;
 import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.GameMap;
-import javafx.application.Platform;
 
 /**
  * Implementation of {@link GameEndSubmoduleAbs}.
@@ -77,7 +76,6 @@ public final class GameEndSubmodule extends GameEndSubmoduleAbs {
 
     @Override
     public void killGame() {
-        Platform.exit();
         gameEnded = true;
     }
 
