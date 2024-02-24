@@ -80,14 +80,14 @@ public final class FightSubmodule extends FightSubmoduleAbs {
         return Optional.ofNullable(lastAnnouncedFight);
     }
 
-    private Fight getLastAnnouncedFightOrThrowException() throws IllegalStateException {
+    private Fight getLastAnnouncedFightOrThrowException() {
         return getLastAnnouncedFight().orElseThrow(
                 () -> new IllegalStateException("Player is not involved in a fight")
         );
     }
 
     @Override
-    public void nextAttack() throws IllegalStateException {
+    public void nextAttack() {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
         final List<Attack> attacks = currentFight.getCurrentMyYokimon().getAttacks();
         final int nextAttackIndex = (attacks.indexOf(currentFight.getSelectedAttack()) + 1) % attacks.size();
@@ -96,7 +96,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
     }
 
     @Override
-    public void prevAttack() throws IllegalStateException {
+    public void prevAttack() {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
         final List<Attack> attacks = currentFight.getCurrentMyYokimon().getAttacks();
         int nextAttackIndex = attacks.indexOf(currentFight.getSelectedAttack()) - 1;
