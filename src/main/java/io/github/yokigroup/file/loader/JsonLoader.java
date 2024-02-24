@@ -6,13 +6,15 @@ import io.github.yokigroup.util.json.JsonParser;
 import io.github.yokigroup.util.json.JsonParserImpl;
 import io.github.yokigroup.util.json.PathNotFoundException;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
 /**
- * @param <T>
+ * Base class used for instantiating objects from the json files they are contained in.
+ * @param <T> type of object produced by the loader
  */
-public abstract class JsonLoader<T> {
+class JsonLoader<T> {
     private final JsonParser parser;
 
     /**
@@ -56,7 +58,7 @@ public abstract class JsonLoader<T> {
     /**
      * @param relativePath path of json file relative to {@code JsonParser.ROOT}
      */
-    public JsonLoader(final String relativePath) {
+    public JsonLoader(final String relativePath) throws IOException {
         this.parser = new JsonParserImpl(JsonParser.ROOT + relativePath);
     }
 

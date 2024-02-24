@@ -11,20 +11,21 @@ import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.world.GameMap;
 
 import java.util.Locale;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+/**
+ * Observer that monitors fight changes and issues draw requests accordingly.
+ */
 public final class FightObserver extends ViewObserver<Fight> {
     private static final String YOKIMON_SPRITES_ROOT_DIR = "io/github/yokigroup/view/textures/yokimons/";
     private String currentPlayerYokimonName;
     private String currentEnemyYokimonName;
-    private final Consumer<String> setPlayerYokimonLabel;
-    private final Consumer<String> setEnemyYokimonLabel;
 
+    /**
+     * @param painter painter to issue draw requests to
+     */
     public FightObserver(final Painter painter) {
         super(painter);
-        setPlayerYokimonLabel = painter::setPlayerYokimonLabel;
-        setEnemyYokimonLabel = painter::setEnemyYokimonLabel;
     }
 
     private void drawYokimons(final DrawQueue drawQueue, final Fight fight) {
@@ -62,13 +63,15 @@ public final class FightObserver extends ViewObserver<Fight> {
     }
 
     private void drawYokimonStats(final Fight fight) {
-        setEnemyYokimonLabel.accept(getYokimonHPStr(fight.getCurrentOpponent()));
-        setPlayerYokimonLabel.accept(getYokimonHPStr(fight.getCurrentMyYokimon()));
+        final Painter painter = painter();
+        painter.setEnemyYokimonLabel(getYokimonHPStr(fight.getCurrentOpponent()));
+        painter.setPlayerYokimonLabel(getYokimonHPStr(fight.getCurrentMyYokimon()));
     }
 
     private void unDrawYokimonStats() {
-        setEnemyYokimonLabel.accept("");
-        setPlayerYokimonLabel.accept("");
+        final Painter painter = painter();
+        painter.setEnemyYokimonLabel("");
+        painter.setPlayerYokimonLabel("");
     }
 
     @Override

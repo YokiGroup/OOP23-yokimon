@@ -1,5 +1,6 @@
 package io.github.yokigroup.world.gen;
 
+import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.file.loader.TileShapeLoader;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.world.Direction;
@@ -7,6 +8,7 @@ import io.github.yokigroup.world.tile.TileBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,7 +18,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class WFCWrapperTest {
     private static final int WIDTH = 5;
     private static final int HEIGHT = 5;
-    private static final TileShapeLoader TILE_SHAPE_LOADER = new TileShapeLoader();
+    private static final TileShapeLoader TILE_SHAPE_LOADER;
+
+    static {
+        try {
+            TILE_SHAPE_LOADER = new TileShapeLoader();
+        } catch (IOException e) {
+            throw new GameInitFailException(e);
+        }
+    }
+
     private Set<TileBuilder> allTiles;
     private WFCWrapper wfcWrapper;
 

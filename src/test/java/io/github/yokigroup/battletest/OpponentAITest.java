@@ -5,10 +5,14 @@ import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
 import io.github.yokigroup.battle.opponentai.OpponentAI;
 import io.github.yokigroup.battle.opponentai.DummyImplOpponentAI;
 import io.github.yokigroup.battle.opponentai.FullImplOpponentAI;
+import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -22,8 +26,18 @@ final class OpponentAITest {
     private static final int ATK_ID1 = 18;
     private static final int ATK_ID2 = 13;
     private Yokimon y1, y2;
-    private final YokimonLoader yokimonLoader = new YokimonLoader();
-    private final AttackLoader attackLoader = new AttackLoader();
+    private final YokimonLoader yokimonLoader;
+    private final AttackLoader attackLoader;
+
+    {
+        try {
+            attackLoader = new AttackLoader();
+            yokimonLoader = new YokimonLoader();
+        } catch (IOException e) {
+            throw new GameInitFailException(e);
+        }
+    }
+
 
     /**
      * Initialises some Yokimons meant for testing.

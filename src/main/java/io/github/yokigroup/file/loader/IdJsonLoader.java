@@ -1,5 +1,6 @@
 package io.github.yokigroup.file.loader;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public abstract class IdJsonLoader<T> extends JsonLoader<T> {
     /**
      * @param relativePath path of json file relative to {@code JsonParser.ROOT}
      */
-    public IdJsonLoader(final String relativePath) {
+    public IdJsonLoader(final String relativePath) throws IOException {
         super(relativePath);
     }
 

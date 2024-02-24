@@ -1,10 +1,12 @@
 package io.github.yokigroup.battletest;
 
+import java.io.IOException;
 import java.util.List;
 import io.github.yokigroup.battle.xpcalculator.FullImplXPCalculator;
 import io.github.yokigroup.battle.xpcalculator.XPCalculator;
 import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.battle.xpcalculator.DummyImplXPCalculator;
+import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +27,15 @@ final class XPCalcTest {
     private static final int RAND_LEVEL = 12;
 
     private Yokimon tengu, oni, nekomata;
-    private final YokimonLoader yokimonLoader = new YokimonLoader();
+    private final YokimonLoader yokimonLoader;
+
+    {
+        try {
+            yokimonLoader = new YokimonLoader();
+        } catch (IOException e) {
+            throw new GameInitFailException(e);
+        }
+    }
 
     /**
      * Initialises some Yokimons meant for testing.

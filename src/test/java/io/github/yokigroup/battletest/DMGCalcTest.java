@@ -6,10 +6,13 @@ import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
 import io.github.yokigroup.battle.dmgcalculator.DmgCalculator;
 import io.github.yokigroup.battle.dmgcalculator.FullImplDmgCalculator;
 import io.github.yokigroup.battle.dmgcalculator.MultiplierDmgCalculator;
+import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,9 +31,17 @@ class DMGCalcTest {
     private static final short EXP_VAL_FULL4 = 11;
     private Yokimon y1, y2;
     private Attack a1, a2;
-    private final YokimonLoader yokimonLoader = new YokimonLoader();
-    private final AttackLoader attackLoader = new AttackLoader();
+    private final YokimonLoader yokimonLoader;
+    private final AttackLoader attackLoader;
 
+    {
+        try {
+            yokimonLoader = new YokimonLoader();
+            attackLoader = new AttackLoader();
+        } catch (IOException e) {
+            throw new GameInitFailException(e);
+        }
+    }
 
     /**
      * Instantiates variables for test.

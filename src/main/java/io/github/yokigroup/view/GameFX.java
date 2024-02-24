@@ -2,11 +2,13 @@ package io.github.yokigroup.view;
 
 import io.github.yokigroup.core.GameLogicImpl;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.GameEndSubmodule;
 import io.github.yokigroup.event.submodule.InputSubmodule;
 import io.github.yokigroup.view.render.painter.CanvasPainter;
 import io.github.yokigroup.view.render.painter.Painter;
 import io.github.yokigroup.view.render.observer.ModelObserverImpl;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
@@ -79,15 +81,15 @@ public final class GameFX extends Application {
         final AnchorPane anchorPane = (AnchorPane) borderPane.getTop();
         final Label eventLabel = (Label) borderPane.getBottom();
         final Label playerYokimonLabel = (Label) anchorPane.getChildren().stream()
-                .filter(n -> n.getId().equals("playerYokimonLabel")).findFirst().orElseThrow();
+                .filter(n -> "playerYokimonLabel".equals(n.getId())).findFirst().orElseThrow();
         final Label enemyYokimonLabel = (Label) anchorPane.getChildren().stream()
-                .filter(n -> n.getId().equals("enemyYokimonLabel")).findFirst().orElseThrow();
+                .filter(n -> "enemyYokimonLabel".equals(n.getId())).findFirst().orElseThrow();
 
         final Painter painter = new CanvasPainter(gameCanvas
                 .getGraphicsContext2D(), eventLabel, playerYokimonLabel, enemyYokimonLabel);
 
         final ModelObserverImpl modelObs = new ModelObserverImpl(painter);
-        final GameLogicImpl gameThread = new GameLogicImpl(modelObs, painter);
+        final GameLogicImpl gameThread = new GameLogicImpl(modelObs, painter, Platform::exit);
         final MessageHandler handler = gameThread.getMessageHandler();
 
         scene.setOnKeyPressed(
@@ -109,7 +111,7 @@ public final class GameFX extends Application {
         stage.fullScreenProperty().addListener(resizeListener);
         stage.maximizedProperty().addListener(resizeListener);
 
-        stage.setOnCloseRequest(a -> gameThread.stopGame());
+        stage.setOnCloseRequest(a -> handler.handle(GameEndSubmodule.class, GameEndSubmodule::killGame));
 
         final InputStream iconStream = ClassLoader
                 .getSystemResourceAsStream(ROOT_RESOUCE_PATH + "icon.png");

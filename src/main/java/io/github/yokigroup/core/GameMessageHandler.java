@@ -12,13 +12,14 @@ import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 import io.github.yokigroup.event.MessageHandler;
 
-import io.github.yokigroup.event.Updateable;
+import io.github.yokigroup.event.Updatable;
 import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.view.render.observer.NOPModelObserver;
 
 import java.lang.reflect.InvocationTargetException;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -49,12 +50,14 @@ public class GameMessageHandler implements MessageHandler {
 
     /**
      * creates a {@link SubmoduleMap} with the given instantiated submodules.
-     * @param submoduleTypes
+     * @param submoduleTypes set of submodules to initialize
+     * @param modelObs model observer to instantiate the submodules with
      * @throws GameInitFailException if the initialization did not succeed
-     * @return
      */
     protected final void instantiateSubmodules(final ModelObserver modelObs,
                                                        final Set<Class<? extends Submodule>> submoduleTypes) {
+        Objects.requireNonNull(modelObs);
+        Objects.requireNonNull(submoduleTypes);
         final SubmoduleMap retMap = new SubmoduleMapImpl();
         submoduleTypes.forEach(s -> {
             try {
@@ -100,7 +103,7 @@ public class GameMessageHandler implements MessageHandler {
     }
 
     @Override
-    public <T extends Submodule> void handle(final Set<Class<T>> subModuleTypes, final Consumer<T> handler) {
+    public final <T extends Submodule> void handle(final Set<Class<T>> subModuleTypes, final Consumer<T> handler) {
         subModuleTypes.forEach(smt -> handle(smt, handler));
     }
 
@@ -115,6 +118,6 @@ public class GameMessageHandler implements MessageHandler {
 
     @Override
     public final void updateSubmodules() {
-        subModules.subModuleSet().forEach(Updateable::update);
+        subModules.subModuleSet().forEach(Updatable::update);
     }
 }

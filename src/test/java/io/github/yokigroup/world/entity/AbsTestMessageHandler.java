@@ -139,10 +139,6 @@ public final class AbsTestMessageHandler extends GameMessageHandler {
             return false;
         }
 
-        @Override
-        protected void updateTile() {
-
         }
 
-    }
 }

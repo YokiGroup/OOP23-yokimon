@@ -4,8 +4,10 @@ import io.github.yokigroup.battle.attack.Attack;
 import io.github.yokigroup.battle.attack.Color;
 import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.battle.yokimon.YokimonImpl;
+import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.util.json.JsonParser;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +27,7 @@ public final class YokimonLoader extends IdJsonLoader<Yokimon> {
     /**
      * Class constructor.
      */
-    public YokimonLoader() {
+    public YokimonLoader() throws IOException {
         super(YOKIMON_JSON_PATH);
     }
 
@@ -40,8 +42,13 @@ public final class YokimonLoader extends IdJsonLoader<Yokimon> {
 
     @Override
     public Yokimon load(final int id) {
+        final AttackLoader attackLoader;
+        try {
+            attackLoader = new AttackLoader();
+        } catch (IOException e) {
+            throw new GameInitFailException(e);
+        }
         final JsonParser parser = getParser();
-        final AttackLoader attackLoader = new AttackLoader();
 
         final String name = parser.read(String.format(YOKI_NAME_JPATHF, id));
         final Color color = Color.valueOf(parser.read(String.format(YOKI_COLOR_JPATHF, id)));

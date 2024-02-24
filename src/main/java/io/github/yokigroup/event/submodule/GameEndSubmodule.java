@@ -15,6 +15,9 @@ import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.GameMap;
 
+/**
+ * Implementation of {@link GameEndSubmoduleAbs}.
+ */
 public final class GameEndSubmodule extends GameEndSubmoduleAbs {
     private final Publisher<SpriteData> deathScreenPub = new PublisherImpl<>();
     private final Publisher<SpriteData> victoryScreenPub = new PublisherImpl<>();
@@ -35,6 +38,7 @@ public final class GameEndSubmodule extends GameEndSubmoduleAbs {
                     gameMapVec,
                     -100
             );
+    private boolean gameEnded = false;
 
     /**
      * @param handler  MessageHandler to call in order to query other submodules.
@@ -63,6 +67,16 @@ public final class GameEndSubmodule extends GameEndSubmoduleAbs {
     public void triggerBattleWithNoYokimonsGO() {
         comunicateStateChange(GameStateSubmoduleAbs.GameState.GAMEOVER);
         notificationPub.notifyObservers(new DeathNotificationImpl(DeathNotification.Cause.UNPREPARED_FOR_BATTLE));
+    }
+
+    @Override
+    public boolean gameEnded() {
+        return gameEnded;
+    }
+
+    @Override
+    public void killGame() {
+        gameEnded = true;
     }
 
     @Override

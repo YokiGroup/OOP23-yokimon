@@ -6,6 +6,8 @@ import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,9 +18,17 @@ class YokimonImplTest {
     private static final int DEFAULT_LEVEL = 7;
     private static final int NUM_MOVES = 3;
     private static final int DEFAULT_ID = 1;
-    private static final YokimonLoader LOADER = new YokimonLoader();
-    private static final AttackLoader LOADER_ATTACK = new AttackLoader();
+    private static final YokimonLoader LOADER;
+    private static final AttackLoader LOADER_ATTACK;
 
+    static {
+        try {
+            LOADER = new YokimonLoader();
+            LOADER_ATTACK = new AttackLoader();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Test
     void allStats() {

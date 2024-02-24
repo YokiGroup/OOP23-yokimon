@@ -2,12 +2,14 @@ package io.github.yokigroup.battletest;
 
 import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.battle.fight.FightImpl;
+import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import io.github.yokigroup.battle.yokimon.Yokimon;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,8 +27,17 @@ final class FightTest {
     private Fight toTest;
     private Yokimon tengu;
     private Yokimon oni;
-    private final YokimonLoader yokimonLoader = new YokimonLoader();
-    private final AttackLoader attackLoader = new AttackLoader();
+    private final YokimonLoader yokimonLoader;
+    private final AttackLoader attackLoader;
+
+    {
+        try {
+            yokimonLoader = new YokimonLoader();
+            attackLoader = new AttackLoader();
+        } catch (IOException e) {
+            throw new GameInitFailException(e);
+        }
+    }
 
     /**
      * Initialises the fight with some Yokimons meant for testing.

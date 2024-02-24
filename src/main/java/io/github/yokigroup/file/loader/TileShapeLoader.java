@@ -6,6 +6,7 @@ import io.github.yokigroup.world.gen.TileShape;
 import io.github.yokigroup.world.gen.TileShapeImpl;
 import io.github.yokigroup.world.tile.TileBuilder;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
     /**
      * Constructor.
      */
-    public TileShapeLoader() {
+    public TileShapeLoader() throws IOException {
         this(new TileLoader());
     }
 
@@ -32,7 +33,7 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
      *
      * @param loader loader to use
      */
-    public TileShapeLoader(final TileLoader loader) {
+    public TileShapeLoader(final TileLoader loader) throws IOException {
         super(TILE_JSON_RPATH);
         Objects.requireNonNull(loader);
         this.tileLoader = loader;
