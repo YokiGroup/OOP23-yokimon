@@ -38,41 +38,29 @@ public final class GameFX extends Application {
      */
     public static final Rectangle2D SCREEN_SIZE = Screen.getPrimary().getBounds();
 
-    private static class GameWindowResizeListener<T> implements ChangeListener<T> {
-        private final double ratio;
-        private final Canvas gameCanvas;
-        private final Scene gameScene;
-        private final StackPane stackPane;
-
-
-        GameWindowResizeListener(final Scene gameScene, final Canvas gameCanvas, final StackPane stackPane, final double ratio) {
-            this.ratio = ratio;
-            this.gameCanvas = gameCanvas;
-            this.gameScene = gameScene;
-            this.stackPane = stackPane;
-        }
-
+    private record GameWindowResizeListener<T>(Scene gameScene, Canvas gameCanvas, StackPane stackPane,
+                                               double ratio) implements ChangeListener<T> {
         @Override
-        public void changed(final ObservableValue<? extends T> observableValue, final T t, final T t1) {
-            final double paneWidth = gameScene.getWidth();
-            final double paneHeight = gameScene.getHeight();
-            final double currentRatio = paneWidth / paneHeight;
-            double newHeight, newWidth;
+            public void changed(final ObservableValue<? extends T> observableValue, final T t, final T t1) {
+                final double paneWidth = gameScene.getWidth();
+                final double paneHeight = gameScene.getHeight();
+                final double currentRatio = paneWidth / paneHeight;
+                double newHeight, newWidth;
 
-            if (currentRatio > ratio) { // width has to be truncated
-                newHeight = paneHeight;
-                newWidth = paneHeight * ratio;
-            } else { // height has to be truncated
-                newHeight = paneWidth / ratio;
-                newWidth = paneWidth;
+                if (currentRatio > ratio) { // width has to be truncated
+                    newHeight = paneHeight;
+                    newWidth = paneHeight * ratio;
+                } else { // height has to be truncated
+                    newHeight = paneWidth / ratio;
+                    newWidth = paneWidth;
+                }
+                gameCanvas.setWidth(newWidth);
+                gameCanvas.setHeight(newHeight);
+                stackPane.setMinSize(newWidth, newHeight);
+                stackPane.setPrefSize(newWidth, newHeight);
+                stackPane.setMaxSize(newWidth, newHeight);
             }
-            gameCanvas.setWidth(newWidth);
-            gameCanvas.setHeight(newHeight);
-            stackPane.setMinSize(newWidth, newHeight);
-            stackPane.setPrefSize(newWidth, newHeight);
-            stackPane.setMaxSize(newWidth, newHeight);
         }
-    }
 
     @Override
     public void start(final Stage stage) throws Exception {
