@@ -1,6 +1,6 @@
 package io.github.yokigroup.view.notification;
 
-public class DeathNotificationImpl implements DeathNotification {
+public final class DeathNotificationImpl implements DeathNotification {
     private final Cause causeOfDeath;
 
     public DeathNotificationImpl(final Cause causeOfDeath) {
