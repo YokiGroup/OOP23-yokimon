@@ -27,6 +27,16 @@ public abstract class GameEndSubmoduleAbs extends Submodule {
     public abstract void triggerBattleWithNoYokimonsGO();
 
     /**
+     * @return true if the game has ended
+     */
+    public abstract boolean gameEnded();
+
+    /**
+     * called when the player is ready to quit the game after the game over.
+     */
+    public abstract void killGame();
+
+    /**
      * Triggers a victory.
      */
     public abstract void triggerVictory();

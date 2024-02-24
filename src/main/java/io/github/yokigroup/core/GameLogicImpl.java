@@ -1,6 +1,8 @@
 package io.github.yokigroup.core;
 
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.submodule.GameEndSubmodule;
+import io.github.yokigroup.event.submodule.abs.GameEndSubmoduleAbs;
 import io.github.yokigroup.view.render.painter.DrawCallable;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 
@@ -38,7 +40,7 @@ public final class GameLogicImpl extends Thread implements GameLogic {
     }
 
     private void gameLoop() {
-        while (running) {
+        while (!handler.handle(GameEndSubmodule.class, GameEndSubmodule::gameEnded)) {
             try {
                 Thread.sleep(SLEEP_TIME);
             } catch (InterruptedException e) {
