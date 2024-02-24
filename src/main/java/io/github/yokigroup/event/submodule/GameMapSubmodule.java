@@ -53,6 +53,12 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     }
 
     @Override
+    public void deactivate() {
+        super.deactivate();
+        gameMap.getTileAt(playerTilePos).getEntities().forEach(Updateable::resetDTime);
+    }
+
+    @Override
     public int getPlayerDistanceFromHome() {
         return Math.abs(playerTilePos.x() - homeTilePos.x()) + Math.abs(playerTilePos.y() - homeTilePos.y());
     }
@@ -70,6 +76,8 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
         }
         return success;
     }
+
+
 
     private void publishEntitySpriteData() {
         entityPub.notifyObservers(
