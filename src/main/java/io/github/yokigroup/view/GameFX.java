@@ -41,21 +41,21 @@ public final class GameFX extends Application {
     private static class GameWindowResizeListener<T> implements ChangeListener<T> {
         private final double ratio;
         private final Canvas gameCanvas;
-        private final Stage gameStage;
+        private final Scene gameScene;
         private final StackPane stackPane;
 
 
-        GameWindowResizeListener(final Stage gameStage, final Canvas gameCanvas, final StackPane stackPane, final double ratio) {
+        GameWindowResizeListener(final Scene gameScene, final Canvas gameCanvas, final StackPane stackPane, final double ratio) {
             this.ratio = ratio;
             this.gameCanvas = gameCanvas;
-            this.gameStage = gameStage;
+            this.gameScene = gameScene;
             this.stackPane = stackPane;
         }
 
         @Override
         public void changed(final ObservableValue<? extends T> observableValue, final T t, final T t1) {
-            final double paneWidth = gameStage.getWidth();
-            final double paneHeight = gameStage.getHeight();
+            final double paneWidth = gameScene.getWidth();
+            final double paneHeight = gameScene.getHeight();
             final double currentRatio = paneWidth / paneHeight;
             double newHeight, newWidth;
 
@@ -66,8 +66,6 @@ public final class GameFX extends Application {
                 newHeight = paneWidth / ratio;
                 newWidth = paneWidth;
             }
-            gameCanvas.minWidth(newWidth);
-            gameCanvas.minHeight(newHeight);
             gameCanvas.setWidth(newWidth);
             gameCanvas.setHeight(newHeight);
             stackPane.setMinSize(newWidth, newHeight);
@@ -117,7 +115,7 @@ public final class GameFX extends Application {
         gameThread.start();
 
         final GameWindowResizeListener<Object> resizeListener =
-                new GameWindowResizeListener<>(stage, gameCanvas, stackPane, ratio);
+                new GameWindowResizeListener<>(scene, gameCanvas, stackPane, ratio);
         stage.widthProperty().addListener(resizeListener);
         stage.heightProperty().addListener(resizeListener);
         stage.fullScreenProperty().addListener(resizeListener);
