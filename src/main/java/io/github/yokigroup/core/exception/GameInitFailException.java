@@ -1,9 +1,14 @@
 package io.github.yokigroup.core.exception;
 
+import java.io.Serial;
+
 /**
  * Exception thrown if the game initialization logic did not go as planned.
  */
 public class GameInitFailException extends RuntimeException {
+    @Serial
+    private static final long serialVersionUID = 56465165;
+
     /** Constructs a new game init fail exception with the specified cause and a
      * detail message of {@code (cause==null ? null : cause.toString())}
      * (which typically contains the class and detail message of

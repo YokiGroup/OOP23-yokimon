@@ -1,9 +1,13 @@
 package io.github.yokigroup.util.json;
 
+import java.io.Serial;
+
 /**
  * Thrown when a json file is not structured correctly.
  */
 public class InvalidJsonException extends RuntimeException {
+    @Serial
+    private static final long serialVersionUID = 402340;
 
     /**
      * Constructs a new runtime exception with the specified cause.
