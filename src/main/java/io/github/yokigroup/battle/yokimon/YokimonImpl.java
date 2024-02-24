@@ -129,9 +129,7 @@ public class YokimonImpl implements Yokimon {
     }
 
     @Override
-    public final Map<Stats, Integer> getAllStats() {
-        return Map.copyOf(this.stats);
-    }
+    public final Map<Stats, Integer> getAllStats() { return Map.copyOf(this.stats); }
 
     @Override
     public final void setStats(final Map<Stats, Integer> newStats) {
