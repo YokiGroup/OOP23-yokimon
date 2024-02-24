@@ -30,7 +30,7 @@ import java.util.function.Consumer;
 /**
  * Main JavaFX Application entry.
  */
-public class GameFX extends Application {
+public final class GameFX extends Application {
     private static final String ROOT_RESOUCE_PATH = "io/github/yokigroup/view/";
 
     /**
