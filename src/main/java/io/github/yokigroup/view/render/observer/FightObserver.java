@@ -16,7 +16,8 @@ import java.util.stream.Collectors;
 
 public final class FightObserver extends ViewObserver<Fight> {
     private static final String YOKIMON_SPRITES_ROOT_DIR = "io/github/yokigroup/view/textures/yokimons/";
-    private String currentPlayerYokimonName = null, currentEnemyYokimonName = null;
+    private String currentPlayerYokimonName;
+    private String currentEnemyYokimonName;
     private final Consumer<String> setPlayerYokimonLabel;
     private final Consumer<String> setEnemyYokimonLabel;
 
