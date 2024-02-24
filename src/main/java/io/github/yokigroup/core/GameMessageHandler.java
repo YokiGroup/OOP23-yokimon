@@ -49,12 +49,15 @@ public class GameMessageHandler implements MessageHandler {
 
     /**
      * creates a {@link SubmoduleMap} with the given instantiated submodules.
-     * @param submoduleTypes
+     * @param submoduleTypes set of submodules to initialize
+     * @param modelObs
      * @throws GameInitFailException if the initialization did not succeed
      * @return
      */
     protected final void instantiateSubmodules(final ModelObserver modelObs,
                                                        final Set<Class<? extends Submodule>> submoduleTypes) {
+        Objects.requireNonNull(modelObs);
+        Objects.requireNonNull(submoduleTypes);
         final SubmoduleMap retMap = new SubmoduleMapImpl();
         submoduleTypes.forEach(s -> {
             try {
