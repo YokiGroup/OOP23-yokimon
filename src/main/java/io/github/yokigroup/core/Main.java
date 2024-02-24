@@ -17,7 +17,7 @@ final class Main {
      * @param args arguments passed to the program
      */
     public static void main(final String[] args) {
-        Main mainClass = new Main();
+        final Main mainClass = new Main();
         mainClass.gameWindow.create(args);
     }
 }
