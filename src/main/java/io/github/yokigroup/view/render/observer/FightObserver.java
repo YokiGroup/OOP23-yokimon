@@ -14,6 +14,9 @@ import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+/**
+ * Observer that monitors fight changes and issues draw requests accordingly.
+ */
 public final class FightObserver extends ViewObserver<Fight> {
     private static final String YOKIMON_SPRITES_ROOT_DIR = "io/github/yokigroup/view/textures/yokimons/";
     private String currentPlayerYokimonName;
@@ -21,6 +24,9 @@ public final class FightObserver extends ViewObserver<Fight> {
     private final Consumer<String> setPlayerYokimonLabel;
     private final Consumer<String> setEnemyYokimonLabel;
 
+    /**
+     * @param painter painter to issue draw requests to
+     */
     public FightObserver(final Painter painter) {
         super(painter);
         setPlayerYokimonLabel = painter::setPlayerYokimonLabel;
