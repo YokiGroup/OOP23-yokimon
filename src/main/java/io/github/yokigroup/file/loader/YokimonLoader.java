@@ -42,13 +42,13 @@ public final class YokimonLoader extends IdJsonLoader<Yokimon> {
 
     @Override
     public Yokimon load(final int id) {
-        final JsonParser parser = getParser();
         final AttackLoader attackLoader;
         try {
             attackLoader = new AttackLoader();
         } catch (IOException e) {
             throw new GameInitFailException(e);
         }
+        final JsonParser parser = getParser();
 
         final String name = parser.read(String.format(YOKI_NAME_JPATHF, id));
         final Color color = Color.valueOf(parser.read(String.format(YOKI_COLOR_JPATHF, id)));
