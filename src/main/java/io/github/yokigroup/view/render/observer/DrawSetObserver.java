@@ -8,7 +8,7 @@ import io.github.yokigroup.view.render.RenderState;
 import java.util.Set;
 
 
-public class DrawSetObserver extends ViewObserver<Pair<RenderState, Set<SpriteData>>> {
+public final class DrawSetObserver extends ViewObserver<Pair<RenderState, Set<SpriteData>>> {
 
     public DrawSetObserver(final Painter painter) {
         super(painter);
