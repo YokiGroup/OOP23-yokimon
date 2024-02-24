@@ -14,11 +14,12 @@ import java.util.Set;
 /**
  * Submodule containing information about the game's current state, and deactivates submodules not \
  * inherent to the current state.
+ *
  * @author Giovanni Paone
  */
 public final class GameStateSubmodule extends GameStateSubmoduleAbs {
     private GameState currentState = GameState.WORLD;
-    private final Publisher<RenderState> renderStatePublisher  = new PublisherImpl<>();
+    private final Publisher<RenderState> renderStatePublisher = new PublisherImpl<>();
     private final Map<GameState, Set<Class<? extends Submodule>>> submoduleStateMap = Map.of(
             GameState.FIGHT, Set.of(
             ),
@@ -33,7 +34,7 @@ public final class GameStateSubmodule extends GameStateSubmoduleAbs {
     );
 
     /**
-     * @param handler         MessageHandler to call in order to query other submodules.
+     * @param handler  MessageHandler to call in order to query other submodules.
      * @param modelObs {@link ModelObserver} used to instantiate the submodule
      */
     public GameStateSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
@@ -64,7 +65,7 @@ public final class GameStateSubmodule extends GameStateSubmoduleAbs {
                     case WORLD -> RenderState.WORLD;
                     case FIGHT -> RenderState.FIGHT;
                     case GAMEOVER -> RenderState.DEATH;
-                    case VICTORY ->  RenderState.VICTORY;
+                    case VICTORY -> RenderState.VICTORY;
                 }
         );
     }
@@ -75,6 +76,6 @@ public final class GameStateSubmodule extends GameStateSubmoduleAbs {
     }
 
     @Override
-    protected void updateCode(double delta) {
+    protected void updateCode(final double delta) {
     }
 }

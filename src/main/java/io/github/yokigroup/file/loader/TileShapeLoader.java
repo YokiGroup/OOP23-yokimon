@@ -30,6 +30,7 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
 
     /**
      * Instance TileShapeLoader with an existing TileLoader.
+     *
      * @param loader loader to use
      */
     public TileShapeLoader(final TileLoader loader) {
@@ -66,7 +67,7 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
             });
         }
 
-        for (final var tileEntry: tiles.entrySet()) {
+        for (final var tileEntry : tiles.entrySet()) {
             shapes.add(new TileShapeImpl(tileEntry.getValue(), tileEntry.getKey()));
         }
 

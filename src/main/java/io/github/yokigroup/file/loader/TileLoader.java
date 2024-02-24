@@ -44,8 +44,8 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
         final String tileHitboxDimensionsRPATH = ".dimensions";
         final String tileHitboxRadiusRpath = ".radius";
         final String formattedHitboxJPATH = String.format(tileHitboxTypeJPATHF, id == -1 ? HOME : String.valueOf(id), index);
-        final String type = parser.read(formattedHitboxJPATH  +  tileHitboxTypeRPATH);
-        final Vector2 pos = getVector2(formattedHitboxJPATH  +  tileHitboxPositionRPATH);
+        final String type = parser.read(formattedHitboxJPATH + tileHitboxTypeRPATH);
+        final Vector2 pos = getVector2(formattedHitboxJPATH + tileHitboxPositionRPATH);
 
         return switch (type) {
             case "rect" -> {

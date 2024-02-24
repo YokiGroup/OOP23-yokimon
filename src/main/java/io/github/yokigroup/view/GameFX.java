@@ -25,7 +25,6 @@ import javafx.stage.Stage;
 
 import java.io.InputStream;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -90,10 +89,13 @@ public class GameFX extends Application {
         final BorderPane borderPane = ((BorderPane) stackPaneList.get(1));
         final AnchorPane anchorPane = (AnchorPane) borderPane.getTop();
         final Label eventLabel = (Label) borderPane.getBottom();
-        final Label playerYokimonLabel = (Label) anchorPane.getChildren().stream().filter(n -> n.getId().equals("playerYokimonLabel")).findFirst().orElseThrow();
-        final Label enemyYokimonLabel = (Label) anchorPane.getChildren().stream().filter(n -> n.getId().equals("enemyYokimonLabel")).findFirst().orElseThrow();
+        final Label playerYokimonLabel = (Label) anchorPane.getChildren().stream()
+                .filter(n -> n.getId().equals("playerYokimonLabel")).findFirst().orElseThrow();
+        final Label enemyYokimonLabel = (Label) anchorPane.getChildren().stream()
+                .filter(n -> n.getId().equals("enemyYokimonLabel")).findFirst().orElseThrow();
 
-        final Painter painter = new CanvasPainter(gameCanvas.getGraphicsContext2D(), eventLabel, playerYokimonLabel, enemyYokimonLabel);
+        final Painter painter = new CanvasPainter(gameCanvas
+                .getGraphicsContext2D(), eventLabel, playerYokimonLabel, enemyYokimonLabel);
 
         final ModelObserverImpl modelObs = new ModelObserverImpl(painter);
         final GameLogicImpl gameThread = new GameLogicImpl(modelObs, painter);
@@ -111,7 +113,8 @@ public class GameFX extends Application {
         );
         gameThread.start();
 
-        final GameWindowResizeListener<Object> resizeListener = new GameWindowResizeListener<>(scene, gameCanvas, stackPane, ratio);
+        final GameWindowResizeListener<Object> resizeListener =
+                new GameWindowResizeListener<>(scene, gameCanvas, stackPane, ratio);
         stage.widthProperty().addListener(resizeListener);
         stage.heightProperty().addListener(resizeListener);
         stage.fullScreenProperty().addListener(resizeListener);
@@ -119,7 +122,8 @@ public class GameFX extends Application {
 
         stage.setOnCloseRequest(a -> gameThread.stopGame());
 
-        final InputStream iconStream = ClassLoader.getSystemResourceAsStream(ROOT_RESOUCE_PATH + "icon.png");
+        final InputStream iconStream = ClassLoader
+                .getSystemResourceAsStream(ROOT_RESOUCE_PATH + "icon.png");
         if (iconStream != null) {
             stage.getIcons().add(new Image(iconStream));
         }
@@ -130,6 +134,7 @@ public class GameFX extends Application {
 
     /**
      * Runs this view.
+     *
      * @param args String[]
      */
     public static void run(final String[] args) {

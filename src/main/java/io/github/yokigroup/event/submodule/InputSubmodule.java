@@ -63,7 +63,7 @@ public final class InputSubmodule extends InputSubmoduleAbs {
         return confirmed;
     }
 
-    private <T> void cycleUntilTrue(final List<Predicate<T>> predicates, T input) {
+    private <T> void cycleUntilTrue(final List<Predicate<T>> predicates, final T input) {
         for (var event : predicates) {
             if (event.test(input)) {
                 return;
@@ -129,6 +129,9 @@ public final class InputSubmodule extends InputSubmoduleAbs {
                 switch (e) {
                     case UP -> s.nextAttack();
                     case DOWN -> s.prevAttack();
+                    default -> {
+                        //FIXME
+                    }
                 }
             });
         });
@@ -159,6 +162,9 @@ public final class InputSubmodule extends InputSubmoduleAbs {
             case WORLD -> handlePlayerPositionChange(delta);
             case FIGHT -> handleFightInputs();
             case GAMEOVER, VICTORY -> handleGameFinishedInputs();
+            default -> {
+                //FIXME
+            }
         }
     }
 }
