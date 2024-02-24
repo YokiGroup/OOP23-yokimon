@@ -45,6 +45,9 @@ public final class AbsTestMessageHandler extends GameMessageHandler {
         );
     }
 
+    /**
+     * Constructor of this test class, instantiate ModelObserver and SubModules.
+     */
     public AbsTestMessageHandler() {
         this.instantiateSubmodules(new NOPModelObserver(), getSubmoduleTypes());
     }
