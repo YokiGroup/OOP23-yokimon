@@ -31,12 +31,11 @@ import java.util.function.Consumer;
  * @author Giovanni Paone
  */
 public final class FightSubmodule extends FightSubmoduleAbs {
-    private static Fight lastAnnouncedFight = null;
+    private Fight lastAnnouncedFight;
     private final Publisher<Fight> fightPub = new PublisherImpl<>();
     private final Publisher<SpriteData> backgroundPub = new PublisherImpl<>();
     private final Publisher<Notification> notificationPublisher = new PublisherImpl<>();
     private static final int LAST_PRIORITY = -100;
-    private final SpriteData battleBackground;
 
     /**
      * @param handler  MessageHandler to call in order to query other submodules.
@@ -49,7 +48,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
         modelObs.addSpritePublisher(RenderState.FIGHT, backgroundPub);
         modelObs.addNotificationPublisher(notificationPublisher);
         final Vector2 mapDim = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS);
-        battleBackground = new SpriteData(
+        final SpriteData battleBackground = new SpriteData(
                 "io/github/yokigroup/view/textures/tiles/battle-forest.png",
                 mapDim.scale(0.5),
                 mapDim,
@@ -101,7 +100,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
         final List<Attack> attacks = currentFight.getCurrentMyYokimon().getAttacks();
         int nextAttackIndex = attacks.indexOf(currentFight.getSelectedAttack()) - 1;
-        nextAttackIndex = nextAttackIndex < 0 ? (attacks.size() - 1) : nextAttackIndex;
+        nextAttackIndex = nextAttackIndex < 0 ? attacks.size() - 1 : nextAttackIndex;
         currentFight.selectAttack(attacks.get(nextAttackIndex));
         notificationPublisher.notifyObservers(new AttackSelectedNotificationImpl(currentFight.getSelectedAttack()));
     }
