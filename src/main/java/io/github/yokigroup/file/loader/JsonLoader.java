@@ -11,9 +11,10 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 /**
- * @param <T>
+ * Base class used for instantiating objects from the json files they are contained in.
+ * @param <T> type of object produced by the loader
  */
-public abstract class JsonLoader<T> {
+class JsonLoader<T> {
     private final JsonParser parser;
 
     /**
