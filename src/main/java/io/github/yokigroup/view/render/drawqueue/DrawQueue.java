@@ -3,11 +3,12 @@ package io.github.yokigroup.view.render.drawqueue;
 import io.github.yokigroup.view.render.drawable.SpriteData;
 
 import java.util.Collection;
+import java.util.stream.Stream;
 
 /**
  * Queue used to draw to the screen, drawing elements in ascending priority.
  */
-public interface DrawQueue extends DrawQueueReader {
+public interface DrawQueue {
     /**
      * @param sprite sprite to add to the draw queue
      */
@@ -32,5 +33,10 @@ public interface DrawQueue extends DrawQueueReader {
      * empties the queue.
      */
     void empty();
+
+    /**
+     * @return the draw queue's contents, in a stream format
+     */
+    Stream<SpriteData> stream();
 
 }
