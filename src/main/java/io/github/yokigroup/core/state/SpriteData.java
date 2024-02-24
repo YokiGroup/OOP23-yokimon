@@ -7,11 +7,11 @@ import io.github.yokigroup.world.GameMap;
 /**
  * Record for storing sprites.
  *
- * @param spriteURL
- * @param position
- * @param dim
- * @param priority
- * @param flipped
+ * @param spriteURL String
+ * @param position Vector2
+ * @param dim Vector2
+ * @param priority int
+ * @param flipped boolean
  */
 public record SpriteData(String spriteURL, Vector2 position, Vector2 dim, int priority, boolean flipped) {
     private static final Vector2 TILE_DIM = new Vector2Impl(GameMap.TILE_DIMENSIONS.x(), GameMap.TILE_DIMENSIONS.y());

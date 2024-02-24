@@ -19,6 +19,7 @@ public final class AttackLoader extends IdJsonLoader<Attack> {
 
     /**
      * Constructor for AttackLoader.
+     * @throws
      */
     public AttackLoader() throws IOException {
         super(ATTACK_JSONR_PATH);

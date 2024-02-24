@@ -92,7 +92,7 @@ public class GameMessageHandler implements MessageHandler {
      *
      * @param subModuleTypes type of the submodule called in play ...
      * @param handler handler function to determine what to do with the submodule ...
-     * @param <T>
+     * @param <T> Parameter which extends Submodule
      */
     @Override
     public final <T extends Submodule> void handle(final Class<T> subModuleTypes, final Consumer<T> handler) {

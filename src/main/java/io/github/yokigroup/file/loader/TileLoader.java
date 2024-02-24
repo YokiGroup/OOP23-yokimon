@@ -28,6 +28,7 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
 
     /**
      * Initializes a TileLoader by parsing the default tiles.json.
+     * @throws
      */
     public TileLoader() throws IOException {
         super(TILE_JSON_RPATH);

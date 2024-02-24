@@ -17,9 +17,9 @@ public final class GameLogicImpl extends Thread {
     /**
      * Constructor for GameLogicImpl.
      *
-     * @param view
-     * @param renderer
-     * @param stopWindowFun
+     * @param view ModelObserver
+     * @param renderer DrawCallable
+     * @param stopWindowFun Runnable
      */
     public GameLogicImpl(final ModelObserver view, final DrawCallable renderer, final Runnable stopWindowFun) {
         super();
