@@ -22,8 +22,8 @@ import java.util.function.Predicate;
  */
 public final class InputSubmodule extends InputSubmoduleAbs {
     private final Set<Direction> moveEvents = new HashSet<>();
-    private boolean clickedConfirmEvent = false;
-    private GameStateSubmoduleAbs.GameState lastQueriedState = null;
+    private boolean clickedConfirmEvent;
+    private GameStateSubmoduleAbs.GameState lastQueriedState;
 
     /**
      * @param handler         MessageHandler to call in order to query other submodules.
@@ -51,7 +51,7 @@ public final class InputSubmodule extends InputSubmoduleAbs {
     }
 
     private boolean readConfirmationEvent(final String keyText, final Runnable ifPresent) {
-        boolean confirmed = switch (keyText) {
+        final boolean confirmed = switch (keyText) {
             case "\n", "\r", " " -> true;
             default -> false;
         };
@@ -64,7 +64,7 @@ public final class InputSubmodule extends InputSubmoduleAbs {
     }
 
     private <T> void cycleUntilTrue(final List<Predicate<T>> predicates, final T input) {
-        for (var event : predicates) {
+        for (final Predicate<T> event : predicates) {
             if (event.test(input)) {
                 return;
             }
