@@ -13,11 +13,6 @@ import java.util.Set;
  * comunicate with the view.
  */
 public class NOPModelObserver implements ModelObserver {
-    /**
-     * Constructor.
-     */
-    public NOPModelObserver() {
-    }
 
     @Override
     public void addSpritePublisher(final RenderState state, final Publisher<SpriteData> spriteObs) {
