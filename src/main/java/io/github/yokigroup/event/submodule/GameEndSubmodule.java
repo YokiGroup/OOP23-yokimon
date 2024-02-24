@@ -15,7 +15,7 @@ import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.GameMap;
 
-public class GameEndSubmodule extends GameEndSubmoduleAbs {
+public final class GameEndSubmodule extends GameEndSubmoduleAbs {
     private final Publisher<SpriteData> deathScreenPub = new PublisherImpl<>();
     private final Publisher<SpriteData> victoryScreenPub = new PublisherImpl<>();
     private final Publisher<Notification> notificationPub = new PublisherImpl<>();
