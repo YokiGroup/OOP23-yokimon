@@ -100,7 +100,7 @@ public class GameMessageHandler implements MessageHandler {
     }
 
     @Override
-    public <T extends Submodule> void handle(final Set<Class<T>> subModuleTypes, final Consumer<T> handler) {
+    public final <T extends Submodule> void handle(final Set<Class<T>> subModuleTypes, final Consumer<T> handler) {
         subModuleTypes.forEach(smt -> handle(smt, handler));
     }
 
