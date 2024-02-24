@@ -3,7 +3,7 @@ package io.github.yokigroup.view.notification;
 import io.github.yokigroup.event.observer.EObserver;
 import io.github.yokigroup.view.render.painter.Painter;
 
-public class NotificationVisitorImpl implements NotificationVisitor, EObserver<Notification> {
+public final class NotificationVisitorImpl implements NotificationVisitor, EObserver<Notification> {
     private final Painter painter;
     // FIXME locales
 
