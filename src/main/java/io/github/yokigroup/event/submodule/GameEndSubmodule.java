@@ -38,7 +38,7 @@ public final class GameEndSubmodule extends GameEndSubmoduleAbs {
                     gameMapVec,
                     -100
             );
-    private boolean gameEnded = false;
+    private boolean gameEnded;
 
     /**
      * @param handler  MessageHandler to call in order to query other submodules.
@@ -46,6 +46,7 @@ public final class GameEndSubmodule extends GameEndSubmoduleAbs {
      */
     public GameEndSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
         super(handler, modelObs);
+        gameEnded = false;
         modelObs.addSpritePublisher(RenderState.DEATH, deathScreenPub);
         modelObs.addSpritePublisher(RenderState.VICTORY, victoryScreenPub);
         modelObs.addNotificationPublisher(notificationPub);
