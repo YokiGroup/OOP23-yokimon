@@ -70,7 +70,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
             handler().handle(GameStateSubmodule.class,
                     (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.FIGHT));
             lastAnnouncedFight = handler().handle(PartySubmodule.class, s -> {
-                return lastAnnouncedFight = new FightImpl(s.listYokimons(), enemyParty);
+                return new FightImpl(s.listYokimons(), enemyParty);
             });
             fightPub.notifyObservers(lastAnnouncedFight);
         }
