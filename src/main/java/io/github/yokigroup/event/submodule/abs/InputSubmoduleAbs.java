@@ -16,7 +16,15 @@ public abstract class InputSubmoduleAbs extends Submodule {
         super(handler, ignoredModelObs);
     }
 
+    /**
+     * Registers the given key press event given its string representation.
+     * @param keyText key event input to handle
+     */
     public abstract void registerKeyPress(String keyText);
 
+    /**
+     * Registers the given key release event given its string representation.
+     * @param keyText key event input to handle
+     */
     public abstract void registerKeyRelease(String keyText);
 }
