@@ -1,20 +1,33 @@
 package io.github.yokigroup.event;
 
 
-public abstract class Updateable implements Deactivatable {
+/**
+ * Superclass of anything that necessitates being deactivated or activated, along with requiring being updated \
+ * periodically by the game logic.
+ */
+public abstract class Updatable implements Deactivatable {
     private long sinceLastUpdate = -1;
     private boolean isActive = true;
 
+    /**
+     * You should extend this if you want your object to perform additional instructions upon object activation.
+     */
     @Override
-    public final void activate() {
+    public void activate() {
         isActive = true;
     }
 
+    /**
+     * You should extend this if you want your object to perform additional instructions upon object deactivation.
+     */
     @Override
     public void deactivate() {
         isActive = false;
     }
 
+    /**
+     * Resets the delta time of this object, used if the update function is not going to be called for a while.
+     */
     public final void resetDTime() {
         sinceLastUpdate = -1;
     }
@@ -28,9 +41,15 @@ public abstract class Updateable implements Deactivatable {
         return System.currentTimeMillis();
     }
 
+    /**
+     * Code that's called upon {@link Updatable#update()} invocation.
+     * @param delta time in seconds passed from last {@link Updatable#update()} call
+     */
     protected abstract void updateCode(double delta);
 
-
+    /**
+     * Updates the object.
+     */
     public final void update() {
         if (!isActive) {
             return;

@@ -12,7 +12,7 @@ import io.github.yokigroup.event.submodule.SubmoduleMap;
 import io.github.yokigroup.event.submodule.SubmoduleMapImpl;
 import io.github.yokigroup.event.MessageHandler;
 
-import io.github.yokigroup.event.Updateable;
+import io.github.yokigroup.event.Updatable;
 import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.view.render.observer.NOPModelObserver;
@@ -115,6 +115,6 @@ public class GameMessageHandler implements MessageHandler {
 
     @Override
     public final void updateSubmodules() {
-        subModules.subModuleSet().forEach(Updateable::update);
+        subModules.subModuleSet().forEach(Updatable::update);
     }
 }

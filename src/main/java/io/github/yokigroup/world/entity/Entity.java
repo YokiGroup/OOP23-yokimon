@@ -2,7 +2,7 @@ package io.github.yokigroup.world.entity;
 
 import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.event.Updateable;
+import io.github.yokigroup.event.Updatable;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.world.Sprite;
 import io.github.yokigroup.world.entity.hitbox.Hitbox;
@@ -13,7 +13,7 @@ import java.util.Objects;
  * Entity class represents a generic entity in the game world.
  * It provides methods to manage and manipulate entities.
  */
-public abstract class Entity extends Updateable implements Sprite {
+public abstract class Entity extends Updatable implements Sprite {
     private final String resourceURL;
     private final Vector2 dimensions;
     private Position pos;

@@ -1,6 +1,6 @@
 package io.github.yokigroup.event.submodule;
 
-import io.github.yokigroup.event.Updateable;
+import io.github.yokigroup.event.Updatable;
 import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
@@ -55,7 +55,7 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
     @Override
     public void deactivate() {
         super.deactivate();
-        gameMap.getTileAt(playerTilePos).getEntities().forEach(Updateable::resetDTime);
+        gameMap.getTileAt(playerTilePos).getEntities().forEach(Updatable::resetDTime);
     }
 
     @Override
@@ -69,7 +69,7 @@ public final class GameMapSubmodule extends GameMapSubmoduleAbs {
         if (success) {
             final Pair<Integer, Integer> dirOffset = dir.getOffset();
             // reset dtime of previous tile
-            gameMap.getTileAt(playerTilePos).getEntities().forEach(Updateable::resetDTime);
+            gameMap.getTileAt(playerTilePos).getEntities().forEach(Updatable::resetDTime);
             tilePub.notifyObservers(gameMap.getPlayerTile().getSpriteData());
             playerTilePos = new Pair<>(playerTilePos.x() + dirOffset.x(), playerTilePos.y() + dirOffset.y());
             publishEntitySpriteData();

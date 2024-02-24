@@ -2,7 +2,7 @@ package io.github.yokigroup.event.submodule.abs;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.view.render.observer.ModelObserver;
-import io.github.yokigroup.event.Updateable;
+import io.github.yokigroup.event.Updatable;
 
 /**
  * Submodule interface.
@@ -10,7 +10,7 @@ import io.github.yokigroup.event.Updateable;
  * @see MessageHandler EventHandler
  * @author Giovanni Paone
  */
-public abstract class Submodule extends Updateable {
+public abstract class Submodule extends Updatable {
     private final MessageHandler handler;
 
     /**
