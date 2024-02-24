@@ -59,6 +59,7 @@ public final class GameFX extends Application {
             final double currentRatio = paneWidth / paneHeight;
             double newHeight, newWidth;
 
+            System.out.printf("%f %f AAAAAAAAAAAAAAAAAA\n%n", paneWidth, paneHeight);
             if (currentRatio > ratio) { // width has to be truncated
                 newHeight = paneHeight;
                 newWidth = paneHeight * ratio;
@@ -66,7 +67,6 @@ public final class GameFX extends Application {
                 newHeight = paneWidth / ratio;
                 newWidth = paneWidth;
             }
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             gameCanvas.setWidth(newWidth);
             gameCanvas.setHeight(newHeight);
             stackPane.setMinSize(newWidth, newHeight);
