@@ -8,7 +8,6 @@ import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.Direction;
-import javafx.application.Platform;
 
 import java.util.HashSet;
 import java.util.List;

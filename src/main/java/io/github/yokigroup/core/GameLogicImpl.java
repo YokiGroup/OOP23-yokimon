@@ -2,7 +2,6 @@ package io.github.yokigroup.core;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameEndSubmodule;
-import io.github.yokigroup.event.submodule.abs.GameEndSubmoduleAbs;
 import io.github.yokigroup.view.render.painter.DrawCallable;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 
@@ -17,11 +16,12 @@ public final class GameLogicImpl extends Thread {
 
     /**
      * Constructor for GameLogicImpl.
+     *
      * @param view
      * @param renderer
      * @param stopWindowFun
      */
-    public GameLogicImpl(final ModelObserver view, final DrawCallable renderer, Runnable stopWindowFun) {
+    public GameLogicImpl(final ModelObserver view, final DrawCallable renderer, final Runnable stopWindowFun) {
         super();
         this.handler = new GameMessageHandler(view);
         this.renderer = renderer;
@@ -30,6 +30,7 @@ public final class GameLogicImpl extends Thread {
 
     /**
      * The message handler.
+     *
      * @return the message handler.
      */
     public MessageHandler getMessageHandler() {
