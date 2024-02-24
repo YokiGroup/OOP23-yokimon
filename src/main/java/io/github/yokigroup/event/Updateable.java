@@ -6,17 +6,17 @@ public abstract class Updateable implements Deactivatable {
     private boolean isActive = true;
 
     @Override
-    public void activate() {
+    public final void activate() {
         isActive = true;
     }
 
     @Override
-    public void deactivate() {
+    public final void deactivate() {
         isActive = false;
     }
 
     @Override
-    public boolean isActive() {
+    public final boolean isActive() {
         return isActive;
     }
 

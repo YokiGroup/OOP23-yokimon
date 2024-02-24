@@ -1,7 +1,6 @@
 package io.github.yokigroup.file.loader;
 
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.util.json.JsonParser;
 import io.github.yokigroup.world.Direction;
 import io.github.yokigroup.world.gen.TileShape;
 import io.github.yokigroup.world.gen.TileShapeImpl;
@@ -30,6 +29,7 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
 
     /**
      * Instance TileShapeLoader with an existing TileLoader.
+     *
      * @param loader loader to use
      */
     public TileShapeLoader(final TileLoader loader) {
@@ -66,7 +66,7 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
             });
         }
 
-        for (final var tileEntry: tiles.entrySet()) {
+        for (final var tileEntry : tiles.entrySet()) {
             shapes.add(new TileShapeImpl(tileEntry.getValue(), tileEntry.getKey()));
         }
 

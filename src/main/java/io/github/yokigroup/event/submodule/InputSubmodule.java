@@ -22,8 +22,8 @@ import java.util.function.Predicate;
  */
 public final class InputSubmodule extends InputSubmoduleAbs {
     private final Set<Direction> moveEvents = new HashSet<>();
-    private boolean clickedConfirmEvent = false;
-    private GameStateSubmoduleAbs.GameState lastQueriedState = null;
+    private boolean clickedConfirmEvent;
+    private GameStateSubmoduleAbs.GameState lastQueriedState;
 
     /**
      * @param handler         MessageHandler to call in order to query other submodules.
@@ -51,7 +51,7 @@ public final class InputSubmodule extends InputSubmoduleAbs {
     }
 
     private boolean readConfirmationEvent(final String keyText, final Runnable ifPresent) {
-        boolean confirmed = switch (keyText) {
+        final boolean confirmed = switch (keyText) {
             case "\n", "\r", " " -> true;
             default -> false;
         };
@@ -63,8 +63,8 @@ public final class InputSubmodule extends InputSubmoduleAbs {
         return confirmed;
     }
 
-    private <T> void cycleUntilTrue(final List<Predicate<T>> predicates, T input) {
-        for (var event : predicates) {
+    private <T> void cycleUntilTrue(final List<Predicate<T>> predicates, final T input) {
+        for (final Predicate<T> event : predicates) {
             if (event.test(input)) {
                 return;
             }
@@ -129,6 +129,9 @@ public final class InputSubmodule extends InputSubmoduleAbs {
                 switch (e) {
                     case UP -> s.nextAttack();
                     case DOWN -> s.prevAttack();
+                    default -> {
+                        //FIXME
+                    }
                 }
             });
         });
@@ -159,6 +162,9 @@ public final class InputSubmodule extends InputSubmoduleAbs {
             case WORLD -> handlePlayerPositionChange(delta);
             case FIGHT -> handleFightInputs();
             case GAMEOVER, VICTORY -> handleGameFinishedInputs();
+            default -> {
+                //FIXME
+            }
         }
     }
 }

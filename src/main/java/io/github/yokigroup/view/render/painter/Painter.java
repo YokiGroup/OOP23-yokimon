@@ -27,12 +27,12 @@ public abstract class Painter implements DrawCallable {
         return drawQueues.get(state);
     }
 
-    public void setPaintState(final RenderState paintState) {
+    public final void setPaintState(final RenderState paintState) {
         this.paintState = paintState;
         setEventText("");
     }
 
-    public RenderState getPaintState() {
+    public final RenderState getPaintState() {
         return paintState;
     }
 

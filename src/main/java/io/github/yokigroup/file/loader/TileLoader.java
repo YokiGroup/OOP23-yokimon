@@ -44,8 +44,8 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
         final String tileHitboxDimensionsRPATH = ".dimensions";
         final String tileHitboxRadiusRpath = ".radius";
         final String formattedHitboxJPATH = String.format(tileHitboxTypeJPATHF, id == -1 ? HOME : String.valueOf(id), index);
-        final String type = parser.read(formattedHitboxJPATH  +  tileHitboxTypeRPATH);
-        final Vector2 pos = getVector2(formattedHitboxJPATH  +  tileHitboxPositionRPATH);
+        final String type = parser.read(formattedHitboxJPATH + tileHitboxTypeRPATH);
+        final Vector2 pos = getVector2(formattedHitboxJPATH + tileHitboxPositionRPATH);
 
         return switch (type) {
             case "rect" -> {
@@ -56,8 +56,8 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
                 final double radius = parser.read(formattedHitboxJPATH + tileHitboxRadiusRpath);
                 yield new CircularHitbox(pos, radius);
             }
-            default -> throw new RuntimeException(
-                    String.format("invalid type of hitbox index %d of name %s: received %s", index, id, type)
+            default -> throw new InvalidJsonException(
+                    String.format("Invalid type of hitbox index %d of name %s: received %s", index, id, type)
             );
         };
     }
@@ -74,24 +74,25 @@ public final class TileLoader extends IdJsonLoader<TileBuilder> {
             final String formattedJPath = String.format(spawnPositionJPATH, i);
             final Position position = new PositionImpl(getVector2(formattedJPath));
             final String type = getParser().read(formattedJPath + ".type");
-            c.add(switch (type) {
-                case "enemy" -> new Pair<>(TileBuilder.EntityType.ENEMY, position);
-                case "altar" -> new Pair<>(TileBuilder.EntityType.ALTAR, position);
-                default -> throw new InvalidJsonException(String.format("invalid type %s", type));
+            c.add(
+                    switch (type) {
+                        case "enemy" -> new Pair<>(TileBuilder.EntityType.ENEMY, position);
+                        case "altar" -> new Pair<>(TileBuilder.EntityType.ALTAR, position);
+                        default -> throw new InvalidJsonException(String.format("invalid type %s", type));
             });
         }));
     }
 
     private Set<Direction> getTileDirs(final int id) {
-        List<String> rawTileDirs = getParser().read(String.format(TILE_SHAPE_JPATHF, id == -1 ? HOME : "" + id));
-        Set<Direction> tileDirs = new HashSet<>();
+        final List<String> rawTileDirs = getParser().read(String.format(TILE_SHAPE_JPATHF, id == -1 ? HOME : String.valueOf(id)));
+        final Set<Direction> tileDirs = new HashSet<>();
 
         rawTileDirs.forEach(d -> tileDirs.add(Direction.valueOf(d)));
         return tileDirs;
     }
 
     private String getResourceURL(final int id) {
-        final String resourceURLJPATH = "$." + (id == -1 ? HOME : "" + id) + ".texture";
+        final String resourceURLJPATH = "$." + (id == -1 ? HOME : String.valueOf(id)) + ".texture";
         return getParser().read(resourceURLJPATH);
     }
 

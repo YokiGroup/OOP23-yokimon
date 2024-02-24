@@ -2,11 +2,11 @@ package io.github.yokigroup.view.notification;
 
 import io.github.yokigroup.battle.fight.Fight;
 
-public class AttackOutcomeNotificationImpl implements AttackOutcomeNotification {
+public final class AttackOutcomeNotificationImpl implements AttackOutcomeNotification {
     private final Fight.Success attackOutcome;
     private final Attacker attacker;
 
-    public AttackOutcomeNotificationImpl(final Fight.Success attackOutcome, Attacker attacker) {
+    public AttackOutcomeNotificationImpl(final Fight.Success attackOutcome, final Attacker attacker) {
         this.attackOutcome = attackOutcome;
         this.attacker = attacker;
     }

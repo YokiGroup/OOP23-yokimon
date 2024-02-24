@@ -114,7 +114,7 @@ public class WaveFunctionCollapseImpl implements WaveFunctionCollapse {
         final Set<Pair<Integer, Integer>> disconnectedTiles = getDisconnectedTiles(centerPos);
         if (!disconnectedTiles.isEmpty()) {
             disconnectedTiles.addAll(getAdjacentPositions(disconnectedTiles));
-            disconnectedTiles.forEach(t -> setStaticShape(t, resetMap.get(t).getEntries()));
+            disconnectedTiles.forEach(t -> shapeMap.put(t, resetMap.get(t).deepCopy(Set::copyOf)));
             // Make sure all tiles get the new valid positions
             getAllValidPositions()
                     .forEach(p -> updateAdjacentShapes(maxDepth, p));

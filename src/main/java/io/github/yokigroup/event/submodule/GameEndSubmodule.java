@@ -15,7 +15,7 @@ import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.world.GameMap;
 
-public class GameEndSubmodule extends GameEndSubmoduleAbs {
+public final class GameEndSubmodule extends GameEndSubmoduleAbs {
     private final Publisher<SpriteData> deathScreenPub = new PublisherImpl<>();
     private final Publisher<SpriteData> victoryScreenPub = new PublisherImpl<>();
     private final Publisher<Notification> notificationPub = new PublisherImpl<>();
@@ -37,7 +37,7 @@ public class GameEndSubmodule extends GameEndSubmoduleAbs {
             );
 
     /**
-     * @param handler MessageHandler to call in order to query other submodules.
+     * @param handler  MessageHandler to call in order to query other submodules.
      * @param modelObs {@link ModelObserver} used to instantiate the submodule
      */
     public GameEndSubmodule(final MessageHandler handler, final ModelObserver modelObs) {
@@ -49,7 +49,7 @@ public class GameEndSubmodule extends GameEndSubmoduleAbs {
         victoryScreenPub.notifyObservers(victoryScreenSprite);
     }
 
-    private void comunicateStateChange(GameStateSubmoduleAbs.GameState state) {
+    private void comunicateStateChange(final GameStateSubmoduleAbs.GameState state) {
         handler().<GameStateSubmodule>handle(GameStateSubmodule.class, s -> s.setGameState(state));
     }
 

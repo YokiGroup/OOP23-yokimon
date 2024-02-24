@@ -13,7 +13,7 @@ import io.github.yokigroup.view.render.RenderState;
 import java.util.Set;
 import java.util.function.Function;
 
-public class ModelObserverImpl implements ModelObserver {
+public final class ModelObserverImpl implements ModelObserver {
     private final DrawObserver drawObs;
     private final DrawSetObserver drawSetObs;
     private final FightObserver fightObserver;

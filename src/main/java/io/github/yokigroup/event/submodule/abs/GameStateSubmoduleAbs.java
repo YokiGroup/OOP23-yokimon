@@ -1,11 +1,11 @@
 package io.github.yokigroup.event.submodule.abs;
 
 import io.github.yokigroup.event.MessageHandler;
-import io.github.yokigroup.view.render.RenderState;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 
 /**
- * Abstract class of a submodule containing information about the game's current state
+ * Abstract class of a submodule containing information about the game's current state.
+ *
  * @author Giovanni Paone
  */
 public abstract class GameStateSubmoduleAbs extends Submodule {
@@ -29,7 +29,7 @@ public abstract class GameStateSubmoduleAbs extends Submodule {
          * game is won.
          */
         VICTORY
-    };
+    }
 
     /**
      * @param handler         MessageHandler to call in order to query other submodules.
@@ -41,6 +41,7 @@ public abstract class GameStateSubmoduleAbs extends Submodule {
 
     /**
      * sets the game state to {@param state}.
+     *
      * @param state state to set the game's state to
      */
     public abstract void setGameState(GameState state);

@@ -31,12 +31,11 @@ import java.util.function.Consumer;
  * @author Giovanni Paone
  */
 public final class FightSubmodule extends FightSubmoduleAbs {
-    private static Fight lastAnnouncedFight = null;
+    private Fight lastAnnouncedFight;
     private final Publisher<Fight> fightPub = new PublisherImpl<>();
     private final Publisher<SpriteData> backgroundPub = new PublisherImpl<>();
     private final Publisher<Notification> notificationPublisher = new PublisherImpl<>();
     private static final int LAST_PRIORITY = -100;
-    private final SpriteData battleBackground;
 
     /**
      * @param handler  MessageHandler to call in order to query other submodules.
@@ -49,7 +48,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
         modelObs.addSpritePublisher(RenderState.FIGHT, backgroundPub);
         modelObs.addNotificationPublisher(notificationPublisher);
         final Vector2 mapDim = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS);
-        battleBackground = new SpriteData(
+        final SpriteData battleBackground = new SpriteData(
                 "io/github/yokigroup/view/textures/tiles/battle-forest.png",
                 mapDim.scale(0.5),
                 mapDim,
@@ -67,9 +66,10 @@ public final class FightSubmodule extends FightSubmoduleAbs {
         if (partyYokimonsNum == 0) {
             handler().handle(GameEndSubmodule.class, GameEndSubmodule::triggerBattleWithNoYokimonsGO);
         } else {
-            handler().handle(GameStateSubmodule.class, (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.FIGHT));
+            handler().handle(GameStateSubmodule.class,
+                    (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.FIGHT));
             lastAnnouncedFight = handler().handle(PartySubmodule.class, s -> {
-                return lastAnnouncedFight = new FightImpl(s.listYokimons(), enemyParty);
+                return new FightImpl(s.listYokimons(), enemyParty);
             });
             fightPub.notifyObservers(lastAnnouncedFight);
         }
@@ -100,7 +100,7 @@ public final class FightSubmodule extends FightSubmoduleAbs {
         final Fight currentFight = getLastAnnouncedFightOrThrowException();
         final List<Attack> attacks = currentFight.getCurrentMyYokimon().getAttacks();
         int nextAttackIndex = attacks.indexOf(currentFight.getSelectedAttack()) - 1;
-        nextAttackIndex = nextAttackIndex < 0 ? (attacks.size() - 1) : nextAttackIndex;
+        nextAttackIndex = nextAttackIndex < 0 ? attacks.size() - 1 : nextAttackIndex;
         currentFight.selectAttack(attacks.get(nextAttackIndex));
         notificationPublisher.notifyObservers(new AttackSelectedNotificationImpl(currentFight.getSelectedAttack()));
     }
@@ -111,21 +111,31 @@ public final class FightSubmodule extends FightSubmoduleAbs {
         fightPub.notifyObservers(currentFight);
         switch (currentFight.getState()) {
             case PLAYER_TURN ->
-                    notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack(), AttackOutcomeNotification.Attacker.PLAYER));
+                    notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.attack(),
+                            AttackOutcomeNotification.Attacker.PLAYER));
             case OPPONENT_TURN ->
-                    notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.getAttacked(), AttackOutcomeNotification.Attacker.ENEMY));
+                    notificationPublisher.notifyObservers(new AttackOutcomeNotificationImpl(currentFight.getAttacked(),
+                            AttackOutcomeNotification.Attacker.ENEMY));
+            default -> {
+                //FIXME
+            }
         }
         switch (currentFight.getState()) {
             case LOSE -> {
                 handler().handle(GameEndSubmodule.class, GameEndSubmodule::triggerDeathGameGO);
             }
             case WIN -> {
-                handler().handle(PartySubmodule.class, (Consumer<PartySubmodule>) s -> s.setParty(currentFight.getPlayerParty()));
+                handler().handle(PartySubmodule.class,
+                        (Consumer<PartySubmodule>) s -> s.setParty(currentFight.getPlayerParty()));
                 if (handler().handle(GameMapSubmodule.class, GameMapSubmodule::areAllEnemiesSlain)) {
                     handler().handle(GameEndSubmodule.class, GameEndSubmodule::triggerVictory);
                 } else {
-                    handler().handle(GameStateSubmodule.class, (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.WORLD));
+                    handler().handle(GameStateSubmodule.class,
+                            (Consumer<GameStateSubmodule>) s -> s.setGameState(GameStateSubmoduleAbs.GameState.WORLD));
                 }
+            }
+            default -> {
+                //FIXME
             }
         }
         fightPub.notifyObservers(currentFight);

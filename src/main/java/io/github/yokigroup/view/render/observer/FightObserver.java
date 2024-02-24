@@ -2,7 +2,6 @@ package io.github.yokigroup.view.render.observer;
 
 import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.battle.yokimon.Yokimon;
-import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.view.render.drawable.SpriteData;
 import io.github.yokigroup.util.Vector2;
 import io.github.yokigroup.util.Vector2Impl;
@@ -15,11 +14,12 @@ import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class FightObserver extends ViewObserver<Fight> {
+public final class FightObserver extends ViewObserver<Fight> {
     private static final String YOKIMON_SPRITES_ROOT_DIR = "io/github/yokigroup/view/textures/yokimons/";
-    String currentPlayerYokimonName = null, currentEnemyYokimonName = null;
-    final Consumer<String> setPlayerYokimonLabel;
-    final Consumer<String> setEnemyYokimonLabel;
+    private String currentPlayerYokimonName;
+    private String currentEnemyYokimonName;
+    private final Consumer<String> setPlayerYokimonLabel;
+    private final Consumer<String> setEnemyYokimonLabel;
 
     public FightObserver(final Painter painter) {
         super(painter);
