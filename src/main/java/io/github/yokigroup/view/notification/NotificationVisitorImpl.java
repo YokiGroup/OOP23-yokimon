@@ -40,7 +40,7 @@ public final class NotificationVisitorImpl implements NotificationVisitor, EObse
 
     @Override
     public String getAttackOutcomeNotificationText(final AttackOutcomeNotification notification) {
-        String damageQuantityStr = switch (notification.getAttackOutcome()) {
+        final String damageQuantityStr = switch (notification.getAttackOutcome()) {
             case FAIL -> "non ha fatto male";
             case GOOD -> "ha fatto male";
             case SUPER -> "ha fatto molto male";
