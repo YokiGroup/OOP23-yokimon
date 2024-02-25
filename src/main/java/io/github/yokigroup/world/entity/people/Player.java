@@ -28,6 +28,10 @@ public class Player extends People {
         super(pos, messageHandler, RAY_HITBOX, "player.png");
     }
 
+    /**
+     * Copy constructor for Player.
+     * @param player player to copy
+     */
     public Player(final Player player) {
         this(player.getPos(), player.getMessageHandler());
     }
