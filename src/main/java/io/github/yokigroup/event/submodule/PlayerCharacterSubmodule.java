@@ -55,7 +55,7 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
 
     @Override
     public Entity getPlayerEntity() {
-        return player;
+        return new Player(player);
     }
 
     @Override

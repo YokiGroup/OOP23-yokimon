@@ -28,6 +28,10 @@ public class Player extends People {
         super(pos, messageHandler, RAY_HITBOX, "player.png");
     }
 
+    public Player(final Player player) {
+        this(player.getPos(), player.getMessageHandler());
+    }
+
     /**
      * Given a vector, it changes the position of the player.
      * around the map.
