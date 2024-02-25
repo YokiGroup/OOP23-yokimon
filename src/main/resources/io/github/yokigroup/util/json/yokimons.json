@@ -323,11 +323,10 @@
       }
     ]
   },
-
   "8": {
     "name": "Akugyo",
     "growthRate": "FAST",
-    "color": "WHITE",
+    "color": "BLACK",
     "stats": {
       "ATK": 85,
       "DEF": 80,
