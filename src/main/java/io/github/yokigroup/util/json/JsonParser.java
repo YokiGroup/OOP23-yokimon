@@ -13,7 +13,7 @@ public interface JsonParser {
     /**
      * @param jsonPath json path expression to evaluate
      * @return value returned by parse cast to type {@param T}
-     * @param <T>
+     * @param <T> Type returned by loader
      */
     <T> T read(String jsonPath);
 }

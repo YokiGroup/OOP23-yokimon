@@ -10,10 +10,10 @@ public abstract class InputSubmoduleAbs extends Submodule {
 
     /**
      * @param handler MessageHandler to call in order to query other submodules.
-     * @param ignoredModelObs
+     * @param modelObs model observer to populate
      */
-    public InputSubmoduleAbs(final MessageHandler handler, final ModelObserver ignoredModelObs) {
-        super(handler, ignoredModelObs);
+    public InputSubmoduleAbs(final MessageHandler handler, final ModelObserver modelObs) {
+        super(handler, modelObs);
     }
 
     /**

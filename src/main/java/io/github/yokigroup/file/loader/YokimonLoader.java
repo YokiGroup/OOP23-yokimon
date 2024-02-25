@@ -26,7 +26,7 @@ public final class YokimonLoader extends IdJsonLoader<Yokimon> {
 
     /**
      * Class constructor.
-     * @throws
+     * @throws IOException yokimon json file failed to open
      */
     public YokimonLoader() throws IOException {
         super(YOKIMON_JSON_PATH);

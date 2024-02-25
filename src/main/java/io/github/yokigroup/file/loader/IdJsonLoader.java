@@ -11,7 +11,7 @@ import java.util.Map;
 public abstract class IdJsonLoader<T> extends JsonLoader<T> {
     /**
      * @param relativePath path of json file relative to {@code JsonParser.ROOT}
-     * @throws
+     * @throws IOException File failed to open
      */
     public IdJsonLoader(final String relativePath) throws IOException {
         super(relativePath);

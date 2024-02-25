@@ -19,7 +19,7 @@ public final class AttackLoader extends IdJsonLoader<Attack> {
 
     /**
      * Constructor for AttackLoader.
-     * @throws
+     * @throws IOException File failed to open
      */
     public AttackLoader() throws IOException {
         super(ATTACK_JSONR_PATH);
