@@ -330,7 +330,7 @@
     "color": "WHITE",
     "stats": {
       "ATK": 85,
-      "DEF": 70,
+      "DEF": 80,
       "SPD": 60,
       "HP": 85
     },
@@ -378,10 +378,10 @@
     "growthRate": "FAST",
     "color": "BLACK",
     "stats": {
-      "ATK": 65,
+      "ATK": 85,
       "DEF": 60,
       "SPD": 150,
-      "HP": 60
+      "HP": 70
     },
     "moves": [
       {

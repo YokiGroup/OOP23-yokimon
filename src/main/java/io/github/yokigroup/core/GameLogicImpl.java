@@ -2,32 +2,35 @@ package io.github.yokigroup.core;
 
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameEndSubmodule;
-import io.github.yokigroup.event.submodule.abs.GameEndSubmoduleAbs;
 import io.github.yokigroup.view.render.painter.DrawCallable;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 
 /**
  * Instances and keeps the game model updated.
  */
-public final class GameLogicImpl extends Thread implements GameLogic {
+public final class GameLogicImpl extends Thread {
     private static final int SLEEP_TIME = 5;
     private final MessageHandler handler;
     private final DrawCallable renderer;
-    private boolean running = true;
+    private final Runnable stopWindowFun;
 
     /**
      * Constructor for GameLogicImpl.
-     * @param view
-     * @param renderer
+     *
+     * @param view ModelObserver
+     * @param renderer DrawCallable
+     * @param stopWindowFun Runnable
      */
-    public GameLogicImpl(final ModelObserver view, final DrawCallable renderer) {
+    public GameLogicImpl(final ModelObserver view, final DrawCallable renderer, final Runnable stopWindowFun) {
         super();
         this.handler = new GameMessageHandler(view);
         this.renderer = renderer;
+        this.stopWindowFun = stopWindowFun;
     }
 
     /**
      * The message handler.
+     *
      * @return the message handler.
      */
     public MessageHandler getMessageHandler() {
@@ -49,10 +52,6 @@ public final class GameLogicImpl extends Thread implements GameLogic {
             handler.updateSubmodules();
             renderer.safeDraw();
         }
-    }
-
-    @Override
-    public void stopGame() {
-        running = false;
+        this.stopWindowFun.run();
     }
 }

@@ -30,7 +30,7 @@
     "power": 95
   },
   "6": {
-    "name": "TailSwipe",
+    "name": "Tail Swipe",
     "color": "WHITE",
     "effect": "NONE",
     "power": 60
@@ -102,7 +102,7 @@
     "power": 500
   },
   "18": {
-    "name": "KatanaSlash",
+    "name": "Katana Slash",
     "color": "RED",
     "effect": "NONE",
     "power": 90
@@ -117,7 +117,7 @@
     "name": "Shadow Sneak",
     "color": "BLACK",
     "effect": "NONE",
-    "power": 40
+    "power": 50
   },
   "21": {
     "name": "Extreme Speed",
@@ -126,7 +126,7 @@
     "power": 80
   },
   "22": {
-    "name": "CelestialGun",
+    "name": "Celestial Gun",
     "color": "WHITE",
     "effect": "NONE",
     "power": 175

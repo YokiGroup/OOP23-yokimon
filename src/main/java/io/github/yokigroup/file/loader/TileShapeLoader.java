@@ -23,6 +23,7 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
 
     /**
      * Constructor.
+     * @throws
      */
     public TileShapeLoader() throws IOException {
         this(new TileLoader());
@@ -32,6 +33,7 @@ public class TileShapeLoader extends JsonLoader<TileShape> {
      * Instance TileShapeLoader with an existing TileLoader.
      *
      * @param loader loader to use
+     * @throws
      */
     public TileShapeLoader(final TileLoader loader) throws IOException {
         super(TILE_JSON_RPATH);

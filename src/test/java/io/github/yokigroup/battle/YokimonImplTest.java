@@ -2,6 +2,7 @@
 package io.github.yokigroup.battle;
 
 import io.github.yokigroup.battle.yokimon.Yokimon;
+import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
 import org.junit.jupiter.api.Test;
@@ -20,13 +21,12 @@ class YokimonImplTest {
     private static final int DEFAULT_ID = 1;
     private static final YokimonLoader LOADER;
     private static final AttackLoader LOADER_ATTACK;
-
     static {
         try {
             LOADER = new YokimonLoader();
             LOADER_ATTACK = new AttackLoader();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new GameInitFailException(e);
         }
     }
 

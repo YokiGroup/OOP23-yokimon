@@ -58,7 +58,7 @@ class JsonLoader<T> {
     /**
      * @param relativePath path of json file relative to {@code JsonParser.ROOT}
      */
-    public JsonLoader(final String relativePath) throws IOException {
+    JsonLoader(final String relativePath) throws IOException {
         this.parser = new JsonParserImpl(JsonParser.ROOT + relativePath);
     }
 

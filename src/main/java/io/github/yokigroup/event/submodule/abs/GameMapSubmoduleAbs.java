@@ -25,7 +25,7 @@ public abstract class GameMapSubmoduleAbs extends Submodule {
     /**
      * Dimensions of the map to instance.
      */
-    protected static final Pair<Integer, Integer> MAP_DIM = new Pair<>(5, 5);
+    protected static final Pair<Integer, Integer> MAP_DIM = new Pair<>(6, 6);
 
     private Optional<Direction> checkTileChange() {
         final Pair<Integer, Integer> mapDim = GameMap.TILE_DIMENSIONS;

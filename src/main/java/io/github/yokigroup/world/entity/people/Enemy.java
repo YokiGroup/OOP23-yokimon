@@ -126,7 +126,7 @@ public class Enemy extends People {
             directionWeightedPool.addElement(Direction.DEFAULT_STAND, DEFAULT_POOL_VALUE);
         }
         wanderDir = directionWeightedPool.getRandomizedElement();
-        return wanderDir.get();
+        return wanderDir.get().normalize();
 
     }
 
@@ -139,7 +139,8 @@ public class Enemy extends People {
     private void move(final Vector2 vector) {
         this.collisionCheck(vector);
         this.getMessageHandler().handle(PlayerCharacterSubmodule.class, player -> {
-            if (Objects.requireNonNull(this.getHitBox()).collidesWith(player.getPlayerEntity().getHitBox()).isPresent()) {
+            if (Objects.requireNonNull(this.getHitBox())
+                    .collidesWith(player.getPlayerEntity().getHitBox()).isPresent()) {
                 encounter();
                 this.deactivate();
             }

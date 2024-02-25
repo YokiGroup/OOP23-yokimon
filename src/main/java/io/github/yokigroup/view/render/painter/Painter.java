@@ -52,19 +52,19 @@ public abstract class Painter implements DrawCallable {
 
     /**
      * Sets the global text label to the given string.
-     * @param eventText
+     * @param eventText String
      */
     public abstract void setEventText(String eventText);
 
     /**
      * Sets the fight label for the player's yokimon stats.
-     * @param text
+     * @param text String
      */
     public abstract void setPlayerYokimonLabel(String text);
 
     /**
      * Sets the fight label for the enemy's yokimon stats.
-     * @param text
+     * @param text String
      */
     public abstract void setEnemyYokimonLabel(String text);
 

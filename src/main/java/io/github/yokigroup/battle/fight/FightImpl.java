@@ -98,7 +98,7 @@ public final class FightImpl implements Fight {
     @Override
     public void selectAttack(final Attack attack) {
         Objects.requireNonNull(attack);
-        if (getCurrentMyYokimon().getAttacks().contains(attack)) {
+        if (Objects.requireNonNull(getCurrentMyYokimon()).getAttacks().contains(attack)) {
             selectedAttack = Objects.requireNonNull(attack);
         } else {
             throw new IllegalArgumentException("Attack given is not possessed by yokimon "
