@@ -77,7 +77,7 @@ public abstract class Entity extends Updatable implements Sprite {
      *
      * @return MessageHandler
      */
-    public final MessageHandler getMessageHandler() {
+    protected final MessageHandler getMessageHandler() {
         return this.messageHandler;
     }
 
