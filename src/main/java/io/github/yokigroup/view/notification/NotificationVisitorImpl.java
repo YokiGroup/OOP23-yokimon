@@ -3,19 +3,21 @@ package io.github.yokigroup.view.notification;
 import io.github.yokigroup.event.observer.EObserver;
 import io.github.yokigroup.view.render.painter.Painter;
 
+import java.util.function.Consumer;
+
 /**
  * Implementation of {@link NotificationVisitor}, Also an observer listening for notification events and relaying them
  * to the view painter.
  */
 public final class NotificationVisitorImpl implements NotificationVisitor, EObserver<Notification> {
-    private final Painter painter;
+    private final Consumer<String> setGlobalEventString;
     // FIXME locales
 
     /**
      * @param painter to relay the requests captured by the observer.
      */
     public NotificationVisitorImpl(final Painter painter) {
-        this.painter = painter;
+        this.setGlobalEventString = painter::setEventText;
     }
 
     @Override
@@ -60,6 +62,6 @@ public final class NotificationVisitorImpl implements NotificationVisitor, EObse
 
     @Override
     public void update(final Notification lastArg, final Notification arg) {
-        painter.setEventText(arg.getMessage(this));
+        this.setGlobalEventString.accept(arg.getMessage(this));
     }
 }
