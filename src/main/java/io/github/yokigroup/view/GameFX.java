@@ -80,7 +80,7 @@ public final class GameFX extends Application {
 
         final StackPane stackPane = (StackPane) rootElem.getCenter();
         final List<Node> stackPaneList = stackPane.getChildren();
-        final Canvas gameCanvas = (Canvas) stackPaneList.get(0); // FIXME maybe casting like this isn't the smartest choice
+        final Canvas gameCanvas = (Canvas) stackPaneList.get(0);
 
         final BorderPane borderPane = (BorderPane) stackPaneList.get(1);
         final AnchorPane anchorPane = (AnchorPane) borderPane.getTop();
