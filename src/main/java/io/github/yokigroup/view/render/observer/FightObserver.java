@@ -32,12 +32,14 @@ public final class FightObserver extends ViewObserver<Fight> {
         final Vector2 gameMapVec = Vector2Impl.castPair(GameMap.TILE_DIMENSIONS);
         final double xYokimonSpritePlacement = .3;
         final double yYokimonSpritePlacement = .67;
-        final double yokimonSpriteDim = .22;
+        final double yokimonScale = .17;
+        final double yokimonSideDim = gameMapVec.getX() * yokimonScale;
+        final Vector2 yokimonDim = new Vector2Impl(yokimonSideDim, yokimonSideDim);
         drawQueue.addToDrawQueue(
                 new SpriteData(
                         YOKIMON_SPRITES_ROOT_DIR + fight.getCurrentMyYokimon().getName().toLowerCase(Locale.ROOT) + ".png",
                         gameMapVec.times(new Vector2Impl(xYokimonSpritePlacement, yYokimonSpritePlacement)),
-                        gameMapVec.scale(yokimonSpriteDim),
+                        yokimonDim,
                         1
                 )
         );
@@ -45,7 +47,7 @@ public final class FightObserver extends ViewObserver<Fight> {
                 new SpriteData(
                         YOKIMON_SPRITES_ROOT_DIR + fight.getCurrentOpponent().getName().toLowerCase(Locale.ROOT) + ".png",
                         gameMapVec.times(new Vector2Impl(1 - xYokimonSpritePlacement, yYokimonSpritePlacement)),
-                        gameMapVec.scale(yokimonSpriteDim),
+                        yokimonDim,
                         1,
                         true
                 )
