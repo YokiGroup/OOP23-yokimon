@@ -128,7 +128,7 @@ public abstract class People extends Entity {
         /**
          * Vector which represent the direction.
          */
-        private final Vector2 vector;
+        private final transient Vector2 vector;
 
         /**
          * Return the direction where this People is looking.
