@@ -53,7 +53,7 @@ public final class FightObserver extends ViewObserver<Fight> {
     }
 
     private String getYokimonHPStr(final Yokimon yokimon) {
-        final String hpFmtStr = "%s\nL%d %3d/%-3d HP";
+        final String hpFmtStr = "%s%nL%d %3d/%-3d HP";
         return String.format(hpFmtStr,
                 yokimon.getName(),
                 yokimon.getLevel(),
