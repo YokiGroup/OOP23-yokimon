@@ -13,7 +13,7 @@ public abstract class ViewObserver<T> implements EObserver<T> {
     /**
      * @param painter painter to invoke
      */
-    public ViewObserver(final Painter painter) {
+    protected ViewObserver(final Painter painter) {
         this.painter = painter;
     }
 
