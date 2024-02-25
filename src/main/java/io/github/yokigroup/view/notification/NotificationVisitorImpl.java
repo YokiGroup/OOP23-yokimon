@@ -35,8 +35,8 @@ public final class NotificationVisitorImpl implements NotificationVisitor, EObse
     @Override
     public String getDeathNotificationText(final DeathNotification notification) {
         return switch (notification.getCause()) {
-            case DEFEATED_IN_BATTLE -> "Sei stato sconfitto...";
-            case UNPREPARED_FOR_BATTLE -> "Senza yokimon non puoi combattere";
+            case DEFEATED_IN_BATTLE -> "You have been defeated...";
+            case UNPREPARED_FOR_BATTLE -> "You cannot fight with no Yokimons";
         };
     }
 
@@ -49,14 +49,14 @@ public final class NotificationVisitorImpl implements NotificationVisitor, EObse
     @Override
     public String getAttackOutcomeNotificationText(final AttackOutcomeNotification notification) {
         final String damageQuantityStr = switch (notification.getAttackOutcome()) {
-            case FAIL -> "non ha fatto male";
-            case GOOD -> "ha fatto male";
-            case SUPER -> "ha fatto molto male";
-            case WEAK -> "ha fatto poco male";
+            case FAIL -> "failed";
+            case GOOD -> "was effective";
+            case SUPER -> "was very effective";
+            case WEAK -> "was rather weak";
         };
         return switch (notification.getAttacker()) {
-            case PLAYER -> "il tuo yokimon ";
-            case ENEMY -> "lo yokimon nemico ";
+            case PLAYER -> "Your attack ";
+            case ENEMY -> "The opponent's attack ";
         } + damageQuantityStr;
     }
 
