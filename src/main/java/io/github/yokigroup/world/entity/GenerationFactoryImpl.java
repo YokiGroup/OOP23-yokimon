@@ -35,7 +35,7 @@ public class GenerationFactoryImpl implements GenerationFactory {
     private final WeightedPoolImpl<Integer> variableNum = new WeightedPoolImpl<>();
     private static final int MULTIPLIER_DIFFICULTY = 5;
     private static final int DIVISOR = 4;
-    private static final int LEGEND_ID = 15;
+    private static final int LEGEND_ID = 16;
     private static final int BOSS_LEVEL = 40;
     /**
      * Constructor of this class.
