@@ -10,20 +10,7 @@ import java.util.function.Consumer;
 /**
  * Controller interface used to be interfaced with the model.
  */
-public class Controller implements EObserver<Pair<Controller.KeyEventType, String>> {
-    /**
-     * type of key event received.
-     */
-    public enum KeyEventType {
-        /**
-         * the key has been pressed.
-         */
-        PRESS,
-        /**
-         * the key has been released.
-         */
-        RELEASE
-    }
+public class Controller implements EObserver<Pair<KeyEventType, String>> {
     private final Consumer<String> keyPressHandler;
     private final Consumer<String> keyReleaseHandler;
 

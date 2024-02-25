@@ -1,6 +1,7 @@
 package io.github.yokigroup.view;
 
 import io.github.yokigroup.controller.Controller;
+import io.github.yokigroup.controller.KeyEventType;
 import io.github.yokigroup.core.GameLogicImpl;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
@@ -95,14 +96,14 @@ public final class GameFX extends Application {
         final ModelObserverImpl modelObs = new ModelObserverImpl(painter);
         final GameLogicImpl gameThread = new GameLogicImpl(modelObs, painter, Platform::exit);
         final MessageHandler handler = gameThread.getMessageHandler();
-        final Publisher<Pair<Controller.KeyEventType, String>> keyEventPub = new PublisherImpl<>();
+        final Publisher<Pair<KeyEventType, String>> keyEventPub = new PublisherImpl<>();
         keyEventPub.addObserver(gameThread.getController());
 
         scene.setOnKeyPressed(
-                event -> keyEventPub.notifyObservers(new Pair<>(Controller.KeyEventType.PRESS, event.getText()))
+                event -> keyEventPub.notifyObservers(new Pair<>(KeyEventType.PRESS, event.getText()))
         );
         scene.setOnKeyReleased(
-                event -> keyEventPub.notifyObservers(new Pair<>(Controller.KeyEventType.RELEASE, event.getText()))
+                event -> keyEventPub.notifyObservers(new Pair<>(KeyEventType.RELEASE, event.getText()))
         );
         gameThread.start();
 
