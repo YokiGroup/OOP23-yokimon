@@ -54,6 +54,5 @@ public abstract class PlayerCharacterSubmoduleAbs extends Submodule {
 
     @Override
     protected void updateCode(final double delta) {
-        // TODO collision check
     }
 }
