@@ -87,6 +87,51 @@
     ]
   },
   "3": {
+    "name": "Tsuchigumo",
+    "growthRate": "MEDIUM",
+    "color": "BLACK",
+    "stats": {
+      "ATK": 90,
+      "DEF": 110,
+      "SPD": 50,
+      "HP": 60
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 11
+      },
+      {
+        "level": 3,
+        "skillId": 20
+      },
+      {
+        "level": 7,
+        "skillId": 8
+      },
+      {
+        "level": 10,
+        "skillId": 10
+      },
+      {
+        "level": 12,
+        "skillId": 24
+      },
+      {
+        "level": 15,
+        "skillId": 9
+      },
+      {
+        "level": 20,
+        "skillId": 13
+      },
+      {
+        "level": 26,
+        "skillId": 5
+      }
+    ]
+  },
+  "4": {
     "name": "Nekomata",
     "growthRate": "MEDIUM",
     "color": "PURPLE",
@@ -131,7 +176,7 @@
       }
     ]
   },
-  "4": {
+  "5": {
     "name": "Baku",
     "growthRate": "MEDIUM",
     "color": "PURPLE",
@@ -176,7 +221,7 @@
       }
     ]
   },
-  "5": {
+  "6": {
     "name": "Kitsune",
     "growthRate": "MEDIUM",
     "color": "PURPLE",
@@ -226,7 +271,7 @@
     ]
   },
 
-  "6": {
+  "7": {
     "name": "Tanuki",
     "growthRate": "FAST",
     "color": "WHITE",
@@ -274,7 +319,7 @@
     ]
   },
 
-  "7": {
+  "8": {
     "name": "Sazae-oni",
     "growthRate": "MEDIUM",
     "color": "WHITE",
@@ -323,7 +368,7 @@
       }
     ]
   },
-  "8": {
+  "9": {
     "name": "Akugyo",
     "growthRate": "FAST",
     "color": "BLACK",
@@ -372,7 +417,7 @@
       }
     ]
   },
-  "9": {
+  "10": {
     "name": "Yatagarasu",
     "growthRate": "FAST",
     "color": "BLACK",
@@ -417,7 +462,7 @@
       }
     ]
   },
-  "10": {
+  "11": {
     "name": "Yosuzume",
     "growthRate": "FAST",
     "color": "BLACK",
@@ -463,7 +508,7 @@
 
     ]
   },
-  "11": {
+  "12": {
     "name": "KAPPA",
     "growthRate": "MEDIUM",
     "color": "WHITE",
@@ -508,7 +553,7 @@
       }
     ]
   },
-  "12": {
+  "13": {
     "name": "Woman",
     "growthRate": "FAST",
     "color": "PURPLE",
@@ -557,7 +602,7 @@
       }
     ]
   },
-  "13": {
+  "14": {
     "name": "Wani",
     "growthRate": "SLOW",
     "color": "RED",
@@ -607,7 +652,7 @@
     ]
   },
 
-  "14": {
+  "15": {
     "name": "Inugami",
     "growthRate": "SLOW",
     "color": "WHITE",
@@ -656,8 +701,7 @@
       }
     ]
   },
-
-  "15": {
+  "16": {
     "name": "SonWukong",
     "growthRate": "SLOW",
     "color": "WHITE",
