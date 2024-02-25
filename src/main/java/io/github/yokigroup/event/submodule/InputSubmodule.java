@@ -125,22 +125,25 @@ public final class InputSubmodule extends InputSubmoduleAbs {
 
     private void handleFightInputs() {
         handler().handle(FightSubmodule.class, s -> {
-            moveEvents.forEach(e -> {
-                switch (e) {
-                    case UP -> s.nextAttack();
-                    case DOWN -> s.prevAttack();
-                    default -> {
-                        //FIXME
+            synchronized (this) {
+                moveEvents.forEach(e -> {
+                    switch (e) {
+                        case UP -> s.nextAttack();
+                        case DOWN -> s.prevAttack();
+                        default -> {
+                        }
                     }
-                }
-            });
+                });
+            }
         });
 
         if (clickedConfirmEvent) {
             handler().handle(FightSubmodule.class, FightSubmodule::confirmAttack);
         }
 
-        moveEvents.clear();
+        synchronized (this) {
+            moveEvents.clear();
+        }
         clickedConfirmEvent = false;
     }
 
