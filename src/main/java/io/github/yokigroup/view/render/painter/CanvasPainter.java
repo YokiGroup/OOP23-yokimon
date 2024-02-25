@@ -52,7 +52,7 @@ public class CanvasPainter extends Painter {
         gc.setImageSmoothing(false);
         gc.setTextAlign(TextAlignment.CENTER);
         this.getCanvasDim = () -> {
-            Canvas gcCanvas = gc.getCanvas();
+            final Canvas gcCanvas = gc.getCanvas();
             return new Vector2Impl(gcCanvas.getWidth(), gcCanvas.getHeight());
         };
         this.drawImage = (i, p) -> {
