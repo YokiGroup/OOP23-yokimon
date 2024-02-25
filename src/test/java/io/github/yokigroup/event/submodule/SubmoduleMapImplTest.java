@@ -22,7 +22,7 @@ class SubmoduleMapImplTest {
     private final FightSubmoduleAbs fSub;
     private final Set<Submodule> subModuleTestSet;
 
-    public SubmoduleMapImplTest() {
+    SubmoduleMapImplTest() {
         final MessageHandler handler = new GameMessageHandler();
         final ModelObserver obs = new NOPModelObserver();
 
