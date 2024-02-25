@@ -15,14 +15,16 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 /**
  * Implementation of {@link Painter} specific to JavaFX.
  */
 public class CanvasPainter extends Painter {
-    private final Label globalLabel;
-    private final Label enemyYokimonLabel;
-    private final Label playerYokimonLabel;
+    private final Runnable scaleFonts;
+    private final Consumer<String> setGlobalLabelText;
+    private final Consumer<String> setEnemyYokimonLabelText;
+    private final Consumer<String> setPlayerYokimonLabelText;
     private final Map<String, Image> imageCache = new HashMap<>();
     private final GraphicsContext gc;
     private Pair<Long, String> currentNotification; // notification with timestamp
@@ -51,26 +53,29 @@ public class CanvasPainter extends Painter {
         super();
         gc.setImageSmoothing(false);
         gc.setTextAlign(TextAlignment.CENTER);
-        this.gc = gc;
-        this.globalLabel = eventLabel;
-        this.enemyYokimonLabel = enemyYokimonLabel;
-        this.playerYokimonLabel = playerYokimonLabel;
+        this.gc = gc.getCanvas().getGraphicsContext2D();
+        this.scaleFonts = () -> {
+            final Font labelFont = new Font(gc.getCanvas().getWidth() / CANVAS_DIM_DIVISOR);
+            eventLabel.setFont(labelFont);
+            playerYokimonLabel.setFont(labelFont);
+            enemyYokimonLabel.setFont(labelFont);
+        };
+        this.setEnemyYokimonLabelText = enemyYokimonLabel::setText;
+        this.setPlayerYokimonLabelText = playerYokimonLabel::setText;
+        this.setGlobalLabelText = eventLabel::setText;
     }
 
     private void paint(final SpriteData sprite) {
         if (currentNotification != null
                 && currentNotification.x() < System.currentTimeMillis()) {
             currentNotification = null;
-            globalLabel.setText("");
+            setGlobalLabelText.accept("");
         }
         final Vector2 canvasDim = getCanvasDim();
         final Vector2 absSpriteDim = sprite.getNormalizedDimension().times(canvasDim);
         final Vector2 absSpritePos = sprite.getNormalizedPosition().times(canvasDim).minus(absSpriteDim.scale(.5));
-        final Font labelFont = new Font(canvasDim.getX() / CANVAS_DIM_DIVISOR);
 
-        globalLabel.setFont(labelFont);
-        playerYokimonLabel.setFont(labelFont);
-        enemyYokimonLabel.setFont(labelFont);
+        scaleFonts.run();
 
         gc.drawImage(
                 consultCache(sprite.spriteURL()),
@@ -80,7 +85,7 @@ public class CanvasPainter extends Painter {
                 absSpriteDim.getY()
         );
         if (currentNotification != null) {
-            globalLabel.setText(currentNotification.y());
+            setGlobalLabelText.accept(currentNotification.y());
         }
     }
 
@@ -90,18 +95,22 @@ public class CanvasPainter extends Painter {
         currentNotification = new Pair<>(System.currentTimeMillis() + waitTime, eventText);
     }
 
+    private void doWithJavaFXThread(final Runnable runnable) {
+        if (Thread.currentThread().getName().startsWith("JavaFX")) {
+            runnable.run();
+        } else {
+            Platform.runLater(runnable);
+        }
+    }
+
     @Override
     public final void setPlayerYokimonLabel(final String text) {
-        Platform.runLater(() -> {
-            playerYokimonLabel.setText(text);
-        });
+        doWithJavaFXThread(() -> setPlayerYokimonLabelText.accept(text));
     }
 
     @Override
     public final void setEnemyYokimonLabel(final String text) {
-        Platform.runLater(() -> {
-            enemyYokimonLabel.setText(text);
-        });
+        doWithJavaFXThread(() -> setEnemyYokimonLabelText.accept(text));
     }
 
     @Override
