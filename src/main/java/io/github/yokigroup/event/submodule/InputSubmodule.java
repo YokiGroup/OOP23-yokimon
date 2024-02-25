@@ -125,28 +125,33 @@ public final class InputSubmodule extends InputSubmoduleAbs {
 
     private void handleFightInputs() {
         handler().handle(FightSubmodule.class, s -> {
-            moveEvents.forEach(e -> {
-                switch (e) {
-                    case UP -> s.nextAttack();
-                    case DOWN -> s.prevAttack();
-                    default -> {
-                        //FIXME
+            synchronized (this) {
+                moveEvents.forEach(e -> {
+                    switch (e) {
+                        case UP -> s.nextAttack();
+                        case DOWN -> s.prevAttack();
+                        default -> {
+                        }
                     }
-                }
-            });
+                });
+            }
         });
 
-        if (clickedConfirmEvent) {
-            handler().handle(FightSubmodule.class, FightSubmodule::confirmAttack);
-        }
+        synchronized (this) {
+            if (clickedConfirmEvent) {
+                handler().handle(FightSubmodule.class, FightSubmodule::confirmAttack);
+            }
 
-        moveEvents.clear();
-        clickedConfirmEvent = false;
+            moveEvents.clear();
+            clickedConfirmEvent = false;
+        }
     }
 
     private void handleGameFinishedInputs() {
-        if (clickedConfirmEvent) {
-            handler().handle(GameEndSubmodule.class, GameEndSubmodule::killGame);
+        synchronized (this) {
+            if (clickedConfirmEvent) {
+                handler().handle(GameEndSubmodule.class, GameEndSubmodule::killGame);
+            }
         }
     }
 
@@ -154,16 +159,17 @@ public final class InputSubmodule extends InputSubmoduleAbs {
     protected void updateCode(final double delta) {
         final GameStateSubmoduleAbs.GameState currentState = handler()
                 .handle(GameStateSubmodule.class, GameStateSubmodule::getGameState);
-        if (currentState != lastQueriedState) {
-            clickedConfirmEvent = false;
-            lastQueriedState = currentState;
+        synchronized (this) {
+            if (currentState != lastQueriedState) {
+                clickedConfirmEvent = false;
+                lastQueriedState = currentState;
+            }
         }
         switch (currentState) {
             case WORLD -> handlePlayerPositionChange(delta);
             case FIGHT -> handleFightInputs();
             case GAMEOVER, VICTORY -> handleGameFinishedInputs();
             default -> {
-                //FIXME
             }
         }
     }
