@@ -7,7 +7,6 @@ import io.github.yokigroup.event.submodule.abs.PartySubmoduleAbs;
 import io.github.yokigroup.event.submodule.abs.Submodule;
 import io.github.yokigroup.view.render.observer.ModelObserver;
 import io.github.yokigroup.view.render.observer.NOPModelObserver;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -18,13 +17,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class SubmoduleMapImplTest {
-    private SubmoduleMap map;
-    private PartySubmoduleAbs pSub;
-    private FightSubmoduleAbs fSub;
-    private Set<Submodule> subModuleTestSet;
+    private final SubmoduleMap map;
+    private final PartySubmoduleAbs pSub;
+    private final FightSubmoduleAbs fSub;
+    private final Set<Submodule> subModuleTestSet;
 
-    @BeforeEach
-    void setUp() {
+    public SubmoduleMapImplTest() {
         final MessageHandler handler = new GameMessageHandler();
         final ModelObserver obs = new NOPModelObserver();
 
