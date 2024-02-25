@@ -1,5 +1,6 @@
 package io.github.yokigroup.core;
 
+import io.github.yokigroup.controller.Controller;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.submodule.GameEndSubmodule;
 import io.github.yokigroup.view.render.painter.DrawCallable;
@@ -13,6 +14,7 @@ public final class GameLogicImpl extends Thread {
     private final MessageHandler handler;
     private final DrawCallable renderer;
     private final Runnable stopWindowFun;
+    private final Controller controller;
 
     /**
      * Constructor for GameLogicImpl.
@@ -26,6 +28,7 @@ public final class GameLogicImpl extends Thread {
         this.handler = new GameMessageHandler(view);
         this.renderer = renderer;
         this.stopWindowFun = stopWindowFun;
+        this.controller = new Controller(this.handler);
     }
 
     /**
@@ -35,6 +38,10 @@ public final class GameLogicImpl extends Thread {
      */
     public MessageHandler getMessageHandler() {
         return handler;
+    }
+
+    public Controller getController() {
+        return controller;
     }
 
     @Override
