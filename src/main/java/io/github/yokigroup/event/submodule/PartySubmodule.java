@@ -53,10 +53,4 @@ public final class PartySubmodule extends PartySubmoduleAbs {
     public void setParty(final List<Yokimon> party) {
         yokimonList = deepCopyOf(party);
     }
-
-    @Override
-    public void removeYokimon(final int index) {
-        yokimonList.remove(index);
-    }
-
 }
