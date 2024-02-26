@@ -4,7 +4,6 @@ import io.github.yokigroup.battle.attack.Attack;
 import io.github.yokigroup.battle.attack.Color;
 import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.battle.yokimon.YokimonImpl;
-import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.util.json.JsonParser;
 
 import java.io.IOException;
@@ -16,7 +15,7 @@ import java.util.Map;
  * Instances yokimons loading them from the json file describing them.
  */
 public final class YokimonLoader extends IdJsonLoader<Yokimon> {
-    final IdJsonLoader<Attack> attackLoader;
+    private final IdJsonLoader<Attack> attackLoader;
     // path of yokimon json file relative to JsonParser.ROOT
     private static final String YOKIMON_JSON_PATH = "yokimons.json";
     private static final String YOKI_NAME_JPATHF = "$.%d.name";
