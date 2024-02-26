@@ -77,15 +77,6 @@ class DMGCalcTest {
         assertEquals(EXP_VAL_MULT2, toTest.getDMG(y1, y2, a2).x());
     }
 
-    private int calcRandomDamage(final int damage, final Fight.Success successValue) {
-        return switch (successValue) {
-            case FAIL -> 0;
-            case WEAK -> damage / 2;
-            case SUPER -> damage * 2;
-            default -> damage;
-        };
-    }
-
     /**
      * Testing full implementation with color hierarchy.
      */
@@ -93,12 +84,12 @@ class DMGCalcTest {
     void testFullImpl() {
         final DmgCalculator toTest = new FullImplDmgCalculator();
         final Pair<Integer, Fight.Success> damage1 = toTest.getDMG(y1, y2, a1);
-        assertEquals(calcRandomDamage(EXP_VAL_FULL1, damage1.y()), damage1.x());
+        assertEquals(EXP_VAL_FULL1, damage1.x());
         final Pair<Integer, Fight.Success> damage2 = toTest.getDMG(y1, y2, a2);
-        assertEquals(calcRandomDamage(EXP_VAL_FULL2, damage2.y()), damage2.x());
+        assertEquals(EXP_VAL_FULL2, damage2.x());
         final Pair<Integer, Fight.Success> damage3 = toTest.getDMG(y2, y1, a1);
-        assertEquals(calcRandomDamage(EXP_VAL_FULL3, damage3.y()), damage3.x());
+        assertEquals(EXP_VAL_FULL3, damage3.x());
         final Pair<Integer, Fight.Success> damage4 = toTest.getDMG(y2, y1, a2);
-        assertEquals(calcRandomDamage(EXP_VAL_FULL4, damage4.y()), damage4.x());
+        assertEquals(EXP_VAL_FULL4, damage4.x());
     }
 }
