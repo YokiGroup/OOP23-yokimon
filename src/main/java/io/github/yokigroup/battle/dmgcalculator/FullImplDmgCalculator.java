@@ -29,7 +29,10 @@ public class FullImplDmgCalculator implements DmgCalculator {
      * @param attack           the attack used by the attacking Yokimon
      * @return the actual damage (to subtract from the HP of the attacked Yokimon)
      */
-    protected Pair<Double, Fight.Success> getDMGdouble(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
+    protected Pair<Double, Fight.Success> getDMGdouble(
+            final Yokimon attackingYokimon,
+            final Yokimon attackedYokimon,
+            final Attack attack) {
        final MultiplierDmgCalculator multipl = new MultiplierDmgCalculator();
        double total = multipl.getDMGdouble(attackingYokimon, attackedYokimon, attack);
        final Color attackedYokimonColor = attackedYokimon.getYokimonColor();
@@ -59,7 +62,7 @@ public class FullImplDmgCalculator implements DmgCalculator {
         };
 
         total = switch (attackSuccess) {
-            case WEAK -> total / WEAK;
+            case WEAK -> total * WEAK;
             case SUPER -> total * STRONG;
             case GOOD -> total * NORMAL;
             default -> total;
