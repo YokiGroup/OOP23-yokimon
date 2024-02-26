@@ -40,6 +40,9 @@ public final class GameLogicImpl extends Thread {
         return handler;
     }
 
+    /**
+     * @return the controller associated with this game logic
+     */
     public Controller getController() {
         return controller;
     }
