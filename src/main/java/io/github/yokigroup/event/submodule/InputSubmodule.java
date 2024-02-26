@@ -50,14 +50,14 @@ public final class InputSubmodule extends InputSubmoduleAbs {
         return false;
     }
 
-    private boolean readConfirmationEvent(final String keyText, final Runnable ifPresent) {
+    private boolean readConfirmationEvent(final String keyText) {
         final boolean confirmed = switch (keyText) {
             case "\n", "\r", " " -> true;
             default -> false;
         };
         if (confirmed) {
             synchronized (this) {
-                ifPresent.run();
+                clickedConfirmEvent = true;
             }
         }
         return confirmed;
@@ -81,7 +81,7 @@ public final class InputSubmodule extends InputSubmoduleAbs {
         cycleUntilTrue(
                 List.of(
                         k -> this.readDirEvent(k, moveEvents::add),
-                        k -> this.readConfirmationEvent(k, () -> clickedConfirmEvent = true)
+                        k -> this.readConfirmationEvent(k)
                 ),
                 keyText
         );
@@ -137,19 +137,20 @@ public final class InputSubmodule extends InputSubmoduleAbs {
             }
         });
 
-        if (clickedConfirmEvent) {
-            handler().handle(FightSubmodule.class, FightSubmodule::confirmAttack);
-        }
-
         synchronized (this) {
+            if (clickedConfirmEvent) {
+                handler().handle(FightSubmodule.class, FightSubmodule::confirmAttack);
+            }
             moveEvents.clear();
+            clickedConfirmEvent = false;
         }
-        clickedConfirmEvent = false;
     }
 
     private void handleGameFinishedInputs() {
-        if (clickedConfirmEvent) {
-            handler().handle(GameEndSubmodule.class, GameEndSubmodule::killGame);
+        synchronized (this) {
+            if (clickedConfirmEvent) {
+                handler().handle(GameEndSubmodule.class, GameEndSubmodule::killGame);
+            }
         }
     }
 
@@ -157,16 +158,17 @@ public final class InputSubmodule extends InputSubmoduleAbs {
     protected void updateCode(final double delta) {
         final GameStateSubmoduleAbs.GameState currentState = handler()
                 .handle(GameStateSubmodule.class, GameStateSubmodule::getGameState);
-        if (currentState != lastQueriedState) {
-            clickedConfirmEvent = false;
-            lastQueriedState = currentState;
+        synchronized (this) {
+            if (currentState != lastQueriedState) {
+                clickedConfirmEvent = false;
+                lastQueriedState = currentState;
+            }
         }
         switch (currentState) {
             case WORLD -> handlePlayerPositionChange(delta);
             case FIGHT -> handleFightInputs();
             case GAMEOVER, VICTORY -> handleGameFinishedInputs();
             default -> {
-                //FIXME
             }
         }
     }
