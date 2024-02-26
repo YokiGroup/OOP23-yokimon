@@ -1,13 +1,11 @@
 package io.github.yokigroup.view;
 
-import io.github.yokigroup.controller.Controller;
 import io.github.yokigroup.controller.KeyEventType;
 import io.github.yokigroup.core.GameLogicImpl;
 import io.github.yokigroup.event.MessageHandler;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.GameEndSubmodule;
-import io.github.yokigroup.event.submodule.InputSubmodule;
 import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.view.render.painter.CanvasPainter;
 import io.github.yokigroup.view.render.painter.Painter;
@@ -32,7 +30,6 @@ import javafx.stage.Stage;
 
 import java.io.InputStream;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * Main JavaFX Application entry.
