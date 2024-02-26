@@ -47,6 +47,10 @@ public final class FightImpl implements Fight {
     private State state;
     private final Publisher<Fight> publisher = new PublisherImpl<>();
 
+    private List<Yokimon> deepCopyYokimonList(final List<Yokimon> yokimonList) {
+        return Objects.requireNonNull(yokimonList).stream().map(YokimonImpl::new).collect(Collectors.toList());
+    }
+
     /**
      * Builder to instantiate the fight through the Logic.
      *
@@ -58,18 +62,13 @@ public final class FightImpl implements Fight {
         if (myYokimons.isEmpty() || oppYokimons.isEmpty()) {
             throw new UnsupportedOperationException("Must instantiate fight with at least one Yokimon on each party.");
         }
-        this.myYokimons = deepCopyOf(myYokimons);
-        this.oppYokimons = deepCopyOf(oppYokimons);
+        this.myYokimons = deepCopyYokimonList(myYokimons);
+        this.oppYokimons = deepCopyYokimonList(oppYokimons);
 
         this.currMyYokimon = this.myYokimons.get(0);
         this.currOppYokimon = this.oppYokimons.get(0);
         this.state = playerIsFirst() ? State.PLAYER_TURN : State.OPPONENT_TURN;
         this.selectAttack(currMyYokimon.getAttacks().get(0));
-    }
-
-    private List<Yokimon> deepCopyOf(final List<Yokimon> yokimonList) {
-        Objects.requireNonNull(yokimonList);
-        return yokimonList.stream().map(YokimonImpl::new).collect(Collectors.toList());
     }
 
     @Override
@@ -161,7 +160,7 @@ public final class FightImpl implements Fight {
 
     @Override
     public List<Yokimon> getPlayerParty() {
-        return deepCopyOf(this.myYokimons);
+        return deepCopyYokimonList(this.myYokimons);
     }
 
     @Override
