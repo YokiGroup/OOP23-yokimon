@@ -5,8 +5,6 @@ import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.battle.attack.Color;
 import io.github.yokigroup.util.Pair;
-import io.github.yokigroup.util.WeightedPool;
-import io.github.yokigroup.util.WeightedPoolImpl;
 
 /**
  * Complete version of {@link DmgCalculator}, that takes into consideration
@@ -16,32 +14,9 @@ import io.github.yokigroup.util.WeightedPoolImpl;
  * @see Color
  */
 public class FullImplDmgCalculator implements DmgCalculator {
-    /* attack success pool */
-    private static final WeightedPool<Fight.Success> SUCCESS_WEIGHTED_POOL = new WeightedPoolImpl<>();
-    static final float FAIL_RATE = 0.05f;
-    static final float WEAK_RATE = 0.2f;
-    static final float GOOD_RATE = 0.7f;
-    static final float SUPER_RATE = 0.2f;
-    static {
-        SUCCESS_WEIGHTED_POOL.addElement(Fight.Success.FAIL, FAIL_RATE);
-        SUCCESS_WEIGHTED_POOL.addElement(Fight.Success.WEAK, WEAK_RATE);
-        SUCCESS_WEIGHTED_POOL.addElement(Fight.Success.GOOD, GOOD_RATE);
-        SUCCESS_WEIGHTED_POOL.addElement(Fight.Success.SUPER, SUPER_RATE);
-    }
-
     private static final double STRONG = 2.0;
     private static final double NORMAL = 1.0;
     private static final double WEAK = 0.5;
-
-    private int addDamageModifiers(final Fight.Success attackSuccessValue, final int damage) {
-        return switch (attackSuccessValue) {
-            case FAIL -> 0;
-            case WEAK -> damage / 2;
-            case SUPER -> damage * 2;
-            default -> damage;
-        };
-    }
-
 
     /**
      * This version uses a multiplier in case a Yokimon and the attack are of the same color.
@@ -54,34 +29,43 @@ public class FullImplDmgCalculator implements DmgCalculator {
      * @param attack           the attack used by the attacking Yokimon
      * @return the actual damage (to subtract from the HP of the attacked Yokimon)
      */
-    protected double getDMGdouble(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
+    protected Pair<Double, Fight.Success> getDMGdouble(final Yokimon attackingYokimon, final Yokimon attackedYokimon, final Attack attack) {
        final MultiplierDmgCalculator multipl = new MultiplierDmgCalculator();
        double total = multipl.getDMGdouble(attackingYokimon, attackedYokimon, attack);
        final Color attackedYokimonColor = attackedYokimon.getYokimonColor();
+       Fight.Success attackSuccess;
 
         //hierarchy
-        total = switch (attackingYokimon.getYokimonColor()) {
+        attackSuccess = switch (attackingYokimon.getYokimonColor()) {
             case PURPLE -> switch (attackedYokimonColor) {
-                    case BLACK, PURPLE -> total * WEAK;
-                    case RED -> total * STRONG;
-                    default -> total * NORMAL;
+                    case BLACK, PURPLE -> Fight.Success.WEAK;
+                    case RED -> Fight.Success.SUPER;
+                    default -> Fight.Success.GOOD;
                 };
 
             case RED -> switch (attackedYokimonColor) {
-                    case PURPLE, RED -> total * WEAK;
-                    case BLACK -> total * STRONG;
-                    default -> total * NORMAL;
+                    case PURPLE, RED -> Fight.Success.WEAK;
+                    case BLACK -> Fight.Success.SUPER;
+                    default -> Fight.Success.GOOD;
                 };
 
             case BLACK -> switch (attackedYokimonColor) {
-                    case RED, BLACK -> total * WEAK;
-                    case PURPLE -> total * STRONG;
-                    default -> total * NORMAL;
+                    case RED, BLACK -> Fight.Success.WEAK;
+                    case PURPLE -> Fight.Success.SUPER;
+                    default -> Fight.Success.GOOD;
                 };
 
-            default -> total * NORMAL;
+            default -> Fight.Success.GOOD;
         };
-        return total;
+
+        total = switch (attackSuccess) {
+            case WEAK -> total / WEAK;
+            case SUPER -> total * STRONG;
+            case GOOD -> total * NORMAL;
+            default -> total;
+        };
+
+        return new Pair<>(total, attackSuccess);
     }
 
     /**
@@ -93,14 +77,13 @@ public class FullImplDmgCalculator implements DmgCalculator {
      * @param attackingYokimon the offending Yokimon
      * @param attackedYokimon  the offended Yokimon
      * @param attack           the attack used by the attacking Yokimon
-     * @return      * @return a pair containing the actual damage (to subtract from attacked Yokimon's HP) and the
+     * @return a pair containing the actual damage (to subtract from attacked Yokimon's HP) and the
      * success value of the attack
      */
     @Override
     public Pair<Integer, Fight.Success> getDMG(final Yokimon attackingYokimon,
                                                final Yokimon attackedYokimon, final Attack attack) {
-        final Fight.Success randomizedSuccess = SUCCESS_WEIGHTED_POOL.getRandomizedElement();
-        final int finalDamage = (int) getDMGdouble(attackingYokimon, attackedYokimon, attack);
-        return new Pair<>(addDamageModifiers(randomizedSuccess, finalDamage), randomizedSuccess);
+        final var finalDamage = getDMGdouble(attackingYokimon, attackedYokimon, attack);
+        return new Pair<>(finalDamage.x().intValue(),  finalDamage.y());
     }
 }
