@@ -23,9 +23,9 @@ class JsonLoader<T> {
      * @param fun function to invoke: First Parameter is the {@param aggregator} (list, set, map...), \
      *            second parameter is an index.
      * @return aggregator after {@param fun} has been run
-     * @param <T> aggregator type
+     * @param <A> aggregator type
      */
-    protected final <T> T doUntilPathException(final T aggregator, final BiConsumer<T, Integer> fun) {
+    protected final <A> A doUntilPathException(final A aggregator, final BiConsumer<A, Integer> fun) {
         int i = 0;
 
         try {
