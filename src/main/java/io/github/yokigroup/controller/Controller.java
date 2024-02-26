@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 /**
  * Controller interface used to be interfaced with the model.
  */
-public class Controller implements EObserver<Pair<KeyEventType, String>> {
+public final class Controller implements EObserver<Pair<KeyEventType, String>> {
     private final Consumer<String> keyPressHandler;
     private final Consumer<String> keyReleaseHandler;
 
@@ -32,6 +32,7 @@ public class Controller implements EObserver<Pair<KeyEventType, String>> {
         switch (arg.x()) {
             case PRESS -> keyPressHandler.accept(arg.y());
             case RELEASE -> keyReleaseHandler.accept(arg.y());
+            default -> throw new AssertionError(String.format("KeyEventType is of unknown state %s", arg.x().name()));
         }
     }
 }
