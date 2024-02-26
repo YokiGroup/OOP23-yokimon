@@ -16,6 +16,7 @@ import java.util.Map;
  * Instances yokimons loading them from the json file describing them.
  */
 public final class YokimonLoader extends IdJsonLoader<Yokimon> {
+    final IdJsonLoader<Attack> attackLoader;
     // path of yokimon json file relative to JsonParser.ROOT
     private static final String YOKIMON_JSON_PATH = "yokimons.json";
     private static final String YOKI_NAME_JPATHF = "$.%d.name";
@@ -30,6 +31,7 @@ public final class YokimonLoader extends IdJsonLoader<Yokimon> {
      */
     public YokimonLoader() throws IOException {
         super(YOKIMON_JSON_PATH);
+        this.attackLoader = new AttackLoader();
     }
 
     private Map<Yokimon.Stats, Integer> getBaseStats(final int id) {
@@ -43,12 +45,6 @@ public final class YokimonLoader extends IdJsonLoader<Yokimon> {
 
     @Override
     public Yokimon load(final int id) {
-        final AttackLoader attackLoader;
-        try {
-            attackLoader = new AttackLoader();
-        } catch (IOException e) {
-            throw new GameInitFailException(e);
-        }
         final JsonParser parser = getParser();
 
         final String name = parser.read(String.format(YOKI_NAME_JPATHF, id));
