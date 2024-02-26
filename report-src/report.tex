@@ -187,10 +187,10 @@ In particolare:
 \caption{Schema UML dell'implementazione dell'AI nemica}
 \label{img:uml-opponentai}
 \end{figure}
-\paragraph{Problema} In fase di sviluppo sono stati implementati più algoritmi intercambiabili per le diverse componenti di Fight, realizzati aumentando man mano il grado di complessità.
-\paragraph{Soluzione} OpponentAI, XPCalculator e DMGCalculator seguono tutte il pattern Strategy: presentano delle implementazioni che sono una famiglia di algoritmi interscambiabili, dati dalla specializzazione di un’interfaccia di base.
+\paragraph{Problema} In fase di sviluppo sono stati implementati più algoritmi intercambiabili per le diverse componenti di \texttt{Fight}, realizzati aumentando man mano il grado di complessità.
+\paragraph{Soluzione} \texttt{OpponentAI}, \texttt{XPCalculator} e \texttt{DMGCalculator} seguono tutte il pattern Strategy: presentano delle implementazioni che sono una famiglia di algoritmi interscambiabili, dati dalla specializzazione di un’interfaccia di base.
 %
-\Cref{img:uml-fight}, un esempio relativo a OpponentAI.
+\Cref{img:uml-fight}, un esempio relativo a \texttt{OpponentAI}.
 \subsubsection{DMG Calculator}
 \begin{figure}[H]
 \centering{}
@@ -201,11 +201,11 @@ In particolare:
 \paragraph{Problema} Esistono più implementazioni che altro non sono che progressive specializzazioni per calcolare sempre più accuratamente il danno.
 %
 Serve un modo per evitare ripetizione di codice e rispettare il principio DRY.
-\paragraph{Soluzione} Si sfrutta il pattern decorator: la versione più specializzata è un wrapper della versione precedente (in particolare nell’ordine BasicImpl - MultiplierImpl - FullImpl). \\
+\paragraph{Soluzione} Si sfrutta il pattern decorator: la versione più specializzata è un wrapper della versione precedente (in particolare nell’ordine \texttt{BasicImpl} - \texttt{MultiplierImpl} - \texttt{FullImpl}). \\
 \footnotesize \\
-Nota: Le implementazioni di DMGCalculator dispongono anche di un metodo protected, \textbf{getDMGdouble()}.
+Nota: Le implementazioni di \texttt{DMGCalculator} dispongono anche di un metodo protected, \texttt{getDMGdouble()}.
 %
-Serve a ottenere un damage più accurato, prima che il risultato venga troncato ad int per essere utilizzato dall’esterno (da takeDamage(), che richiede un int). Senza questo metodo, il sistema di decoratori darebbe risultati molto più imprecisi, a causa di troncamenti in successione.
+Serve a ottenere un damage più accurato, prima che il risultato venga troncato ad int per essere utilizzato dall’esterno (da \texttt{takeDamage()}, che richiede un int). Senza questo metodo, il sistema di decoratori darebbe risultati molto più imprecisi, a causa di troncamenti in successione.
 \normalsize
 \subsubsection{Gestione di eventi}
 \begin{figure}[H]
@@ -495,10 +495,10 @@ Vorrei soltanto aggiungere che la metrica di avere un “target” di ore da rag
 \textbf{S key}: Muovi verso il basso \\
 \textbf{D key}: Muovi verso destra \\
 --------------------------------------------------- \\
-\textbf{Comandi per la selezione} \\
-\textbf{A key}: Opzione precedente \\
-\textbf{S key}: Opzione successiva \\
-\textbf{Enter key}: Conferma \\ \\
+\textbf{Comandi per il combattimento} \\
+\textbf{A key}: Attacco precedente \\
+\textbf{S key}: Attacco successivo \\
+\textbf{Space or Enter key}: Avanza il turno (tuo e del nemico) \\ \\
 \textbf{Tabelle dei contenuti di gioco} \\
 \tiny
 \begin{tabular}{ |c|c|c| } 
