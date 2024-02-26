@@ -110,7 +110,9 @@ public class GameMessageHandler implements MessageHandler {
     @Override
     public final <T extends Submodule, E> E handle(final Class<T> subModuleType, final Function<T, E> handler) {
         final Optional<T> submodule = subModules.get(subModuleType);
-        return handler.apply(submodule.orElseThrow(() -> new IllegalArgumentException(this.getClass() + " does not contain submodule " + subModuleType)));
+        return handler.apply(submodule.orElseThrow(
+                () -> new IllegalArgumentException(this.getClass() + " does not contain submodule " + subModuleType))
+        );
     }
 
     @Override
