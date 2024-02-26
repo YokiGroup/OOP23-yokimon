@@ -43,7 +43,7 @@ public class MultiplierDmgCalculator implements DmgCalculator {
      * @param attackingYokimon the offending Yokimon
      * @param attackedYokimon  the offended Yokimon
      * @param attack           the attack used by the first one
-     * @returna pair containing the actual damage (to subtract from attacked Yokimon's HP) and the
+     * @return pair containing the actual damage (to subtract from attacked Yokimon's HP) and the
      * success value of the attack
      */
     @Override
