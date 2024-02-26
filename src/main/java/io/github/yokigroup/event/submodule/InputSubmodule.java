@@ -50,14 +50,14 @@ public final class InputSubmodule extends InputSubmoduleAbs {
         return false;
     }
 
-    private boolean readConfirmationEvent(final String keyText, final Runnable ifPresent) {
+    private boolean readConfirmationEvent(final String keyText) {
         final boolean confirmed = switch (keyText) {
             case "\n", "\r", " " -> true;
             default -> false;
         };
         if (confirmed) {
             synchronized (this) {
-                ifPresent.run();
+                clickedConfirmEvent = true;
             }
         }
         return confirmed;
@@ -81,7 +81,7 @@ public final class InputSubmodule extends InputSubmoduleAbs {
         cycleUntilTrue(
                 List.of(
                         k -> this.readDirEvent(k, moveEvents::add),
-                        k -> this.readConfirmationEvent(k, () -> clickedConfirmEvent = true)
+                        k -> this.readConfirmationEvent(k)
                 ),
                 keyText
         );
