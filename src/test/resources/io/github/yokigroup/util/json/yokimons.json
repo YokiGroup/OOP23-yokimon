@@ -656,8 +656,57 @@
       }
     ]
   },
-
   "15": {
+    "name": "Stone",
+    "growthRate": "SLOW",
+    "color": "WHITE",
+    "stats": {
+      "ATK": 100,
+      "DEF": 100,
+      "SPD": 100,
+      "HP": 100
+    },
+    "moves": [
+      {
+        "level": 1,
+        "skillId": 11
+      },
+      {
+        "level": 3,
+        "skillId": 6
+      },
+      {
+        "level": 7,
+        "skillId": 9
+      },
+      {
+        "level": 10,
+        "skillId": 10
+      },
+      {
+        "level": 14,
+        "skillId": 2
+      },
+      {
+        "level": 19,
+        "skillId": 5
+      },
+      {
+        "level": 23,
+        "skillId": 8
+      },
+      {
+        "level": 26,
+        "skillId": 1
+      },
+      {
+        "level": 37,
+        "skillId": 19
+      }
+    ]
+  },
+
+  "16": {
     "name": "SonWukong",
     "growthRate": "SLOW",
     "color": "WHITE",

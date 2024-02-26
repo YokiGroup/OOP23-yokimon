@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GenerationFactoryImplTest {
     private final GenerationFactory generator = new GenerationFactoryImpl();
-    private static final int ID = 15;
+    private static final int ID = 16;
     private static final int BOSS_LEV = 40;
 
     @BeforeEach

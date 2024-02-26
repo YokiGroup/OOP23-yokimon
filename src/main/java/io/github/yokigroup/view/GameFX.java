@@ -1,9 +1,14 @@
 package io.github.yokigroup.view;
 
+import io.github.yokigroup.controller.Controller;
+import io.github.yokigroup.controller.KeyEventType;
 import io.github.yokigroup.core.GameLogicImpl;
 import io.github.yokigroup.event.MessageHandler;
+import io.github.yokigroup.event.observer.Publisher;
+import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.GameEndSubmodule;
 import io.github.yokigroup.event.submodule.InputSubmodule;
+import io.github.yokigroup.util.Pair;
 import io.github.yokigroup.view.render.painter.CanvasPainter;
 import io.github.yokigroup.view.render.painter.Painter;
 import io.github.yokigroup.view.render.observer.ModelObserverImpl;
@@ -75,7 +80,7 @@ public final class GameFX extends Application {
 
         final StackPane stackPane = (StackPane) rootElem.getCenter();
         final List<Node> stackPaneList = stackPane.getChildren();
-        final Canvas gameCanvas = (Canvas) stackPaneList.get(0); // FIXME maybe casting like this isn't the smartest choice
+        final Canvas gameCanvas = (Canvas) stackPaneList.get(0);
 
         final BorderPane borderPane = (BorderPane) stackPaneList.get(1);
         final AnchorPane anchorPane = (AnchorPane) borderPane.getTop();
@@ -91,16 +96,14 @@ public final class GameFX extends Application {
         final ModelObserverImpl modelObs = new ModelObserverImpl(painter);
         final GameLogicImpl gameThread = new GameLogicImpl(modelObs, painter, Platform::exit);
         final MessageHandler handler = gameThread.getMessageHandler();
+        final Publisher<Pair<KeyEventType, String>> keyEventPub = new PublisherImpl<>();
+        keyEventPub.addObserver(gameThread.getController());
 
         scene.setOnKeyPressed(
-                event -> handler.handle(InputSubmodule.class,
-                        (Consumer<InputSubmodule>) s -> s.registerKeyPress(event.getText())
-                )
+                event -> keyEventPub.notifyObservers(new Pair<>(KeyEventType.PRESS, event.getText()))
         );
         scene.setOnKeyReleased(
-                event -> handler.handle(InputSubmodule.class,
-                        (Consumer<InputSubmodule>) s -> s.registerKeyRelease(event.getText())
-                )
+                event -> keyEventPub.notifyObservers(new Pair<>(KeyEventType.RELEASE, event.getText()))
         );
         gameThread.start();
 

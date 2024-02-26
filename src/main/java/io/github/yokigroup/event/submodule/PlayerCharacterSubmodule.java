@@ -40,7 +40,6 @@ public final class PlayerCharacterSubmodule extends PlayerCharacterSubmoduleAbs 
         publishPlayerSpriteData();
     }
 
-    // TODO Change Direction reference
     @Override
     public void changeTile(final Direction dir) {
         handler().handle(GameMapSubmodule.class, s -> {

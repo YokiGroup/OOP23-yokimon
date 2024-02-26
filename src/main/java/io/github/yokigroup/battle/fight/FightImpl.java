@@ -77,7 +77,7 @@ public final class FightImpl implements Fight {
 
         this.currMyYokimon = this.myYokimons.get(0);
         this.currOppYokimon = this.oppYokimons.get(0);
-        this.state = State.PLAYER_TURN;
+        this.state = playerIsFirst() ? State.PLAYER_TURN : State.OPPONENT_TURN;
         this.selectAttack(currMyYokimon.getAttacks().get(0));
     }
 

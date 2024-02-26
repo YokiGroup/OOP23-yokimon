@@ -80,7 +80,7 @@ public interface Fight {
      * Method through which the Logic can communicate which {@link Attack} the player wants to use and do so.
      *
      * @return success rate over my {@link Yokimon}'s attack
-     * @see this#selectAttack(Attack)
+     * @see #selectAttack(Attack)
      */
     Success attack();
 
