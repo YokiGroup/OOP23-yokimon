@@ -1,5 +1,6 @@
 package io.github.yokigroup.battletest;
 
+import io.github.yokigroup.battle.fight.Fight;
 import io.github.yokigroup.battle.yokimon.Yokimon;
 import io.github.yokigroup.battle.attack.Attack;
 import io.github.yokigroup.battle.dmgcalculator.BasicImplDmgCalculator;
@@ -9,6 +10,7 @@ import io.github.yokigroup.battle.dmgcalculator.MultiplierDmgCalculator;
 import io.github.yokigroup.core.exception.GameInitFailException;
 import io.github.yokigroup.file.loader.AttackLoader;
 import io.github.yokigroup.file.loader.YokimonLoader;
+import io.github.yokigroup.util.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -60,8 +62,8 @@ class DMGCalcTest {
     @Test
     void testBasicImpl() {
         final DmgCalculator toTest = new BasicImplDmgCalculator();
-        assertEquals(EXP_VAL_BASIC1, toTest.getDMG(y1, y2, a1));
-        assertEquals(EXP_VAL_BASIC2, toTest.getDMG(y1, y2, a2));
+        assertEquals(EXP_VAL_BASIC1, toTest.getDMG(y1, y2, a1).x());
+        assertEquals(EXP_VAL_BASIC2, toTest.getDMG(y1, y2, a2).x());
 
     }
 
@@ -71,8 +73,17 @@ class DMGCalcTest {
     @Test
     void testMultiplierImpl() {
         final DmgCalculator toTest = new MultiplierDmgCalculator();
-        assertEquals(EXP_VAL_MULT1, toTest.getDMG(y1, y2, a1));
-        assertEquals(EXP_VAL_MULT2, toTest.getDMG(y1, y2, a2));
+        assertEquals(EXP_VAL_MULT1, toTest.getDMG(y1, y2, a1).x());
+        assertEquals(EXP_VAL_MULT2, toTest.getDMG(y1, y2, a2).x());
+    }
+
+    private int calcRandomDamage(final int damage, final Fight.Success successValue) {
+        return switch (successValue) {
+            case FAIL -> 0;
+            case WEAK -> damage / 2;
+            case SUPER -> damage * 2;
+            default -> damage;
+        };
     }
 
     /**
@@ -81,10 +92,13 @@ class DMGCalcTest {
     @Test
     void testFullImpl() {
         final DmgCalculator toTest = new FullImplDmgCalculator();
-
-        assertEquals(EXP_VAL_FULL1, toTest.getDMG(y1, y2, a1));
-        assertEquals(EXP_VAL_FULL2, toTest.getDMG(y1, y2, a2));
-        assertEquals(EXP_VAL_FULL3, toTest.getDMG(y2, y1, a1));
-        assertEquals(EXP_VAL_FULL4, toTest.getDMG(y2, y1, a2));
+        final Pair<Integer, Fight.Success> damage1 = toTest.getDMG(y1, y2, a1);
+        assertEquals(calcRandomDamage(EXP_VAL_FULL1, damage1.y()), damage1.x());
+        final Pair<Integer, Fight.Success> damage2 = toTest.getDMG(y1, y2, a2);
+        assertEquals(calcRandomDamage(EXP_VAL_FULL2, damage2.y()), damage2.x());
+        final Pair<Integer, Fight.Success> damage3 = toTest.getDMG(y2, y1, a1);
+        assertEquals(calcRandomDamage(EXP_VAL_FULL3, damage3.y()), damage3.x());
+        final Pair<Integer, Fight.Success> damage4 = toTest.getDMG(y2, y1, a2);
+        assertEquals(calcRandomDamage(EXP_VAL_FULL4, damage4.y()), damage4.x());
     }
 }

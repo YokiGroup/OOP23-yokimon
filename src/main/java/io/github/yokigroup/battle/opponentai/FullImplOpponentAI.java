@@ -52,7 +52,7 @@ public class FullImplOpponentAI extends OpponentAI {
         //there are available attacks
         for (final Attack atk : attacks) {
 
-            final int atkValue = dmgCalc.getDMG(currMyYokimon, currOppYokimon, atk);
+            final int atkValue = dmgCalc.getDMG(currMyYokimon, currOppYokimon, atk).x();
             if (atkValue >= maxValue) {
                 maxValue = atkValue;
                 best = Optional.of(atk);

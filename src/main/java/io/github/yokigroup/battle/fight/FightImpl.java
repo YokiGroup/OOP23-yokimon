@@ -12,8 +12,7 @@ import io.github.yokigroup.battle.xpcalculator.XPCalculator;
 import io.github.yokigroup.event.observer.Publisher;
 import io.github.yokigroup.event.observer.PublisherImpl;
 import io.github.yokigroup.event.submodule.FightSubmodule;
-import io.github.yokigroup.util.WeightedPool;
-import io.github.yokigroup.util.WeightedPoolImpl;
+import io.github.yokigroup.util.Pair;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -27,19 +26,6 @@ import java.util.stream.Collectors;
  * @see FightSubmodule
  */
 public final class FightImpl implements Fight {
-    static final float FAIL_RATE = 0.05f;
-    static final float WEAK_RATE = 0.2f;
-    static final float GOOD_RATE = 0.7f;
-    static final float SUPER_RATE = 0.2f;
-    /* attack success pool */
-    private static final WeightedPool<Success> SUCCESS_WEIGHTED_POOL = new WeightedPoolImpl<>();
-
-    static {
-        SUCCESS_WEIGHTED_POOL.addElement(Success.FAIL, FAIL_RATE);
-        SUCCESS_WEIGHTED_POOL.addElement(Success.WEAK, WEAK_RATE);
-        SUCCESS_WEIGHTED_POOL.addElement(Success.GOOD, GOOD_RATE);
-        SUCCESS_WEIGHTED_POOL.addElement(Success.SUPER, SUPER_RATE);
-    }
 
     /* parties */
     private final List<Yokimon> myYokimons;
@@ -86,15 +72,6 @@ public final class FightImpl implements Fight {
         return yokimonList.stream().map(YokimonImpl::new).collect(Collectors.toList());
     }
 
-    private int addDamageModifiers(final Success attackSuccessValue, final int damage) {
-        return switch (attackSuccessValue) {
-            case FAIL -> 0;
-            case WEAK -> damage / 2;
-            case SUPER -> damage * 2;
-            default -> damage;
-        };
-    }
-
     @Override
     public void selectAttack(final Attack attack) {
         Objects.requireNonNull(attack);
@@ -116,13 +93,9 @@ public final class FightImpl implements Fight {
         if (state != State.PLAYER_TURN) {
             throw new IllegalAccessError("attack() cannot be invoked if it's not the player's turn");
         }
-
-        final Success attackSuccessValue = SUCCESS_WEIGHTED_POOL.getRandomizedElement();
-        final int damage = addDamageModifiers(attackSuccessValue,
-                dmgCalc.getDMG(currMyYokimon, currOppYokimon, selectedAttack));
-
+        final Pair<Integer, Success> attackValues = dmgCalc.getDMG(currMyYokimon, currOppYokimon, selectedAttack);
         state = State.OPPONENT_TURN;
-        if (!currOppYokimon.takeDamage(damage)) {
+        if (!currOppYokimon.takeDamage(attackValues.x())) {
             oppYokimons.remove(0);
             defeatedOpps.add(currMyYokimon);
             if (oppYokimons.isEmpty()) {
@@ -134,7 +107,7 @@ public final class FightImpl implements Fight {
                 currOppYokimon = oppYokimons.get(0);
             }
         }
-        return attackSuccessValue;
+        return attackValues.y();
     }
 
     @Override
@@ -147,10 +120,8 @@ public final class FightImpl implements Fight {
         if (nextOppAttack.isEmpty()) {
             throw new UnsupportedOperationException("Yokimon doesn't have any available attack.");
         }
-        final Success attackSuccessValue = SUCCESS_WEIGHTED_POOL.getRandomizedElement();
-        final int damage = addDamageModifiers(attackSuccessValue,
-                dmgCalc.getDMG(currOppYokimon, currMyYokimon, nextOppAttack.get()));
-        currMyYokimon.takeDamage(damage);
+        final Pair<Integer, Success> attackValues = dmgCalc.getDMG(currOppYokimon, currMyYokimon, nextOppAttack.get());
+        currMyYokimon.takeDamage(attackValues.x());
         state = State.PLAYER_TURN;
         if (!currMyYokimon.active()) {
             myYokimons.remove(0);
@@ -162,7 +133,7 @@ public final class FightImpl implements Fight {
                 selectAttack(currMyYokimon.getAttacks().get(0));
             }
         }
-        return attackSuccessValue;
+        return attackValues.y();
     }
 
     @Override
